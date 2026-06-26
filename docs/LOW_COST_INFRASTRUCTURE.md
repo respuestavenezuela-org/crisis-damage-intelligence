@@ -24,7 +24,29 @@ Schema files:
 - `supabase/migrations/0001_core_schema.sql`
 - `supabase/seed.sql`
 
-Apply once Supabase access is available:
+Live project:
+
+- Organization: `la-memoria-de-venezuela`
+- Project: `memoria-venezuela`
+- Project ref: `gxepalgxlyohcgxzxcur`
+- API endpoint: `https://gxepalgxlyohcgxzxcur.supabase.co`
+
+Applied through Supabase SQL Editor:
+
+- `supabase/migrations/0001_core_schema.sql`
+- `supabase/seed.sql`
+
+Verified live counts:
+
+```text
+aois                    3
+products                2
+ingestion_jobs          2
+source_confidence_audit 3
+vlm_review_queue        0
+```
+
+CLI path for future migrations:
 
 ```bash
 npx supabase login --token <SUPABASE_ACCESS_TOKEN>
@@ -39,13 +61,13 @@ Required GitHub/Vercel variables only if server-side DB automation is added late
 - `SUPABASE_PROJECT_REF`
 - `SUPABASE_DB_URL` or service role key only for private worker jobs, never client code
 
-Current status: schema and seed are ready, but live Supabase provisioning requires a Supabase access token or browser dashboard access.
+Current status: schema and seed are applied live. Public viewing still does not depend on Supabase.
 
 ## Object Storage
 
-Recommended free/low-cost target: Cloudflare R2 or any S3-compatible bucket.
+Active low-cost target: Cloudflare R2.
 
-Bucket suggestion:
+Bucket:
 
 ```text
 crisis-damage-intelligence
@@ -60,7 +82,8 @@ ems/rasters/before/
 ems/rasters/after/
 ems/evidence-chips/
 ems/vlm/
-ems/qa-reports/
+qa/reports/
+qa/screenshots/
 ```
 
 Upload helper:
@@ -77,7 +100,44 @@ Required env for S3-compatible upload:
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_DEFAULT_REGION=auto` for R2
 
-Current status: upload script and workflow hooks are ready. Live bucket creation/upload requires Cloudflare R2 login/API token.
+Current status:
+
+- R2 subscription enabled on the Cloudflare account.
+- Bucket `crisis-damage-intelligence` created.
+- Current AOI02/AOI06 static outputs uploaded.
+- Original AOI02/AOI06 GRA ZIPs uploaded.
+- AOI00 GRM ZIP uploaded from the monitor download.
+- QA report and public screenshot uploaded.
+- GitHub Actions R2 secrets configured.
+
+Uploaded object manifest:
+
+```text
+ems/generated/catalog.json
+ems/generated/emsr884-aoi02-caracas/damage.csv
+ems/generated/emsr884-aoi02-caracas/damage.geojson
+ems/generated/emsr884-aoi02-caracas/damage.kml
+ems/generated/emsr884-aoi02-caracas/source_metadata.json
+ems/generated/emsr884-aoi02-caracas/vlm_queue.jsonl
+ems/generated/emsr884-aoi06-moron/damage.csv
+ems/generated/emsr884-aoi06-moron/damage.geojson
+ems/generated/emsr884-aoi06-moron/damage.kml
+ems/generated/emsr884-aoi06-moron/source_metadata.json
+ems/generated/emsr884-aoi06-moron/vlm_queue.jsonl
+ems/original-zips/emsr884-aoi02-caracas/AOI02_Caracas_GRA_v1.zip
+ems/original-zips/emsr884-aoi06-moron/AOI06_Moron_GRA_v1.zip
+ems/original-zips/emsr884-aoi00-central-coastal-venezuela/AOI00_Central_Coastal_Venezuela_GRM_latest.zip
+qa/screenshots/public-vercel-after-infra.png
+qa/reports/EMSR884_ACCEPTANCE_REPORT.md
+qa/reports/LOW_COST_INFRA_SETUP_REPORT.md
+```
+
+R2 token note:
+
+- Active GitHub token name in Cloudflare: `crisis-damage-intelligence-github-actions-r2`
+- Permission: `Object Read & Write`
+- Scope: all R2 buckets on the account. This was used because the bucket-specific selector was unstable in the dashboard.
+- It does not grant bucket admin permissions.
 
 ## GitHub Actions
 
@@ -106,6 +166,8 @@ Required GitHub secrets for object storage upload:
 - `S3_BUCKET`
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
+
+Current status: configured in GitHub repo secrets.
 
 Optional future secrets:
 
