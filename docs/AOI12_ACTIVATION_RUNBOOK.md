@@ -131,6 +131,27 @@ npm run build
 vercel --prod
 ```
 
+For GitHub Actions, use the manual workflow:
+
+```text
+Actions -> Manual EMSR884 AOI Ingest
+```
+
+Inputs:
+
+```text
+aoi_id: emsr884-aoi12-caraballeda
+zip_url: <real AOI12 GRA ZIP URL>
+output_prefix: public/data/aoi/emsr884-aoi12-caraballeda
+```
+
+If object storage secrets are configured, the workflow also uploads:
+
+```text
+ems/original-zips/emsr884-aoi12-caraballeda/
+ems/generated/emsr884-aoi12-caraballeda/
+```
+
 If not using Vercel yet, regenerate the handoff ZIP:
 
 ```bash

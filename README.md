@@ -134,8 +134,15 @@ Short response-operations guides:
 - `docs/OPERATOR_HANDOFF_EN.md`
 - `docs/DEPLOYMENT_CHECKLIST.md`
 - `docs/AOI12_ACTIVATION_RUNBOOK.md`
+- `docs/LOW_COST_INFRASTRUCTURE.md`
 
 These explain AOI switching, severity filters, priority click behavior, exports, data confidence, and the exact next action when AOI12/La Guaira becomes available.
+
+Live infrastructure:
+
+- Vercel: `https://crisis-damage-intelligence.vercel.app`
+- GitHub: `https://github.com/takove/crisis-damage-intelligence`
+- Public app remains static-first and does not require Supabase for viewing.
 
 Operational warning:
 

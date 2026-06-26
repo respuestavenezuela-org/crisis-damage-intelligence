@@ -1,0 +1,60 @@
+name: Manual EMSR884 AOI Ingest
+
+on:
+  workflow_dispatch:
+    inputs:
+      aoi_id:
+        description: "AOI id, e.g. emsr884-aoi12-caraballeda"
+        required: true
+      zip_url:
+        description: "Direct EMS GRA ZIP URL"
+        required: true
+      output_prefix:
+        description: "Public data prefix"
+        required: true
+        default: "public/data/aoi/emsr884-aoi12-caraballeda"
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install GDAL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin python3-gdal
+      - name: Download AOI ZIP
+        run: |
+          mkdir -p data/incoming
+          curl -L --fail --retry 3 -o "data/incoming/${{ inputs.aoi_id }}.zip" "${{ inputs.zip_url }}"
+      - name: Ingest AOI
+        run: |
+          bash scripts/emsr884-aoi12-ingest.sh "data/incoming/${{ inputs.aoi_id }}.zip" "${{ inputs.output_prefix }}"
+          python3 scripts/queue_vlm_candidates.py "${{ inputs.aoi_id }}" "${{ inputs.output_prefix }}/damage.geojson" "${{ inputs.output_prefix }}/vlm_queue.jsonl"
+      - name: Upload to object storage when configured
+        if: ${{ secrets.S3_ENDPOINT_URL != '' && secrets.S3_BUCKET != '' && secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}
+        env:
+          S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          python3 -m pip install --upgrade awscli
+          python3 scripts/upload_to_object_storage.py "data/incoming/${{ inputs.aoi_id }}.zip" "ems/original-zips/${{ inputs.aoi_id }}"
+          python3 scripts/upload_to_object_storage.py "${{ inputs.output_prefix }}" "ems/generated/${{ inputs.aoi_id }}"
+      - name: Create pull request with static outputs
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Add ${{ inputs.aoi_id }} EMSR884 outputs"
+          branch: "emsr884/${{ inputs.aoi_id }}"
+          title: "Add ${{ inputs.aoi_id }} EMSR884 outputs"
+          body: "Manual EMSR884 ingest. Review catalog counts and QA before merge/deploy."
+          add-paths: |
+            ${{ inputs.output_prefix }}

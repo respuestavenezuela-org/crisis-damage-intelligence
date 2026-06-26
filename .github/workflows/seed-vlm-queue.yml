@@ -1,0 +1,38 @@
+name: Build VLM Queue JSONL
+
+on:
+  workflow_dispatch:
+    inputs:
+      aoi_id:
+        required: true
+        default: "emsr884-aoi06-moron"
+      damage_geojson:
+        required: true
+        default: "public/data/aoi/emsr884-aoi06-moron/damage.geojson"
+      output_jsonl:
+        required: true
+        default: "public/data/aoi/emsr884-aoi06-moron/vlm_queue.jsonl"
+
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build queue
+        run: |
+          python3 scripts/queue_vlm_candidates.py "${{ inputs.aoi_id }}" "${{ inputs.damage_geojson }}" "${{ inputs.output_jsonl }}"
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Build VLM queue for ${{ inputs.aoi_id }}"
+          branch: "vlm-queue/${{ inputs.aoi_id }}"
+          title: "Build VLM queue for ${{ inputs.aoi_id }}"
+          body: "Queue only. No VLM model calls are made by this workflow."
+          add-paths: |
+            ${{ inputs.output_jsonl }}

@@ -16,3 +16,12 @@ jobs:
       - name: Check EMSR884 status
         run: |
           python3 ops/monitor_emsr884.py
+      - name: Upload monitor log artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: emsr884-monitor-state
+          path: |
+            ops/emsr884_monitor_state.json
+            ops/emsr884_monitor_log.csv
+            ops/emsr884_downloads/*.zip
+          if-no-files-found: ignore
