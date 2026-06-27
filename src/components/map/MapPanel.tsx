@@ -43,6 +43,7 @@ type Props = {
   basemap: "map" | "aerial";
   vlm: Record<string, VlmRecord>;
   selectedId?: string;
+  focusToken: number;
   onSelect: (feature: DamageFeature) => void;
 };
 
@@ -72,7 +73,7 @@ function passesFilter(feature: DamageFeature, filter: Props["filter"], vlm: Reco
   return true;
 }
 
-export default function MapPanel({ aoi, mode, opacity, filter, basemap, vlm, selectedId, onSelect }: Props) {
+export default function MapPanel({ aoi, mode, opacity, filter, basemap, vlm, selectedId, focusToken, onSelect }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const popupRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<OlMap | null>(null);
@@ -335,7 +336,7 @@ export default function MapPanel({ aoi, mode, opacity, filter, basemap, vlm, sel
 
   useEffect(() => {
     focusFeature(selectedId);
-  }, [focusFeature, selectedId]);
+  }, [focusFeature, focusToken, selectedId]);
 
   return (
     <>
@@ -364,10 +365,11 @@ function escapeHtml(value: string) {
 function popupHtml(p: DamageFeature["properties"]) {
   const mapsUrl = typeof p.google_maps_url === "string" ? p.google_maps_url : "";
   const label = p.not_official_ems ? "External" : "EMS";
+  const damage = String(p.damage_gra ?? p.damage_class ?? "unknown");
+  const percent = String(p.damage_percent ?? p.damage_score ?? "-");
   return (
-    `<strong>${escapeHtml(p.id)}</strong><br/>` +
-    `${label}: <strong>${escapeHtml(String(p.damage_gra ?? p.damage_class ?? "unknown"))}</strong><br/>` +
-    `Damage: ${escapeHtml(String(p.damage_percent ?? p.damage_score ?? "-"))}%<br/>` +
+    `<strong>${escapeHtml(p.id)}</strong>` +
+    `<span>${label}: ${escapeHtml(damage)} · ${escapeHtml(percent)}%</span>` +
     (mapsUrl ? `<a href="${escapeHtml(mapsUrl)}" target="_blank" rel="noreferrer">Google Maps</a>` : "")
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import MapPanel from "./map/MapPanel";
 import type { AoiCatalog, AoiRecord, DamageFeature, Language, VlmRecord } from "./types";
 
@@ -37,6 +37,7 @@ const copy = {
     filterNote: "Severity uses official EMS damage_gra when available. Possible damage is not counted as destroyed/damaged.",
     downloads: "Downloads",
     evidence: "Evidence queue",
+    backToPriority: "Back to priority list",
     noSelection: "Select a polygon to inspect evidence.",
     watchlist: "Incoming products",
     architecture: "Low-cost operating model",
@@ -91,6 +92,7 @@ const copy = {
     filterNote: "La severidad usa damage_gra oficial de EMS cuando existe. Posible daño no cuenta como destruido/dañado.",
     downloads: "Descargas",
     evidence: "Cola de evidencia",
+    backToPriority: "Volver a prioridad",
     noSelection: "Selecciona un poligono para inspeccionar evidencia.",
     watchlist: "Productos entrantes",
     architecture: "Modelo operativo de bajo costo",
@@ -128,8 +130,11 @@ export default function OperationsConsole() {
   const [basemap, setBasemap] = useState<Basemap>("aerial");
   const [opacity, setOpacity] = useState(52);
   const [selected, setSelected] = useState<DamageFeature | null>(null);
+  const [focusToken, setFocusToken] = useState(0);
   const [vlm, setVlm] = useState<Record<string, VlmRecord>>({});
   const [features, setFeatures] = useState<DamageFeature[]>([]);
+  const rightRailRef = useRef<HTMLElement | null>(null);
+  const priorityRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     fetch("/data/catalog.json").then((r) => r.json()).then(setCatalog);
@@ -165,8 +170,18 @@ export default function OperationsConsole() {
   const selectAoi = (id: string) => {
     setActiveId(id);
     setSelected(null);
+    setFocusToken((value) => value + 1);
     setVlm({});
     setFeatures([]);
+  };
+  const selectPriorityFeature = (feature: DamageFeature) => {
+    setSelected(feature);
+    setFilter("all");
+    setFocusToken((value) => value + 1);
+    rightRailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const scrollToPriority = () => {
+    priorityRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const adjustOpacity = (delta: number) => setOpacity((value) => Math.max(5, Math.min(90, value + delta)));
   const priorityFeatures = useMemo(() => {
@@ -246,6 +261,7 @@ export default function OperationsConsole() {
             basemap={basemap}
             vlm={vlm}
             selectedId={selected?.properties.id}
+            focusToken={focusToken}
             onSelect={setSelected}
           />
         )}
@@ -287,11 +303,11 @@ export default function OperationsConsole() {
         </div>
       </section>
 
-      <aside className="right-rail">
+      <aside className="right-rail" ref={rightRailRef}>
         <section className="evidence-panel">
           <h2>{t.evidence}</h2>
           {selected ? (
-            <Evidence feature={selected} vlm={vlm[selected.properties.id]} language={language} />
+            <Evidence feature={selected} vlm={vlm[selected.properties.id]} language={language} onBackToPriority={scrollToPriority} />
           ) : (
             <p className="muted">{t.noSelection}</p>
           )}
@@ -313,17 +329,14 @@ export default function OperationsConsole() {
           <h2>{t.confidenceTitle}</h2>
           <p>{t.confidenceText}</p>
         </section>
-        <section>
+        <section ref={priorityRef}>
           <h2>{language === "es" ? "Prioridad" : "Priority"}</h2>
           <div className="priority-list">
             {priorityFeatures.map((feature) => {
               const p = feature.properties;
               const label = String(vlm[p.id]?.vlm?.damage_class ?? p.damage_class ?? p.damage_gra ?? "candidate");
               return (
-                <button key={p.id} data-testid={`priority-${p.id}`} className={selected?.properties.id === p.id ? "priority-row active" : "priority-row"} onClick={() => {
-                  setSelected(feature);
-                  setFilter("all");
-                }}>
+                <button key={p.id} data-testid={`priority-${p.id}`} className={selected?.properties.id === p.id ? "priority-row active" : "priority-row"} onClick={() => selectPriorityFeature(feature)}>
                   <b>{p.id}</b>
                   <span>{label} · {String(p.damage_score ?? p.damage_percent ?? "-")}</span>
                 </button>
@@ -355,7 +368,7 @@ function formatBytes(bytes?: number) {
   return `${Math.round(bytes / 1_000_000)} MB`;
 }
 
-function Evidence({ feature, vlm, language }: { feature: DamageFeature; vlm?: VlmRecord; language: Language }) {
+function Evidence({ feature, vlm, language, onBackToPriority }: { feature: DamageFeature; vlm?: VlmRecord; language: Language; onBackToPriority: () => void }) {
   const t = copy[language];
   const p = feature.properties;
   const chip = vlm?.post_event_chip ?? vlm?.triplet_chip?.replace(/^.*chips\//, "/data/chips/");
@@ -379,6 +392,7 @@ function Evidence({ feature, vlm, language }: { feature: DamageFeature; vlm?: Vl
       <div className="download-row">
         {mapsUrl && <a href={mapsUrl} target="_blank">{t.maps}</a>}
         {chip && <a href={chip} target="_blank">{t.chip}</a>}
+        <button type="button" className="text-action" onClick={onBackToPriority}>{t.backToPriority}</button>
       </div>
     </div>
   );
