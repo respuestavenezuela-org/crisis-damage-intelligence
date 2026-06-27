@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EMS Damage Layer - EMSR884_AOI08_GRA_v1</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+html,body,#map{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.panel{position:absolute;z-index:500;left:12px;top:12px;width:360px;max-width:calc(100vw - 24px);background:white;border:1px solid #ccc;padding:12px;box-shadow:0 4px 16px #0002}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.kpi{border:1px solid #ddd;padding:8px} .kpi b{font-size:18px;display:block}
+button{border:1px solid #bbb;background:white;padding:6px 8px;margin:2px;cursor:pointer} button.active{background:#111;color:white}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="panel">
+  <h2 style="margin:0 0 6px;font-size:17px">EMS Damage Layer - EMSR884_AOI08_GRA_v1</h2>
+  <div>Copernicus EMS-compatible grading layer. This viewer expects official GRA/BLP vector products.</div>
+  <div id="kpis" class="kpis"></div>
+  <div><button class="active" data-filter="all">All</button><button data-filter="Damaged">Damaged</button><button data-filter="Possibly damaged">Possibly damaged</button></div>
+  <p style="font-size:12px;color:#555">Exports: <a href="data/ems_builtup_damage.csv">CSV</a> · <a href="data/ems_builtup_damage.geojson">GeoJSON</a> · <a href="data/ems_builtup_damage.kml">KML</a></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map=L.map('map').setView([10.48,-67],12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:20,attribution:'&copy; OpenStreetMap'}).addTo(map);
+let data, layer, filter='all';
+const color=p=>p.damage_gra==='Damaged'?'#c4121a':p.damage_gra==='Possibly damaged'?'#e49b22':'#777';
+function popup(p){return `<b>${p.id}</b><br>EMS: <b>${p.damage_gra}</b><br>Object: ${p.obj_type||''}<br>Detection: ${p.det_method||''}<br><a target="_blank" href="${p.google_maps_url}">Google Maps</a>`}
+function render(){if(layer) layer.remove(); const feats=data.features.filter(f=>filter==='all'||f.properties.damage_gra===filter); layer=L.geoJSON({type:'FeatureCollection',features:feats},{style:f=>({color:color(f.properties),fillColor:color(f.properties),fillOpacity:.35,weight:2}),onEachFeature:(f,l)=>l.bindPopup(popup(f.properties))}).addTo(map); if(feats.length) map.fitBounds(layer.getBounds(),{padding:[24,24]}); document.getElementById('kpis').innerHTML=`<div class="kpi"><b>${data.features.length}</b><span>total</span></div><div class="kpi"><b>${data.features.filter(f=>f.properties.damage_gra==='Damaged').length}</b><span>damaged</span></div><div class="kpi"><b>${data.features.filter(f=>f.properties.damage_gra==='Possibly damaged').length}</b><span>possible</span></div>`}
+fetch('data/ems_builtup_damage.geojson').then(r=>r.json()).then(j=>{data=j; render();});
+document.querySelectorAll('button').forEach(b=>b.onclick=()=>{document.querySelectorAll('button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); filter=b.dataset.filter; render();});
+</script>
+</body>
+</html>

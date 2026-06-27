@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T16:20:00Z",
+  "updatedAt": "2026-06-27T14:22:12Z",
   "platform": "Crisis Damage Intelligence",
   "aois": [
     {
@@ -189,24 +189,24 @@
       "country": "Venezuela",
       "event": "EMSR884 Venezuela earthquake",
       "name": {
-        "en": "AOI08 San Felipe - Imagery available, product in production",
-        "es": "AOI08 San Felipe - Imagen disponible, producto en produccion"
+        "en": "AOI08 San Felipe - Official EMSR884 Vector",
+        "es": "AOI08 San Felipe - Vector oficial EMSR884"
       },
-      "status": "in-production",
-      "source": "Copernicus EMSR884 public COG imagery metadata; no official builtUpA damage vector available yet for this AOI.",
+      "status": "official-vector",
+      "source": "Copernicus EMSR884 GRA ZIP -> EMSR884_AOI08_GRA_PRODUCT_v1.gpkg / builtUpA_v1 + public post-event COG imagery.",
       "bounds": [
         [
-          10.236931,
-          -68.858055
+          10.24163722,
+          -68.85519831
         ],
         [
-          10.615665,
-          -68.423346
+          10.4210621,
+          -68.5355039
         ]
       ],
       "center": [
-        10.39063728807947,
-        -68.68538323178808
+        10.272575359969258,
+        -68.80601638624945
       ],
       "downloads": {
         "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
@@ -219,10 +219,10 @@
         "damage": "/data/aoi/emsr884-aoi08-san-felipe/damage.geojson"
       },
       "metrics": {
-        "features": 0,
+        "features": 43,
         "destroyed": 0,
-        "damagedConfirmed": 0,
-        "possibleDamage": 0,
+        "damagedConfirmed": 8,
+        "possibleDamage": 35,
         "vlmReviewed": 0
       },
       "imagery": {
@@ -291,19 +291,63 @@
         "before": null,
         "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
       }
+    },
+    {
+      "id": "emsr884-aoi12-caraballeda",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "AOI12 Caraballeda / La Guaira - Official EMSR884 Vector",
+        "es": "AOI12 Caraballeda / La Guaira - Vector oficial EMSR884"
+      },
+      "status": "official-vector",
+      "source": "Copernicus EMSR884 GRA ZIP -> EMSR884_AOI12_GRA_PRODUCT_v1.gpkg / builtUpA_v1 + public post-event COG imagery.",
+      "bounds": [
+        [
+          10.58363191,
+          -67.08460266
+        ],
+        [
+          10.6206226,
+          -66.81703685
+        ]
+      ],
+      "center": [
+        10.60806442625776,
+        -66.95540317069258
+      ],
+      "downloads": {
+        "csv": "/data/aoi/emsr884-aoi12-caraballeda/damage.csv",
+        "geojson": "/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
+        "kml": "/data/aoi/emsr884-aoi12-caraballeda/damage.kml",
+        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif"
+      },
+      "layers": {
+        "damage": "/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
+        "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif"
+      },
+      "metrics": {
+        "features": 120,
+        "destroyed": 10,
+        "damagedConfirmed": 96,
+        "possibleDamage": 24,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "after": {
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+          "sensor": "Legion",
+          "acquisitionUtc": "2026-06-26T15:10:00",
+          "bytes": 916351360,
+          "sha256": null,
+          "r2Key": null
+        },
+        "before": null,
+        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
+      }
     }
   ],
   "watchlist": [
-    {
-      "id": "ems-aoi12-caraballeda",
-      "name": {
-        "en": "AOI12 Caraballeda / La Guaira",
-        "es": "AOI12 Caraballeda / La Guaira"
-      },
-      "status": "waiting",
-      "expectedUtc": "2026-06-27T01:00:00Z",
-      "priority": "critical"
-    },
     {
       "id": "ems-aoi07-puerto-cabello",
       "name": {

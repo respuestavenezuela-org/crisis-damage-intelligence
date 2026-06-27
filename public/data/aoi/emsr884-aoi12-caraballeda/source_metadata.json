@@ -1,0 +1,10 @@
+{
+  "features": 120,
+  "destroyed": 10,
+  "damaged": 86,
+  "possibly_damaged": 24,
+  "source_product": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_v1.zip",
+  "source_root": "EMSR884_AOI12_GRA_v1",
+  "source_file": "EMSR884_AOI12_GRA_PRODUCT_v1.gpkg",
+  "source_layer": "builtUpA_v1"
+}
