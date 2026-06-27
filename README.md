@@ -130,6 +130,8 @@ Verified app behavior:
 
 Short response-operations guides:
 
+- `docs/OPERATIONAL_LOOP_GOALS.md`
+- `docs/OPERATIONAL_PROGRESS.md`
 - `docs/OPERATOR_HANDOFF_ES.md`
 - `docs/OPERATOR_HANDOFF_EN.md`
 - `docs/DEPLOYMENT_CHECKLIST.md`
