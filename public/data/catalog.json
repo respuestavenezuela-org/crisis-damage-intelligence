@@ -216,7 +216,8 @@
       },
       "layers": {
         "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
-        "damage": "/data/aoi/emsr884-aoi08-san-felipe/damage.geojson"
+        "damage": "/data/aoi/emsr884-aoi08-san-felipe/damage.geojson",
+        "afterTiles": "/data/tiles/emsr884-aoi08-san-felipe/after/{z}/{x}/{y}.webp"
       },
       "metrics": {
         "features": 43,
@@ -232,7 +233,16 @@
           "acquisitionUtc": "2026-06-25T15:00:00",
           "bytes": 222077456,
           "sha256": "ac298487358bc513d1722608dcd802f74281527e48ab5f25363e91d720402498",
-          "r2Key": "ems/rasters/after/emsr884-aoi08-san-felipe/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif"
+          "r2Key": "ems/rasters/after/emsr884-aoi08-san-felipe/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
+          "tilePyramid": {
+            "urlTemplate": "/data/tiles/emsr884-aoi08-san-felipe/after/{z}/{x}/{y}.webp",
+            "format": "webp",
+            "minZoom": 12,
+            "maxZoom": 18,
+            "tileCount": 29700,
+            "bytesApprox": 31249928,
+            "quality": 80
+          }
         },
         "before": null,
         "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
@@ -324,7 +334,8 @@
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
-        "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif"
+        "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+        "afterTiles": "/data/tiles/emsr884-aoi12-caraballeda/after/{z}/{x}/{y}.webp"
       },
       "metrics": {
         "features": 120,
@@ -340,7 +351,16 @@
           "acquisitionUtc": "2026-06-26T15:10:00",
           "bytes": 916351360,
           "sha256": null,
-          "r2Key": null
+          "r2Key": null,
+          "tilePyramid": {
+            "urlTemplate": "/data/tiles/emsr884-aoi12-caraballeda/after/{z}/{x}/{y}.webp",
+            "format": "webp",
+            "minZoom": 12,
+            "maxZoom": 18,
+            "tileCount": 11655,
+            "bytesApprox": 44369872,
+            "quality": 75
+          }
         },
         "before": null,
         "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
