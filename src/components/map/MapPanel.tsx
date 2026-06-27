@@ -46,7 +46,7 @@ type Props = {
   selectedId?: string;
   focusToken: number;
   aoiFocusToken: number;
-  onSelect: (feature: DamageFeature) => void;
+  onSelect: (feature: DamageFeature | null) => void;
 };
 
 type OlDamageFeature = Feature & { original?: DamageFeature };
@@ -144,7 +144,16 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
 
   const focusFeature = useCallback((id?: string) => {
     const map = mapRef.current;
-    if (!map || !id) return;
+    if (!map) return;
+    if (!id) {
+      highlightRef.current?.getSource()?.clear();
+      markerRef.current?.getSource()?.clear();
+      popupOverlayRef.current?.setPosition(undefined);
+      if (popupRef.current) popupRef.current.innerHTML = "";
+      nodeRef.current?.setAttribute("data-focused-id", "");
+      setDebug(featuresRef.current.filter((candidate) => passesFilter(candidate, filter, vlm)));
+      return;
+    }
     const feature = featuresRef.current.find((candidate) => candidate.properties.id === id);
     let olFeature = olFeatureByIdRef.current.get(id);
     if (!feature) return;
@@ -263,6 +272,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
         layerFilter: (layer) => layer === vectorRef.current,
       });
       if (hit?.original) onSelect(hit.original);
+      else onSelect(null);
     });
 
     return () => {
