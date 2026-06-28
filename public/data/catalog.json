@@ -43,7 +43,7 @@
         "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
         "vlm": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
         "afterTiles": "/data/tiles/emsr884-aoi02-caracas/after/{z}/{x}/{y}.webp",
-        "beforeTiles": "https://raw.githubusercontent.com/takove/crisis-damage-intelligence/main/public/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp"
+        "beforeTiles": "/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp"
       },
       "metrics": {
         "features": 17,
@@ -86,7 +86,7 @@
           }
         },
         "before": {
-          "url": "https://raw.githubusercontent.com/takove/crisis-damage-intelligence/main/public/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
+          "url": "/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
           "sensor": "Vantor LG06",
           "acquisitionUtc": "2026-03-20T14:46:55Z",
           "bytes": null,
@@ -105,7 +105,7 @@
             }
           ],
           "tilePyramid": {
-            "urlTemplate": "https://raw.githubusercontent.com/takove/crisis-damage-intelligence/main/public/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
+            "urlTemplate": "/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
             "format": "webp",
             "minZoom": 12,
             "maxZoom": 18,

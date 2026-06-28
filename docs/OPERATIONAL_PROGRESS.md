@@ -1069,3 +1069,49 @@ Do not run post-event-only VLM as if it were before/after comparison.
   - Run or build a manifest-level R2 audit for every local tile key before deploying a fully pruned remote-asset package.
   - Have a human reviewer validate the 5 AOI03 urgent candidates, then rerun `python3 scripts/compile_aoi03_human_validation.py`.
   - Continue searching for licensed high-resolution pre-event baselines for AOI06/AOI08/AOI10; do not substitute Sentinel-2 or post-event-only VLM.
+
+### 2026-06-28 - R2 Full Asset Upload And Remote Vercel Package
+
+- Objective:
+  - Remove the production risk that the pruned/remote-asset deployment would show 404s for imagery tiles or evidence chips.
+- Files changed:
+  - `public/data/catalog.json`
+  - `ops/remote_asset_validation/latest.json`
+  - `ops/remote_asset_validation/latest.md`
+  - `ops/remote_asset_validation/post_upload_recheck.json`
+  - `ops/remote_asset_validation/post_upload_recheck.md`
+- Commands run:
+  - `npx wrangler whoami`
+  - `npx wrangler r2 bucket list`
+  - Temporary Worker upload path deployed and deleted:
+    - `npx wrangler deploy --config /tmp/cdi-r2-uploader/wrangler.jsonc`
+    - local concurrent uploader: 74,518 tile/chip objects uploaded, 0 failures
+    - `npx wrangler delete cdi-r2-uploader --force --config /tmp/cdi-r2-uploader/wrangler.jsonc`
+  - `python3 scripts/validate_remote_asset_urls.py --sample-per-template 12 --sample-chips 32`
+  - `python3 scripts/build_vercel_remote_asset_package.py --force`
+  - `npm install`
+  - `npm run lint`
+  - `npm run build`
+  - `npx vercel deploy --prod --yes --archive=tgz`
+- QA performed:
+  - Rechecked all 4,823 previously observed public R2 404 tile URLs plus 2,000 deterministic sampled tile/chip URLs: 6,702 checked, 6,702 OK, 0 failed.
+  - Standard repo validator now passes with 104 remote checks, 0 failures.
+  - Public production catalog now has 0 local `/data/tiles` or `/data/chips` references and 0 GitHub Raw tile references.
+  - Final public smoke checked app, catalog, CSV/GeoJSON/KML downloads, and 40 real R2 tile/chip URLs: 72 checked, 0 failed.
+  - Browser QA confirmed the production map loads La Guaira imagery from the remote-asset deployment.
+- Deployment:
+  - Production alias updated: `https://crisis-damage-intelligence.vercel.app`
+  - Final deployment id: `dpl_DqdohMCWxvBCQjes1s6hbDTTZCgD`
+  - Remote package path: `/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_vercel_remote_assets`
+  - Remote package upload size: about 23.3 MB; Vercel package excludes `public/data/tiles` and `public/data/chips`.
+- Result:
+  - R2 is now the production source for published tile/chip imagery references.
+  - AOI02 `beforeTiles` was moved from GitHub Raw fallback to the same R2 path pattern used by other imagery.
+  - The temporary upload Worker was removed after use.
+- Blockers:
+  - AOI06/AOI08/AOI10 still do not have credible high-resolution pre-event imagery for true before/after VLM.
+  - AOI03 remains internal-only until human validation promotes candidates.
+  - Vercel Git autodeploy from the heavy source repo can still upload local tiles unless the remote-asset package path is used for production deployments.
+- Next recommended action:
+  - Make the remote-asset package the only deployment path, or remove heavy tile/chip directories from the deploy source after confirming the team no longer needs local fallback in the production repo.
+  - Continue VLM work only where before/after imagery is credible; keep post-event-only VLM separately labeled.
