@@ -1,0 +1,32 @@
+{
+  "caraballeda_east": {
+    "aoi12": {
+      "intersecting_features": 1904,
+      "intersecting_damaged_flag_1": 397
+    },
+    "external_catia_current": {
+      "intersecting_features": 0,
+      "intersecting_damaged_flag_1": 0
+    }
+  },
+  "catia_la_mar_east": {
+    "aoi12": {
+      "intersecting_features": 2152,
+      "intersecting_damaged_flag_1": 300
+    },
+    "external_catia_current": {
+      "intersecting_features": 4600,
+      "intersecting_damaged_flag_1": 387
+    }
+  },
+  "la_guaira_east": {
+    "aoi12": {
+      "intersecting_features": 972,
+      "intersecting_damaged_flag_1": 57
+    },
+    "external_catia_current": {
+      "intersecting_features": 0,
+      "intersecting_damaged_flag_1": 0
+    }
+  }
+}

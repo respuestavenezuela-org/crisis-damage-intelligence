@@ -116,10 +116,10 @@
         ]
       },
       "official": false,
-      "confidence": "pending_review_triage_only",
+      "confidence": "external_prediction_triage_only",
       "sourceType": "external model-predicted building-footprint damage",
-      "status": "documented_not_loaded",
-      "reviewStatus": "queued_for_source_review",
+      "status": "added_as_external_prediction_triage_layer",
+      "reviewStatus": "published_with_triage_warning",
       "lastKnownSourceModifiedUtc": "2026-06-27T14:59:30.939048",
       "resources": [
         {
@@ -141,7 +141,30 @@
           "url": "https://data.humdata.org/dataset/1a77bd9c-5170-4651-92c2-0dd42cdc303e/resource/2446c43b-d445-47e3-a349-e73f911059bf/download/caraballeda_east_vantor_6-26_valid_area_mask.geojson"
         }
       ],
-      "caveat": "Do not publish as a new public layer until overlap with AOI12 official EMS features, thresholding, and visual QA are reviewed. Treat as external model triage only."
+      "caveat": "Published as high-value external model triage candidates only, not official EMS damage and not confirmed collapse. Do not add these counts to official EMS totals; dedupe/field/VLM review is still required.",
+      "analysisStatus": "downloaded_and_quantified_not_published",
+      "analysisArtifacts": {
+        "localReport": "ops/external_source_review/analysis/msft_hdx/msft_hdx_new_layers_analysis.md",
+        "summaryJson": "ops/external_source_review/analysis/msft_hdx/summary.json",
+        "highValueCandidateCsv": "ops/external_source_review/analysis/msft_hdx/high_value_external_triage_candidates.csv"
+      },
+      "analysisSummary": {
+        "featureCount": 10392,
+        "damagedFlagCount": 622,
+        "maxDamageGte25": 498,
+        "maxDamageGte50": 334,
+        "maxDamageGte75": 255,
+        "boundsWgs84": [
+          -66.8629357,
+          10.6002163,
+          -66.8113256,
+          10.6211033
+        ],
+        "aoi12IntersectingFeatures": 1904,
+        "aoi12IntersectingDamagedFlag1": 397,
+        "currentCatiaLayerIntersectingFeatures": 0,
+        "currentCatiaLayerIntersectingDamagedFlag1": 0
+      }
     },
     {
       "id": "hdx-msft-catia-la-mar-east-predicted-damage",
@@ -165,10 +188,10 @@
         ]
       },
       "official": false,
-      "confidence": "pending_review_triage_only",
+      "confidence": "external_prediction_triage_only",
       "sourceType": "external model-predicted building-footprint damage",
-      "status": "documented_not_loaded",
-      "reviewStatus": "queued_for_source_review",
+      "status": "added_as_external_prediction_triage_layer",
+      "reviewStatus": "published_with_triage_warning",
       "lastKnownSourceModifiedUtc": "2026-06-27T21:18:56.956382",
       "resources": [
         {
@@ -190,7 +213,30 @@
           "url": "https://data.humdata.org/dataset/0c439581-b14d-4092-a104-95b5abee3002/resource/5b0bcd32-39b7-4c39-9722-a20818d5e0b0/download/valid_area_mask_catia_la_mar_east.geojson"
         }
       ],
-      "caveat": "Do not publish as a new public layer until duplicated coverage with existing Catia/EMS records, model thresholding, and imagery validity are reviewed. Treat as external model triage only."
+      "caveat": "Published as high-value external model triage candidates only, not official EMS damage and not confirmed collapse. Do not add these counts to official EMS totals; dedupe/field/VLM review is still required.",
+      "analysisStatus": "downloaded_and_quantified_not_published",
+      "analysisArtifacts": {
+        "localReport": "ops/external_source_review/analysis/msft_hdx/msft_hdx_new_layers_analysis.md",
+        "summaryJson": "ops/external_source_review/analysis/msft_hdx/summary.json",
+        "highValueCandidateCsv": "ops/external_source_review/analysis/msft_hdx/high_value_external_triage_candidates.csv"
+      },
+      "analysisSummary": {
+        "featureCount": 24732,
+        "damagedFlagCount": 1209,
+        "maxDamageGte25": 769,
+        "maxDamageGte50": 457,
+        "maxDamageGte75": 307,
+        "boundsWgs84": [
+          -67.0272747,
+          10.5212059,
+          -66.9572208,
+          10.6147739
+        ],
+        "aoi12IntersectingFeatures": 2152,
+        "aoi12IntersectingDamagedFlag1": 300,
+        "currentCatiaLayerIntersectingFeatures": 4600,
+        "currentCatiaLayerIntersectingDamagedFlag1": 387
+      }
     },
     {
       "id": "hdx-msft-la-guaira-predicted-damage",
@@ -214,10 +260,10 @@
         ]
       },
       "official": false,
-      "confidence": "pending_review_triage_only",
+      "confidence": "external_prediction_triage_only",
       "sourceType": "external model-predicted building-footprint damage",
-      "status": "documented_not_loaded",
-      "reviewStatus": "queued_for_source_review",
+      "status": "added_as_external_prediction_triage_layer",
+      "reviewStatus": "published_with_triage_warning",
       "lastKnownSourceModifiedUtc": "2026-06-27T15:00:19.039959",
       "resources": [
         {
@@ -239,7 +285,30 @@
           "url": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/441dbd20-9727-4067-bbe3-69f17220eb24/download/valid_area_mask_be30d955-2b80-4354-9418-5b9123117843_8fb3f63b-6166-4626-88e1-a434238f6272-1-.geojson"
         }
       ],
-      "caveat": "Do not publish as a new public layer until source geometry, thresholding, and overlap with official EMS AOIs are reviewed. Treat as external model triage only."
+      "caveat": "Published as high-value external model triage candidates only, not official EMS damage and not confirmed collapse. Do not add these counts to official EMS totals; dedupe/field/VLM review is still required.",
+      "analysisStatus": "downloaded_and_quantified_not_published",
+      "analysisArtifacts": {
+        "localReport": "ops/external_source_review/analysis/msft_hdx/msft_hdx_new_layers_analysis.md",
+        "summaryJson": "ops/external_source_review/analysis/msft_hdx/summary.json",
+        "highValueCandidateCsv": "ops/external_source_review/analysis/msft_hdx/high_value_external_triage_candidates.csv"
+      },
+      "analysisSummary": {
+        "featureCount": 5411,
+        "damagedFlagCount": 112,
+        "maxDamageGte25": 243,
+        "maxDamageGte50": 113,
+        "maxDamageGte75": 74,
+        "boundsWgs84": [
+          -66.918586,
+          10.5849143,
+          -66.8608767,
+          10.6132233
+        ],
+        "aoi12IntersectingFeatures": 972,
+        "aoi12IntersectingDamagedFlag1": 57,
+        "currentCatiaLayerIntersectingFeatures": 0,
+        "currentCatiaLayerIntersectingDamagedFlag1": 0
+      }
     },
     {
       "id": "vosocc-rescue-international-la-guaira-sector-maps",
@@ -519,6 +588,86 @@
         }
       ],
       "caveat": "Useful for context and exposure analysis, but not an official damage source. Overture building footprints are partly AI-generated; national-scale files are too large for the Vercel bundle until filtered or tiled."
+    },
+    {
+      "id": "hot-2026-venezuela-earthquake-response",
+      "title": "HOT 2026 Venezuela Earthquake Response: OAM, Tasking Manager, fAIr, HDX portal",
+      "url": "https://www.hotosm.org/en/projects/2026-venezuela-earthquake-response/",
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Humanitarian OpenStreetMap Team (HOT) and partners",
+      "licenseOrTerms": "Mixed by dataset/tool; verify each export before redistribution.",
+      "geography": {
+        "label": "Caracas and La Guaira affected areas, Venezuela",
+        "country": "Venezuela",
+        "bounds": null
+      },
+      "official": false,
+      "confidence": "high_for_mapping_coordination_pending_dataset_specific_review",
+      "sourceType": "open mapping response portal / building footprints / imagery index / fAIr building density",
+      "status": "documented_monitor_for_ingestion",
+      "reviewStatus": "queued_for_source_monitoring",
+      "lastKnownSourceModifiedUtc": null,
+      "resources": [
+        {
+          "name": "HOT response page",
+          "format": "HTML",
+          "lastModifiedUtc": null,
+          "url": "https://www.hotosm.org/en/projects/2026-venezuela-earthquake-response/"
+        },
+        {
+          "name": "HOT Tasking Manager search",
+          "format": "HTML",
+          "lastModifiedUtc": null,
+          "url": "https://tasks.hotosm.org/explore?omitMapResults=1"
+        },
+        {
+          "name": "HOT HDX organization/data portal",
+          "format": "HTML",
+          "lastModifiedUtc": null,
+          "url": "https://data.humdata.org/organization/hot"
+        },
+        {
+          "name": "OpenAerialMap",
+          "format": "HTML/API",
+          "lastModifiedUtc": null,
+          "url": "https://openaerialmap.org/"
+        }
+      ],
+      "caveat": "Use to find available imagery, building footprints, density layers, and mapping campaigns. Do not treat fAIr or OSM-derived outputs as confirmed structural damage; use as exposure/context and candidate generation only."
+    },
+    {
+      "id": "commercial-basemap-imagery-google-esri-bing",
+      "title": "Commercial web basemap imagery: Google, Esri, Bing and similar map tiles",
+      "url": "https://cloud.google.com/maps-platform/terms",
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Google Maps Platform and other commercial basemap providers; each provider has separate terms.",
+      "licenseOrTerms": "Do not download, cache, rehost, extract, trace, train, validate models, or create derived operational datasets from commercial map tiles unless the provider terms and a specific license explicitly allow it. Use only as a human navigation link or user-provided external reference.",
+      "geography": {
+        "label": "Global basemap reference; not a Venezuela earthquake operational dataset",
+        "country": "Global",
+        "bounds": null
+      },
+      "official": false,
+      "confidence": "not_usable_as_operational_data_source",
+      "sourceType": "commercial basemap imagery / map tiles",
+      "status": "blocked_for_ingestion_or_vlm",
+      "reviewStatus": "do_not_ingest",
+      "lastKnownSourceModifiedUtc": null,
+      "resources": [
+        {
+          "name": "Google Maps Platform Terms",
+          "format": "HTML",
+          "lastModifiedUtc": null,
+          "url": "https://cloud.google.com/maps-platform/terms"
+        },
+        {
+          "name": "Google Maps Platform Policies",
+          "format": "HTML",
+          "lastModifiedUtc": null,
+          "url": "https://developers.google.com/maps/policies"
+        }
+      ],
+      "caveat": "These sources can remain as outbound human links, for example Google Maps search links from popups. They must not be used as before imagery, VLM evidence, cached tiles, exported chips, or generated geodata in this platform."
     }
   ]
 }

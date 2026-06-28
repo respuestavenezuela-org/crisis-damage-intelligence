@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>La Guaira East - Microsoft AI4G Triage Candidates</name>
+
+    <Placemark>
+      <name>msft_la_guaira_00001</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 530<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6007247,-66.9139069'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9139069,10.6007247,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00002</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 554<br/><b>Max damage score:</b> 0.525412<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6008314,-66.9139382'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9139382,10.6008314,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00003</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 813<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6052663,-66.8880218'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8880218,10.6052663,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00004</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 847<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6042345,-66.8832882'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8832882,10.6042345,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00005</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 848<br/><b>Max damage score:</b> 0.959821<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6042561,-66.8832191'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8832191,10.6042561,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00006</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 850<br/><b>Max damage score:</b> 0.694581<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6042646,-66.8833759'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8833759,10.6042646,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00007</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 851<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6042858,-66.8833180'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.883318,10.6042858,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00008</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 853<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6043308,-66.8832628'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8832628,10.6043308,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00009</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 854<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6043204,-66.8832157'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8832157,10.6043204,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00010</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 856<br/><b>Max damage score:</b> 0.679083<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6043754,-66.8834222'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8834222,10.6043754,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00011</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 867<br/><b>Max damage score:</b> 0.596774<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6044078,-66.8833596'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8833596,10.6044078,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00012</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1204<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6055822,-66.8973642'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8973642,10.6055822,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00013</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1211<br/><b>Max damage score:</b> 0.553502<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6055785,-66.8940084'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8940084,10.6055785,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00014</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1453<br/><b>Max damage score:</b> 0.505783<br/><b>Damaged flag:</b> 0<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6057309,-66.8939832'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8939832,10.6057309,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00015</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1455<br/><b>Max damage score:</b> 0.842975<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6057465,-66.8938610'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.893861,10.6057465,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00016</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1521<br/><b>Max damage score:</b> 0.869478<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6057751,-66.8868730'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.886873,10.6057751,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00017</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1541<br/><b>Max damage score:</b> 0.786207<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6058376,-66.8877104'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8877104,10.6058376,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00018</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1561<br/><b>Max damage score:</b> 0.943716<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6059532,-66.8876750'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.887675,10.6059532,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00019</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1600<br/><b>Max damage score:</b> 0.86506<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6060386,-66.8877160'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.887716,10.6060386,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00020</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 1831<br/><b>Max damage score:</b> 0.721785<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6017563,-66.9131124'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9131124,10.6017563,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00021</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2291<br/><b>Max damage score:</b> 0.640501<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6024863,-66.9134936'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9134936,10.6024863,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00022</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2307<br/><b>Max damage score:</b> 0.601163<br/><b>Damaged flag:</b> 0<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6025987,-66.9134168'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9134168,10.6025987,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00023</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2309<br/><b>Max damage score:</b> 0.65917<br/><b>Damaged flag:</b> 0<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6026065,-66.9133793'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9133793,10.6026065,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00024</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2310<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6026450,-66.9132830'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.913283,10.602645,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00025</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2311<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6026393,-66.9130493'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9130493,10.6026393,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00026</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2312<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6026533,-66.9131288'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9131288,10.6026533,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00027</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2313<br/><b>Max damage score:</b> 0.647402<br/><b>Damaged flag:</b> 0<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6027142,-66.9129523'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9129523,10.6027142,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00028</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2315<br/><b>Max damage score:</b> 0.977346<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6027248,-66.9134935'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9134935,10.6027248,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00029</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2339<br/><b>Max damage score:</b> 0.511882<br/><b>Damaged flag:</b> 0<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6028203,-66.9133795'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9133795,10.6028203,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00030</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2341<br/><b>Max damage score:</b> 0.660717<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6028222,-66.9132576'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9132576,10.6028222,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00031</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2555<br/><b>Max damage score:</b> 0.72973<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6032860,-66.9003196'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9003196,10.603286,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00032</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2747<br/><b>Max damage score:</b> 0.509796<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6033178,-66.9019841'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9019841,10.6033178,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00033</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2757<br/><b>Max damage score:</b> 0.73663<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6033104,-66.8995776'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8995776,10.6033104,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00034</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2765<br/><b>Max damage score:</b> 0.933333<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6033935,-66.9027692'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9027692,10.6033935,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00035</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2768<br/><b>Max damage score:</b> 0.941073<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6034608,-66.9026753'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9026753,10.6034608,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00036</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2777<br/><b>Max damage score:</b> 0.441261<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6035325,-66.8985978'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8985978,10.6035325,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00037</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2785<br/><b>Max damage score:</b> 0.752926<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6035999,-66.9026097'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9026097,10.6035999,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00038</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2800<br/><b>Max damage score:</b> 0.856061<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6036568,-66.8986012'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8986012,10.6036568,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00039</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2986<br/><b>Max damage score:</b> 0.500382<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6045313,-66.9170645'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9170645,10.6045313,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00040</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2994<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6046776,-66.9169499'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9169499,10.6046776,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00041</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2995<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6047245,-66.9171178'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9171178,10.6047245,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00042</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 2997<br/><b>Max damage score:</b> 0.958188<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6048037,-66.9169492'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9169492,10.6048037,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00043</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3127<br/><b>Max damage score:</b> 0.726066<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6048147,-66.9008352'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9008352,10.6048147,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00044</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3139<br/><b>Max damage score:</b> 0.519651<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6050114,-66.9002795'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9002795,10.6050114,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00045</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3146<br/><b>Max damage score:</b> 0.870619<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6049171,-66.9009211'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9009211,10.6049171,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00046</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3162<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6050918,-66.9006386'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9006386,10.6050918,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00047</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3166<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6051568,-66.9003301'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9003301,10.6051568,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00048</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3174<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6053246,-66.9003894'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9003894,10.6053246,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00049</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3177<br/><b>Max damage score:</b> 0.597107<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6054185,-66.8999813'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8999813,10.6054185,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00050</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3178<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6054178,-66.9004375'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9004375,10.6054178,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00051</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3180<br/><b>Max damage score:</b> 0.502382<br/><b>Damaged flag:</b> 0<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6055000,-66.9002477'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9002477,10.6055,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00052</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3210<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6055770,-66.9000273'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.9000273,10.605577,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00053</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3211<br/><b>Max damage score:</b> 0.524956<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6055931,-66.8996954'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8996954,10.6055931,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00054</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3212<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6056239,-66.8999150'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.899915,10.6056239,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00055</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3214<br/><b>Max damage score:</b> 0.928842<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6056130,-66.8990386'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8990386,10.605613,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00056</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3218<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6057784,-66.8992519'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8992519,10.6057784,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00057</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3219<br/><b>Max damage score:</b> 0.469388<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6058080,-66.8994187'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8994187,10.605808,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00058</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3264<br/><b>Max damage score:</b> 0.996042<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6063314,-66.8923838'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8923838,10.6063314,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00059</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3266<br/><b>Max damage score:</b> 0.514205<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6063290,-66.8932832'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8932832,10.606329,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00060</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3268<br/><b>Max damage score:</b> 0.956522<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6063323,-66.8932099'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8932099,10.6063323,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00061</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3271<br/><b>Max damage score:</b> 0.579516<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6063919,-66.8926860'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.892686,10.6063919,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00062</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3283<br/><b>Max damage score:</b> 0.881517<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6065902,-66.8928353'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8928353,10.6065902,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00063</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3315<br/><b>Max damage score:</b> 0.431707<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6066850,-66.8911582'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8911582,10.606685,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00064</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3316<br/><b>Max damage score:</b> 0.658443<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6066890,-66.8927394'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8927394,10.606689,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00065</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3435<br/><b>Max damage score:</b> 0.753333<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6062455,-66.8873834'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8873834,10.6062455,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00066</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3444<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6062292,-66.8866676'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8866676,10.6062292,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00067</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3646<br/><b>Max damage score:</b> 0.96382<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6069117,-66.8882024'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8882024,10.6069117,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00068</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3667<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6071446,-66.8852833'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8852833,10.6071446,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00069</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3671<br/><b>Max damage score:</b> 0.5<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6072194,-66.8857820'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.885782,10.6072194,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00070</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3710<br/><b>Max damage score:</b> 0.658247<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6073946,-66.8855148'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8855148,10.6073946,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00071</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3717<br/><b>Max damage score:</b> 0.705069<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6073901,-66.8873806'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8873806,10.6073901,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00072</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3794<br/><b>Max damage score:</b> 0.983471<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6076877,-66.8857619'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8857619,10.6076877,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00073</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3798<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6077180,-66.8857908'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8857908,10.607718,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00074</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3837<br/><b>Max damage score:</b> 0.721678<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6079076,-66.8818106'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8818106,10.6079076,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00075</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3849<br/><b>Max damage score:</b> 0.839604<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6079092,-66.8857039'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8857039,10.6079092,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00076</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3934<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6071844,-66.8911078'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8911078,10.6071844,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00077</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3938<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6071721,-66.8908953'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8908953,10.6071721,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00078</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3947<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6075290,-66.8911083'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8911083,10.607529,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00079</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3949<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6076152,-66.8910627'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8910627,10.6076152,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00080</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3950<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6076567,-66.8910866'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8910866,10.6076567,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00081</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3991<br/><b>Max damage score:</b> 0.458763<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6086476,-66.8896518'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8896518,10.6086476,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00082</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 3999<br/><b>Max damage score:</b> 0.84695<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6087879,-66.8894496'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8894496,10.6087879,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00083</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4003<br/><b>Max damage score:</b> 0.981668<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6088186,-66.8897476'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8897476,10.6088186,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00084</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4004<br/><b>Max damage score:</b> 0.949025<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6088127,-66.8895904'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8895904,10.6088127,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00085</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4006<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6090148,-66.8895510'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.889551,10.6090148,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00086</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4047<br/><b>Max damage score:</b> 0.51895<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6080009,-66.8818231'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8818231,10.6080009,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00087</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4089<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6083837,-66.8655064'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8655064,10.6083837,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00088</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4090<br/><b>Max damage score:</b> 0.981964<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6084160,-66.8654490'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.865449,10.608416,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00089</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4130<br/><b>Max damage score:</b> 0.684874<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6079030,-66.8891216'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8891216,10.607903,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00090</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4728<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6103383,-66.8888624'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8888624,10.6103383,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00091</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4742<br/><b>Max damage score:</b> 0.536145<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6099087,-66.8709155'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8709155,10.6099087,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00092</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4761<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6098631,-66.8815843'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8815843,10.6098631,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00093</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4793<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6101844,-66.8726088'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8726088,10.6101844,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00094</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4806<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6102613,-66.8698218'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8698218,10.6102613,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00095</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4915<br/><b>Max damage score:</b> 0.432857<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6101943,-66.8834440'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.883444,10.6101943,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00096</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4928<br/><b>Max damage score:</b> 0.990644<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6112671,-66.8844221'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8844221,10.6112671,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00097</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4930<br/><b>Max damage score:</b> 0.607863<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6114194,-66.8845743'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8845743,10.6114194,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00098</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4947<br/><b>Max damage score:</b> 0.904998<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6106937,-66.8864867'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8864867,10.6106937,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00099</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4951<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6107854,-66.8868647'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8868647,10.6107854,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00100</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4952<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6107913,-66.8867735'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8867735,10.6107913,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00101</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4963<br/><b>Max damage score:</b> 0.516129<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6104397,-66.8891849'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8891849,10.6104397,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00102</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4964<br/><b>Max damage score:</b> 0.960948<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6104516,-66.8888762'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8888762,10.6104516,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00103</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4966<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6104875,-66.8891583'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8891583,10.6104875,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00104</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4967<br/><b>Max damage score:</b> 0.519288<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6106194,-66.8887966'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8887966,10.6106194,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00105</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4973<br/><b>Max damage score:</b> 0.587013<br/><b>Damaged flag:</b> 0<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6108291,-66.8866868'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8866868,10.6108291,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00106</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4976<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6108859,-66.8865310'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.886531,10.6108859,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00107</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4981<br/><b>Max damage score:</b> 0.70073<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6109234,-66.8864541'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8864541,10.6109234,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00108</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4992<br/><b>Max damage score:</b> 0.912955<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6110362,-66.8871321'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8871321,10.6110362,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00109</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 4993<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6110617,-66.8872219'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8872219,10.6110617,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00110</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5007<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6114732,-66.8854654'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8854654,10.6114732,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00111</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5009<br/><b>Max damage score:</b> 0.411348<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6115946,-66.8853212'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8853212,10.6115946,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00112</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5010<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6117364,-66.8859337'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8859337,10.6117364,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00113</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5016<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6114692,-66.8862711'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8862711,10.6114692,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00114</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5017<br/><b>Max damage score:</b> 0.959847<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6115611,-66.8862314'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8862314,10.6115611,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00115</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5018<br/><b>Max damage score:</b> 1.0<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6115959,-66.8862919'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8862919,10.6115959,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00116</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5021<br/><b>Max damage score:</b> 0.578628<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6117488,-66.8856892'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8856892,10.6117488,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00117</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5165<br/><b>Max damage score:</b> 0.611111<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6103302,-66.8713117'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8713117,10.6103302,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00118</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5385<br/><b>Max damage score:</b> 0.904217<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6118675,-66.8642677'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8642677,10.6118675,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>msft_la_guaira_00119</name>
+      <description><![CDATA[<b>Status:</b> external triage prediction, not official EMS damage<br/><b>Source ID:</b> 5387<br/><b>Max damage score:</b> 0.933854<br/><b>Damaged flag:</b> 1<br/><b>Google Maps:</b> <a href='https://www.google.com/maps/search/?api=1&amp;query=10.6119089,-66.8640968'>open</a><br/>]]></description>
+      <Style><IconStyle><color>ff1a12c4</color><scale>0.85</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+      <Point><coordinates>-66.8640968,10.6119089,0</coordinates></Point>
+    </Placemark>
+</Document></kml>

@@ -1,7 +1,7 @@
 import { OpenPanelComponent } from "@openpanel/nextjs";
 
 const provider = process.env.NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER ?? "openpanel";
-const clientId = process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID ?? "8f14c2ad-cd7b-4f57-9ecd-65f5d2659c75";
+const clientId = process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID;
 const apiUrl = process.env.NEXT_PUBLIC_OPENPANEL_API_URL;
 const scriptUrl = process.env.NEXT_PUBLIC_OPENPANEL_SCRIPT_URL;
 

@@ -10,4 +10,11 @@ Review gates before any new public layer:
 4. Confirm the layer is visually and textually distinct from official Copernicus EMS data.
 5. Keep queued or rejected sources out of `public/data/catalog.json`.
 
+Operational guardrails:
+
+- Google Maps links and Esri basemap/satellite views are external visual references only. They are not official evidence sources, are not cached or redistributed by this project, and should not be used as VLM before imagery.
+- Pre-event imagery has three allowed labels: `Vantor usable for VLM`, `Esri visual reference only`, and `No before`. Only the Vantor class may support before/after VLM, and only when coverage, alignment, and visibility are adequate.
+- Microsoft/HDX damage-prediction layers are external model outputs. They may be used as candidate footprints or triage leads, but not as EMS labels, field-confirmed damage, or official response counts.
+- Do not overclaim absence: a missing prediction, missing EMS polygon, or missing VLM flag is not proof of no damage.
+
 The current queue documents three additional Microsoft AI for Good Lab HDX damage-prediction datasets discovered on 2026-06-28. They are not official EMS labels and were not added to the public catalog.

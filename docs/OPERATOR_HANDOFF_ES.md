@@ -33,6 +33,13 @@ Usar el mapa para ubicar rapidamente poligonos oficiales de daño de Copernicus 
 - AOI06 y AOI08 actualmente tienen VLM solo post-evento. No describa esos registros como comparaciones antes/despues.
 - AOI03 Antimano tiene una cola interna de revision VLM sobre candidatos OSM, pero no es dato publico operativo de daño.
 - La capa `Catia La Mar - Daño predicho Microsoft AI4G` viene de HDX/Microsoft AI for Good Lab. Es prediccion externa de huellas dañadas, util para triage, pero no es etiqueta oficial EMS.
+- Los links de Google Maps y la imagen base de Esri son referencias visuales solamente. No son evidencia oficial, este proyecto no las cachea, y no deben citarse como verificacion.
+
+## Reglas de imagen antes
+
+- `Vantor usable para VLM`: imagen pre-evento fechada que puede apoyar VLM antes/despues a nivel de edificio cuando la cobertura, alineacion y visibilidad sean adecuadas.
+- `Esri solo referencia visual`: contexto operativo para orientacion. No usar como evidencia cacheada ni como imagen antes para VLM.
+- `Sin before`: no hay imagen pre-evento adecuada. Mantenga las etiquetas VLM como solo post-evento o solo candidatos.
 
 ## No Sobreafirmar
 
@@ -40,6 +47,8 @@ Usar el mapa para ubicar rapidamente poligonos oficiales de daño de Copernicus 
 - Las etiquetas oficiales EMS son la fuente principal de verdad para este paquete.
 - VLM y etiquetas inferidas son ayudas de triage, no confirmacion oficial.
 - Las capas externas de daño predicho son indicios solamente; no las cite como conteos oficiales ni como edificios dañados confirmados.
+- Las capas Microsoft/HDX son capas de prediccion de modelo. Interpretelas como huellas candidatas externas para priorizacion, no como etiquetas EMS, confirmacion de campo ni estadisticas de respuesta.
+- No describa vistas de Google o Esri como evidencia oficial, imagen fuente de verdad, ni imagen antes retenida/cacheable.
 - La ausencia de un poligono marcado no prueba que no haya daño.
 
 ## Limitaciones Conocidas

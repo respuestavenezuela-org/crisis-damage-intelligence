@@ -32,6 +32,7 @@ declare global {
 }
 
 const provider = process.env.NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER ?? "openpanel";
+const openPanelClientId = process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID;
 const debug = process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === "true";
 
 function compactProperties(properties: AnalyticsProperties = {}) {
@@ -57,7 +58,7 @@ export function trackAnalytics(name: AnalyticsEventName, properties: AnalyticsPr
     trackVercel(name, event.properties);
   }
 
-  if (provider === "openpanel") {
+  if (provider === "openpanel" && openPanelClientId) {
     window.op?.("track", name, event.properties);
   }
 

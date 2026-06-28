@@ -44,19 +44,19 @@ Interaction events remain provider-neutral at the app boundary:
 - Every event is pushed to `window.crisisDamageAnalyticsQueue`.
 - Every event dispatches a `crisis_damage_analytics` browser event.
 - A future provider can attach `window.crisisDamageAnalytics.track(event)` without changing UI code.
-- OpenPanel screen views, outgoing links, data-attribute events, and sanitized custom interaction events are enabled by default with `@openpanel/nextjs`.
+- OpenPanel screen views, outgoing links, data-attribute events, and sanitized custom interaction events are enabled only when a public OpenPanel client id is configured.
 
 Optional environment variables:
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER` | `openpanel` | Default sends screen views and custom interaction events through OpenPanel. Set to `disabled` to disable OpenPanel/custom forwarding. Set to `vercel` only if custom Vercel events are intentionally enabled. |
-| `NEXT_PUBLIC_OPENPANEL_CLIENT_ID` | `8f14c2ad-cd7b-4f57-9ecd-65f5d2659c75` | Public OpenPanel client id. Override only when moving to a different OpenPanel project. |
+| `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER` | `openpanel` | Sends screen views and custom interaction events through OpenPanel only when `NEXT_PUBLIC_OPENPANEL_CLIENT_ID` is set. Set to `disabled` to disable OpenPanel/custom forwarding. Set to `vercel` only if custom Vercel events are intentionally enabled. |
+| `NEXT_PUBLIC_OPENPANEL_CLIENT_ID` | unset | Public OpenPanel client id. Required to enable OpenPanel network calls. |
 | `NEXT_PUBLIC_OPENPANEL_API_URL` | unset | Optional OpenPanel API URL for self-hosted/proxied deployments. |
 | `NEXT_PUBLIC_OPENPANEL_SCRIPT_URL` | unset | Optional OpenPanel script URL for self-hosted/proxied deployments. |
 | `NEXT_PUBLIC_ANALYTICS_DEBUG` | `false` | Set to `true` to log sanitized events in the browser console during QA. |
 
-OpenPanel is initialized unless `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER` is set to something other than `openpanel`. Session replay, user identification, and profile ids remain disabled. Automatic outgoing-link tracking and `data-track` attribute tracking are enabled. Vercel custom events can require a paid plan or consume event quota; use `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER=vercel` only intentionally. The app remains static-first either way.
+OpenPanel is initialized only when `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER=openpanel` and `NEXT_PUBLIC_OPENPANEL_CLIENT_ID` is set. Session replay, user identification, and profile ids remain disabled. Automatic outgoing-link tracking and `data-track` attribute tracking are enabled when OpenPanel is active. Vercel custom events can require a paid plan or consume event quota; use `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER=vercel` only intentionally. The app remains static-first either way.
 
 ## Validation Checklist
 

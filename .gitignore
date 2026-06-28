@@ -42,6 +42,11 @@ yarn-error.log*
 ops/emsr884_downloads/
 ops/emsr884_monitor_log.csv
 ops/emsr884_monitor_state.json
+ops/external_source_review/downloads/
+ops/external_source_review/analysis/**/*.sample.geojson
+
+# QA screenshots
+output/playwright/*.png
 
 # typescript
 *.tsbuildinfo

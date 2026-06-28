@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T18:05:00Z",
+  "updatedAt": "2026-06-28T14:40:00Z",
   "platform": "Crisis Damage Intelligence",
   "aois": [
     {
@@ -729,7 +729,7 @@
       "event": "Venezuela earthquake June 2026",
       "name": {
         "en": "Catia La Mar - Microsoft AI4G Predicted Damage",
-        "es": "Catia La Mar - Daño predicho Microsoft AI4G"
+        "es": "Catia La Mar - Da\u00f1o predicho Microsoft AI4G"
       },
       "status": "external-prediction",
       "source": "HDX dataset from Microsoft AI for Good Lab: Venezuela Earthquakes: Building Damage Assessment in Catia La Mar. External predicted building-footprint damage, not official Copernicus EMS damage labels.",
@@ -776,6 +776,195 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
+      }
+    },
+    {
+      "id": "external-msft-caraballeda-east-predicted-damage",
+      "country": "Venezuela",
+      "event": "Venezuela earthquake June 2026",
+      "name": {
+        "en": "Caraballeda East - Microsoft AI4G Triage Candidates",
+        "es": "Caraballeda Este - Candidatos triage Microsoft AI4G"
+      },
+      "status": "external-prediction",
+      "source": "HDX dataset from Microsoft AI for Good Lab: Venezuela Earthquakes: Building Damage Assessment in Caraballeda. External predicted building-footprint triage candidates, not official Copernicus EMS damage labels.",
+      "bounds": [
+        [
+          10.6058425,
+          -66.8618551
+        ],
+        [
+          10.6202868,
+          -66.8207108
+        ]
+      ],
+      "center": [
+        10.615048483762058,
+        -66.84526952138263
+      ],
+      "downloads": {
+        "csv": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.csv",
+        "geojson": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
+        "kml": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.kml",
+        "metadata": "/data/aoi/external-msft-caraballeda-east-predicted-damage/source_metadata.json",
+        "hdx": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-caraballeda",
+        "source_gpkg": "https://data.humdata.org/dataset/1a77bd9c-5170-4651-92c2-0dd42cdc303e/resource/d82d36cf-e728-4f03-b8a8-7615d05a8374/download/caraballeda_east_vantor_6-26_building_predictions_merged.gpkg"
+      },
+      "layers": {
+        "damage": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson"
+      },
+      "metrics": {
+        "features": 622,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "candidates": 622,
+        "vlmReviewed": 0
+      },
+      "externalTriage": {
+        "provider": "Microsoft AI for Good Lab via HDX",
+        "official": false,
+        "triageOnly": true,
+        "filter": "damaged == 1 or max damage probability >= 0.50",
+        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+      },
+      "imagery": {
+        "before": null,
+        "after": null,
+        "note": "No imagery is bundled with this external prediction layer. Use only as optional triage context. Official EMS AOI records remain the source for official counts.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence review context.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, and must not be used for official damage counts."
+        }
+      }
+    },
+    {
+      "id": "external-msft-catia-la-mar-east-predicted-damage",
+      "country": "Venezuela",
+      "event": "Venezuela earthquake June 2026",
+      "name": {
+        "en": "Catia La Mar East - Microsoft AI4G Triage Candidates",
+        "es": "Catia La Mar Este - Candidatos triage Microsoft AI4G"
+      },
+      "status": "external-prediction",
+      "source": "HDX dataset from Microsoft AI for Good Lab: Venezuela Earthquakes: Building Damage Assessment in East Catia La Mar. External predicted building-footprint triage candidates, not official Copernicus EMS damage labels.",
+      "bounds": [
+        [
+          10.5267038,
+          -67.0272079
+        ],
+        [
+          10.6134024,
+          -66.9587215
+        ]
+      ],
+      "center": [
+        10.601175079073615,
+        -67.00000905591398
+      ],
+      "downloads": {
+        "csv": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.csv",
+        "geojson": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
+        "kml": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.kml",
+        "metadata": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/source_metadata.json",
+        "hdx": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-catia-la-mar-east",
+        "source_gpkg": "https://data.humdata.org/dataset/0c439581-b14d-4092-a104-95b5abee3002/resource/2034c971-e8ac-431d-acaa-e1c94d601039/download/predicted_damage_east-catia-la-mar-skysat-final.gpkg"
+      },
+      "layers": {
+        "damage": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson"
+      },
+      "metrics": {
+        "features": 1209,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "candidates": 1209,
+        "vlmReviewed": 0
+      },
+      "externalTriage": {
+        "provider": "Microsoft AI for Good Lab via HDX",
+        "official": false,
+        "triageOnly": true,
+        "filter": "damaged == 1 or max damage probability >= 0.50",
+        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+      },
+      "imagery": {
+        "before": null,
+        "after": null,
+        "note": "No imagery is bundled with this external prediction layer. Use only as optional triage context. Official EMS AOI records remain the source for official counts.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence review context.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, and must not be used for official damage counts."
+        }
+      }
+    },
+    {
+      "id": "external-msft-la-guaira-east-predicted-damage",
+      "country": "Venezuela",
+      "event": "Venezuela earthquake June 2026",
+      "name": {
+        "en": "La Guaira East - Microsoft AI4G Triage Candidates",
+        "es": "La Guaira Este - Candidatos triage Microsoft AI4G"
+      },
+      "status": "external-prediction",
+      "source": "HDX dataset from Microsoft AI for Good Lab: Venezuela Earthquakes: Building Damage Assessment in La Guaira East. External predicted building-footprint triage candidates, not official Copernicus EMS damage labels.",
+      "bounds": [
+        [
+          10.6007247,
+          -66.9171178
+        ],
+        [
+          10.6119089,
+          -66.8640968
+        ]
+      ],
+      "center": [
+        10.606804407563025,
+        -66.89260585966386
+      ],
+      "downloads": {
+        "csv": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.csv",
+        "geojson": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
+        "kml": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.kml",
+        "metadata": "/data/aoi/external-msft-la-guaira-east-predicted-damage/source_metadata.json",
+        "hdx": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-la-guaira",
+        "source_gpkg": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/d07fc3f8-885f-46f4-bd8e-03ac92fd5b00/download/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg"
+      },
+      "layers": {
+        "damage": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson"
+      },
+      "metrics": {
+        "features": 119,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "candidates": 119,
+        "vlmReviewed": 0
+      },
+      "externalTriage": {
+        "provider": "Microsoft AI for Good Lab via HDX",
+        "official": false,
+        "triageOnly": true,
+        "filter": "damaged == 1 or max damage probability >= 0.50",
+        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+      },
+      "imagery": {
+        "before": null,
+        "after": null,
+        "note": "No imagery is bundled with this external prediction layer. Use only as optional triage context. Official EMS AOI records remain the source for official counts.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence review context.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, and must not be used for official damage counts."
         }
       }
     }

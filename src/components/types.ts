@@ -63,6 +63,13 @@ export type AoiRecord = {
         quality?: number;
       };
     };
+    approximateReference?: {
+      label: string;
+      urlTemplate: string;
+      source?: string;
+      intendedUse?: string;
+      limitations?: string;
+    };
     note?: string;
   };
   metrics: Record<string, number>;

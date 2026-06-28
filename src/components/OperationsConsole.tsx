@@ -30,6 +30,7 @@ const copy = {
     after: "After",
     noImagery: "No imagery exposed for this AOI yet",
     noBefore: "Before imagery is not exposed yet. Showing post-event imagery where available.",
+    approximateBefore: "Before shows external aerial reference only; not official EMS and not guaranteed pre-event.",
     beforeEvidenceOnly: "Before reference exists for evidence chips only; no before map layer is published.",
     imageryAvailable: "Post-event imagery available",
     imageryCoverage: "Imagery coverage",
@@ -106,6 +107,7 @@ const copy = {
     after: "Despues",
     noImagery: "Sin imagen expuesta para este AOI todavia",
     noBefore: "La imagen antes no esta expuesta todavia. Se muestra imagen posterior donde exista.",
+    approximateBefore: "Antes muestra solo referencia aérea externa; no es oficial EMS ni garantiza fecha pre-evento.",
     beforeEvidenceOnly: "Existe referencia antes para chips de evidencia; no hay capa antes publicada en el mapa.",
     imageryAvailable: "Imagen posterior disponible",
     imageryCoverage: "Cobertura de imagenes",
@@ -200,7 +202,13 @@ const cityGroups: Array<Omit<
   {
     id: "la-guaira",
     primaryAoiId: "emsr884-aoi12-caraballeda",
-    sourceIds: ["emsr884-aoi12-caraballeda", "external-msft-catia-la-mar-predicted-damage"],
+    sourceIds: [
+      "emsr884-aoi12-caraballeda",
+      "external-msft-catia-la-mar-predicted-damage",
+      "external-msft-caraballeda-east-predicted-damage",
+      "external-msft-catia-la-mar-east-predicted-damage",
+      "external-msft-la-guaira-east-predicted-damage",
+    ],
     name: { en: "La Guaira / Caraballeda / Catia La Mar", es: "La Guaira / Caraballeda / Catia La Mar" },
   },
   {
@@ -401,7 +409,9 @@ export default function OperationsConsole() {
 
   const t = copy[language];
   const metrics = active?.metrics;
-  const hasBeforeImagery = Boolean(active?.layers.beforeTiles || active?.layers.beforeImage);
+  const hasApproximateBefore = Boolean(active?.imagery?.approximateReference?.urlTemplate);
+  const hasNativeBeforeImagery = Boolean(active?.layers.beforeTiles || active?.layers.beforeImage);
+  const hasBeforeImagery = hasNativeBeforeImagery || hasApproximateBefore;
   const hasAfterImagery = Boolean(active?.layers.afterTiles || active?.layers.afterImage);
   const hasImagery = hasBeforeImagery || hasAfterImagery;
   const isDemo = active?.status === "test-fixture";
@@ -633,6 +643,7 @@ export default function OperationsConsole() {
             <summary>{language === "es" ? "Notas" : "Notes"}</summary>
             <p>{t.aerialBaseNote}</p>
             {!hasImagery && <p>{t.noImagery}</p>}
+            {hasApproximateBefore && !hasNativeBeforeImagery && <p>{t.approximateBefore}</p>}
             {hasAfterImagery && !hasBeforeImagery && <p>{active?.imagery?.before ? t.beforeEvidenceOnly : t.noBefore}</p>}
             <p>{t.filterNote}</p>
           </details>
@@ -669,6 +680,7 @@ export default function OperationsConsole() {
             language={language}
             hasAfterLayer={hasAfterImagery}
             hasBeforeLayer={hasBeforeImagery}
+            hasNativeBeforeLayer={hasNativeBeforeImagery}
           />
         )}
         <section className="confidence-panel">
@@ -699,11 +711,13 @@ function ImageryCoveragePanel({
   language,
   hasAfterLayer,
   hasBeforeLayer,
+  hasNativeBeforeLayer,
 }: {
   aoi: AoiRecord;
   language: Language;
   hasAfterLayer: boolean;
   hasBeforeLayer: boolean;
+  hasNativeBeforeLayer: boolean;
 }) {
   const t = copy[language];
   const afterStatus = aoi.imagery?.after
@@ -711,6 +725,8 @@ function ImageryCoveragePanel({
     : t.notAvailable;
   const beforeStatus = aoi.imagery?.before
     ? `${hasBeforeLayer ? t.mapLayerAvailable : t.evidenceOnly} · ${t.nonOfficialBefore}`
+    : aoi.imagery?.approximateReference
+      ? `${t.mapLayerAvailable} · ${aoi.imagery.approximateReference.label}`
     : t.notAvailable;
   const hasCogDownload = Boolean(aoi.imagery?.after?.url);
 
@@ -728,8 +744,11 @@ function ImageryCoveragePanel({
           </>
         )}
         <div><dt>{t.beforeImagery}</dt><dd>{beforeStatus}</dd></div>
-        {aoi.imagery?.before?.coverage && <div><dt>{t.coverage}</dt><dd>{aoi.imagery.before.coverage}</dd></div>}
+      {aoi.imagery?.before?.coverage && <div><dt>{t.coverage}</dt><dd>{aoi.imagery.before.coverage}</dd></div>}
       </dl>
+      {aoi.imagery?.approximateReference && !hasNativeBeforeLayer && (
+        <p className="muted imagery-note">{aoi.imagery.approximateReference.limitations}</p>
+      )}
       {!aoi.metrics.features && <p className="muted">{t.imageryOnly}</p>}
       {aoi.imagery?.note && <p className="muted imagery-note">{aoi.imagery.note}</p>}
       {hasCogDownload && (

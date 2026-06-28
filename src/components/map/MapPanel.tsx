@@ -101,6 +101,10 @@ function passesFilter(feature: DamageFeature, filter: Props["filter"], vlm: Reco
   return true;
 }
 
+function hasBeforeLayer(aoi: AoiRecord) {
+  return Boolean(aoi.layers.beforeTiles || aoi.layers.beforeImage || aoi.imagery?.approximateReference?.urlTemplate);
+}
+
 export default function MapPanel({ aoi, features, mode, opacity, filter, basemap, vlm, selectedId, focusToken, aoiFocusToken, onSelect }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const popupRef = useRef<HTMLDivElement | null>(null);
@@ -177,7 +181,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       popupOverlayRef.current?.setPosition(undefined);
       if (popupRef.current) popupRef.current.innerHTML = "";
       nodeRef.current?.setAttribute("data-focused-id", "");
-      setDebug(featuresRef.current.filter((candidate) => passesFilter(candidate, filter, vlm)));
+      setDebug(featuresRef.current.filter((candidate) => candidate.properties.aoi_id === aoi.id && passesFilter(candidate, filter, vlm)));
       return;
     }
     const feature = featuresRef.current.find((candidate) => candidate.properties.id === id);
@@ -222,15 +226,15 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
     nodeRef.current?.setAttribute("data-focused-id", id);
     nodeRef.current?.setAttribute("data-map-center", `${lat.toFixed(7)},${lng.toFixed(7)}`);
     nodeRef.current?.setAttribute("data-map-zoom", String(map.getView().getZoom()));
-    setDebug(featuresRef.current.filter((candidate) => passesFilter(candidate, filter, vlm)));
-  }, [filter, setDebug, vlm]);
+    setDebug(featuresRef.current.filter((candidate) => candidate.properties.aoi_id === aoi.id && passesFilter(candidate, filter, vlm)));
+  }, [aoi.id, filter, setDebug, vlm]);
 
   const renderVectors = useCallback(() => {
     const vector = vectorRef.current;
     if (!vector) return;
     const source = vector.getSource();
     if (!source) return;
-    const visible = featuresRef.current.filter((feature) => passesFilter(feature, filter, vlm));
+    const visible = featuresRef.current.filter((feature) => feature.properties.aoi_id === aoi.id && passesFilter(feature, filter, vlm));
     const olFeatures = new GeoJSON().readFeatures({ type: "FeatureCollection", features: visible }, {
       dataProjection: "EPSG:4326",
       featureProjection: "EPSG:3857",
@@ -245,7 +249,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
     vector.setStyle((feature) => styleFor(feature as OlDamageFeature));
     nodeRef.current?.setAttribute("data-visible-features", String(visible.length));
     setDebug(visible);
-  }, [filter, setDebug, styleFor, vlm]);
+  }, [aoi.id, filter, setDebug, styleFor, vlm]);
 
   useEffect(() => {
     renderVectorsRef.current = renderVectors;
@@ -300,8 +304,8 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   useEffect(() => {
     baseRef.current?.setVisible(basemap === "map");
     aerialBaseRef.current?.setVisible(basemap === "aerial");
-    setDebug(featuresRef.current.filter((feature) => passesFilter(feature, filter, vlm)));
-  }, [basemap, filter, setDebug, vlm]);
+    setDebug(featuresRef.current.filter((feature) => feature.properties.aoi_id === aoi.id && passesFilter(feature, filter, vlm)));
+  }, [aoi.id, basemap, filter, setDebug, vlm]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -319,7 +323,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       fromLonLat([aoi.bounds[1][1], aoi.bounds[1][0]]),
     ]);
 
-    if (aoi.layers.beforeTiles || aoi.layers.beforeImage) {
+    if (aoi.layers.beforeTiles || aoi.layers.beforeImage || aoi.imagery?.approximateReference?.urlTemplate) {
       beforeRef.current = aoi.layers.beforeTiles
         ? new TileLayer({
           source: new XYZ({ url: aoi.layers.beforeTiles, maxZoom: 18, minZoom: 12, transition: 0 }),
@@ -328,8 +332,21 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
           visible: modeRef.current === "before",
           zIndex: 10,
         })
-        : new WebGLTileLayer({
+        : aoi.layers.beforeImage
+          ? new WebGLTileLayer({
           source: new GeoTIFF({ sources: [{ url: aoi.layers.beforeImage as string }], convertToRGB: "auto" }),
+          opacity: 1,
+          visible: modeRef.current === "before",
+          zIndex: 10,
+        })
+          : new TileLayer({
+          source: new XYZ({
+            attributions: aoi.imagery?.approximateReference?.source ?? "Reference imagery",
+            url: aoi.imagery?.approximateReference?.urlTemplate,
+            crossOrigin: "anonymous",
+            maxZoom: 19,
+            transition: 0,
+          }),
           opacity: 1,
           visible: modeRef.current === "before",
           zIndex: 10,
@@ -373,13 +390,13 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   }, [renderVectors]);
 
   useEffect(() => {
-    const hasBefore = Boolean(aoi.layers.beforeTiles || aoi.layers.beforeImage);
+    const hasBefore = hasBeforeLayer(aoi);
     const hasAfter = Boolean(aoi.layers.afterTiles || aoi.layers.afterImage);
     beforeRef.current?.setVisible(mode === "before" && hasBefore);
     afterRef.current?.setVisible(mode === "after" && hasAfter);
     if (!hasBefore && mode === "before") afterRef.current?.setVisible(false);
-    setDebug(featuresRef.current.filter((feature) => passesFilter(feature, filter, vlm)));
-  }, [aoi.layers.afterImage, aoi.layers.afterTiles, aoi.layers.beforeImage, aoi.layers.beforeTiles, filter, mode, setDebug, vlm]);
+    setDebug(featuresRef.current.filter((feature) => feature.properties.aoi_id === aoi.id && passesFilter(feature, filter, vlm)));
+  }, [aoi, filter, mode, setDebug, vlm]);
 
   useEffect(() => {
     focusFeature(selectedId);

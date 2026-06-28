@@ -33,6 +33,13 @@ Use the map to quickly locate official Copernicus EMSR884 damage polygons, prior
 - AOI06 and AOI08 currently have post-event-only VLM review. Do not describe those records as before/after comparisons.
 - AOI03 Antimano has an internal OSM-candidate VLM review queue, but it is not public operational damage data.
 - The `Catia La Mar - Microsoft AI4G Predicted Damage` layer comes from HDX/Microsoft AI for Good Lab. It is an external predicted-damage footprint layer for triage, not an official EMS label.
+- Google Maps links and Esri basemap imagery are visual references only. They are not official evidence sources, are not cached by this project, and must not be cited as verification.
+
+## Before Imagery Rules
+
+- `Vantor usable for VLM`: dated pre-event imagery may support building-level before/after VLM when coverage, alignment, and visibility are adequate.
+- `Esri visual reference only`: operator-facing context only. Use it to orient visually, not as cached evidence and not as the before image for VLM.
+- `No before`: no suitable pre-event image is available. Keep VLM labels as post-event-only or candidate-only.
 
 ## Do Not Overclaim
 
@@ -40,6 +47,8 @@ Use the map to quickly locate official Copernicus EMSR884 damage polygons, prior
 - Official EMS labels are the source of record for this package.
 - VLM and inferred labels are triage aids, not official confirmation.
 - External predicted-damage layers are leads only; do not quote them as official counts or confirmed damaged buildings.
+- Microsoft/HDX layers are model prediction layers. Interpret them as external candidate footprints for prioritization, not as EMS labels, field confirmation, or response statistics.
+- Do not describe Google or Esri views as official evidence, source-of-record imagery, or retained/cacheable before imagery.
 - Absence of a marked polygon is not proof of no damage.
 
 ## Known Limitations

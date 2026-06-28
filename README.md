@@ -85,7 +85,13 @@ AOI12 v1 is already deployed. Use this flow for future EMS updates, reruns, or n
 6. Run VLM only on high-value candidates first.
 7. Publish VLM JSONL as a separate evidence layer with clear review type labels.
 
-Do not mark an item as before/after VLM-reviewed unless both pre-event and post-event imagery were actually used. AOI12 has EMS post-event imagery and Vantor/OpenData pre-event reference with partial gaps. AOI02 has before/after evidence chips but high uncertainty. AOI06 and AOI08 currently have post-event-only VLM, not before/after VLM.
+Do not mark an item as before/after VLM-reviewed unless both pre-event and post-event imagery were actually used. Treat pre-event reference imagery in three explicit classes:
+
+- `Vantor usable for VLM`: dated pre-event reference may support building-level before/after VLM, subject to coverage and quality gaps.
+- `Esri visual reference only`: operator-facing visual context only. Do not use it as cached evidence or as a VLM before source.
+- `No before`: no suitable pre-event image is available; any VLM review must stay labeled post-event-only or candidate-only.
+
+AOI12 has EMS post-event imagery and Vantor/OpenData pre-event reference with partial gaps. AOI02 has before/after evidence chips but high uncertainty. AOI06 and AOI08 currently have post-event-only VLM, not before/after VLM.
 
 ## EMSR884 Acceptance Test
 
@@ -161,6 +167,8 @@ Operational warning:
 - Official EMS labels are the source of record for this package.
 - VLM/inferred labels are triage aids only.
 - External predicted-damage layers are triage-only and must not be counted as official EMS damage.
+- Google Maps links and Esri basemap imagery are external visual references only. They are not official evidence sources, are not cached by this project, and must not be cited as verification.
+- Microsoft/HDX prediction layers are external model outputs for search and prioritization. Interpret them as candidate footprints or lead lists, not as confirmed damage, EMS labels, or response statistics.
 - Absence of a marked feature is not proof of no damage.
 
 ## VLM Policy
@@ -171,6 +179,7 @@ VLM output is evidence, not authority.
 - Pixel heuristics are recall-oriented candidates.
 - VLM is async second-pass prioritization.
 - Before/after VLM means both dated pre-event and post-event imagery were reviewed. Post-event-only VLM has lower evidentiary value and must stay labeled separately.
+- Esri/Google visual references must not be treated as cached VLM evidence. Vantor/OpenData before imagery is the current before source that can support VLM when coverage and quality are adequate.
 - Human validation can be added later with Supabase tables.
 
 ## Optional Supabase

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "caraballeda_east",
+    "file": "ops/external_source_review/downloads/msft_hdx/hdx-msft-caraballeda-predicted-damage/caraballeda_east_vantor_6-26_building_predictions_merged.gpkg",
+    "layer": "predicted_damage_Caraballeda-east-Vantor-6-26-warped-model-946",
+    "feature_count": 10392,
+    "fields": [
+      "id",
+      "damage_pct_0m",
+      "damage_pct_10m",
+      "damage_pct_20m",
+      "damaged",
+      "unknown_pct"
+    ],
+    "damaged_counts": {
+      "0": 9770,
+      "1": 622
+    },
+    "max_damage_threshold_counts": {
+      ">=0.25": 498,
+      ">=0.50": 334,
+      ">=0.75": 255
+    },
+    "max_damage_mean": 0.0407,
+    "max_damage_median": 0.0,
+    "bounds_wgs84": [
+      -66.8629357,
+      10.6002163,
+      -66.8113256,
+      10.6211033
+    ],
+    "sample_geojson": "ops/external_source_review/analysis/msft_hdx/caraballeda_east.sample.geojson"
+  },
+  {
+    "id": "catia_la_mar_east",
+    "file": "ops/external_source_review/downloads/msft_hdx/hdx-msft-catia-la-mar-east-predicted-damage/predicted_damage_east-catia-la-mar-skysat-final.gpkg",
+    "layer": "predicted_damage_East-Catia-La-Mar-Skysat-model-510",
+    "feature_count": 24732,
+    "fields": [
+      "id",
+      "damage_pct_0m",
+      "damage_pct_10m",
+      "damage_pct_20m",
+      "damaged",
+      "unknown_pct"
+    ],
+    "damaged_counts": {
+      "0": 23523,
+      "1": 1209
+    },
+    "max_damage_threshold_counts": {
+      ">=0.25": 769,
+      ">=0.50": 457,
+      ">=0.75": 307
+    },
+    "max_damage_mean": 0.0287,
+    "max_damage_median": 0.0,
+    "bounds_wgs84": [
+      -67.0272747,
+      10.5212059,
+      -66.9572208,
+      10.6147739
+    ],
+    "sample_geojson": "ops/external_source_review/analysis/msft_hdx/catia_la_mar_east.sample.geojson"
+  },
+  {
+    "id": "la_guaira_east",
+    "file": "ops/external_source_review/downloads/msft_hdx/hdx-msft-la-guaira-predicted-damage/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg",
+    "layer": "out",
+    "feature_count": 5411,
+    "fields": [
+      "id",
+      "damage_pct_0m",
+      "damage_pct_10m",
+      "damage_pct_20m",
+      "damaged",
+      "unknown_pct"
+    ],
+    "damaged_counts": {
+      "0": 5299,
+      "1": 112
+    },
+    "max_damage_threshold_counts": {
+      ">=0.25": 243,
+      ">=0.50": 113,
+      ">=0.75": 74
+    },
+    "max_damage_mean": 0.0489,
+    "max_damage_median": 0.0,
+    "bounds_wgs84": [
+      -66.918586,
+      10.5849143,
+      -66.8608767,
+      10.6132233
+    ],
+    "sample_geojson": "ops/external_source_review/analysis/msft_hdx/la_guaira_east.sample.geojson"
+  }
+]

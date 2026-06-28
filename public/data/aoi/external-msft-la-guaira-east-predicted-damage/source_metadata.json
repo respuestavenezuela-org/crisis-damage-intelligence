@@ -1,0 +1,27 @@
+{
+  "source": "HDX dataset from Microsoft AI for Good Lab; external model-predicted building damage footprints, not official Copernicus EMS damage labels.",
+  "dataset_title": "Venezuela Earthquakes: Building Damage Assessment in La Guaira East",
+  "hdx_dataset_url": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-la-guaira",
+  "source_resource_url": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/d07fc3f8-885f-46f4-bd8e-03ac92fd5b00/download/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg",
+  "source_layer": "out",
+  "source_crs": "converted to EPSG:4326",
+  "filter": "Published only if damaged == 1 or max(damage_pct_0m, damage_pct_10m, damage_pct_20m) >= 0.50.",
+  "total_source_features": 5411,
+  "exported_triage_features": 119,
+  "official_damage_counts_included": false,
+  "bounds": [
+    [
+      10.6007247,
+      -66.9171178
+    ],
+    [
+      10.6119089,
+      -66.8640968
+    ]
+  ],
+  "center": [
+    10.606804407563025,
+    -66.89260585966386
+  ],
+  "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+}
