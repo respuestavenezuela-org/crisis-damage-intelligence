@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T04:51:02.180373+00:00",
+  "generated_at": "2026-06-28T10:18:44.923021+00:00",
   "warning": "Only rows with usable_for_building_vlm=true should be considered for building-level before/after VLM. Context-only imagery must not be used as damage evidence.",
   "rows": [
     {

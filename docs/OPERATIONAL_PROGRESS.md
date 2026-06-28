@@ -946,3 +946,47 @@ Do not run post-event-only VLM as if it were before/after comparison.
 - Result:
 - Blockers:
 - Next recommended action:
+
+### 2026-06-28 - R2 Tile Repair, Baseline Refresh, Toolbar Compression
+
+- Objective:
+  - Work down the four remaining operational gaps after the 8-priority agent loop: remote R2 tile 404s, missing before baselines for AOI06/AOI08/AOI10, AOI03 internal validation, and toolbar field usability.
+- Files changed:
+  - `scripts/upload_missing_remote_assets_from_report.py`
+  - `src/components/OperationsConsole.tsx`
+  - `src/app/globals.css`
+  - `ops/remote_asset_validation/latest.json`
+  - `ops/remote_asset_validation/latest.md`
+  - `ops/baseline_inventory/pre_event_baseline_inventory.json`
+  - `ops/baseline_inventory/pre_event_baseline_inventory.csv`
+  - `ops/baseline_inventory/pre_event_baseline_suitability_report.md`
+- Commands run:
+  - `python3 -m py_compile scripts/upload_missing_remote_assets_from_report.py`
+  - `python3 scripts/upload_missing_remote_assets_from_report.py`
+  - `python3 scripts/validate_remote_asset_urls.py --sample-per-template 8 --sample-chips 16`
+  - `python3 scripts/validate_remote_asset_urls.py --sample-per-template 20 --sample-chips 40`
+  - `python3 scripts/inventory_pre_event_baselines.py`
+  - `npm run lint`
+  - `npm run build`
+  - `python3 scripts/validate_vlm_publication_guardrails.py`
+  - `python3 scripts/validate_external_source_registry.py`
+  - `python3 scripts/compile_aoi03_human_validation.py`
+- QA performed:
+  - Uploaded 71 locally present tile objects that had returned public R2 404s in sampled validation reports.
+  - Standard remote validation now passes: 56 checked, 0 failed.
+  - Expanded remote validation now passes: 140 checked, 0 failed.
+  - Baseline refresh still finds 0 building-level pre-event candidates for AOI06, AOI08, and AOI10.
+  - AOI03 human validation compiler still reports 5 rows, 0 reviewed, 0 promoted.
+  - Browser QA on `https://toolbar-qa.localhost` confirmed the compact toolbar renders with La Guaira active, priority list present, and a `Notas` disclosure; toolbar measured about 620x99 px on desktop.
+- Result:
+  - The known sampled R2 tile 404s are repaired, and the remote-asset validation report is green for a larger sample.
+  - The app toolbar blocks less map area by moving long caveats into a compact notes disclosure while keeping base, before/after, opacity, and filter controls visible.
+  - No new before/after VLM was run for AOI06/AOI08/AOI10 because the refreshed baseline inventory still does not support building-level comparison.
+- Blockers:
+  - R2 is much healthier, but this was still a sampled repair, not a complete 63k-object manifest audit.
+  - AOI06/AOI08/AOI10 remain blocked for credible before/after VLM until a high-resolution pre-event baseline is found.
+  - AOI03 cannot leave internal status until reviewers fill the validation template with evidence-backed decisions.
+- Next recommended action:
+  - Run or build a manifest-level R2 audit for every local tile key before deploying a fully pruned remote-asset package.
+  - Have a human reviewer validate the 5 AOI03 urgent candidates, then rerun `python3 scripts/compile_aoi03_human_validation.py`.
+  - Continue searching for licensed high-resolution pre-event baselines for AOI06/AOI08/AOI10; do not substitute Sentinel-2 or post-event-only VLM.

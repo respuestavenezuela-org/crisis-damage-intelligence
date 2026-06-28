@@ -605,7 +605,6 @@ export default function OperationsConsole() {
               <button data-testid="basemap-map" className={basemap === "map" ? "active" : ""} onClick={() => changeBasemap("map")}>{t.mapBase}</button>
               <button data-testid="basemap-aerial" className={basemap === "aerial" ? "active" : ""} onClick={() => changeBasemap("aerial")}>{t.aerialBase}</button>
             </div>
-            <em className="control-note">{t.aerialBaseNote}</em>
           </div>
           <div className="control-group">
             <span>{t.mode}</span>
@@ -613,8 +612,6 @@ export default function OperationsConsole() {
               <button data-testid="mode-before" disabled={!hasBeforeImagery} className={mode === "before" ? "active" : ""} onClick={() => changeMode("before")}>{t.before}</button>
               <button data-testid="mode-after" disabled={!hasAfterImagery} className={mode === "after" ? "active" : ""} onClick={() => changeMode("after")}>{t.after}</button>
             </div>
-            {!hasImagery && <em className="control-note">{t.noImagery}</em>}
-            {hasAfterImagery && !hasBeforeImagery && <em className="control-note">{active?.imagery?.before ? t.beforeEvidenceOnly : t.noBefore}</em>}
           </div>
           <label className="range-control">
             <span>{t.opacity} <b>{opacity}%</b></span>
@@ -631,8 +628,14 @@ export default function OperationsConsole() {
               <button data-testid="filter-severe" className={filter === "severe" ? "active" : ""} onClick={() => changeFilter("severe")}>{t.severe}</button>
               <button data-testid="filter-vlm" className={filter === "vlm" ? "active" : ""} onClick={() => changeFilter("vlm")}>{t.vlmOnly}</button>
             </div>
-            <em className="control-note">{t.filterNote}</em>
           </div>
+          <details className="map-toolbar-notes">
+            <summary>{language === "es" ? "Notas" : "Notes"}</summary>
+            <p>{t.aerialBaseNote}</p>
+            {!hasImagery && <p>{t.noImagery}</p>}
+            {hasAfterImagery && !hasBeforeImagery && <p>{active?.imagery?.before ? t.beforeEvidenceOnly : t.noBefore}</p>}
+            <p>{t.filterNote}</p>
+          </details>
         </div>
       </section>
 
