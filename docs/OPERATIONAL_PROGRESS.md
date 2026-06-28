@@ -473,13 +473,17 @@ QA evidence:
   - `ops/aoi03_internal_review_queue/review_queue.csv`
   - `ops/aoi03_internal_review_queue/review_queue.geojson`
   - `ops/aoi03_internal_review_queue/review_queue.kml`
+  - `ops/aoi03_internal_review_queue/review_report.md`
+  - `ops/aoi03_internal_review_queue/review_packet.html`
   - `ops/aoi03_internal_review_queue/README.md`
   - `qa/aoi03-internal-review-queue-19-contact-sheet.png`
 - Guardrail:
   - AOI03 VLM results are OSM-candidate triage evidence, not official EMS damage. They must stay out of `public/data/catalog.json` until explicitly promoted with source/confidence labels.
 - QA evidence:
   - Internal queue GeoJSON contains 19 features.
-  - Contact sheet generated at `qa/aoi03-internal-review-queue-19-contact-sheet.png`.
+  - Contact sheet generated at `qa/aoi03-internal-review-queue-19-contact-sheet.png` with class, confidence, priority, and coordinates visible per candidate.
+  - `review_packet.html` references 19 comparison images, 0 missing.
+  - `review_report.md` includes internal-only, not-official, and not-proof-of-no-damage warnings.
 - Next recommended action:
   - Have a human review the 19 AOI03 contact-sheet candidates first, then either run another bounded AOI03 batch or prioritize AOI06/AOI08 only after credible pre-event imagery is identified.
 

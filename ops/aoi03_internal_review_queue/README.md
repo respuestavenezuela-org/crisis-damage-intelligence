@@ -6,4 +6,6 @@ Use this only to route human review or requests for better imagery. Do not publi
 
 - Source pilot: `ops/aoi03_osm_before_after_pilot/pilot_records.json`
 - Candidates in queue: 19
-- Outputs: `review_queue.csv`, `review_queue.geojson`, `review_queue.kml`
+- Machine-readable outputs: `review_queue.csv`, `review_queue.geojson`, `review_queue.kml`
+- Human-review packet: `review_report.md`, `review_packet.html`
+- Contact sheet: `qa/aoi03-internal-review-queue-19-contact-sheet.png`
