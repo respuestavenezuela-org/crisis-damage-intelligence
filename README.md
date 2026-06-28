@@ -47,6 +47,7 @@ vercel --prod
 Keep large rasters, chips, COGs, and PMTiles out of the Vercel repo. Store them in R2, Supabase Storage, or another CDN/object store, then point `public/data/catalog.json` layer URLs to those public CDN URLs.
 
 Analytics setup and the privacy-safe event taxonomy live in `docs/ANALYTICS.md`.
+HF Spaces VLM provider setup lives in `docs/HF_SPACES_VLM.md`.
 
 ## Data Model
 
@@ -200,4 +201,4 @@ Schema: `supabase/schema.sql`
 - No heavy raster files in Vercel.
 - Static AOI exports split by AOI/severity.
 - CDN cache public read-only files aggressively.
-- Batch VLM jobs, never run every building by default.
+- Batch VLM jobs through HF Spaces by default, never run every building by default.

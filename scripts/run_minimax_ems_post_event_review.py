@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
-"""Run MiniMax-M3 VLM triage on EMSR884 post-event chips.
+"""Run VLM triage on EMSR884 post-event chips.
 
 This is intentionally labeled as post-event-only triage. It does not replace
 official EMS labels and cannot prove absence of damage without before imagery.
 """
 
-import base64
 import json
 import math
 import os
-import re
 import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from threading import Lock
-from urllib.error import HTTPError
-from urllib.request import Request, urlopen
+
+from vlm_provider import call_vlm
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -58,10 +56,6 @@ def lonlat_to_webmercator(lon: float, lat: float) -> tuple[float, float]:
     x = radius * math.radians(lon)
     y = radius * math.log(math.tan(math.pi / 4.0 + math.radians(lat) / 2.0))
     return x, y
-
-
-def encode_image(path: Path) -> str:
-    return "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode("ascii")
 
 
 def chip_path(aoi_id: str, feature_id: str) -> Path:
@@ -109,11 +103,7 @@ def make_chip(cog: Path, feature: dict, out: Path, size_m: int = 96) -> None:
     tmp.with_suffix(tmp.suffix + ".aux.xml").unlink(missing_ok=True)
 
 
-def call_minimax(item: dict) -> dict:
-    key = os.environ.get("MINIMAX_API_KEY")
-    if not key:
-        raise SystemExit("MINIMAX_API_KEY missing")
-    model = os.environ.get("MINIMAX_MODEL", "MiniMax-M3")
+def call_provider(item: dict) -> dict:
     prompt = (
         "Review this post-event satellite/aerial chip for emergency triage. "
         "The white/red reticle marks the EMS mapped feature centroid; inspect the surrounding building footprint. "
@@ -122,41 +112,7 @@ def call_minimax(item: dict) -> dict:
         "Because no before image is provided, classify only visible post-event damage indicators and uncertainty. "
         "If the chip is too blurry, dark, obstructed, or does not clearly show the structure, return uncertain_imagery_problem."
     )
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": SYSTEM},
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": prompt},
-                    {"type": "image_url", "image_url": {"url": encode_image(Path(item["post_event_chip"]))}},
-                ],
-            },
-        ],
-        "temperature": 0,
-    }
-    req = Request(
-        "https://api.minimax.io/v1/text/chatcompletion_v2",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urlopen(req, timeout=90) as resp:
-            raw = resp.read().decode("utf-8")
-    except HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"MiniMax HTTP {exc.code}: {detail}") from exc
-    data = json.loads(raw)
-    text = data["choices"][0]["message"]["content"]
-    match = re.search(r"\{.*\}", text, re.S)
-    if not match:
-        raise ValueError(f"No JSON in MiniMax response: {text[:400]}")
-    result = json.loads(match.group(0))
-    result["vlm_model"] = model
-    result["review_type"] = "post_event_only"
-    return result
+    return call_vlm(SYSTEM, prompt, [item["post_event_chip"]], metadata=item, review_type="post_event_only")
 
 
 def priority(feature: dict) -> tuple[int, str]:
@@ -185,7 +141,7 @@ def make_record(aoi_id: str, cog: Path, feature: dict) -> dict:
         "google_maps_url": props.get("google_maps_url"),
         "post_event_chip": str(chip),
     }
-    result = call_minimax(item)
+    result = call_provider(item)
     public_chip = "/data/chips/" + chip.relative_to(ROOT / "public" / "data" / "chips").as_posix()
     return {
         "id": fid,

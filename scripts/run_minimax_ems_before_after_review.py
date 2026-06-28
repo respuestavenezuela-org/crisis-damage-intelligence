@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run MiniMax-M3 VLM triage using before/after chips where a baseline exists.
+"""Run VLM triage using before/after chips where a baseline exists.
 
 This runner is intentionally separate from the legacy post-event-only review.
 It currently supports AOI12 because it has a dated Vantor pre-event reference
@@ -7,20 +7,18 @@ mosaic and EMS post-event imagery. Outputs are labeled as VLM triage aids, not
 official damage confirmation.
 """
 
-import base64
 import csv
 import json
 import math
 import os
-import re
 import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from threading import Lock
-from urllib.error import HTTPError
-from urllib.request import Request, urlopen
+
+from vlm_provider import call_vlm
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -109,10 +107,6 @@ def draw_feature_outline(draw, feature: dict, window: tuple[float, float, float,
         draw.line(points, fill=(255, 221, 58), width=3, joint="curve")
 
 
-def encode_image(path: Path) -> str:
-    return "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode("ascii")
-
-
 def chip_path(aoi_id: str, feature_id: str, kind: str) -> Path:
     return ROOT / "public" / "data" / "chips" / aoi_id / f"{feature_id}_{kind}.png"
 
@@ -192,11 +186,7 @@ def make_compare_chip(before: Path, after: Path, out: Path) -> None:
     panel.save(out, optimize=True)
 
 
-def call_minimax(item: dict) -> dict:
-    key = os.environ.get("MINIMAX_API_KEY")
-    if not key:
-        raise SystemExit("MINIMAX_API_KEY missing")
-    model = os.environ.get("MINIMAX_MODEL", "MiniMax-M3")
+def call_provider(item: dict) -> dict:
     prompt = (
         "Compare the before and after chips for emergency earthquake damage triage. "
         "Both chips are centered on the same EMS mapped feature centroid marked by the reticle. "
@@ -208,40 +198,13 @@ def call_minimax(item: dict) -> dict:
         "If the before reference is missing, too misaligned, lower quality, or from a different viewing geometry that prevents a fair comparison, "
         "return uncertain_comparison_problem and explain why."
     )
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": SYSTEM},
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": prompt},
-                    {"type": "image_url", "image_url": {"url": encode_image(Path(item["compare_chip"]))}},
-                ],
-            },
-        ],
-        "temperature": 0,
-    }
-    req = Request(
-        "https://api.minimax.io/v1/text/chatcompletion_v2",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        method="POST",
+    result = call_vlm(
+        SYSTEM,
+        prompt,
+        [item["compare_chip"]],
+        metadata=item,
+        review_type="dated_pre_event_comparison",
     )
-    try:
-        with urlopen(req, timeout=90) as resp:
-            raw = resp.read().decode("utf-8")
-    except HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"MiniMax HTTP {exc.code}: {detail}") from exc
-    data = json.loads(raw)
-    text = data["choices"][0]["message"]["content"]
-    match = re.search(r"\{.*\}", text, re.S)
-    if not match:
-        raise ValueError(f"No JSON in MiniMax response: {text[:400]}")
-    result = json.loads(match.group(0))
-    result["vlm_model"] = model
-    result["review_type"] = "dated_pre_event_comparison"
     result["before_source"] = item["before_source_label"]
     return result
 
@@ -286,7 +249,7 @@ def make_record(aoi_id: str, before_cog: str | Path, after_cog: str | Path, feat
         "before_source_label": BEFORE_SOURCE_LABEL[aoi_id],
         "compare_chip": str(compare_chip),
     }
-    result = call_minimax(item)
+    result = call_provider(item)
     return {
         "id": fid,
         "aoi_id": aoi_id,
