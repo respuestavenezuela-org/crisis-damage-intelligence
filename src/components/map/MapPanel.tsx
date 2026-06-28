@@ -410,11 +410,12 @@ function popupHtml(p: DamageFeature["properties"]) {
   const mapsUrl = typeof p.google_maps_url === "string" ? p.google_maps_url : "";
   const label = p.not_official_ems ? "External" : "EMS";
   const id = String(p.source_feature_id ?? p.id);
+  const aoiId = String(p.aoi_id ?? "");
   const damage = String(p.damage_gra ?? p.damage_class ?? "unknown");
   const percent = String(p.damage_percent ?? p.damage_score ?? "-");
   return (
     `<strong>${escapeHtml(id)}</strong>` +
     `<span>${label}: ${escapeHtml(damage)} · ${escapeHtml(percent)}%</span>` +
-    (mapsUrl ? `<a href="${escapeHtml(mapsUrl)}" target="_blank" rel="noreferrer">Google Maps</a>` : "")
+    (mapsUrl ? `<a href="${escapeHtml(mapsUrl)}" target="_blank" rel="noreferrer" data-analytics-event="google_maps_link_clicked" data-analytics-aoi="${escapeHtml(aoiId)}" data-analytics-surface="map_popup">Google Maps</a>` : "")
   );
 }

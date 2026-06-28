@@ -41,6 +41,8 @@ vercel --prod
 
 Keep large rasters, chips, COGs, and PMTiles out of the Vercel repo. Store them in R2, Supabase Storage, or another CDN/object store, then point `public/data/catalog.json` layer URLs to those public CDN URLs.
 
+Analytics setup and the privacy-safe event taxonomy live in `docs/ANALYTICS.md`.
+
 ## Data Model
 
 The public app only requires static files:

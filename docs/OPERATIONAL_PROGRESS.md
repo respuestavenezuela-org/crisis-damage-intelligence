@@ -426,6 +426,24 @@ QA evidence:
 - Next recommended action:
   - Use S3-compatible sync for z17-z18 and other AOIs. Wrangler fallback is acceptable for scoped z12-z16 batches but too slow for the full residential tile pyramid.
 
+### 2026-06-27 - Privacy-Safe Analytics Foundation
+
+- Objective: track whether responders use the public app effectively without collecting personal data, feature ids, coordinates, or full external URLs.
+- Files changed:
+  - Added `@vercel/analytics` pageview support.
+  - Added `src/lib/analytics.ts` provider-neutral event queue/dispatcher.
+  - Added `src/components/AnalyticsEvents.tsx` delegated click tracking for links.
+  - Instrumented language, AOI, imagery mode, basemap, damage filter, priority click, downloads, Google Maps, and evidence chip interactions.
+  - Added `docs/ANALYTICS.md`.
+- Privacy guardrails:
+  - Custom events do not send names, emails, IPs, coordinates, feature/building ids, full Google Maps URLs, chip URLs, or free text.
+  - Custom Vercel event sending is opt-in with `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER=vercel`; otherwise events remain local/provider-neutral and pageviews use Vercel Web Analytics only.
+- QA performed:
+  - `npm run lint`
+  - `npm run build`
+- Next recommended action:
+  - Deploy with pageview analytics enabled and only enable custom interaction forwarding after confirming Vercel quota/cost settings.
+
 ## Known Gaps
 
 1. Imagery is still active-area based. The map loads all vector features, but not all AOI imagery at once.

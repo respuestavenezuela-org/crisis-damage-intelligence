@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { trackAnalytics } from "@/lib/analytics";
 import MapPanel from "./map/MapPanel";
 import type { AoiCatalog, AoiRecord, DamageFeature, Language, VlmRecord } from "./types";
 
@@ -150,6 +151,8 @@ type CityNavItem = {
   score: number;
 };
 
+let appLoadedTracked = false;
+
 const cityGroups: Array<Omit<CityNavItem, "official" | "monitor" | "external" | "imageryOnly" | "score">> = [
   {
     id: "la-guaira",
@@ -213,6 +216,7 @@ export default function OperationsConsole() {
   const [features, setFeatures] = useState<DamageFeature[]>([]);
   const rightRailRef = useRef<HTMLElement | null>(null);
   const priorityRef = useRef<HTMLElement | null>(null);
+  const appLoadTrackedRef = useRef(false);
 
   useEffect(() => {
     fetch("/data/catalog.json").then((r) => r.json()).then(setCatalog);
@@ -298,13 +302,85 @@ export default function OperationsConsole() {
       };
     }).sort((a, b) => b.score - a.score || a.name[language].localeCompare(b.name[language]));
   }, [catalog, language]);
-  const selectAoi = (id: string) => {
+
+  useEffect(() => {
+    if (!catalog || appLoadTrackedRef.current || appLoadedTracked) return;
+    appLoadTrackedRef.current = true;
+    appLoadedTracked = true;
+    trackAnalytics("app_loaded", {
+      language,
+      default_aoi_id: activeId,
+      aoi_count: catalog.aois.length,
+      default_basemap: basemap,
+      default_mode: mode,
+      public_static: true,
+    });
+  }, [activeId, basemap, catalog, language, mode]);
+
+  const changeLanguage = (nextLanguage: Language) => {
+    if (nextLanguage !== language) {
+      trackAnalytics("language_switched", {
+        from_language: language,
+        to_language: nextLanguage,
+        aoi_id: activeId,
+      });
+    }
+    setLanguage(nextLanguage);
+  };
+  const selectAoi = (id: string, cityId?: string) => {
+    if (id !== activeId) {
+      const nextAoi = catalog?.aois.find((aoi) => aoi.id === id);
+      trackAnalytics("aoi_selected", {
+        aoi_id: id,
+        city_id: cityId,
+        aoi_status: nextAoi?.status,
+        language,
+      });
+    }
     setActiveId(id);
     setSelected(null);
     setFocusToken((value) => value + 1);
     setAoiFocusToken((value) => value + 1);
   };
-  const selectPriorityFeature = (feature: DamageFeature) => {
+  const changeMode = (nextMode: Mode) => {
+    if (nextMode !== mode) {
+      trackAnalytics("imagery_mode_changed", {
+        aoi_id: activeId,
+        mode: nextMode,
+        has_before_imagery: hasBeforeImagery,
+        has_after_imagery: hasAfterImagery,
+      });
+    }
+    setMode(nextMode);
+  };
+  const changeBasemap = (nextBasemap: Basemap) => {
+    if (nextBasemap !== basemap) {
+      trackAnalytics("basemap_changed", {
+        aoi_id: activeId,
+        basemap: nextBasemap,
+      });
+    }
+    setBasemap(nextBasemap);
+  };
+  const changeFilter = (nextFilter: Filter) => {
+    if (nextFilter !== filter) {
+      trackAnalytics("damage_filter_changed", {
+        aoi_id: activeId,
+        filter: nextFilter,
+      });
+    }
+    setFilter(nextFilter);
+  };
+  const selectPriorityFeature = (feature: DamageFeature, rank: number) => {
+    const p = feature.properties;
+    const record = vlm[p.id];
+    trackAnalytics("priority_item_clicked", {
+      aoi_id: String(p.aoi_id ?? activeId),
+      rank,
+      damage_class: String(record?.vlm?.damage_class ?? p.damage_class ?? p.damage_gra ?? "unknown"),
+      has_vlm: Boolean(record),
+      vlm_review_type: record?.vlm?.review_type ?? record?.review_type,
+    });
     setSelected(feature);
     setFilter("all");
     setFocusToken((value) => value + 1);
@@ -339,14 +415,14 @@ export default function OperationsConsole() {
 
         <label className="field-label">{t.language}</label>
         <div className="segmented" aria-label={t.language}>
-          <button className={language === "es" ? "active" : ""} onClick={() => setLanguage("es")}>ES</button>
-          <button className={language === "en" ? "active" : ""} onClick={() => setLanguage("en")}>EN</button>
+          <button className={language === "es" ? "active" : ""} onClick={() => changeLanguage("es")}>ES</button>
+          <button className={language === "en" ? "active" : ""} onClick={() => changeLanguage("en")}>EN</button>
         </div>
 
         <label className="field-label">{t.aoi}</label>
         <div className="aoi-list">
           {cityNavItems.map((item) => (
-            <button key={item.id} data-testid={`city-${item.id}`} className={item.sourceIds.includes(activeId) ? "aoi-card active" : "aoi-card"} onClick={() => selectAoi(item.primaryAoiId)}>
+            <button key={item.id} data-testid={`city-${item.id}`} className={item.sourceIds.includes(activeId) ? "aoi-card active" : "aoi-card"} onClick={() => selectAoi(item.primaryAoiId, item.id)}>
               <span>{item.name[language]}</span>
               <small>{cityImpactLabel(item, language)}</small>
             </button>
@@ -375,7 +451,16 @@ export default function OperationsConsole() {
           <h2>{t.downloads}</h2>
           <div className="download-row">
             {active && Object.entries(active.downloads).map(([kind, href]) => (
-              <a key={kind} href={href}>{kind.toUpperCase()}</a>
+              <a
+                key={kind}
+                href={href}
+                data-analytics-event="data_download_clicked"
+                data-analytics-aoi={active.id}
+                data-analytics-format={kind.toLowerCase()}
+                data-analytics-surface="downloads_panel"
+              >
+                {kind.toUpperCase()}
+              </a>
             ))}
           </div>
         </section>
@@ -401,16 +486,16 @@ export default function OperationsConsole() {
           <div className="control-group">
             <span>{t.basemap}</span>
             <div className="button-row">
-              <button data-testid="basemap-map" className={basemap === "map" ? "active" : ""} onClick={() => setBasemap("map")}>{t.mapBase}</button>
-              <button data-testid="basemap-aerial" className={basemap === "aerial" ? "active" : ""} onClick={() => setBasemap("aerial")}>{t.aerialBase}</button>
+              <button data-testid="basemap-map" className={basemap === "map" ? "active" : ""} onClick={() => changeBasemap("map")}>{t.mapBase}</button>
+              <button data-testid="basemap-aerial" className={basemap === "aerial" ? "active" : ""} onClick={() => changeBasemap("aerial")}>{t.aerialBase}</button>
             </div>
             <em className="control-note">{t.aerialBaseNote}</em>
           </div>
           <div className="control-group">
             <span>{t.mode}</span>
             <div className="button-row">
-              <button data-testid="mode-before" disabled={!hasBeforeImagery} className={mode === "before" ? "active" : ""} onClick={() => setMode("before")}>{t.before}</button>
-              <button data-testid="mode-after" disabled={!hasAfterImagery} className={mode === "after" ? "active" : ""} onClick={() => setMode("after")}>{t.after}</button>
+              <button data-testid="mode-before" disabled={!hasBeforeImagery} className={mode === "before" ? "active" : ""} onClick={() => changeMode("before")}>{t.before}</button>
+              <button data-testid="mode-after" disabled={!hasAfterImagery} className={mode === "after" ? "active" : ""} onClick={() => changeMode("after")}>{t.after}</button>
             </div>
             {!hasImagery && <em className="control-note">{t.noImagery}</em>}
             {hasAfterImagery && !hasBeforeImagery && <em className="control-note">{t.noBefore}</em>}
@@ -426,9 +511,9 @@ export default function OperationsConsole() {
           <div className="control-group">
             <span>{t.filters}</span>
             <div className="button-row">
-              <button data-testid="filter-all" className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>{t.all}</button>
-              <button data-testid="filter-severe" className={filter === "severe" ? "active" : ""} onClick={() => setFilter("severe")}>{t.severe}</button>
-              <button data-testid="filter-vlm" className={filter === "vlm" ? "active" : ""} onClick={() => setFilter("vlm")}>{t.vlmOnly}</button>
+              <button data-testid="filter-all" className={filter === "all" ? "active" : ""} onClick={() => changeFilter("all")}>{t.all}</button>
+              <button data-testid="filter-severe" className={filter === "severe" ? "active" : ""} onClick={() => changeFilter("severe")}>{t.severe}</button>
+              <button data-testid="filter-vlm" className={filter === "vlm" ? "active" : ""} onClick={() => changeFilter("vlm")}>{t.vlmOnly}</button>
             </div>
             <em className="control-note">{t.filterNote}</em>
           </div>
@@ -454,7 +539,19 @@ export default function OperationsConsole() {
               <div><dt>Size</dt><dd>{formatBytes(active.imagery.after.bytes)}</dd></div>
             </dl>
             {!active.metrics.features && <p className="muted">{t.imageryOnly}</p>}
-            <div className="download-row"><a href={active.imagery.after.url} target="_blank">COG</a></div>
+            <div className="download-row">
+              <a
+                href={active.imagery.after.url}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics-event="data_download_clicked"
+                data-analytics-aoi={active.id}
+                data-analytics-format="cog"
+                data-analytics-surface="imagery_panel"
+              >
+                COG
+              </a>
+            </div>
           </section>
         )}
         <section className="confidence-panel">
@@ -465,11 +562,11 @@ export default function OperationsConsole() {
         <section ref={priorityRef}>
           <h2>{language === "es" ? "Prioridad" : "Priority"}</h2>
           <div className="priority-list">
-            {priorityFeatures.map((feature) => {
+            {priorityFeatures.map((feature, index) => {
               const p = feature.properties;
               const label = String(vlm[p.id]?.vlm?.damage_class ?? p.damage_class ?? p.damage_gra ?? "candidate");
               return (
-                <button key={p.id} data-testid={`priority-${p.source_feature_id ?? p.id}`} className={selected?.properties.id === p.id ? "priority-row active" : "priority-row"} onClick={() => selectPriorityFeature(feature)}>
+                <button key={p.id} data-testid={`priority-${p.source_feature_id ?? p.id}`} className={selected?.properties.id === p.id ? "priority-row active" : "priority-row"} onClick={() => selectPriorityFeature(feature, index + 1)}>
                   <b>{p.source_feature_id ?? p.id}</b>
                   <span>{label} · {String(p.damage_score ?? p.damage_percent ?? "-")}</span>
                 </button>
@@ -532,8 +629,10 @@ function VlmQualityPanel({ aoi, language }: { aoi: AoiRecord; language: Language
 function Evidence({ feature, vlm, language, onBackToPriority }: { feature: DamageFeature; vlm?: VlmRecord; language: Language; onBackToPriority: () => void }) {
   const t = copy[language];
   const p = feature.properties;
-  const chip = evidenceChipUrl(vlm);
+  const chip = evidenceChip(vlm);
   const mapsUrl = typeof p.google_maps_url === "string" ? p.google_maps_url : "";
+  const aoiId = String(p.aoi_id ?? "");
+  const hasVlm = Boolean(vlm);
   return (
     <div className="evidence-body">
       <h3>{p.source_feature_id ?? p.id}</h3>
@@ -548,27 +647,65 @@ function Evidence({ feature, vlm, language, onBackToPriority }: { feature: Damag
       {vlm?.vlm?.change_evidence && <p className="evidence-text">{vlm.vlm.change_evidence}</p>}
       {vlm?.vlm?.evidence && <p className="evidence-text">{vlm.vlm.evidence}</p>}
       {vlm?.vlm?.uncertainty_reason && <p className="evidence-text"><b>Uncertainty:</b> {vlm.vlm.uncertainty_reason}</p>}
-      {chip && <a href={chip} target="_blank">
+      {chip && <a
+        href={chip.url}
+        target="_blank"
+        rel="noreferrer"
+        data-analytics-event="evidence_chip_clicked"
+        data-analytics-aoi={aoiId}
+        data-analytics-chip-kind={chip.kind}
+        data-analytics-surface="evidence_preview"
+        data-analytics-has-vlm={String(hasVlm)}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="chip-preview" src={chip} alt="" loading="lazy" />
+        <img className="chip-preview" src={chip.url} alt="" loading="lazy" />
       </a>}
       <div className="download-row">
-        {mapsUrl && <a href={mapsUrl} target="_blank">{t.maps}</a>}
-        {chip && <a href={chip} target="_blank">{t.chip}</a>}
+        {mapsUrl && <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noreferrer"
+          data-analytics-event="google_maps_link_clicked"
+          data-analytics-aoi={aoiId}
+          data-analytics-surface="evidence_panel"
+          data-analytics-has-vlm={String(hasVlm)}
+        >
+          {t.maps}
+        </a>}
+        {chip && <a
+          href={chip.url}
+          target="_blank"
+          rel="noreferrer"
+          data-analytics-event="evidence_chip_clicked"
+          data-analytics-aoi={aoiId}
+          data-analytics-chip-kind={chip.kind}
+          data-analytics-surface="evidence_button"
+          data-analytics-has-vlm={String(hasVlm)}
+        >
+          {t.chip}
+        </a>}
         <button type="button" className="text-action" onClick={onBackToPriority}>{t.backToPriority}</button>
       </div>
     </div>
   );
 }
 
-function evidenceChipUrl(vlm?: VlmRecord) {
-  const candidate = vlm?.compare_chip ?? vlm?.post_event_chip ?? vlm?.before_event_chip ?? vlm?.triplet_chip;
-  if (!candidate) return undefined;
-  if (candidate.startsWith("http://") || candidate.startsWith("https://") || candidate.startsWith("/data/chips/")) return candidate;
+function evidenceChip(vlm?: VlmRecord) {
+  const entries = [
+    ["compare", vlm?.compare_chip],
+    ["post_event", vlm?.post_event_chip],
+    ["before_event", vlm?.before_event_chip],
+    ["triplet", vlm?.triplet_chip],
+  ] as const;
+  const match = entries.find(([, value]) => value);
+  if (!match?.[1]) return undefined;
+  const candidate = match[1];
+  const kind = match[0];
+  if (candidate.startsWith("http://") || candidate.startsWith("https://") || candidate.startsWith("/data/chips/")) return { url: candidate, kind };
   const marker = "/data/chips/";
   const index = candidate.indexOf(marker);
-  if (index >= 0) return candidate.slice(index);
+  if (index >= 0) return { url: candidate.slice(index), kind };
   const bareIndex = candidate.indexOf("chips/");
-  if (bareIndex >= 0) return `/data/${candidate.slice(bareIndex)}`;
-  return candidate;
+  if (bareIndex >= 0) return { url: `/data/${candidate.slice(bareIndex)}`, kind };
+  return { url: candidate, kind };
 }
