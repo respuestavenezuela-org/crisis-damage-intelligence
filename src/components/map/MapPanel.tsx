@@ -314,10 +314,16 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
     markerRef.current?.getSource()?.clear();
     popupOverlayRef.current?.setPosition(undefined);
 
+    const bounds3857 = boundingExtent([
+      fromLonLat([aoi.bounds[0][1], aoi.bounds[0][0]]),
+      fromLonLat([aoi.bounds[1][1], aoi.bounds[1][0]]),
+    ]);
+
     if (aoi.layers.beforeTiles || aoi.layers.beforeImage) {
       beforeRef.current = aoi.layers.beforeTiles
         ? new TileLayer({
           source: new XYZ({ url: aoi.layers.beforeTiles, maxZoom: 18, minZoom: 12, transition: 0 }),
+          extent: bounds3857,
           opacity: 1,
           visible: modeRef.current === "before",
           zIndex: 10,
@@ -334,6 +340,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       afterRef.current = aoi.layers.afterTiles
         ? new TileLayer({
           source: new XYZ({ url: aoi.layers.afterTiles, maxZoom: 18, minZoom: 12, transition: 0 }),
+          extent: bounds3857,
           opacity: 1,
           visible: modeRef.current === "after",
           zIndex: 11,
@@ -347,10 +354,6 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       map.addLayer(afterRef.current);
     }
 
-    const bounds3857 = boundingExtent([
-      fromLonLat([aoi.bounds[0][1], aoi.bounds[0][0]]),
-      fromLonLat([aoi.bounds[1][1], aoi.bounds[1][0]]),
-    ]);
     map.getView().fit(bounds3857, { padding: [60, 60, 60, 60], duration: 0, maxZoom: 15 });
     renderVectorsRef.current();
   }, [aoi]);

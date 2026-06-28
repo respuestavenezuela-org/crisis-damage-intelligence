@@ -1,32 +1,264 @@
 {
-  "updatedAt": "2026-06-27T20:45:00Z",
+  "schemaVersion": 2,
+  "updatedAt": "2026-06-28T10:20:00Z",
+  "registryPurpose": "Track external evidence sources before they are ingested or exposed as operational layers. This registry is not a publication approval.",
+  "publicationPolicy": {
+    "doNotTreatSocialOrBookmarkSourcesAsOfficial": true,
+    "doNotPublishUnlessSourceTermsConfidenceAreClear": true,
+    "externalPredictionsMustRemainDistinctFromOfficialEmsDamage": true
+  },
   "sources": [
+    {
+      "id": "copernicus-emsr884-rapid-mapping",
+      "title": "EMSR884: Earthquake in Venezuela",
+      "url": "https://mapping.emergency.copernicus.eu/activations/EMSR884/",
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Copernicus Emergency Management Service",
+      "licenseOrTerms": "Copernicus EMS public rapid mapping products; verify product-specific terms before redistribution outside the existing app exports.",
+      "geography": {
+        "label": "Venezuela, EMSR884 activation AOIs currently represented in the app",
+        "country": "Venezuela",
+        "bounds": null
+      },
+      "official": true,
+      "confidence": "high",
+      "sourceType": "official emergency mapping activation",
+      "status": "current_official_reference",
+      "reviewStatus": "usable_for_official_ems_layers_only",
+      "lastKnownSourceModifiedUtc": null,
+      "resources": [
+        {
+          "name": "AOI12 GRA product",
+          "format": "ZIP",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_v1.zip"
+        },
+        {
+          "name": "AOI08 GRA product",
+          "format": "ZIP",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_v1.zip"
+        },
+        {
+          "name": "AOI06 GRA MONIT01 product",
+          "format": "ZIP",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI06/GRA_MONIT01/EMSR884_AOI06_GRA_MONIT01_v1.zip"
+        }
+      ],
+      "caveat": "Official EMS products remain the highest-trust damage source. MONIT01 point layers must not be merged into GRA polygon counts without clear labeling."
+    },
     {
       "id": "hdx-msft-catia-la-mar-predicted-damage",
       "title": "Venezuela Earthquakes: Building Damage Assessment in Catia La Mar",
-      "provider": "Microsoft AI for Good Lab via HDX",
-      "type": "external predicted building-footprint damage",
+      "url": "https://data.humdata.org/dataset/venezuela-earthquakes-catia-la-mar",
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Microsoft AI for Good Lab via HDX",
+      "licenseOrTerms": "Creative Commons Attribution International (CC BY)",
+      "geography": {
+        "label": "Catia La Mar, La Guaira, Venezuela",
+        "country": "Venezuela",
+        "bounds": [
+          [
+            10.559730392756398,
+            -67.10968478093005
+          ],
+          [
+            10.613965524545677,
+            -66.99680888316503
+          ]
+        ]
+      },
+      "official": false,
+      "confidence": "medium_triage_only",
+      "sourceType": "external model-predicted building-footprint damage",
       "status": "added_as_external_prediction_layer",
-      "packageModifiedUtc": "2026-06-27T15:03:50.421777",
+      "reviewStatus": "published_with_triage_warning",
+      "lastKnownSourceModifiedUtc": "2026-06-27T15:03:50.342248",
       "resources": [
         {
           "name": "predicted_damage_catia_la_mar_footprints.gpkg",
           "format": "GPKG",
           "lastModifiedUtc": "2026-06-26T05:16:28.651374",
           "url": "https://data.humdata.org/dataset/029efb88-3a8a-40d9-8aea-65477e6eb744/resource/684fdeab-e4ac-4029-9ec9-891676b2ebfc/download/predicted_damage_catia_la_mar_footprints.gpkg"
+        },
+        {
+          "name": "valid_area_mask_be30d955-2b80-4354-9418-5b9123117843_39cc9d50-43cb-4384-92c3-ce40455392aa.geojson",
+          "format": "GeoJSON",
+          "lastModifiedUtc": "2026-06-26T22:16:40.048145",
+          "url": "https://data.humdata.org/dataset/029efb88-3a8a-40d9-8aea-65477e6eb744/resource/d7c889f0-4a3f-4f93-b35c-55b539e11b95/download/valid_area_mask_be30d955-2b80-4354-9418-5b9123117843_39cc9d50-43cb-4384-92c3-ce40455392aa.geojson"
         }
       ],
-      "caveat": "Triage aid only. Not official EMS source-of-truth. The app exports only damaged=1 features from the source layer."
+      "caveat": "Triage aid only. Not official EMS source-of-truth. HDX metadata warns that source imagery has orthorectification quality issues that may misalign building footprints with basemaps."
+    },
+    {
+      "id": "hdx-msft-caraballeda-predicted-damage",
+      "title": "Venezuela Earthquakes: Building Damage Assessment in Caraballeda",
+      "url": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-caraballeda",
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Microsoft AI for Good Lab via HDX",
+      "licenseOrTerms": "Creative Commons Attribution International (CC BY)",
+      "geography": {
+        "label": "Caraballeda east, La Guaira, Venezuela",
+        "country": "Venezuela",
+        "bounds": [
+          [
+            10.60021581816834,
+            -66.8634820650857
+          ],
+          [
+            10.624836585934151,
+            -66.8111437828669
+          ]
+        ]
+      },
+      "official": false,
+      "confidence": "pending_review_triage_only",
+      "sourceType": "external model-predicted building-footprint damage",
+      "status": "documented_not_loaded",
+      "reviewStatus": "queued_for_source_review",
+      "lastKnownSourceModifiedUtc": "2026-06-27T14:59:30.939048",
+      "resources": [
+        {
+          "name": "caraballeda_east_vantor_6-26_building_predictions_merged.gpkg",
+          "format": "GPKG",
+          "lastModifiedUtc": "2026-06-27T14:09:18.082712",
+          "url": "https://data.humdata.org/dataset/1a77bd9c-5170-4651-92c2-0dd42cdc303e/resource/d82d36cf-e728-4f03-b8a8-7615d05a8374/download/caraballeda_east_vantor_6-26_building_predictions_merged.gpkg"
+        },
+        {
+          "name": "caraballeda_east_vantor_6-26_valid_area_mask.geojson",
+          "format": "GeoJSON",
+          "lastModifiedUtc": "2026-06-27T14:09:19.198448",
+          "url": "https://data.humdata.org/dataset/1a77bd9c-5170-4651-92c2-0dd42cdc303e/resource/2446c43b-d445-47e3-a349-e73f911059bf/download/caraballeda_east_vantor_6-26_valid_area_mask.geojson"
+        }
+      ],
+      "caveat": "Do not publish as a new public layer until overlap with AOI12 official EMS features, thresholding, and visual QA are reviewed. Treat as external model triage only."
+    },
+    {
+      "id": "hdx-msft-catia-la-mar-east-predicted-damage",
+      "title": "Venezuela Earthquakes: Building Damage Assessment in Catia La Mar - East",
+      "url": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-catia-la-mar-east",
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Microsoft AI for Good Lab via HDX",
+      "licenseOrTerms": "Creative Commons Attribution International (CC BY)",
+      "geography": {
+        "label": "East Catia La Mar, La Guaira, Venezuela",
+        "country": "Venezuela",
+        "bounds": [
+          [
+            10.521090003067927,
+            -67.02766918446041
+          ],
+          [
+            10.677178843708468,
+            -66.95183893320902
+          ]
+        ]
+      },
+      "official": false,
+      "confidence": "pending_review_triage_only",
+      "sourceType": "external model-predicted building-footprint damage",
+      "status": "documented_not_loaded",
+      "reviewStatus": "queued_for_source_review",
+      "lastKnownSourceModifiedUtc": "2026-06-27T21:18:56.956382",
+      "resources": [
+        {
+          "name": "predicted_damage_East-Catia-La-Mar-Skysat-final.gpkg",
+          "format": "GPKG",
+          "lastModifiedUtc": "2026-06-27T21:14:07.183743",
+          "url": "https://data.humdata.org/dataset/0c439581-b14d-4092-a104-95b5abee3002/resource/2034c971-e8ac-431d-acaa-e1c94d601039/download/predicted_damage_east-catia-la-mar-skysat-final.gpkg"
+        },
+        {
+          "name": "valid_area_mask_catia_la_mar_east.geojson",
+          "format": "GeoJSON",
+          "lastModifiedUtc": "2026-06-27T21:14:04.974192",
+          "url": "https://data.humdata.org/dataset/0c439581-b14d-4092-a104-95b5abee3002/resource/5b0bcd32-39b7-4c39-9722-a20818d5e0b0/download/valid_area_mask_catia_la_mar_east.geojson"
+        }
+      ],
+      "caveat": "Do not publish as a new public layer until duplicated coverage with existing Catia/EMS records, model thresholding, and imagery validity are reviewed. Treat as external model triage only."
+    },
+    {
+      "id": "hdx-msft-la-guaira-predicted-damage",
+      "title": "Venezuela Earthquakes: Building Damage Assessment in La Guaira",
+      "url": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-la-guaira",
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Microsoft AI for Good Lab via HDX",
+      "licenseOrTerms": "Creative Commons Attribution International (CC BY)",
+      "geography": {
+        "label": "La Guaira east, Venezuela",
+        "country": "Venezuela",
+        "bounds": [
+          [
+            10.584188048338683,
+            -66.9211988875442
+          ],
+          [
+            10.630343630808635,
+            -66.85617232010596
+          ]
+        ]
+      },
+      "official": false,
+      "confidence": "pending_review_triage_only",
+      "sourceType": "external model-predicted building-footprint damage",
+      "status": "documented_not_loaded",
+      "reviewStatus": "queued_for_source_review",
+      "lastKnownSourceModifiedUtc": "2026-06-27T15:00:19.039959",
+      "resources": [
+        {
+          "name": "predicted_damage_La-Guaira-East-BlackSky-06-25-model-337_filtered.gpkg",
+          "format": "GPKG",
+          "lastModifiedUtc": "2026-06-26T23:48:50.995224",
+          "url": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/d07fc3f8-885f-46f4-bd8e-03ac92fd5b00/download/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg"
+        },
+        {
+          "name": "valid_area_mask_be30d955-2b80-4354-9418-5b9123117843_8fb3f63b-6166-4626-88e1-a434238f6272.geojson",
+          "format": "GeoJSON",
+          "lastModifiedUtc": "2026-06-26T22:26:36.088705",
+          "url": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/441dbd20-9727-4067-bbe3-69f17220eb24/download/valid_area_mask_be30d955-2b80-4354-9418-5b9123117843_8fb3f63b-6166-4626-88e1-a434238f6272-1-.geojson"
+        }
+      ],
+      "caveat": "Do not publish as a new public layer until source geometry, thresholding, and overlap with official EMS AOIs are reviewed. Treat as external model triage only."
     },
     {
       "id": "hdx-hot-venezuela-earthquake-osm-overture",
       "title": "Venezuela - M 7.5 Earthquake - June 2026 - OSM & Overture Data",
-      "provider": "Humanitarian OpenStreetMap Team (HOT) via HDX",
-      "type": "context data: buildings, roads, POI, health, education, airports, seaports, Overture buildings, fAIr predictions",
-      "status": "documented_not_loaded_by_default",
-      "packageModifiedUtc": "2026-06-27T08:13:59.555654",
       "url": "https://data.humdata.org/dataset/hot_eq_ven",
-      "caveat": "Useful for context and exposure analysis, but national-scale Overture buildings are hundreds of MB and should remain out of the Vercel bundle until tiled/split."
+      "dateAccessed": "2026-06-28",
+      "dataOwner": "Humanitarian OpenStreetMap Team (HOT), OpenStreetMap contributors, and Overture Maps via HDX",
+      "licenseOrTerms": "Open Database License (ODbL) v1.0 for OSM layers; Community Data License Agreement - Permissive 2.0 for Emergency Facilities (Overture places).",
+      "geography": {
+        "label": "Earthquake-affected Venezuela export; HDX notes bbox approximately 69.76W-65.78W, 8.70N-11.51N",
+        "country": "Venezuela",
+        "bounds": [
+          [
+            8.7,
+            -69.76
+          ],
+          [
+            11.51,
+            -65.78
+          ]
+        ]
+      },
+      "official": false,
+      "confidence": "medium_context_only",
+      "sourceType": "context data: buildings, roads, POI, facilities, fAIr predictions",
+      "status": "documented_not_loaded_by_default",
+      "reviewStatus": "usable_for_context_after_size_filtering",
+      "lastKnownSourceModifiedUtc": "2026-06-27T07:33:12",
+      "resources": [
+        {
+          "name": "Buildings (OSM)",
+          "format": "GPKG ZIP",
+          "lastModifiedUtc": "2026-06-27T07:29:57",
+          "url": "https://production-raw-data-api.s3.amazonaws.com/ISO3/VEN/buildings/hot_eq_osm_ven_buildings_osm_gpkg.zip"
+        },
+        {
+          "name": "Data Quality Report and Interactive Map",
+          "format": "HTML",
+          "lastModifiedUtc": "2026-06-27T07:33:12",
+          "url": "https://production-raw-data-api.s3.amazonaws.com/ISO3/VEN/earthquake/VEN_EQ_Data_Quality_Report.html"
+        }
+      ],
+      "caveat": "Useful for context and exposure analysis, but not an official damage source. Overture building footprints are partly AI-generated; national-scale files are too large for the Vercel bundle until filtered or tiled."
     }
   ]
 }

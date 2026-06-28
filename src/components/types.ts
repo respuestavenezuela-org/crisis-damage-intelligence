@@ -26,6 +26,25 @@ export type AoiRecord = {
       bytes?: number;
       sha256?: string;
       r2Key?: string;
+      source?: string;
+      coverage?: string;
+      license?: string;
+      tilePyramid?: {
+        urlTemplate: string;
+        format?: string;
+        minZoom?: number;
+        maxZoom?: number;
+        tileCount?: number;
+        bytesApprox?: number;
+        quality?: number;
+      };
+      sourceScenes?: Array<{
+        id: string;
+        sensor?: string;
+        acquisitionUtc?: string;
+        cloudCover?: number;
+        url?: string;
+      }>;
     };
     after: null | {
       url: string;
@@ -34,6 +53,15 @@ export type AoiRecord = {
       bytes?: number;
       sha256?: string;
       r2Key?: string;
+      tilePyramid?: {
+        urlTemplate: string;
+        format?: string;
+        minZoom?: number;
+        maxZoom?: number;
+        tileCount?: number;
+        bytesApprox?: number;
+        quality?: number;
+      };
     };
     note?: string;
   };

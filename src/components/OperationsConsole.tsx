@@ -12,6 +12,7 @@ const copy = {
     live: "Public read-only",
     language: "Language",
     aoi: "Go to affected area",
+    rankingNote: "Ranked by response value: official EMS destroyed/damaged first, then possible/MONIT01, VLM triage, and capped external predictions.",
     source: "Source",
     status: "Status",
     features: "features",
@@ -29,7 +30,17 @@ const copy = {
     after: "After",
     noImagery: "No imagery exposed for this AOI yet",
     noBefore: "Before imagery is not exposed yet. Showing post-event imagery where available.",
+    beforeEvidenceOnly: "Before reference exists for evidence chips only; no before map layer is published.",
     imageryAvailable: "Post-event imagery available",
+    imageryCoverage: "Imagery coverage",
+    afterImagery: "After imagery",
+    beforeImagery: "Before imagery",
+    mapLayerAvailable: "Map layer available",
+    evidenceOnly: "Evidence chips only",
+    notAvailable: "Not available",
+    officialAfter: "Copernicus EMS post-event imagery",
+    nonOfficialBefore: "Vantor/OpenData reference - not official EMS imagery",
+    coverage: "Coverage",
     imageryOnly: "Imagery only - no official damage vector yet",
     opacity: "Damage opacity",
     filters: "Filters",
@@ -77,6 +88,7 @@ const copy = {
     live: "Publico solo lectura",
     language: "Idioma",
     aoi: "Ir a zona afectada",
+    rankingNote: "Ordenado por valor de respuesta: primero destruido/dañado oficial EMS, luego posible/MONIT01, triage VLM y predicciones externas limitadas.",
     source: "Fuente",
     status: "Estado",
     features: "estructuras",
@@ -94,7 +106,17 @@ const copy = {
     after: "Despues",
     noImagery: "Sin imagen expuesta para este AOI todavia",
     noBefore: "La imagen antes no esta expuesta todavia. Se muestra imagen posterior donde exista.",
+    beforeEvidenceOnly: "Existe referencia antes para chips de evidencia; no hay capa antes publicada en el mapa.",
     imageryAvailable: "Imagen posterior disponible",
+    imageryCoverage: "Cobertura de imagenes",
+    afterImagery: "Imagen despues",
+    beforeImagery: "Imagen antes",
+    mapLayerAvailable: "Capa de mapa disponible",
+    evidenceOnly: "Solo chips de evidencia",
+    notAvailable: "No disponible",
+    officialAfter: "Imagen post-evento de Copernicus EMS",
+    nonOfficialBefore: "Referencia Vantor/OpenData - no es imagen oficial EMS",
+    coverage: "Cobertura",
     imageryOnly: "Solo imagen - sin vector oficial de danos aun",
     opacity: "Opacidad de daño",
     filters: "Filtros",
@@ -147,15 +169,34 @@ type CityNavItem = {
   sourceIds: string[];
   name: Record<Language, string>;
   official: number;
+  officialConfirmed: number;
+  officialPossible: number;
   monitor: number;
+  monitorConfirmed: number;
+  monitorPossible: number;
   external: number;
+  vlmBeforeAfterCritical: number;
   imageryOnly: boolean;
   score: number;
 };
 
 let appLoadedTracked = false;
 
-const cityGroups: Array<Omit<CityNavItem, "official" | "monitor" | "external" | "imageryOnly" | "score">> = [
+const n = (value: unknown) => Number(value ?? 0) || 0;
+
+const cityGroups: Array<Omit<
+  CityNavItem,
+  | "official"
+  | "officialConfirmed"
+  | "officialPossible"
+  | "monitor"
+  | "monitorConfirmed"
+  | "monitorPossible"
+  | "external"
+  | "vlmBeforeAfterCritical"
+  | "imageryOnly"
+  | "score"
+>> = [
   {
     id: "la-guaira",
     primaryAoiId: "emsr884-aoi12-caraballeda",
@@ -197,10 +238,97 @@ const cityGroups: Array<Omit<CityNavItem, "official" | "monitor" | "external" | 
 function cityImpactLabel(item: CityNavItem, language: Language) {
   if (item.imageryOnly) return language === "es" ? "Imagen disponible · 0 daños oficiales" : "Imagery available · 0 official damage";
   const parts: string[] = [];
-  if (item.official) parts.push(language === "es" ? `${item.official} oficiales` : `${item.official} official`);
-  if (item.monitor) parts.push(language === "es" ? `${item.monitor} monitor` : `${item.monitor} monitor`);
-  if (item.external) parts.push(language === "es" ? `${item.external} predicción externa` : `${item.external} external prediction`);
+  if (item.officialConfirmed) parts.push(language === "es" ? `${item.officialConfirmed} destruidos/dañados oficiales` : `${item.officialConfirmed} official destroyed/damaged`);
+  if (item.officialPossible) parts.push(language === "es" ? `${item.officialPossible} posibles oficiales` : `${item.officialPossible} official possible`);
+  if (item.monitor) parts.push(language === "es" ? `${item.monitor} MONIT01` : `${item.monitor} MONIT01`);
+  if (item.vlmBeforeAfterCritical) parts.push(language === "es" ? `${item.vlmBeforeAfterCritical} VLM antes/después` : `${item.vlmBeforeAfterCritical} VLM before/after`);
+  if (item.external) parts.push(language === "es" ? `${item.external} externos solo triage` : `${item.external} external triage-only`);
   return parts.join(" · ") || (language === "es" ? "0 daños oficiales" : "0 official damage");
+}
+
+function cityResponseScore(records: AoiRecord[]) {
+  const officialVectors = records.filter((aoi) => aoi.status === "official-vector");
+  const monitorLayers = records.filter((aoi) => aoi.status === "official-monitor-points");
+  const externalLayers = records.filter((aoi) => aoi.status === "external-prediction");
+  const imageryOnly = records.length > 0 && records.every((aoi) => aoi.status === "imagery-only");
+  const official = officialVectors.reduce((sum, aoi) => sum + n(aoi.metrics.features), 0);
+  const officialConfirmed = officialVectors.reduce((sum, aoi) => sum + n(aoi.metrics.damagedConfirmed), 0);
+  const officialPossible = officialVectors.reduce((sum, aoi) => sum + n(aoi.metrics.possibleDamage), 0);
+  const monitor = monitorLayers.reduce((sum, aoi) => sum + n(aoi.metrics.features), 0);
+  const monitorConfirmed = monitorLayers.reduce((sum, aoi) => sum + n(aoi.metrics.damagedConfirmed), 0);
+  const monitorPossible = monitorLayers.reduce((sum, aoi) => sum + n(aoi.metrics.possibleDamage), 0);
+  const external = externalLayers.reduce((sum, aoi) => sum + n(aoi.metrics.candidates ?? aoi.metrics.features), 0);
+  const vlmBeforeAfterCritical = officialVectors.reduce(
+    (sum, aoi) => sum + n(aoi.metrics.vlmBeforeAfterLikelyDestroyed) + n(aoi.metrics.vlmBeforeAfterPossibleMajor),
+    0,
+  );
+  return {
+    official,
+    officialConfirmed,
+    officialPossible,
+    monitor,
+    monitorConfirmed,
+    monitorPossible,
+    external,
+    vlmBeforeAfterCritical,
+    imageryOnly,
+    score:
+      officialConfirmed * 1_000 +
+      officialPossible * 180 +
+      monitorConfirmed * 140 +
+      monitorPossible * 90 +
+      vlmBeforeAfterCritical * 55 +
+      Math.min(external * 0.01, 75) +
+      (imageryOnly ? 1 : 0),
+  };
+}
+
+function officialSeverityScore(cls: string) {
+  const normalized = cls.toLowerCase();
+  if (normalized.includes("destroy")) return 12_000;
+  if (normalized.includes("possibly")) return 8_000;
+  if (normalized.includes("damage") || normalized.includes("major")) return 11_000;
+  if (normalized.includes("minor")) return 7_000;
+  return 0;
+}
+
+function vlmSeverityScore(vlm?: VlmRecord) {
+  const cls = String(vlm?.vlm?.damage_class ?? "").toLowerCase();
+  const reviewType = String(vlm?.vlm?.review_type ?? vlm?.review_type ?? "");
+  const beforeAfterBonus = reviewType.includes("before") || reviewType.includes("comparison") ? 300 : 0;
+  if (cls.includes("likely_destroyed") || cls.includes("likely destroyed")) return 5_200 + beforeAfterBonus;
+  if (cls.includes("possible_major") || cls.includes("possible major")) return 4_700 + beforeAfterBonus;
+  if (cls.includes("minor")) return 3_700 + beforeAfterBonus;
+  return vlm ? 3_000 + beforeAfterBonus : 0;
+}
+
+function priorityFeatureScore(feature: DamageFeature, vlm?: VlmRecord, status?: string) {
+  const p = feature.properties;
+  const cls = String(p.damage_class ?? p.damage_gra ?? p.confirmed_damage_class ?? "");
+  const numeric = n(p.damage_score ?? p.damage_percent ?? p.confirmed_damage_percent);
+  if (status === "official-vector") return officialSeverityScore(cls) + numeric + Math.min(vlmSeverityScore(vlm) / 100, 80);
+  if (status === "official-monitor-points") return Math.max(officialSeverityScore(cls) - 2_000, 6_000) + numeric;
+  if (status === "external-prediction") return 3_000 + numeric;
+  return vlmSeverityScore(vlm) + numeric;
+}
+
+function priorityFeatureLabel(feature: DamageFeature, vlm: VlmRecord | undefined, language: Language, status?: string) {
+  const p = feature.properties;
+  const official = String(p.damage_class ?? p.damage_gra ?? p.confirmed_damage_class ?? "candidate");
+  const vlmClass = vlm?.vlm?.damage_class;
+  if (status === "external-prediction") {
+    return language === "es" ? `Predicción externa: ${official} · solo triage` : `External prediction: ${official} · triage only`;
+  }
+  if (status === "official-monitor-points") {
+    return language === "es" ? `MONIT01 oficial: ${official}` : `Official MONIT01: ${official}`;
+  }
+  if (status === "official-vector") {
+    if (vlmClass) {
+      return language === "es" ? `EMS oficial: ${official} · VLM: ${vlmClass}` : `Official EMS: ${official} · VLM: ${vlmClass}`;
+    }
+    return language === "es" ? `EMS oficial: ${official}` : `Official EMS: ${official}`;
+  }
+  return String(vlmClass ?? official);
 }
 
 export default function OperationsConsole() {
@@ -284,23 +412,9 @@ export default function OperationsConsole() {
     const byId = new Map(catalog.aois.map((aoi) => [aoi.id, aoi]));
     return cityGroups.map((group) => {
       const records = group.sourceIds.map((id) => byId.get(id)).filter(Boolean) as AoiRecord[];
-      const official = records
-        .filter((aoi) => aoi.status === "official-vector")
-        .reduce((sum, aoi) => sum + (aoi.metrics.features ?? 0), 0);
-      const monitor = records
-        .filter((aoi) => aoi.status === "official-monitor-points")
-        .reduce((sum, aoi) => sum + (aoi.metrics.features ?? 0), 0);
-      const external = records
-        .filter((aoi) => aoi.status === "external-prediction")
-        .reduce((sum, aoi) => sum + (aoi.metrics.candidates ?? aoi.metrics.features ?? 0), 0);
-      const imageryOnly = records.length > 0 && records.every((aoi) => aoi.status === "imagery-only");
       return {
         ...group,
-        official,
-        monitor,
-        external,
-        imageryOnly,
-        score: official + monitor + external,
+        ...cityResponseScore(records),
       };
     }).sort((a, b) => b.score - a.score || a.name[language].localeCompare(b.name[language]));
   }, [catalog, language]);
@@ -393,18 +507,14 @@ export default function OperationsConsole() {
   };
   const adjustOpacity = (delta: number) => setOpacity((value) => Math.max(5, Math.min(90, value + delta)));
   const priorityFeatures = useMemo(() => {
-    const score = (feature: DamageFeature) => {
-      const p = feature.properties;
-      const id = p.id;
-      const cls = String(vlm[id]?.vlm?.damage_class ?? p.damage_class ?? p.damage_gra ?? "").toLowerCase();
-      const numeric = Number(p.damage_score ?? p.damage_percent ?? p.confirmed_damage_percent ?? 0);
-      if (vlm[id]) return 400 + numeric;
-      if (cls.includes("destroy") || cls.includes("major") || cls === "damaged") return 300 + numeric;
-      if (cls.includes("possible") || cls.includes("minor")) return 200 + numeric;
-      return numeric;
-    };
-    return features.filter((feature) => feature.properties.aoi_id === activeId).sort((a, b) => score(b) - score(a)).slice(0, 12);
-  }, [activeId, features, vlm]);
+    return features
+      .filter((feature) => feature.properties.aoi_id === activeId)
+      .sort((a, b) => (
+        priorityFeatureScore(b, vlm[b.properties.id], active?.status) -
+        priorityFeatureScore(a, vlm[a.properties.id], active?.status)
+      ) || String(a.properties.source_feature_id ?? a.properties.id).localeCompare(String(b.properties.source_feature_id ?? b.properties.id)))
+      .slice(0, 12);
+  }, [active?.status, activeId, features, vlm]);
 
   return (
     <main className="ops-shell">
@@ -430,6 +540,7 @@ export default function OperationsConsole() {
             </button>
           ))}
         </div>
+        <p className="muted">{t.rankingNote}</p>
 
         {active && (
           <section className="source-card">
@@ -503,7 +614,7 @@ export default function OperationsConsole() {
               <button data-testid="mode-after" disabled={!hasAfterImagery} className={mode === "after" ? "active" : ""} onClick={() => changeMode("after")}>{t.after}</button>
             </div>
             {!hasImagery && <em className="control-note">{t.noImagery}</em>}
-            {hasAfterImagery && !hasBeforeImagery && <em className="control-note">{t.noBefore}</em>}
+            {hasAfterImagery && !hasBeforeImagery && <em className="control-note">{active?.imagery?.before ? t.beforeEvidenceOnly : t.noBefore}</em>}
           </div>
           <label className="range-control">
             <span>{t.opacity} <b>{opacity}%</b></span>
@@ -534,42 +645,12 @@ export default function OperationsConsole() {
             <p className="muted">{t.noSelection}</p>
           )}
         </section>
-        {active?.imagery?.after && (
-          <section className="imagery-panel">
-            <h2>{t.imageryAvailable}</h2>
-            <dl>
-              <div><dt>AOI</dt><dd>{active.id}</dd></div>
-              <div><dt>Sensor</dt><dd>{active.imagery.after.sensor ?? "-"}</dd></div>
-              <div><dt>UTC</dt><dd>{active.imagery.after.acquisitionUtc ?? "-"}</dd></div>
-              <div><dt>Size</dt><dd>{formatBytes(active.imagery.after.bytes)}</dd></div>
-            </dl>
-            {!active.metrics.features && <p className="muted">{t.imageryOnly}</p>}
-            <div className="download-row">
-              <a
-                href={active.imagery.after.url}
-                target="_blank"
-                rel="noreferrer"
-                data-analytics-event="data_download_clicked"
-                data-analytics-aoi={active.id}
-                data-analytics-format="cog"
-                data-analytics-surface="imagery_panel"
-              >
-                COG
-              </a>
-            </div>
-          </section>
-        )}
-        <section className="confidence-panel">
-          <h2>{t.confidenceTitle}</h2>
-          <p>{t.confidenceText}</p>
-        </section>
-        {active && <VlmQualityPanel aoi={active} language={language} />}
-        <section ref={priorityRef}>
+        <section className="priority-panel" ref={priorityRef}>
           <h2>{language === "es" ? "Prioridad" : "Priority"}</h2>
           <div className="priority-list">
             {priorityFeatures.map((feature, index) => {
               const p = feature.properties;
-              const label = String(vlm[p.id]?.vlm?.damage_class ?? p.damage_class ?? p.damage_gra ?? "candidate");
+              const label = priorityFeatureLabel(feature, vlm[p.id], language, active?.status);
               return (
                 <button key={p.id} data-testid={`priority-${p.source_feature_id ?? p.id}`} className={selected?.properties.id === p.id ? "priority-row active" : "priority-row"} onClick={() => selectPriorityFeature(feature, index + 1)}>
                   <b>{p.source_feature_id ?? p.id}</b>
@@ -579,6 +660,19 @@ export default function OperationsConsole() {
             })}
           </div>
         </section>
+        {active?.imagery && (
+          <ImageryCoveragePanel
+            aoi={active}
+            language={language}
+            hasAfterLayer={hasAfterImagery}
+            hasBeforeLayer={hasBeforeImagery}
+          />
+        )}
+        <section className="confidence-panel">
+          <h2>{t.confidenceTitle}</h2>
+          <p>{t.confidenceText}</p>
+        </section>
+        {active && <VlmQualityPanel aoi={active} language={language} />}
         <section>
           <h2>{t.watchlist}</h2>
           {catalog?.watchlist.map((item) => (
@@ -594,6 +688,63 @@ export default function OperationsConsole() {
         </section>
       </aside>
     </main>
+  );
+}
+
+function ImageryCoveragePanel({
+  aoi,
+  language,
+  hasAfterLayer,
+  hasBeforeLayer,
+}: {
+  aoi: AoiRecord;
+  language: Language;
+  hasAfterLayer: boolean;
+  hasBeforeLayer: boolean;
+}) {
+  const t = copy[language];
+  const afterStatus = aoi.imagery?.after
+    ? `${hasAfterLayer ? t.mapLayerAvailable : t.evidenceOnly} · ${t.officialAfter}`
+    : t.notAvailable;
+  const beforeStatus = aoi.imagery?.before
+    ? `${hasBeforeLayer ? t.mapLayerAvailable : t.evidenceOnly} · ${t.nonOfficialBefore}`
+    : t.notAvailable;
+  const hasCogDownload = Boolean(aoi.imagery?.after?.url);
+
+  return (
+    <section className="imagery-panel">
+      <h2>{t.imageryCoverage}</h2>
+      <dl>
+        <div><dt>AOI</dt><dd>{aoi.id}</dd></div>
+        <div><dt>{t.afterImagery}</dt><dd>{afterStatus}</dd></div>
+        {aoi.imagery?.after && (
+          <>
+            <div><dt>Sensor</dt><dd>{aoi.imagery.after.sensor ?? "-"}</dd></div>
+            <div><dt>UTC</dt><dd>{aoi.imagery.after.acquisitionUtc ?? "-"}</dd></div>
+            <div><dt>Size</dt><dd>{formatBytes(aoi.imagery.after.bytes)}</dd></div>
+          </>
+        )}
+        <div><dt>{t.beforeImagery}</dt><dd>{beforeStatus}</dd></div>
+        {aoi.imagery?.before?.coverage && <div><dt>{t.coverage}</dt><dd>{aoi.imagery.before.coverage}</dd></div>}
+      </dl>
+      {!aoi.metrics.features && <p className="muted">{t.imageryOnly}</p>}
+      {aoi.imagery?.note && <p className="muted imagery-note">{aoi.imagery.note}</p>}
+      {hasCogDownload && (
+        <div className="download-row">
+          <a
+            href={aoi.imagery?.after?.url}
+            target="_blank"
+            rel="noreferrer"
+            data-analytics-event="data_download_clicked"
+            data-analytics-aoi={aoi.id}
+            data-analytics-format="cog"
+            data-analytics-surface="imagery_panel"
+          >
+            COG
+          </a>
+        </div>
+      )}
+    </section>
   );
 }
 

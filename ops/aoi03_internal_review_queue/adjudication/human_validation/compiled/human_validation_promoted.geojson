@@ -1,0 +1,6 @@
+{
+  "type": "FeatureCollection",
+  "name": "aoi03_human_confirmed_static_validation",
+  "warning": "INTERNAL REVIEW ONLY. AOI03 rows are OpenStreetMap candidate leads, not official EMS damage. Static outputs promote only human-confirmed rows with independent evidence_uri.",
+  "features": []
+}

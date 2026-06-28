@@ -6,7 +6,7 @@
 - Public URL: `https://crisis-damage-intelligence.vercel.app`
 - Source repo: `https://github.com/takove/crisis-damage-intelligence`
 - Public viewing path: static Next.js + `public/data/**`
-- Public viewing does not require Supabase, object storage, workers, or VLM.
+- Public viewing does not require Supabase, workers, or live VLM calls. The current imagery-heavy package still depends on static local or CDN/R2-hosted assets for chips/tiles.
 
 ## Supabase
 
@@ -109,6 +109,7 @@ Current status:
 - Important Wrangler note:
   - Use `--remote` for real R2 writes/reads. Without `--remote`, Wrangler can interact with local R2 state.
 - Current AOI02/AOI06 static outputs uploaded.
+- AOI12 static outputs and before/after VLM outputs are represented in the generated manifest and should remain available through static files or verified R2/CDN URLs.
 - Original AOI02/AOI06 GRA ZIPs uploaded.
 - AOI00 GRM ZIP uploaded from the monitor download.
 - QA report and public screenshot uploaded.
@@ -260,6 +261,12 @@ Current queue files:
 
 - `public/data/aoi/emsr884-aoi02-caracas/vlm_queue.jsonl`
 - `public/data/aoi/emsr884-aoi06-moron/vlm_queue.jsonl`
+
+Current public VLM caveats:
+
+- AOI12 and AOI02 expose before/after VLM JSONL. AOI12 is the canonical deployed pattern; AOI02 is mostly uncertain comparison evidence.
+- AOI06 and AOI08 expose post-event-only VLM. Do not label those records as before/after comparisons.
+- AOI03 VLM candidate work remains internal under `ops/`; it is not a public damage layer.
 
 ## Failure Recovery
 

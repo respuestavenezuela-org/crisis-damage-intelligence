@@ -9,6 +9,7 @@ An operations-grade public map that can run close to zero cost:
 - Next.js static frontend on Vercel free tier.
 - Leaflet/OpenStreetMap-compatible map UI.
 - AOI data loaded from static `public/data/**` exports.
+- Affected-area navigation that groups operational layers by response area.
 - Before/after image overlays with a simple toggle.
 - Building damage GeoJSON/CSV/KML downloads.
 - VLM evidence loaded lazily from JSONL.
@@ -57,7 +58,9 @@ public/data/aoi/<aoi-id>/before.png or remote COG/tile URL
 public/data/aoi/<aoi-id>/after.png or remote COG/tile URL
 ```
 
-For real La Guaira operations, prefer remote object storage URLs:
+Current public operational data includes official EMS vectors for AOI02 Caracas, AOI06 Moron, AOI08 San Felipe, and AOI12 Caraballeda / La Guaira; MONIT01 point layers for AOI02/AOI06/AOI08; imagery-only navigation areas for AOI03 Antimano and AOI10 Guacara; and an external Microsoft AI4G Catia La Mar prediction layer. The external prediction layer is a triage-only candidate source, not official EMS damage confirmation.
+
+For imagery-heavy La Guaira operations, prefer remote object storage URLs:
 
 ```json
 {
@@ -72,13 +75,17 @@ For real La Guaira operations, prefer remote object storage URLs:
 
 ## Processing Strategy
 
-1. Run `monitor_emsr884.py` until AOI12 is available.
-2. Download AOI12 product ZIP.
+AOI12 v1 is already deployed. Use this flow for future EMS updates, reruns, or new AOIs:
+
+1. Run `monitor_emsr884.py` for new or updated EMSR884 products.
+2. Download the relevant product ZIP.
 3. Run Copernicus EMS importer to produce CSV/GeoJSON/KML.
 4. Upload exports to object storage/CDN.
 5. Update `catalog.json`.
 6. Run VLM only on high-value candidates first.
-7. Publish VLM JSONL as a separate evidence layer.
+7. Publish VLM JSONL as a separate evidence layer with clear review type labels.
+
+Do not mark an item as before/after VLM-reviewed unless both pre-event and post-event imagery were actually used. AOI12 has EMS post-event imagery and Vantor/OpenData pre-event reference with partial gaps. AOI02 has before/after evidence chips but high uncertainty. AOI06 and AOI08 currently have post-event-only VLM, not before/after VLM.
 
 ## EMSR884 Acceptance Test
 
@@ -120,9 +127,9 @@ outputs/ems_acceptance_qa/02-aoi06-severe-final.png
 outputs/ems_acceptance_qa/06-aoi06-priority-zoom18-popup.png
 ```
 
-Verified app behavior:
+Historical acceptance behavior from this AOI02/AOI06 test:
 
-- AOI switching works for AOI02 and AOI06.
+- AOI02 and AOI06 loaded from real EMSR884 GRA vector products.
 - Severity filters use real EMS `damage_gra` values.
 - AOI06 severe filter returns 36 features: `Destroyed` + `Damaged`.
 - Priority rows center the selected feature at zoom 18.
@@ -140,7 +147,7 @@ Short response-operations guides:
 - `docs/AOI12_ACTIVATION_RUNBOOK.md`
 - `docs/LOW_COST_INFRASTRUCTURE.md`
 
-These explain AOI switching, severity filters, priority click behavior, exports, data confidence, and the exact next action when AOI12/La Guaira becomes available.
+These explain affected-area navigation, severity filters, priority click behavior, exports, data confidence, deployed AOI12 operations, and the next safe actions for VLM expansion.
 
 Live infrastructure:
 
@@ -153,6 +160,7 @@ Operational warning:
 - EMS `builtUpA` features may not be one building each.
 - Official EMS labels are the source of record for this package.
 - VLM/inferred labels are triage aids only.
+- External predicted-damage layers are triage-only and must not be counted as official EMS damage.
 - Absence of a marked feature is not proof of no damage.
 
 ## VLM Policy
@@ -162,6 +170,7 @@ VLM output is evidence, not authority.
 - Official EMS labels are marked as confirmed source.
 - Pixel heuristics are recall-oriented candidates.
 - VLM is async second-pass prioritization.
+- Before/after VLM means both dated pre-event and post-event imagery were reviewed. Post-event-only VLM has lower evidentiary value and must stay labeled separately.
 - Human validation can be added later with Supabase tables.
 
 ## Optional Supabase

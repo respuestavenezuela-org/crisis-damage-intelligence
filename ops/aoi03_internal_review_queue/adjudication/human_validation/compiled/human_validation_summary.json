@@ -1,0 +1,19 @@
+{
+  "input": "/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform/ops/aoi03_internal_review_queue/adjudication/human_validation/human_validation_template.csv",
+  "generated_at_utc": "2026-06-28T09:57:17.548294Z",
+  "warning": "INTERNAL REVIEW ONLY. AOI03 rows are OpenStreetMap candidate leads, not official EMS damage. Static outputs promote only human-confirmed rows with independent evidence_uri.",
+  "total_rows": 5,
+  "reviewed_rows": 0,
+  "unreviewed_rows": 5,
+  "promoted_rows": 0,
+  "blocked_rows": 5,
+  "status_counts": {
+    "unreviewed": 5
+  },
+  "promotion_guardrails": [
+    "Only human_status=confirmed_damage can be promoted.",
+    "confirmed_damage requires evidence_uri.",
+    "Any reviewed row requires reviewer_id and reviewed_at_utc.",
+    "AOI03 candidates remain non-official OSM leads."
+  ]
+}

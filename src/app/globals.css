@@ -76,6 +76,9 @@ dl { display: grid; gap: 6px; margin: 0; }
 dl div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid #e1dbce; padding-bottom: 5px; }
 dt { color: var(--muted); }
 dd { margin: 0; text-align: right; font-weight: 700; }
+.imagery-panel dl div { display: grid; grid-template-columns: 96px minmax(0, 1fr); }
+.imagery-panel dd { text-align: left; overflow-wrap: anywhere; }
+.imagery-note { margin-top: 10px; }
 .evidence-text { font-size: 13px; line-height: 1.45; color: var(--ink); }
 .confidence-panel p, .vlm-quality-panel p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
 .mini-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px; }
@@ -100,7 +103,17 @@ dd { margin: 0; text-align: right; font-weight: 700; }
 }
 @media (max-width: 1120px) {
   .ops-shell { grid-template-columns: 286px 1fr; }
-  .right-rail { display: none; }
+  .right-rail {
+    position: fixed;
+    left: 286px;
+    right: 0;
+    bottom: 0;
+    display: block;
+    max-height: 38vh;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -10px 24px rgba(0,0,0,.16);
+  }
+  .right-rail section:not(.evidence-panel):not(.priority-panel) { display: none; }
   .map-toolbar { grid-template-columns: 1fr 1fr; align-items: stretch; }
   .map-toolbar .control-group { grid-column: auto; }
   .map-toolbar .control-group:last-child { grid-column: 1 / -1; }
@@ -124,4 +137,11 @@ dd { margin: 0; text-align: right; font-weight: 700; }
   .button-row { overflow-x: auto; }
   .map-toolbar button { padding: 5px 6px; min-height: 30px; font-size: 12px; }
   .map-toolbar label { min-width: 0; }
+  .right-rail {
+    left: 0;
+    max-height: 36vh;
+    padding: 8px;
+  }
+  .right-rail section { margin-top: 8px; padding: 9px; }
+  .right-rail section:first-child { margin-top: 0; }
 }

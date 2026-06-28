@@ -17,15 +17,23 @@ Expected result:
 - Output: Next.js static/prerendered route for `/`
 - Public data served from `public/data/**`
 - No database required for public viewing
-- No object storage required for current AOI02/AOI06 vector-only package
+- The current operational app includes AOI12 imagery/VLM assets and local chip/tile references. Keep large chips, tiles, rasters, COGs, and PMTiles out of the Vercel deploy package where possible; use R2/CDN remote assets after URL validation passes.
 
 For the imagery-enabled package, generate a remote-asset deploy copy first:
 
 ```bash
+python3 scripts/validate_remote_asset_urls.py
 python3 scripts/build_vercel_remote_asset_package.py --force
 cd ../crisis_damage_intelligence_vercel_remote_assets
 npm install
 npm run build
+```
+
+The remote asset validator writes:
+
+```text
+ops/remote_asset_validation/latest.json
+ops/remote_asset_validation/latest.md
 ```
 
 Do not deploy the remote-asset package until these URLs return HTTP 200:
@@ -41,7 +49,7 @@ https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/<aoi>/<chip>.png
 - Install command: `npm ci`
 - Build command: `npm run build`
 - Output directory: leave default for Next.js
-- Environment variables: none required for public AOI02/AOI06 viewing
+- Environment variables: none required for static public viewing. Analytics provider variables are optional; see `docs/ANALYTICS.md`.
 
 ## Before Publishing
 
@@ -56,16 +64,23 @@ https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/<aoi>/<chip>.png
 
 1. Open the deployed URL.
 2. Confirm default AOI is official EMSR884 data.
-3. Switch AOI02/AOI06.
+3. Check affected-area navigation. Current expected Spanish order after source-aware ranking is La Guaira / Caraballeda / Catia La Mar, Moron, San Felipe, Caracas, Antimano, Guacara.
 4. Check filters:
    - AOI02 all = 17, Destroyed/Damaged = 0.
    - AOI06 all = 129, Destroyed/Damaged = 36.
+   - AOI08 all = 43, Destroyed/Damaged = 8.
+   - AOI12 all = 120, Destroyed/Damaged = 96.
 5. Click first priority item and confirm zoom 18 + popup + Google Maps link.
-6. Download CSV, GeoJSON, and KML for each AOI.
+6. Confirm AOI12 imagery labels show EMS post-event imagery and Vantor/OpenData before reference, with partial-coverage caveats.
+7. Confirm VLM labels distinguish before/after review from post-event-only review.
+8. Confirm Catia La Mar Microsoft AI4G predictions are labeled external/triage-only and are not counted as official EMS damage.
+9. Download CSV, GeoJSON, and KML for operational AOIs.
 
 ## Do Not Overclaim
 
 - EMS `builtUpA` features may not be one building each.
 - Official EMS labels are the source of record for this package.
 - VLM/inferred labels are triage aids only.
+- Post-event-only VLM is not before/after VLM.
+- External prediction layers are not official EMS confirmation.
 - Absence of a marked feature is not proof of no damage.

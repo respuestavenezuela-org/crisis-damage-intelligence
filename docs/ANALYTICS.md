@@ -6,7 +6,7 @@ This app is a public bilingual crisis map. Analytics must measure whether respon
 
 Score: 76/100, usable with gaps.
 
-- Decision alignment: 20/25. Events map to crisis-response questions: which AOIs are used, which evidence paths matter, and which export formats are needed.
+- Decision alignment: 20/25. Events map to crisis-response questions: which affected areas are used, which evidence paths matter, and which export formats are needed.
 - Event model clarity: 17/20. Events use `object_action` names and flat properties.
 - Data accuracy: 14/20. Client events are wired, but production provider verification is still required.
 - Conversion quality: 10/15. No hard conversion is defined yet; downloads and evidence opens are intent signals, not conversions.
@@ -16,7 +16,7 @@ Score: 76/100, usable with gaps.
 ## Data Minimization
 
 - Do not send names, emails, IPs, coordinates, free text, or full Google Maps/chip/download URLs from custom events.
-- AOI ids, city ids, language, selected mode, filter, basemap, file format, evidence surface, priority rank, and coarse damage/VLM context are allowed.
+- AOI ids, affected-area/city ids, language, selected mode, filter, basemap, file format, evidence surface, priority rank, source category, and coarse damage/VLM context are allowed.
 - Priority events intentionally omit feature/building ids. Evidence chip events record `chip_kind`, not the chip path.
 - Web Analytics pageviews are handled by Vercel's cookie-free script. Interaction events are queued locally and only sent to a provider when explicitly enabled.
 
@@ -26,7 +26,7 @@ Score: 76/100, usable with gaps.
 | --- | --- | --- | --- | --- |
 | `app_loaded` | App shell and AOI catalog loaded | `language`, `default_aoi_id`, `aoi_count`, `default_basemap`, `default_mode`, `public_static` | First catalog load | Is the public app loading and what default context is seen? |
 | `language_switched` | User changes ES/EN | `from_language`, `to_language`, `aoi_id` | Language segmented control | Which language needs better operational support? |
-| `aoi_selected` | User selects a city/AOI | `aoi_id`, `city_id`, `aoi_status`, `language` | City/AOI button | Which affected areas are being investigated? |
+| `aoi_selected` | User selects an affected area or its active AOI layer | `aoi_id`, `city_id`, `aoi_status`, `language` | Affected-area navigation button | Which affected areas are being investigated? |
 | `imagery_mode_changed` | User toggles before/after imagery | `aoi_id`, `mode`, `has_before_imagery`, `has_after_imagery` | Before/after buttons | Is before/after comparison useful where available? |
 | `basemap_changed` | User toggles map/aerial base | `aoi_id`, `basemap` | Basemap buttons | Which base layer supports inspection? |
 | `damage_filter_changed` | User changes damage/VLM filter | `aoi_id`, `filter` | Filter buttons | Which triage views are useful? |
@@ -66,3 +66,10 @@ OpenPanel is initialized only when both `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER=o
 4. Click a priority row, Google Maps link, evidence chip, and CSV/GeoJSON/KML download; confirm no full URL, feature id, coordinates, or free text appears in event properties.
 5. If `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER=openpanel` is enabled, verify screen views and interaction events in OpenPanel before using them for operational decisions.
 6. If `NEXT_PUBLIC_ANALYTICS_EVENTS_PROVIDER=vercel` is enabled, verify events in the Vercel dashboard before using them for operational decisions.
+
+## Interpretation Caveats
+
+- Analytics events can show which affected areas, filters, exports, and evidence surfaces are used; they do not validate damage.
+- Do not infer confirmed damage from clicks on VLM, imagery, MONIT01, or external prediction layers.
+- Before/after VLM and post-event-only VLM must stay distinguishable in event properties and downstream dashboards.
+- External Microsoft AI4G Catia La Mar prediction usage should be reported as triage-interest only, not as official EMS demand or confirmed damage.

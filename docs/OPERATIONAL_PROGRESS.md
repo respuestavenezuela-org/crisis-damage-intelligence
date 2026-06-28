@@ -632,10 +632,10 @@ QA evidence:
 
 1. Imagery is still active-area based. The map loads all vector features, but not all AOI imagery at once.
 2. Vercel deployment package is too large because chips/tiles are still bundled.
-3. Area ranking currently includes external prediction counts in the visible order; this is labeled, but needs better source-weighted ranking.
+3. Source-weighted area ranking is implemented locally; deployed Vercel order still needs validation after publish.
 4. Public VLM before/after exists for AOI12 and AOI02 only. AOI03 has an internal OSM-candidate VLM pilot with 95 reviewed comparisons and 19 review candidates, but it is not public operational data.
 5. Mobile end-to-end QA is incomplete.
-6. Operator docs may be stale after the recent area-navigation and VLM before/after changes.
+6. Operator docs have been refreshed for area navigation, AOI12 Vantor before reference, VLM review limits, and external prediction caveats; deployed app wording still needs normal post-deploy spot checks.
 7. Human validation workflow is not implemented.
 8. External bookmarked/social sources still need systematic review and ingestion only if trustworthy.
 
@@ -680,6 +680,247 @@ Improve the crisis damage intelligence app, prioritizing more before/after VLM a
   - Production capture still requires adding a real OpenPanel client id in Vercel and validating events in the OpenPanel dashboard.
 - Next recommended action:
   - Configure Vercel env vars for OpenPanel, deploy, then verify screen views and sanitized interaction events before using analytics for decisions.
+
+### 2026-06-28 - Source-Aware Operational Ranking
+
+- Objective: ensure affected-area and priority-item ordering reflects response value and source confidence, not raw feature count alone.
+- Files changed:
+  - `src/components/OperationsConsole.tsx`
+  - `docs/OPERATIONAL_PROGRESS.md`
+- Commands run:
+  - `npm run lint`
+  - `npm run build`
+  - `portless priority-ranking npm start`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh open https://priority-ranking.localhost`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh open http://localhost:4262`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh snapshot`
+- QA performed:
+  - Production build passed.
+  - Browser snapshot verified the Spanish area order is now La Guaira, Moron, San Felipe, Caracas, Antimano, Guacara.
+  - Browser snapshot verified area labels now separate official destroyed/damaged, official possible, MONIT01, VLM before/after, and external triage-only candidates.
+  - Browser snapshot verified priority rows show official EMS class separately from VLM class, e.g. `EMS oficial: destroyed · VLM: likely_destroyed`.
+- Ranking evidence:
+  - Previous raw-count score put La Guaira first mostly because `9134` external Catia La Mar candidates were added to `120` official features.
+  - Source-aware score now weights official confirmed damage first, official possible next, then MONIT01, VLM before/after critical signals, and a capped external-prediction contribution.
+  - New score order: La Guaira `103640`, Moron `63730`, San Felipe `31470`, Caracas `5010`, Antimano `1`, Guacara `1`.
+- Blockers:
+  - `priority-ranking.localhost` did not register in `portless list` during final dev-server QA because another Next dev server was already running for this repo. Final browser check used the existing local server on `http://localhost:4262`.
+  - Local browser QA still logs expected local-only 404s for Vercel analytics and some missing AOI12 tile URLs at the tested zoom; ranking UI rendered correctly despite those asset misses.
+- Next recommended action:
+  - Validate the same source-aware order on the deployed Vercel app after the current working tree is merged/deployed.
+
+### 2026-06-28 - Remote Asset Validation Preflight
+
+- Objective: make remote chip/tile readiness measurable before deploying the pruned Vercel package.
+- Files changed:
+  - `scripts/validate_remote_asset_urls.py`
+  - `docs/DEPLOYMENT_CHECKLIST.md`
+  - `ops/remote_asset_validation/latest.json`
+  - `ops/remote_asset_validation/latest.md`
+  - `docs/OPERATIONAL_PROGRESS.md`
+- Commands run:
+  - `du -sh . public public/data public/data/chips public/data/tiles`
+  - `find public/data -type f -size +1M -print0 | xargs -0 du -h | sort -hr`
+  - `python3 -m py_compile scripts/validate_remote_asset_urls.py`
+  - `python3 scripts/validate_remote_asset_urls.py --sample-per-template 12 --sample-chips 32 --allow-failures`
+- Result:
+  - Disk usage snapshot: repo `1.7G`, `public/data` `445M`, chips `69M`, tiles `326M`.
+  - Logical package-pressure report: `public/data` 64,504 files / 241.4 MB; chips 681 files / 67.3 MB; tiles 63,745 files / 124.2 MB.
+  - Top bundled non-tile/chip offenders are Catia La Mar KML/GeoJSON/CSV and EMS PDF reports.
+  - Static `/data/aoi` references checked: 66; missing local static references: 0. Public read-only viewing still has a Supabase-free static data path.
+  - Remote checks sampled: 92; passed: 49; failed: 43.
+  - All sampled evidence chip URLs passed; all failures were tile URLs returning HTTP 404.
+  - Missing tile samples cover AOI02 after, AOI06 after, AOI08 after, and AOI12 z17-z18 before/after.
+- Evidence:
+  - `ops/remote_asset_validation/latest.md`
+  - `ops/remote_asset_validation/latest.json`
+- Blocker:
+  - Do not deploy the remote-asset Vercel package yet. Required tile paths still need bulk R2/S3 sync or a reduced catalog that only points at verified remote tile zooms.
+- Next recommended action:
+  - Upload `public/data/tiles` to R2 with an S3-compatible sync preserving `data/tiles/...`, then rerun `python3 scripts/validate_remote_asset_urls.py` without `--allow-failures`.
+
+### 2026-06-28 - Imagery Coverage Labels And Tile Extent Guard
+
+- Objective: improve Priority 2 imagery loading/coverage clarity without adding heavy assets or redesigning the public app.
+- Files changed:
+  - `src/components/OperationsConsole.tsx`
+  - `src/components/map/MapPanel.tsx`
+  - `src/components/types.ts`
+  - `src/app/globals.css`
+  - `docs/OPERATIONAL_PROGRESS.md`
+- Commands run:
+  - `npm run lint`
+  - `npm run build`
+  - `portless imagery-coverage npm start`
+  - `portless imagery-coverage-dev npm run dev`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh open https://field-usability.localhost`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh snapshot`
+- Functional changes:
+  - Replaced the post-event-only right-rail imagery panel with an imagery coverage panel showing after imagery, before imagery, map-layer availability, evidence-chip-only availability, and catalog caveats.
+  - AOI12 now explicitly labels after imagery as Copernicus EMS post-event imagery and before imagery as Vantor/OpenData reference, not official EMS imagery, with partial-coverage/gap warning.
+  - AOI02 now distinguishes the Vantor before reference used in evidence chips from a non-published before map layer.
+  - Imagery-only AOIs still show 0 official damage and now show before imagery as unavailable.
+  - Generated XYZ raster layers are constrained to active AOI bounds so map fits do not request WebP tiles outside the known generated pyramid.
+- Current coverage by AOI:
+  - AOI12 La Guaira / Caraballeda: after map layer available; Vantor/OpenData before map layer available; before coverage is partial with gaps; before/after VLM reviewed 107 and skipped no-before 13.
+  - AOI02 Caracas: after map layer available; Vantor before reference exists for evidence chips only; no before map layer is published; before/after VLM reviewed 17 with high uncertainty.
+  - AOI06 Moron: after map layer available; no high-resolution before imagery; post-event-only VLM only.
+  - AOI08 San Felipe: after map layer available; no high-resolution before imagery; post-event-only VLM only.
+  - AOI03 Antimano: post-event imagery available; no official damage vector; public app remains imagery-only.
+  - AOI10 Guacara: post-event imagery available; no official damage vector; public app remains imagery-only.
+  - MONIT01 layers and Catia La Mar external prediction: no bundled imagery; use parent AOI imagery or aerial basemap reference only.
+- QA performed:
+  - Build and lint passed.
+  - Browser snapshot verified AOI12 coverage panel labels before imagery as `Referencia Vantor/OpenData - no es imagen oficial EMS`.
+  - Browser snapshot verified AOI02 coverage panel labels before imagery as evidence-chip-only and says no before map layer is published.
+  - Browser snapshot verified AOI03 imagery-only panel shows 0 official damage and before imagery unavailable.
+  - Fresh AOI12 load and AOI12 before-toggle console had no generated-tile 404s after the raster layer extent guard.
+- Evidence:
+  - `.playwright-cli/page-2026-06-28T09-45-14-901Z.yml`
+  - `.playwright-cli/page-2026-06-28T09-45-24-714Z.yml`
+  - `.playwright-cli/console-2026-06-28T09-45-14-382Z.log`
+  - `output/playwright/imagery-coverage-aoi12-before.png`
+- Notes:
+  - `next start` on a temporary Portless run returned a 404 for one generated Next chunk despite the file existing under `.next/static/chunks`; `npm run build` itself succeeded.
+  - Starting a second Portless dev server with `imagery-coverage-dev` was blocked because an existing Next dev server for this repo was already running on port 4262. Final browser QA used the existing Portless mapping `https://field-usability.localhost`.
+- Next recommended action:
+  - Upload full z17-z18 tile pyramids to R2/CDN with S3-compatible sync, then validate representative AOI12/AOI02/AOI06/AOI08 tile URLs before deploying a pruned Vercel package.
+
+### 2026-06-28 04:47 Local - Mobile Field Workflow Panel
+
+- Objective: verify Priority 5 first-five-minutes usability and patch a high-impact mobile workflow blocker without aesthetic redesign.
+- Files changed:
+  - `src/components/OperationsConsole.tsx`
+  - `src/app/globals.css`
+  - `docs/OPERATIONAL_PROGRESS.md`
+  - `qa/local-mobile-field-workflow.png`
+- Commands run:
+  - `npm run lint`
+  - `npm run build`
+  - `portless field-usability npm start` (failed because `next start` did not find a usable production build in `.next`)
+  - `portless field-usability npm run dev`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh --session fieldqa open https://field-usability.localhost`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh --session fieldqa resize 390 844`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh --session fieldqa snapshot`
+  - `bash ~/.codex/skills/playwright/scripts/playwright_cli.sh --session fieldqa click e72`
+  - Playwright eval checks for selected id, map center, zoom, imagery mode, raster, Google Maps link, opacity, and popup clear.
+- Functional change:
+  - The right workflow rail is no longer hidden below 1120px. On tablet/mobile it becomes a scrollable bottom panel.
+  - Priority is now directly after evidence in the rail, so mobile users can choose area, inspect a priority item, see evidence, open Google Maps, and return to the priority list.
+  - Secondary right-rail panels are hidden only in the tablet/mobile bottom panel to keep the field workflow short; desktop keeps the full right rail.
+- QA performed:
+  - Mobile viewport `390x844`: priority list is visible in the bottom workflow panel.
+  - Mobile priority tap on `ems_00050`: map selected `emsr884-aoi12-caraballeda__ems_00050`, centered at `10.6096660,-67.0144104`, zoom `18`, and evidence panel showed `dated_pre_event_comparison`, chip link, Google Maps link, and return-to-priority action.
+  - Mobile opacity `0.52 -> 0.42`: selected id, center, and zoom stayed unchanged.
+  - Mobile before/after toggle: `mode=before` showed `raster=before`, then returned to after.
+  - Mobile outside click after AOI reset: popup text and focused id cleared.
+  - Desktop viewport `1280x800`: right rail remains static in the normal three-column layout (`304px 648px 328px`) with evidence and priority visible.
+- Evidence:
+  - `qa/local-mobile-field-workflow.png`
+  - `.playwright-cli/page-2026-06-28T09-43-30-859Z.yml`
+  - `.playwright-cli/page-2026-06-28T09-45-07-236Z.yml`
+- Result:
+  - Priority 5 mobile workflow blocker fixed and verified locally through Portless dev URL `https://field-usability.localhost`.
+- Blockers:
+  - Durable desktop PNG capture through the wrapper was unavailable in this run; desktop verification is recorded through snapshot/eval output.
+- Next recommended action:
+  - Re-run this mobile script against the deployed public URL after the current working-tree changes are reviewed and deployed.
+
+### 2026-06-28 - Documentation And Runbook Refresh
+
+- Objective: make responder/operator docs match the current deployed and operational system without inventing capabilities.
+- Files changed:
+  - `README.md`
+  - `docs/AOI12_ACTIVATION_RUNBOOK.md`
+  - `docs/OPERATOR_HANDOFF_EN.md`
+  - `docs/OPERATOR_HANDOFF_ES.md`
+  - `docs/DEPLOYMENT_CHECKLIST.md`
+  - `docs/ANALYTICS.md`
+  - `docs/LOW_COST_INFRASTRUCTURE.md`
+  - `docs/OPERATIONAL_PROGRESS.md`
+- Commands run:
+  - `sed -n '1,240p' docs/OPERATIONAL_LOOP_GOALS.md`
+  - `sed -n '1,260p' docs/OPERATIONAL_PROGRESS.md`
+  - `jq '{catalogVersion,generatedAt,areas:(.aois[] | {id,name,status,metrics,layers})}' public/data/catalog.json`
+  - Targeted `rg` scan for stale AOI12-pending, old navigation, and AOI02/AOI06-only deployment wording in README and docs.
+- Result:
+  - README now states AOI12 v1 is already deployed and describes affected-area navigation, current public AOI/layer inventory, VLM review-type separation, and external prediction caveats.
+  - AOI12 runbook now works as a rerun/repair/update runbook and records current AOI12 counts, EMS post-event imagery, Vantor/OpenData before reference, 107 before/after VLM reviews, and 13 skipped no-before records.
+  - English and Spanish handoff docs now match on current area navigation, Vantor before-reference limits, VLM before/after vs post-event-only limits, AOI03 internal-only status, and do-not-overclaim warnings.
+  - Deployment and analytics docs now test/report affected-area navigation and warn that analytics, VLM, MONIT01, and external predictions do not validate damage.
+- QA performed:
+  - Re-scanned targeted docs for stale AOI12-pending and old AOI-selector wording.
+  - Compared docs against `public/data/catalog.json` metrics/layers rather than adding unverified capabilities.
+  - No app build was run because this was a markdown-only patch.
+- Next recommended action:
+  - After deployment, run a short public spot check that the UI labels match the refreshed docs, especially AOI12 imagery labels and VLM review-type labels.
+
+### 2026-06-28 04:55 Local - AOI03 Human Validation Compiler
+
+- Objective: support cheap, auditable AOI03 human review without requiring live DB access or publishing unconfirmed OSM-candidate claims.
+- Files changed:
+  - `scripts/compile_aoi03_human_validation.py`
+  - `ops/aoi03_internal_review_queue/adjudication/human_validation/README.md`
+  - `ops/aoi03_internal_review_queue/README.md`
+  - `ops/aoi03_internal_review_queue/adjudication/human_validation/compiled/human_validation_summary.json`
+  - `ops/aoi03_internal_review_queue/adjudication/human_validation/compiled/human_validation_compiled.csv`
+  - `ops/aoi03_internal_review_queue/adjudication/human_validation/compiled/human_validation_promoted.geojson`
+  - `ops/aoi03_internal_review_queue/adjudication/human_validation/compiled/human_validation_promoted.kml`
+- Commands run:
+  - `python3 -m py_compile scripts/compile_aoi03_human_validation.py`
+  - `python3 scripts/compile_aoi03_human_validation.py --input ops/aoi03_internal_review_queue/adjudication/human_validation/human_validation_template.csv`
+  - Temp CSV header-only empty-template test
+  - Temp JSONL negative test: `confirmed_damage` with blank `evidence_uri`
+  - Temp JSONL positive test: `confirmed_damage` with reviewer, UTC timestamp, evidence URI, and source
+  - `python3 scripts/validate_vlm_publication_guardrails.py`
+- Result:
+  - Current blank AOI03 template compiles successfully with 5 input rows, 0 reviewed rows, and 0 promoted rows.
+  - Header-only empty CSV compiles successfully with 0 input rows, 0 reviewed rows, 0 promoted rows, and a stable compiled CSV header.
+  - Static outputs are written under `ops/aoi03_internal_review_queue/adjudication/human_validation/compiled/`.
+  - Positive JSONL test compiled 1 reviewed row into 1 promoted GeoJSON feature and preserved `audit_source=operator_photo`.
+- Guardrail:
+  - The compiler promotes only `human_status=confirmed_damage` rows with `reviewer_id`, `reviewed_at_utc`, and `evidence_uri`.
+  - A `confirmed_damage` row without `evidence_uri` fails validation and emits no promoted output.
+  - Unreviewed template rows are retained in the compiled CSV as `not_promoted` with `promotion_blockers=unreviewed`.
+  - AOI03 public guardrail still passes: before/after reviewed 124, skipped no-before 13, post-event-only reviewed 309, and AOI03 public features remain 0.
+- Next recommended action:
+  - Have reviewers fill a copy of the AOI03 human-validation CSV/JSONL, run the compiler, and only consider `human_validation_promoted.geojson` for any static internal display or future public status indicator.
+
+### 2026-06-28 05:20 Local - External Source Registry And Review Queue
+
+- Objective: advance Priority 7 by recording recent useful external evidence without publishing unreviewed model predictions as operational damage.
+- Files changed:
+  - `public/data/sources/earthquake_source_review.json`
+  - `ops/external_source_review/README.md`
+  - `ops/external_source_review/review_queue.csv`
+  - `scripts/validate_external_source_registry.py`
+  - `docs/OPERATIONAL_PROGRESS.md`
+- Commands run:
+  - `curl -L --fail --silent 'https://data.humdata.org/api/3/action/package_show?id=venezuela-earthquakes-catia-la-mar'`
+  - `curl -L --fail --silent 'https://data.humdata.org/api/3/action/package_show?id=hot_eq_ven'`
+  - `curl -L --fail --silent 'https://data.humdata.org/api/3/action/package_search?q=%22Venezuela%20Earthquakes%3A%20Building%20Damage%20Assessment%22&rows=10'`
+  - `curl -L --fail --silent 'https://mapping.emergency.copernicus.eu/activations/EMSR884/'`
+  - `python3 -m json.tool public/data/sources/earthquake_source_review.json`
+  - `python3 scripts/validate_external_source_registry.py`
+  - `python3 scripts/validate_vlm_publication_guardrails.py`
+- Source checks:
+  - Confirmed the existing Microsoft AI for Good Lab / HDX Catia La Mar prediction layer is CC BY, external/non-official, and has an HDX caveat about orthorectification quality issues.
+  - Confirmed three additional Microsoft AI for Good Lab / HDX prediction datasets exist for Caraballeda, Catia La Mar East, and La Guaira; all are recorded as queued review candidates only.
+  - Confirmed HOT/HDX earthquake OSM/Overture context data licensing from HDX metadata: ODbL for OSM layers and CDLA Permissive 2.0 for Overture emergency facilities.
+  - Recorded Copernicus EMSR884 as the official high-confidence reference source, with MONIT01 caveats preserved.
+- QA performed:
+  - External source registry validator passed for 6 source records.
+  - Existing VLM publication guardrails still passed: `before_after_reviewed=124`, `before_after_skipped_no_before=13`, `post_event_only_reviewed=309`, `emsr884-aoi03-antimano_public_features=0`.
+- Deployment:
+  - Not deployed.
+  - No new public AOI or layer was added to `public/data/catalog.json`.
+- Result:
+  - Priority 7 now has a source registry with URL, date accessed, data owner, license/terms, geography, confidence, and official status.
+  - New external model-prediction datasets are queued for review instead of published.
+- Blockers:
+  - The queued Microsoft/HDX prediction layers still need overlap checks against EMS AOIs, threshold review, visual sample QA, and explicit UI distinction before any public layer can be considered.
+- Next recommended action:
+  - If Priority 7 continues, download queued HDX GPKGs into `ops/` only, produce feature counts by model threshold and AOI overlap, then decide whether a small internal review queue is useful. Do not add them to the public catalog until source confidence and caveats are reviewed.
 
 ## Next Recommended Loop
 

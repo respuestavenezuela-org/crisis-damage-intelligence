@@ -13,3 +13,5 @@ Use this only to route human review or requests for better imagery. Do not publi
 - Adjudication contact sheet: `qa/aoi03-internal-adjudication-19-contact-sheet.png`
 - Fastest operator entrypoint: `adjudication/urgent_human_review_shortlist.md`
 - Human-validation templates: `adjudication/human_validation/human_validation_template.csv`, `adjudication/human_validation/human_validation_template.jsonl`
+- Human-validation compiler: `scripts/compile_aoi03_human_validation.py`
+- Human-validation compiled outputs: `adjudication/human_validation/compiled/`
