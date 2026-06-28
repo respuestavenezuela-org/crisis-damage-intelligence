@@ -104,6 +104,10 @@ Current status:
 
 - R2 subscription enabled on the Cloudflare account.
 - Bucket `crisis-damage-intelligence` created.
+- Public `r2.dev` access enabled:
+  - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev`
+- Important Wrangler note:
+  - Use `--remote` for real R2 writes/reads. Without `--remote`, Wrangler can interact with local R2 state.
 - Current AOI02/AOI06 static outputs uploaded.
 - Original AOI02/AOI06 GRA ZIPs uploaded.
 - AOI00 GRM ZIP uploaded from the monitor download.
@@ -114,16 +118,13 @@ Uploaded object manifest:
 
 ```text
 ems/generated/catalog.json
-ems/generated/emsr884-aoi02-caracas/damage.csv
-ems/generated/emsr884-aoi02-caracas/damage.geojson
-ems/generated/emsr884-aoi02-caracas/damage.kml
-ems/generated/emsr884-aoi02-caracas/source_metadata.json
-ems/generated/emsr884-aoi02-caracas/vlm_queue.jsonl
-ems/generated/emsr884-aoi06-moron/damage.csv
-ems/generated/emsr884-aoi06-moron/damage.geojson
-ems/generated/emsr884-aoi06-moron/damage.kml
-ems/generated/emsr884-aoi06-moron/source_metadata.json
-ems/generated/emsr884-aoi06-moron/vlm_queue.jsonl
+ems/generated/aoi/<aoi-id>/damage.csv
+ems/generated/aoi/<aoi-id>/damage.geojson
+ems/generated/aoi/<aoi-id>/damage.kml
+ems/generated/aoi/<aoi-id>/source_metadata.json
+ems/generated/aoi/<aoi-id>/vlm_queue.jsonl
+ems/generated/aoi/<aoi-id>/vlm_review.jsonl
+ems/generated/aoi/<aoi-id>/vlm_before_after_review.jsonl
 ems/original-zips/emsr884-aoi02-caracas/AOI02_Caracas_GRA_v1.zip
 ems/original-zips/emsr884-aoi06-moron/AOI06_Moron_GRA_v1.zip
 ems/original-zips/emsr884-aoi00-central-coastal-venezuela/AOI00_Central_Coastal_Venezuela_GRM_latest.zip
@@ -131,6 +132,18 @@ qa/screenshots/public-vercel-after-infra.png
 qa/reports/EMSR884_ACCEPTANCE_REPORT.md
 qa/reports/LOW_COST_INFRA_SETUP_REPORT.md
 ```
+
+Verified public examples:
+
+```text
+https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/ems/generated/catalog.json
+https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/ems/generated/aoi/emsr884-aoi12-caraballeda/damage.geojson
+```
+
+Still not complete:
+
+- `public/data/tiles` and `public/data/chips` are not yet mirrored to public R2/CDN paths.
+- Vercel deployment should not exclude local tiles/chips until the app catalog points those URLs to verified remote assets.
 
 R2 token note:
 

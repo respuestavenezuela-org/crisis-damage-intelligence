@@ -5,5 +5,5 @@ INTERNAL REVIEW ONLY. OpenStreetMap footprint candidate, not official EMS damage
 Use this only to route human review or requests for better imagery. Do not publish it as an operational damage layer.
 
 - Source pilot: `ops/aoi03_osm_before_after_pilot/pilot_records.json`
-- Candidates in queue: 8
+- Candidates in queue: 13
 - Outputs: `review_queue.csv`, `review_queue.geojson`, `review_queue.kml`

@@ -272,6 +272,79 @@ QA evidence:
 - Next recommended action:
   - Deploy after review, or continue with before-baseline search for AOI06/AOI08 if we want more VLM coverage before pushing another public update.
 
+### 2026-06-27 - Expanded Internal AOI03 Before/After VLM Batch
+
+- Objective: continue VLM analysis in parallel, but only where before/after imagery exists, without publishing candidate-only results as operational EMS damage.
+- Commands run:
+  - `VLM_WORKERS=5 python3 scripts/run_aoi03_osm_before_after_pilot.py --limit 120 --workers 5 --run-vlm`
+  - `python3 scripts/build_aoi03_internal_review_queue.py`
+- Result:
+  - Selected 120 OpenStreetMap building candidates in AOI03 Antimano.
+  - Generated 62 usable before/after chip triplets.
+  - Skipped/failed 58 candidates because before/after chips were missing, blank, or unusable.
+  - VLM classes across the 62 generated records:
+    - 47 `uncertain_comparison_problem`
+    - 9 `possible_major_damage`
+    - 2 `likely_destroyed`
+    - 2 `minor_visible_damage`
+    - 2 `no_change_visible`
+  - Internal human-review queue now has 13 candidates.
+- Files updated:
+  - `ops/aoi03_osm_before_after_pilot/pilot_records.json`
+  - `ops/aoi03_osm_before_after_pilot/pilot_summary.json`
+  - `ops/aoi03_osm_before_after_pilot/pilot_summary.csv`
+  - `ops/aoi03_internal_review_queue/review_queue.csv`
+  - `ops/aoi03_internal_review_queue/review_queue.geojson`
+  - `ops/aoi03_internal_review_queue/review_queue.kml`
+- Guardrail:
+  - AOI03 outputs remain internal only. They use OSM candidate footprints, not official EMS damage vectors, and must not be displayed as confirmed Venezuela operational damage.
+- Next recommended action:
+  - Human-review the 13 AOI03 candidates before any public display, or continue searching for better before baselines for AOI06/AOI08.
+
+### 2026-06-27 - R2 Reality Check And Lightweight Remote Outputs
+
+- Objective: unblock deployability by verifying what can safely move out of Vercel.
+- Findings:
+  - Local `public/data` has 64,500 files.
+  - `public/data/tiles` and `public/data/chips` account for 64,426 files and about 395 MB.
+  - `vercel deploy --prod --yes` failed because Vercel received 64,691 files, above the 15,000-file request limit.
+  - `vercel deploy --prod --yes --archive=tgz` did not complete in a practical time window and was interrupted.
+  - Cloudflare R2 bucket `crisis-damage-intelligence` exists.
+  - Previous R2 uploads were likely local Wrangler uploads because `--remote` was missing.
+  - Public R2 access via `r2.dev` is now enabled at `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev`.
+  - Confirmed remote upload/read works with `ems/generated/catalog.json`.
+- Commands run:
+  - `npx wrangler r2 bucket list`
+  - `npx wrangler r2 bucket info crisis-damage-intelligence --json`
+  - `npx wrangler r2 bucket dev-url get crisis-damage-intelligence`
+  - `npx wrangler r2 bucket dev-url enable crisis-damage-intelligence`
+  - `npx wrangler r2 object put crisis-damage-intelligence/ems/generated/catalog.json --remote --file public/data/catalog.json --content-type application/json --cache-control 'public, max-age=300'`
+  - `npx wrangler r2 object get crisis-damage-intelligence/ems/generated/catalog.json --remote --file /tmp/cdi-r2-catalog.json`
+- Current status:
+  - Static lightweight AOI outputs were uploaded under `ems/generated/aoi/...`.
+  - Verified public R2 catalog URL returns HTTP 200:
+    - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/ems/generated/catalog.json`
+  - Verified public R2 AOI12 GeoJSON returns HTTP 200 and 120 features:
+    - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/ems/generated/aoi/emsr884-aoi12-caraballeda/damage.geojson`
+  - Tiles/chips are not yet moved to R2/CDN. Uploading 64k files through one-file-at-a-time Wrangler commands is technically possible but operationally poor.
+- Blocker:
+  - Before deploying a pruned Vercel package, tiles/chips need either a proper bulk S3/R2 sync path or a generated deploy catalog pointing imagery/chip URLs to a verified public R2/CDN base.
+
+### 2026-06-27 - Coordinate Focus Verification
+
+- Objective: verify map focus and Google Maps links are not using inverted or wrong coordinates.
+- Commands run:
+  - Python GeoJSON audit comparing `centroid_lat`/`centroid_lon`, Google Maps query strings, and geometry locations across all `public/data/aoi/*/damage.geojson`.
+- Result:
+  - No evidence of lat/lon inversion.
+  - Google Maps links match `query=lat,lon` from feature properties.
+  - A small number of feature centroid points fall just outside the polygon geometry, generally by less than 30 m. This is a focus precision issue, not a wrong-city/wrong-coordinate issue.
+- Code changed:
+  - `src/components/map/MapPanel.tsx` now centers/popup-focuses on `centroid_lat`/`centroid_lon` only when that point intersects the geometry. If not, it falls back to an interior polygon point, then extent center.
+- QA performed:
+  - `npm run lint`
+  - `npm run build`
+
 ## Known Gaps
 
 1. Imagery is still active-area based. The map loads all vector features, but not all AOI imagery at once.

@@ -51,6 +51,13 @@ type Props = {
 
 type OlDamageFeature = Feature & { original?: DamageFeature };
 type RasterLayer = WebGLTileLayer | TileLayer<XYZ>;
+type InteriorGeometry = {
+  getType: () => string;
+  getCoordinates?: () => unknown;
+  getInteriorPoint?: () => { getCoordinates: () => number[] };
+  getInteriorPoints?: () => { getCoordinates: () => number[][] };
+  intersectsCoordinate?: (coordinate: number[]) => boolean;
+};
 
 function damageClass(properties: DamageFeature["properties"]) {
   const raw = String(properties.damage_class ?? properties.damage_gra ?? properties.confirmed_damage_class ?? "").toLowerCase();
@@ -66,6 +73,25 @@ function colorFor(kind: string) {
   if (kind === "possible") return "#d78a1f";
   if (kind === "uncertain") return "#64748b";
   return "#7a7f87";
+}
+
+function focusCoordinate(feature: OlDamageFeature, original: DamageFeature) {
+  const geometry = feature.getGeometry() as InteriorGeometry | undefined;
+  const centroidLat = Number(original.properties.centroid_lat);
+  const centroidLon = Number(original.properties.centroid_lon);
+  if (Number.isFinite(centroidLat) && Number.isFinite(centroidLon)) {
+    const candidate = fromLonLat([centroidLon, centroidLat]);
+    if (!geometry?.intersectsCoordinate || geometry.intersectsCoordinate(candidate)) return candidate;
+  }
+  if (geometry?.getType() === "Polygon" && geometry.getInteriorPoint) {
+    return geometry.getInteriorPoint().getCoordinates().slice(0, 2);
+  }
+  if (geometry?.getType() === "MultiPolygon" && geometry.getInteriorPoints) {
+    const points = geometry.getInteriorPoints().getCoordinates();
+    if (points[0]) return points[0].slice(0, 2);
+  }
+  const extent = feature.getGeometry()?.getExtent();
+  return extent ? getCenter(extent) : undefined;
 }
 
 function passesFilter(feature: DamageFeature, filter: Props["filter"], vlm: Record<string, VlmRecord>) {
@@ -164,14 +190,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       }) as OlDamageFeature;
       olFeature.original = feature;
     }
-    const extent = olFeature.getGeometry()?.getExtent();
-    const centroidLat = Number(feature.properties.centroid_lat);
-    const centroidLon = Number(feature.properties.centroid_lon);
-    const center = Number.isFinite(centroidLat) && Number.isFinite(centroidLon)
-      ? fromLonLat([centroidLon, centroidLat])
-      : extent
-        ? getCenter(extent)
-        : undefined;
+    const center = focusCoordinate(olFeature, feature);
     if (!center) return;
     map.getView().setCenter(center);
     map.getView().setZoom(18);
