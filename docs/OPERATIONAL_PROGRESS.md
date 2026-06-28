@@ -603,6 +603,31 @@ QA evidence:
 - Next recommended action:
   - Have a reviewer fill the CSV/JSONL. Only rows with `human_status=confirmed_damage` and an evidence URI should be considered for any public/internal escalation beyond triage.
 
+### 2026-06-28 - Public VLM Publication Guardrail Validation
+
+- Objective: add a local verification gate that prevents public VLM outputs from overstating before/after evidence.
+- Files changed:
+  - Added `scripts/validate_vlm_publication_guardrails.py`.
+- Commands run:
+  - `python3 -m py_compile scripts/validate_vlm_publication_guardrails.py`
+  - `python3 scripts/validate_vlm_publication_guardrails.py`
+  - `python3 scripts/sync_vlm_review_metrics.py`
+  - `python3 scripts/validate_vlm_publication_guardrails.py`
+- Result:
+  - Validation passes on the regenerated current catalog/output state.
+  - Verified public before/after VLM reviewed count: 124.
+  - Verified before/after skipped-no-before count: 13.
+  - Verified post-event-only VLM reviewed count: 309.
+  - Verified AOI03 public damage feature count remains 0.
+- Guardrail:
+  - The script fails if before/after VLM records are missing `before_event_chip`, `post_event_chip`, `compare_chip`, `dated_pre_event_comparison`, or `before_source`.
+  - The script fails if post-event-only VLM records contain before/compare chip fields or regain nonzero legacy `vlmReviewed` without before/after coverage.
+  - The script fails if AOI03 exposes public VLM downloads or nonzero public official damage metrics.
+- Confidence caveat:
+  - This validates publication integrity and local file references; it does not create new credible AOI06/AOI08/AOI10 before/after coverage because those AOIs still lack high-resolution pre-event baselines.
+- Next recommended action:
+  - Run `python3 scripts/validate_vlm_publication_guardrails.py` after any VLM metric sync, catalog edit, or before/after batch. Actual Priority 1 expansion still depends on human validation of the 5 urgent AOI03 candidates or a new high-resolution pre-event source for AOI06/AOI08/AOI10.
+
 ## Known Gaps
 
 1. Imagery is still active-area based. The map loads all vector features, but not all AOI imagery at once.
