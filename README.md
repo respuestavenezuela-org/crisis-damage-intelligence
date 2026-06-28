@@ -2,6 +2,10 @@
 
 Static-first, bilingual earthquake damage intelligence platform for public response coordination.
 
+Canonical public URL: `https://respuestavenezuela.org`
+
+The Vercel project URL `https://crisis-damage-intelligence.vercel.app` remains attached to the project and is configured to redirect users to the canonical domain.
+
 ## What This Is
 
 An operations-grade public map that can run close to zero cost:
@@ -158,6 +162,7 @@ These explain affected-area navigation, severity filters, priority click behavio
 Live infrastructure:
 
 - Vercel: `https://crisis-damage-intelligence.vercel.app`
+- Canonical domain: `https://respuestavenezuela.org`
 - GitHub: `https://github.com/takove/crisis-damage-intelligence`
 - Public app remains static-first and does not require Supabase for viewing.
 

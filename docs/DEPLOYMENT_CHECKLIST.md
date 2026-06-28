@@ -50,6 +50,32 @@ https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/<aoi>/<chip>.png
 - Build command: `npm run build`
 - Output directory: leave default for Next.js
 - Environment variables: none required for static public viewing. Analytics provider variables are optional; see `docs/ANALYTICS.md`.
+- Canonical domain: `respuestavenezuela.org`
+- Redirects configured in `next.config.ts`:
+  - `crisis-damage-intelligence.vercel.app/*` -> `https://respuestavenezuela.org/*`
+  - `www.respuestavenezuela.org/*` -> `https://respuestavenezuela.org/*`
+
+## Domain DNS
+
+The Vercel project is `takoves-projects/crisis-damage-intelligence`.
+
+Required DNS records for the purchased domain:
+
+| Type | Name | Value | Proxy |
+| --- | --- | --- | --- |
+| A | `@` | `76.76.21.21` | DNS only preferred for Vercel validation |
+| A | `www` | `76.76.21.21` | DNS only preferred for Vercel validation |
+
+Validation commands:
+
+```bash
+dig +short A respuestavenezuela.org
+dig +short A www.respuestavenezuela.org
+vercel domains inspect respuestavenezuela.org
+vercel domains inspect www.respuestavenezuela.org
+curl -I https://respuestavenezuela.org
+curl -I https://crisis-damage-intelligence.vercel.app
+```
 
 ## Before Publishing
 
