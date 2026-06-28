@@ -345,6 +345,41 @@ QA evidence:
   - `npm run lint`
   - `npm run build`
 
+### 2026-06-27 - Vercel Remote-Asset Package Path
+
+- Objective: make the app deployable without sending 64k local tile/chip files to Vercel.
+- Files changed:
+  - Added `scripts/build_vercel_remote_asset_package.py`.
+  - Updated `src/components/OperationsConsole.tsx` so evidence chip links preserve full remote URLs instead of reconstructing `/data/chips/...` from older paths.
+  - Updated `.gitignore` for generated package artifacts.
+- Commands run:
+  - `python3 -m py_compile scripts/build_vercel_remote_asset_package.py`
+  - `python3 scripts/build_vercel_remote_asset_package.py --force`
+  - `npm run lint`
+  - `npm run build`
+  - From generated package: `npm install && npm run build`
+- Result:
+  - Generated package path:
+    - `/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_vercel_remote_assets`
+  - Package excludes:
+    - `public/data/tiles`
+    - `public/data/chips`
+    - `.git`, `.next`, `.vercel`, `node_modules`, `ops`, `qa`, `outputs`
+  - Package manifest:
+    - `/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_vercel_remote_assets/REMOTE_ASSET_PACKAGE_MANIFEST.json`
+  - Package file count before install/build: 128.
+  - Package rewrites tile/chip references to:
+    - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/tiles/...`
+    - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/...`
+  - Clean install/build from the package succeeds.
+- Current blocker:
+  - R2 public URLs for rewritten tile/chip paths currently return 404.
+  - Verified examples:
+    - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/emsr884-aoi12-caraballeda/ems_00006_before_after_compare.png` -> 404
+    - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/tiles/emsr884-aoi12-caraballeda/after/18/82294/123319.webp` -> 404
+- Next recommended action:
+  - Bulk upload `public/data/chips` and `public/data/tiles` to the R2 bucket preserving the `data/chips/...` and `data/tiles/...` keys, preferably using S3-compatible credentials and `aws s3 sync`. One-file-at-a-time Wrangler uploads are too slow for 64k tile files.
+
 ## Known Gaps
 
 1. Imagery is still active-area based. The map loads all vector features, but not all AOI imagery at once.

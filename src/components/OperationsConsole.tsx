@@ -532,7 +532,7 @@ function VlmQualityPanel({ aoi, language }: { aoi: AoiRecord; language: Language
 function Evidence({ feature, vlm, language, onBackToPriority }: { feature: DamageFeature; vlm?: VlmRecord; language: Language; onBackToPriority: () => void }) {
   const t = copy[language];
   const p = feature.properties;
-  const chip = vlm?.compare_chip ?? vlm?.post_event_chip ?? vlm?.triplet_chip?.replace(/^.*chips\//, "/data/chips/");
+  const chip = evidenceChipUrl(vlm);
   const mapsUrl = typeof p.google_maps_url === "string" ? p.google_maps_url : "";
   return (
     <div className="evidence-body">
@@ -559,4 +559,16 @@ function Evidence({ feature, vlm, language, onBackToPriority }: { feature: Damag
       </div>
     </div>
   );
+}
+
+function evidenceChipUrl(vlm?: VlmRecord) {
+  const candidate = vlm?.compare_chip ?? vlm?.post_event_chip ?? vlm?.before_event_chip ?? vlm?.triplet_chip;
+  if (!candidate) return undefined;
+  if (candidate.startsWith("http://") || candidate.startsWith("https://") || candidate.startsWith("/data/chips/")) return candidate;
+  const marker = "/data/chips/";
+  const index = candidate.indexOf(marker);
+  if (index >= 0) return candidate.slice(index);
+  const bareIndex = candidate.indexOf("chips/");
+  if (bareIndex >= 0) return `/data/${candidate.slice(bareIndex)}`;
+  return candidate;
 }

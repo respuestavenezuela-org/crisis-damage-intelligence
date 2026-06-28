@@ -19,6 +19,8 @@
 
 # production
 /build
+/crisis_damage_intelligence_vercel_remote_assets
+/REMOTE_ASSET_PACKAGE_MANIFEST.json
 
 # misc
 .DS_Store

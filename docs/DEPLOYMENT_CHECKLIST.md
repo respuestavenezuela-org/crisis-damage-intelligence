@@ -19,6 +19,22 @@ Expected result:
 - No database required for public viewing
 - No object storage required for current AOI02/AOI06 vector-only package
 
+For the imagery-enabled package, generate a remote-asset deploy copy first:
+
+```bash
+python3 scripts/build_vercel_remote_asset_package.py --force
+cd ../crisis_damage_intelligence_vercel_remote_assets
+npm install
+npm run build
+```
+
+Do not deploy the remote-asset package until these URLs return HTTP 200:
+
+```text
+https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/tiles/<aoi>/<kind>/<z>/<x>/<y>.webp
+https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/<aoi>/<chip>.png
+```
+
 ## Vercel Settings
 
 - Root directory: repository/package root
@@ -34,6 +50,7 @@ Expected result:
 - Confirm `node_modules` and `.next` are not committed or zipped for handoff.
 - Confirm CSV/GeoJSON/KML links resolve under `/data/aoi/<aoi-id>/`.
 - Confirm large rasters are not committed to Vercel; use object storage/CDN if imagery becomes large.
+- If using the remote-asset package, confirm `public/data/catalog.json` tile/chip URLs point to R2/CDN and not local `/data/tiles` or `/data/chips`.
 
 ## Smoke Test After Deploy
 
