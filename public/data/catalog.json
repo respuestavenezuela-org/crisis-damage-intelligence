@@ -42,7 +42,8 @@
         "damage": "/data/aoi/emsr884-aoi02-caracas/damage.geojson",
         "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
         "vlm": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
-        "afterTiles": "/data/tiles/emsr884-aoi02-caracas/after/{z}/{x}/{y}.webp"
+        "afterTiles": "/data/tiles/emsr884-aoi02-caracas/after/{z}/{x}/{y}.webp",
+        "beforeTiles": "https://raw.githubusercontent.com/takove/crisis-damage-intelligence/main/public/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp"
       },
       "metrics": {
         "features": 17,
@@ -85,14 +86,14 @@
           }
         },
         "before": {
-          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif",
+          "url": "https://raw.githubusercontent.com/takove/crisis-damage-intelligence/main/public/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
           "sensor": "Vantor LG06",
           "acquisitionUtc": "2026-03-20T14:46:55Z",
           "bytes": null,
           "sha256": null,
           "r2Key": null,
           "source": "Vantor Open Data pre-event reference scene, not Copernicus EMS official before imagery",
-          "coverage": "Covers all 17 AOI02 EMS features, but no before tile pyramid is published in the app yet. Used for evidence chips only.",
+          "coverage": "Covers the official AOI02 EMS features and is now published as WebP tiles. Northern AOI edge may contain transparent/black pixels where the Vantor scene does not cover the full AOI bounds.",
           "license": "CC-BY-NC-4.0",
           "sourceScenes": [
             {
@@ -102,9 +103,26 @@
               "cloudCover": 1,
               "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif"
             }
-          ]
+          ],
+          "tilePyramid": {
+            "urlTemplate": "https://raw.githubusercontent.com/takove/crisis-damage-intelligence/main/public/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
+            "format": "webp",
+            "minZoom": 12,
+            "maxZoom": 18,
+            "tileCount": 10092,
+            "bytesApprox": 64840354,
+            "quality": 75
+          },
+          "staticHosting": "GitHub raw fallback for production until AOI02 before tiles are bulk-synced to R2. Tiles are committed in the repository under public/data/tiles/emsr884-aoi02-caracas/before/."
         },
-        "note": "After imagery is official Copernicus EMS post-event COG/tiles. Before imagery is a Vantor Open Data pre-event reference scene, not official EMS before imagery. AOI02 VLM uses before/after chips, but most results are uncertain because post-event chips are dark/hazy or affected by shadows."
+        "note": "After imagery is official Copernicus EMS post-event COG/tiles. Before imagery is a Vantor Open Data pre-event reference scene, not official EMS before imagery. AOI02 before tiles are currently hosted through GitHub raw as a production fallback until R2 bulk sync is completed; results remain uncertain where post-event chips are dark/hazy or shadows affect the target.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       }
     },
     {
@@ -151,7 +169,14 @@
       "imagery": {
         "before": null,
         "after": null,
-        "note": "MONIT01 point layer only. Use parent AOI imagery for visual context."
+        "note": "MONIT01 point layer only. Use parent AOI imagery for visual context.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       },
       "parentAoi": "emsr884-aoi02-caracas",
       "geometryType": "Point"
@@ -207,7 +232,14 @@
           "r2Key": "ems/rasters/after/emsr884-aoi03-antimano/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif"
         },
         "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
+        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       }
     },
     {
@@ -281,7 +313,14 @@
           }
         },
         "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
+        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       }
     },
     {
@@ -328,7 +367,14 @@
       "imagery": {
         "before": null,
         "after": null,
-        "note": "MONIT01 point layer only. Use parent AOI imagery for visual context."
+        "note": "MONIT01 point layer only. Use parent AOI imagery for visual context.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       },
       "parentAoi": "emsr884-aoi06-moron",
       "geometryType": "Point"
@@ -405,7 +451,14 @@
           }
         },
         "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
+        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       }
     },
     {
@@ -452,7 +505,14 @@
       "imagery": {
         "before": null,
         "after": null,
-        "note": "MONIT01 point layer only. Use parent AOI imagery for visual context."
+        "note": "MONIT01 point layer only. Use parent AOI imagery for visual context.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       },
       "parentAoi": "emsr884-aoi08-san-felipe",
       "geometryType": "Point"
@@ -508,7 +568,14 @@
           "r2Key": "ems/rasters/after/emsr884-aoi10-guacara/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif"
         },
         "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet."
+        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       }
     },
     {
@@ -597,13 +664,13 @@
         },
         "before": {
           "url": "/data/tiles/emsr884-aoi12-caraballeda/before/{z}/{x}/{y}.webp",
-          "sensor": "Vantor Open Data mosaic: LG02, LG03, LG06",
+          "sensor": "Vantor Open Data mosaic: LG02, LG03, LG06; WV03 candidate gap-fill identified",
           "acquisitionUtc": "2025-11-03T12:56:33Z / 2026-03-21T14:31:32Z / 2026-04-07T15:14:46Z",
           "bytes": null,
           "sha256": null,
           "r2Key": null,
           "source": "Vantor Open Data pre-event reference, not Copernicus EMS official before imagery",
-          "coverage": "Partial AOI12 coverage mosaic. Best available pre-event reference scenes; visible gaps may remain where no pre-event Vantor scene covered the AOI.",
+          "coverage": "Partial AOI12 coverage mosaic. Current published tiles use the best lower-cloud LG scenes. WV03 2026-05-31 intersects the far west edge and is documented as candidate gap-fill, but not yet promoted into the published tile mosaic because of 30% cloud cover and limited incremental coverage.",
           "license": "CC-BY-NC-4.0",
           "tilePyramid": {
             "urlTemplate": "/data/tiles/emsr884-aoi12-caraballeda/before/{z}/{x}/{y}.webp",
@@ -635,10 +702,25 @@
               "acquisitionUtc": "2026-04-07T15:14:46.124708Z",
               "cloudCover": 12,
               "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B120001100513B10.tif"
+            },
+            {
+              "id": "10400100B979DD00",
+              "sensor": "WV03",
+              "acquisitionUtc": "2026-05-31T14:57:27.599765Z",
+              "cloudCover": 30,
+              "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/10400100B979DD00.tif",
+              "use": "candidate gap-fill only; intersects the far west edge of AOI12 but has 30% cloud cover and should not replace cleaner LG scenes"
             }
           ]
         },
-        "note": "After imagery is official Copernicus EMS post-event COG/tiles. Before imagery is Vantor Open Data pre-event reference mosaic, not official EMS before imagery, and may have partial coverage/gaps. VLM for AOI12 now uses before/after comparison where Vantor before coverage exists."
+        "note": "After imagery is official Copernicus EMS post-event COG/tiles. Before imagery is Vantor Open Data pre-event reference mosaic, not official EMS before imagery, and may have partial coverage/gaps. A WV03 2026-05-31 candidate was found for possible west-edge gap fill but is not yet promoted into the published before tiles due to cloud/quality risk.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       }
     },
     {
@@ -687,7 +769,14 @@
       "imagery": {
         "before": null,
         "after": null,
-        "note": "No imagery is bundled with this external prediction layer. Use the aerial basemap as context. Official EMS AOI12 before/after imagery remains in the AOI12 record."
+        "note": "No imagery is bundled with this external prediction layer. Use the aerial basemap as context. Official EMS AOI12 before/after imagery remains in the AOI12 record.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
+          "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
+        }
       }
     }
   ],

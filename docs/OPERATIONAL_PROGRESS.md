@@ -43,6 +43,38 @@ Update this after every work loop. Keep entries factual: what changed, how it wa
 
 ## Recent Completed Work
 
+### 2026-06-28 - AOI02 Before Tiles and Approximate Reference Queue
+
+- Objective: move quickly on missing pre-event references without pretending approximate basemaps are official before imagery.
+- Files changed/generated:
+  - Generated AOI02 Vantor pre-event WebP tiles under `public/data/tiles/emsr884-aoi02-caracas/before/`.
+  - Updated `public/data/catalog.json` with AOI02 `layers.beforeTiles` and before tile pyramid metadata.
+  - Documented AOI12 WV03 `10400100B979DD00` as a candidate west-edge gap-fill scene, but did not promote it into the published AOI12 before mosaic because it has 30% cloud cover and limited incremental coverage.
+  - Added `scripts/build_approximate_basemap_reference_queue.py`.
+  - Generated `ops/approximate_basemap_reference_queue/queue.csv`, `queue.json`, `queue.jsonl`, and `README.md`.
+- AOI02 tile result:
+  - Source: Vantor Open Data scene `B160001100FD1910`, LG06, 2026-03-20T14:46:55Z, 1% cloud.
+  - Tile range: z12-z18.
+  - Tile count: 10,092.
+  - Size: 64,840,354 bytes.
+  - Caveat: northern AOI edge may contain transparent/black pixels where the Vantor scene does not cover the full AOI bounds.
+- Approximate reference queue:
+  - Records: 172.
+  - AOI06 Moron: 129.
+  - AOI08 San Felipe: 43.
+  - Evidence mode: `approximate_aerial_reference_not_dated_before`.
+  - Intended only for triage when no dated high-resolution baseline exists.
+  - Do not merge these results into official EMS or dated before/after VLM counts.
+- R2 sync status:
+  - Wrangler object-by-object upload was tested and is too slow for the full AOI02 before tile set.
+  - 148 AOI02 before tiles were uploaded before stopping the test.
+  - To avoid blocking publication, AOI02 before tiles now use a GitHub raw static fallback URL in `public/data/catalog.json`.
+  - R2 remains the preferred long-term host, but production no longer needs the incomplete AOI02 R2 upload to show Caracas before imagery.
+- Next recommended action:
+  - Use S3-compatible R2 credentials with `scripts/upload_to_object_storage.py`, or run a GitHub Actions/cloud sync, to upload `public/data/tiles/emsr884-aoi02-caracas/before/` in bulk and then switch AOI02 back from GitHub raw to R2.
+  - After sync, run `python3 scripts/validate_remote_asset_urls.py --sample-per-template 20 --sample-chips 40`.
+  - Until that migration, validate the GitHub raw AOI02 before URL samples after each push.
+
 ### 2026-06-28 - External Source Quality/Recency Review
 
 - Objective: classify newly supplied sources by operational value, recency, and publication risk.
