@@ -1,17 +1,17 @@
 {
-  "records": 62,
-  "failures": 58,
+  "records": 95,
+  "failures": 85,
   "damage_classes": {
-    "uncertain_comparison_problem": 47,
-    "possible_major_damage": 9,
-    "no_change_visible": 2,
-    "minor_visible_damage": 2,
-    "likely_destroyed": 2
+    "uncertain_comparison_problem": 72,
+    "likely_destroyed": 6,
+    "possible_major_damage": 10,
+    "no_change_visible": 4,
+    "minor_visible_damage": 3
   },
   "action_priorities": {
-    "urgent_review": 18,
-    "review": 34,
-    "deprioritize": 9,
+    "urgent_review": 32,
+    "review": 48,
+    "deprioritize": 14,
     "urgentReview": 1
   },
   "warning": "These are OSM building candidates for QA only. They are not official EMS damage features and are not published in the operational catalog."

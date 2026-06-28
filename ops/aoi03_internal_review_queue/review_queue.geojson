@@ -71,6 +71,134 @@
       "type": "Feature",
       "properties": {
         "rank": 3,
+        "id": "osm_way_226086253",
+        "aoi_id": "emsr884-aoi03-antimano",
+        "source": "OpenStreetMap building footprint candidate",
+        "official_damage_source": false,
+        "warning": "INTERNAL REVIEW ONLY. OpenStreetMap footprint candidate, not official EMS damage. VLM before/after output is a triage aid only; absence/presence here is not confirmation.",
+        "centroid_lat": 10.4351853,
+        "centroid_lon": -66.96866586666667,
+        "google_maps_url": "https://www.google.com/maps/search/?api=1&query=10.4351853,-66.96866586666667",
+        "building": "apartments",
+        "name": "Bloque 5",
+        "area_m2": 680.1,
+        "vlm_damage_class": "likely_destroyed",
+        "vlm_confidence": "high",
+        "vlm_action_priority": "urgent_review",
+        "vlm_change_evidence": "The before image shows a clearly defined multi-story apartment building (Bloque 5) with a visible roof and structural walls within the yellow footprint outline. In the after image, the same footprint area shows no recognizable building structure\u2014only a flattened, lighter-toned surface consistent with rubble or a cleared/collapsed footprint. The distinct rectangular building mass and rooflines present pre-event are absent post-event.",
+        "vlm_uncertainty_reason": "Lower post-event resolution means fine debris patterns cannot be resolved; however, the complete absence of a previously distinct multi-story building mass within a well-aligned footprint is a strong visual signal of major damage or destruction rather than a comparison artifact.",
+        "compare_chip": "/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform/ops/aoi03_osm_before_after_pilot/chips/osm_way_226086253_before_after_compare.png",
+        "before_source": "Vantor Open Data pre-event reference scene B160001100FD1910, 2026-03-20T14:46:55Z, not official EMS before imagery",
+        "after_source": "Copernicus EMSR884 AOI03 post-event Legion COG, 2026-06-25T15:17:00Z"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.96866586666667,
+          10.4351853
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "rank": 4,
+        "id": "osm_way_279905871",
+        "aoi_id": "emsr884-aoi03-antimano",
+        "source": "OpenStreetMap building footprint candidate",
+        "official_damage_source": false,
+        "warning": "INTERNAL REVIEW ONLY. OpenStreetMap footprint candidate, not official EMS damage. VLM before/after output is a triage aid only; absence/presence here is not confirmation.",
+        "centroid_lat": 10.43031545,
+        "centroid_lon": -66.963455375,
+        "google_maps_url": "https://www.google.com/maps/search/?api=1&query=10.43031545,-66.963455375",
+        "building": "apartments",
+        "name": "Bloque 30",
+        "area_m2": 734.8,
+        "vlm_damage_class": "likely_destroyed",
+        "vlm_confidence": "high",
+        "vlm_action_priority": "urgent_review",
+        "vlm_change_evidence": "The clearly defined rectangular apartment building with intact roofline visible in the before image is absent in the after image. The footprint area shows scattered light-toned debris material and a flattened surface where the multi-story structure previously stood. No standing walls or roof structure are visible within the outlined candidate footprint.",
+        "vlm_uncertainty_reason": "After image has reduced clarity and color saturation, but the complete disappearance of a previously distinct rectangular building roofline and walls constitutes strong evidence of total structural loss. Minor uncertainty remains only regarding whether the lighter patches represent in-situ debris or a partially cleared site.",
+        "compare_chip": "/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform/ops/aoi03_osm_before_after_pilot/chips/osm_way_279905871_before_after_compare.png",
+        "before_source": "Vantor Open Data pre-event reference scene B160001100FD1910, 2026-03-20T14:46:55Z, not official EMS before imagery",
+        "after_source": "Copernicus EMSR884 AOI03 post-event Legion COG, 2026-06-25T15:17:00Z"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.963455375,
+          10.43031545
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "rank": 5,
+        "id": "osm_way_280011199",
+        "aoi_id": "emsr884-aoi03-antimano",
+        "source": "OpenStreetMap building footprint candidate",
+        "official_damage_source": false,
+        "warning": "INTERNAL REVIEW ONLY. OpenStreetMap footprint candidate, not official EMS damage. VLM before/after output is a triage aid only; absence/presence here is not confirmation.",
+        "centroid_lat": 10.433707041666667,
+        "centroid_lon": -66.97118965833333,
+        "google_maps_url": "https://www.google.com/maps/search/?api=1&query=10.433707041666667,-66.97118965833333",
+        "building": "apartments",
+        "name": "Bloque 14 de UD-3",
+        "area_m2": 674.9,
+        "vlm_damage_class": "likely_destroyed",
+        "vlm_confidence": "high",
+        "vlm_action_priority": "urgent_review",
+        "vlm_change_evidence": "In the before chip, a clear cross/plus-shaped multi-section apartment building with distinct roof structure, rooftop elements, and shadowed relief is visible within the OSM footprint. In the after chip, the same footprint contains no discernible building structure, roofline, or shadows \u2014 only ground/vegetation texture consistent with the surrounding cleared area. Adjacent buildings outside the footprint remain visible in the after scene, indicating the loss is footprint-specific rather than a scene-wide data gap.",
+        "vlm_uncertainty_reason": "Some uncertainty remains because the after image resolution is limited and the building is large, so a low rubble pile could in theory be hidden under vegetation tone. However, the complete absence of shadows, rooflines, and any bright rubble signature within the footprint, contrasted with a clearly intact building just outside, makes a 'likely_destroyed' call well supported.",
+        "compare_chip": "/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform/ops/aoi03_osm_before_after_pilot/chips/osm_way_280011199_before_after_compare.png",
+        "before_source": "Vantor Open Data pre-event reference scene B160001100FD1910, 2026-03-20T14:46:55Z, not official EMS before imagery",
+        "after_source": "Copernicus EMSR884 AOI03 post-event Legion COG, 2026-06-25T15:17:00Z"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.97118965833333,
+          10.433707041666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "rank": 6,
+        "id": "osm_way_294904181",
+        "aoi_id": "emsr884-aoi03-antimano",
+        "source": "OpenStreetMap building footprint candidate",
+        "official_damage_source": false,
+        "warning": "INTERNAL REVIEW ONLY. OpenStreetMap footprint candidate, not official EMS damage. VLM before/after output is a triage aid only; absence/presence here is not confirmation.",
+        "centroid_lat": 10.47136755,
+        "centroid_lon": -66.959749325,
+        "google_maps_url": "https://www.google.com/maps/search/?api=1&query=10.47136755,-66.959749325",
+        "building": "apartments",
+        "name": "Residencias Primavera",
+        "area_m2": 596.2,
+        "vlm_damage_class": "likely_destroyed",
+        "vlm_confidence": 0.55,
+        "vlm_action_priority": "review",
+        "vlm_change_evidence": "In the before image, a clearly visible multi-story building with a light-colored roof and rooftop features occupies the outlined footprint. In the after image, the distinct building structure is absent; the outlined area shows mostly uniform dusty/hazy ground with only very faint, indistinct traces that could represent debris or low rubble. The clear disappearance of a substantial built structure is the primary evidence.",
+        "vlm_uncertainty_reason": "The after image is heavily obscured by dust/smoke, so while the disappearance of the building is clear, the precise damage state (total collapse vs. severe damage with residual structure) cannot be confirmed from imagery alone. Moderate confidence reflects strong qualitative change but limited detail in the post-event chip.",
+        "compare_chip": "/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform/ops/aoi03_osm_before_after_pilot/chips/osm_way_294904181_before_after_compare.png",
+        "before_source": "Vantor Open Data pre-event reference scene B160001100FD1910, 2026-03-20T14:46:55Z, not official EMS before imagery",
+        "after_source": "Copernicus EMSR884 AOI03 post-event Legion COG, 2026-06-25T15:17:00Z"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.959749325,
+          10.47136755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "rank": 7,
         "id": "osm_way_287205261",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -102,7 +230,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 4,
+        "rank": 8,
         "id": "osm_way_226086257",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -134,7 +262,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 5,
+        "rank": 9,
         "id": "osm_way_295041872",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -166,7 +294,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 6,
+        "rank": 10,
         "id": "osm_way_229952196",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -198,7 +326,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 7,
+        "rank": 11,
         "id": "osm_way_230042909",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -230,7 +358,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 8,
+        "rank": 12,
         "id": "osm_way_230042920",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -262,7 +390,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 9,
+        "rank": 13,
         "id": "osm_way_233926033",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -294,7 +422,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 10,
+        "rank": 14,
         "id": "osm_way_237297666",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -326,7 +454,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 11,
+        "rank": 15,
         "id": "osm_way_279914444",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -358,7 +486,71 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 12,
+        "rank": 16,
+        "id": "osm_way_280011208",
+        "aoi_id": "emsr884-aoi03-antimano",
+        "source": "OpenStreetMap building footprint candidate",
+        "official_damage_source": false,
+        "warning": "INTERNAL REVIEW ONLY. OpenStreetMap footprint candidate, not official EMS damage. VLM before/after output is a triage aid only; absence/presence here is not confirmation.",
+        "centroid_lat": 10.436214544444445,
+        "centroid_lon": -66.95522475555555,
+        "google_maps_url": "https://www.google.com/maps/search/?api=1&query=10.436214544444445,-66.95522475555555",
+        "building": "apartments",
+        "name": "Bloque 12",
+        "area_m2": 692.2,
+        "vlm_damage_class": "possible_major_damage",
+        "vlm_confidence": 0.45,
+        "vlm_action_priority": "review",
+        "vlm_change_evidence": "In the before image, a clear multi-story apartment building with a defined roof and visible structural footprint occupies the yellow-outlined area. In the after image, the distinct building structure and roof are not clearly identifiable within the outline; lighter, irregular surface tones suggest possible debris or rubble, but the extreme pixelation and haze of the after scene limit confident interpretation.",
+        "vlm_uncertainty_reason": "The after image is too low-resolution and degraded to confirm collapse versus partial roof loss versus intact-but-shaded structure. While the loss of a clearly defined roof/footprint inside the outline is suggestive of significant damage, the imagery quality prevents ruling out minor damage, intact structure under poor rendering, or alignment-induced misreading. Higher-resolution post-event imagery is required for confirmation.",
+        "compare_chip": "/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform/ops/aoi03_osm_before_after_pilot/chips/osm_way_280011208_before_after_compare.png",
+        "before_source": "Vantor Open Data pre-event reference scene B160001100FD1910, 2026-03-20T14:46:55Z, not official EMS before imagery",
+        "after_source": "Copernicus EMSR884 AOI03 post-event Legion COG, 2026-06-25T15:17:00Z"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.95522475555555,
+          10.436214544444445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "rank": 17,
+        "id": "osm_way_280011200",
+        "aoi_id": "emsr884-aoi03-antimano",
+        "source": "OpenStreetMap building footprint candidate",
+        "official_damage_source": false,
+        "warning": "INTERNAL REVIEW ONLY. OpenStreetMap footprint candidate, not official EMS damage. VLM before/after output is a triage aid only; absence/presence here is not confirmation.",
+        "centroid_lat": 10.43311285,
+        "centroid_lon": -66.97118386666666,
+        "google_maps_url": "https://www.google.com/maps/search/?api=1&query=10.43311285,-66.97118386666666",
+        "building": "apartments",
+        "name": "Bloque 15 de UD-3",
+        "area_m2": 641.4,
+        "vlm_damage_class": "minor_visible_damage",
+        "vlm_confidence": 0.55,
+        "vlm_action_priority": "review",
+        "vlm_change_evidence": "The cross-shaped building footprint remains present in the after image with its characteristic form intact. No rubble pile, no exposed floors, no collapse, and no footprint distortion are visible. The roof surface within the outline appears lighter and more uniform in the after image compared to the textured tan roof in the before image, suggesting possible roof damage or material loss, but the low resolution limits certainty.",
+        "vlm_uncertainty_reason": "The post-event image resolution is substantially lower than the pre-event reference, making it difficult to distinguish minor roof damage from image artifacts or tonal differences. No clear signatures of major damage (rubble, collapse, exposed floors) are visible, but the resolution is insufficient to confidently rule out moderate damage or confirm pristine condition.",
+        "compare_chip": "/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform/ops/aoi03_osm_before_after_pilot/chips/osm_way_280011200_before_after_compare.png",
+        "before_source": "Vantor Open Data pre-event reference scene B160001100FD1910, 2026-03-20T14:46:55Z, not official EMS before imagery",
+        "after_source": "Copernicus EMSR884 AOI03 post-event Legion COG, 2026-06-25T15:17:00Z"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.97118386666666,
+          10.43311285
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "rank": 18,
         "id": "osm_way_230042923",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",
@@ -390,7 +582,7 @@
     {
       "type": "Feature",
       "properties": {
-        "rank": 13,
+        "rank": 19,
         "id": "osm_way_233926035",
         "aoi_id": "emsr884-aoi03-antimano",
         "source": "OpenStreetMap building footprint candidate",

@@ -444,12 +444,51 @@ QA evidence:
 - Next recommended action:
   - Deploy with pageview analytics enabled and only enable custom interaction forwarding after confirming Vercel quota/cost settings.
 
+### 2026-06-27 - AOI03 Internal Before/After VLM Expansion
+
+- Objective: make concrete progress on before/after VLM analysis where official EMS vectors are unavailable, without publishing non-official OSM candidates as operational damage.
+- Scope:
+  - AOI03 Antimano only.
+  - OpenStreetMap building candidates only.
+  - Internal QA/review outputs only; nothing was added to the public operational catalog.
+- Commands run:
+  - `VLM_WORKERS=5 python3 scripts/run_aoi03_osm_before_after_pilot.py --limit 180 --workers 5 --run-vlm`
+  - `python3 scripts/build_aoi03_internal_review_queue.py`
+- Result:
+  - 180 candidates selected.
+  - 95 before/after chip triplets generated and reviewed by VLM.
+  - 85 chip-generation failures, mostly due to missing/blank/insufficient source tiles.
+  - Damage classes:
+    - `likely_destroyed`: 6
+    - `possible_major_damage`: 10
+    - `minor_visible_damage`: 3
+    - `no_change_visible`: 4
+    - `uncertain_comparison_problem`: 72
+  - Internal review queue increased to 19 candidates.
+- Files changed:
+  - `ops/aoi03_osm_before_after_pilot/pilot_records.json`
+  - `ops/aoi03_osm_before_after_pilot/pilot_summary.json`
+  - `ops/aoi03_osm_before_after_pilot/pilot_summary.csv`
+  - `ops/aoi03_osm_before_after_pilot/chips/`
+  - `ops/aoi03_internal_review_queue/review_queue.csv`
+  - `ops/aoi03_internal_review_queue/review_queue.geojson`
+  - `ops/aoi03_internal_review_queue/review_queue.kml`
+  - `ops/aoi03_internal_review_queue/README.md`
+  - `qa/aoi03-internal-review-queue-19-contact-sheet.png`
+- Guardrail:
+  - AOI03 VLM results are OSM-candidate triage evidence, not official EMS damage. They must stay out of `public/data/catalog.json` until explicitly promoted with source/confidence labels.
+- QA evidence:
+  - Internal queue GeoJSON contains 19 features.
+  - Contact sheet generated at `qa/aoi03-internal-review-queue-19-contact-sheet.png`.
+- Next recommended action:
+  - Have a human review the 19 AOI03 contact-sheet candidates first, then either run another bounded AOI03 batch or prioritize AOI06/AOI08 only after credible pre-event imagery is identified.
+
 ## Known Gaps
 
 1. Imagery is still active-area based. The map loads all vector features, but not all AOI imagery at once.
 2. Vercel deployment package is too large because chips/tiles are still bundled.
 3. Area ranking currently includes external prediction counts in the visible order; this is labeled, but needs better source-weighted ranking.
-4. Public VLM before/after exists for AOI12 and AOI02 only. AOI03 has an internal OSM-candidate VLM pilot, but it is not public operational data.
+4. Public VLM before/after exists for AOI12 and AOI02 only. AOI03 has an internal OSM-candidate VLM pilot with 95 reviewed comparisons and 19 review candidates, but it is not public operational data.
 5. Mobile end-to-end QA is incomplete.
 6. Operator docs may be stale after the recent area-navigation and VLM before/after changes.
 7. Human validation workflow is not implemented.
@@ -472,7 +511,7 @@ Run the next before/after VLM expansion loop:
 
 1. Validate AOI02 on Vercel after deployment.
 2. Search for better before imagery or alternative baselines for AOI06, AOI08, and AOI10 outside the current Vantor STAC collection.
-3. For AOI03 Antimano, only run VLM if credible candidate features are available; imagery alone is not enough.
+3. For AOI03 Antimano, review the 19 internal VLM candidates before expanding further; do not publish them as official damage.
 4. Add UI copy/metrics that surface AOI02's high uncertainty rate so users do not overread the VLM layer.
 
 Do not run post-event-only VLM as if it were before/after comparison.
