@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T14:40:00Z",
+  "updatedAt": "2026-06-28T18:02:44Z",
   "platform": "Respuesta Venezuela",
   "aois": [
     {
@@ -729,7 +729,7 @@
       "event": "Venezuela earthquake June 2026",
       "name": {
         "en": "Catia La Mar - Microsoft AI4G Predicted Damage",
-        "es": "Catia La Mar - Da\u00f1o predicho Microsoft AI4G"
+        "es": "Catia La Mar - Daño predicho Microsoft AI4G"
       },
       "status": "external-prediction",
       "source": "HDX dataset from Microsoft AI for Good Lab: Venezuela Earthquakes: Building Damage Assessment in Catia La Mar. External predicted building-footprint damage, not official Copernicus EMS damage labels.",
@@ -973,12 +973,42 @@
     {
       "id": "ems-aoi07-puerto-cabello",
       "name": {
-        "en": "AOI07 Puerto Cabello",
-        "es": "AOI07 Puerto Cabello"
+        "en": "Puerto Cabello - EMSR884 gap",
+        "es": "Puerto Cabello - brecha EMSR884"
       },
-      "status": "waiting",
-      "expectedUtc": "2026-06-27T12:30:00Z",
+      "status": "no-official-product",
+      "expectedUtc": "EMSR884 AOI07 GRA PRODUCT and MONIT01 are N/not produced as of 2026-06-28 18:02 UTC",
       "priority": "high"
+    },
+    {
+      "id": "external-gap-tucacas-falcon",
+      "name": {
+        "en": "Tucacas / Falcon - public data gap",
+        "es": "Tucacas / Falcón - brecha de datos públicos"
+      },
+      "status": "external-gap",
+      "expectedUtc": "No EMSR884 AOI/catalog layer in the current app; needs public imagery, reports, OSM/field validation, or external source review",
+      "priority": "high"
+    },
+    {
+      "id": "ems-aoi01-petare",
+      "name": {
+        "en": "Petare - EMSR884 gap",
+        "es": "Petare - brecha EMSR884"
+      },
+      "status": "no-official-product",
+      "expectedUtc": "EMSR884 AOI01 GRA PRODUCT is N/not produced as of 2026-06-28 18:02 UTC",
+      "priority": "medium"
+    },
+    {
+      "id": "ems-aoi09-valencia",
+      "name": {
+        "en": "Valencia - EMSR884 gap",
+        "es": "Valencia - brecha EMSR884"
+      },
+      "status": "no-official-product",
+      "expectedUtc": "EMSR884 AOI09 GRA PRODUCT is N/not produced as of 2026-06-28 18:02 UTC",
+      "priority": "medium"
     }
   ]
 }

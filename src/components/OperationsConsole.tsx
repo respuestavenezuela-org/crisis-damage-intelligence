@@ -81,6 +81,8 @@ const copy = {
       "imagery-only": "Imagery only",
       waiting: "Waiting",
       "in-production": "In production",
+      "no-official-product": "No official EMS product",
+      "external-gap": "External gap to source",
     },
   },
   es: {
@@ -158,6 +160,8 @@ const copy = {
       "imagery-only": "Solo imagen",
       waiting: "En espera",
       "in-production": "En producción",
+      "no-official-product": "Sin producto oficial EMS",
+      "external-gap": "Brecha externa por cubrir",
     },
   },
 };
