@@ -26,6 +26,15 @@ CATALOG = ROOT / "public" / "data" / "catalog.json"
 DEFAULT_REMOTE_BASE = "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev"
 DEFAULT_REPORT = ROOT / "ops" / "remote_asset_validation" / "latest.json"
 TILE_TEMPLATE_RE = re.compile(r"/data/tiles/([^/]+)/([^/]+)/\{z\}/\{x\}/\{y\}\.webp")
+COG_SUFFIXES = {".tif", ".tiff"}
+EXPECTED_CONTENT_TYPES = {
+    "tile": {"image/webp"},
+    "chip": {"image/png"},
+    "cog": {"image/tiff", "image/geotiff", "application/octet-stream", "binary/octet-stream"},
+}
+IMMUTABLE_MAX_AGE_SECONDS = 31_536_000
+COG_RANGE_REQUIREMENT = "COG fallback URLs must honor Range: bytes=0-0 with HTTP 206 and a Content-Range header starting with 'bytes 0-0/'."
+COG_CONTENT_TYPE_REQUIREMENT = "COG fallback URLs must return a GeoTIFF-compatible content type; binary/octet-stream is accepted for EMS/Vantor/Sentinel public S3 COGs when byte ranges work."
 
 
 def normalize_base(value: str) -> str:
@@ -39,6 +48,13 @@ def bytes_human(value: int) -> str:
             return f"{size:.1f} {unit}" if unit != "B" else f"{int(size)} B"
         size /= 1024
     return f"{value} B"
+
+
+def rel(path: Path) -> str:
+    try:
+        return path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def dir_stats(path: Path) -> dict[str, Any]:
@@ -110,6 +126,15 @@ def evenly_sample(items: list[Path], limit: int) -> list[Path]:
     return [items[index] for index in indexes]
 
 
+def evenly_sample_records(items: list[dict[str, str]], limit: int) -> list[dict[str, str]]:
+    if limit <= 0 or len(items) <= limit:
+        return items
+    if limit == 1:
+        return [items[0]]
+    indexes = sorted({round(i * (len(items) - 1) / (limit - 1)) for i in range(limit)})
+    return [items[index] for index in indexes]
+
+
 def sample_tile_files(template: str, limit: int) -> list[Path]:
     data_path = catalog_path_from_url(template)
     if not data_path:
@@ -152,17 +177,26 @@ def check_url(url: str, timeout: float, pause: float) -> dict[str, Any]:
             status = int(response.status)
             content_type = response.headers.get("content-type")
             content_range = response.headers.get("content-range")
+            cache_control = response.headers.get("cache-control")
+            accept_ranges = response.headers.get("accept-ranges")
+            content_length = response.headers.get("content-length")
             ok = 200 <= status < 400
     except HTTPError as exc:
         status = int(exc.code)
         content_type = exc.headers.get("content-type") if exc.headers else None
         content_range = exc.headers.get("content-range") if exc.headers else None
+        cache_control = exc.headers.get("cache-control") if exc.headers else None
+        accept_ranges = exc.headers.get("accept-ranges") if exc.headers else None
+        content_length = exc.headers.get("content-length") if exc.headers else None
         ok = False
         error = str(exc)
     except (URLError, TimeoutError, OSError) as exc:
         status = None
         content_type = None
         content_range = None
+        cache_control = None
+        accept_ranges = None
+        content_length = None
         ok = False
         error = str(exc)
     else:
@@ -176,6 +210,9 @@ def check_url(url: str, timeout: float, pause: float) -> dict[str, Any]:
         "status": status,
         "content_type": content_type,
         "content_range": content_range,
+        "accept_ranges": accept_ranges,
+        "cache_control": cache_control,
+        "content_length": content_length,
         "elapsed_ms": elapsed_ms,
         "error": error,
     }
@@ -213,6 +250,105 @@ def tile_templates(catalog: dict[str, Any]) -> list[dict[str, str]]:
     return templates
 
 
+def remote_cog_urls(catalog: dict[str, Any], limit: int) -> list[dict[str, str]]:
+    seen: set[str] = set()
+    checks: list[dict[str, str]] = []
+    for path, value in walk_strings(catalog):
+        parsed = urlparse(value)
+        if parsed.scheme not in {"http", "https"}:
+            continue
+        if any(token in value for token in ("{z}", "{x}", "{y}")):
+            continue
+        suffix = Path(parsed.path).suffix.lower()
+        if suffix not in COG_SUFFIXES and "cog" not in path.lower() and "cog" not in parsed.path.lower():
+            continue
+        if value in seen:
+            continue
+        seen.add(value)
+        checks.append({
+            "kind": "cog",
+            "catalog_path": path,
+            "data_path": parsed.path or value,
+            "url": value,
+        })
+    return evenly_sample_records(checks, limit)
+
+
+def normalized_content_type(value: str | None) -> str | None:
+    if not value:
+        return None
+    return value.split(";", 1)[0].strip().lower()
+
+
+def max_age_seconds(cache_control: str | None) -> int | None:
+    if not cache_control:
+        return None
+    match = re.search(r"max-age=(\d+)", cache_control, flags=re.I)
+    return int(match.group(1)) if match else None
+
+
+def quality_messages(kind: str, status: int | None, content_type: str | None, content_range: str | None, cache_control: str | None) -> tuple[list[str], list[str]]:
+    errors: list[str] = []
+    warnings: list[str] = []
+    if status is None or not 200 <= status < 400:
+        return errors, warnings
+
+    normalized_type = normalized_content_type(content_type)
+    expected = EXPECTED_CONTENT_TYPES.get(kind)
+    if expected and normalized_type not in expected:
+        errors.append(f"unexpected content-type {content_type!r}; expected one of {sorted(expected)}")
+
+    if kind == "cog":
+        content_range_lower = (content_range or "").lower()
+        if status != 206 or not content_range_lower.startswith("bytes 0-0/"):
+            errors.append(COG_RANGE_REQUIREMENT)
+
+    if kind in {"tile", "chip"}:
+        age = max_age_seconds(cache_control)
+        cache_lower = (cache_control or "").lower()
+        if "public" not in cache_lower:
+            warnings.append("Cache-Control should include public for CDN/browser reuse")
+        if age is None or age < IMMUTABLE_MAX_AGE_SECONDS:
+            warnings.append("Cache-Control max-age is below one year for a versioned asset")
+        if "immutable" not in cache_lower:
+            warnings.append("Cache-Control should include immutable for versioned tiles/chips")
+    return errors, warnings
+
+
+def deploy_gate(
+    failures: list[dict[str, Any]],
+    missing_static: list[dict[str, Any]],
+    quality_errors: list[dict[str, Any]],
+    sampled_cogs: list[dict[str, str]],
+) -> dict[str, Any]:
+    blockers: list[str] = []
+    cog_failures = [item for item in failures if item.get("kind") == "cog"]
+    cog_quality_errors = [item for item in quality_errors if item.get("kind") == "cog"]
+    if missing_static:
+        blockers.append(f"{len(missing_static)} local static /data/aoi references are missing")
+    if failures:
+        blockers.append(f"{len(failures)} sampled remote asset checks failed")
+    if quality_errors:
+        blockers.append(f"{len(quality_errors)} sampled remote asset checks have content/range quality errors")
+    if not sampled_cogs:
+        blockers.append("no COG URLs were sampled, so COG fallback Range/content-type support is unverified")
+    if cog_failures or cog_quality_errors:
+        blockers.append(
+            f"sampled COG fallback is blocked by {len(cog_failures)} fetch failures "
+            f"and {len(cog_quality_errors)} Range/content-type errors"
+        )
+    return {
+        "pruned_remote_asset_package_ready": not blockers,
+        "blockers": blockers,
+        "cog_range_requirement": COG_RANGE_REQUIREMENT,
+        "cog_content_type_requirement": COG_CONTENT_TYPE_REQUIREMENT,
+        "expected_content_types": {key: sorted(value) for key, value in EXPECTED_CONTENT_TYPES.items()},
+        "sampled_cog_count": len(sampled_cogs),
+        "cog_failure_count": len(cog_failures),
+        "cog_quality_error_count": len(cog_quality_errors),
+    }
+
+
 def write_markdown(report: dict[str, Any], path: Path) -> None:
     lines = [
         "# Remote Asset Validation",
@@ -237,16 +373,40 @@ def write_markdown(report: dict[str, Any], path: Path) -> None:
         f"- Local `/data/aoi` references checked: {report['static_data']['checked']}",
         f"- Missing local static references: {report['static_data']['missing']}",
         "",
+        "## Pruned Deploy Gate",
+        "",
+        f"- Ready for pruned remote-asset package: `{report['deploy_gate']['pruned_remote_asset_package_ready']}`",
+        f"- COG Range requirement: {report['deploy_gate']['cog_range_requirement']}",
+        f"- COG content-type requirement: {report['deploy_gate']['cog_content_type_requirement']}",
+        f"- Sampled COG URLs: `{report['deploy_gate']['sampled_cog_count']}`",
+    ])
+    if report["deploy_gate"]["blockers"]:
+        lines.extend(["", "### Deploy Blockers", ""])
+        lines.extend(f"- {blocker}" for blocker in report["deploy_gate"]["blockers"])
+    lines.extend([
+        "",
         "## Remote Asset Checks",
         "",
         f"- Checks run: {report['remote_assets']['checked']}",
         f"- OK: {report['remote_assets']['ok']}",
         f"- Failed: {report['remote_assets']['failed']}",
+        f"- Quality errors: {report['remote_assets']['quality_error_count']}",
+        f"- Quality warnings: {report['remote_assets']['quality_warning_count']}",
     ])
     if report["remote_assets"]["failures"]:
         lines.extend(["", "### Failures", ""])
         for failure in report["remote_assets"]["failures"][:50]:
             lines.append(f"- `{failure['kind']}` `{failure['data_path']}` -> HTTP `{failure.get('status')}`")
+    if report["remote_assets"]["quality_errors"]:
+        lines.extend(["", "### Quality Errors", ""])
+        for item in report["remote_assets"]["quality_errors"][:50]:
+            messages = "; ".join(item["messages"])
+            lines.append(f"- `{item['kind']}` `{item['data_path']}`: {messages}")
+    if report["remote_assets"]["quality_warnings"]:
+        lines.extend(["", "### Quality Warnings", ""])
+        for item in report["remote_assets"]["quality_warnings"][:50]:
+            messages = "; ".join(item["messages"])
+            lines.append(f"- `{item['kind']}` `{item['data_path']}`: {messages}")
     path.write_text("\n".join(lines) + "\n")
 
 
@@ -256,6 +416,7 @@ def main() -> None:
     parser.add_argument("--remote-base", default=DEFAULT_REMOTE_BASE)
     parser.add_argument("--sample-per-template", type=int, default=12, help="Sampled tile files per catalog tile template; 0 means all selected zoom picks.")
     parser.add_argument("--sample-chips", type=int, default=32, help="Sampled evidence chips; 0 means all chips.")
+    parser.add_argument("--sample-cogs", type=int, default=12, help="Sampled remote COG URLs from catalog; 0 means all COG URLs.")
     parser.add_argument("--timeout", type=float, default=8)
     parser.add_argument("--pause", type=float, default=0.05, help="Seconds to pause between public URL checks.")
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
@@ -285,19 +446,40 @@ def main() -> None:
             "data_path": data_path,
             "url": remote_url(remote_base, data_path),
         })
+    checks.extend(remote_cog_urls(catalog, args.sample_cogs))
 
     results: list[dict[str, Any]] = []
     for check in checks:
         result = check_url(check["url"], args.timeout, args.pause)
-        results.append({**check, **result})
+        quality_errors, quality_warnings = quality_messages(
+            check["kind"],
+            result["status"],
+            result["content_type"],
+            result["content_range"],
+            result["cache_control"],
+        )
+        results.append({**check, **result, "quality_errors": quality_errors, "quality_warnings": quality_warnings})
 
     failures = [item for item in results if not item["ok"]]
     missing_static = [item for item in static_refs if not item["exists"]]
+    quality_errors = [
+        {"kind": item["kind"], "data_path": item["data_path"], "url": item["url"], "messages": item["quality_errors"]}
+        for item in results
+        if item["quality_errors"]
+    ]
+    quality_warnings = [
+        {"kind": item["kind"], "data_path": item["data_path"], "url": item["url"], "messages": item["quality_warnings"]}
+        for item in results
+        if item["quality_warnings"]
+    ]
+    sampled_cogs = [item for item in checks if item["kind"] == "cog"]
+    gate = deploy_gate(failures, missing_static, quality_errors, sampled_cogs)
     report = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
-        "catalog": str(args.catalog),
+        "catalog": rel(args.catalog),
         "remote_base": remote_base,
-        "result": "pass" if not failures and not missing_static else "fail",
+        "result": "pass" if gate["pruned_remote_asset_package_ready"] else "fail",
+        "deploy_gate": gate,
         "package_pressure": {
             "public_data": dir_stats(ROOT / "public" / "data"),
             "chips": dir_stats(ROOT / "public" / "data" / "chips"),
@@ -312,11 +494,16 @@ def main() -> None:
         },
         "remote_assets": {
             "tile_templates": templates,
+            "sampled_cogs": sampled_cogs,
             "checked": len(results),
             "ok": len(results) - len(failures),
             "failed": len(failures),
+            "quality_error_count": sum(len(item["quality_errors"]) for item in results),
+            "quality_warning_count": sum(len(item["quality_warnings"]) for item in results),
             "checks": results,
             "failures": failures,
+            "quality_errors": quality_errors,
+            "quality_warnings": quality_warnings,
             "note": "Remote chip/tile URLs must pass before deploying the pruned remote-asset Vercel package.",
         },
     }
@@ -328,11 +515,15 @@ def main() -> None:
 
     print(json.dumps({
         "result": report["result"],
-        "report": str(args.report),
-        "markdown": str(markdown_path),
+        "report": rel(args.report),
+        "markdown": rel(markdown_path),
         "static_missing": len(missing_static),
         "remote_checked": len(results),
         "remote_failed": len(failures),
+        "remote_quality_errors": len(quality_errors),
+        "remote_quality_warnings": len(quality_warnings),
+        "pruned_deploy_ready": gate["pruned_remote_asset_package_ready"],
+        "deploy_blockers": len(gate["blockers"]),
     }, indent=2))
     if report["result"] != "pass" and not args.allow_failures:
         raise SystemExit(1)

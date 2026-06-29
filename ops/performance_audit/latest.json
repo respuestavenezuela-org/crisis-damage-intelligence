@@ -1,0 +1,2488 @@
+{
+  "generated_utc": "2026-06-29T08:20:46.406761+00:00",
+  "catalog": {
+    "path": "public/data/catalog.json",
+    "bytes": 63734,
+    "human": "62.2 KB",
+    "updated_at": "2026-06-29T07:42:57Z",
+    "aoi_count": 15,
+    "watchlist_count": 4
+  },
+  "bundle": {
+    "build_present": true,
+    "js_files": 24,
+    "js_bytes": 1792068,
+    "js_human": "1.7 MB",
+    "css_files": 2,
+    "css_bytes": 59692,
+    "css_human": "58.3 KB",
+    "next_dir": {
+      "path": ".next",
+      "exists": true,
+      "files": 195,
+      "bytes": 8905827,
+      "human": "8.5 MB"
+    }
+  },
+  "public_data": {
+    "data": {
+      "path": "public/data",
+      "exists": true,
+      "files": 74613,
+      "bytes": 281923982,
+      "human": "268.9 MB"
+    },
+    "aoi": {
+      "path": "public/data/aoi",
+      "exists": true,
+      "files": 93,
+      "bytes": 16151018,
+      "human": "15.4 MB"
+    },
+    "tiles": {
+      "path": "public/data/tiles",
+      "exists": true,
+      "files": 73837,
+      "bytes": 195061868,
+      "human": "186.0 MB"
+    },
+    "chips": {
+      "path": "public/data/chips",
+      "exists": true,
+      "files": 681,
+      "bytes": 70615065,
+      "human": "67.3 MB"
+    },
+    "heavy_local_files": [],
+    "large_local_aoi_files": [],
+    "large_local_aoi_by_status": []
+  },
+  "production_package_pressure": {
+    "raw_local_package_safe": false,
+    "remote_asset_package_required": true,
+    "unsafe_reasons": [
+      "public/data is 268.9 MB, above the raw package target 119.2 MB",
+      "public/data/tiles is 186.0 MB, above the local tile target 71.5 MB",
+      "public/data/chips is 67.3 MB, above the local chip target 38.1 MB"
+    ],
+    "remote_excluded_bytes": 265676933,
+    "remote_excluded_human": "253.4 MB",
+    "non_remote_public_data_bytes": 16247049,
+    "non_remote_public_data_human": "15.5 MB",
+    "large_local_aoi_file_count": 0,
+    "large_local_aoi_bytes": 0,
+    "large_local_aoi_human": "0 B",
+    "external_prediction_large_file_bytes": 0,
+    "external_prediction_large_file_human": "0 B",
+    "local_report_large_file_bytes": 0,
+    "local_report_large_file_human": "0 B",
+    "critical_large_file_count": 0
+  },
+  "initial_load_estimate": {
+    "default_aoi_id": "emsr884-aoi12-caraballeda",
+    "aoi_list_bytes_before_active_data": 63734,
+    "aoi_list_human": "62.2 KB",
+    "default_damage_bytes": 619576,
+    "default_vlm_bytes": 318376,
+    "default_metadata_and_vector_bytes": 1001686,
+    "default_metadata_and_vector_human": "978.2 KB",
+    "non_default_damage_bytes_if_eager": 7596213,
+    "non_default_vlm_bytes_if_eager": 287816,
+    "non_default_data_human_if_eager": "7.5 MB",
+    "note": "Tile bytes are intentionally excluded because first visible tile count depends on viewport, zoom, CDN cache, and network.",
+    "aoi_inventory_count": 15
+  },
+  "frontend_loading_scan": {
+    "source": "src/components/OperationsConsole.tsx",
+    "fetches_catalog": true,
+    "fetches_active_damage_layer": true,
+    "fetches_active_vlm_layer": true,
+    "possible_eager_all_aoi_patterns": [],
+    "loads_all_aois_on_initial_render": false
+  },
+  "aois": [
+    {
+      "id": "emsr884-aoi02-caracas",
+      "status": "official-vector",
+      "metrics_features": 17,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi02-caracas",
+        "exists": true,
+        "files": 11,
+        "bytes": 143658,
+        "human": "140.3 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi02-caracas",
+        "exists": true,
+        "files": 68,
+        "bytes": 6512085,
+        "human": "6.2 MB"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi02-caracas",
+        "exists": true,
+        "files": 20184,
+        "bytes": 75829012,
+        "human": "72.3 MB"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 3,
+          "bytes": 12683,
+          "human": "12.4 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 39217,
+          "human": "38.3 KB"
+        },
+        ".json": {
+          "files": 3,
+          "bytes": 1379,
+          "human": "1.3 KB"
+        },
+        ".jsonl": {
+          "files": 3,
+          "bytes": 78636,
+          "human": "76.8 KB"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 11743,
+          "human": "11.5 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/damage.csv",
+          "bytes": 5108,
+          "human": "5.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/damage.geojson",
+          "bytes": 39217,
+          "human": "38.3 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/damage.kml",
+          "bytes": 11743,
+          "human": "11.5 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/source_metadata.json",
+          "bytes": 264,
+          "human": "264 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
+          "bytes": 49841,
+          "human": "48.7 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.csv",
+          "bytes": 3893,
+          "human": "3.8 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.json",
+          "bytes": 591,
+          "human": "591 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_queue.jsonl",
+          "bytes": 5070,
+          "human": "5.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_review.jsonl",
+          "bytes": 23725,
+          "human": "23.2 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_review_summary.csv",
+          "bytes": 3682,
+          "human": "3.6 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_summary.json",
+          "bytes": 524,
+          "human": "524 B"
+        }
+      ],
+      "damage_geojson_features": 17,
+      "vlm_jsonl_records": 17,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi02-caracas/damage.csv",
+          "exists": true,
+          "bytes": 5108,
+          "human": "5.0 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi02-caracas/damage.geojson",
+          "exists": true,
+          "bytes": 39217,
+          "human": "38.3 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi02-caracas/damage.kml",
+          "exists": true,
+          "bytes": 11743,
+          "human": "11.5 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_before_after_jsonl",
+          "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
+          "exists": true,
+          "bytes": 49841,
+          "human": "48.7 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_before_after_csv",
+          "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.csv",
+          "exists": true,
+          "bytes": 3893,
+          "human": "3.8 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_before_after_summary",
+          "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.json",
+          "exists": true,
+          "bytes": 591,
+          "human": "591 B"
+        },
+        {
+          "catalog_path": "downloads.vlm_jsonl",
+          "path": "/data/aoi/emsr884-aoi02-caracas/vlm_review.jsonl",
+          "exists": true,
+          "bytes": 23725,
+          "human": "23.2 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_csv",
+          "path": "/data/aoi/emsr884-aoi02-caracas/vlm_review_summary.csv",
+          "exists": true,
+          "bytes": 3682,
+          "human": "3.6 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_summary",
+          "path": "/data/aoi/emsr884-aoi02-caracas/vlm_summary.json",
+          "exists": true,
+          "bytes": 524,
+          "human": "524 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi02-caracas/damage.geojson",
+          "exists": true,
+          "bytes": 39217,
+          "human": "38.3 KB"
+        },
+        {
+          "catalog_path": "layers.vlm",
+          "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
+          "exists": true,
+          "bytes": 49841,
+          "human": "48.7 KB"
+        },
+        {
+          "catalog_path": "layers.afterTiles",
+          "path": "/data/tiles/emsr884-aoi02-caracas/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "layers.beforeTiles",
+          "path": "/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "imagery.after.tilePyramid.urlTemplate",
+          "path": "/data/tiles/emsr884-aoi02-caracas/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "imagery.before.url",
+          "path": "/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "imagery.before.tilePyramid.urlTemplate",
+          "path": "/data/tiles/emsr884-aoi02-caracas/before/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "layers.afterImage",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[0].url",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi02-caracas-monitor01",
+      "status": "official-monitor-points",
+      "metrics_features": 20,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi02-caracas-monitor01",
+        "exists": true,
+        "files": 4,
+        "bytes": 55321,
+        "human": "54.0 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi02-caracas-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi02-caracas-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 5936,
+          "human": "5.8 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 15758,
+          "human": "15.4 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 674,
+          "human": "674 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 32953,
+          "human": "32.2 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas-monitor01/damage.csv",
+          "bytes": 5936,
+          "human": "5.8 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas-monitor01/damage.geojson",
+          "bytes": 15758,
+          "human": "15.4 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas-monitor01/damage.kml",
+          "bytes": 32953,
+          "human": "32.2 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi02-caracas-monitor01/source_metadata.json",
+          "bytes": 674,
+          "human": "674 B"
+        }
+      ],
+      "damage_geojson_features": 20,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi02-caracas-monitor01/damage.csv",
+          "exists": true,
+          "bytes": 5936,
+          "human": "5.8 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi02-caracas-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 15758,
+          "human": "15.4 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi02-caracas-monitor01/damage.kml",
+          "exists": true,
+          "bytes": 32953,
+          "human": "32.2 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi02-caracas-monitor01/source_metadata.json",
+          "exists": true,
+          "bytes": 674,
+          "human": "674 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi02-caracas-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 15758,
+          "human": "15.4 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.zip",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI02/GRA_MONIT01/EMSR884_AOI02_GRA_MONIT01_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi03-antimano",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi03-antimano",
+        "exists": true,
+        "files": 4,
+        "bytes": 341,
+        "human": "341 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi03-antimano",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi03-antimano",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 51,
+          "human": "51 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 110,
+          "human": "110 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 109,
+          "human": "109 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi03-antimano/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi03-antimano/damage.geojson",
+          "bytes": 51,
+          "human": "51 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi03-antimano/damage.kml",
+          "bytes": 109,
+          "human": "109 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi03-antimano/source_metadata.json",
+          "bytes": 110,
+          "human": "110 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi03-antimano/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi03-antimano/damage.geojson",
+          "exists": true,
+          "bytes": 51,
+          "human": "51 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi03-antimano/damage.kml",
+          "exists": true,
+          "bytes": 109,
+          "human": "109 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi03-antimano/damage.geojson",
+          "exists": true,
+          "bytes": 51,
+          "human": "51 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI03/GRA_PRODUCT/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.before_cog",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI03/GRA_PRODUCT/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.url",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[0].url",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi05-santa-cruz",
+      "status": "official-monitor-points",
+      "metrics_features": 3,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi05-santa-cruz",
+        "exists": true,
+        "files": 4,
+        "bytes": 5474,
+        "human": "5.3 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi05-santa-cruz",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi05-santa-cruz",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 959,
+          "human": "959 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 2098,
+          "human": "2.0 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 275,
+          "human": "275 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 2142,
+          "human": "2.1 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi05-santa-cruz/damage.csv",
+          "bytes": 959,
+          "human": "959 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson",
+          "bytes": 2098,
+          "human": "2.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi05-santa-cruz/damage.kml",
+          "bytes": 2142,
+          "human": "2.1 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi05-santa-cruz/source_metadata.json",
+          "bytes": 275,
+          "human": "275 B"
+        }
+      ],
+      "damage_geojson_features": 3,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi05-santa-cruz/damage.csv",
+          "exists": true,
+          "bytes": 959,
+          "human": "959 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson",
+          "exists": true,
+          "bytes": 2098,
+          "human": "2.0 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi05-santa-cruz/damage.kml",
+          "exists": true,
+          "bytes": 2142,
+          "human": "2.1 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi05-santa-cruz/source_metadata.json",
+          "exists": true,
+          "bytes": 275,
+          "human": "275 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson",
+          "exists": true,
+          "bytes": 2098,
+          "human": "2.0 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.zip",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.before_cog",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "layers.afterImage",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[0].url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi06-moron",
+      "status": "official-vector",
+      "metrics_features": 129,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi06-moron",
+        "exists": true,
+        "files": 8,
+        "bytes": 578504,
+        "human": "564.9 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi06-moron",
+        "exists": true,
+        "files": 129,
+        "bytes": 10253071,
+        "human": "9.8 MB"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi06-moron",
+        "exists": true,
+        "files": 4554,
+        "bytes": 11476406,
+        "human": "10.9 MB"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 2,
+          "bytes": 64523,
+          "human": "63.0 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 205953,
+          "human": "201.1 KB"
+        },
+        ".json": {
+          "files": 2,
+          "bytes": 916,
+          "human": "916 B"
+        },
+        ".jsonl": {
+          "files": 2,
+          "bytes": 218549,
+          "human": "213.4 KB"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 88563,
+          "human": "86.5 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/damage.csv",
+          "bytes": 37922,
+          "human": "37.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/damage.geojson",
+          "bytes": 205953,
+          "human": "201.1 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/damage.kml",
+          "bytes": 88563,
+          "human": "86.5 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/source_metadata.json",
+          "bytes": 264,
+          "human": "264 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/vlm_queue.jsonl",
+          "bytes": 37898,
+          "human": "37.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/vlm_review.jsonl",
+          "bytes": 180651,
+          "human": "176.4 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/vlm_review_summary.csv",
+          "bytes": 26601,
+          "human": "26.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron/vlm_summary.json",
+          "bytes": 652,
+          "human": "652 B"
+        }
+      ],
+      "damage_geojson_features": 129,
+      "vlm_jsonl_records": 129,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi06-moron/damage.csv",
+          "exists": true,
+          "bytes": 37922,
+          "human": "37.0 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi06-moron/damage.geojson",
+          "exists": true,
+          "bytes": 205953,
+          "human": "201.1 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi06-moron/damage.kml",
+          "exists": true,
+          "bytes": 88563,
+          "human": "86.5 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_jsonl",
+          "path": "/data/aoi/emsr884-aoi06-moron/vlm_review.jsonl",
+          "exists": true,
+          "bytes": 180651,
+          "human": "176.4 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_csv",
+          "path": "/data/aoi/emsr884-aoi06-moron/vlm_review_summary.csv",
+          "exists": true,
+          "bytes": 26601,
+          "human": "26.0 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_summary",
+          "path": "/data/aoi/emsr884-aoi06-moron/vlm_summary.json",
+          "exists": true,
+          "bytes": 652,
+          "human": "652 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi06-moron/damage.geojson",
+          "exists": true,
+          "bytes": 205953,
+          "human": "201.1 KB"
+        },
+        {
+          "catalog_path": "layers.vlm",
+          "path": "/data/aoi/emsr884-aoi06-moron/vlm_review.jsonl",
+          "exists": true,
+          "bytes": 180651,
+          "human": "176.4 KB"
+        },
+        {
+          "catalog_path": "layers.afterTiles",
+          "path": "/data/tiles/emsr884-aoi06-moron/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "imagery.after.tilePyramid.urlTemplate",
+          "path": "/data/tiles/emsr884-aoi06-moron/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.before_cog",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "layers.afterImage",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[0].url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi06-moron-monitor01",
+      "status": "official-monitor-points",
+      "metrics_features": 96,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi06-moron-monitor01",
+        "exists": true,
+        "files": 4,
+        "bytes": 249559,
+        "human": "243.7 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi06-moron-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi06-moron-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 26093,
+          "human": "25.5 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 72967,
+          "human": "71.3 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 685,
+          "human": "685 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 149814,
+          "human": "146.3 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron-monitor01/damage.csv",
+          "bytes": 26093,
+          "human": "25.5 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron-monitor01/damage.geojson",
+          "bytes": 72967,
+          "human": "71.3 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron-monitor01/damage.kml",
+          "bytes": 149814,
+          "human": "146.3 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi06-moron-monitor01/source_metadata.json",
+          "bytes": 685,
+          "human": "685 B"
+        }
+      ],
+      "damage_geojson_features": 96,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi06-moron-monitor01/damage.csv",
+          "exists": true,
+          "bytes": 26093,
+          "human": "25.5 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi06-moron-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 72967,
+          "human": "71.3 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi06-moron-monitor01/damage.kml",
+          "exists": true,
+          "bytes": 149814,
+          "human": "146.3 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi06-moron-monitor01/source_metadata.json",
+          "exists": true,
+          "bytes": 685,
+          "human": "685 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi06-moron-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 72967,
+          "human": "71.3 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.zip",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI06/GRA_MONIT01/EMSR884_AOI06_GRA_MONIT01_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi08-san-felipe",
+      "status": "official-vector",
+      "metrics_features": 43,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi08-san-felipe",
+        "exists": true,
+        "files": 14,
+        "bytes": 419881,
+        "human": "410.0 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi08-san-felipe",
+        "exists": true,
+        "files": 43,
+        "bytes": 1229338,
+        "human": "1.2 MB"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi08-san-felipe",
+        "exists": true,
+        "files": 29700,
+        "bytes": 31249928,
+        "human": "29.8 MB"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 3,
+          "bytes": 34291,
+          "human": "33.5 KB"
+        },
+        ".geojson": {
+          "files": 2,
+          "bytes": 190202,
+          "human": "185.7 KB"
+        },
+        ".html": {
+          "files": 1,
+          "bytes": 3224,
+          "human": "3.1 KB"
+        },
+        ".json": {
+          "files": 3,
+          "bytes": 1233,
+          "human": "1.2 KB"
+        },
+        ".jsonl": {
+          "files": 1,
+          "bytes": 57324,
+          "human": "56.0 KB"
+        },
+        ".kml": {
+          "files": 2,
+          "bytes": 59090,
+          "human": "57.7 KB"
+        },
+        ".md": {
+          "files": 1,
+          "bytes": 301,
+          "human": "301 B"
+        },
+        ".xlsx": {
+          "files": 1,
+          "bytes": 74216,
+          "human": "72.5 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/damage.csv",
+          "bytes": 12545,
+          "human": "12.3 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/damage.geojson",
+          "bytes": 95101,
+          "human": "92.9 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/damage.kml",
+          "bytes": 29545,
+          "human": "28.9 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/data/ems_builtup_damage.csv",
+          "bytes": 12545,
+          "human": "12.3 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/data/ems_builtup_damage.geojson",
+          "bytes": 95101,
+          "human": "92.9 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/data/ems_builtup_damage.kml",
+          "bytes": 29545,
+          "human": "28.9 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/metadata/source_metadata.json",
+          "bytes": 344,
+          "human": "344 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/source_metadata.json",
+          "bytes": 344,
+          "human": "344 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/vlm_review.jsonl",
+          "bytes": 57324,
+          "human": "56.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/vlm_review_summary.csv",
+          "bytes": 9201,
+          "human": "9.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe/vlm_summary.json",
+          "bytes": 545,
+          "human": "545 B"
+        }
+      ],
+      "damage_geojson_features": 43,
+      "vlm_jsonl_records": 43,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/damage.csv",
+          "exists": true,
+          "bytes": 12545,
+          "human": "12.3 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/damage.geojson",
+          "exists": true,
+          "bytes": 95101,
+          "human": "92.9 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/damage.kml",
+          "exists": true,
+          "bytes": 29545,
+          "human": "28.9 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_jsonl",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/vlm_review.jsonl",
+          "exists": true,
+          "bytes": 57324,
+          "human": "56.0 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_csv",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/vlm_review_summary.csv",
+          "exists": true,
+          "bytes": 9201,
+          "human": "9.0 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_summary",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/vlm_summary.json",
+          "exists": true,
+          "bytes": 545,
+          "human": "545 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/damage.geojson",
+          "exists": true,
+          "bytes": 95101,
+          "human": "92.9 KB"
+        },
+        {
+          "catalog_path": "layers.afterTiles",
+          "path": "/data/tiles/emsr884-aoi08-san-felipe/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "layers.vlm",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe/vlm_review.jsonl",
+          "exists": true,
+          "bytes": 57324,
+          "human": "56.0 KB"
+        },
+        {
+          "catalog_path": "imagery.after.tilePyramid.urlTemplate",
+          "path": "/data/tiles/emsr884-aoi08-san-felipe/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.before_cog",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "layers.afterImage",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[0].url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi08-san-felipe-monitor01",
+      "status": "official-monitor-points",
+      "metrics_features": 183,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi08-san-felipe-monitor01",
+        "exists": true,
+        "files": 4,
+        "bytes": 295182,
+        "human": "288.3 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi08-san-felipe-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi08-san-felipe-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 50960,
+          "human": "49.8 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 121126,
+          "human": "118.3 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 288,
+          "human": "288 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 122808,
+          "human": "119.9 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe-monitor01/damage.csv",
+          "bytes": 50960,
+          "human": "49.8 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe-monitor01/damage.geojson",
+          "bytes": 121126,
+          "human": "118.3 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe-monitor01/damage.kml",
+          "bytes": 122808,
+          "human": "119.9 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi08-san-felipe-monitor01/source_metadata.json",
+          "bytes": 288,
+          "human": "288 B"
+        }
+      ],
+      "damage_geojson_features": 183,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe-monitor01/damage.csv",
+          "exists": true,
+          "bytes": 50960,
+          "human": "49.8 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 121126,
+          "human": "118.3 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe-monitor01/damage.kml",
+          "exists": true,
+          "bytes": 122808,
+          "human": "119.9 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe-monitor01/source_metadata.json",
+          "exists": true,
+          "bytes": 288,
+          "human": "288 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi08-san-felipe-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 121126,
+          "human": "118.3 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.zip",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi10-guacara",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi10-guacara",
+        "exists": true,
+        "files": 4,
+        "bytes": 340,
+        "human": "340 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi10-guacara",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi10-guacara",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 51,
+          "human": "51 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 109,
+          "human": "109 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 109,
+          "human": "109 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi10-guacara/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi10-guacara/damage.geojson",
+          "bytes": 51,
+          "human": "51 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi10-guacara/damage.kml",
+          "bytes": 109,
+          "human": "109 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi10-guacara/source_metadata.json",
+          "bytes": 109,
+          "human": "109 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi10-guacara/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi10-guacara/damage.geojson",
+          "exists": true,
+          "bytes": 51,
+          "human": "51 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi10-guacara/damage.kml",
+          "exists": true,
+          "bytes": 109,
+          "human": "109 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi10-guacara/damage.geojson",
+          "exists": true,
+          "bytes": 51,
+          "human": "51 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI10/GRA_PRODUCT/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.before_cog",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI10/GRA_PRODUCT/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[0].url",
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi12-caraballeda",
+      "status": "official-vector",
+      "metrics_features": 120,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi12-caraballeda",
+        "exists": true,
+        "files": 17,
+        "bytes": 2097868,
+        "human": "2.0 MB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi12-caraballeda",
+        "exists": true,
+        "files": 441,
+        "bytes": 52620571,
+        "human": "50.2 MB"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi12-caraballeda",
+        "exists": true,
+        "files": 19399,
+        "bytes": 76506522,
+        "human": "73.0 MB"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 4,
+          "bytes": 118903,
+          "human": "116.1 KB"
+        },
+        ".geojson": {
+          "files": 2,
+          "bytes": 1239152,
+          "human": "1.2 MB"
+        },
+        ".html": {
+          "files": 1,
+          "bytes": 3224,
+          "human": "3.1 KB"
+        },
+        ".json": {
+          "files": 4,
+          "bytes": 2011,
+          "human": "2.0 KB"
+        },
+        ".jsonl": {
+          "files": 2,
+          "bytes": 498422,
+          "human": "486.7 KB"
+        },
+        ".kml": {
+          "files": 2,
+          "bytes": 163924,
+          "human": "160.1 KB"
+        },
+        ".md": {
+          "files": 1,
+          "bytes": 301,
+          "human": "301 B"
+        },
+        ".xlsx": {
+          "files": 1,
+          "bytes": 71931,
+          "human": "70.2 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/damage.csv",
+          "bytes": 35412,
+          "human": "34.6 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
+          "bytes": 619576,
+          "human": "605.1 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/damage.kml",
+          "bytes": 81962,
+          "human": "80.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/data/ems_builtup_damage.csv",
+          "bytes": 35412,
+          "human": "34.6 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/data/ems_builtup_damage.geojson",
+          "bytes": 619576,
+          "human": "605.1 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/data/ems_builtup_damage.kml",
+          "bytes": 81962,
+          "human": "80.0 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/metadata/source_metadata.json",
+          "bytes": 347,
+          "human": "347 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/source_metadata.json",
+          "bytes": 347,
+          "human": "347 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
+          "bytes": 318376,
+          "human": "310.9 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.csv",
+          "bytes": 23289,
+          "human": "22.7 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.json",
+          "bytes": 637,
+          "human": "637 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_review.jsonl",
+          "bytes": 180046,
+          "human": "175.8 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_review_summary.csv",
+          "bytes": 24790,
+          "human": "24.2 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_summary.json",
+          "bytes": 680,
+          "human": "680 B"
+        }
+      ],
+      "damage_geojson_features": 120,
+      "vlm_jsonl_records": 107,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/damage.csv",
+          "exists": true,
+          "bytes": 35412,
+          "human": "34.6 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
+          "exists": true,
+          "bytes": 619576,
+          "human": "605.1 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/damage.kml",
+          "exists": true,
+          "bytes": 81962,
+          "human": "80.0 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_jsonl",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_review.jsonl",
+          "exists": true,
+          "bytes": 180046,
+          "human": "175.8 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_csv",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_review_summary.csv",
+          "exists": true,
+          "bytes": 24790,
+          "human": "24.2 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_summary",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_summary.json",
+          "exists": true,
+          "bytes": 680,
+          "human": "680 B"
+        },
+        {
+          "catalog_path": "downloads.vlm_before_after_jsonl",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
+          "exists": true,
+          "bytes": 318376,
+          "human": "310.9 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_before_after_csv",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.csv",
+          "exists": true,
+          "bytes": 23289,
+          "human": "22.7 KB"
+        },
+        {
+          "catalog_path": "downloads.vlm_before_after_summary",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.json",
+          "exists": true,
+          "bytes": 637,
+          "human": "637 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
+          "exists": true,
+          "bytes": 619576,
+          "human": "605.1 KB"
+        },
+        {
+          "catalog_path": "layers.afterTiles",
+          "path": "/data/tiles/emsr884-aoi12-caraballeda/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "layers.vlm",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
+          "exists": true,
+          "bytes": 318376,
+          "human": "310.9 KB"
+        },
+        {
+          "catalog_path": "layers.beforeTiles",
+          "path": "/data/tiles/emsr884-aoi12-caraballeda/before/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "imagery.after.tilePyramid.urlTemplate",
+          "path": "/data/tiles/emsr884-aoi12-caraballeda/after/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "imagery.before.url",
+          "path": "/data/tiles/emsr884-aoi12-caraballeda/before/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        },
+        {
+          "catalog_path": "imagery.before.tilePyramid.urlTemplate",
+          "path": "/data/tiles/emsr884-aoi12-caraballeda/before/{z}/{x}/{y}.webp",
+          "exists": true,
+          "bytes": 0,
+          "human": "0 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "layers.afterImage",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[0].url",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B130001101BE2A00.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[1].url",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FF4510.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[2].url",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B120001100513B10.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.before.sourceScenes[3].url",
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/10400100B979DD00.tif",
+          "host": "vantor-opendata.s3.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi12-caraballeda-monitor01",
+      "status": "official-monitor-points",
+      "metrics_features": 1004,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi12-caraballeda-monitor01",
+        "exists": true,
+        "files": 4,
+        "bytes": 1583339,
+        "human": "1.5 MB"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi12-caraballeda-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi12-caraballeda-monitor01",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 267383,
+          "human": "261.1 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 652530,
+          "human": "637.2 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 292,
+          "human": "292 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 663134,
+          "human": "647.6 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda-monitor01/damage.csv",
+          "bytes": 267383,
+          "human": "261.1 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda-monitor01/damage.geojson",
+          "bytes": 652530,
+          "human": "637.2 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda-monitor01/damage.kml",
+          "bytes": 663134,
+          "human": "647.6 KB"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi12-caraballeda-monitor01/source_metadata.json",
+          "bytes": 292,
+          "human": "292 B"
+        }
+      ],
+      "damage_geojson_features": 1004,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda-monitor01/damage.csv",
+          "exists": true,
+          "bytes": 267383,
+          "human": "261.1 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 652530,
+          "human": "637.2 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda-monitor01/damage.kml",
+          "exists": true,
+          "bytes": 663134,
+          "human": "647.6 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda-monitor01/source_metadata.json",
+          "exists": true,
+          "bytes": 292,
+          "human": "292 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi12-caraballeda-monitor01/damage.geojson",
+          "exists": true,
+          "bytes": 652530,
+          "human": "637.2 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.zip",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_MONIT01/EMSR884_AOI12_GRA_MONIT01_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "external-msft-catia-la-mar-predicted-damage",
+      "status": "external-prediction",
+      "metrics_features": 9134,
+      "aoi_dir": {
+        "path": "public/data/aoi/external-msft-catia-la-mar-predicted-damage",
+        "exists": true,
+        "files": 3,
+        "bytes": 7096573,
+        "human": "6.8 MB"
+      },
+      "chips": {
+        "path": "public/data/chips/external-msft-catia-la-mar-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/external-msft-catia-la-mar-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 2539201,
+          "human": "2.4 MB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 4555694,
+          "human": "4.3 MB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 1678,
+          "human": "1.6 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.csv",
+          "bytes": 2539201,
+          "human": "2.4 MB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.geojson",
+          "bytes": 4555694,
+          "human": "4.3 MB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-catia-la-mar-predicted-damage/source_metadata.json",
+          "bytes": 1678,
+          "human": "1.6 KB"
+        }
+      ],
+      "damage_geojson_features": 9134,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.csv",
+          "exists": true,
+          "bytes": 2539201,
+          "human": "2.4 MB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 4555694,
+          "human": "4.3 MB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-msft-catia-la-mar-predicted-damage/source_metadata.json",
+          "exists": true,
+          "bytes": 1678,
+          "human": "1.6 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 4555694,
+          "human": "4.3 MB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.hdx",
+          "url": "https://data.humdata.org/dataset/venezuela-earthquakes-catia-la-mar",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "downloads.source_gpkg",
+          "url": "https://data.humdata.org/dataset/029efb88-3a8a-40d9-8aea-65477e6eb744/resource/684fdeab-e4ac-4029-9ec9-891676b2ebfc/download/predicted_damage_catia_la_mar_footprints.gpkg",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "external-msft-caraballeda-east-predicted-damage",
+      "status": "external-prediction",
+      "metrics_features": 622,
+      "aoi_dir": {
+        "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage",
+        "exists": true,
+        "files": 4,
+        "bytes": 1154186,
+        "human": "1.1 MB"
+      },
+      "chips": {
+        "path": "public/data/chips/external-msft-caraballeda-east-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/external-msft-caraballeda-east-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 164634,
+          "human": "160.8 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 583407,
+          "human": "569.7 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 1275,
+          "human": "1.2 KB"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 404870,
+          "human": "395.4 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.csv",
+          "bytes": 164634,
+          "human": "160.8 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
+          "bytes": 583407,
+          "human": "569.7 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.kml",
+          "bytes": 404870,
+          "human": "395.4 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage/source_metadata.json",
+          "bytes": 1275,
+          "human": "1.2 KB"
+        }
+      ],
+      "damage_geojson_features": 622,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.csv",
+          "exists": true,
+          "bytes": 164634,
+          "human": "160.8 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 583407,
+          "human": "569.7 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.kml",
+          "exists": true,
+          "bytes": 404870,
+          "human": "395.4 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/source_metadata.json",
+          "exists": true,
+          "bytes": 1275,
+          "human": "1.2 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 583407,
+          "human": "569.7 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.hdx",
+          "url": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-caraballeda",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "downloads.source_gpkg",
+          "url": "https://data.humdata.org/dataset/1a77bd9c-5170-4651-92c2-0dd42cdc303e/resource/d82d36cf-e728-4f03-b8a8-7615d05a8374/download/caraballeda_east_vantor_6-26_building_predictions_merged.gpkg",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "external-msft-catia-la-mar-east-predicted-damage",
+      "status": "external-prediction",
+      "metrics_features": 1209,
+      "aoi_dir": {
+        "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage",
+        "exists": true,
+        "files": 4,
+        "bytes": 2251580,
+        "human": "2.1 MB"
+      },
+      "chips": {
+        "path": "public/data/chips/external-msft-catia-la-mar-east-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/external-msft-catia-la-mar-east-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 320406,
+          "human": "312.9 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 1142769,
+          "human": "1.1 MB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 1268,
+          "human": "1.2 KB"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 787137,
+          "human": "768.7 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.csv",
+          "bytes": 320406,
+          "human": "312.9 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
+          "bytes": 1142769,
+          "human": "1.1 MB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.kml",
+          "bytes": 787137,
+          "human": "768.7 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage/source_metadata.json",
+          "bytes": 1268,
+          "human": "1.2 KB"
+        }
+      ],
+      "damage_geojson_features": 1209,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.csv",
+          "exists": true,
+          "bytes": 320406,
+          "human": "312.9 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 1142769,
+          "human": "1.1 MB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.kml",
+          "exists": true,
+          "bytes": 787137,
+          "human": "768.7 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/source_metadata.json",
+          "exists": true,
+          "bytes": 1268,
+          "human": "1.2 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 1142769,
+          "human": "1.1 MB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.hdx",
+          "url": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-catia-la-mar-east",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "downloads.source_gpkg",
+          "url": "https://data.humdata.org/dataset/0c439581-b14d-4092-a104-95b5abee3002/resource/2034c971-e8ac-431d-acaa-e1c94d601039/download/predicted_damage_east-catia-la-mar-skysat-final.gpkg",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "external-msft-la-guaira-east-predicted-damage",
+      "status": "external-prediction",
+      "metrics_features": 119,
+      "aoi_dir": {
+        "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage",
+        "exists": true,
+        "files": 4,
+        "bytes": 219212,
+        "human": "214.1 KB"
+      },
+      "chips": {
+        "path": "public/data/chips/external-msft-la-guaira-east-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/external-msft-la-guaira-east-predicted-damage",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 31234,
+          "human": "30.5 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 109491,
+          "human": "106.9 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 1225,
+          "human": "1.2 KB"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 77262,
+          "human": "75.5 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.csv",
+          "bytes": 31234,
+          "human": "30.5 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
+          "bytes": 109491,
+          "human": "106.9 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.kml",
+          "bytes": 77262,
+          "human": "75.5 KB"
+        },
+        {
+          "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage/source_metadata.json",
+          "bytes": 1225,
+          "human": "1.2 KB"
+        }
+      ],
+      "damage_geojson_features": 119,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.csv",
+          "exists": true,
+          "bytes": 31234,
+          "human": "30.5 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 109491,
+          "human": "106.9 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.kml",
+          "exists": true,
+          "bytes": 77262,
+          "human": "75.5 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/source_metadata.json",
+          "exists": true,
+          "bytes": 1225,
+          "human": "1.2 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
+          "exists": true,
+          "bytes": 109491,
+          "human": "106.9 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.hdx",
+          "url": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-la-guaira",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "downloads.source_gpkg",
+          "url": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/d07fc3f8-885f-46f4-bd8e-03ac92fd5b00/download/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg",
+          "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    }
+  ]
+}

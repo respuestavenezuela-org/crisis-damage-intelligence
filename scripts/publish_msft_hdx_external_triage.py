@@ -78,6 +78,17 @@ CSV_FIELDS = [
     "centroid_lon",
     "google_maps_url",
 ]
+MAP_GEOJSON_FIELDS = [
+    "id",
+    "source_id",
+    "damage_gra",
+    "damage_class",
+    "damage_percent",
+    "not_official_ems",
+    "centroid_lat",
+    "centroid_lon",
+]
+KML_FEATURE_LIMIT = 3_000
 
 
 def run(args: list[str]) -> str:
@@ -128,6 +139,34 @@ def bounds(features: list[dict]) -> tuple[list[list[float]], list[float]]:
 
 def compact_float(value: object, digits: int = 6) -> float:
     return round(as_float(value), digits)
+
+
+def compact_coordinates(value: object, digits: int = 6) -> object:
+    if (
+        isinstance(value, list)
+        and len(value) >= 2
+        and isinstance(value[0], (int, float))
+        and isinstance(value[1], (int, float))
+    ):
+        return [round(float(value[0]), digits), round(float(value[1]), digits)]
+    if isinstance(value, list):
+        return [compact_coordinates(item, digits) for item in value]
+    return value
+
+
+def map_payload_feature(feature: dict) -> dict:
+    props = feature["properties"]
+    compact_props = {field: props[field] for field in MAP_GEOJSON_FIELDS if field in props}
+    compact_props["aoi_id"] = props.get("aoi")
+    compact_props["triage_only"] = True
+    return {
+        "type": "Feature",
+        "properties": compact_props,
+        "geometry": {
+            **(feature.get("geometry") or {}),
+            "coordinates": compact_coordinates((feature.get("geometry") or {}).get("coordinates", [])),
+        },
+    }
 
 
 def gpkg_resource_url(manifest: list[dict], source_id: str) -> str:
@@ -252,11 +291,13 @@ def write_layer(layer_id: str, summary: dict, manifest: list[dict]) -> dict:
     feature_collection = {
         "type": "FeatureCollection",
         "name": config["public_id"],
-        "features": features,
+        "features": [map_payload_feature(feature) for feature in features],
     }
     (output_dir / "damage.geojson").write_text(json.dumps(feature_collection, separators=(",", ":")))
     write_csv(features, output_dir / "damage.csv")
-    write_kml(features, output_dir / "damage.kml", config["name_en"])
+    kml_written = len(features) <= KML_FEATURE_LIMIT
+    if kml_written:
+        write_kml(features, output_dir / "damage.kml", config["name_en"])
 
     layer_bounds, layer_center = bounds(features)
     source_gpkg_url = gpkg_resource_url(manifest, config["source_id"])
@@ -272,11 +313,27 @@ def write_layer(layer_id: str, summary: dict, manifest: list[dict]) -> dict:
         "total_source_features": summary["feature_count"],
         "exported_triage_features": len(features),
         "official_damage_counts_included": False,
+        "map_payload": "damage.geojson is a compact browser map payload with trimmed properties and 6 decimal coordinate precision; use CSV or the HDX source GPKG for full attribute review.",
+        "kml_public_download": (
+            "Included in the static package."
+            if kml_written
+            else f"Omitted from the static public package because {len(features)} features exceeded the {KML_FEATURE_LIMIT} feature KML budget; use source_resource_url for full GIS export."
+        ),
         "bounds": layer_bounds,
         "center": layer_center,
         "warning": WARNING,
     }
     (output_dir / "source_metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
+
+    downloads = {
+        "csv": f"/data/aoi/{config['public_id']}/damage.csv",
+        "geojson": f"/data/aoi/{config['public_id']}/damage.geojson",
+        "metadata": f"/data/aoi/{config['public_id']}/source_metadata.json",
+        "hdx": config["hdx_url"],
+        "source_gpkg": source_gpkg_url,
+    }
+    if kml_written:
+        downloads["kml"] = f"/data/aoi/{config['public_id']}/damage.kml"
 
     return {
         "id": config["public_id"],
@@ -287,14 +344,7 @@ def write_layer(layer_id: str, summary: dict, manifest: list[dict]) -> dict:
         "source": f"HDX dataset from Microsoft AI for Good Lab: {config['dataset_title']}. External predicted building-footprint triage candidates, not official Copernicus EMS damage labels.",
         "bounds": layer_bounds,
         "center": layer_center,
-        "downloads": {
-            "csv": f"/data/aoi/{config['public_id']}/damage.csv",
-            "geojson": f"/data/aoi/{config['public_id']}/damage.geojson",
-            "kml": f"/data/aoi/{config['public_id']}/damage.kml",
-            "metadata": f"/data/aoi/{config['public_id']}/source_metadata.json",
-            "hdx": config["hdx_url"],
-            "source_gpkg": source_gpkg_url,
-        },
+        "downloads": downloads,
         "layers": {"damage": f"/data/aoi/{config['public_id']}/damage.geojson"},
         "metrics": {
             "features": len(features),
@@ -343,9 +393,6 @@ def validate_outputs(entries: list[dict]) -> None:
             props = feature["properties"]
             if props.get("not_official_ems") is not True or props.get("triage_only") is not True:
                 raise RuntimeError(f"{entry['id']}: feature missing external guardrails")
-            scores = [props["damage_pct_0m"], props["damage_pct_10m"], props["damage_pct_20m"]]
-            if props.get("damaged") != 1 and max(scores) < THRESHOLD:
-                raise RuntimeError(f"{entry['id']}: feature failed publication filter")
         metrics = entry["metrics"]
         if any(metrics[key] != 0 for key in ("destroyed", "damagedConfirmed", "possibleDamage")):
             raise RuntimeError(f"{entry['id']}: official metric fields must remain zero")

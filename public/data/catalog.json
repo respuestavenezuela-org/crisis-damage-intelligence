@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T18:20:00Z",
+  "updatedAt": "2026-06-29T07:42:57Z",
   "platform": "Respuesta Venezuela",
   "aois": [
     {
@@ -76,6 +76,9 @@
           "bytes": 188120283,
           "sha256": "eb5a904185724597778f2846582a1884a2cf00e13934b09062ff70eafc87e43b",
           "r2Key": "ems/rasters/after/emsr884-aoi02-caracas/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
+          "license": "Copernicus EMS public product terms",
+          "limitations": "Official post-event imagery context; use EMS vector labels as the damage source of record and never infer absence of damage from imagery gaps.",
           "tilePyramid": {
             "urlTemplate": "/data/tiles/emsr884-aoi02-caracas/after/{z}/{x}/{y}.webp",
             "format": "webp",
@@ -209,10 +212,10 @@
         "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI03/GRA_PRODUCT/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif",
         "csv": "/data/aoi/emsr884-aoi03-antimano/damage.csv",
         "geojson": "/data/aoi/emsr884-aoi03-antimano/damage.geojson",
-        "kml": "/data/aoi/emsr884-aoi03-antimano/damage.kml"
+        "kml": "/data/aoi/emsr884-aoi03-antimano/damage.kml",
+        "before_cog": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif"
       },
       "layers": {
-        "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI03/GRA_PRODUCT/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif",
         "damage": "/data/aoi/emsr884-aoi03-antimano/damage.geojson"
       },
       "metrics": {
@@ -229,10 +232,33 @@
           "acquisitionUtc": "2026-06-25T15:17:00",
           "bytes": 267288991,
           "sha256": "6d327cc502c08402c7e695ce6932be07b5bb6fd6f9901a6be75bac21dae96c65",
-          "r2Key": "ems/rasters/after/emsr884-aoi03-antimano/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif"
+          "r2Key": "ems/rasters/after/emsr884-aoi03-antimano/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif",
+          "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
+          "license": "Copernicus EMS public product terms",
+          "limitations": "Official post-event imagery context; no official damage vector is published for this AOI yet and imagery gaps must not be read as no damage."
         },
-        "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "before": {
+          "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif",
+          "sensor": "Vantor LG06",
+          "acquisitionUtc": "2026-03-20T14:46:55.249591Z",
+          "bytes": 4722307642,
+          "sha256": null,
+          "r2Key": null,
+          "source": "Vantor Open Data pre-event reference scene, not Copernicus EMS official before imagery",
+          "coverage": "Intersects AOI03 Antimano and can support high-resolution pre-event visual context for imagery-only pilot review. AOI03 still has no official EMS damage vector, so it must not be used for official damage counts.",
+          "license": "CC-BY-NC-4.0",
+          "productionNote": "Direct remote GeoTIFF is public and CORS-enabled; generate WebP/COG tiles before heavy production use.",
+          "sourceScenes": [
+            {
+              "id": "B160001100FD1910",
+              "sensor": "LG06",
+              "acquisitionUtc": "2026-03-20T14:46:55.249591Z",
+              "cloudCover": 1,
+              "url": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif"
+            }
+          ]
+        },
+        "note": "After imagery is official Copernicus EMS post-event COG. Before imagery is Vantor Open Data high-resolution pre-event reference, not official EMS before imagery. AOI03 has no official EMS damage vector, so before/after review remains imagery-only context unless official vectors are published.",
         "approximateReference": {
           "label": "Esri World Imagery aerial reference",
           "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -272,7 +298,8 @@
         "kml": "/data/aoi/emsr884-aoi05-santa-cruz/damage.kml",
         "metadata": "/data/aoi/emsr884-aoi05-santa-cruz/source_metadata.json",
         "zip": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_v1.zip",
-        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif"
+        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson",
@@ -286,16 +313,41 @@
         "vlmReviewed": 0
       },
       "imagery": {
-        "before": null,
+        "before": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "sensor": "Sentinel-2B MSI",
+          "acquisitionUtc": "2026-02-05T15:09:57.182000Z",
+          "bytes": 289110095,
+          "sha256": null,
+          "r2Key": null,
+          "source": "AWS Earth Search Sentinel-2 L2A COG true-color pre-event visual reference, not Copernicus EMS official before imagery",
+          "coverage": "Covers the AOI05 Santa Cruz EMS point features as a 10 m true-color context layer. This is not high-resolution enough for building-level damage comparison.",
+          "license": "Copernicus Sentinel data terms / AWS Open Data Registry",
+          "resolutionM": 10,
+          "intendedUse": "Context-only before map layer. Too coarse for building-level before/after VLM, official damage evidence, or response counts.",
+          "sourceScenes": [
+            {
+              "id": "S2B_19PFM_20260205_0_L2A",
+              "sensor": "Sentinel-2B MSI",
+              "acquisitionUtc": "2026-02-05T15:09:57.182000Z",
+              "cloudCover": 0.765556,
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+              "use": "context-only before map layer; not suitable for building-level damage comparison"
+            }
+          ]
+        },
         "after": {
           "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
           "sensor": "WorldView-3",
           "acquisitionUtc": "2026-06-26T15:10:00",
           "bytes": null,
           "sha256": null,
-          "r2Key": null
+          "r2Key": null,
+          "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
+          "license": "Copernicus EMS public product terms",
+          "limitations": "Official post-event imagery context; use EMS MONIT01/vector labels as the damage source of record and never infer absence of damage from imagery gaps."
         },
-        "note": "Official EMS point damage layer with post-event image URL. No dated pre-event imagery pair is exposed for this AOI yet.",
+        "note": "After imagery is official Copernicus EMS post-event WorldView-3 COG. Before imagery is public Sentinel-2 L2A 10 m context only; do not use it for building-level before/after VLM, official damage evidence, or response counts.",
         "approximateReference": {
           "label": "Esri World Imagery aerial reference",
           "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -337,7 +389,8 @@
         "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
         "vlm_jsonl": "/data/aoi/emsr884-aoi06-moron/vlm_review.jsonl",
         "vlm_csv": "/data/aoi/emsr884-aoi06-moron/vlm_review_summary.csv",
-        "vlm_summary": "/data/aoi/emsr884-aoi06-moron/vlm_summary.json"
+        "vlm_summary": "/data/aoi/emsr884-aoi06-moron/vlm_summary.json",
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi06-moron/damage.geojson",
@@ -367,6 +420,9 @@
           "bytes": 311844612,
           "sha256": "95d73a91b221c1604381258ae8dfdb24607726b72f47221800be9ffbb2d105fd",
           "r2Key": "ems/rasters/after/emsr884-aoi06-moron/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
+          "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
+          "license": "Copernicus EMS public product terms",
+          "limitations": "Official post-event imagery context; use EMS vector labels as the damage source of record and never infer absence of damage from imagery gaps.",
           "tilePyramid": {
             "urlTemplate": "/data/tiles/emsr884-aoi06-moron/after/{z}/{x}/{y}.webp",
             "format": "webp",
@@ -376,8 +432,30 @@
             "bytesApprox": 25000000
           }
         },
-        "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "before": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "sensor": "Sentinel-2B MSI",
+          "acquisitionUtc": "2026-02-05T15:10:00.674000Z",
+          "bytes": 305451117,
+          "sha256": null,
+          "r2Key": null,
+          "source": "AWS Earth Search Sentinel-2 L2A COG true-color pre-event visual reference, not Copernicus EMS official before imagery",
+          "coverage": "Covers the AOI06 Moron official EMS vector features as a 10 m true-color context layer. This is not high-resolution enough for building-level damage comparison.",
+          "license": "Copernicus Sentinel data terms / AWS Open Data Registry",
+          "resolutionM": 10,
+          "intendedUse": "Context-only before map layer. Too coarse for building-level before/after VLM, official damage evidence, or response counts.",
+          "sourceScenes": [
+            {
+              "id": "S2B_19PEM_20260205_0_L2A",
+              "sensor": "Sentinel-2B MSI",
+              "acquisitionUtc": "2026-02-05T15:10:00.674000Z",
+              "cloudCover": 5.237879,
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+              "use": "context-only before map layer; not suitable for building-level damage comparison"
+            }
+          ]
+        },
+        "note": "After imagery is official Copernicus EMS post-event COG/tiles. Before imagery is public Sentinel-2 L2A 10 m context only; keep AOI06 VLM labeled post-event-only until a high-resolution pre-event baseline is found.",
         "approximateReference": {
           "label": "Esri World Imagery aerial reference",
           "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -474,7 +552,8 @@
         "kml": "/data/aoi/emsr884-aoi08-san-felipe/damage.kml",
         "vlm_jsonl": "/data/aoi/emsr884-aoi08-san-felipe/vlm_review.jsonl",
         "vlm_csv": "/data/aoi/emsr884-aoi08-san-felipe/vlm_review_summary.csv",
-        "vlm_summary": "/data/aoi/emsr884-aoi08-san-felipe/vlm_summary.json"
+        "vlm_summary": "/data/aoi/emsr884-aoi08-san-felipe/vlm_summary.json",
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif"
       },
       "layers": {
         "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
@@ -504,6 +583,9 @@
           "bytes": 222077456,
           "sha256": "ac298487358bc513d1722608dcd802f74281527e48ab5f25363e91d720402498",
           "r2Key": "ems/rasters/after/emsr884-aoi08-san-felipe/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
+          "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
+          "license": "Copernicus EMS public product terms",
+          "limitations": "Official post-event imagery context; use EMS vector labels as the damage source of record and never infer absence of damage from imagery gaps.",
           "tilePyramid": {
             "urlTemplate": "/data/tiles/emsr884-aoi08-san-felipe/after/{z}/{x}/{y}.webp",
             "format": "webp",
@@ -514,8 +596,30 @@
             "quality": 80
           }
         },
-        "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "before": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+          "sensor": "Sentinel-2B MSI",
+          "acquisitionUtc": "2026-02-05T15:10:00.674000Z",
+          "bytes": 305451117,
+          "sha256": null,
+          "r2Key": null,
+          "source": "AWS Earth Search Sentinel-2 L2A COG true-color pre-event visual reference, not Copernicus EMS official before imagery",
+          "coverage": "Covers the AOI08 San Felipe official EMS vector features as a 10 m true-color context layer. This is not high-resolution enough for building-level damage comparison.",
+          "license": "Copernicus Sentinel data terms / AWS Open Data Registry",
+          "resolutionM": 10,
+          "intendedUse": "Context-only before map layer. Too coarse for building-level before/after VLM, official damage evidence, or response counts.",
+          "sourceScenes": [
+            {
+              "id": "S2B_19PEM_20260205_0_L2A",
+              "sensor": "Sentinel-2B MSI",
+              "acquisitionUtc": "2026-02-05T15:10:00.674000Z",
+              "cloudCover": 5.237879,
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+              "use": "context-only before map layer; not suitable for building-level damage comparison"
+            }
+          ]
+        },
+        "note": "After imagery is official Copernicus EMS post-event COG/tiles. Before imagery is public Sentinel-2 L2A 10 m context only; keep AOI08 VLM labeled post-event-only until a high-resolution pre-event baseline is found.",
         "approximateReference": {
           "label": "Esri World Imagery aerial reference",
           "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -609,10 +713,10 @@
         "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI10/GRA_PRODUCT/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
         "csv": "/data/aoi/emsr884-aoi10-guacara/damage.csv",
         "geojson": "/data/aoi/emsr884-aoi10-guacara/damage.geojson",
-        "kml": "/data/aoi/emsr884-aoi10-guacara/damage.kml"
+        "kml": "/data/aoi/emsr884-aoi10-guacara/damage.kml",
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif"
       },
       "layers": {
-        "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI10/GRA_PRODUCT/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
         "damage": "/data/aoi/emsr884-aoi10-guacara/damage.geojson"
       },
       "metrics": {
@@ -629,10 +733,35 @@
           "acquisitionUtc": "2026-06-25T14:59:00",
           "bytes": 706216767,
           "sha256": "bdc3448878b2d89f33c79828eda35e075dcc4f7e93a1182855225ab49ad126d5",
-          "r2Key": "ems/rasters/after/emsr884-aoi10-guacara/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif"
+          "r2Key": "ems/rasters/after/emsr884-aoi10-guacara/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
+          "license": "Copernicus EMS public product terms",
+          "limitations": "Official post-event imagery context; no official damage vector is published for this AOI yet and imagery gaps must not be read as no damage."
         },
-        "before": null,
-        "note": "Post-event COG only. No EMSR884 before imagery pair is exposed for this AOI yet.",
+        "before": {
+          "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+          "sensor": "Sentinel-2B MSI",
+          "acquisitionUtc": "2026-02-05T15:09:57.182000Z",
+          "bytes": 289110095,
+          "sha256": null,
+          "r2Key": null,
+          "source": "AWS Earth Search Sentinel-2 L2A COG true-color pre-event visual reference, not Copernicus EMS official before imagery",
+          "coverage": "Covers the AOI10 Guacara imagery-only bounds as a 10 m true-color context layer. AOI10 still has no official EMS damage vector, and this before layer is too coarse for building-level damage comparison.",
+          "license": "Copernicus Sentinel data terms / AWS Open Data Registry",
+          "resolutionM": 10,
+          "intendedUse": "Context-only before map layer. Too coarse for building-level before/after VLM, official damage evidence, or response counts.",
+          "sourceScenes": [
+            {
+              "id": "S2B_19PFM_20260205_0_L2A",
+              "sensor": "Sentinel-2B MSI",
+              "acquisitionUtc": "2026-02-05T15:09:57.182000Z",
+              "cloudCover": 0.765556,
+              "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+              "use": "context-only before map layer; not suitable for building-level damage comparison"
+            }
+          ]
+        },
+        "note": "After imagery is official Copernicus EMS post-event COG. Before imagery is public Sentinel-2 L2A 10 m context only. AOI10 has no official EMS damage vector, so this pair is for navigation/context only.",
         "approximateReference": {
           "label": "Esri World Imagery aerial reference",
           "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -716,6 +845,9 @@
           "bytes": 916351360,
           "sha256": null,
           "r2Key": null,
+          "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
+          "license": "Copernicus EMS public product terms",
+          "limitations": "Official post-event imagery context; use EMS vector labels as the damage source of record and never infer absence of damage from imagery gaps.",
           "tilePyramid": {
             "urlTemplate": "/data/tiles/emsr884-aoi12-caraballeda/after/{z}/{x}/{y}.webp",
             "format": "webp",
@@ -870,7 +1002,6 @@
       "downloads": {
         "csv": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.csv",
         "geojson": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.geojson",
-        "kml": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.kml",
         "metadata": "/data/aoi/external-msft-catia-la-mar-predicted-damage/source_metadata.json",
         "hdx": "https://data.humdata.org/dataset/venezuela-earthquakes-catia-la-mar",
         "source_gpkg": "https://data.humdata.org/dataset/029efb88-3a8a-40d9-8aea-65477e6eb744/resource/684fdeab-e4ac-4029-9ec9-891676b2ebfc/download/predicted_damage_catia_la_mar_footprints.gpkg"

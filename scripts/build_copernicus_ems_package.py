@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import csv
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -8,6 +9,9 @@ import tempfile
 import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
+
+
+PUBLIC_REPORT_PDF_MAX_BYTES = 5 * 1024 * 1024
 
 
 def run(args):
@@ -40,9 +44,16 @@ def layer_source(product_root):
     gpkg = sorted(product_root.glob("*_v*.gpkg"))
     if gpkg:
         info = run(["ogrinfo", str(gpkg[0])])
-        for layer in ("builtUpA_v1", "builtUpP_v1"):
-            if layer in info:
-                return str(gpkg[0]), layer, gpkg[0]
+        layers = []
+        for line in info.splitlines():
+            match = re.match(r"\s*\d+:\s+(builtUp[AP]_v(\d+))\b", line)
+            if match:
+                name, version = match.groups()
+                geometry_priority = 0 if name.startswith("builtUpA_") else 1
+                layers.append((geometry_priority, -int(version), name))
+        if layers:
+            _, _, layer = sorted(layers)[0]
+            return str(gpkg[0]), layer, gpkg[0]
     shp = sorted(product_root.glob("*_builtUp[AP]_v*.shp"))
     if shp:
         return str(shp[0]), None, shp[0]
@@ -54,6 +65,10 @@ def product_id_from_path(product_path, product_root):
     if "_v" in stem:
         return stem.rsplit("_v", 1)[0]
     return product_root.name
+
+
+def source_product_label(input_path):
+    return Path(input_path).name
 
 
 def convert_to_geojson(src, layer, out_geojson):
@@ -229,8 +244,12 @@ def main():
         build_kml(rows, out / "data" / "ems_builtup_damage.kml")
 
         pdfs = list(product_root.rglob("*.pdf"))
+        skipped_pdf = None
         if pdfs:
-            shutil.copy2(pdfs[0], out / "reports" / pdfs[0].name)
+            if pdfs[0].stat().st_size <= PUBLIC_REPORT_PDF_MAX_BYTES:
+                shutil.copy2(pdfs[0], out / "reports" / pdfs[0].name)
+            else:
+                skipped_pdf = pdfs[0].name
         xlsx = list(product_root.rglob("*summaryTable*.xlsx"))
         if xlsx:
             shutil.copy2(xlsx[0], out / "reports" / xlsx[0].name)
@@ -240,7 +259,7 @@ def main():
             "destroyed": sum(r["damage_gra"] == "Destroyed" for r in rows),
             "damaged": sum(r["damage_gra"] == "Damaged" for r in rows),
             "possibly_damaged": sum(r["damage_gra"] == "Possibly damaged" for r in rows),
-            "source_product": str(input_path),
+            "source_product": source_product_label(input_path),
             "source_root": product_id,
             "source_file": Path(src).name,
             "source_layer": layer or Path(src).name,
@@ -249,10 +268,11 @@ def main():
         (out / "reports" / "README_EMS_COMPATIBILITY.md").write_text(
             "# EMS-Compatible Package\n\n"
             "This package is generated directly from Copernicus EMS GRA/BLP vectors.\n\n"
-            "- Input layer: `builtUpA_v1`\n"
+            f"- Input layer: `{layer or Path(src).name}`\n"
             "- Key EMS field: `damage_gra`\n"
             "- Outputs: CSV, GeoJSON, KML, static map viewer\n\n"
-            "For AOI12 La Guaira, run this same builder on the AOI12 GRA zip when it becomes downloadable.\n"
+            + (f"- Map PDF `{skipped_pdf}` was not copied because it exceeds the 5 MB public package budget; keep the source EMS ZIP as the full official report source.\n\n" if skipped_pdf else "")
+            + "For AOI12 La Guaira, run this same builder on the AOI12 GRA zip when it becomes downloadable.\n"
         )
         write_simple_viewer(out, "ems_builtup_damage.geojson", f"EMS Damage Layer - {product_id}")
         print(out)

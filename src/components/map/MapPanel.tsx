@@ -53,6 +53,7 @@ type Props = {
 
 type OlDamageFeature = Feature & { original?: DamageFeature };
 type RasterLayer = WebGLTileLayer | TileLayer<XYZ>;
+const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
 type InteriorGeometry = {
   getType: () => string;
   getCoordinates?: () => unknown;
@@ -103,8 +104,20 @@ function passesFilter(feature: DamageFeature, filter: Props["filter"], vlm: Reco
   return true;
 }
 
+function directRasterIsMobileSafe(bytes?: number | null) {
+  return !bytes || bytes <= DIRECT_RASTER_MOBILE_MAX_BYTES;
+}
+
+function canRenderBeforeImage(aoi: AoiRecord) {
+  return Boolean(aoi.layers.beforeImage && directRasterIsMobileSafe(aoi.imagery?.before?.bytes));
+}
+
+function canRenderAfterImage(aoi: AoiRecord) {
+  return Boolean(aoi.layers.afterImage && directRasterIsMobileSafe(aoi.imagery?.after?.bytes));
+}
+
 function hasBeforeLayer(aoi: AoiRecord) {
-  return Boolean(aoi.layers.beforeTiles || aoi.layers.beforeImage || aoi.imagery?.approximateReference?.urlTemplate);
+  return Boolean(aoi.layers.beforeTiles || canRenderBeforeImage(aoi) || aoi.imagery?.approximateReference?.urlTemplate);
 }
 
 export default function MapPanel({ aoi, features, mode, opacity, filter, basemap, vlm, selectedId, focusToken, aoiFocusToken, onMapReady, onFirstTileLoaded, onSelect }: Props) {
@@ -292,7 +305,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   const applyLayerVisibility = useCallback((nextMode: Props["mode"], nextBasemap: Props["basemap"]) => {
     const map = mapRef.current;
     const hasBefore = hasBeforeLayer(aoi);
-    const hasAfter = Boolean(aoi.layers.afterTiles || aoi.layers.afterImage);
+    const hasAfter = Boolean(aoi.layers.afterTiles || canRenderAfterImage(aoi));
     baseRef.current?.setVisible(nextBasemap === "map");
     aerialBaseRef.current?.setVisible(nextBasemap === "aerial");
     beforeRef.current?.setVisible(nextMode === "before" && hasBefore);
@@ -402,7 +415,10 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       fromLonLat([aoi.bounds[1][1], aoi.bounds[1][0]]),
     ]);
 
-    if (aoi.layers.beforeTiles || aoi.layers.beforeImage || aoi.imagery?.approximateReference?.urlTemplate) {
+    const beforeImageUrl = canRenderBeforeImage(aoi) ? aoi.layers.beforeImage : undefined;
+    const afterImageUrl = canRenderAfterImage(aoi) ? aoi.layers.afterImage : undefined;
+
+    if (aoi.layers.beforeTiles || beforeImageUrl || aoi.imagery?.approximateReference?.urlTemplate) {
       beforeRef.current = aoi.layers.beforeTiles
         ? new TileLayer({
           source: new XYZ({ url: aoi.layers.beforeTiles, maxZoom: 18, minZoom: 12, transition: 0 }),
@@ -411,9 +427,9 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
           visible: modeRef.current === "before",
           zIndex: 10,
         })
-        : aoi.layers.beforeImage
+        : beforeImageUrl
           ? new WebGLTileLayer({
-          source: new GeoTIFF({ sources: [{ url: aoi.layers.beforeImage as string }], convertToRGB: "auto" }),
+          source: new GeoTIFF({ sources: [{ url: beforeImageUrl }], convertToRGB: "auto" }),
           opacity: 1,
           visible: modeRef.current === "before",
           zIndex: 10,
@@ -433,7 +449,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       map.addLayer(beforeRef.current);
       attachFirstTileTracker(beforeRef.current.getSource(), "before");
     }
-    if (aoi.layers.afterTiles || aoi.layers.afterImage) {
+    if (aoi.layers.afterTiles || afterImageUrl) {
       afterRef.current = aoi.layers.afterTiles
         ? new TileLayer({
           source: new XYZ({ url: aoi.layers.afterTiles, maxZoom: 18, minZoom: 12, transition: 0 }),
@@ -443,7 +459,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
           zIndex: 11,
         })
         : new WebGLTileLayer({
-          source: new GeoTIFF({ sources: [{ url: aoi.layers.afterImage as string }], convertToRGB: "auto" }),
+          source: new GeoTIFF({ sources: [{ url: afterImageUrl as string }], convertToRGB: "auto" }),
           opacity: 1,
           visible: modeRef.current === "after",
           zIndex: 11,
@@ -481,7 +497,17 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   }, [focusFeature, focusToken, selectedId]);
 
   return (
-    <div ref={nodeRef} className="map-node" data-filter={filter} data-mode={mode} data-basemap={basemap} data-opacity={opacity} data-selected-id={selectedId ?? ""} />
+    <div
+      ref={nodeRef}
+      className="map-node"
+      role="region"
+      aria-label={`Mapa operacional de ${aoi.name.es}`}
+      data-filter={filter}
+      data-mode={mode}
+      data-basemap={basemap}
+      data-opacity={opacity}
+      data-selected-id={selectedId ?? ""}
+    />
   );
 }
 
@@ -501,8 +527,16 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;");
 }
 
+function googleMapsUrl(p: DamageFeature["properties"]) {
+  if (typeof p.google_maps_url === "string" && p.google_maps_url) return p.google_maps_url;
+  const lat = Number(p.centroid_lat);
+  const lon = Number(p.centroid_lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return "";
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+}
+
 function popupHtml(p: DamageFeature["properties"]) {
-  const mapsUrl = typeof p.google_maps_url === "string" ? p.google_maps_url : "";
+  const mapsUrl = googleMapsUrl(p);
   const label = p.not_official_ems ? "External" : "EMS";
   const id = String(p.source_feature_id ?? p.id);
   const aoiId = String(p.aoi_id ?? "");

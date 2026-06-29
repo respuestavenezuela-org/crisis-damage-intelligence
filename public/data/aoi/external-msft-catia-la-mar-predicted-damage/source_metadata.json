@@ -24,5 +24,7 @@
     10.593469756538651,
     -67.0374313975316
   ],
-  "warning": "Prediction layer for triage only. Not EMS source-of-truth. Absence/presence of a feature is not confirmation of no damage/damage without field or official validation."
+  "warning": "Prediction layer for triage only. Not EMS source-of-truth. Absence/presence of a feature is not confirmation of no damage/damage without field or official validation.",
+  "map_payload": "damage.geojson is a compact browser map payload with trimmed properties and 6 decimal coordinate precision; use CSV or the HDX source GPKG for full attribute review.",
+  "kml_public_download": "Omitted from the static public package because the 9,134-feature KML exceeded the 5 MB mobile/deploy budget; use source_resource_url for full GIS export."
 }

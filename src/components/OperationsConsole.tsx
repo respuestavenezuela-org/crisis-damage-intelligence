@@ -1,9 +1,19 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import { trackAnalytics } from "@/lib/analytics";
+import { cn } from "@/lib/utils";
 import MapPanel from "./map/MapPanel";
 import type { AoiCatalog, AoiRecord, DamageFeature, Language, VlmRecord } from "./types";
+
+const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
 
 const copy = {
   en: {
@@ -12,7 +22,7 @@ const copy = {
     live: "Public read-only",
     language: "Language",
     aoi: "Go to affected area",
-    quickStart: "Start with La Guaira · switch Before/After · click red buildings",
+    quickStart: "Start with La Guaira · open Priority · tap red structures",
     rankingNote: "Ranked by response value: official EMS destroyed/damaged first, then possible/MONIT01, VLM triage, and capped external predictions.",
     source: "Source",
     status: "Status",
@@ -46,12 +56,35 @@ const copy = {
     imageryOnly: "Imagery only - no official damage vector yet",
     opacity: "Damage opacity",
     filters: "Filters",
+    controls: "Controls",
     all: "All",
     severe: "Destroyed/Damaged",
     vlmOnly: "VLM reviewed",
     filterNote: "Severity uses official EMS damage_gra when available. Possible damage is not counted as destroyed/damaged.",
     downloads: "Downloads",
     evidence: "Evidence queue",
+    operationalBrief: "Operational brief",
+    recommendedAction: "Recommended action",
+    reviewPriority: "Review priority",
+    fieldDownloads: "Field downloads",
+    priorityReady: "priority rows ready",
+    noPriorityReady: "No priority rows loaded yet",
+    officialBrief: "Use official EMS damage first, then VLM evidence to decide what needs a closer look.",
+    monitorBrief: "Use official MONIT01 points as field leads; keep them separate from EMS building-vector counts.",
+    imageryBrief: "Use this AOI for visual context only. No official damage vector is published yet.",
+    externalBrief: "Use this as a search lead only. Do not count it as official damage.",
+    downloadField: "Field packet",
+    downloadGis: "GIS data",
+    downloadEvidence: "Evidence",
+    downloadImagery: "Imagery",
+    downloadOther: "Other",
+    lightModeHint: "For weak links, start with KML/CSV and open imagery only when needed.",
+    loadingCatalog: "Loading AOI catalog...",
+    catalogError: "Catalog unavailable. The static shell is still available; retry or use published downloads if already cached.",
+    loadingDamage: "Loading active AOI damage layer...",
+    damageError: "Damage geometry failed to load. Use metadata and downloads; the app shell remains usable.",
+    loadingVlm: "Loading VLM evidence for active AOI...",
+    vlmError: "VLM evidence failed to load. Official EMS vectors and downloads remain the source of record.",
     backToPriority: "Back to priority list",
     noSelection: "Select a polygon to inspect evidence.",
     watchlist: "Incoming products",
@@ -89,10 +122,10 @@ const copy = {
   es: {
     title: "Respuesta Venezuela",
     subtitle: "Triage geoespacial de daños para respuesta al terremoto",
-    live: "Publico solo lectura",
+    live: "Público solo lectura",
     language: "Idioma",
     aoi: "Ir a zona afectada",
-    quickStart: "Empieza por La Guaira · cambia Antes/Después · click en rojo",
+    quickStart: "Empieza por La Guaira · abre Prioridad · toca estructuras rojas",
     rankingNote: "Ordenado por valor de respuesta: primero destruido/dañado oficial EMS, luego posible/MONIT01, triage VLM y predicciones externas limitadas.",
     source: "Fuente",
     status: "Estado",
@@ -100,22 +133,22 @@ const copy = {
     candidates: "candidatos",
     confirmed: "destruidos/dañados oficiales",
     possible: "posibles oficiales",
-    vlm: "VLM antes/despues",
+    vlm: "VLM antes/después",
     vlmPostEvent: "VLM post-evento",
     mode: "Imagen",
     basemap: "Base",
     mapBase: "Mapa",
-    aerialBase: "Aerea",
+    aerialBase: "Aérea",
     aerialBaseNote: "Imagen de referencia solamente. La evidencia de daño viene de vectores EMS e imagen posterior por AOI.",
     before: "Antes",
-    after: "Despues",
-    noImagery: "Sin imagen expuesta para este AOI todavia",
-    noBefore: "La imagen antes no esta expuesta todavia. Se muestra imagen posterior donde exista.",
+    after: "Después",
+    noImagery: "Sin imagen expuesta para este AOI todavía",
+    noBefore: "La imagen antes no está expuesta todavía. Se muestra imagen posterior donde exista.",
     approximateBefore: "Antes muestra solo referencia aérea externa; no es oficial EMS ni garantiza fecha pre-evento.",
     beforeEvidenceOnly: "Existe referencia antes para chips de evidencia; no hay capa antes publicada en el mapa.",
     imageryAvailable: "Imagen posterior disponible",
     imageryCoverage: "Cobertura de imagenes",
-    afterImagery: "Imagen despues",
+    afterImagery: "Imagen después",
     beforeImagery: "Imagen antes",
     mapLayerAvailable: "Capa de mapa disponible",
     evidenceOnly: "Solo chips de evidencia",
@@ -126,12 +159,35 @@ const copy = {
     imageryOnly: "Solo imagen - sin vector oficial de danos aun",
     opacity: "Opacidad de daño",
     filters: "Filtros",
+    controls: "Controles",
     all: "Todos",
     severe: "Destruido/Dañado",
     vlmOnly: "Revisado VLM",
     filterNote: "La severidad usa damage_gra oficial de EMS cuando existe. Posible daño no cuenta como destruido/dañado.",
     downloads: "Descargas",
     evidence: "Cola de evidencia",
+    operationalBrief: "Brief operativo",
+    recommendedAction: "Acción recomendada",
+    reviewPriority: "Ver prioridad",
+    fieldDownloads: "Descargas de campo",
+    priorityReady: "filas de prioridad listas",
+    noPriorityReady: "Aún no hay filas de prioridad cargadas",
+    officialBrief: "Usa primero el daño oficial EMS y luego la evidencia VLM para decidir qué revisar con más detalle.",
+    monitorBrief: "Usa los puntos oficiales MONIT01 como pistas de campo; mantenlos separados de los conteos vectoriales EMS.",
+    imageryBrief: "Usa este AOI solo como contexto visual. Aún no hay vector oficial de daños publicado.",
+    externalBrief: "Usa esto solo como pista de búsqueda. No lo cuentes como daño oficial.",
+    downloadField: "Paquete de campo",
+    downloadGis: "Datos GIS",
+    downloadEvidence: "Evidencia",
+    downloadImagery: "Imagen",
+    downloadOther: "Otros",
+    lightModeHint: "Con enlace débil, empieza con KML/CSV y abre imagen solo cuando haga falta.",
+    loadingCatalog: "Cargando catálogo de AOIs...",
+    catalogError: "Catálogo no disponible. La interfaz estática sigue disponible; reintenta o usa descargas publicadas si ya están en caché.",
+    loadingDamage: "Cargando capa de daños del AOI activo...",
+    damageError: "No se pudo cargar la geometría de daños. Usa metadatos y descargas; la interfaz sigue usable.",
+    loadingVlm: "Cargando evidencia VLM del AOI activo...",
+    vlmError: "No se pudo cargar evidencia VLM. Los vectores EMS oficiales y descargas siguen siendo la fuente principal.",
     backToPriority: "Volver a prioridad",
     noSelection: "Selecciona un poligono para inspeccionar evidencia.",
     watchlist: "Productos entrantes",
@@ -171,6 +227,11 @@ const copy = {
 type Filter = "all" | "severe" | "vlm";
 type Mode = "before" | "after";
 type Basemap = "map" | "aerial";
+type LoadStatus = "idle" | "loading" | "ready" | "error";
+type AoiLayerState = {
+  damage?: LoadStatus;
+  vlm?: LoadStatus;
+};
 type CityNavItem = {
   id: string;
   primaryAoiId: string;
@@ -192,6 +253,7 @@ let appLoadedTracked = false;
 
 const n = (value: unknown) => Number(value ?? 0) || 0;
 const interactionClockMs = () => performance.now();
+const isSmallViewport = () => typeof window !== "undefined" && window.matchMedia("(max-width: 760px)").matches;
 
 const cityGroups: Array<Omit<
   CityNavItem,
@@ -353,8 +415,101 @@ function priorityFeatureLabel(feature: DamageFeature, vlm: VlmRecord | undefined
   return String(vlmClass ?? official);
 }
 
+type DownloadGroupId = "field" | "gis" | "evidence" | "imagery" | "other";
+type DownloadItem = {
+  kind: string;
+  href: string;
+  label: string;
+};
+type DownloadGroup = {
+  id: DownloadGroupId;
+  title: string;
+  items: DownloadItem[];
+};
+
+function downloadGroupId(kind: string): DownloadGroupId {
+  const normalized = kind.toLowerCase();
+  if (normalized === "csv" || normalized === "kml") return "field";
+  if (normalized === "geojson" || normalized === "shp" || normalized === "gdb") return "gis";
+  if (normalized.startsWith("vlm")) return "evidence";
+  if (normalized === "cog" || normalized === "tif" || normalized === "tiff" || normalized === "pdf" || normalized === "xls" || normalized === "xlsx" || normalized === "web") return "imagery";
+  return "other";
+}
+
+function downloadLabel(kind: string, language: Language) {
+  const normalized = kind.toLowerCase();
+  const labels: Record<string, string> = {
+    csv: "CSV",
+    geojson: "GeoJSON",
+    kml: "KML",
+    cog: "COG",
+    shp: "SHP",
+    gdb: "GDB",
+    xls: "XLS",
+    xlsx: "XLSX",
+    web: "WEB",
+    vlm_jsonl: "VLM JSONL",
+    vlm_csv: "VLM CSV",
+    vlm_summary: language === "es" ? "Resumen VLM" : "VLM summary",
+    vlm_before_after_jsonl: language === "es" ? "Antes/desp. JSONL" : "Before/after JSONL",
+    vlm_before_after_csv: language === "es" ? "Antes/desp. CSV" : "Before/after CSV",
+    vlm_before_after_summary: language === "es" ? "Resumen A/D" : "B/A summary",
+  };
+  return labels[normalized] ?? kind.toUpperCase().replaceAll("_", " ");
+}
+
+function buildDownloadGroups(downloads: Record<string, string> | undefined, language: Language): DownloadGroup[] {
+  const t = copy[language];
+  const groups: Record<DownloadGroupId, DownloadGroup> = {
+    field: { id: "field", title: t.downloadField, items: [] },
+    gis: { id: "gis", title: t.downloadGis, items: [] },
+    evidence: { id: "evidence", title: t.downloadEvidence, items: [] },
+    imagery: { id: "imagery", title: t.downloadImagery, items: [] },
+    other: { id: "other", title: t.downloadOther, items: [] },
+  };
+  Object.entries(downloads ?? {}).forEach(([kind, href]) => {
+    const id = downloadGroupId(kind);
+    groups[id].items.push({ kind, href, label: downloadLabel(kind, language) });
+  });
+  return (["field", "gis", "evidence", "imagery", "other"] as DownloadGroupId[])
+    .map((id) => groups[id])
+    .filter((group) => group.items.length > 0);
+}
+
+function operationalGuidance(aoi: AoiRecord, language: Language) {
+  const t = copy[language];
+  if (aoi.status === "external-prediction") return t.externalBrief;
+  if (aoi.status === "imagery-only") return t.imageryBrief;
+  if (aoi.status === "official-monitor-points") return t.monitorBrief;
+  return t.officialBrief;
+}
+
+function directRasterIsMobileSafe(bytes?: number | null) {
+  return !bytes || bytes <= DIRECT_RASTER_MOBILE_MAX_BYTES;
+}
+
+function googleMapsUrl(properties: DamageFeature["properties"]) {
+  if (typeof properties.google_maps_url === "string" && properties.google_maps_url) return properties.google_maps_url;
+  const lat = Number(properties.centroid_lat);
+  const lon = Number(properties.centroid_lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return "";
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+}
+
+function hasNativeBeforeLayer(aoi: AoiRecord | null | undefined) {
+  if (!aoi) return false;
+  return Boolean(aoi.layers.beforeTiles || (aoi.layers.beforeImage && directRasterIsMobileSafe(aoi.imagery?.before?.bytes)));
+}
+
+function hasAfterLayer(aoi: AoiRecord | null | undefined) {
+  if (!aoi) return false;
+  return Boolean(aoi.layers.afterTiles || (aoi.layers.afterImage && directRasterIsMobileSafe(aoi.imagery?.after?.bytes)));
+}
+
 export default function OperationsConsole() {
   const [catalog, setCatalog] = useState<AoiCatalog | null>(null);
+  const [catalogStatus, setCatalogStatus] = useState<LoadStatus>("loading");
+  const [aoiLayerState, setAoiLayerState] = useState<Record<string, AoiLayerState>>({});
   const [activeId, setActiveId] = useState("emsr884-aoi12-caraballeda");
   const [language, setLanguage] = useState<Language>("es");
   const [filter, setFilter] = useState<Filter>("all");
@@ -362,12 +517,17 @@ export default function OperationsConsole() {
   const [basemap, setBasemap] = useState<Basemap>("aerial");
   const [opacity, setOpacity] = useState(52);
   const [selected, setSelected] = useState<DamageFeature | null>(null);
+  const [mapControlsOpen, setMapControlsOpen] = useState(false);
+  const [isMobileLayout, setIsMobileLayout] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [inspectorOpen, setInspectorOpen] = useState(false);
   const [focusToken, setFocusToken] = useState(0);
   const [aoiFocusToken, setAoiFocusToken] = useState(0);
   const [vlm, setVlm] = useState<Record<string, VlmRecord>>({});
   const [features, setFeatures] = useState<DamageFeature[]>([]);
   const rightRailRef = useRef<HTMLElement | null>(null);
-  const priorityRef = useRef<HTMLElement | null>(null);
+  const desktopPriorityRef = useRef<HTMLElement | null>(null);
+  const mobilePriorityRef = useRef<HTMLElement | null>(null);
   const appLoadTrackedRef = useRef(false);
   const sessionStartedAtRef = useRef<number>(0);
   const firstInteractionTrackedRef = useRef(false);
@@ -376,8 +536,48 @@ export default function OperationsConsole() {
   const mapReadyTrackedRef = useRef<Set<string>>(new Set());
   const firstTileTrackedRef = useRef<Set<string>>(new Set());
 
+  const setLayerStatus = useCallback((aoiId: string, key: keyof AoiLayerState, status: LoadStatus) => {
+    setAoiLayerState((current) => ({
+      ...current,
+      [aoiId]: {
+        ...current[aoiId],
+        [key]: status,
+      },
+    }));
+  }, []);
+
   useEffect(() => {
-    fetch("/data/catalog.json").then((r) => r.json()).then(setCatalog);
+    const viewportQuery = window.matchMedia("(max-width: 760px)");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncViewport = () => {
+      const isMobile = viewportQuery.matches;
+      setIsMobileLayout(isMobile);
+      if (!isMobile) setInspectorOpen(false);
+    };
+    const syncMotion = () => setPrefersReducedMotion(motionQuery.matches);
+    syncViewport();
+    syncMotion();
+    viewportQuery.addEventListener("change", syncViewport);
+    motionQuery.addEventListener("change", syncMotion);
+    return () => {
+      viewportQuery.removeEventListener("change", syncViewport);
+      motionQuery.removeEventListener("change", syncMotion);
+    };
+  }, []);
+
+  useEffect(() => {
+    fetch("/data/catalog.json")
+      .then((r) => {
+        if (!r.ok) throw new Error("Unable to load AOI catalog");
+        return r.json();
+      })
+      .then((data) => {
+        setCatalog(data);
+        setCatalogStatus("ready");
+      })
+      .catch(() => {
+        setCatalogStatus("error");
+      });
   }, []);
 
   useEffect(() => {
@@ -389,8 +589,12 @@ export default function OperationsConsole() {
   useEffect(() => {
     if (!catalog) return;
     const aoi = catalog.aois.find((candidate) => candidate.id === activeId);
-    if (!aoi || loadedVlmAoisRef.current.has(aoi.id) || !aoi.layers.vlm) return;
+    if (!aoi) return;
+    if (!aoi.layers.vlm || loadedVlmAoisRef.current.has(aoi.id)) return;
     let cancelled = false;
+    queueMicrotask(() => {
+      if (!cancelled) setLayerStatus(aoi.id, "vlm", "loading");
+    });
     fetch(aoi.layers.vlm)
       .then((r) => {
         if (!r.ok) throw new Error(`Unable to load VLM data for ${aoi.id}`);
@@ -404,18 +608,24 @@ export default function OperationsConsole() {
         });
         setVlm((current) => ({ ...current, ...Object.fromEntries(entries) }));
         loadedVlmAoisRef.current.add(aoi.id);
+        setLayerStatus(aoi.id, "vlm", "ready");
       })
       .catch(() => {
         loadedVlmAoisRef.current.delete(aoi.id);
+        if (!cancelled) setLayerStatus(aoi.id, "vlm", "error");
       });
     return () => { cancelled = true; };
-  }, [activeId, catalog]);
+  }, [activeId, catalog, setLayerStatus]);
 
   useEffect(() => {
     if (!catalog) return;
     const aoi = catalog.aois.find((candidate) => candidate.id === activeId);
-    if (!aoi || loadedDamageAoisRef.current.has(aoi.id)) return;
+    if (!aoi) return;
+    if (loadedDamageAoisRef.current.has(aoi.id)) return;
     let cancelled = false;
+    queueMicrotask(() => {
+      if (!cancelled) setLayerStatus(aoi.id, "damage", "loading");
+    });
     fetch(aoi.layers.damage)
       .then((r) => {
         if (!r.ok) throw new Error(`Unable to load damage data for ${aoi.id}`);
@@ -442,23 +652,35 @@ export default function OperationsConsole() {
           return [...withoutAoi, ...nextFeatures];
         });
         loadedDamageAoisRef.current.add(aoi.id);
+        setLayerStatus(aoi.id, "damage", "ready");
       })
       .catch(() => {
         loadedDamageAoisRef.current.delete(aoi.id);
+        if (!cancelled) setLayerStatus(aoi.id, "damage", "error");
       });
     return () => { cancelled = true; };
-  }, [activeId, catalog]);
+  }, [activeId, catalog, setLayerStatus]);
 
   const t = copy[language];
   const metrics = active?.metrics;
   const hasApproximateBefore = Boolean(active?.imagery?.approximateReference?.urlTemplate);
-  const hasNativeBeforeImagery = Boolean(active?.layers.beforeTiles || active?.layers.beforeImage);
+  const hasNativeBeforeImagery = hasNativeBeforeLayer(active);
   const hasBeforeImagery = hasNativeBeforeImagery || hasApproximateBefore;
-  const hasAfterImagery = Boolean(active?.layers.afterTiles || active?.layers.afterImage);
+  const hasAfterImagery = hasAfterLayer(active);
   const hasImagery = hasBeforeImagery || hasAfterImagery;
   const isDemo = active?.status === "test-fixture";
   const isExternalPrediction = active?.status === "external-prediction";
   const statusLabel = (status: string) => t.statuses[status as keyof typeof t.statuses] ?? status;
+  const currentLayerState = aoiLayerState[activeId] ?? {};
+  const statusMessages = [
+    catalogStatus === "loading" ? t.loadingCatalog : undefined,
+    catalogStatus === "error" ? t.catalogError : undefined,
+    currentLayerState.damage === "loading" ? t.loadingDamage : undefined,
+    currentLayerState.damage === "error" ? t.damageError : undefined,
+    currentLayerState.vlm === "loading" ? t.loadingVlm : undefined,
+    currentLayerState.vlm === "error" ? t.vlmError : undefined,
+  ].filter(Boolean) as string[];
+  const hasLayerError = currentLayerState.damage === "error" || currentLayerState.vlm === "error" || catalogStatus === "error";
   const cityNavItems = useMemo<CityNavItem[]>(() => {
     if (!catalog) return [];
     const byId = new Map(catalog.aois.map((aoi) => [aoi.id, aoi]));
@@ -520,7 +742,16 @@ export default function OperationsConsole() {
       });
     }
     setActiveId(id);
+    setAoiLayerState((current) => ({
+      ...current,
+      [id]: {
+        damage: loadedDamageAoisRef.current.has(id) ? "ready" : "idle",
+        vlm: loadedVlmAoisRef.current.has(id) ? "ready" : "idle",
+      },
+    }));
     setSelected(null);
+    setMapControlsOpen(false);
+    setInspectorOpen(false);
     setFocusToken((value) => value + 1);
     setAoiFocusToken((value) => value + 1);
   };
@@ -569,11 +800,17 @@ export default function OperationsConsole() {
     });
     setSelected(feature);
     setFilter("all");
+    setMapControlsOpen(false);
+    setInspectorOpen(false);
     setFocusToken((value) => value + 1);
     rightRailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
   const scrollToPriority = () => {
-    priorityRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setInspectorOpen(true);
+    requestAnimationFrame(() => {
+      const target = isSmallViewport() ? mobilePriorityRef.current : desktopPriorityRef.current;
+      target?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+    });
   };
   const adjustOpacity = (delta: number) => setOpacity((value) => Math.max(5, Math.min(90, value + delta)));
   const priorityFeatures = useMemo(() => {
@@ -585,6 +822,104 @@ export default function OperationsConsole() {
       ) || String(a.properties.source_feature_id ?? a.properties.id).localeCompare(String(b.properties.source_feature_id ?? b.properties.id)))
       .slice(0, 12);
   }, [active?.status, activeId, features, vlm]);
+  const controlSummary = `${basemap === "aerial" ? t.aerialBase : t.mapBase} · ${mode === "after" ? t.after : t.before} · ${opacity}%`;
+  const prioritySummary = priorityFeatures.length ? `${priorityFeatures.length} ${t.priorityReady}` : t.noPriorityReady;
+  const selectedSummary = selected
+    ? String(selected.properties.source_feature_id ?? selected.properties.id)
+    : prioritySummary;
+  const priorityTitle = language === "es" ? "Prioridad" : "Priority";
+  const renderInspectorBody = (bodyId: string, prioritySectionRef: RefObject<HTMLElement | null>) => (
+    <div className="inspector-body" id={bodyId}>
+      {active && !selected && (
+        <OperationalBrief
+          aoi={active}
+          language={language}
+          priorityCount={priorityFeatures.length}
+          onReviewPriority={scrollToPriority}
+        />
+      )}
+      <Card className="ops-card evidence-panel" size="sm">
+        <CardHeader>
+          <CardTitle>{t.evidence}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {selected ? (
+            <Evidence feature={selected} vlm={vlm[selected.properties.id]} language={language} onBackToPriority={scrollToPriority} />
+          ) : (
+            <p className="muted">{t.noSelection}</p>
+          )}
+        </CardContent>
+      </Card>
+      <Card className="ops-card priority-panel" ref={prioritySectionRef as RefObject<HTMLDivElement | null>} size="sm">
+        <CardHeader>
+          <CardTitle>{priorityTitle}</CardTitle>
+          <CardAction>
+            <Badge variant="outline">{priorityFeatures.length}</Badge>
+          </CardAction>
+        </CardHeader>
+        <CardContent className="priority-list">
+          {priorityFeatures.length === 0 && (
+            <p className="muted">
+              {currentLayerState.damage === "error"
+                ? t.damageError
+                : currentLayerState.damage === "loading"
+                  ? t.loadingDamage
+                  : language === "es" ? "Sin filas de prioridad para este AOI." : "No priority rows for this AOI."}
+            </p>
+          )}
+          {priorityFeatures.map((feature, index) => {
+            const p = feature.properties;
+            const label = priorityFeatureLabel(feature, vlm[p.id], language, active?.status);
+            return (
+              <Button key={p.id} variant="outline" data-testid={`priority-${p.source_feature_id ?? p.id}`} aria-pressed={selected?.properties.id === p.id} className={selected?.properties.id === p.id ? "priority-row active" : "priority-row"} onClick={() => selectPriorityFeature(feature, index + 1)}>
+                <b>{p.source_feature_id ?? p.id}</b>
+                <span>{label} · {String(p.damage_score ?? p.damage_percent ?? "-")}</span>
+              </Button>
+            );
+          })}
+        </CardContent>
+      </Card>
+      {active?.imagery && (
+        <ImageryCoveragePanel
+          aoi={active}
+          language={language}
+          hasAfterLayer={hasAfterImagery}
+          hasBeforeLayer={hasNativeBeforeImagery}
+          hasNativeBeforeLayer={hasNativeBeforeImagery}
+        />
+      )}
+      <Card className="ops-card confidence-panel" size="sm">
+        <CardHeader>
+          <CardTitle>{t.confidenceTitle}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>{t.confidenceText}</p>
+        </CardContent>
+      </Card>
+      {active && <VlmQualityPanel aoi={active} language={language} />}
+      <Card className="ops-card watch-panel" size="sm">
+        <CardHeader>
+          <CardTitle>{t.watchlist}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {catalog?.watchlist.map((item) => (
+            <div className="watch-row" key={item.id}>
+              <b>{item.name[language]}</b>
+              <span>{statusLabel(item.status)} · {item.expectedUtc}</span>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+      <Card className="ops-card architecture" size="sm">
+        <CardHeader>
+          <CardTitle>{t.architecture}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>{t.architectureText}</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
 
   return (
     <main className="ops-shell">
@@ -598,33 +933,48 @@ export default function OperationsConsole() {
 
         <label className="field-label">{t.language}</label>
         <div className="segmented" aria-label={t.language}>
-          <button className={language === "es" ? "active" : ""} onClick={() => changeLanguage("es")}>ES</button>
-          <button className={language === "en" ? "active" : ""} onClick={() => changeLanguage("en")}>EN</button>
+          <Button variant={language === "es" ? "default" : "outline"} className={language === "es" ? "active" : ""} aria-pressed={language === "es"} onClick={() => changeLanguage("es")}>ES</Button>
+          <Button variant={language === "en" ? "default" : "outline"} className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => changeLanguage("en")}>EN</Button>
         </div>
 
         <label className="field-label">{t.aoi}</label>
         <div className="aoi-list">
           {cityNavItems.map((item) => (
-            <button key={item.id} data-testid={`city-${item.id}`} className={item.sourceIds.includes(activeId) ? "aoi-card active" : "aoi-card"} onClick={() => selectAoi(item.primaryAoiId, item.id)}>
+            <Button key={item.id} variant="outline" data-testid={`city-${item.id}`} aria-pressed={item.sourceIds.includes(activeId)} className={item.sourceIds.includes(activeId) ? "aoi-card active" : "aoi-card"} onClick={() => selectAoi(item.primaryAoiId, item.id)}>
               <span>{item.name[language]}</span>
               <small>{cityImpactLabel(item, language)}</small>
-            </button>
+            </Button>
           ))}
         </div>
         <p className="muted">{t.rankingNote}</p>
 
         {active && (
-          <section className="source-card">
-            <div className={(isDemo || isExternalPrediction) ? "source-banner demo" : "source-banner official"}>
-              {isDemo ? t.demoOnly : isExternalPrediction ? t.externalPrediction : t.officialData}
-            </div>
-            <strong>{t.source}</strong>
-            <p>{active.source}</p>
-            <div className="meta-row"><span>{t.status}</span><b>{statusLabel(active.status)}</b></div>
-          </section>
+          <Card className="ops-card source-card" size="sm">
+            <CardHeader>
+              <CardTitle>{t.source}</CardTitle>
+              <CardAction>
+                <Badge variant={(isDemo || isExternalPrediction) ? "secondary" : "default"}>
+                  {isDemo ? t.demoOnly : isExternalPrediction ? t.externalPrediction : t.officialData}
+                </Badge>
+              </CardAction>
+            </CardHeader>
+            <CardContent>
+              <p>{active.source}</p>
+              <Separator className="my-2" />
+              <div className="meta-row"><span>{t.status}</span><b>{statusLabel(active.status)}</b></div>
+            </CardContent>
+          </Card>
         )}
 
-        <section className="kpi-grid">
+        {statusMessages.length > 0 && (
+          <Alert className={hasLayerError ? "data-status error" : "data-status"} variant={hasLayerError ? "destructive" : "default"} role="status" aria-live="polite">
+            <AlertDescription>
+              {statusMessages.map((message) => <p key={message}>{message}</p>)}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        <section className="kpi-grid" aria-label={language === "es" ? "Métricas del AOI" : "AOI metrics"}>
           <div><b>{metrics?.features ?? "-"}</b><span>{t.features}</span></div>
           <div><b>{metrics?.damagedConfirmed ?? 0}</b><span>{t.confirmed}</span></div>
           <div><b>{metrics?.candidates ?? metrics?.possibleDamage ?? 0}</b><span>{t.candidates}</span></div>
@@ -636,20 +986,7 @@ export default function OperationsConsole() {
 
         <section className="downloads-section">
           <h2>{t.downloads}</h2>
-          <div className="download-row">
-            {active && Object.entries(active.downloads).map(([kind, href]) => (
-              <a
-                key={kind}
-                href={href}
-                data-analytics-event="data_download_clicked"
-                data-analytics-aoi={active.id}
-                data-analytics-format={kind.toLowerCase()}
-                data-analytics-surface="downloads_panel"
-              >
-                {kind.toUpperCase()}
-              </a>
-            ))}
-          </div>
+          <DownloadGroups downloads={active?.downloads} language={language} aoiId={active?.id} surface="downloads_panel" />
         </section>
       </aside>
 
@@ -681,104 +1018,224 @@ export default function OperationsConsole() {
             onSelect={(feature) => {
               trackFirstInteraction(feature ? "map_feature" : "map_empty");
               setSelected(feature);
+              setMapControlsOpen(false);
+              setInspectorOpen(false);
             }}
           />
         )}
-        <div className="map-toolbar">
-          <div className="control-group">
-            <span>{t.basemap}</span>
-            <div className="button-row">
-              <button data-testid="basemap-map" className={basemap === "map" ? "active" : ""} onClick={() => changeBasemap("map")}>{t.mapBase}</button>
-              <button data-testid="basemap-aerial" className={basemap === "aerial" ? "active" : ""} onClick={() => changeBasemap("aerial")}>{t.aerialBase}</button>
+        <div className={mapControlsOpen ? "map-toolbar open" : "map-toolbar"} data-testid="map-toolbar">
+          <Button
+            type="button"
+            variant="outline"
+            className="map-toolbar-toggle"
+            data-testid="map-controls-toggle"
+            aria-expanded={mapControlsOpen}
+            aria-controls="map-toolbar-body"
+            onClick={() => setMapControlsOpen((open) => !open)}
+          >
+            <span>{t.controls}</span>
+            <em>{mapControlsOpen ? (language === "es" ? "Cerrar" : "Close") : (language === "es" ? "Abrir" : "Open")}</em>
+            <b>{controlSummary}</b>
+          </Button>
+          <div className="map-toolbar-body" id="map-toolbar-body">
+            <div className="control-group">
+              <span>{t.basemap}</span>
+              <div className="button-row">
+                <Button variant={basemap === "map" ? "default" : "outline"} data-testid="basemap-map" aria-pressed={basemap === "map"} className={basemap === "map" ? "active" : ""} onClick={() => changeBasemap("map")}>{t.mapBase}</Button>
+                <Button variant={basemap === "aerial" ? "default" : "outline"} data-testid="basemap-aerial" aria-pressed={basemap === "aerial"} className={basemap === "aerial" ? "active" : ""} onClick={() => changeBasemap("aerial")}>{t.aerialBase}</Button>
+              </div>
             </div>
+            <div className="control-group">
+              <span>{t.mode}</span>
+              <div className="button-row">
+                <Button variant={mode === "before" ? "default" : "outline"} data-testid="mode-before" disabled={!hasBeforeImagery} aria-pressed={mode === "before"} className={mode === "before" ? "active" : ""} onClick={() => changeMode("before")}>{t.before}</Button>
+                <Button variant={mode === "after" ? "default" : "outline"} data-testid="mode-after" disabled={!hasAfterImagery} aria-pressed={mode === "after"} className={mode === "after" ? "active" : ""} onClick={() => changeMode("after")}>{t.after}</Button>
+              </div>
+            </div>
+            <label className="range-control">
+              <span>{t.opacity} <b>{opacity}%</b></span>
+              <div className="range-row">
+                <Button type="button" variant="outline" aria-label={language === "es" ? "bajar opacidad de daño" : "reduce damage opacity"} onClick={() => adjustOpacity(-10)}>-</Button>
+                <input type="range" min="5" max="90" value={opacity} aria-label={t.opacity} onInput={(e) => setOpacity(Number(e.currentTarget.value))} onChange={(e) => setOpacity(Number(e.currentTarget.value))} />
+                <Button type="button" variant="outline" aria-label={language === "es" ? "subir opacidad de daño" : "increase damage opacity"} onClick={() => adjustOpacity(10)}>+</Button>
+              </div>
+            </label>
+            <div className="control-group">
+              <span>{t.filters}</span>
+              <div className="button-row">
+                <Button variant={filter === "all" ? "default" : "outline"} data-testid="filter-all" aria-pressed={filter === "all"} className={filter === "all" ? "active" : ""} onClick={() => changeFilter("all")}>{t.all}</Button>
+                <Button variant={filter === "severe" ? "default" : "outline"} data-testid="filter-severe" aria-pressed={filter === "severe"} className={filter === "severe" ? "active" : ""} onClick={() => changeFilter("severe")}>{t.severe}</Button>
+                <Button variant={filter === "vlm" ? "default" : "outline"} data-testid="filter-vlm" aria-pressed={filter === "vlm"} className={filter === "vlm" ? "active" : ""} onClick={() => changeFilter("vlm")}>{t.vlmOnly}</Button>
+              </div>
+            </div>
+            <details className="map-toolbar-notes">
+              <summary>{language === "es" ? "Notas" : "Notes"}</summary>
+              <p>{t.aerialBaseNote}</p>
+              {!hasImagery && <p>{t.noImagery}</p>}
+              {hasApproximateBefore && !hasNativeBeforeImagery && <p>{t.approximateBefore}</p>}
+              {hasAfterImagery && !hasBeforeImagery && <p>{active?.imagery?.before ? t.beforeEvidenceOnly : t.noBefore}</p>}
+              <p>{t.filterNote}</p>
+            </details>
           </div>
-          <div className="control-group">
-            <span>{t.mode}</span>
-            <div className="button-row">
-              <button data-testid="mode-before" disabled={!hasBeforeImagery} className={mode === "before" ? "active" : ""} onClick={() => changeMode("before")}>{t.before}</button>
-              <button data-testid="mode-after" disabled={!hasAfterImagery} className={mode === "after" ? "active" : ""} onClick={() => changeMode("after")}>{t.after}</button>
-            </div>
-          </div>
-          <label className="range-control">
-            <span>{t.opacity} <b>{opacity}%</b></span>
-            <div className="range-row">
-              <button type="button" aria-label="reduce damage opacity" onClick={() => adjustOpacity(-10)}>-</button>
-              <input type="range" min="5" max="90" value={opacity} onInput={(e) => setOpacity(Number(e.currentTarget.value))} onChange={(e) => setOpacity(Number(e.currentTarget.value))} />
-              <button type="button" aria-label="increase damage opacity" onClick={() => adjustOpacity(10)}>+</button>
-            </div>
-          </label>
-          <div className="control-group">
-            <span>{t.filters}</span>
-            <div className="button-row">
-              <button data-testid="filter-all" className={filter === "all" ? "active" : ""} onClick={() => changeFilter("all")}>{t.all}</button>
-              <button data-testid="filter-severe" className={filter === "severe" ? "active" : ""} onClick={() => changeFilter("severe")}>{t.severe}</button>
-              <button data-testid="filter-vlm" className={filter === "vlm" ? "active" : ""} onClick={() => changeFilter("vlm")}>{t.vlmOnly}</button>
-            </div>
-          </div>
-          <details className="map-toolbar-notes">
-            <summary>{language === "es" ? "Notas" : "Notes"}</summary>
-            <p>{t.aerialBaseNote}</p>
-            {!hasImagery && <p>{t.noImagery}</p>}
-            {hasApproximateBefore && !hasNativeBeforeImagery && <p>{t.approximateBefore}</p>}
-            {hasAfterImagery && !hasBeforeImagery && <p>{active?.imagery?.before ? t.beforeEvidenceOnly : t.noBefore}</p>}
-            <p>{t.filterNote}</p>
-          </details>
         </div>
       </section>
 
-      <aside className="right-rail" ref={rightRailRef}>
-        <section className="evidence-panel">
-          <h2>{t.evidence}</h2>
-          {selected ? (
-            <Evidence feature={selected} vlm={vlm[selected.properties.id]} language={language} onBackToPriority={scrollToPriority} />
-          ) : (
-            <p className="muted">{t.noSelection}</p>
+      {!isMobileLayout && (
+        <aside className="right-rail desktop-right-rail" ref={rightRailRef} data-testid="right-rail">
+          {renderInspectorBody("desktop-inspector-body", desktopPriorityRef)}
+        </aside>
+      )}
+
+      {isMobileLayout && (
+        <div className={inspectorOpen ? "mobile-sheet-shell open" : "mobile-sheet-shell"} data-testid="right-rail">
+          {!inspectorOpen && (
+            <Button
+              type="button"
+              variant="outline"
+              className="mobile-sheet-trigger"
+              data-testid="mobile-inspector-toggle"
+              aria-expanded={inspectorOpen}
+              aria-controls="mobile-inspector-body"
+              onClick={() => setInspectorOpen(true)}
+            >
+              <span>{t.evidence} / {priorityTitle}</span>
+              <em>{language === "es" ? "Abrir" : "Open"}</em>
+              <b>{selectedSummary}</b>
+            </Button>
           )}
-        </section>
-        <section className="priority-panel" ref={priorityRef}>
-          <h2>{language === "es" ? "Prioridad" : "Priority"}</h2>
-          <div className="priority-list">
-            {priorityFeatures.map((feature, index) => {
-              const p = feature.properties;
-              const label = priorityFeatureLabel(feature, vlm[p.id], language, active?.status);
-              return (
-                <button key={p.id} data-testid={`priority-${p.source_feature_id ?? p.id}`} className={selected?.properties.id === p.id ? "priority-row active" : "priority-row"} onClick={() => selectPriorityFeature(feature, index + 1)}>
-                  <b>{p.source_feature_id ?? p.id}</b>
-                  <span>{label} · {String(p.damage_score ?? p.damage_percent ?? "-")}</span>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-        {active?.imagery && (
-          <ImageryCoveragePanel
-            aoi={active}
-            language={language}
-            hasAfterLayer={hasAfterImagery}
-            hasBeforeLayer={hasBeforeImagery}
-            hasNativeBeforeLayer={hasNativeBeforeImagery}
-          />
-        )}
-        <section className="confidence-panel">
-          <h2>{t.confidenceTitle}</h2>
-          <p>{t.confidenceText}</p>
-        </section>
-        {active && <VlmQualityPanel aoi={active} language={language} />}
-        <section>
-          <h2>{t.watchlist}</h2>
-          {catalog?.watchlist.map((item) => (
-            <div className="watch-row" key={item.id}>
-              <b>{item.name[language]}</b>
-              <span>{statusLabel(item.status)} · {item.expectedUtc}</span>
-            </div>
-          ))}
-        </section>
-        <section className="architecture">
-          <h2>{t.architecture}</h2>
-          <p>{t.architectureText}</p>
-        </section>
-      </aside>
+          <Drawer open={inspectorOpen} onOpenChange={setInspectorOpen} direction="bottom" modal={false}>
+            <DrawerContent className="mobile-sheet-container shadcn-mobile-drawer" data-testid="mobile-inspector-sheet" aria-label={`${t.evidence} / ${priorityTitle}`}>
+              <DrawerHeader className="mobile-sheet-header">
+                <div className="mobile-sheet-handle" aria-hidden="true" />
+                <div className="mobile-sheet-titlebar">
+                  <div>
+                    <DrawerTitle>{t.evidence} / {priorityTitle}</DrawerTitle>
+                    <DrawerDescription>{selectedSummary}</DrawerDescription>
+                  </div>
+                  <Button type="button" variant="outline" size="sm" onClick={() => setInspectorOpen(false)}>{language === "es" ? "Cerrar" : "Close"}</Button>
+                </div>
+              </DrawerHeader>
+              <ScrollArea className="mobile-sheet-content mobile-sheet-scroller">
+                <div className="mobile-sheet-body">
+                  {renderInspectorBody("mobile-inspector-body", mobilePriorityRef)}
+                </div>
+              </ScrollArea>
+            </DrawerContent>
+          </Drawer>
+        </div>
+      )}
     </main>
+  );
+}
+
+function OperationalBrief({
+  aoi,
+  language,
+  priorityCount,
+  onReviewPriority,
+}: {
+  aoi: AoiRecord;
+  language: Language;
+  priorityCount: number;
+  onReviewPriority: () => void;
+}) {
+  const t = copy[language];
+  const fieldDownloads = buildDownloadGroups(aoi.downloads, language).find((group) => group.id === "field")?.items ?? [];
+  const confirmed = n(aoi.metrics.damagedConfirmed);
+  const possible = n(aoi.metrics.possibleDamage);
+  const vlmActionable = n(aoi.metrics.vlmBeforeAfterActionable ?? aoi.metrics.vlmPostEventUrgentReview);
+  const hasOfficialDamage = confirmed > 0 || possible > 0;
+  const sourceLabel = aoi.status === "external-prediction"
+    ? t.externalPrediction
+    : aoi.status === "imagery-only"
+      ? t.imageryOnly
+      : aoi.status === "official-monitor-points"
+        ? t.statuses["official-monitor-points"]
+        : t.officialData;
+
+  return (
+    <Card className="ops-card operational-brief" size="sm">
+      <CardHeader>
+        <CardTitle role="heading" aria-level={2}>{t.operationalBrief}</CardTitle>
+        <CardAction>
+          <Badge variant="secondary">{sourceLabel}</Badge>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <div className="brief-callout">
+          <small>{t.recommendedAction}</small>
+          <p>{operationalGuidance(aoi, language)}</p>
+        </div>
+        <div className="brief-facts">
+          <div><b>{hasOfficialDamage ? confirmed : n(aoi.metrics.features)}</b><span>{hasOfficialDamage ? t.confirmed : t.features}</span></div>
+          <div><b>{possible}</b><span>{t.possible}</span></div>
+          <div><b>{priorityCount}</b><span>{t.priorityReady}</span></div>
+          <div><b>{vlmActionable}</b><span>{t.vlmActionable}</span></div>
+        </div>
+      </CardContent>
+      <CardContent className="brief-actions">
+        <Button type="button" className="text-action primary-action" onClick={onReviewPriority}>{t.reviewPriority}</Button>
+        {fieldDownloads.slice(0, 2).map((item) => (
+          <a
+            key={item.kind}
+            className={cn(buttonVariants({ variant: "outline" }), "text-action")}
+            href={item.href}
+            data-analytics-event="data_download_clicked"
+            data-analytics-aoi={aoi.id}
+            data-analytics-format={item.kind.toLowerCase()}
+            data-analytics-surface="operational_brief"
+          >
+            {item.label}
+          </a>
+        ))}
+      </CardContent>
+      <CardContent>
+        <p className="muted brief-hint">{t.lightModeHint}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function DownloadGroups({
+  downloads,
+  language,
+  aoiId,
+  surface,
+}: {
+  downloads?: Record<string, string>;
+  language: Language;
+  aoiId?: string;
+  surface: string;
+}) {
+  const groups = buildDownloadGroups(downloads, language);
+  if (groups.length === 0) {
+    return <p className="muted">{language === "es" ? "Sin descargas publicadas para este AOI." : "No downloads published for this AOI."}</p>;
+  }
+  return (
+    <div className="download-groups">
+      {groups.map((group) => (
+        <div className="download-group" key={group.id}>
+          <div className="download-group-title">
+            <span>{group.title}</span>
+          </div>
+          <div className="download-row">
+            {group.items.map((item) => (
+              <a
+                key={item.kind}
+                className={cn(buttonVariants({ variant: "outline", size: "sm" }), "download-link")}
+                href={item.href}
+                data-analytics-event="data_download_clicked"
+                data-analytics-aoi={aoiId}
+                data-analytics-format={item.kind.toLowerCase()}
+                data-analytics-surface={surface}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -884,7 +1341,7 @@ function Evidence({ feature, vlm, language, onBackToPriority }: { feature: Damag
   const t = copy[language];
   const p = feature.properties;
   const chip = evidenceChip(vlm);
-  const mapsUrl = typeof p.google_maps_url === "string" ? p.google_maps_url : "";
+  const mapsUrl = googleMapsUrl(p);
   const aoiId = String(p.aoi_id ?? "");
   const hasVlm = Boolean(vlm);
   return (
@@ -912,7 +1369,12 @@ function Evidence({ feature, vlm, language, onBackToPriority }: { feature: Damag
         data-analytics-has-vlm={String(hasVlm)}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="chip-preview" src={chip.url} alt="" loading="lazy" />
+        <img
+          className="chip-preview"
+          src={chip.url}
+          alt={language === "es" ? "Chip de evidencia del elemento seleccionado" : "Evidence chip for selected feature"}
+          loading="lazy"
+        />
       </a>}
       <div className="download-row">
         {mapsUrl && <a
