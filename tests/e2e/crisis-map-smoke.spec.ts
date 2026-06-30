@@ -1,54 +1,14 @@
-import { Buffer } from "node:buffer";
-import { expect, type Locator, type Page, test } from "@playwright/test";
-
-const transparentPng = Buffer.from(
-  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAFgwJ/lI2NnQAAAABJRU5ErkJggg==",
-  "base64",
-);
+import { expect, test } from "@playwright/test";
+import {
+  closeSheet,
+  expectActiveDownloadReachable,
+  keepMapRastersLight,
+  openMobileSheet,
+} from "./helpers/crisis-map";
 
 // These smoke tests intercept data and tile requests. Block service workers so
 // Playwright routes see the same network requests every run.
 test.use({ serviceWorkers: "block" });
-
-async function keepMapRastersLight(page: Page) {
-  await page.route("**/data/tiles/**", (route) => {
-    route.fulfill({ status: 200, contentType: "image/png", body: transparentPng });
-  });
-  await page.route("https://server.arcgisonline.com/**", (route) => {
-    route.fulfill({ status: 200, contentType: "image/png", body: transparentPng });
-  });
-  await page.route("https://tile.openstreetmap.org/**", (route) => {
-    route.fulfill({ status: 200, contentType: "image/png", body: transparentPng });
-  });
-  await page.route("https://*.tile.openstreetmap.org/**", (route) => {
-    route.fulfill({ status: 200, contentType: "image/png", body: transparentPng });
-  });
-  await page.route("https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/**", (route) => route.abort("blockedbyclient"));
-  await page.route("https://sentinel-cogs.s3.us-west-2.amazonaws.com/**", (route) => route.abort("blockedbyclient"));
-  await page.route("https://vantor-opendata.s3.amazonaws.com/**", (route) => route.abort("blockedbyclient"));
-}
-
-async function expectActiveDownloadReachable(scope: Page | Locator) {
-  const download = scope.getByRole("link", { name: "CSV" }).first();
-  await download.scrollIntoViewIfNeeded();
-  await expect(download).toBeVisible();
-  await expect(download).toBeInViewport({ ratio: 0.5 });
-  await expect(download).toHaveAttribute("href", /\/data\/aoi\/emsr884-aoi12-caraballeda\//);
-  const box = await download.boundingBox();
-  expect(box?.height).toBeGreaterThanOrEqual(38);
-}
-
-async function openMobileSheet(page: Page, toggleTestId: string, sheetTestId: string) {
-  await page.getByTestId(toggleTestId).click();
-  const sheet = page.getByTestId(sheetTestId);
-  await expect(sheet).toBeVisible();
-  return sheet;
-}
-
-async function closeSheet(sheet: Locator) {
-  await sheet.getByRole("button", { name: "Cerrar" }).click();
-  await expect(sheet).toBeHidden();
-}
 
 test("mobile critical AOI workflow stays usable", async ({ page }) => {
   await keepMapRastersLight(page);
@@ -111,7 +71,7 @@ test("mobile critical AOI workflow stays usable", async ({ page }) => {
   await page.getByTestId("mobile-inspector-toggle").click();
   await expect(mobileSheet).toBeVisible();
   await mobileSheet.getByRole("button", { name: "Ver prioridad" }).click();
-  const firstPriority = mobileSheet.locator('[data-testid^="priority-"]').first();
+  const firstPriority = mobileSheet.locator(".priority-row").first();
   await expect(firstPriority).toBeVisible();
   await firstPriority.click();
   await expect(page.locator(".map-node")).toHaveAttribute("data-map-zoom", "18");

@@ -16,7 +16,7 @@ export default defineConfig({
     video: "retain-on-failure",
   },
   webServer: {
-    command: `npm run start -- -p ${port}`,
+    command: `INTERNAL_API_ENABLED=true INTERNAL_API_TOKEN=e2e-token npm run start -- -p ${port}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -90,6 +90,18 @@ curl -I https://crisis-damage-intelligence.vercel.app
 
 ## Smoke Test After Deploy
 
+Automated static smoke:
+
+```bash
+npm run smoke:production
+```
+
+If the internal API is intentionally enabled, also run:
+
+```bash
+npm run smoke:production -- --api-enabled --api-token "$INTERNAL_API_TOKEN"
+```
+
 1. Open the deployed URL.
 2. Confirm default AOI is official EMSR884 data.
 3. Check affected-area navigation. Current expected Spanish order after source-aware ranking is La Guaira / Caraballeda / Catia La Mar, Moron, San Felipe, Caracas, Antimano, Guacara.

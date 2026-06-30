@@ -222,6 +222,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       popupOverlayRef.current?.setPosition(undefined);
       if (popupRef.current) popupRef.current.innerHTML = "";
       nodeRef.current?.setAttribute("data-focused-id", "");
+      nodeRef.current?.setAttribute("data-focused-internal-id", "");
       setDebug(featuresRef.current.filter((candidate) => candidate.properties.aoi_id === aoi.id && passesFilter(candidate, filter, vlm)));
       return;
     }
@@ -264,7 +265,8 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       popupOverlayRef.current?.setPosition(center);
     }
     const [lng, lat] = toLonLat(center);
-    nodeRef.current?.setAttribute("data-focused-id", id);
+    nodeRef.current?.setAttribute("data-focused-id", String(feature.properties.source_feature_id ?? id));
+    nodeRef.current?.setAttribute("data-focused-internal-id", id);
     nodeRef.current?.setAttribute("data-map-center", `${lat.toFixed(7)},${lng.toFixed(7)}`);
     nodeRef.current?.setAttribute("data-map-zoom", String(map.getView().getZoom()));
     setDebug(featuresRef.current.filter((candidate) => candidate.properties.aoi_id === aoi.id && passesFilter(candidate, filter, vlm)));
