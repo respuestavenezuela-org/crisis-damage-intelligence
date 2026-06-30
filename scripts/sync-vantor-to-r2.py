@@ -181,12 +181,14 @@ def process_item(s3_client, item):
     
     log(f"Processing {item_id}")
     log(f"  Date: {props.get('datetime', 'unknown')}")
+    log(f"  Phase: {props.get('phase', 'unknown')}")
     log(f"  Vehicle: {props.get('vehicle_name', 'unknown')}")
     log(f"  Cloud cover: {props.get('eo:cloud_cover', 'N/A')}%")
     
     result = {
         "id": item_id,
         "datetime": props.get('datetime'),
+        "phase": props.get('phase'),
         "vehicle": props.get('vehicle_name'),
         "cloud_cover": props.get('eo:cloud_cover'),
         "assets": {}
@@ -278,6 +280,18 @@ def main():
     items = []
     for link in item_links:
         items.append(fetch_json(link['href']))
+
+    unique_items = {}
+    duplicate_ids = []
+    for item in items:
+        item_id = item["id"]
+        if item_id in unique_items:
+            duplicate_ids.append(item_id)
+            continue
+        unique_items[item_id] = item
+    items = list(unique_items.values())
+    if duplicate_ids:
+        log(f"Deduplicated {len(duplicate_ids)} duplicate item link(s): {', '.join(sorted(set(duplicate_ids)))}")
     
     # Sort by quality (cloud cover ascending)
     items.sort(key=lambda x: x['properties'].get('eo:cloud_cover', 100))
@@ -296,6 +310,12 @@ def main():
     else:
         # All items, all assets
         log(f"Processing all {len(items)} items")
+
+    phase_counts = {}
+    for item in items:
+        phase = item["properties"].get("phase", "unknown")
+        phase_counts[phase] = phase_counts.get(phase, 0) + 1
+    log(f"Phase counts: {phase_counts}")
     
     # Process each item
     manifest = {
@@ -304,6 +324,7 @@ def main():
         "license": "CC-BY-NC-4.0",
         "strategy": STRATEGY,
         "dry_run": DRY_RUN,
+        "phase_counts": phase_counts,
         "uploaded_at": datetime.now().isoformat(),
         "items": []
     }
@@ -318,10 +339,17 @@ def main():
         with open(manifest_path, 'w') as f:
             json.dump(manifest, f, indent=2)
         if not DRY_RUN:
+            manifest_body = json.dumps(manifest, indent=2).encode("utf-8")
             upload_bytes_to_r2(
                 s3_client,
-                json.dumps(manifest, indent=2).encode("utf-8"),
+                manifest_body,
                 f"{R2_PREFIX}/manifests/vantor-stream-manifest.json",
+                "application/json; charset=utf-8",
+            )
+            upload_bytes_to_r2(
+                s3_client,
+                manifest_body,
+                f"{R2_PREFIX}/manifests/vantor-{STRATEGY}-manifest.json",
                 "application/json; charset=utf-8",
             )
     
