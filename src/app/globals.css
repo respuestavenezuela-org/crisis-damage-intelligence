@@ -211,16 +211,15 @@ h2 { margin: 0 0 10px; font-size: 15px; }
 .translator-banner-link.primary { background: var(--green); color: #fff; }
 .translator-banner-link:hover { filter: brightness(1.05); }
 
-/* Desktop: inline in the left rail */
-.left-rail .translator-banner { margin: 12px 0; flex-wrap: wrap; }
+/* Desktop left rail and mobile about sheet */
+.left-rail .translator-banner,
+.mobile-sheet-body .translator-banner { margin-top: 10px; flex-wrap: wrap; }
 
-/* Mobile: floating strip pinned above the map */
-.map-stage .translator-banner {
-  position: relative;
-  z-index: 930;
-  margin: 12px 12px 0;
-  box-shadow: 0 8px 24px rgba(0,0,0,.16);
-}
+/* Field guide legend */
+.field-guide { margin: 12px 0; display: flex; flex-direction: column; gap: 5px; }
+.field-guide b { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ops-muted); }
+.field-guide p { font-size: 13px; line-height: 1.4; margin: 0; color: var(--ink); }
+.field-guide-verify { padding: 7px 8px; border-left: 3px solid #d97706; background: #fffbeb; color: var(--ink); font-size: 12px; line-height: 1.4; }
 .ol-viewport { font-family: inherit; }
 .ol-popup {
   position: absolute;

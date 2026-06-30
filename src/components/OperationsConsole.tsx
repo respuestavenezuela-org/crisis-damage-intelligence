@@ -70,6 +70,11 @@ const copy = {
     translatorBody: "Bridge Spanish ↔ English with local rescue teams. Can run on your device.",
     translatorOpen: "Open translator",
     translatorTelegram: "Telegram bot",
+    fieldGuideTitle: "How to use this map",
+    fieldGuideCritical: "🔴 Red — critical structural damage (collapse likely, people possibly trapped)",
+    fieldGuidePartial: "🟡 Yellow — partial damage (structure still standing)",
+    fieldGuideVerify: "Verify before sending resources. AI is not perfect — red may mark structures that are still standing. Use before/after imagery and your judgment.",
+    fieldGuideContact: "Contact: somos@respuestavenezuela.org",
     rankingNote: "Ranked by response value: official EMS destroyed/damaged first, then possible/MONIT01, VLM triage, and capped external predictions.",
     source: "Source",
     status: "Status",
@@ -195,6 +200,11 @@ const copy = {
     translatorBody: "Comunícate en español ↔ inglés con los equipos locales. Puede ejecutarse en tu dispositivo.",
     translatorOpen: "Abrir traductor",
     translatorTelegram: "Bot de Telegram",
+    fieldGuideTitle: "Cómo usar este mapa",
+    fieldGuideCritical: "🔴 Rojo — daño estructural crítico (derrumbe probable, personas posiblemente atrapadas)",
+    fieldGuidePartial: "🟡 Amarillo — daño parcial (estructura sigue en pie)",
+    fieldGuideVerify: "Verifica antes de enviar recursos. La IA no es perfecta — el rojo puede marcar estructuras que siguen en pie. Usa las imágenes antes/después y tu criterio en terreno.",
+    fieldGuideContact: "Contacto: somos@respuestavenezuela.org",
     rankingNote: "Ordenado por valor de respuesta: primero destruido/dañado oficial EMS, luego posible/MONIT01, triage VLM y predicciones externas limitadas.",
     source: "Fuente",
     status: "Estado",
@@ -1527,7 +1537,15 @@ export default function OperationsConsole() {
             </Button>
           )}
         </div>
-        {!isMobileLayout && <TranslatorBanner language={language} copy={t} />}
+        {!isMobileLayout && (
+          <section className="field-guide">
+            <b>{t.fieldGuideTitle}</b>
+            <p>{t.fieldGuideCritical}</p>
+            <p>{t.fieldGuidePartial}</p>
+            <p className="field-guide-verify">{t.fieldGuideVerify}</p>
+            <TranslatorBanner language={language} copy={t} />
+          </section>
+        )}
         {!isMobileLayout && offlineLabel && (
           <p className={`offline-line ${offlineState}`}>{offlineLabel}</p>
         )}
@@ -1597,7 +1615,6 @@ export default function OperationsConsole() {
       </aside>
 
       <section className="map-stage">
-        {isMobileLayout && <TranslatorBanner language={language} copy={t} />}
         {isMobileLayout && renderSearchPanel("mobile")}
         {isMobileLayout && statusMessages.length > 0 && (
           <Alert className={hasLayerError ? "data-status mobile-data-status error" : "data-status mobile-data-status"} variant={hasLayerError ? "destructive" : "default"} role="status" aria-live="polite">
@@ -1725,6 +1742,13 @@ export default function OperationsConsole() {
                 <div className="mobile-sheet-body">
                   <p>{t.subtitle}</p>
                   <p className="quick-start">{t.quickStart}</p>
+                  <section className="field-guide">
+                    <b>{t.fieldGuideTitle}</b>
+                    <p>{t.fieldGuideCritical}</p>
+                    <p>{t.fieldGuidePartial}</p>
+                    <p className="field-guide-verify">{t.fieldGuideVerify}</p>
+                  </section>
+                  <TranslatorBanner language={language} copy={t} />
                   {offlineLabel && (
                     <p className={`offline-line ${offlineState}`}>{offlineLabel}</p>
                   )}
