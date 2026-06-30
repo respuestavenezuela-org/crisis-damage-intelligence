@@ -290,6 +290,7 @@ def main():
             continue
         unique_items[item_id] = item
     items = list(unique_items.values())
+    unique_collection_item_count = len(items)
     if duplicate_ids:
         log(f"Deduplicated {len(duplicate_ids)} duplicate item link(s): {', '.join(sorted(set(duplicate_ids)))}")
     
@@ -324,6 +325,9 @@ def main():
         "license": "CC-BY-NC-4.0",
         "strategy": STRATEGY,
         "dry_run": DRY_RUN,
+        "collection_item_count": len(item_links),
+        "unique_collection_item_count": unique_collection_item_count,
+        "duplicate_item_ids": sorted(set(duplicate_ids)),
         "phase_counts": phase_counts,
         "uploaded_at": datetime.now().isoformat(),
         "items": []
@@ -370,10 +374,24 @@ def main():
     file_label = "Files planned" if DRY_RUN else "Files uploaded"
     log(f"{file_label}: {total_files}")
     log(f"Total size: {format_size(total_bytes)}")
+    log(f"Collection links: {len(item_links)}")
+    log(f"Unique collection items: {unique_collection_item_count}")
     
     if DRY_RUN:
         log("\n⚠️  This was a DRY RUN. No files were actually uploaded.")
         log("   Run with dry_run=false to perform the actual upload.")
+
+    asset_errors = [
+        (item["id"], asset_name, asset.get("error"))
+        for item in manifest["items"]
+        for asset_name, asset in item["assets"].items()
+        if "error" in asset
+    ]
+    if asset_errors:
+        log("\n❌ Asset upload errors:")
+        for item_id, asset_name, error in asset_errors:
+            log(f"  {item_id}/{asset_name}: {error}")
+        sys.exit(1)
     
     # Print best images info
     log("\nBest quality images:")

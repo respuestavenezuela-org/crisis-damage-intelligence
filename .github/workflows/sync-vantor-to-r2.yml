@@ -45,7 +45,6 @@ jobs:
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
         run: |
           echo "R2 credentials configured"
-          echo "Endpoint: $S3_ENDPOINT_URL"
           echo "Bucket: $S3_BUCKET"
       
       - name: Sync Vantor data to R2
@@ -69,4 +68,5 @@ jobs:
         with:
           name: vantor-sync-manifest
           path: /tmp/vantor-manifest.json
+          if-no-files-found: error
           retention-days: 30
