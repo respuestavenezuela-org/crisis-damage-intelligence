@@ -4,6 +4,10 @@ Static-first, bilingual earthquake response and damage triage platform for publi
 
 Canonical public URL: `https://respuestavenezuela.org`
 
+> **For rescue teams / Para equipos de rescate:** field guide in
+> [Español](docs/RESCUE_FIELD_GUIDE_ES.md) · [English](docs/RESCUE_FIELD_GUIDE_EN.md).
+> Includes the volunteer translator (ES ⇄ EN): [traduceme](https://suvadityamuk-traduceme.hf.space/) · Telegram [@TraducemeVzlaBot](https://t.me/TraducemeVzlaBot).
+
 The Vercel project URL `https://crisis-damage-intelligence.vercel.app` remains attached to the project and is configured to redirect users to the canonical domain.
 
 ## What This Is

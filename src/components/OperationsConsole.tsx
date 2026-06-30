@@ -14,6 +14,7 @@ import { persistLang, readStoredLang } from "@/lib/lang";
 import { getOfflineBudgetBytes, precacheAoi } from "@/lib/offline-cache";
 import { cn } from "@/lib/utils";
 import MapPanel from "./map/MapPanel";
+import TranslatorBanner from "./TranslatorBanner";
 import type { AoiCatalog, AoiRecord, DamageFeature, Language, VlmRecord } from "./types";
 
 const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
@@ -65,6 +66,10 @@ const copy = {
     language: "Language",
     aoi: "Go to affected area",
     quickStart: "Start with La Guaira · open Priority · tap red structures",
+    translatorTitle: "Volunteer translator",
+    translatorBody: "Bridge Spanish ↔ English with local rescue teams. Can run on your device.",
+    translatorOpen: "Open translator",
+    translatorTelegram: "Telegram bot",
     rankingNote: "Ranked by response value: official EMS destroyed/damaged first, then possible/MONIT01, VLM triage, and capped external predictions.",
     source: "Source",
     status: "Status",
@@ -186,6 +191,10 @@ const copy = {
     language: "Idioma",
     aoi: "Ir a zona afectada",
     quickStart: "Empieza por La Guaira · abre Prioridad · toca estructuras rojas",
+    translatorTitle: "Traductor para voluntarios",
+    translatorBody: "Comunícate en español ↔ inglés con los equipos locales. Puede ejecutarse en tu dispositivo.",
+    translatorOpen: "Abrir traductor",
+    translatorTelegram: "Bot de Telegram",
     rankingNote: "Ordenado por valor de respuesta: primero destruido/dañado oficial EMS, luego posible/MONIT01, triage VLM y predicciones externas limitadas.",
     source: "Fuente",
     status: "Estado",
@@ -1518,6 +1527,7 @@ export default function OperationsConsole() {
             </Button>
           )}
         </div>
+        {!isMobileLayout && <TranslatorBanner language={language} copy={t} />}
         {!isMobileLayout && offlineLabel && (
           <p className={`offline-line ${offlineState}`}>{offlineLabel}</p>
         )}
@@ -1587,6 +1597,7 @@ export default function OperationsConsole() {
       </aside>
 
       <section className="map-stage">
+        {isMobileLayout && <TranslatorBanner language={language} copy={t} />}
         {isMobileLayout && renderSearchPanel("mobile")}
         {isMobileLayout && statusMessages.length > 0 && (
           <Alert className={hasLayerError ? "data-status mobile-data-status error" : "data-status mobile-data-status"} variant={hasLayerError ? "destructive" : "default"} role="status" aria-live="polite">

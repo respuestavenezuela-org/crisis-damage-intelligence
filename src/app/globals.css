@@ -176,6 +176,51 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 h2 { margin: 0 0 10px; font-size: 15px; }
 .map-stage { position: relative; min-width: 0; }
 .map-node { position: absolute; inset: 0; background: #c9c3b7; }
+
+/* Volunteer translator banner */
+.translator-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  border: 1px solid var(--green);
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+  padding: 9px 11px;
+}
+.translator-banner-icon { font-size: 20px; line-height: 1; flex: 0 0 auto; }
+.translator-banner-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1 1 auto; }
+.translator-banner-text b { font-size: 13px; font-weight: 750; }
+.translator-banner-text span { font-size: 12px; line-height: 1.35; color: var(--ink); }
+.translator-banner-actions { display: flex; gap: 6px; flex: 0 0 auto; flex-wrap: wrap; }
+.translator-banner-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 11px;
+  border: 1px solid var(--green);
+  border-radius: 7px;
+  background: #fffdf8;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.translator-banner-link.primary { background: var(--green); color: #fff; }
+.translator-banner-link:hover { filter: brightness(1.05); }
+
+/* Desktop: inline in the left rail */
+.left-rail .translator-banner { margin: 12px 0; flex-wrap: wrap; }
+
+/* Mobile: floating strip pinned above the map */
+.map-stage .translator-banner {
+  position: relative;
+  z-index: 930;
+  margin: 12px 12px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,.16);
+}
 .ol-viewport { font-family: inherit; }
 .ol-popup {
   position: absolute;

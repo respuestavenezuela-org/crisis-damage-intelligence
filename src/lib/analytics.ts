@@ -11,6 +11,8 @@ export type AnalyticsEventName =
   | "damage_filter_changed"
   | "priority_item_clicked"
   | "google_maps_link_clicked"
+  | "translator_open"
+  | "translator_telegram"
   | "data_download_clicked"
   | "evidence_chip_clicked"
   | "map_ready"
