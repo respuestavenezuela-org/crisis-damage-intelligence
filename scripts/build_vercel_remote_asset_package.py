@@ -26,6 +26,7 @@ DEFAULT_REMOTE_BASE = "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev"
 DEFAULT_REMOTE_VALIDATION_REPORT = ROOT / "ops" / "remote_asset_validation" / "latest.json"
 
 EXCLUDE_DIRS = {
+    ".cursor",
     ".git",
     ".next",
     ".vercel",
@@ -34,7 +35,17 @@ EXCLUDE_DIRS = {
     "ops",
     "qa",
     "outputs",
+    "test-results",
 }
+
+EXCLUDE_FILE_NAMES = {
+    ".DS_Store",
+    ".env",
+}
+
+EXCLUDE_FILE_PREFIXES = (
+    ".env.",
+)
 
 HEAVY_PUBLIC_DIRS = {
     Path("public/data/tiles"),
@@ -85,6 +96,8 @@ def ignore(src: str, names: list[str]) -> set[str]:
         path = src_path / name
         rel = path.relative_to(ROOT)
         if path.is_dir() and name in EXCLUDE_DIRS:
+            ignored.add(name)
+        elif path.is_file() and (name in EXCLUDE_FILE_NAMES or name.startswith(EXCLUDE_FILE_PREFIXES)):
             ignored.add(name)
         elif any(rel == heavy for heavy in HEAVY_PUBLIC_DIRS):
             ignored.add(name)
@@ -352,6 +365,8 @@ def main() -> None:
         "package_dir": display_path(out_dir),
         "remote_asset_base": remote_base,
         "excluded_dirs": sorted(EXCLUDE_DIRS),
+        "excluded_file_names": sorted(EXCLUDE_FILE_NAMES),
+        "excluded_file_prefixes": sorted(EXCLUDE_FILE_PREFIXES),
         "excluded_public_asset_dirs": sorted(path.as_posix() for path in HEAVY_PUBLIC_DIRS),
         "rewritten_files": changed,
         "validation": validation,

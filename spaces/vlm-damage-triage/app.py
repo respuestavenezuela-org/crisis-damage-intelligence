@@ -10,7 +10,17 @@ import torch
 from fastapi import FastAPI, HTTPException
 from PIL import Image
 from pydantic import BaseModel, Field
-from transformers import AutoProcessor, AutoModelForImageTextToText
+from transformers import AutoModelForImageTextToText, AutoProcessor
+
+try:
+    from transformers import Qwen3VLForConditionalGeneration
+except ImportError:  # pragma: no cover - depends on the Space transformers build.
+    Qwen3VLForConditionalGeneration = None
+
+try:
+    from qwen_vl_utils import process_vision_info
+except ImportError:  # pragma: no cover - optional fallback helper.
+    process_vision_info = None
 
 
 MODEL_ID = os.environ.get("HF_VLM_MODEL", "Qwen/Qwen3-VL-8B-Instruct")
@@ -51,19 +61,31 @@ def extract_json(text: str) -> dict[str, Any]:
 @lru_cache(maxsize=1)
 def load_model():
     processor = AutoProcessor.from_pretrained(MODEL_ID, trust_remote_code=True)
-    model = AutoModelForImageTextToText.from_pretrained(
-        MODEL_ID,
-        torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
-        device_map="auto",
-        trust_remote_code=True,
+    model_cls = (
+        Qwen3VLForConditionalGeneration
+        if Qwen3VLForConditionalGeneration and "qwen3-vl" in MODEL_ID.lower()
+        else AutoModelForImageTextToText
     )
+    model_kwargs = {
+        "torch_dtype": torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+        "device_map": "auto",
+        "trust_remote_code": True,
+    }
+    attn_implementation = os.environ.get("ATTN_IMPLEMENTATION", "sdpa").strip()
+    if attn_implementation:
+        model_kwargs["attn_implementation"] = attn_implementation
+    try:
+        model = model_cls.from_pretrained(MODEL_ID, **model_kwargs)
+    except TypeError:
+        model_kwargs.pop("attn_implementation", None)
+        model = model_cls.from_pretrained(MODEL_ID, **model_kwargs)
     model.eval()
     return processor, model
 
 
 def dry_result(req: PredictRequest) -> dict[str, Any]:
     review_type = "dated_pre_event_comparison" if len(req.images) != 1 or "before" in req.prompt.lower() else "post_event_only"
-    return {
+    result = {
         "damage_class": "uncertain_comparison_problem" if review_type == "dated_pre_event_comparison" else "uncertain_imagery_problem",
         "damage_percent": None,
         "confidence": 0.0,
@@ -73,6 +95,60 @@ def dry_result(req: PredictRequest) -> dict[str, Any]:
         "review_type": review_type,
         "vlm_model": MODEL_ID,
     }
+    if review_type == "dated_pre_event_comparison":
+        result.update(
+            {
+                "change_evidence": "DRY_RUN=1; before/after comparison was not executed.",
+                "before_observation": "DRY_RUN=1; before image not inspected.",
+                "after_observation": "DRY_RUN=1; after image not inspected.",
+                "image_alignment": "dry_run",
+            }
+        )
+    else:
+        result["evidence"] = "DRY_RUN=1; post-event image was not inspected."
+    return result
+
+
+def model_device(model) -> torch.device:
+    try:
+        return model.device
+    except AttributeError:
+        return next(model.parameters()).device
+
+
+def build_messages(req: PredictRequest, images: list[Image.Image]) -> list[dict[str, Any]]:
+    messages: list[dict[str, Any]] = []
+    if req.system:
+        messages.append({"role": "system", "content": [{"type": "text", "text": req.system}]})
+    content: list[dict[str, Any]] = [{"type": "image", "image": image} for image in images]
+    content.append({"type": "text", "text": req.prompt})
+    messages.append({"role": "user", "content": content})
+    return messages
+
+
+def prepare_inputs(processor, model, messages: list[dict[str, Any]], images: list[Image.Image]):
+    try:
+        inputs = processor.apply_chat_template(
+            messages,
+            tokenize=True,
+            add_generation_prompt=True,
+            return_dict=True,
+            return_tensors="pt",
+        )
+    except Exception:
+        text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        processor_kwargs: dict[str, Any] = {"text": [text], "images": images, "return_tensors": "pt"}
+        if process_vision_info:
+            try:
+                image_inputs, video_inputs = process_vision_info(messages)
+                processor_kwargs["images"] = image_inputs or images
+                if video_inputs:
+                    processor_kwargs["videos"] = video_inputs
+            except Exception:
+                pass
+        inputs = processor(**processor_kwargs)
+    inputs.pop("token_type_ids", None)
+    return inputs.to(model_device(model))
 
 
 @app.get("/")
@@ -90,15 +166,8 @@ def predict(req: PredictRequest) -> dict[str, Any]:
     images = [decode_image(image) for image in req.images]
     processor, model = load_model()
 
-    content: list[dict[str, Any]] = [{"type": "text", "text": req.prompt}]
-    content.extend({"type": "image", "image": image} for image in images)
-    messages = []
-    if req.system:
-        messages.append({"role": "system", "content": req.system})
-    messages.append({"role": "user", "content": content})
-
-    text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = processor(text=[text], images=images, return_tensors="pt").to(model.device)
+    messages = build_messages(req, images)
+    inputs = prepare_inputs(processor, model, messages, images)
     with torch.inference_mode():
         output_ids = model.generate(**inputs, max_new_tokens=MAX_NEW_TOKENS, do_sample=False)
     generated_ids = output_ids[:, inputs.input_ids.shape[-1]:]

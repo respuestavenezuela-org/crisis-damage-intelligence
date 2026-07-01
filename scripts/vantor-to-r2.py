@@ -13,6 +13,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Configuration
+ROOT = Path(__file__).resolve().parents[1]
 COLLECTION_URL = "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/collection.json"
 R2_BUCKET = "crisis-damage-intelligence"
 R2_PREFIX = "vantor/venezuela-earthquake-jun-2026"
@@ -59,10 +60,10 @@ def upload_to_r2(local_path, r2_key):
         cmd,
         capture_output=True,
         text=True,
-        cwd="/Users/luisrosal/Documents/Codex/2026-06-26/nec/work/crisis-damage-intelligence-audit"
+        cwd=ROOT,
     )
     if result.returncode != 0:
-        log(f"  ⚠️  Upload failed: {result.stderr}")
+        log(f"  Upload failed: {result.stderr}")
         return False
     return True
 
@@ -134,20 +135,20 @@ def main():
             
             # Get file size
             size = get_file_size(url)
-            log(f"  📥 {asset_name}: {filename} ({format_size(size)})")
+            log(f"  Download candidate {asset_name}: {filename} ({format_size(size)})")
             
             # Download
             try:
                 downloaded_size = download_file(url, local_path)
-                log(f"  ✅ Downloaded: {format_size(downloaded_size)}")
+                log(f"  Downloaded: {format_size(downloaded_size)}")
             except Exception as e:
-                log(f"  ❌ Download failed: {e}")
+                log(f"  Download failed: {e}")
                 continue
             
             # Upload to R2
-            log(f"  ⬆️  Uploading to R2...")
+            log("  Uploading to R2...")
             if upload_to_r2(local_path, r2_key):
-                log(f"  ✅ Uploaded: r2://{R2_BUCKET}/{r2_key}")
+                log(f"  Uploaded: r2://{R2_BUCKET}/{r2_key}")
                 item_manifest['assets'][asset_name] = {
                     "r2_key": r2_key,
                     "r2_url": f"https://{R2_BUCKET}.r2.cloudflarestorage.com/{r2_key}",
@@ -155,11 +156,11 @@ def main():
                     "type": asset_info.get('type', 'unknown')
                 }
             else:
-                log(f"  ❌ Upload failed")
+                log("  Upload failed")
             
             # Clean up local file to save space
             local_path.unlink()
-            log(f"  🧹 Cleaned up local file")
+            log("  Cleaned up local file")
         
         manifest['items'].append(item_manifest)
         
@@ -167,7 +168,7 @@ def main():
         manifest_path = LOCAL_CACHE / "upload_manifest.json"
         with open(manifest_path, 'w') as f:
             json.dump(manifest, f, indent=2)
-        log(f"  💾 Manifest saved")
+        log("  Manifest saved")
         log("")
     
     # Final summary

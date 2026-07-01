@@ -1,0 +1,3996 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "status": "public-aggregate-not-official-damage",
+    "generatedAt": "2026-07-01T16:32:34Z",
+    "gridDegrees": 0.02,
+    "minCommunityReports": 5,
+    "minDistinctSubmissionMinutes": 3,
+    "minExternalGapCandidates": 20,
+    "warning": "Operational signals are triage guidance only. EMS remains the official source of damage counts."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-001",
+        "priority": "high",
+        "score": 125,
+        "communityReports": 120,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 19,
+          "other": 101
+        },
+        "latestSubmissionDate": "2026-06-30",
+        "emsOfficialDestroyedDamaged": 37,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 243,
+        "emsMonitorPossible": 108,
+        "externalGapCandidates": 790,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "120 aggregated community reports",
+          "19 structural-damage reports",
+          "37 official EMS destroyed/damaged features",
+          "790 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.04,
+              10.6
+            ],
+            [
+              -67.02,
+              10.6
+            ],
+            [
+              -67.02,
+              10.620000000000001
+            ],
+            [
+              -67.04,
+              10.620000000000001
+            ],
+            [
+              -67.04,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-002",
+        "priority": "high",
+        "score": 125,
+        "communityReports": 111,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 35,
+          "other": 75,
+          "aid_collection_first_aid": 1
+        },
+        "latestSubmissionDate": "2026-06-29",
+        "emsOfficialDestroyedDamaged": 16,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 267,
+        "emsMonitorPossible": 54,
+        "externalGapCandidates": 172,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-east-predicted-damage",
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "111 aggregated community reports",
+          "35 structural-damage reports",
+          "16 official EMS destroyed/damaged features",
+          "172 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.02,
+              10.6
+            ],
+            [
+              -67.0,
+              10.6
+            ],
+            [
+              -67.0,
+              10.620000000000001
+            ],
+            [
+              -67.02,
+              10.620000000000001
+            ],
+            [
+              -67.02,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-003",
+        "priority": "high",
+        "score": 110,
+        "communityReports": 261,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 50,
+          "other": 211
+        },
+        "latestSubmissionDate": "2026-07-01",
+        "emsOfficialDestroyedDamaged": 14,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 126,
+        "emsMonitorPossible": 37,
+        "externalGapCandidates": 63,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-caraballeda-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Caraballeda Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "261 aggregated community reports",
+          "50 structural-damage reports",
+          "14 official EMS destroyed/damaged features",
+          "63 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.86,
+              10.6
+            ],
+            [
+              -66.84,
+              10.6
+            ],
+            [
+              -66.84,
+              10.620000000000001
+            ],
+            [
+              -66.86,
+              10.620000000000001
+            ],
+            [
+              -66.86,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-004",
+        "priority": "high",
+        "score": 100,
+        "communityReports": 475,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 466,
+          "structural_damage": 9
+        },
+        "latestSubmissionDate": "2026-07-01",
+        "emsOfficialDestroyedDamaged": 15,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 67,
+        "emsMonitorPossible": 6,
+        "externalGapCandidates": 24,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-caraballeda-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Caraballeda Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "475 aggregated community reports",
+          "9 structural-damage reports",
+          "15 official EMS destroyed/damaged features",
+          "24 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.84,
+              10.6
+            ],
+            [
+              -66.82000000000001,
+              10.6
+            ],
+            [
+              -66.82000000000001,
+              10.620000000000001
+            ],
+            [
+              -66.84,
+              10.620000000000001
+            ],
+            [
+              -66.84,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-005",
+        "priority": "high",
+        "score": 95,
+        "communityReports": 23,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 14,
+          "other": 9
+        },
+        "latestSubmissionDate": "2026-06-29",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 4,
+        "emsMonitorPossible": 2,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": true,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-la-guaira-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "La Guaira Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "23 aggregated community reports",
+          "14 structural-damage reports",
+          "gap: community structural reports without GRA damage in this cell"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.88,
+              10.6
+            ],
+            [
+              -66.86,
+              10.6
+            ],
+            [
+              -66.86,
+              10.620000000000001
+            ],
+            [
+              -66.88,
+              10.620000000000001
+            ],
+            [
+              -66.88,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-006",
+        "priority": "high",
+        "score": 83,
+        "communityReports": 42,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 7,
+          "other": 34,
+          "aid_collection_first_aid": 1
+        },
+        "latestSubmissionDate": "2026-06-29",
+        "emsOfficialDestroyedDamaged": 6,
+        "emsOfficialPossible": 3,
+        "emsMonitorDestroyedDamaged": 26,
+        "emsMonitorPossible": 4,
+        "externalGapCandidates": 40,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-la-guaira-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "La Guaira Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "42 aggregated community reports",
+          "7 structural-damage reports",
+          "6 official EMS destroyed/damaged features",
+          "40 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.9,
+              10.6
+            ],
+            [
+              -66.88,
+              10.6
+            ],
+            [
+              -66.88,
+              10.620000000000001
+            ],
+            [
+              -66.9,
+              10.620000000000001
+            ],
+            [
+              -66.9,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-007",
+        "priority": "high",
+        "score": 81,
+        "communityReports": 19,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 6,
+          "other": 11,
+          "aid_collection_first_aid": 2
+        },
+        "latestSubmissionDate": "2026-06-27",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [
+          "19 aggregated community reports",
+          "6 structural-damage reports",
+          "gap: community structural reports without GRA damage in this cell"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.86,
+              10.48
+            ],
+            [
+              -66.84,
+              10.48
+            ],
+            [
+              -66.84,
+              10.5
+            ],
+            [
+              -66.86,
+              10.5
+            ],
+            [
+              -66.86,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-008",
+        "priority": "medium",
+        "score": 69,
+        "communityReports": 8,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 1,
+          "other": 7
+        },
+        "latestSubmissionDate": "2026-06-26",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 1475,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-east-predicted-damage",
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "8 aggregated community reports",
+          "1 structural-damage reports",
+          "1475 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.02,
+              10.58
+            ],
+            [
+              -67.0,
+              10.58
+            ],
+            [
+              -67.0,
+              10.6
+            ],
+            [
+              -67.02,
+              10.6
+            ],
+            [
+              -67.02,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-009",
+        "priority": "medium",
+        "score": 54,
+        "communityReports": 7,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 5,
+          "aid_collection_first_aid": 1,
+          "other": 1
+        },
+        "latestSubmissionDate": "2026-06-27",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 2,
+        "emsMonitorPossible": 14,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [
+          "7 aggregated community reports",
+          "5 structural-damage reports",
+          "gap: community structural reports without GRA damage in this cell"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.9,
+              10.5
+            ],
+            [
+              -66.88,
+              10.5
+            ],
+            [
+              -66.88,
+              10.52
+            ],
+            [
+              -66.9,
+              10.52
+            ],
+            [
+              -66.9,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-010",
+        "priority": "medium",
+        "score": 53,
+        "communityReports": 238,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 237,
+          "structural_damage": 1
+        },
+        "latestSubmissionDate": "2026-06-29",
+        "emsOfficialDestroyedDamaged": 5,
+        "emsOfficialPossible": 8,
+        "emsMonitorDestroyedDamaged": 6,
+        "emsMonitorPossible": 4,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "238 aggregated community reports",
+          "1 structural-damage reports",
+          "5 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.94,
+              10.6
+            ],
+            [
+              -66.92,
+              10.6
+            ],
+            [
+              -66.92,
+              10.620000000000001
+            ],
+            [
+              -66.94,
+              10.620000000000001
+            ],
+            [
+              -66.94,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-011",
+        "priority": "medium",
+        "score": 52,
+        "communityReports": 70,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 4,
+          "other": 65,
+          "aid_collection_first_aid": 1
+        },
+        "latestSubmissionDate": "2026-06-28",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 1,
+        "emsMonitorPossible": 2,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [
+          "70 aggregated community reports",
+          "4 structural-damage reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.92,
+              10.5
+            ],
+            [
+              -66.9,
+              10.5
+            ],
+            [
+              -66.9,
+              10.52
+            ],
+            [
+              -66.92,
+              10.52
+            ],
+            [
+              -66.92,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-012",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 1,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 1755,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "1755 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.04,
+              10.58
+            ],
+            [
+              -67.02,
+              10.58
+            ],
+            [
+              -67.02,
+              10.6
+            ],
+            [
+              -67.04,
+              10.6
+            ],
+            [
+              -67.04,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-013",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 1,
+        "emsMonitorPossible": 3,
+        "externalGapCandidates": 841,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "841 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.06,
+              10.58
+            ],
+            [
+              -67.04,
+              10.58
+            ],
+            [
+              -67.04,
+              10.6
+            ],
+            [
+              -67.06,
+              10.6
+            ],
+            [
+              -67.06,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-014",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 1,
+        "externalGapCandidates": 1500,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "1500 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.08,
+              10.58
+            ],
+            [
+              -67.06,
+              10.58
+            ],
+            [
+              -67.06,
+              10.6
+            ],
+            [
+              -67.08,
+              10.6
+            ],
+            [
+              -67.08,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-015",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 189,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "189 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.98,
+              10.58
+            ],
+            [
+              -66.96000000000001,
+              10.58
+            ],
+            [
+              -66.96000000000001,
+              10.6
+            ],
+            [
+              -66.98,
+              10.6
+            ],
+            [
+              -66.98,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-016",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 231,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "231 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.0,
+              10.58
+            ],
+            [
+              -66.98,
+              10.58
+            ],
+            [
+              -66.98,
+              10.6
+            ],
+            [
+              -67.0,
+              10.6
+            ],
+            [
+              -67.0,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-017",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 199,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [
+          "199 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.12,
+              10.56
+            ],
+            [
+              -67.1,
+              10.56
+            ],
+            [
+              -67.1,
+              10.58
+            ],
+            [
+              -67.12,
+              10.58
+            ],
+            [
+              -67.12,
+              10.56
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-018",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 178,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "178 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.08,
+              10.56
+            ],
+            [
+              -67.06,
+              10.56
+            ],
+            [
+              -67.06,
+              10.58
+            ],
+            [
+              -67.08,
+              10.58
+            ],
+            [
+              -67.08,
+              10.56
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-019",
+        "priority": "medium",
+        "score": 50,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 129,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "129 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.06,
+              10.56
+            ],
+            [
+              -67.04,
+              10.56
+            ],
+            [
+              -67.04,
+              10.58
+            ],
+            [
+              -67.06,
+              10.58
+            ],
+            [
+              -67.06,
+              10.56
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-020",
+        "priority": "medium",
+        "score": 43,
+        "communityReports": 269,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 268,
+          "structural_damage": 1
+        },
+        "latestSubmissionDate": "2026-06-28",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas",
+          "emsr884-aoi03-antimano"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas",
+          "AOI03 Antimano - Imagen disponible, sin vector oficial de danos"
+        ],
+        "reasons": [
+          "269 aggregated community reports",
+          "1 structural-damage reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.96000000000001,
+              10.48
+            ],
+            [
+              -66.94,
+              10.48
+            ],
+            [
+              -66.94,
+              10.5
+            ],
+            [
+              -66.96000000000001,
+              10.5
+            ],
+            [
+              -66.96000000000001,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-021",
+        "priority": "medium",
+        "score": 40,
+        "communityReports": 239,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 239
+        },
+        "latestSubmissionDate": "2026-07-01",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [
+          "239 aggregated community reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.82000000000001,
+              10.46
+            ],
+            [
+              -66.8,
+              10.46
+            ],
+            [
+              -66.8,
+              10.48
+            ],
+            [
+              -66.82000000000001,
+              10.48
+            ],
+            [
+              -66.82000000000001,
+              10.46
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-022",
+        "priority": "medium",
+        "score": 40,
+        "communityReports": 174,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 174
+        },
+        "latestSubmissionDate": "2026-06-28",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas",
+          "emsr884-aoi03-antimano"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas",
+          "AOI03 Antimano - Imagen disponible, sin vector oficial de danos"
+        ],
+        "reasons": [
+          "174 aggregated community reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.96000000000001,
+              10.5
+            ],
+            [
+              -66.94,
+              10.5
+            ],
+            [
+              -66.94,
+              10.52
+            ],
+            [
+              -66.96000000000001,
+              10.52
+            ],
+            [
+              -66.96000000000001,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-023",
+        "priority": "medium",
+        "score": 40,
+        "communityReports": 157,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 157
+        },
+        "latestSubmissionDate": "2026-06-29",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas",
+          "emsr884-aoi03-antimano"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas",
+          "AOI03 Antimano - Imagen disponible, sin vector oficial de danos"
+        ],
+        "reasons": [
+          "157 aggregated community reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.94,
+              10.48
+            ],
+            [
+              -66.92,
+              10.48
+            ],
+            [
+              -66.92,
+              10.5
+            ],
+            [
+              -66.94,
+              10.5
+            ],
+            [
+              -66.94,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-024",
+        "priority": "medium",
+        "score": 40,
+        "communityReports": 88,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "aid_collection_first_aid": 3,
+          "other": 85
+        },
+        "latestSubmissionDate": "2026-06-29",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [
+          "88 aggregated community reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.86,
+              10.5
+            ],
+            [
+              -66.84,
+              10.5
+            ],
+            [
+              -66.84,
+              10.52
+            ],
+            [
+              -66.86,
+              10.52
+            ],
+            [
+              -66.86,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-025",
+        "priority": "medium",
+        "score": 40,
+        "communityReports": 38,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 38
+        },
+        "latestSubmissionDate": "2026-06-28",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [
+          "38 aggregated community reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.04,
+              10.34
+            ],
+            [
+              -67.02,
+              10.34
+            ],
+            [
+              -67.02,
+              10.36
+            ],
+            [
+              -67.04,
+              10.36
+            ],
+            [
+              -67.04,
+              10.34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-026",
+        "priority": "medium",
+        "score": 40,
+        "communityReports": 20,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 19,
+          "aid_collection_first_aid": 1
+        },
+        "latestSubmissionDate": "2026-06-28",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas",
+          "emsr884-aoi03-antimano"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas",
+          "AOI03 Antimano - Imagen disponible, sin vector oficial de danos"
+        ],
+        "reasons": [
+          "20 aggregated community reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.96000000000001,
+              10.46
+            ],
+            [
+              -66.94,
+              10.46
+            ],
+            [
+              -66.94,
+              10.48
+            ],
+            [
+              -66.96000000000001,
+              10.48
+            ],
+            [
+              -66.96000000000001,
+              10.46
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-027",
+        "priority": "low",
+        "score": 34,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 57,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "57 external candidates outside GRA",
+          "gap: dense external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.1,
+              10.58
+            ],
+            [
+              -67.08,
+              10.58
+            ],
+            [
+              -67.08,
+              10.6
+            ],
+            [
+              -67.1,
+              10.6
+            ],
+            [
+              -67.1,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-028",
+        "priority": "low",
+        "score": 33,
+        "communityReports": 8,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "structural_damage": 5,
+          "other": 3
+        },
+        "latestSubmissionDate": "2026-06-29",
+        "emsOfficialDestroyedDamaged": 1,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 5,
+        "emsMonitorPossible": 4,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": true,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-la-guaira-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "La Guaira Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "8 aggregated community reports",
+          "5 structural-damage reports",
+          "1 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.92,
+              10.6
+            ],
+            [
+              -66.9,
+              10.6
+            ],
+            [
+              -66.9,
+              10.620000000000001
+            ],
+            [
+              -66.92,
+              10.620000000000001
+            ],
+            [
+              -66.92,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-029",
+        "priority": "low",
+        "score": 28,
+        "communityReports": 5,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 5
+        },
+        "latestSubmissionDate": "2026-06-26",
+        "emsOfficialDestroyedDamaged": 1,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 13,
+        "emsMonitorPossible": 12,
+        "externalGapCandidates": 66,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "5 aggregated community reports",
+          "1 official EMS destroyed/damaged features",
+          "66 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.0,
+              10.6
+            ],
+            [
+              -66.98,
+              10.6
+            ],
+            [
+              -66.98,
+              10.620000000000001
+            ],
+            [
+              -67.0,
+              10.620000000000001
+            ],
+            [
+              -67.0,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-030",
+        "priority": "low",
+        "score": 26,
+        "communityReports": 12,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 12
+        },
+        "latestSubmissionDate": "2026-06-26",
+        "emsOfficialDestroyedDamaged": 1,
+        "emsOfficialPossible": 3,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 1,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "12 aggregated community reports",
+          "1 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.94,
+              10.58
+            ],
+            [
+              -66.92,
+              10.58
+            ],
+            [
+              -66.92,
+              10.6
+            ],
+            [
+              -66.94,
+              10.6
+            ],
+            [
+              -66.94,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-031",
+        "priority": "low",
+        "score": 18,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 9,
+        "emsOfficialPossible": 9,
+        "emsMonitorDestroyedDamaged": 5,
+        "emsMonitorPossible": 1,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron",
+          "emsr884-aoi06-moron-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron",
+          "AOI06 Moron - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "9 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.2,
+              10.5
+            ],
+            [
+              -68.18,
+              10.5
+            ],
+            [
+              -68.18,
+              10.52
+            ],
+            [
+              -68.2,
+              10.52
+            ],
+            [
+              -68.2,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-032",
+        "priority": "low",
+        "score": 17,
+        "communityReports": 7,
+        "communityReportsSuppressed": false,
+        "communityEvents": {
+          "other": 6,
+          "structural_damage": 1
+        },
+        "latestSubmissionDate": "2026-06-27",
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [
+          "7 aggregated community reports",
+          "1 structural-damage reports"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.34,
+              10.76
+            ],
+            [
+              -68.32000000000001,
+              10.76
+            ],
+            [
+              -68.32000000000001,
+              10.78
+            ],
+            [
+              -68.34,
+              10.78
+            ],
+            [
+              -68.34,
+              10.76
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-033",
+        "priority": "low",
+        "score": 16,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 8,
+        "emsOfficialPossible": 30,
+        "emsMonitorDestroyedDamaged": 4,
+        "emsMonitorPossible": 36,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron",
+          "emsr884-aoi06-moron-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron",
+          "AOI06 Moron - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "8 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.2,
+              10.48
+            ],
+            [
+              -68.18,
+              10.48
+            ],
+            [
+              -68.18,
+              10.5
+            ],
+            [
+              -68.2,
+              10.5
+            ],
+            [
+              -68.2,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-034",
+        "priority": "low",
+        "score": 16,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 8,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 11,
+        "emsMonitorPossible": 9,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "8 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.74,
+              10.32
+            ],
+            [
+              -68.72,
+              10.32
+            ],
+            [
+              -68.72,
+              10.34
+            ],
+            [
+              -68.74,
+              10.34
+            ],
+            [
+              -68.74,
+              10.32
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-035",
+        "priority": "low",
+        "score": 14,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 7,
+        "emsOfficialPossible": 6,
+        "emsMonitorDestroyedDamaged": 22,
+        "emsMonitorPossible": 5,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron",
+          "emsr884-aoi06-moron-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron",
+          "AOI06 Moron - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "7 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.22,
+              10.46
+            ],
+            [
+              -68.2,
+              10.46
+            ],
+            [
+              -68.2,
+              10.48
+            ],
+            [
+              -68.22,
+              10.48
+            ],
+            [
+              -68.22,
+              10.46
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-036",
+        "priority": "low",
+        "score": 12,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 8,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 49,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01",
+          "external-msft-catia-la-mar-east-predicted-damage"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01",
+          "Catia La Mar Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "49 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.98,
+              10.6
+            ],
+            [
+              -66.96000000000001,
+              10.6
+            ],
+            [
+              -66.96000000000001,
+              10.620000000000001
+            ],
+            [
+              -66.98,
+              10.620000000000001
+            ],
+            [
+              -66.98,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-037",
+        "priority": "low",
+        "score": 12,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 48,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "Catia La Mar - Daño predicho Microsoft AI4G"
+        ],
+        "reasons": [
+          "48 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.1,
+              10.56
+            ],
+            [
+              -67.08,
+              10.56
+            ],
+            [
+              -67.08,
+              10.58
+            ],
+            [
+              -67.1,
+              10.58
+            ],
+            [
+              -67.1,
+              10.56
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-038",
+        "priority": "low",
+        "score": 8,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": 21,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "external-msft-catia-la-mar-east-predicted-damage",
+          "external-msft-catia-la-mar-predicted-damage"
+        ],
+        "aoiLabels": [
+          "Catia La Mar - Daño predicho Microsoft AI4G",
+          "Catia La Mar Este - Candidatos triage Microsoft AI4G"
+        ],
+        "reasons": [
+          "21 external candidates outside GRA"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.02,
+              10.56
+            ],
+            [
+              -67.0,
+              10.56
+            ],
+            [
+              -67.0,
+              10.58
+            ],
+            [
+              -67.02,
+              10.58
+            ],
+            [
+              -67.02,
+              10.56
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-039",
+        "priority": "low",
+        "score": 8,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 4,
+        "emsOfficialPossible": 9,
+        "emsMonitorDestroyedDamaged": 3,
+        "emsMonitorPossible": 4,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron",
+          "emsr884-aoi06-moron-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron",
+          "AOI06 Moron - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "4 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.22,
+              10.48
+            ],
+            [
+              -68.2,
+              10.48
+            ],
+            [
+              -68.2,
+              10.5
+            ],
+            [
+              -68.22,
+              10.5
+            ],
+            [
+              -68.22,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-040",
+        "priority": "low",
+        "score": 8,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 4,
+        "emsOfficialPossible": 16,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron"
+        ],
+        "reasons": [
+          "4 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.18,
+              10.5
+            ],
+            [
+              -68.16,
+              10.5
+            ],
+            [
+              -68.16,
+              10.52
+            ],
+            [
+              -68.18,
+              10.52
+            ],
+            [
+              -68.18,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-041",
+        "priority": "low",
+        "score": 6,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 3,
+        "emsOfficialPossible": 12,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron"
+        ],
+        "reasons": [
+          "3 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.18,
+              10.48
+            ],
+            [
+              -68.16,
+              10.48
+            ],
+            [
+              -68.16,
+              10.5
+            ],
+            [
+              -68.18,
+              10.5
+            ],
+            [
+              -68.18,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-042",
+        "priority": "low",
+        "score": 2,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 1,
+        "emsOfficialPossible": 9,
+        "emsMonitorDestroyedDamaged": 5,
+        "emsMonitorPossible": 3,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron",
+          "emsr884-aoi06-moron-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron",
+          "AOI06 Moron - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [
+          "1 official EMS destroyed/damaged features"
+        ],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.24,
+              10.46
+            ],
+            [
+              -68.22,
+              10.46
+            ],
+            [
+              -68.22,
+              10.48
+            ],
+            [
+              -68.24,
+              10.48
+            ],
+            [
+              -68.24,
+              10.46
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-046",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 1,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": true,
+        "aoiIds": [
+          "emsr884-aoi12-caraballeda",
+          "emsr884-aoi12-caraballeda-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI12 Caraballeda / La Guaira",
+          "AOI12 Caraballeda / La Guaira - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.96000000000001,
+              10.58
+            ],
+            [
+              -66.94,
+              10.58
+            ],
+            [
+              -66.94,
+              10.6
+            ],
+            [
+              -66.96000000000001,
+              10.6
+            ],
+            [
+              -66.96000000000001,
+              10.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-047",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.92,
+              10.48
+            ],
+            [
+              -66.9,
+              10.48
+            ],
+            [
+              -66.9,
+              10.5
+            ],
+            [
+              -66.92,
+              10.5
+            ],
+            [
+              -66.92,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-050",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 1,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas",
+          "emsr884-aoi03-antimano"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas",
+          "AOI03 Antimano - Imagen disponible, sin vector oficial de danos"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.94,
+              10.5
+            ],
+            [
+              -66.92,
+              10.5
+            ],
+            [
+              -66.92,
+              10.52
+            ],
+            [
+              -66.94,
+              10.52
+            ],
+            [
+              -66.94,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-056",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 0,
+        "emsMonitorDestroyedDamaged": 3,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -67.5,
+              10.200000000000001
+            ],
+            [
+              -67.48,
+              10.200000000000001
+            ],
+            [
+              -67.48,
+              10.22
+            ],
+            [
+              -67.5,
+              10.22
+            ],
+            [
+              -67.5,
+              10.200000000000001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-104",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": true,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 5,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.88,
+              10.48
+            ],
+            [
+              -66.86,
+              10.48
+            ],
+            [
+              -66.86,
+              10.5
+            ],
+            [
+              -66.88,
+              10.5
+            ],
+            [
+              -66.88,
+              10.48
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-133",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.88,
+              10.4
+            ],
+            [
+              -66.86,
+              10.4
+            ],
+            [
+              -66.86,
+              10.42
+            ],
+            [
+              -66.88,
+              10.42
+            ],
+            [
+              -66.88,
+              10.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-134",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.88,
+              10.42
+            ],
+            [
+              -66.86,
+              10.42
+            ],
+            [
+              -66.86,
+              10.44
+            ],
+            [
+              -66.88,
+              10.44
+            ],
+            [
+              -66.88,
+              10.42
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-135",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.9,
+              10.44
+            ],
+            [
+              -66.88,
+              10.44
+            ],
+            [
+              -66.88,
+              10.46
+            ],
+            [
+              -66.9,
+              10.46
+            ],
+            [
+              -66.9,
+              10.44
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-136",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas",
+          "emsr884-aoi03-antimano"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas",
+          "AOI03 Antimano - Imagen disponible, sin vector oficial de danos"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.94,
+              10.42
+            ],
+            [
+              -66.92,
+              10.42
+            ],
+            [
+              -66.92,
+              10.44
+            ],
+            [
+              -66.94,
+              10.44
+            ],
+            [
+              -66.94,
+              10.42
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-137",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.9,
+              10.42
+            ],
+            [
+              -66.88,
+              10.42
+            ],
+            [
+              -66.88,
+              10.44
+            ],
+            [
+              -66.9,
+              10.44
+            ],
+            [
+              -66.9,
+              10.42
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-138",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 4,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas",
+          "emsr884-aoi03-antimano"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas",
+          "AOI03 Antimano - Imagen disponible, sin vector oficial de danos"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.94,
+              10.44
+            ],
+            [
+              -66.92,
+              10.44
+            ],
+            [
+              -66.92,
+              10.46
+            ],
+            [
+              -66.94,
+              10.46
+            ],
+            [
+              -66.94,
+              10.44
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-139",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi02-caracas"
+        ],
+        "aoiLabels": [
+          "AOI02 Caracas"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.92,
+              10.46
+            ],
+            [
+              -66.9,
+              10.46
+            ],
+            [
+              -66.9,
+              10.48
+            ],
+            [
+              -66.92,
+              10.48
+            ],
+            [
+              -66.92,
+              10.46
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-140",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 8,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron",
+          "emsr884-aoi06-moron-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron",
+          "AOI06 Moron - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.26,
+              10.46
+            ],
+            [
+              -68.24,
+              10.46
+            ],
+            [
+              -68.24,
+              10.48
+            ],
+            [
+              -68.26,
+              10.48
+            ],
+            [
+              -68.26,
+              10.46
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-141",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi06-moron",
+          "emsr884-aoi06-moron-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI06 Moron",
+          "AOI06 Moron - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.2,
+              10.46
+            ],
+            [
+              -68.18,
+              10.46
+            ],
+            [
+              -68.18,
+              10.48
+            ],
+            [
+              -68.2,
+              10.48
+            ],
+            [
+              -68.2,
+              10.46
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-142",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 8,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 51,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.86,
+              10.24
+            ],
+            [
+              -68.84,
+              10.24
+            ],
+            [
+              -68.84,
+              10.26
+            ],
+            [
+              -68.86,
+              10.26
+            ],
+            [
+              -68.86,
+              10.24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-143",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 27,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.84,
+              10.24
+            ],
+            [
+              -68.82000000000001,
+              10.24
+            ],
+            [
+              -68.82000000000001,
+              10.26
+            ],
+            [
+              -68.84,
+              10.26
+            ],
+            [
+              -68.84,
+              10.24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-144",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 5,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.82000000000001,
+              10.24
+            ],
+            [
+              -68.8,
+              10.24
+            ],
+            [
+              -68.8,
+              10.26
+            ],
+            [
+              -68.82000000000001,
+              10.26
+            ],
+            [
+              -68.82000000000001,
+              10.24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-145",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 3,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.82000000000001,
+              10.26
+            ],
+            [
+              -68.8,
+              10.26
+            ],
+            [
+              -68.8,
+              10.28
+            ],
+            [
+              -68.82000000000001,
+              10.28
+            ],
+            [
+              -68.82000000000001,
+              10.26
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-146",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 3,
+        "emsMonitorDestroyedDamaged": 1,
+        "emsMonitorPossible": 9,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.8,
+              10.3
+            ],
+            [
+              -68.78,
+              10.3
+            ],
+            [
+              -68.78,
+              10.32
+            ],
+            [
+              -68.8,
+              10.32
+            ],
+            [
+              -68.8,
+              10.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-147",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 3,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 8,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.8,
+              10.24
+            ],
+            [
+              -68.78,
+              10.24
+            ],
+            [
+              -68.78,
+              10.26
+            ],
+            [
+              -68.8,
+              10.26
+            ],
+            [
+              -68.8,
+              10.24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-148",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 4,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 7,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.78,
+              10.24
+            ],
+            [
+              -68.76,
+              10.24
+            ],
+            [
+              -68.76,
+              10.26
+            ],
+            [
+              -68.78,
+              10.26
+            ],
+            [
+              -68.78,
+              10.24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-149",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 3,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.78,
+              10.32
+            ],
+            [
+              -68.76,
+              10.32
+            ],
+            [
+              -68.76,
+              10.34
+            ],
+            [
+              -68.78,
+              10.34
+            ],
+            [
+              -68.78,
+              10.32
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-150",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 3,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 26,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe",
+          "emsr884-aoi08-san-felipe-monitor01"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe",
+          "AOI08 San Felipe - Puntos EMSR884 MONIT01"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.76,
+              10.32
+            ],
+            [
+              -68.74,
+              10.32
+            ],
+            [
+              -68.74,
+              10.34
+            ],
+            [
+              -68.76,
+              10.34
+            ],
+            [
+              -68.76,
+              10.32
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-151",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 2,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.76,
+              10.34
+            ],
+            [
+              -68.74,
+              10.34
+            ],
+            [
+              -68.74,
+              10.36
+            ],
+            [
+              -68.76,
+              10.36
+            ],
+            [
+              -68.76,
+              10.34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-152",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 10,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.72,
+              10.32
+            ],
+            [
+              -68.7,
+              10.32
+            ],
+            [
+              -68.7,
+              10.34
+            ],
+            [
+              -68.72,
+              10.34
+            ],
+            [
+              -68.72,
+              10.32
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-153",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 2,
+        "emsMonitorPossible": 9,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [
+          "emsr884-aoi08-san-felipe"
+        ],
+        "aoiLabels": [
+          "AOI08 San Felipe"
+        ],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.74,
+              10.34
+            ],
+            [
+              -68.72,
+              10.34
+            ],
+            [
+              -68.72,
+              10.36
+            ],
+            [
+              -68.74,
+              10.36
+            ],
+            [
+              -68.74,
+              10.34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-154",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 2,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.56,
+              10.42
+            ],
+            [
+              -68.54,
+              10.42
+            ],
+            [
+              -68.54,
+              10.44
+            ],
+            [
+              -68.56,
+              10.44
+            ],
+            [
+              -68.56,
+              10.42
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ops-zone-155",
+        "priority": "low",
+        "score": 0,
+        "communityReports": null,
+        "communityReportsSuppressed": false,
+        "communityEvents": {},
+        "latestSubmissionDate": null,
+        "emsOfficialDestroyedDamaged": 0,
+        "emsOfficialPossible": 1,
+        "emsMonitorDestroyedDamaged": 0,
+        "emsMonitorPossible": 0,
+        "externalGapCandidates": null,
+        "externalGapSuppressed": false,
+        "aoiIds": [],
+        "aoiLabels": [],
+        "reasons": [],
+        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.54,
+              10.4
+            ],
+            [
+              -68.52,
+              10.4
+            ],
+            [
+              -68.52,
+              10.42
+            ],
+            [
+              -68.54,
+              10.42
+            ],
+            [
+              -68.54,
+              10.4
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

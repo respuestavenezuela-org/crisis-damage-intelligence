@@ -1,0 +1,17 @@
+{
+  "checked_at": "20260630T074707Z",
+  "activation_code": "EMSR884",
+  "activation_closed": false,
+  "aoi_count": 13,
+  "product_count": 19,
+  "downloadable_product_count": 10,
+  "image_count": 22,
+  "layer_count": 53,
+  "raw_snapshot": "ops/data_acquisition_plan/emsr884_live_products_20260630T074707Z.json",
+  "product_manifest": "ops/data_acquisition_plan/emsr884_product_manifest.csv",
+  "image_manifest": "ops/data_acquisition_plan/emsr884_product_images.csv",
+  "official_imagery_manifest": "ops/data_acquisition_plan/official_imagery_manifest.csv",
+  "layer_manifest": "ops/data_acquisition_plan/emsr884_product_layers.csv",
+  "zip_manifest": "ops/data_acquisition_plan/official_product_zip_manifest.csv",
+  "zip_layer_inventory": "ops/data_acquisition_plan/official_product_layer_inventory.csv"
+}

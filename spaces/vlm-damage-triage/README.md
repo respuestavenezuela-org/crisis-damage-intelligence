@@ -59,3 +59,23 @@ Output:
 ```
 
 VLM output is triage evidence only. Official EMS labels remain the source of record.
+
+## Publish
+
+From the repo root:
+
+```bash
+export HF_TOKEN="<write token>"
+python3 scripts/publish_hf_vlm_space.py --repo-id takove/respuesta-venezuela-vlm
+```
+
+That publish leaves `DRY_RUN=1`. Enable real inference only after credits/hardware are available:
+
+```bash
+python3 scripts/publish_hf_vlm_space.py \
+  --repo-id takove/respuesta-venezuela-vlm \
+  --hardware l4x1 \
+  --sleep-time 3600 \
+  --enable-inference \
+  --restart
+```

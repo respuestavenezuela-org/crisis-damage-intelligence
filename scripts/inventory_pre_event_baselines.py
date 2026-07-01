@@ -23,11 +23,12 @@ OUT_DIR = ROOT / "ops" / "baseline_inventory"
 CATALOG = ROOT / "public" / "data" / "catalog.json"
 
 VANTOR_COLLECTION = "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/collection.json"
-PC_STAC_SEARCH = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
+AWS_STAC_SEARCH = "https://earth-search.aws.element84.com/v1/search"
 OAM_SEARCH = "https://api.openaerialmap.org/meta"
 
 TARGET_AOIS = {
     "emsr884-aoi03-antimano",
+    "emsr884-aoi05-santa-cruz",
     "emsr884-aoi06-moron",
     "emsr884-aoi08-san-felipe",
     "emsr884-aoi10-guacara",
@@ -136,7 +137,7 @@ def inventory_vantor(aois: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
-def inventory_planetary_computer(aois: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def inventory_aws_sentinel_2(aois: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for aoi in aois:
         payload = {
@@ -148,11 +149,11 @@ def inventory_planetary_computer(aois: list[dict[str, Any]]) -> list[dict[str, A
             "sortby": [{"field": "properties.eo:cloud_cover", "direction": "asc"}],
         }
         try:
-            data = fetch_json(PC_STAC_SEARCH, method="POST", payload=payload)
+            data = fetch_json(AWS_STAC_SEARCH, method="POST", payload=payload)
         except Exception as exc:
             rows.append({
                 "aoi_id": aoi["id"],
-                "source": "planetary-computer-sentinel-2-l2a",
+                "source": "aws-earth-search-sentinel-2-l2a-cogs",
                 "item_id": "ERROR",
                 "datetime": None,
                 "platform": "Sentinel-2",
@@ -171,7 +172,7 @@ def inventory_planetary_computer(aois: list[dict[str, Any]]) -> list[dict[str, A
             judgement, usable = source_judgement("sentinel-2", gsd)
             rows.append({
                 "aoi_id": aoi["id"],
-                "source": "planetary-computer-sentinel-2-l2a",
+                "source": "aws-earth-search-sentinel-2-l2a-cogs",
                 "item_id": item.get("id"),
                 "datetime": props.get("datetime"),
                 "platform": props.get("platform", "Sentinel-2"),
@@ -180,8 +181,8 @@ def inventory_planetary_computer(aois: list[dict[str, Any]]) -> list[dict[str, A
                 "phase": "pre",
                 "bbox": item.get("bbox"),
                 "features_covered": feature_count_inside(aoi, item.get("bbox", [])) if item.get("bbox") else None,
-                "asset_url": item.get("assets", {}).get("visual", {}).get("href") or item.get("assets", {}).get("B04", {}).get("href"),
-                "license": "Copernicus Sentinel data terms",
+                "asset_url": item.get("assets", {}).get("visual", {}).get("href") or item.get("assets", {}).get("red", {}).get("href"),
+                "license": "Copernicus Sentinel data terms / AWS Open Data Registry",
                 "judgement": judgement,
                 "usable_for_building_vlm": usable,
             })
@@ -270,6 +271,7 @@ def write_suitability_report(rows: list[dict[str, Any]]) -> None:
 
     names = {
         "emsr884-aoi03-antimano": "AOI03 Antimano",
+        "emsr884-aoi05-santa-cruz": "AOI05 Santa Cruz",
         "emsr884-aoi06-moron": "AOI06 Moron",
         "emsr884-aoi08-san-felipe": "AOI08 San Felipe",
         "emsr884-aoi10-guacara": "AOI10 Guacara",
@@ -282,7 +284,7 @@ def write_suitability_report(rows: list[dict[str, Any]]) -> None:
         "",
         "Generated from `ops/baseline_inventory/pre_event_baseline_inventory.json`.",
         "",
-        "Only imagery marked `usable_for_building_vlm=true` should be used for building-level before/after VLM. Sentinel-2 and unknown-date/context-only basemaps are not acceptable for building damage comparison.",
+        "Only imagery marked `usable_for_building_vlm=true` should be used for building-level before/after VLM. Sentinel-2 and unknown-date/context-only basemaps are acceptable as visual context only, not building damage comparison.",
         "",
         "## Summary",
         "",
@@ -295,7 +297,7 @@ def write_suitability_report(rows: list[dict[str, Any]]) -> None:
         covered = sum(int(row.get("features_covered") or 0) for row in usable)
         if aoi_id == "emsr884-aoi03-antimano" and usable:
             decision = "usable pilot only; internal candidates, not official vectors"
-        elif aoi_id in {"emsr884-aoi06-moron", "emsr884-aoi08-san-felipe"}:
+        elif aoi_id in {"emsr884-aoi05-santa-cruz", "emsr884-aoi06-moron", "emsr884-aoi08-san-felipe"}:
             decision = "blocked: only 10 m Sentinel-2 context baseline found"
         elif aoi_id == "emsr884-aoi10-guacara":
             decision = "blocked: no official damage vector and only context baseline found"
@@ -332,7 +334,7 @@ def write_suitability_report(rows: list[dict[str, Any]]) -> None:
     lines.extend([
         "## Operational Rule",
         "",
-        "- Do not run or publish before/after building VLM for AOI06, AOI08, or AOI10 until a high-resolution pre-event baseline is found.",
+        "- Do not run or publish before/after building VLM for AOI05, AOI06, AOI08, or AOI10 until a high-resolution pre-event baseline is found.",
         "- Post-event-only VLM may remain available as lower-confidence triage evidence, but it must stay labeled separately from before/after comparison.",
         "- AOI03 VLM remains internal because it is based on OSM candidates, not official EMS damage features.",
     ])
@@ -344,7 +346,7 @@ def main() -> None:
     aois = [aoi for aoi in catalog["aois"] if aoi["id"] in TARGET_AOIS]
     rows: list[dict[str, Any]] = []
     rows.extend(inventory_vantor(aois))
-    rows.extend(inventory_planetary_computer(aois))
+    rows.extend(inventory_aws_sentinel_2(aois))
     rows.extend(inventory_oam(aois))
     rows.sort(key=lambda row: (row["aoi_id"], not row.get("usable_for_building_vlm", False), row.get("source") or "", row.get("cloud_cover") if row.get("cloud_cover") is not None else 999))
     write_outputs(rows)

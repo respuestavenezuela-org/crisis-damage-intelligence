@@ -29,7 +29,7 @@ Default language is Spanish, with English available in the UI.
 ## Local Run
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -53,6 +53,7 @@ Keep large rasters, chips, COGs, and PMTiles out of the Vercel repo. Store them 
 Analytics setup and the privacy-safe event taxonomy live in `docs/ANALYTICS.md`.
 HF Spaces VLM provider setup lives in `docs/HF_SPACES_VLM.md`.
 Contributor credits live in `docs/CONTRIBUTORS.md`, including attribution for `@endersonO`'s mobile PWA and offline workflow contribution.
+Agent guardrails live in `AGENTS.md`. Mobile/performance budgets and data validation live in `docs/PERFORMANCE_BUDGETS.md` and `docs/DATA_VALIDATION.md`.
 
 ## Data Model
 
@@ -119,7 +120,11 @@ python3 outputs/damage_pipeline/build_copernicus_ems_package.py \
   outputs/ems_acceptance_aoi06_from_zip
 
 npm run lint
+npm run typecheck
 npm run build
+python3 scripts/validate_catalog_schema.py
+python3 scripts/audit_asset_budget.py
+python3 scripts/validate_mobile_performance_budget.py
 ```
 
 Results:
@@ -169,7 +174,7 @@ Live infrastructure:
 
 - Vercel: `https://crisis-damage-intelligence.vercel.app`
 - Canonical domain: `https://respuestavenezuela.org`
-- GitHub: `https://github.com/takove/crisis-damage-intelligence`
+- GitHub: `https://github.com/respuestavenezuela-org/crisis-damage-intelligence`
 - Public app remains static-first and does not require Supabase for viewing.
 
 Operational warning:

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import {
   closeSheet,
   expectActiveDownloadReachable,
@@ -9,6 +9,69 @@ import {
 // These smoke tests intercept data and tile requests. Block service workers so
 // Playwright routes see the same network requests every run.
 test.use({ serviceWorkers: "block" });
+
+type AnalyticsEvent = {
+  name: string;
+  properties: Record<string, unknown>;
+};
+
+async function captureAnalyticsEvents(page: Page) {
+  await page.addInitScript(() => {
+    const target = window as typeof window & { __capturedAnalyticsEvents?: unknown[] };
+    target.__capturedAnalyticsEvents = [];
+    window.addEventListener("crisis_damage_analytics", (event) => {
+      target.__capturedAnalyticsEvents?.push((event as CustomEvent).detail);
+    });
+  });
+}
+
+async function readAnalyticsEvents(page: Page): Promise<AnalyticsEvent[]> {
+  return page.evaluate(() => {
+    const target = window as typeof window & { __capturedAnalyticsEvents?: AnalyticsEvent[] };
+    return target.__capturedAnalyticsEvents ?? [];
+  });
+}
+
+async function waitForAnalyticsEvent(page: Page, name: string) {
+  await expect.poll(async () => {
+    const events = await readAnalyticsEvents(page);
+    return events.some((event) => event.name === name);
+  }).toBe(true);
+}
+
+function expectAnalyticsPayloadsPrivate(events: AnalyticsEvent[]) {
+  for (const event of events) {
+    for (const [key, value] of Object.entries(event.properties)) {
+      expect(key).not.toMatch(/url|href|path|feature_id|source_feature_id|centroid|lat|lon|lng|email/i);
+      if (typeof value !== "string") continue;
+      expect(value).not.toMatch(/https?:\/\//i);
+      expect(value).not.toMatch(/\/data\/(?:aoi|chips|tiles)\//i);
+      expect(value).not.toMatch(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+      expect(value).not.toMatch(/-?\d{1,2}\.\d{4,}\s*,\s*-?\d{1,3}\.\d{4,}/);
+      if (key === "aoi_id" || key === "default_aoi_id" || key === "city_id") {
+        expect(value).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+      }
+    }
+  }
+}
+
+const lowDamageFeatureCollection = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: {
+        id: "low_001",
+        damage_class: "low",
+        damage_percent: 0,
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [-67.0216, 10.6071],
+      },
+    },
+  ],
+};
 
 test("mobile critical AOI workflow stays usable", async ({ page }) => {
   await keepMapRastersLight(page);
@@ -40,11 +103,11 @@ test("mobile critical AOI workflow stays usable", async ({ page }) => {
 
   const mobileSheet = page.getByTestId("mobile-inspector-sheet");
   await expect(page.getByTestId("mobile-inspector-toggle")).toBeVisible();
-  await expect(page.getByTestId("mobile-inspector-toggle")).toContainText("12 filas de prioridad listas");
+  await expect(page.getByTestId("mobile-inspector-toggle")).toContainText("60 filas de prioridad listas");
   await page.getByTestId("mobile-inspector-toggle").click();
   await expect(mobileSheet).toBeVisible();
   await expect(page.getByRole("heading", { name: "Brief operativo" })).toBeVisible();
-  await expect(mobileSheet).toContainText("12 filas de prioridad listas");
+  await expect(mobileSheet).toContainText("60 filas de prioridad listas");
   await mobileSheet.getByRole("button", { name: "Cerrar" }).click();
   await expect(mobileSheet).toBeHidden();
   await expect(page.getByTestId("mobile-inspector-toggle")).toBeVisible();
@@ -79,6 +142,62 @@ test("mobile critical AOI workflow stays usable", async ({ page }) => {
   await expect(page.getByTestId("mobile-inspector-sheet")).toBeHidden();
   await expect(page.getByTestId("mobile-inspector-toggle")).toBeVisible();
   await expect(page.getByTestId("mobile-inspector-toggle")).toContainText(/ems_\d+/);
+});
+
+test("analytics friction events stay coarse and private", async ({ page }) => {
+  await captureAnalyticsEvents(page);
+  await keepMapRastersLight(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route("**/data/aoi/emsr884-aoi12-caraballeda/damage.geojson", (route) => {
+    route.fulfill({
+      status: 200,
+      contentType: "application/geo+json",
+      body: JSON.stringify(lowDamageFeatureCollection),
+    });
+  });
+  await page.route("**/data/aoi/emsr884-aoi12-caraballeda/*.jsonl", (route) => {
+    route.fulfill({ status: 200, contentType: "application/x-ndjson", body: "" });
+  });
+
+  await page.goto("/");
+
+  await waitForAnalyticsEvent(page, "app_loaded");
+  await expect(page.locator(".map-node")).toHaveAttribute("data-visible-features", "1");
+
+  const zoneSheet = await openMobileSheet(page, "mobile-zona-toggle", "mobile-zona-sheet");
+  await closeSheet(zoneSheet);
+  const layersSheet = await openMobileSheet(page, "mobile-capas-toggle", "mobile-capas-sheet");
+  await layersSheet.getByTestId("filter-severe").click();
+  await expect(page.locator(".map-node")).toHaveAttribute("data-visible-features", "0");
+  await waitForAnalyticsEvent(page, "filter_empty_result_seen");
+  await closeSheet(layersSheet);
+
+  const mapBox = await page.locator(".map-node").boundingBox();
+  expect(mapBox).not.toBeNull();
+  await page.mouse.click((mapBox?.x ?? 0) + 8, (mapBox?.y ?? 0) + 8);
+  await waitForAnalyticsEvent(page, "map_empty_clicked");
+
+  await page.evaluate(() => {
+    const anchor = document.createElement("a");
+    anchor.id = "leaky-analytics-anchor";
+    anchor.href = "/data/aoi/emsr884-aoi12-caraballeda/damage.csv";
+    anchor.dataset.analyticsEvent = "data_download_clicked";
+    anchor.dataset.analyticsAoi = "ems_00001";
+    anchor.dataset.analyticsSurface = "https://www.google.com/maps/search/?api=1&query=10.12345,-67.56789";
+    anchor.textContent = "leaky analytics test";
+    anchor.addEventListener("click", (event) => event.preventDefault());
+    document.body.append(anchor);
+  });
+  await page.locator("#leaky-analytics-anchor").click();
+  await waitForAnalyticsEvent(page, "data_download_clicked");
+
+  const events = await readAnalyticsEvents(page);
+  expect(events.some((event) => event.name === "mobile_panel_opened" && event.properties.surface === "zona")).toBe(true);
+  expect(events.some((event) => event.name === "mobile_panel_opened" && event.properties.surface === "capas")).toBe(true);
+  expect(events.some((event) => event.name === "filter_empty_result_seen" && event.properties.filter === "severe")).toBe(true);
+  const leakyDownload = events.find((event) => event.name === "data_download_clicked");
+  expect(leakyDownload?.properties).toEqual({ format: "csv" });
+  expectAnalyticsPayloadsPrivate(events);
 });
 
 for (const viewport of [
@@ -134,6 +253,7 @@ for (const viewport of [
 }
 
 test("mobile shell keeps downloads and AOI metadata visible when active damage and VLM fail", async ({ page }) => {
+  await captureAnalyticsEvents(page);
   await keepMapRastersLight(page);
   await page.setViewportSize({ width: 360, height: 740 });
   await page.route("**/data/aoi/**", async (route) => {
@@ -181,4 +301,12 @@ test("mobile shell keeps downloads and AOI metadata visible when active damage a
   await expect(mobileSheet).toContainText("Datos operativos EMSR884");
   await expect(mobileSheet).toContainText("Con enlace débil");
   await expect(mobileSheet).toContainText("No se pudo cargar la geometría de daños.");
+
+  await waitForAnalyticsEvent(page, "layer_load_failed");
+  await waitForAnalyticsEvent(page, "fallback_view_shown");
+  const events = await readAnalyticsEvents(page);
+  expect(events.some((event) => event.name === "layer_load_failed" && event.properties.layer === "damage")).toBe(true);
+  expect(events.some((event) => event.name === "layer_load_failed" && event.properties.layer === "vlm")).toBe(true);
+  expect(events.some((event) => event.name === "fallback_view_shown" && event.properties.surface === "mobile_status")).toBe(true);
+  expectAnalyticsPayloadsPrivate(events);
 });

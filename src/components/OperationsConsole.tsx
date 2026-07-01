@@ -13,9 +13,19 @@ import { trackAnalytics } from "@/lib/analytics";
 import { persistLang, readStoredLang } from "@/lib/lang";
 import { getOfflineBudgetBytes, precacheAoi } from "@/lib/offline-cache";
 import { cn } from "@/lib/utils";
+import { featureInspectionPoint } from "./map/feature-location";
 import MapPanel from "./map/MapPanel";
 import TranslatorBanner from "./TranslatorBanner";
-import type { AoiCatalog, AoiRecord, DamageFeature, Language, VlmRecord } from "./types";
+import type {
+  AoiCatalog,
+  AoiRecord,
+  DamageFeature,
+  Language,
+  OperationalSignalFeature,
+  OperationalSignalPriority,
+  OperationalSignalsSummary,
+  VlmRecord,
+} from "./types";
 
 const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
 
@@ -76,6 +86,24 @@ const copy = {
     fieldGuideVerify: "Verify before sending resources. AI is not perfect — red may mark structures that are still standing. Use before/after imagery and your judgment.",
     fieldGuideContact: "Contact: somos@respuestavenezuela.org",
     rankingNote: "Ranked by response value: official EMS destroyed/damaged first, then possible/MONIT01, VLM triage, and capped external predictions.",
+    operationalSignals: "Operational zones",
+    operationalSignalsTitle: "Aggregated operational signals",
+    operationalSignalsBrief: "Zones combine community reports, official EMS, MONIT01, and external gaps without exposing individual reports.",
+    operationalSignalsWarning: "Triage guidance only. Not an official damage count.",
+    operationalSignalsLoading: "Loading aggregated operational zones...",
+    operationalSignalsError: "Aggregated operational zones are unavailable. Official EMS layers remain usable.",
+    showOperationalSignals: "Show zones",
+    selectedSignalZone: "Selected zone",
+    topSignalZones: "Top zones",
+    signalHigh: "High",
+    signalMedium: "Medium",
+    signalLow: "Context",
+    communityReports: "Community",
+    officialDamage: "Official EMS D/D",
+    monitorPoints: "MONIT01 D/D",
+    externalGap: "External gap",
+    suppressed: "suppressed",
+    generated: "Updated",
     source: "Source",
     status: "Status",
     features: "features",
@@ -165,6 +193,7 @@ const copy = {
     maps: "Google Maps",
     officialData: "Operational EMSR884 data",
     externalPrediction: "External predicted damage - triage only",
+    externalGapBadge: "External visual gap - triage only",
     demoOnly: "Demo/VLM benchmark - not Venezuela operational data",
     confidenceTitle: "Data confidence",
     confidenceText:
@@ -182,11 +211,11 @@ const copy = {
       "official-vector": "Official EMS vector",
       "official-monitor-points": "Official EMS monitor points",
       "external-prediction": "External prediction",
+      "external-gap": "External visual gap",
       "imagery-only": "Imagery only",
       waiting: "Waiting",
       "in-production": "In production",
       "no-official-product": "No official EMS product",
-      "external-gap": "External gap to source",
     },
   },
   es: {
@@ -206,6 +235,24 @@ const copy = {
     fieldGuideVerify: "Verifica antes de enviar recursos. La IA no es perfecta — el rojo puede marcar estructuras que siguen en pie. Usa las imágenes antes/después y tu criterio en terreno.",
     fieldGuideContact: "Contacto: somos@respuestavenezuela.org",
     rankingNote: "Ordenado por valor de respuesta: primero destruido/dañado oficial EMS, luego posible/MONIT01, triage VLM y predicciones externas limitadas.",
+    operationalSignals: "Zonas operativas",
+    operationalSignalsTitle: "Señales operativas agregadas",
+    operationalSignalsBrief: "Las zonas cruzan reportes comunitarios, EMS oficial, MONIT01 y brechas externas sin exponer reportes individuales.",
+    operationalSignalsWarning: "Solo orientación de triage. No es conteo oficial de daño.",
+    operationalSignalsLoading: "Cargando zonas operativas agregadas...",
+    operationalSignalsError: "Las zonas operativas agregadas no están disponibles. Las capas EMS oficiales siguen usables.",
+    showOperationalSignals: "Mostrar zonas",
+    selectedSignalZone: "Zona seleccionada",
+    topSignalZones: "Zonas principales",
+    signalHigh: "Alta",
+    signalMedium: "Media",
+    signalLow: "Contexto",
+    communityReports: "Comunidad",
+    officialDamage: "EMS oficial D/D",
+    monitorPoints: "MONIT01 D/D",
+    externalGap: "Brecha externa",
+    suppressed: "suprimido",
+    generated: "Actualizado",
     source: "Fuente",
     status: "Estado",
     features: "estructuras",
@@ -295,6 +342,7 @@ const copy = {
     maps: "Google Maps",
     officialData: "Datos operativos EMSR884",
     externalPrediction: "Predicción externa de daño - solo triage",
+    externalGapBadge: "Brecha visual externa - solo triage",
     demoOnly: "Demo/benchmark VLM - no es dato operativo de Venezuela",
     confidenceTitle: "Confianza del dato",
     confidenceText:
@@ -312,11 +360,11 @@ const copy = {
       "official-vector": "Vector oficial EMS",
       "official-monitor-points": "Puntos oficiales EMS monitor",
       "external-prediction": "Predicción externa",
+      "external-gap": "Brecha visual externa",
       "imagery-only": "Solo imagen",
       waiting: "En espera",
       "in-production": "En producción",
       "no-official-product": "Sin producto oficial EMS",
-      "external-gap": "Brecha externa por cubrir",
     },
   },
 };
@@ -325,6 +373,8 @@ type Filter = "all" | "severe" | "vlm";
 type Mode = "before" | "after";
 type Basemap = "map" | "aerial";
 type LoadStatus = "idle" | "loading" | "ready" | "error";
+type MobileSheet = "none" | "about" | "zona" | "capas";
+type MobilePanelSurface = Exclude<MobileSheet, "none"> | "inspector";
 type AoiLayerState = {
   damage?: LoadStatus;
   vlm?: LoadStatus;
@@ -430,7 +480,7 @@ function cityImpactLabel(item: CityNavItem, language: Language) {
 function cityResponseScore(records: AoiRecord[]) {
   const officialVectors = records.filter((aoi) => aoi.status === "official-vector");
   const monitorLayers = records.filter((aoi) => aoi.status === "official-monitor-points");
-  const externalLayers = records.filter((aoi) => aoi.status === "external-prediction");
+  const externalLayers = records.filter((aoi) => aoi.status === "external-prediction" || aoi.status === "external-gap");
   const imageryOnly = records.length > 0 && records.every((aoi) => aoi.status === "imagery-only");
   const official = officialVectors.reduce((sum, aoi) => sum + n(aoi.metrics.features), 0);
   const officialConfirmed = officialVectors.reduce((sum, aoi) => sum + n(aoi.metrics.damagedConfirmed), 0);
@@ -489,8 +539,25 @@ function priorityFeatureScore(feature: DamageFeature, vlm?: VlmRecord, status?: 
   const numeric = n(p.damage_score ?? p.damage_percent ?? p.confirmed_damage_percent);
   if (status === "official-vector") return officialSeverityScore(cls) + numeric + Math.min(vlmSeverityScore(vlm) / 100, 80);
   if (status === "official-monitor-points") return Math.max(officialSeverityScore(cls) - 2_000, 6_000) + numeric;
-  if (status === "external-prediction") return 3_000 + numeric;
+  if (status === "external-prediction" || status === "external-gap") return 3_000 + numeric;
   return vlmSeverityScore(vlm) + numeric;
+}
+
+function damageFilterClass(properties: DamageFeature["properties"]) {
+  const raw = String(properties.damage_class ?? properties.damage_gra ?? properties.confirmed_damage_class ?? "").toLowerCase();
+  if (raw.includes("visual_confirmed_gap")) return "severe";
+  if (raw.includes("needs_human_review")) return "possible";
+  if (raw.includes("possibly")) return "possible";
+  if (raw.includes("destroy") || raw.includes("major") || raw.includes("damaged") || raw === "major_damage") return "severe";
+  if (raw.includes("minor") || raw.includes("possible")) return "possible";
+  if (raw.includes("uncertain")) return "uncertain";
+  return "low";
+}
+
+function matchesVisibleFilter(feature: DamageFeature, filter: Filter, vlm: Record<string, VlmRecord>) {
+  if (filter === "vlm") return Boolean(vlm[feature.properties.id]);
+  if (filter === "severe") return damageFilterClass(feature.properties) === "severe";
+  return true;
 }
 
 function priorityFeatureLabel(feature: DamageFeature, vlm: VlmRecord | undefined, language: Language, status?: string) {
@@ -499,6 +566,9 @@ function priorityFeatureLabel(feature: DamageFeature, vlm: VlmRecord | undefined
   const vlmClass = vlm?.vlm?.damage_class;
   if (status === "external-prediction") {
     return language === "es" ? `Predicción externa: ${official} · solo triage` : `External prediction: ${official} · triage only`;
+  }
+  if (status === "external-gap") {
+    return language === "es" ? `Brecha visual externa: ${official} · solo triage` : `External visual gap: ${official} · triage only`;
   }
   if (status === "official-monitor-points") {
     return language === "es" ? `MONIT01 oficial: ${official}` : `Official MONIT01: ${official}`;
@@ -513,10 +583,8 @@ function priorityFeatureLabel(feature: DamageFeature, vlm: VlmRecord | undefined
 }
 
 function featureLatLon(feature: DamageFeature) {
-  const lat = Number(feature.properties.centroid_lat);
-  const lon = Number(feature.properties.centroid_lon);
-  if (Number.isFinite(lat) && Number.isFinite(lon)) return { lat, lon };
-  return null;
+  const point = featureInspectionPoint(feature);
+  return point ? { lat: point.lat, lon: point.lon } : null;
 }
 
 function googleMapsUrlForFeature(feature: DamageFeature) {
@@ -533,7 +601,7 @@ function distanceFromAoiCenter(feature: DamageFeature, aoi?: AoiRecord) {
 }
 
 function officialRank(feature: DamageFeature, status?: string) {
-  if (status === "external-prediction") return 0;
+  if (status === "external-prediction" || status === "external-gap") return 0;
   return feature.properties.not_official_ems ? 0 : 1;
 }
 
@@ -600,7 +668,7 @@ function buildDownloadGroups(downloads: Record<string, string> | undefined, lang
 
 function operationalGuidance(aoi: AoiRecord, language: Language) {
   const t = copy[language];
-  if (aoi.status === "external-prediction") return t.externalBrief;
+  if (aoi.status === "external-prediction" || aoi.status === "external-gap") return t.externalBrief;
   if (aoi.status === "imagery-only") return t.imageryBrief;
   if (aoi.status === "official-monitor-points") return t.monitorBrief;
   return t.officialBrief;
@@ -610,12 +678,11 @@ function directRasterIsMobileSafe(bytes?: number | null) {
   return !bytes || bytes <= DIRECT_RASTER_MOBILE_MAX_BYTES;
 }
 
-function googleMapsUrl(properties: DamageFeature["properties"]) {
-  if (typeof properties.google_maps_url === "string" && properties.google_maps_url) return properties.google_maps_url;
-  const lat = Number(properties.centroid_lat);
-  const lon = Number(properties.centroid_lon);
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return "";
-  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+function googleMapsUrl(feature: DamageFeature) {
+  if (typeof feature.properties.google_maps_url === "string" && feature.properties.google_maps_url) return feature.properties.google_maps_url;
+  const point = featureLatLon(feature);
+  if (!point) return "";
+  return `https://www.google.com/maps/search/?api=1&query=${point.lat},${point.lon}`;
 }
 
 function hasNativeBeforeLayer(aoi: AoiRecord | null | undefined) {
@@ -628,6 +695,77 @@ function hasAfterLayer(aoi: AoiRecord | null | undefined) {
   return Boolean(aoi.layers.afterTiles || (aoi.layers.afterImage && directRasterIsMobileSafe(aoi.imagery?.after?.bytes)));
 }
 
+function operationalSignalLabel(priority: OperationalSignalPriority, language: Language) {
+  const t = copy[language];
+  if (priority === "high") return t.signalHigh;
+  if (priority === "medium") return t.signalMedium;
+  return t.signalLow;
+}
+
+function operationalSignalValue(value: number | null | undefined, language: Language) {
+  return value === null || value === undefined ? copy[language].suppressed : String(value);
+}
+
+function signalCoordinatePairs(signal: OperationalSignalFeature) {
+  const coords = signal.geometry.coordinates;
+  if (signal.geometry.type === "Polygon") return coords.flat(1) as number[][];
+  return coords.flat(2) as number[][];
+}
+
+function signalBounds(signal: OperationalSignalFeature): [[number, number], [number, number]] {
+  const pairs = signalCoordinatePairs(signal);
+  let minLat = Number.POSITIVE_INFINITY;
+  let minLon = Number.POSITIVE_INFINITY;
+  let maxLat = Number.NEGATIVE_INFINITY;
+  let maxLon = Number.NEGATIVE_INFINITY;
+  for (const pair of pairs) {
+    const [lon, lat] = pair;
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+    minLat = Math.min(minLat, lat);
+    minLon = Math.min(minLon, lon);
+    maxLat = Math.max(maxLat, lat);
+    maxLon = Math.max(maxLon, lon);
+  }
+  return [[minLat, minLon], [maxLat, maxLon]];
+}
+
+function signalIntersectsAoi(signal: OperationalSignalFeature, aoi: AoiRecord, margin = 0.04) {
+  if (signal.properties.aoiIds.includes(aoi.id)) return true;
+  const [[signalSouth, signalWest], [signalNorth, signalEast]] = signalBounds(signal);
+  const [[aoiSouth, aoiWest], [aoiNorth, aoiEast]] = aoi.bounds;
+  return (
+    signalSouth <= aoiNorth + margin &&
+    signalNorth >= aoiSouth - margin &&
+    signalWest <= aoiEast + margin &&
+    signalEast >= aoiWest - margin
+  );
+}
+
+function signalContextLabel(signal: OperationalSignalFeature, language: Language) {
+  const labels = signal.properties.aoiLabels;
+  if (!labels.length) return language === "es" ? "Zona agregada" : "Aggregate zone";
+  const joined = labels.join(" ");
+  if (joined.includes("Caraballeda") || joined.includes("La Guaira")) return "La Guaira";
+  if (joined.includes("Catia")) return "Catia La Mar";
+  if (joined.includes("Caracas") || joined.includes("Antimano")) return "Caracas";
+  if (joined.includes("Moron")) return language === "es" ? "Morón" : "Moron";
+  if (joined.includes("San Felipe")) return "San Felipe";
+  if (joined.includes("Guacara")) return "Guacara";
+  return labels[0].split(" - ")[0];
+}
+
+function signalEventLabel(event: string, language: Language) {
+  const labels: Record<string, Record<Language, string>> = {
+    structural_damage: { en: "structural", es: "estructural" },
+    aid_collection_first_aid: { en: "aid/first aid", es: "acopio/auxilio" },
+    water: { en: "water", es: "agua" },
+    health: { en: "health", es: "salud" },
+    access: { en: "access", es: "acceso" },
+    other: { en: "other", es: "otros" },
+  };
+  return labels[event]?.[language] ?? event.replaceAll("_", " ");
+}
+
 export default function OperationsConsole() {
   const [catalog, setCatalog] = useState<AoiCatalog | null>(null);
   const [catalogStatus, setCatalogStatus] = useState<LoadStatus>("loading");
@@ -637,8 +775,10 @@ export default function OperationsConsole() {
   const [filter, setFilter] = useState<Filter>("all");
   const [mode, setMode] = useState<Mode>("after");
   const [basemap, setBasemap] = useState<Basemap>("aerial");
+  const [showOperationalSignals, setShowOperationalSignals] = useState(true);
   const [opacity, setOpacity] = useState(52);
   const [selected, setSelected] = useState<DamageFeature | null>(null);
+  const [selectedSignal, setSelectedSignal] = useState<OperationalSignalFeature | null>(null);
   const [prioritySort, setPrioritySort] = useState<PrioritySort>("default");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -647,13 +787,16 @@ export default function OperationsConsole() {
   const [isMobileLayout, setIsMobileLayout] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [inspectorOpen, setInspectorOpen] = useState(false);
-  const [mobileSheet, setMobileSheet] = useState<"none" | "about" | "zona" | "capas">("none");
+  const [mobileSheet, setMobileSheet] = useState<MobileSheet>("none");
   const [offlineStatus, setOfflineStatus] = useState<{ done: number; total: number; ready: boolean }>({ done: 0, total: 0, ready: false });
   const precachedAoisRef = useRef<Set<string>>(new Set());
   const [focusToken, setFocusToken] = useState(0);
   const [aoiFocusToken, setAoiFocusToken] = useState(0);
   const [vlm, setVlm] = useState<Record<string, VlmRecord>>({});
   const [features, setFeatures] = useState<DamageFeature[]>([]);
+  const [operationalSignals, setOperationalSignals] = useState<OperationalSignalFeature[]>([]);
+  const [operationalSignalsSummary, setOperationalSignalsSummary] = useState<OperationalSignalsSummary | null>(null);
+  const [operationalSignalsStatus, setOperationalSignalsStatus] = useState<LoadStatus>("loading");
   const rightRailRef = useRef<HTMLElement | null>(null);
   const desktopPriorityRef = useRef<HTMLElement | null>(null);
   const mobilePriorityRef = useRef<HTMLElement | null>(null);
@@ -665,6 +808,9 @@ export default function OperationsConsole() {
   const loadedVlmAoisRef = useRef<Set<string>>(new Set());
   const mapReadyTrackedRef = useRef<Set<string>>(new Set());
   const firstTileTrackedRef = useRef<Set<string>>(new Set());
+  const loadFailureTrackedRef = useRef<Set<string>>(new Set());
+  const fallbackTrackedRef = useRef<Set<string>>(new Set());
+  const filterEmptyTrackedRef = useRef<Set<string>>(new Set());
 
   const setLayerStatus = useCallback((aoiId: string, key: keyof AoiLayerState, status: LoadStatus) => {
     setAoiLayerState((current) => ({
@@ -674,6 +820,22 @@ export default function OperationsConsole() {
         [key]: status,
       },
     }));
+  }, []);
+
+  const trackLayerLoadFailed = useCallback((payload: {
+    aoi_id: string;
+    layer: string;
+    mode?: Mode;
+    basemap?: Basemap;
+    surface?: string;
+  }) => {
+    const key = `${payload.aoi_id}:${payload.layer}:${payload.surface ?? "layer"}`;
+    if (loadFailureTrackedRef.current.has(key)) return;
+    loadFailureTrackedRef.current.add(key);
+    trackAnalytics("layer_load_failed", {
+      ...payload,
+      status: "error",
+    });
   }, []);
 
   useEffect(() => {
@@ -756,6 +918,36 @@ export default function OperationsConsole() {
       })
       .catch(() => {
         setCatalogStatus("error");
+        trackAnalytics("catalog_load_failed", {
+          surface: "catalog",
+          status: "error",
+        });
+      });
+  }, []);
+
+  useEffect(() => {
+    Promise.all([
+      fetch("/data/operational-signals/summary.json").then((r) => {
+        if (!r.ok) throw new Error("Unable to load operational signal summary");
+        return r.json() as Promise<OperationalSignalsSummary>;
+      }),
+      fetch("/data/operational-signals/cells.geojson").then((r) => {
+        if (!r.ok) throw new Error("Unable to load operational signal cells");
+        return r.json() as Promise<{ features?: OperationalSignalFeature[] }>;
+      }),
+    ])
+      .then(([summary, cells]) => {
+        setOperationalSignalsSummary(summary);
+        setOperationalSignals(cells.features ?? []);
+        setOperationalSignalsStatus("ready");
+      })
+      .catch(() => {
+        setOperationalSignalsStatus("error");
+        trackAnalytics("layer_load_failed", {
+          layer: "operational_signals",
+          status: "error",
+          surface: "global_data",
+        });
       });
   }, []);
 
@@ -767,6 +959,20 @@ export default function OperationsConsole() {
   const activeFeatures = useMemo(
     () => features.filter((feature) => feature.properties.aoi_id === activeId),
     [activeId, features],
+  );
+  const visibleFeatureCount = useMemo(
+    () => activeFeatures.filter((feature) => matchesVisibleFilter(feature, filter, vlm)).length,
+    [activeFeatures, filter, vlm],
+  );
+  const activeOperationalSignals = useMemo(
+    () => active ? operationalSignals.filter((signal) => signalIntersectsAoi(signal, active)) : [],
+    [active, operationalSignals],
+  );
+  const topOperationalSignals = useMemo(
+    () => [...activeOperationalSignals]
+      .sort((a, b) => b.properties.score - a.properties.score || a.properties.id.localeCompare(b.properties.id))
+      .slice(0, 8),
+    [activeOperationalSignals],
   );
 
   useEffect(() => {
@@ -843,10 +1049,17 @@ export default function OperationsConsole() {
       })
       .catch(() => {
         loadedVlmAoisRef.current.delete(aoi.id);
-        if (!cancelled) setLayerStatus(aoi.id, "vlm", "error");
+        if (!cancelled) {
+          setLayerStatus(aoi.id, "vlm", "error");
+          trackLayerLoadFailed({
+            aoi_id: aoi.id,
+            layer: "vlm",
+            surface: "aoi_data",
+          });
+        }
       });
     return () => { cancelled = true; };
-  }, [activeId, catalog, setLayerStatus]);
+  }, [activeId, catalog, setLayerStatus, trackLayerLoadFailed]);
 
   useEffect(() => {
     if (!catalog) return;
@@ -887,10 +1100,17 @@ export default function OperationsConsole() {
       })
       .catch(() => {
         loadedDamageAoisRef.current.delete(aoi.id);
-        if (!cancelled) setLayerStatus(aoi.id, "damage", "error");
+        if (!cancelled) {
+          setLayerStatus(aoi.id, "damage", "error");
+          trackLayerLoadFailed({
+            aoi_id: aoi.id,
+            layer: "damage",
+            surface: "aoi_data",
+          });
+        }
       });
     return () => { cancelled = true; };
-  }, [activeId, catalog, setLayerStatus]);
+  }, [activeId, catalog, setLayerStatus, trackLayerLoadFailed]);
 
   const t = copy[language];
   const metrics = active?.metrics;
@@ -900,7 +1120,7 @@ export default function OperationsConsole() {
   const hasAfterImagery = hasAfterLayer(active);
   const hasImagery = hasBeforeImagery || hasAfterImagery;
   const isDemo = active?.status === "test-fixture";
-  const isExternalPrediction = active?.status === "external-prediction";
+  const isExternalTriage = active?.status === "external-prediction" || active?.status === "external-gap";
   const statusLabel = useCallback((status: string) => t.statuses[status as keyof typeof t.statuses] ?? status, [t]);
   const currentLayerState = aoiLayerState[activeId] ?? {};
   const statusMessages = [
@@ -910,8 +1130,47 @@ export default function OperationsConsole() {
     currentLayerState.damage === "error" ? t.damageError : undefined,
     currentLayerState.vlm === "loading" ? t.loadingVlm : undefined,
     currentLayerState.vlm === "error" ? t.vlmError : undefined,
+    operationalSignalsStatus === "loading" ? t.operationalSignalsLoading : undefined,
+    operationalSignalsStatus === "error" ? t.operationalSignalsError : undefined,
   ].filter(Boolean) as string[];
-  const hasLayerError = currentLayerState.damage === "error" || currentLayerState.vlm === "error" || catalogStatus === "error";
+  const hasLayerError = currentLayerState.damage === "error" || currentLayerState.vlm === "error" || catalogStatus === "error" || operationalSignalsStatus === "error";
+
+  useEffect(() => {
+    if (!hasLayerError) return;
+    const catalogState = catalogStatus === "error" ? "catalog_error" : undefined;
+    const damageState = currentLayerState.damage === "error" ? "damage_error" : undefined;
+    const vlmState = currentLayerState.vlm === "error" ? "vlm_error" : undefined;
+    const status = [catalogState, damageState, vlmState].filter(Boolean).join("_") || "error";
+    const surface = isSmallViewport() ? "mobile_status" : "desktop_status";
+    const key = `${activeId}:${surface}:${status}`;
+    if (fallbackTrackedRef.current.has(key)) return;
+    fallbackTrackedRef.current.add(key);
+    trackAnalytics("fallback_view_shown", {
+      aoi_id: activeId,
+      surface,
+      status,
+      catalog_status: catalogStatus,
+      damage_status: currentLayerState.damage ?? "idle",
+      vlm_status: currentLayerState.vlm ?? "idle",
+    });
+  }, [activeId, catalogStatus, currentLayerState.damage, currentLayerState.vlm, hasLayerError]);
+
+  useEffect(() => {
+    if (!active || currentLayerState.damage !== "ready") return;
+    if (activeFeatures.length === 0 || visibleFeatureCount > 0) return;
+    const key = `${active.id}:${filter}:${currentLayerState.vlm ?? "idle"}`;
+    if (filterEmptyTrackedRef.current.has(key)) return;
+    filterEmptyTrackedRef.current.add(key);
+    trackAnalytics("filter_empty_result_seen", {
+      aoi_id: active.id,
+      filter,
+      mode,
+      basemap,
+      feature_count: activeFeatures.length,
+      status: currentLayerState.vlm ?? "idle",
+    });
+  }, [active, activeFeatures.length, basemap, currentLayerState.damage, currentLayerState.vlm, filter, mode, visibleFeatureCount]);
+
   const cityNavItems = useMemo<CityNavItem[]>(() => {
     if (!catalog) return [];
     const byId = new Map(catalog.aois.map((aoi) => [aoi.id, aoi]));
@@ -950,6 +1209,31 @@ export default function OperationsConsole() {
     });
   };
 
+  const trackMobilePanelOpen = (surface: MobilePanelSurface) => {
+    trackFirstInteraction(`mobile_${surface}`);
+    trackAnalytics("mobile_panel_opened", {
+      aoi_id: activeId,
+      surface,
+      language,
+      mode,
+      filter,
+      basemap,
+    });
+  };
+
+  const openMobileSheet = (sheet: Exclude<MobileSheet, "none">) => {
+    trackMobilePanelOpen(sheet);
+    setInspectorOpen(false);
+    setMobileSheet(sheet);
+  };
+
+  const openMobileInspector = () => {
+    trackMobilePanelOpen("inspector");
+    setMobileSheet("none");
+    returnFocusRef.current = true;
+    setInspectorOpen(true);
+  };
+
   const changeLanguage = (nextLanguage: Language) => {
     trackFirstInteraction("language");
     if (nextLanguage !== language) {
@@ -982,6 +1266,7 @@ export default function OperationsConsole() {
       },
     }));
     setSelected(null);
+    setSelectedSignal(null);
     setMapControlsOpen(false);
     setInspectorOpen(false);
     setMobileSheet("none");
@@ -1020,6 +1305,18 @@ export default function OperationsConsole() {
     }
     setFilter(nextFilter);
   };
+  const toggleOperationalSignals = () => {
+    trackFirstInteraction("operational_signals");
+    const nextVisible = !showOperationalSignals;
+    trackAnalytics("operational_signals_toggled", {
+      aoi_id: activeId,
+      status: nextVisible ? "visible" : "hidden",
+      signal_count: activeOperationalSignals.length,
+      language,
+    });
+    setShowOperationalSignals(nextVisible);
+    if (!nextVisible) setSelectedSignal(null);
+  };
   const selectPriorityFeature = (feature: DamageFeature, rank: number) => {
     trackFirstInteraction("priority");
     const p = feature.properties;
@@ -1032,6 +1329,7 @@ export default function OperationsConsole() {
       vlm_review_type: record?.vlm?.review_type ?? record?.review_type,
     });
     setSelected(feature);
+    setSelectedSignal(null);
     setFilter("all");
     setMapControlsOpen(false);
     setInspectorOpen(false);
@@ -1072,12 +1370,14 @@ export default function OperationsConsole() {
         }
         return defaultCompare(a, b);
       })
-      .slice(0, 12);
+      .slice(0, 60);
   }, [active, activeFeatures, prioritySort, vlm]);
-  const controlSummary = `${basemap === "aerial" ? t.aerialBase : t.mapBase} · ${mode === "after" ? t.after : t.before} · ${opacity}%`;
+  const controlSummary = `${basemap === "aerial" ? t.aerialBase : t.mapBase} · ${mode === "after" ? t.after : t.before} · ${showOperationalSignals ? t.operationalSignals : t.features} · ${opacity}%`;
   const prioritySummary = priorityFeatures.length ? `${priorityFeatures.length} ${t.priorityReady}` : t.noPriorityReady;
   const selectedSummary = selected
     ? String(selected.properties.source_feature_id ?? selected.properties.id)
+    : selectedSignal
+      ? `${t.operationalSignals}: ${selectedSignal.properties.id}`
     : prioritySummary;
   const priorityTitle = language === "es" ? "Prioridad" : "Priority";
   const activeCity = cityNavItems.find((item) => item.sourceIds.includes(activeId));
@@ -1278,6 +1578,7 @@ export default function OperationsConsole() {
                           },
                         }));
                         setSelected(null);
+                        setSelectedSignal(null);
                         setMapControlsOpen(false);
                         setInspectorOpen(false);
                         setMobileSheet("none");
@@ -1296,6 +1597,7 @@ export default function OperationsConsole() {
                       const feature = activeFeatures.find((candidate) => candidate.properties.id === item.featureId);
                       if (!feature) return;
                       setSelected(feature);
+                      setSelectedSignal(null);
                       setFilter("all");
                       setMapControlsOpen(false);
                       setInspectorOpen(false);
@@ -1350,12 +1652,28 @@ export default function OperationsConsole() {
           <Button type="button" variant="outline" aria-label={language === "es" ? "subir opacidad de daño" : "increase damage opacity"} onClick={() => adjustOpacity(10)}>+</Button>
         </div>
       </label>
-      <div className="control-group">
+      <div className="control-group filter-control">
         <span>{t.filters}</span>
         <div className="button-row">
           <Button variant={filter === "all" ? "default" : "outline"} data-testid="filter-all" aria-pressed={filter === "all"} className={filter === "all" ? "active" : ""} onClick={() => changeFilter("all")}>{t.all}</Button>
           <Button variant={filter === "severe" ? "default" : "outline"} data-testid="filter-severe" aria-pressed={filter === "severe"} className={filter === "severe" ? "active" : ""} onClick={() => changeFilter("severe")}>{t.severe}</Button>
           <Button variant={filter === "vlm" ? "default" : "outline"} data-testid="filter-vlm" aria-pressed={filter === "vlm"} className={filter === "vlm" ? "active" : ""} onClick={() => changeFilter("vlm")}>{t.vlmOnly}</Button>
+        </div>
+      </div>
+      <div className="control-group signal-control">
+        <span>{t.operationalSignals}</span>
+        <div className="button-row">
+          <Button
+            variant={showOperationalSignals ? "default" : "outline"}
+            data-testid="toggle-operational-signals"
+            aria-pressed={showOperationalSignals}
+            className={showOperationalSignals ? "active" : ""}
+            disabled={operationalSignalsStatus === "error"}
+            onClick={toggleOperationalSignals}
+          >
+            {t.showOperationalSignals}
+          </Button>
+          <Badge variant="outline">{activeOperationalSignals.length}</Badge>
         </div>
       </div>
       <details className="map-toolbar-notes">
@@ -1365,11 +1683,38 @@ export default function OperationsConsole() {
         {hasApproximateBefore && !hasNativeBeforeImagery && <p>{t.approximateBefore}</p>}
         {hasAfterImagery && !hasBeforeImagery && <p>{active?.imagery?.before ? t.beforeEvidenceOnly : t.noBefore}</p>}
         <p>{t.filterNote}</p>
+        <p>{t.operationalSignalsWarning}</p>
       </details>
     </>
   );
   const renderInspectorBody = (bodyId: string, prioritySectionRef: RefObject<HTMLElement | null>) => (
     <div className="inspector-body" id={bodyId}>
+      <OperationalSignalsPanel
+        language={language}
+        signals={activeOperationalSignals}
+        topSignals={topOperationalSignals}
+        selectedSignal={selectedSignal}
+        summary={operationalSignalsSummary}
+        status={operationalSignalsStatus}
+        visible={showOperationalSignals}
+        onToggle={toggleOperationalSignals}
+        onSelect={(signal, rank) => {
+          trackFirstInteraction("operational_signal");
+          trackAnalytics("operational_signal_clicked", {
+            aoi_id: activeId,
+            rank,
+            signal_priority: signal.properties.priority,
+            signal_id: signal.properties.id,
+          });
+          setSelected(null);
+          setSelectedSignal(signal);
+          setShowOperationalSignals(true);
+          setMapControlsOpen(false);
+          setInspectorOpen(false);
+          setFocusToken((value) => value + 1);
+          rightRailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
       {active && !selected && (
         <OperationalBrief
           aoi={active}
@@ -1511,6 +1856,7 @@ export default function OperationsConsole() {
     <div className="context-strip" aria-label={t.context}>
       <span>{activeCity?.name[language] ?? active.name[language]}</span>
       <span>{filter === "all" ? t.all : filter === "severe" ? t.severe : t.vlmOnly}</span>
+      {showOperationalSignals && <span>{activeOperationalSignals.length} {t.operationalSignals}</span>}
       <span>{mode === "after" ? t.after : t.before}</span>
       <span>{statusLabel(active.status)}</span>
     </div>
@@ -1531,7 +1877,7 @@ export default function OperationsConsole() {
               className="brand-info"
               data-testid="mobile-about-toggle"
               aria-label={language === "es" ? "Información" : "Info"}
-              onClick={() => { setInspectorOpen(false); setMobileSheet("about"); }}
+              onClick={() => openMobileSheet("about")}
             >
               ⓘ
             </Button>
@@ -1575,8 +1921,8 @@ export default function OperationsConsole() {
             <CardHeader>
               <CardTitle>{t.source}</CardTitle>
               <CardAction>
-                <Badge variant={(isDemo || isExternalPrediction) ? "secondary" : "default"}>
-                  {isDemo ? t.demoOnly : isExternalPrediction ? t.externalPrediction : t.officialData}
+                <Badge variant={(isDemo || isExternalTriage) ? "secondary" : "default"}>
+                  {isDemo ? t.demoOnly : active?.status === "external-gap" ? t.externalGapBadge : isExternalTriage ? t.externalPrediction : t.officialData}
                 </Badge>
               </CardAction>
             </CardHeader>
@@ -1638,7 +1984,10 @@ export default function OperationsConsole() {
             filter={filter}
             basemap={basemap}
             vlm={vlm}
+            operationalSignals={activeOperationalSignals}
+            showOperationalSignals={showOperationalSignals && operationalSignalsStatus === "ready"}
             selectedId={selected?.properties.id}
+            selectedSignalId={selectedSignal?.properties.id}
             focusToken={focusToken}
             aoiFocusToken={aoiFocusToken}
             onMapReady={(payload) => {
@@ -1653,9 +2002,35 @@ export default function OperationsConsole() {
               firstTileTrackedRef.current.add(key);
               trackAnalytics("first_tile_loaded", payload);
             }}
+            onLayerLoadFailed={trackLayerLoadFailed}
             onSelect={(feature) => {
               trackFirstInteraction(feature ? "map_feature" : "map_empty");
+              if (!feature) {
+                trackAnalytics("map_empty_clicked", {
+                  aoi_id: active.id,
+                  mode,
+                  filter,
+                  basemap,
+                });
+              }
               setSelected(feature);
+              if (feature) setSelectedSignal(null);
+              setMapControlsOpen(false);
+              setInspectorOpen(false);
+            }}
+            onSelectSignal={(signal) => {
+              trackFirstInteraction(signal ? "map_signal" : "map_empty");
+              if (signal) {
+                trackAnalytics("operational_signal_clicked", {
+                  aoi_id: active.id,
+                  signal_priority: signal.properties.priority,
+                  signal_id: signal.properties.id,
+                  surface: "map",
+                });
+              }
+              setSelected(null);
+              setSelectedSignal(signal);
+              if (signal) setShowOperationalSignals(true);
               setMapControlsOpen(false);
               setInspectorOpen(false);
             }}
@@ -1697,7 +2072,7 @@ export default function OperationsConsole() {
               variant="outline"
               className="mobile-dock-btn"
               data-testid="mobile-zona-toggle"
-              onClick={() => { setInspectorOpen(false); setMobileSheet("zona"); }}
+              onClick={() => openMobileSheet("zona")}
             >
               <span>{language === "es" ? "Zona" : "Zone"}</span>
               <b>{activeCity?.name[language] ?? "—"}</b>
@@ -1707,7 +2082,7 @@ export default function OperationsConsole() {
               variant="outline"
               className="mobile-dock-btn"
               data-testid="mobile-capas-toggle"
-              onClick={() => { setInspectorOpen(false); setMobileSheet("capas"); }}
+              onClick={() => openMobileSheet("capas")}
             >
               <span>{language === "es" ? "Capas" : "Layers"}</span>
               <b>{controlSummary}</b>
@@ -1719,7 +2094,7 @@ export default function OperationsConsole() {
               data-testid="mobile-inspector-toggle"
               aria-expanded={inspectorOpen}
               aria-controls="mobile-inspector-body"
-              onClick={() => { setMobileSheet("none"); returnFocusRef.current = true; setInspectorOpen(true); }}
+              onClick={openMobileInspector}
             >
               <span>{t.evidence} / {priorityTitle}</span>
               <b>{selectedSummary}</b>
@@ -1757,8 +2132,8 @@ export default function OperationsConsole() {
                       <CardHeader>
                         <CardTitle>{t.source}</CardTitle>
                         <CardAction>
-                          <Badge variant={(isDemo || isExternalPrediction) ? "secondary" : "default"}>
-                            {isDemo ? t.demoOnly : isExternalPrediction ? t.externalPrediction : t.officialData}
+                          <Badge variant={(isDemo || isExternalTriage) ? "secondary" : "default"}>
+                            {isDemo ? t.demoOnly : active?.status === "external-gap" ? t.externalGapBadge : isExternalTriage ? t.externalPrediction : t.officialData}
                           </Badge>
                         </CardAction>
                       </CardHeader>
@@ -1845,6 +2220,117 @@ export default function OperationsConsole() {
   );
 }
 
+function OperationalSignalsPanel({
+  language,
+  signals,
+  topSignals,
+  selectedSignal,
+  summary,
+  status,
+  visible,
+  onToggle,
+  onSelect,
+}: {
+  language: Language;
+  signals: OperationalSignalFeature[];
+  topSignals: OperationalSignalFeature[];
+  selectedSignal: OperationalSignalFeature | null;
+  summary: OperationalSignalsSummary | null;
+  status: LoadStatus;
+  visible: boolean;
+  onToggle: () => void;
+  onSelect: (signal: OperationalSignalFeature, rank: number) => void;
+}) {
+  const t = copy[language];
+  const selected = selectedSignal?.properties;
+  const top = topSignals.slice(0, 6);
+  const highSignalCount = signals.filter((signal) => signal.properties.priority === "high").length;
+  const communityRecordCount = (summary?.kobo.records ?? 0) + (summary?.whatsapp?.records ?? 0);
+  return (
+    <Card className="ops-card operational-signals-panel" size="sm">
+      <CardHeader>
+        <CardTitle>{t.operationalSignalsTitle}</CardTitle>
+        <CardAction>
+          <Button
+            type="button"
+            variant={visible ? "default" : "outline"}
+            size="sm"
+            className={visible ? "active" : ""}
+            aria-pressed={visible}
+            disabled={status === "error"}
+            onClick={onToggle}
+          >
+            {t.showOperationalSignals}
+          </Button>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <p className="signal-brief">{t.operationalSignalsBrief}</p>
+        {summary && (
+          <div className="signal-summary-grid" aria-label={t.operationalSignals}>
+            <div><b>{signals.length}</b><span>{t.operationalSignals}</span></div>
+            <div><b>{highSignalCount}</b><span>{t.signalHigh}</span></div>
+            <div><b>{communityRecordCount}</b><span>{t.communityReports}</span></div>
+            <div><b>{summary.externalGap.outsideOfficialGraRows}</b><span>{t.externalGap}</span></div>
+          </div>
+        )}
+        {status === "loading" && <p className="muted">{t.operationalSignalsLoading}</p>}
+        {status === "error" && <p className="muted">{t.operationalSignalsError}</p>}
+        {selected && (
+          <section className="selected-signal" aria-label={t.selectedSignalZone}>
+            <div className={`signal-priority ${selected.priority}`}>{operationalSignalLabel(selected.priority, language)}</div>
+            <h3>{selected.id}</h3>
+            <p>{signalContextLabel(selectedSignal as OperationalSignalFeature, language)}</p>
+            <div className="signal-facts">
+              <div><span>{t.communityReports}</span><b>{operationalSignalValue(selected.communityReports, language)}</b></div>
+              <div><span>{t.officialDamage}</span><b>{selected.emsOfficialDestroyedDamaged}</b></div>
+              <div><span>{t.monitorPoints}</span><b>{selected.emsMonitorDestroyedDamaged}</b></div>
+              <div><span>{t.externalGap}</span><b>{operationalSignalValue(selected.externalGapCandidates, language)}</b></div>
+            </div>
+            {Object.keys(selected.communityEvents).length > 0 && (
+              <div className="signal-events">
+                {Object.entries(selected.communityEvents).map(([event, count]) => (
+                  <span key={event}>{signalEventLabel(event, language)} <b>{count}</b></span>
+                ))}
+              </div>
+            )}
+            <p className="signal-warning">{t.operationalSignalsWarning}</p>
+          </section>
+        )}
+        {top.length > 0 && (
+          <section className="signal-zone-list" aria-label={t.topSignalZones}>
+            <div className="signal-list-header">
+              <b>{t.topSignalZones}</b>
+              {summary?.generatedAt && <span>{t.generated} {summary.generatedAt.slice(0, 10)}</span>}
+            </div>
+            {top.map((signal, index) => {
+              const p = signal.properties;
+              return (
+                <Button
+                  key={p.id}
+                  type="button"
+                  variant="outline"
+                  className={selectedSignal?.properties.id === p.id ? "signal-zone-row active" : "signal-zone-row"}
+                  aria-pressed={selectedSignal?.properties.id === p.id}
+                  data-testid={`operational-signal-${p.id}`}
+                  onClick={() => onSelect(signal, index + 1)}
+                >
+                  <span className={`signal-dot ${p.priority}`} aria-hidden="true" />
+                  <b>{p.id}</b>
+                  <small>
+                    {operationalSignalLabel(p.priority, language)} · {t.communityReports} {operationalSignalValue(p.communityReports, language)} · {t.officialDamage} {p.emsOfficialDestroyedDamaged}
+                  </small>
+                </Button>
+              );
+            })}
+          </section>
+        )}
+        <p className="signal-warning">{t.operationalSignalsWarning}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
 function OperationalBrief({
   aoi,
   language,
@@ -1864,7 +2350,9 @@ function OperationalBrief({
   const hasOfficialDamage = confirmed > 0 || possible > 0;
   const sourceLabel = aoi.status === "external-prediction"
     ? t.externalPrediction
-    : aoi.status === "imagery-only"
+    : aoi.status === "external-gap"
+      ? t.externalGapBadge
+      : aoi.status === "imagery-only"
       ? t.imageryOnly
       : aoi.status === "official-monitor-points"
         ? t.statuses["official-monitor-points"]
@@ -2070,7 +2558,7 @@ function Evidence({
   const t = copy[language];
   const p = feature.properties;
   const chip = evidenceChip(vlm);
-  const mapsUrl = googleMapsUrl(p);
+  const mapsUrl = googleMapsUrl(feature);
   const aoiId = String(p.aoi_id ?? "");
   const hasVlm = Boolean(vlm);
   return (

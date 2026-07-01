@@ -1,0 +1,14 @@
+{
+  "source": "HOT/MapSwipe human validation via hotosm/venezuela_eq_2026",
+  "source_urls": [
+    "https://huggingface.co/datasets/hotosm/venezuela_eq_2026",
+    "https://www.hotosm.org/en/projects/2026-venezuela-earthquake-response/"
+  ],
+  "official_status": "not_official_ems",
+  "use": "triage_only_external_visual_gap_queue",
+  "warning": "Do not merge into official EMS destroyed/damaged metrics.",
+  "source_ops_files": [
+    "ops/data_acquisition_plan/ems_gap_visual_queue.geojson",
+    "ops/data_acquisition_plan/ems_gap_visual_queue.csv"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-07-01T17:59:59Z",
+  "source_count": 48,
+  "head_200": 43,
+  "head_403": 0,
+  "range_ok": 48,
+  "p0_count": 20,
+  "p1_count": 22,
+  "p2_count": 6,
+  "manifest": "ops/data_acquisition_plan/source_access_manifest.csv"
+}

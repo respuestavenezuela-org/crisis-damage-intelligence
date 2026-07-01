@@ -53,6 +53,10 @@ export type AoiRecord = {
       bytes?: number;
       sha256?: string;
       r2Key?: string;
+      source?: string;
+      license?: string;
+      coverage?: string;
+      limitations?: string;
       tilePyramid?: {
         urlTemplate: string;
         format?: string;
@@ -119,4 +123,68 @@ export type VlmRecord = {
     review_type?: string;
     uncertainty_reason?: string;
   };
+};
+
+export type OperationalSignalPriority = "high" | "medium" | "low";
+
+export type OperationalSignalFeature = {
+  type: "Feature";
+  geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon;
+  properties: {
+    id: string;
+    priority: OperationalSignalPriority;
+    score: number;
+    communityReports: number | null;
+    communityReportsSuppressed: boolean;
+    communityEvents: Record<string, number>;
+    latestSubmissionDate: string | null;
+    emsOfficialDestroyedDamaged: number;
+    emsOfficialPossible: number;
+    emsMonitorDestroyedDamaged: number;
+    emsMonitorPossible: number;
+    externalGapCandidates: number | null;
+    externalGapSuppressed: boolean;
+    aoiIds: string[];
+    aoiLabels: string[];
+    reasons: string[];
+    publicNote: string;
+  };
+};
+
+export type OperationalSignalsSummary = {
+  status: string;
+  generatedAt: string;
+  privacy: {
+    rawKoboWritten: boolean;
+    rawWhatsappWritten: boolean;
+    exactReportPointsWritten: boolean;
+    freeTextWritten: boolean;
+    minCommunityReportsPerVisibleCell: number;
+    minDistinctSubmissionMinutesPerVisibleCell: number;
+    gridDegrees: number;
+  };
+  kobo: {
+    source: string;
+    records: number;
+    mappedRecords: number;
+    eventCounts: Record<string, number>;
+    validationCounts: Record<string, number>;
+  };
+  whatsapp?: {
+    source: string;
+    configured: boolean;
+    status?: string;
+    records: number;
+    mappedRecords: number;
+    coordinateMessages: number;
+    eventCounts: Record<string, number>;
+  };
+  emsCounts: Record<string, number>;
+  externalGap: {
+    detailRows: number;
+    outsideOfficialGraRows: number;
+  };
+  visibleCells: number;
+  priorityCounts: Partial<Record<OperationalSignalPriority, number>>;
+  warning: string;
 };

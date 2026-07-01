@@ -9,6 +9,8 @@
   "total_source_features": 5411,
   "exported_triage_features": 119,
   "official_damage_counts_included": false,
+  "map_payload": "damage.geojson is a compact browser map payload with point geometry, centroid coordinates, and trimmed properties; use CSV or the HDX source GPKG for full footprint/attribute review.",
+  "kml_public_download": "Included in the static package.",
   "bounds": [
     [
       10.6007247,
@@ -23,5 +25,9 @@
     10.606804407563025,
     -66.89260585966386
   ],
-  "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+  "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation.",
+  "map_payload_geometry": "Point",
+  "map_payload_bytes_before": 34711,
+  "map_payload_bytes_after": 34711,
+  "map_payload_features": 119
 }

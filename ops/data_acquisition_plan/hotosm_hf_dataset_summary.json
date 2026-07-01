@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-07-01T17:51:20Z",
+  "dataset": "hotosm/venezuela_eq_2026",
+  "file_count": 195,
+  "total_bytes": 239578441,
+  "area_counts": {
+    "caraballeda": 36,
+    "caracas": 27,
+    "catia_la_mar": 29,
+    "global": 17,
+    "la_guaira": 36,
+    "moron": 25,
+    "naiguata": 25
+  },
+  "source_family_counts": {
+    "buildings": 24,
+    "combined": 24,
+    "fair": 24,
+    "metadata": 22,
+    "microsoft": 12,
+    "multisource_damage": 6,
+    "osu": 20,
+    "validated": 6,
+    "validated_mapswipe": 21,
+    "visualization": 36
+  },
+  "manifest": "ops/data_acquisition_plan/hotosm_hf_dataset_manifest.csv",
+  "note": "Metadata-only manifest. Files are external triage/adjudication sources, not official EMS metrics."
+}

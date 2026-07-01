@@ -123,6 +123,44 @@ test("priority evidence exposes useful coordinate copy and Google Maps actions",
   expect(copiedCoordinates).toMatch(/^10\.\d+,\s*-67\.\d+$/);
 });
 
+test("priority action coordinates match the focused map point when EMS centroids are outside multipolygons", async ({ page }) => {
+  await page.addInitScript(() => {
+    let text = "";
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        readText: async () => text,
+        writeText: async (nextText: string) => {
+          text = nextText;
+        },
+      },
+    });
+  });
+  await loadMap(page, { width: 768, height: 1024 });
+
+  const inspector = await openInspector(page);
+  const row = inspector.getByTestId("priority-ems_00115");
+  await row.scrollIntoViewIfNeeded();
+  await expect(row).toBeVisible();
+  await row.click();
+
+  const state = await focusedMapState(page);
+  expect(state.focusedId).toBe("ems_00115");
+  expect(state.zoom).toBe("18");
+  const focusedPoint = parseLatLon(state.center);
+
+  const evidencePanel = page.locator(".evidence-panel");
+  const mapsLink = evidencePanel.getByRole("link", { name: /Google Maps/i });
+  const mapsPoint = parseLatLon(new URL((await mapsLink.getAttribute("href")) ?? "").searchParams.get("query"));
+  expect(mapsPoint.lat).toBeCloseTo(focusedPoint.lat, 6);
+  expect(mapsPoint.lon).toBeCloseTo(focusedPoint.lon, 6);
+
+  await page.getByTestId("copy-coordinates").click();
+  const copiedPoint = parseLatLon(await page.evaluate(() => navigator.clipboard.readText()));
+  expect(copiedPoint.lat).toBeCloseTo(focusedPoint.lat, 6);
+  expect(copiedPoint.lon).toBeCloseTo(focusedPoint.lon, 6);
+});
+
 test("priority sort chips keep the default order until an operator selects a sort", async ({ page }) => {
   await loadMap(page, { width: 768, height: 1024 });
 
@@ -147,6 +185,15 @@ test("priority sort chips keep the default order until an operator selects a sor
   await expect
     .poll(async () => readPriorityIds(rows))
     .not.toEqual(initialOrder);
+});
+
+test("priority list exposes more than the first twelve high-priority candidates", async ({ page }) => {
+  await loadMap(page, { width: 768, height: 1024 });
+
+  const inspector = await openInspector(page);
+  const rows = priorityRows(inspector);
+  await expect(rows.first()).toBeVisible();
+  await expect.poll(async () => rows.count()).toBeGreaterThan(12);
 });
 
 test("keyboard search supports Escape and a sane Tab path", async ({ page }) => {
@@ -177,4 +224,11 @@ async function readPriorityIds(rows: Locator) {
   return rows.evaluateAll((nodes) =>
     nodes.slice(0, 6).map((node) => node.querySelector("b")?.textContent?.trim() ?? node.textContent?.trim() ?? ""),
   );
+}
+
+function parseLatLon(value: string | null) {
+  const [lat, lon] = (value ?? "").split(",").map((part) => Number(part.trim()));
+  expect(Number.isFinite(lat)).toBe(true);
+  expect(Number.isFinite(lon)).toBe(true);
+  return { lat, lon };
 }

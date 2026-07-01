@@ -65,14 +65,19 @@ function initialMode(): Mode | null {
 
 export default function InstallPrompt() {
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null);
-  const [mode, setMode] = useState<Mode | null>(() => initialMode());
-  const [lang, setLang] = useState<Lang>(() => readStoredLang());
+  const [mode, setMode] = useState<Mode | null>(null);
+  const [lang, setLang] = useState<Lang>("es");
   const barRef = useRef<HTMLDivElement | null>(null);
   const visible = mode !== null;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (isStandalone() || dismissedRecently()) return;
+    const canPrompt = !isStandalone() && !dismissedRecently();
+    const initialStateFrame = requestAnimationFrame(() => {
+      setLang(readStoredLang());
+      setMode(canPrompt ? initialMode() : null);
+    });
+    if (!canPrompt) return () => cancelAnimationFrame(initialStateFrame);
 
     const onBeforeInstall = (event: Event) => {
       event.preventDefault();
@@ -92,6 +97,7 @@ export default function InstallPrompt() {
     window.addEventListener("appinstalled", onInstalled);
     window.addEventListener(LANG_EVENT, onLangChange);
     return () => {
+      cancelAnimationFrame(initialStateFrame);
       window.removeEventListener("beforeinstallprompt", onBeforeInstall);
       window.removeEventListener("appinstalled", onInstalled);
       window.removeEventListener(LANG_EVENT, onLangChange);

@@ -77,9 +77,10 @@ export default function ServiceWorkerRegister() {
 
     const register = () => {
       navigator.serviceWorker
-        .register("/sw.js")
+        .register("/sw.js", { updateViaCache: "none" })
         .then((reg) => {
           watch(reg);
+          reg.update().catch(() => {});
           updateTimer = setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
         })
         .catch((error) => console.warn("Service worker registration failed", error));

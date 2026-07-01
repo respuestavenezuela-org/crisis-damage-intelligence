@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T07:42:57Z",
+  "updatedAt": "2026-07-01T17:55:00Z",
   "platform": "Respuesta Venezuela",
   "aois": [
     {
@@ -302,8 +302,7 @@
         "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif"
       },
       "layers": {
-        "damage": "/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson",
-        "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif"
+        "damage": "/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson"
       },
       "metrics": {
         "features": 3,
@@ -340,14 +339,15 @@
           "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
           "sensor": "WorldView-3",
           "acquisitionUtc": "2026-06-26T15:10:00",
-          "bytes": null,
+          "bytes": 377353322,
           "sha256": null,
           "r2Key": null,
           "source": "Copernicus EMSR884 GRA_PRODUCT post-event COG",
           "license": "Copernicus EMS public product terms",
-          "limitations": "Official post-event imagery context; use EMS MONIT01/vector labels as the damage source of record and never infer absence of damage from imagery gaps."
+          "limitations": "Official post-event imagery context; use EMS MONIT01/vector labels as the damage source of record and never infer absence of damage from imagery gaps.",
+          "productionNote": "Download/evidence only until a tile pyramid is published; direct map rendering is disabled by the 250 MB mobile raster guardrail."
         },
-        "note": "After imagery is official Copernicus EMS post-event WorldView-3 COG. Before imagery is public Sentinel-2 L2A 10 m context only; do not use it for building-level before/after VLM, official damage evidence, or response counts.",
+        "note": "After imagery is official Copernicus EMS post-event WorldView-3 COG and remains download/evidence only until tiles are published. Before imagery is public Sentinel-2 L2A 10 m context only; do not use it for building-level before/after VLM, official damage evidence, or response counts.",
         "approximateReference": {
           "label": "Esri World Imagery aerial reference",
           "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -981,7 +981,7 @@
       "event": "Venezuela earthquake June 2026",
       "name": {
         "en": "Catia La Mar - Microsoft AI4G Predicted Damage",
-        "es": "Catia La Mar - Daño predicho Microsoft AI4G"
+        "es": "Catia La Mar - Da\u00f1o predicho Microsoft AI4G"
       },
       "status": "external-prediction",
       "source": "HDX dataset from Microsoft AI for Good Lab: Venezuela Earthquakes: Building Damage Assessment in Catia La Mar. External predicted building-footprint damage, not official Copernicus EMS damage labels.",
@@ -1028,6 +1028,12 @@
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
         }
+      },
+      "externalTriage": {
+        "official": false,
+        "triageOnly": true,
+        "mapPayloadGeometry": "Point",
+        "mapPayloadBytes": 2612886
       }
     },
     {
@@ -1057,10 +1063,10 @@
       "downloads": {
         "csv": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.csv",
         "geojson": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
-        "kml": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.kml",
         "metadata": "/data/aoi/external-msft-caraballeda-east-predicted-damage/source_metadata.json",
         "hdx": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-caraballeda",
-        "source_gpkg": "https://data.humdata.org/dataset/1a77bd9c-5170-4651-92c2-0dd42cdc303e/resource/d82d36cf-e728-4f03-b8a8-7615d05a8374/download/caraballeda_east_vantor_6-26_building_predictions_merged.gpkg"
+        "source_gpkg": "https://data.humdata.org/dataset/1a77bd9c-5170-4651-92c2-0dd42cdc303e/resource/d82d36cf-e728-4f03-b8a8-7615d05a8374/download/caraballeda_east_vantor_6-26_building_predictions_merged.gpkg",
+        "kml": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.kml"
       },
       "layers": {
         "damage": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson"
@@ -1078,7 +1084,9 @@
         "official": false,
         "triageOnly": true,
         "filter": "damaged == 1 or max damage probability >= 0.50",
-        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation.",
+        "mapPayloadGeometry": "Point",
+        "mapPayloadBytes": 182125
       },
       "imagery": {
         "before": null,
@@ -1120,10 +1128,10 @@
       "downloads": {
         "csv": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.csv",
         "geojson": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
-        "kml": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.kml",
         "metadata": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/source_metadata.json",
         "hdx": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-catia-la-mar-east",
-        "source_gpkg": "https://data.humdata.org/dataset/0c439581-b14d-4092-a104-95b5abee3002/resource/2034c971-e8ac-431d-acaa-e1c94d601039/download/predicted_damage_east-catia-la-mar-skysat-final.gpkg"
+        "source_gpkg": "https://data.humdata.org/dataset/0c439581-b14d-4092-a104-95b5abee3002/resource/2034c971-e8ac-431d-acaa-e1c94d601039/download/predicted_damage_east-catia-la-mar-skysat-final.gpkg",
+        "kml": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.kml"
       },
       "layers": {
         "damage": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson"
@@ -1141,7 +1149,9 @@
         "official": false,
         "triageOnly": true,
         "filter": "damaged == 1 or max damage probability >= 0.50",
-        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation.",
+        "mapPayloadGeometry": "Point",
+        "mapPayloadBytes": 352529
       },
       "imagery": {
         "before": null,
@@ -1183,10 +1193,10 @@
       "downloads": {
         "csv": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.csv",
         "geojson": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
-        "kml": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.kml",
         "metadata": "/data/aoi/external-msft-la-guaira-east-predicted-damage/source_metadata.json",
         "hdx": "https://data.humdata.org/dataset/venezuela-earthquakes-building-damage-assessment-in-la-guaira",
-        "source_gpkg": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/d07fc3f8-885f-46f4-bd8e-03ac92fd5b00/download/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg"
+        "source_gpkg": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/d07fc3f8-885f-46f4-bd8e-03ac92fd5b00/download/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg",
+        "kml": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.kml"
       },
       "layers": {
         "damage": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson"
@@ -1204,7 +1214,9 @@
         "official": false,
         "triageOnly": true,
         "filter": "damaged == 1 or max damage probability >= 0.50",
-        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation."
+        "warning": "External model prediction for triage only. Not official Copernicus EMS damage. Do not use for official counts without field or official validation.",
+        "mapPayloadGeometry": "Point",
+        "mapPayloadBytes": 34711
       },
       "imagery": {
         "before": null,
@@ -1216,6 +1228,64 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence review context.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, and must not be used for official damage counts."
+        }
+      }
+    },
+    {
+      "id": "external-hot-mapswipe-ems-gap-visual",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "HOT/MapSwipe EMS-gap Visual Triage",
+        "es": "Brechas visuales HOT/MapSwipe fuera de EMS"
+      },
+      "status": "external-gap",
+      "source": "HOT/MapSwipe human validation from hotosm/venezuela_eq_2026 and HOT response sources. External visual gap candidates only; not official EMS damage labels and not official counts.",
+      "bounds": [
+        [
+          10.4401507591153,
+          -66.9794330411323
+        ],
+        [
+          10.6203669572527,
+          -66.8142404823822
+        ]
+      ],
+      "center": [
+        10.59720630736914,
+        -66.87419584047014
+      ],
+      "downloads": {
+        "csv": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.csv",
+        "geojson": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.geojson",
+        "kml": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.kml",
+        "metadata": "/data/aoi/external-hot-mapswipe-ems-gap-visual/source_metadata.json",
+        "hf_dataset": "https://huggingface.co/datasets/hotosm/venezuela_eq_2026",
+        "hot_response": "https://www.hotosm.org/en/projects/2026-venezuela-earthquake-response/"
+      },
+      "layers": {
+        "damage": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.geojson"
+      },
+      "metrics": {
+        "features": 460,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "candidates": 460,
+        "visualConfirmedGap": 215,
+        "needsHumanReview": 245,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "before": null,
+        "after": null,
+        "note": "This layer is generated from HOT/MapSwipe external validation polygons. Use it to find EMS gaps and prioritize human/VLM review; do not count it as official EMS damage.",
+        "approximateReference": {
+          "label": "Esri World Imagery aerial reference",
+          "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
+          "intendedUse": "Human visual orientation only for triage candidates.",
+          "limitations": "Not cached evidence, not official EMS imagery, and not a basis for official damage counts."
         }
       }
     }
@@ -1235,7 +1305,7 @@
       "id": "external-gap-tucacas-falcon",
       "name": {
         "en": "Tucacas / Falcon - public data gap",
-        "es": "Tucacas / Falcón - brecha de datos públicos"
+        "es": "Tucacas / Falc\u00f3n - brecha de datos p\u00fablicos"
       },
       "status": "external-gap",
       "expectedUtc": "No EMSR884 AOI/catalog layer in the current app; needs public imagery, reports, OSM/field validation, or external source review",

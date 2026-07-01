@@ -1,10 +1,15 @@
 // Service worker for Respuesta Venezuela.
-const CACHE = "rv-shell-v2";
+const CACHE = "rv-shell-v3";
 const OFFLINE = "rv-offline";
-const APP_SHELL = ["/", "/offline"];
+const APP_SHELL = ["/offline"];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(APP_SHELL)));
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      .then((cache) => cache.addAll(APP_SHELL))
+      .then(() => self.skipWaiting()),
+  );
 });
 
 self.addEventListener("message", (event) => {
@@ -61,18 +66,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (request.mode === "navigate") {
-    event.respondWith(
-      caches.match(request).then((cached) => {
-        const network = fetch(request)
-          .then((response) => {
-            const copy = response.clone();
-            caches.open(CACHE).then((cache) => cache.put(request, copy));
-            return response;
-          })
-          .catch(() => cached || caches.match("/offline").then((offline) => offline || caches.match("/")));
-        return cached || network;
-      }),
-    );
+    event.respondWith(networkFirstNavigate(request));
     return;
   }
 
@@ -110,4 +104,16 @@ async function networkFirstWithTimeout(request, cacheName, timeoutMs) {
   const response = await Promise.race([network, timedFallback]);
   if (timeout) clearTimeout(timeout);
   return response || cached || network;
+}
+
+async function networkFirstNavigate(request) {
+  const cache = await caches.open(CACHE);
+  const cached = await cache.match(request);
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) cache.put(request, response.clone());
+    return response;
+  } catch {
+    return cached || (await cache.match("/")) || (await caches.match("/offline"));
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-06-30T08:01:59Z",
+  "vantor_pre_items": 10,
+  "coverage_rows": 27,
+  "aoi_count_with_coverage": 9,
+  "aoi_count_with_eligible_coverage": 8,
+  "manifest": "ops/data_acquisition_plan/pre_event_imagery_coverage.csv",
+  "summary_csv": "ops/data_acquisition_plan/pre_event_imagery_coverage_summary.csv",
+  "gate_counts": {
+    "conditional_cloud_review": 3,
+    "coverage_only_zero_current_features": 6,
+    "eligible_after_chip_qa": 18
+  }
+}

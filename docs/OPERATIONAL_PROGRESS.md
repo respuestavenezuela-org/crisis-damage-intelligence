@@ -5,7 +5,7 @@ Update this after every work loop. Keep entries factual: what changed, how it wa
 ## Current Deployment
 
 - Public app: https://crisis-damage-intelligence.vercel.app
-- Package/repo path: `/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_platform`
+- Package/repo path: repository root
 - Primary app file: `src/components/OperationsConsole.tsx`
 - Map implementation: `src/components/map/MapPanel.tsx`
 - Catalog: `public/data/catalog.json`
@@ -423,13 +423,13 @@ QA evidence:
   - From generated package: `npm install && npm run build`
 - Result:
   - Generated package path:
-    - `/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_vercel_remote_assets`
+    - `../crisis_damage_intelligence_vercel_remote_assets`
   - Package excludes:
     - `public/data/tiles`
     - `public/data/chips`
     - `.git`, `.next`, `.vercel`, `node_modules`, `ops`, `qa`, `outputs`
   - Package manifest:
-    - `/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_vercel_remote_assets/REMOTE_ASSET_PACKAGE_MANIFEST.json`
+    - `../crisis_damage_intelligence_vercel_remote_assets/REMOTE_ASSET_PACKAGE_MANIFEST.json`
   - Package file count before install/build: 128.
   - Package rewrites tile/chip references to:
     - `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/tiles/...`
@@ -1102,7 +1102,7 @@ Do not run post-event-only VLM as if it were before/after comparison.
 - Deployment:
   - Production alias updated: `https://crisis-damage-intelligence.vercel.app`
   - Final deployment id: `dpl_DqdohMCWxvBCQjes1s6hbDTTZCgD`
-  - Remote package path: `/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_vercel_remote_assets`
+  - Remote package path: `../crisis_damage_intelligence_vercel_remote_assets`
   - Remote package upload size: about 23.3 MB; Vercel package excludes `public/data/tiles` and `public/data/chips`.
 - Result:
   - R2 is now the production source for published tile/chip imagery references.

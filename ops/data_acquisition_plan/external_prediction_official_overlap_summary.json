@@ -1,0 +1,10 @@
+{
+  "official_gra_polygon_count_compared": 355,
+  "external_layers": 4,
+  "external_features": 71296,
+  "high_priority_features": 11173,
+  "high_priority_outside_official_gra": 7897,
+  "summary_csv": "ops/data_acquisition_plan/external_prediction_official_overlap_summary.csv",
+  "detail_csv": "ops/data_acquisition_plan/external_prediction_official_overlap_detail.csv",
+  "warning": "External predictions are triage only and are not official EMS damage counts."
+}

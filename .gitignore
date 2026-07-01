@@ -12,6 +12,10 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
+__pycache__/
+*.pyc
 
 # next.js
 /.next/
@@ -47,6 +51,10 @@ ops/external_source_review/analysis/**/*.sample.geojson
 
 # QA screenshots
 output/playwright/*.png
+
+# local Codex/coworker artifacts
+.codex/coworkers/
+.codex/operational_signals_preview/
 
 # typescript
 *.tsbuildinfo

@@ -1,0 +1,5 @@
+source_name,layer_name,total_features,high_priority_features,overlaps_official_gra_features,outside_official_gra_features,high_priority_overlaps_official_gra,high_priority_outside_official_gra,official_gra_polygon_count_compared,status
+Microsoft AI4G Catia La Mar GPKG,predicted_damage_catia_la_mar_maxar_footprint_corrected,30761,9223,5647,25114,2195,7028,355,external_prediction_triage_only
+Microsoft AI4G Caraballeda GPKG,predicted_damage_Caraballeda-east-Vantor-6-26-warped-model-946,10392,622,2821,7571,523,99,355,external_prediction_triage_only
+Microsoft AI4G East Catia La Mar GPKG,predicted_damage_East-Catia-La-Mar-Skysat-model-510,24732,1209,4423,20309,494,715,355,external_prediction_triage_only
+Microsoft AI4G La Guaira GPKG,out,5411,119,924,4487,64,55,355,external_prediction_triage_only

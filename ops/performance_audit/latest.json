@@ -1,43 +1,43 @@
 {
-  "generated_utc": "2026-06-29T23:18:47.513774+00:00",
+  "generated_utc": "2026-07-01T18:02:19.569204+00:00",
   "catalog": {
     "path": "public/data/catalog.json",
-    "bytes": 63734,
-    "human": "62.2 KB",
-    "updated_at": "2026-06-29T07:42:57Z",
-    "aoi_count": 15,
+    "bytes": 66684,
+    "human": "65.1 KB",
+    "updated_at": "2026-07-01T17:55:00Z",
+    "aoi_count": 16,
     "watchlist_count": 4
   },
   "bundle": {
     "build_present": true,
     "js_files": 24,
-    "js_bytes": 1806867,
-    "js_human": "1.7 MB",
+    "js_bytes": 1865155,
+    "js_human": "1.8 MB",
     "css_files": 2,
-    "css_bytes": 65848,
-    "css_human": "64.3 KB",
+    "css_bytes": 73436,
+    "css_human": "71.7 KB",
     "next_dir": {
       "path": ".next",
       "exists": true,
-      "files": 295,
-      "bytes": 9965744,
-      "human": "9.5 MB"
+      "files": 2138,
+      "bytes": 437710995,
+      "human": "417.4 MB"
     }
   },
   "public_data": {
     "data": {
       "path": "public/data",
       "exists": true,
-      "files": 74613,
-      "bytes": 281923982,
-      "human": "268.9 MB"
+      "files": 74772,
+      "bytes": 301963285,
+      "human": "288.0 MB"
     },
     "aoi": {
       "path": "public/data/aoi",
       "exists": true,
-      "files": 93,
-      "bytes": 16151018,
-      "human": "15.4 MB"
+      "files": 97,
+      "bytes": 13947312,
+      "human": "13.3 MB"
     },
     "tiles": {
       "path": "public/data/tiles",
@@ -49,9 +49,9 @@
     "chips": {
       "path": "public/data/chips",
       "exists": true,
-      "files": 681,
-      "bytes": 70615065,
-      "human": "67.3 MB"
+      "files": 834,
+      "bytes": 92751867,
+      "human": "88.5 MB"
     },
     "heavy_local_files": [],
     "large_local_aoi_files": [],
@@ -61,14 +61,14 @@
     "raw_local_package_safe": false,
     "remote_asset_package_required": true,
     "unsafe_reasons": [
-      "public/data is 268.9 MB, above the raw package target 119.2 MB",
+      "public/data is 288.0 MB, above the raw package target 119.2 MB",
       "public/data/tiles is 186.0 MB, above the local tile target 71.5 MB",
-      "public/data/chips is 67.3 MB, above the local chip target 38.1 MB"
+      "public/data/chips is 88.5 MB, above the local chip target 38.1 MB"
     ],
-    "remote_excluded_bytes": 265676933,
-    "remote_excluded_human": "253.4 MB",
-    "non_remote_public_data_bytes": 16247049,
-    "non_remote_public_data_human": "15.5 MB",
+    "remote_excluded_bytes": 287813735,
+    "remote_excluded_human": "274.5 MB",
+    "non_remote_public_data_bytes": 14149550,
+    "non_remote_public_data_human": "13.5 MB",
     "large_local_aoi_file_count": 0,
     "large_local_aoi_bytes": 0,
     "large_local_aoi_human": "0 B",
@@ -80,17 +80,17 @@
   },
   "initial_load_estimate": {
     "default_aoi_id": "emsr884-aoi12-caraballeda",
-    "aoi_list_bytes_before_active_data": 63734,
-    "aoi_list_human": "62.2 KB",
+    "aoi_list_bytes_before_active_data": 66684,
+    "aoi_list_human": "65.1 KB",
     "default_damage_bytes": 619576,
-    "default_vlm_bytes": 318376,
-    "default_metadata_and_vector_bytes": 1001686,
-    "default_metadata_and_vector_human": "978.2 KB",
-    "non_default_damage_bytes_if_eager": 7596213,
-    "non_default_vlm_bytes_if_eager": 287816,
-    "non_default_data_human_if_eager": "7.5 MB",
+    "default_vlm_bytes": 231963,
+    "default_metadata_and_vector_bytes": 918223,
+    "default_metadata_and_vector_human": "896.7 KB",
+    "non_default_damage_bytes_if_eager": 5188330,
+    "non_default_vlm_bytes_if_eager": 276180,
+    "non_default_data_human_if_eager": "5.2 MB",
     "note": "Tile bytes are intentionally excluded because first visible tile count depends on viewport, zoom, CDN cache, and network.",
-    "aoi_inventory_count": 15
+    "aoi_inventory_count": 16
   },
   "frontend_loading_scan": {
     "source": "src/components/OperationsConsole.tsx",
@@ -109,8 +109,8 @@
         "path": "public/data/aoi/emsr884-aoi02-caracas",
         "exists": true,
         "files": 11,
-        "bytes": 143658,
-        "human": "140.3 KB"
+        "bytes": 131994,
+        "human": "128.9 KB"
       },
       "chips": {
         "path": "public/data/chips/emsr884-aoi02-caracas",
@@ -129,7 +129,7 @@
       "by_suffix": {
         ".csv": {
           "files": 3,
-          "bytes": 12683,
+          "bytes": 12695,
           "human": "12.4 KB"
         },
         ".geojson": {
@@ -139,13 +139,13 @@
         },
         ".json": {
           "files": 3,
-          "bytes": 1379,
+          "bytes": 1339,
           "human": "1.3 KB"
         },
         ".jsonl": {
           "files": 3,
-          "bytes": 78636,
-          "human": "76.8 KB"
+          "bytes": 67000,
+          "human": "65.4 KB"
         },
         ".kml": {
           "files": 1,
@@ -176,18 +176,18 @@
         },
         {
           "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
-          "bytes": 49841,
-          "human": "48.7 KB"
+          "bytes": 38205,
+          "human": "37.3 KB"
         },
         {
           "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.csv",
-          "bytes": 3893,
+          "bytes": 3905,
           "human": "3.8 KB"
         },
         {
           "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.json",
-          "bytes": 591,
-          "human": "591 B"
+          "bytes": 551,
+          "human": "551 B"
         },
         {
           "path": "public/data/aoi/emsr884-aoi02-caracas/vlm_queue.jsonl",
@@ -238,22 +238,22 @@
           "catalog_path": "downloads.vlm_before_after_jsonl",
           "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
           "exists": true,
-          "bytes": 49841,
-          "human": "48.7 KB"
+          "bytes": 38205,
+          "human": "37.3 KB"
         },
         {
           "catalog_path": "downloads.vlm_before_after_csv",
           "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.csv",
           "exists": true,
-          "bytes": 3893,
+          "bytes": 3905,
           "human": "3.8 KB"
         },
         {
           "catalog_path": "downloads.vlm_before_after_summary",
           "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.json",
           "exists": true,
-          "bytes": 591,
-          "human": "591 B"
+          "bytes": 551,
+          "human": "551 B"
         },
         {
           "catalog_path": "downloads.vlm_jsonl",
@@ -287,8 +287,8 @@
           "catalog_path": "layers.vlm",
           "path": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_review.jsonl",
           "exists": true,
-          "bytes": 49841,
-          "human": "48.7 KB"
+          "bytes": 38205,
+          "human": "37.3 KB"
         },
         {
           "catalog_path": "layers.afterTiles",
@@ -617,7 +617,7 @@
         "path": "public/data/aoi/emsr884-aoi05-santa-cruz",
         "exists": true,
         "files": 4,
-        "bytes": 5474,
+        "bytes": 5466,
         "human": "5.3 KB"
       },
       "chips": {
@@ -647,8 +647,8 @@
         },
         ".json": {
           "files": 1,
-          "bytes": 275,
-          "human": "275 B"
+          "bytes": 267,
+          "human": "267 B"
         },
         ".kml": {
           "files": 1,
@@ -674,8 +674,8 @@
         },
         {
           "path": "public/data/aoi/emsr884-aoi05-santa-cruz/source_metadata.json",
-          "bytes": 275,
-          "human": "275 B"
+          "bytes": 267,
+          "human": "267 B"
         }
       ],
       "damage_geojson_features": 3,
@@ -706,8 +706,8 @@
           "catalog_path": "downloads.metadata",
           "path": "/data/aoi/emsr884-aoi05-santa-cruz/source_metadata.json",
           "exists": true,
-          "bytes": 275,
-          "human": "275 B"
+          "bytes": 267,
+          "human": "267 B"
         },
         {
           "catalog_path": "layers.damage",
@@ -732,11 +732,6 @@
           "catalog_path": "downloads.before_cog",
           "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
           "host": "sentinel-cogs.s3.us-west-2.amazonaws.com"
-        },
-        {
-          "catalog_path": "layers.afterImage",
-          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
-          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
         },
         {
           "catalog_path": "imagery.before.url",
@@ -1331,8 +1326,8 @@
         "path": "public/data/aoi/emsr884-aoi08-san-felipe-monitor01",
         "exists": true,
         "files": 4,
-        "bytes": 295182,
-        "human": "288.3 KB"
+        "bytes": 295166,
+        "human": "288.2 KB"
       },
       "chips": {
         "path": "public/data/chips/emsr884-aoi08-san-felipe-monitor01",
@@ -1361,8 +1356,8 @@
         },
         ".json": {
           "files": 1,
-          "bytes": 288,
-          "human": "288 B"
+          "bytes": 272,
+          "human": "272 B"
         },
         ".kml": {
           "files": 1,
@@ -1388,8 +1383,8 @@
         },
         {
           "path": "public/data/aoi/emsr884-aoi08-san-felipe-monitor01/source_metadata.json",
-          "bytes": 288,
-          "human": "288 B"
+          "bytes": 272,
+          "human": "272 B"
         }
       ],
       "damage_geojson_features": 183,
@@ -1420,8 +1415,8 @@
           "catalog_path": "downloads.metadata",
           "path": "/data/aoi/emsr884-aoi08-san-felipe-monitor01/source_metadata.json",
           "exists": true,
-          "bytes": 288,
-          "human": "288 B"
+          "bytes": 272,
+          "human": "272 B"
         },
         {
           "catalog_path": "layers.damage",
@@ -1586,15 +1581,15 @@
         "path": "public/data/aoi/emsr884-aoi12-caraballeda",
         "exists": true,
         "files": 17,
-        "bytes": 2097868,
-        "human": "2.0 MB"
+        "bytes": 2011378,
+        "human": "1.9 MB"
       },
       "chips": {
         "path": "public/data/chips/emsr884-aoi12-caraballeda",
         "exists": true,
-        "files": 441,
-        "bytes": 52620571,
-        "human": "50.2 MB"
+        "files": 594,
+        "bytes": 74757373,
+        "human": "71.3 MB"
       },
       "tiles": {
         "path": "public/data/tiles/emsr884-aoi12-caraballeda",
@@ -1606,8 +1601,8 @@
       "by_suffix": {
         ".csv": {
           "files": 4,
-          "bytes": 118903,
-          "human": "116.1 KB"
+          "bytes": 118827,
+          "human": "116.0 KB"
         },
         ".geojson": {
           "files": 2,
@@ -1621,13 +1616,13 @@
         },
         ".json": {
           "files": 4,
-          "bytes": 2011,
+          "bytes": 2010,
           "human": "2.0 KB"
         },
         ".jsonl": {
           "files": 2,
-          "bytes": 498422,
-          "human": "486.7 KB"
+          "bytes": 412009,
+          "human": "402.4 KB"
         },
         ".kml": {
           "files": 2,
@@ -1688,18 +1683,18 @@
         },
         {
           "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
-          "bytes": 318376,
-          "human": "310.9 KB"
+          "bytes": 231963,
+          "human": "226.5 KB"
         },
         {
           "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.csv",
-          "bytes": 23289,
+          "bytes": 23213,
           "human": "22.7 KB"
         },
         {
           "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.json",
-          "bytes": 637,
-          "human": "637 B"
+          "bytes": 636,
+          "human": "636 B"
         },
         {
           "path": "public/data/aoi/emsr884-aoi12-caraballeda/vlm_review.jsonl",
@@ -1766,22 +1761,22 @@
           "catalog_path": "downloads.vlm_before_after_jsonl",
           "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
           "exists": true,
-          "bytes": 318376,
-          "human": "310.9 KB"
+          "bytes": 231963,
+          "human": "226.5 KB"
         },
         {
           "catalog_path": "downloads.vlm_before_after_csv",
           "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.csv",
           "exists": true,
-          "bytes": 23289,
+          "bytes": 23213,
           "human": "22.7 KB"
         },
         {
           "catalog_path": "downloads.vlm_before_after_summary",
           "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.json",
           "exists": true,
-          "bytes": 637,
-          "human": "637 B"
+          "bytes": 636,
+          "human": "636 B"
         },
         {
           "catalog_path": "layers.damage",
@@ -1801,8 +1796,8 @@
           "catalog_path": "layers.vlm",
           "path": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
           "exists": true,
-          "bytes": 318376,
-          "human": "310.9 KB"
+          "bytes": 231963,
+          "human": "226.5 KB"
         },
         {
           "catalog_path": "layers.beforeTiles",
@@ -1884,7 +1879,7 @@
         "path": "public/data/aoi/emsr884-aoi12-caraballeda-monitor01",
         "exists": true,
         "files": 4,
-        "bytes": 1583339,
+        "bytes": 1583324,
         "human": "1.5 MB"
       },
       "chips": {
@@ -1914,8 +1909,8 @@
         },
         ".json": {
           "files": 1,
-          "bytes": 292,
-          "human": "292 B"
+          "bytes": 277,
+          "human": "277 B"
         },
         ".kml": {
           "files": 1,
@@ -1941,8 +1936,8 @@
         },
         {
           "path": "public/data/aoi/emsr884-aoi12-caraballeda-monitor01/source_metadata.json",
-          "bytes": 292,
-          "human": "292 B"
+          "bytes": 277,
+          "human": "277 B"
         }
       ],
       "damage_geojson_features": 1004,
@@ -1973,8 +1968,8 @@
           "catalog_path": "downloads.metadata",
           "path": "/data/aoi/emsr884-aoi12-caraballeda-monitor01/source_metadata.json",
           "exists": true,
-          "bytes": 292,
-          "human": "292 B"
+          "bytes": 277,
+          "human": "277 B"
         },
         {
           "catalog_path": "layers.damage",
@@ -2005,8 +2000,8 @@
         "path": "public/data/aoi/external-msft-catia-la-mar-predicted-damage",
         "exists": true,
         "files": 3,
-        "bytes": 7096573,
-        "human": "6.8 MB"
+        "bytes": 5153926,
+        "human": "4.9 MB"
       },
       "chips": {
         "path": "public/data/chips/external-msft-catia-la-mar-predicted-damage",
@@ -2030,13 +2025,13 @@
         },
         ".geojson": {
           "files": 1,
-          "bytes": 4555694,
-          "human": "4.3 MB"
+          "bytes": 2612886,
+          "human": "2.5 MB"
         },
         ".json": {
           "files": 1,
-          "bytes": 1678,
-          "human": "1.6 KB"
+          "bytes": 1839,
+          "human": "1.8 KB"
         }
       },
       "data_files": [
@@ -2047,13 +2042,13 @@
         },
         {
           "path": "public/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.geojson",
-          "bytes": 4555694,
-          "human": "4.3 MB"
+          "bytes": 2612886,
+          "human": "2.5 MB"
         },
         {
           "path": "public/data/aoi/external-msft-catia-la-mar-predicted-damage/source_metadata.json",
-          "bytes": 1678,
-          "human": "1.6 KB"
+          "bytes": 1839,
+          "human": "1.8 KB"
         }
       ],
       "damage_geojson_features": 9134,
@@ -2070,22 +2065,22 @@
           "catalog_path": "downloads.geojson",
           "path": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 4555694,
-          "human": "4.3 MB"
+          "bytes": 2612886,
+          "human": "2.5 MB"
         },
         {
           "catalog_path": "downloads.metadata",
           "path": "/data/aoi/external-msft-catia-la-mar-predicted-damage/source_metadata.json",
           "exists": true,
-          "bytes": 1678,
-          "human": "1.6 KB"
+          "bytes": 1839,
+          "human": "1.8 KB"
         },
         {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/external-msft-catia-la-mar-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 4555694,
-          "human": "4.3 MB"
+          "bytes": 2612886,
+          "human": "2.5 MB"
         }
       ],
       "remote_catalog_refs": [
@@ -2114,8 +2109,8 @@
         "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage",
         "exists": true,
         "files": 4,
-        "bytes": 1154186,
-        "human": "1.1 MB"
+        "bytes": 753308,
+        "human": "735.7 KB"
       },
       "chips": {
         "path": "public/data/chips/external-msft-caraballeda-east-predicted-damage",
@@ -2139,13 +2134,13 @@
         },
         ".geojson": {
           "files": 1,
-          "bytes": 583407,
-          "human": "569.7 KB"
+          "bytes": 182125,
+          "human": "177.9 KB"
         },
         ".json": {
           "files": 1,
-          "bytes": 1275,
-          "human": "1.2 KB"
+          "bytes": 1679,
+          "human": "1.6 KB"
         },
         ".kml": {
           "files": 1,
@@ -2161,8 +2156,8 @@
         },
         {
           "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
-          "bytes": 583407,
-          "human": "569.7 KB"
+          "bytes": 182125,
+          "human": "177.9 KB"
         },
         {
           "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.kml",
@@ -2171,8 +2166,8 @@
         },
         {
           "path": "public/data/aoi/external-msft-caraballeda-east-predicted-damage/source_metadata.json",
-          "bytes": 1275,
-          "human": "1.2 KB"
+          "bytes": 1679,
+          "human": "1.6 KB"
         }
       ],
       "damage_geojson_features": 622,
@@ -2189,8 +2184,15 @@
           "catalog_path": "downloads.geojson",
           "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 583407,
-          "human": "569.7 KB"
+          "bytes": 182125,
+          "human": "177.9 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/source_metadata.json",
+          "exists": true,
+          "bytes": 1679,
+          "human": "1.6 KB"
         },
         {
           "catalog_path": "downloads.kml",
@@ -2200,18 +2202,11 @@
           "human": "395.4 KB"
         },
         {
-          "catalog_path": "downloads.metadata",
-          "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/source_metadata.json",
-          "exists": true,
-          "bytes": 1275,
-          "human": "1.2 KB"
-        },
-        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/external-msft-caraballeda-east-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 583407,
-          "human": "569.7 KB"
+          "bytes": 182125,
+          "human": "177.9 KB"
         }
       ],
       "remote_catalog_refs": [
@@ -2240,8 +2235,8 @@
         "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage",
         "exists": true,
         "files": 4,
-        "bytes": 2251580,
-        "human": "2.1 MB"
+        "bytes": 1461745,
+        "human": "1.4 MB"
       },
       "chips": {
         "path": "public/data/chips/external-msft-catia-la-mar-east-predicted-damage",
@@ -2265,13 +2260,13 @@
         },
         ".geojson": {
           "files": 1,
-          "bytes": 1142769,
-          "human": "1.1 MB"
+          "bytes": 352529,
+          "human": "344.3 KB"
         },
         ".json": {
           "files": 1,
-          "bytes": 1268,
-          "human": "1.2 KB"
+          "bytes": 1673,
+          "human": "1.6 KB"
         },
         ".kml": {
           "files": 1,
@@ -2287,8 +2282,8 @@
         },
         {
           "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
-          "bytes": 1142769,
-          "human": "1.1 MB"
+          "bytes": 352529,
+          "human": "344.3 KB"
         },
         {
           "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.kml",
@@ -2297,8 +2292,8 @@
         },
         {
           "path": "public/data/aoi/external-msft-catia-la-mar-east-predicted-damage/source_metadata.json",
-          "bytes": 1268,
-          "human": "1.2 KB"
+          "bytes": 1673,
+          "human": "1.6 KB"
         }
       ],
       "damage_geojson_features": 1209,
@@ -2315,8 +2310,15 @@
           "catalog_path": "downloads.geojson",
           "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 1142769,
-          "human": "1.1 MB"
+          "bytes": 352529,
+          "human": "344.3 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/source_metadata.json",
+          "exists": true,
+          "bytes": 1673,
+          "human": "1.6 KB"
         },
         {
           "catalog_path": "downloads.kml",
@@ -2326,18 +2328,11 @@
           "human": "768.7 KB"
         },
         {
-          "catalog_path": "downloads.metadata",
-          "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/source_metadata.json",
-          "exists": true,
-          "bytes": 1268,
-          "human": "1.2 KB"
-        },
-        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/external-msft-catia-la-mar-east-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 1142769,
-          "human": "1.1 MB"
+          "bytes": 352529,
+          "human": "344.3 KB"
         }
       ],
       "remote_catalog_refs": [
@@ -2366,8 +2361,8 @@
         "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage",
         "exists": true,
         "files": 4,
-        "bytes": 219212,
-        "human": "214.1 KB"
+        "bytes": 144834,
+        "human": "141.4 KB"
       },
       "chips": {
         "path": "public/data/chips/external-msft-la-guaira-east-predicted-damage",
@@ -2391,13 +2386,13 @@
         },
         ".geojson": {
           "files": 1,
-          "bytes": 109491,
-          "human": "106.9 KB"
+          "bytes": 34711,
+          "human": "33.9 KB"
         },
         ".json": {
           "files": 1,
-          "bytes": 1225,
-          "human": "1.2 KB"
+          "bytes": 1627,
+          "human": "1.6 KB"
         },
         ".kml": {
           "files": 1,
@@ -2413,8 +2408,8 @@
         },
         {
           "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
-          "bytes": 109491,
-          "human": "106.9 KB"
+          "bytes": 34711,
+          "human": "33.9 KB"
         },
         {
           "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.kml",
@@ -2423,8 +2418,8 @@
         },
         {
           "path": "public/data/aoi/external-msft-la-guaira-east-predicted-damage/source_metadata.json",
-          "bytes": 1225,
-          "human": "1.2 KB"
+          "bytes": 1627,
+          "human": "1.6 KB"
         }
       ],
       "damage_geojson_features": 119,
@@ -2441,8 +2436,15 @@
           "catalog_path": "downloads.geojson",
           "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 109491,
-          "human": "106.9 KB"
+          "bytes": 34711,
+          "human": "33.9 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/source_metadata.json",
+          "exists": true,
+          "bytes": 1627,
+          "human": "1.6 KB"
         },
         {
           "catalog_path": "downloads.kml",
@@ -2452,18 +2454,11 @@
           "human": "75.5 KB"
         },
         {
-          "catalog_path": "downloads.metadata",
-          "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/source_metadata.json",
-          "exists": true,
-          "bytes": 1225,
-          "human": "1.2 KB"
-        },
-        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/external-msft-la-guaira-east-predicted-damage/damage.geojson",
           "exists": true,
-          "bytes": 109491,
-          "human": "106.9 KB"
+          "bytes": 34711,
+          "human": "33.9 KB"
         }
       ],
       "remote_catalog_refs": [
@@ -2476,6 +2471,132 @@
           "catalog_path": "downloads.source_gpkg",
           "url": "https://data.humdata.org/dataset/0b1912ea-20d1-4f32-8232-f2631d1a639d/resource/d07fc3f8-885f-46f4-bd8e-03ac92fd5b00/download/predicted_damage_la-guaira-east-blacksky-06-25-model-337_filtered.gpkg",
           "host": "data.humdata.org"
+        },
+        {
+          "catalog_path": "imagery.approximateReference.urlTemplate",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "external-hot-mapswipe-ems-gap-visual",
+      "status": "external-gap",
+      "metrics_features": 460,
+      "aoi_dir": {
+        "path": "public/data/aoi/external-hot-mapswipe-ems-gap-visual",
+        "exists": true,
+        "files": 4,
+        "bytes": 1102225,
+        "human": "1.1 MB"
+      },
+      "chips": {
+        "path": "public/data/chips/external-hot-mapswipe-ems-gap-visual",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/external-hot-mapswipe-ems-gap-visual",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 189057,
+          "human": "184.6 KB"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 801227,
+          "human": "782.4 KB"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 555,
+          "human": "555 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 111386,
+          "human": "108.8 KB"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.csv",
+          "bytes": 189057,
+          "human": "184.6 KB"
+        },
+        {
+          "path": "public/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.geojson",
+          "bytes": 801227,
+          "human": "782.4 KB"
+        },
+        {
+          "path": "public/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.kml",
+          "bytes": 111386,
+          "human": "108.8 KB"
+        },
+        {
+          "path": "public/data/aoi/external-hot-mapswipe-ems-gap-visual/source_metadata.json",
+          "bytes": 555,
+          "human": "555 B"
+        }
+      ],
+      "damage_geojson_features": 460,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.csv",
+          "exists": true,
+          "bytes": 189057,
+          "human": "184.6 KB"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.geojson",
+          "exists": true,
+          "bytes": 801227,
+          "human": "782.4 KB"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.kml",
+          "exists": true,
+          "bytes": 111386,
+          "human": "108.8 KB"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/external-hot-mapswipe-ems-gap-visual/source_metadata.json",
+          "exists": true,
+          "bytes": 555,
+          "human": "555 B"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/external-hot-mapswipe-ems-gap-visual/damage.geojson",
+          "exists": true,
+          "bytes": 801227,
+          "human": "782.4 KB"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.hf_dataset",
+          "url": "https://huggingface.co/datasets/hotosm/venezuela_eq_2026",
+          "host": "huggingface.co"
+        },
+        {
+          "catalog_path": "downloads.hot_response",
+          "url": "https://www.hotosm.org/en/projects/2026-venezuela-earthquake-response/",
+          "host": "www.hotosm.org"
         },
         {
           "catalog_path": "imagery.approximateReference.urlTemplate",

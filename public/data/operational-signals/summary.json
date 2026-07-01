@@ -1,0 +1,59 @@
+{
+  "status": "public-aggregate-not-official-damage",
+  "generatedAt": "2026-07-01T16:32:34Z",
+  "privacy": {
+    "rawKoboWritten": false,
+    "rawWhatsappWritten": false,
+    "exactReportPointsWritten": false,
+    "freeTextWritten": false,
+    "minCommunityReportsPerVisibleCell": 5,
+    "minDistinctSubmissionMinutesPerVisibleCell": 3,
+    "gridDegrees": 0.02
+  },
+  "kobo": {
+    "source": "Kobo public API",
+    "records": 2593,
+    "mappedRecords": 2541,
+    "eventCounts": {
+      "structural_damage": 179,
+      "aid_collection_first_aid": 53,
+      "other": 2361
+    },
+    "validationCounts": {
+      "unreviewed": 2593
+    }
+  },
+  "whatsapp": {
+    "source": "local WhatsApp chat export",
+    "configured": true,
+    "records": 81,
+    "mappedRecords": 4,
+    "coordinateMessages": 4,
+    "eventCounts": {
+      "other": 66,
+      "structural_damage": 10,
+      "aid_collection_first_aid": 2,
+      "health": 1,
+      "access": 2
+    }
+  },
+  "emsCounts": {
+    "official-vector:possible": 169,
+    "official-monitor-points:possible": 471,
+    "official-monitor-points:destroyed": 436,
+    "official-vector:damaged": 128,
+    "official-vector:destroyed": 12,
+    "official-monitor-points:damaged": 399
+  },
+  "externalGap": {
+    "detailRows": 7897,
+    "outsideOfficialGraRows": 7897
+  },
+  "visibleCells": 70,
+  "priorityCounts": {
+    "high": 7,
+    "medium": 19,
+    "low": 44
+  },
+  "warning": "Community, VLM, and external prediction signals are triage only and must not be counted as official EMS damage."
+}

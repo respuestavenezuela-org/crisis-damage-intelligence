@@ -252,6 +252,10 @@ def validate_imagery_guardrails(errors: list[str], warnings: list[str], aoi: dic
         entry = imagery_entry_for_layer(aoi, layer_key)
         bytes_value = entry.get("bytes")
         has_tiles = bool(layers.get(paired_tiles_key(layer_key)))
+        if not has_tiles and not isinstance(bytes_value, int):
+            errors.append(
+                f"{aoi_id}.{layer_key}: direct raster layer requires imagery byte metadata or a paired tile layer"
+            )
         if isinstance(bytes_value, int):
             if bytes_value > DIRECT_RASTER_MOBILE_MAX_BYTES and not has_tiles:
                 errors.append(

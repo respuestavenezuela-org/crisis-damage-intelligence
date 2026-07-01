@@ -3,7 +3,7 @@
   "destroyed": 0,
   "damaged": 14,
   "possibly_damaged": 169,
-  "source_product": "Copernicus EMSR884 AOI08 GRA MONIT01 latest ZIP",
+  "source_product": "AOI08_San_Felipe_GRA_latest.zip",
   "source_root": "EMSR884_AOI08_GRA_MONIT01",
   "source_file": "EMSR884_AOI08_GRA_MONIT01_v1.gpkg",
   "source_layer": "builtUpP_v1"

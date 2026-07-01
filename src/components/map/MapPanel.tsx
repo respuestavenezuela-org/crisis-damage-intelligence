@@ -18,7 +18,8 @@ import CircleStyle from "ol/style/Circle.js";
 import { fromLonLat, toLonLat } from "ol/proj.js";
 import { boundingExtent, getCenter } from "ol/extent.js";
 import "ol/ol.css";
-import type { AoiRecord, DamageFeature, VlmRecord } from "../types";
+import type { AoiRecord, DamageFeature, OperationalSignalFeature, VlmRecord } from "../types";
+import { featureInspectionPoint } from "./feature-location";
 
 declare global {
   interface Window {
@@ -31,6 +32,8 @@ declare global {
       mode: Props["mode"];
       basemap: Props["basemap"];
       raster?: "before" | "after" | "none";
+      visibleSignals?: string[];
+      selectedSignalId?: string;
     };
   }
 }
@@ -43,15 +46,21 @@ type Props = {
   filter: "all" | "severe" | "vlm";
   basemap: "map" | "aerial";
   vlm: Record<string, VlmRecord>;
+  operationalSignals: OperationalSignalFeature[];
+  showOperationalSignals: boolean;
   selectedId?: string;
+  selectedSignalId?: string;
   focusToken: number;
   aoiFocusToken: number;
   onMapReady: (payload: { aoi_id: string; feature_count: number; mode: Props["mode"]; basemap: Props["basemap"] }) => void;
   onFirstTileLoaded: (payload: { aoi_id: string; layer: string; mode: Props["mode"]; basemap: Props["basemap"] }) => void;
+  onLayerLoadFailed: (payload: { aoi_id: string; layer: string; status: "error"; mode: Props["mode"]; basemap: Props["basemap"]; surface: string }) => void;
   onSelect: (feature: DamageFeature | null) => void;
+  onSelectSignal: (feature: OperationalSignalFeature | null) => void;
 };
 
 type OlDamageFeature = Feature & { original?: DamageFeature };
+type OlSignalFeature = Feature & { signal?: OperationalSignalFeature };
 type RasterLayer = WebGLTileLayer | TileLayer<XYZ>;
 const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
 type InteriorGeometry = {
@@ -64,6 +73,8 @@ type InteriorGeometry = {
 
 function damageClass(properties: DamageFeature["properties"]) {
   const raw = String(properties.damage_class ?? properties.damage_gra ?? properties.confirmed_damage_class ?? "").toLowerCase();
+  if (raw.includes("visual_confirmed_gap")) return "severe";
+  if (raw.includes("needs_human_review")) return "possible";
   if (raw.includes("possibly")) return "possible";
   if (raw.includes("destroy") || raw.includes("major") || raw.includes("damaged") || raw === "major_damage") return "severe";
   if (raw.includes("minor") || raw.includes("possible")) return "possible";
@@ -80,12 +91,8 @@ function colorFor(kind: string) {
 
 function focusCoordinate(feature: OlDamageFeature, original: DamageFeature) {
   const geometry = feature.getGeometry() as InteriorGeometry | undefined;
-  const centroidLat = Number(original.properties.centroid_lat);
-  const centroidLon = Number(original.properties.centroid_lon);
-  if (Number.isFinite(centroidLat) && Number.isFinite(centroidLon)) {
-    const candidate = fromLonLat([centroidLon, centroidLat]);
-    if (!geometry?.intersectsCoordinate || geometry.intersectsCoordinate(candidate)) return candidate;
-  }
+  const inspectionPoint = featureInspectionPoint(original);
+  if (inspectionPoint) return fromLonLat([inspectionPoint.lon, inspectionPoint.lat]);
   if (geometry?.getType() === "Polygon" && geometry.getInteriorPoint) {
     return geometry.getInteriorPoint().getCoordinates().slice(0, 2);
   }
@@ -120,7 +127,26 @@ function hasBeforeLayer(aoi: AoiRecord) {
   return Boolean(aoi.layers.beforeTiles || canRenderBeforeImage(aoi) || aoi.imagery?.approximateReference?.urlTemplate);
 }
 
-export default function MapPanel({ aoi, features, mode, opacity, filter, basemap, vlm, selectedId, focusToken, aoiFocusToken, onMapReady, onFirstTileLoaded, onSelect }: Props) {
+export default function MapPanel({
+  aoi,
+  features,
+  mode,
+  opacity,
+  filter,
+  basemap,
+  vlm,
+  operationalSignals,
+  showOperationalSignals,
+  selectedId,
+  selectedSignalId,
+  focusToken,
+  aoiFocusToken,
+  onMapReady,
+  onFirstTileLoaded,
+  onLayerLoadFailed,
+  onSelect,
+  onSelectSignal,
+}: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const popupRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<OlMap | null>(null);
@@ -128,20 +154,29 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   const aerialBaseRef = useRef<TileLayer<XYZ> | null>(null);
   const beforeRef = useRef<RasterLayer | null>(null);
   const afterRef = useRef<RasterLayer | null>(null);
+  const signalRef = useRef<VectorLayer<VectorSource> | null>(null);
   const vectorRef = useRef<VectorLayer<VectorSource> | null>(null);
   const highlightRef = useRef<VectorLayer<VectorSource> | null>(null);
   const markerRef = useRef<VectorLayer<VectorSource> | null>(null);
   const popupOverlayRef = useRef<Overlay | null>(null);
   const featuresRef = useRef<DamageFeature[]>([]);
+  const signalsRef = useRef<OperationalSignalFeature[]>([]);
   const aoiIdRef = useRef(aoi.id);
   const olFeatureByIdRef = useRef<Map<string, OlDamageFeature>>(new Map());
+  const olSignalByIdRef = useRef<Map<string, OlSignalFeature>>(new Map());
   const modeRef = useRef(mode);
   const selectedIdRef = useRef(selectedId);
+  const selectedSignalIdRef = useRef(selectedSignalId);
+  const showOperationalSignalsRef = useRef(showOperationalSignals);
   const onSelectRef = useRef(onSelect);
+  const onSelectSignalRef = useRef(onSelectSignal);
   const onMapReadyRef = useRef(onMapReady);
   const onFirstTileLoadedRef = useRef(onFirstTileLoaded);
+  const onLayerLoadFailedRef = useRef(onLayerLoadFailed);
   const renderVectorsRef = useRef<() => void>(() => {});
+  const renderSignalsRef = useRef<() => void>(() => {});
   const tileTrackedRef = useRef<Set<string>>(new Set());
+  const tileFailureTrackedRef = useRef<Set<string>>(new Set());
   const basemapRef = useRef(basemap);
 
   useEffect(() => {
@@ -153,12 +188,20 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   }, [onFirstTileLoaded]);
 
   useEffect(() => {
+    onLayerLoadFailedRef.current = onLayerLoadFailed;
+  }, [onLayerLoadFailed]);
+
+  useEffect(() => {
     aoiIdRef.current = aoi.id;
   }, [aoi.id]);
 
   useEffect(() => {
     onSelectRef.current = onSelect;
   }, [onSelect]);
+
+  useEffect(() => {
+    onSelectSignalRef.current = onSelectSignal;
+  }, [onSelectSignal]);
 
   useEffect(() => {
     modeRef.current = mode;
@@ -173,9 +216,23 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   }, [selectedId]);
 
   useEffect(() => {
+    selectedSignalIdRef.current = selectedSignalId;
+  }, [selectedSignalId]);
+
+  useEffect(() => {
+    showOperationalSignalsRef.current = showOperationalSignals;
+    renderSignalsRef.current();
+  }, [showOperationalSignals]);
+
+  useEffect(() => {
     featuresRef.current = features;
     renderVectorsRef.current();
   }, [features]);
+
+  useEffect(() => {
+    signalsRef.current = operationalSignals;
+    renderSignalsRef.current();
+  }, [operationalSignals]);
 
   const setDebug = useCallback((visibleFeatures: DamageFeature[]) => {
     const map = mapRef.current;
@@ -190,8 +247,20 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       mode: modeRef.current,
       basemap,
       raster: afterRef.current?.getVisible() ? "after" : beforeRef.current?.getVisible() ? "before" : "none",
+      visibleSignals: showOperationalSignalsRef.current ? signalsRef.current.map((signal) => signal.properties.id) : [],
+      selectedSignalId: selectedSignalIdRef.current,
     };
   }, [basemap, filter]);
+
+  const signalStyleFor = useCallback((feature: OlSignalFeature) => {
+    const priority = feature.signal?.properties.priority ?? "low";
+    const color = priority === "high" ? "#4c3b82" : priority === "medium" ? "#c77700" : "#42635b";
+    const alpha = priority === "high" ? 0.34 : priority === "medium" ? 0.28 : 0.18;
+    return new Style({
+      stroke: new Stroke({ color: hexToRgba(color, 0.92), width: priority === "high" ? 2.5 : 1.5 }),
+      fill: new Fill({ color: hexToRgba(color, alpha) }),
+    });
+  }, []);
 
   const styleFor = useCallback((feature: OlDamageFeature) => {
     const original = feature.original;
@@ -261,16 +330,91 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       }),
     }));
     if (popupRef.current) {
-      popupRef.current.innerHTML = popupHtml(feature.properties);
+      popupRef.current.innerHTML = popupHtml(feature);
       popupOverlayRef.current?.setPosition(center);
     }
     const [lng, lat] = toLonLat(center);
     nodeRef.current?.setAttribute("data-focused-id", String(feature.properties.source_feature_id ?? id));
     nodeRef.current?.setAttribute("data-focused-internal-id", id);
+    nodeRef.current?.setAttribute("data-focused-signal-id", "");
     nodeRef.current?.setAttribute("data-map-center", `${lat.toFixed(7)},${lng.toFixed(7)}`);
     nodeRef.current?.setAttribute("data-map-zoom", String(map.getView().getZoom()));
     setDebug(featuresRef.current.filter((candidate) => candidate.properties.aoi_id === aoi.id && passesFilter(candidate, filter, vlm)));
   }, [aoi.id, filter, setDebug, vlm]);
+
+  const focusSignal = useCallback((id?: string) => {
+    const map = mapRef.current;
+    if (!map) return;
+    if (!id) {
+      if (!selectedIdRef.current) {
+        highlightRef.current?.getSource()?.clear();
+        markerRef.current?.getSource()?.clear();
+        popupOverlayRef.current?.setPosition(undefined);
+        if (popupRef.current) popupRef.current.innerHTML = "";
+        nodeRef.current?.setAttribute("data-focused-signal-id", "");
+      }
+      return;
+    }
+    const signal = signalsRef.current.find((candidate) => candidate.properties.id === id);
+    let olSignal = olSignalByIdRef.current.get(id);
+    if (!signal) return;
+    if (!olSignal) {
+      olSignal = new GeoJSON().readFeature(signal, {
+        dataProjection: "EPSG:4326",
+        featureProjection: "EPSG:3857",
+      }) as OlSignalFeature;
+      olSignal.signal = signal;
+    }
+    const geometry = olSignal.getGeometry();
+    if (!geometry) return;
+    map.getView().fit(geometry.getExtent(), { padding: [80, 80, 80, 80], duration: 0, maxZoom: 13 });
+    const [lng, lat] = toLonLat(getCenter(geometry.getExtent()));
+    highlightRef.current?.getSource()?.clear();
+    const highlightFeature = olSignal.clone() as OlSignalFeature;
+    highlightFeature.signal = signal;
+    highlightRef.current?.getSource()?.addFeature(highlightFeature);
+    highlightRef.current?.setStyle(new Style({
+      stroke: new Stroke({ color: "#ffffff", width: 5 }),
+      fill: new Fill({ color: "rgba(255,255,255,0.10)" }),
+    }));
+    markerRef.current?.getSource()?.clear();
+    popupOverlayRef.current?.setPosition(undefined);
+    if (popupRef.current) {
+      popupRef.current.innerHTML = signalPopupHtml(signal.properties);
+      popupOverlayRef.current?.setPosition(getCenter(geometry.getExtent()));
+    }
+    nodeRef.current?.setAttribute("data-focused-id", "");
+    nodeRef.current?.setAttribute("data-focused-internal-id", "");
+    nodeRef.current?.setAttribute("data-focused-signal-id", id);
+    nodeRef.current?.setAttribute("data-map-center", `${lat.toFixed(7)},${lng.toFixed(7)}`);
+    nodeRef.current?.setAttribute("data-map-zoom", String(map.getView().getZoom()));
+  }, []);
+
+  const renderSignals = useCallback(() => {
+    const vector = signalRef.current;
+    if (!vector) return;
+    const source = vector.getSource();
+    if (!source) return;
+    const visible = showOperationalSignalsRef.current ? signalsRef.current : [];
+    const olFeatures = new GeoJSON().readFeatures({ type: "FeatureCollection", features: visible }, {
+      dataProjection: "EPSG:4326",
+      featureProjection: "EPSG:3857",
+    }) as OlSignalFeature[];
+    olSignalByIdRef.current.clear();
+    olFeatures.forEach((feature, index) => {
+      feature.signal = visible[index];
+      olSignalByIdRef.current.set(visible[index].properties.id, feature);
+    });
+    source.clear();
+    source.addFeatures(olFeatures);
+    vector.setStyle((feature) => signalStyleFor(feature as OlSignalFeature));
+    nodeRef.current?.setAttribute("data-visible-signals", String(visible.length));
+    setDebug(featuresRef.current.filter((candidate) => candidate.properties.aoi_id === aoi.id && passesFilter(candidate, filter, vlm)));
+  }, [aoi.id, filter, setDebug, signalStyleFor, vlm]);
+
+  useEffect(() => {
+    renderSignalsRef.current = renderSignals;
+  }, [renderSignals]);
 
   const renderVectors = useCallback(() => {
     const vector = vectorRef.current;
@@ -333,12 +477,28 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
         basemap: basemapRef.current,
       });
     };
+    const errorListener = () => {
+      if (tileFailureTrackedRef.current.has(key)) return;
+      tileFailureTrackedRef.current.add(key);
+      onLayerLoadFailedRef.current({
+        aoi_id: aoiId,
+        layer,
+        status: "error",
+        mode: modeRef.current,
+        basemap: basemapRef.current,
+        surface: "map_layer",
+      });
+    };
     if (maybeSource.once) {
       maybeSource.once("tileloadend", listener);
       maybeSource.once("imageloadend", listener);
       maybeSource.once("change", listener);
+      maybeSource.once("tileloaderror", errorListener);
+      maybeSource.once("imageloaderror", errorListener);
+      maybeSource.once("error", errorListener);
     } else if (maybeSource.on) {
       maybeSource.on("change", listener);
+      maybeSource.on("error", errorListener);
     }
   }, []);
 
@@ -355,6 +515,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       visible: basemapRef.current === "aerial",
       zIndex: 0,
     });
+    const signal = new VectorLayer({ source: new VectorSource(), zIndex: 20 });
     const vector = new VectorLayer({ source: new VectorSource(), zIndex: 30 });
     const highlight = new VectorLayer({ source: new VectorSource(), zIndex: 40 });
     const marker = new VectorLayer({ source: new VectorSource(), zIndex: 50 });
@@ -364,13 +525,14 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
     const popup = new Overlay({ element: popupElement, autoPan: { animation: { duration: 0 } }, offset: [0, -12] });
     const map = new OlMap({
       target: nodeRef.current,
-      layers: [base, aerialBase, vector, highlight, marker],
+      layers: [base, aerialBase, signal, vector, highlight, marker],
       overlays: [popup],
       view: new View({ center: fromLonLat([aoi.center[1], aoi.center[0]]), zoom: 12 }),
       controls: [],
     });
     baseRef.current = base;
     aerialBaseRef.current = aerialBase;
+    signalRef.current = signal;
     vectorRef.current = vector;
     highlightRef.current = highlight;
     markerRef.current = marker;
@@ -383,8 +545,20 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       const hit = map.forEachFeatureAtPixel(event.pixel, (feature) => feature as OlDamageFeature, {
         layerFilter: (layer) => layer === vectorRef.current,
       });
-      if (hit?.original) onSelectRef.current(hit.original);
-      else onSelectRef.current(null);
+      if (hit?.original) {
+        onSelectSignalRef.current(null);
+        onSelectRef.current(hit.original);
+        return;
+      }
+      const signalHit = map.forEachFeatureAtPixel(event.pixel, (feature) => feature as OlSignalFeature, {
+        layerFilter: (layer) => layer === signalRef.current,
+      });
+      if (signalHit?.signal) {
+        onSelectSignalRef.current(signalHit.signal);
+        return;
+      }
+      onSelectSignalRef.current(null);
+      onSelectRef.current(null);
     });
 
     return () => {
@@ -392,6 +566,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       popupElement.remove();
       popupRef.current = null;
       map.setTarget(undefined);
+      signalRef.current = null;
       mapRef.current = null;
     };
   }, [aoi.center, attachFirstTileTracker]);
@@ -490,6 +665,10 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   }, [renderVectors]);
 
   useEffect(() => {
+    renderSignals();
+  }, [renderSignals]);
+
+  useEffect(() => {
     applyLayerVisibility(mode, basemapRef.current);
     setDebug(featuresRef.current.filter((feature) => feature.properties.aoi_id === aoi.id && passesFilter(feature, filter, vlm)));
   }, [aoi.id, applyLayerVisibility, filter, mode, setDebug, vlm]);
@@ -497,6 +676,10 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
   useEffect(() => {
     focusFeature(selectedId);
   }, [focusFeature, focusToken, selectedId]);
+
+  useEffect(() => {
+    focusSignal(selectedSignalId);
+  }, [focusSignal, focusToken, selectedSignalId]);
 
   return (
     <div
@@ -509,6 +692,8 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       data-basemap={basemap}
       data-opacity={opacity}
       data-selected-id={selectedId ?? ""}
+      data-selected-signal-id={selectedSignalId ?? ""}
+      data-signals-visible={showOperationalSignals ? "true" : "false"}
     />
   );
 }
@@ -529,16 +714,38 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;");
 }
 
-function googleMapsUrl(p: DamageFeature["properties"]) {
+function googleMapsUrl(feature: DamageFeature) {
+  const p = feature.properties;
   if (typeof p.google_maps_url === "string" && p.google_maps_url) return p.google_maps_url;
-  const lat = Number(p.centroid_lat);
-  const lon = Number(p.centroid_lon);
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return "";
-  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+  const point = featureInspectionPoint(feature);
+  if (!point) return "";
+  return `https://www.google.com/maps/search/?api=1&query=${point.lat},${point.lon}`;
 }
 
-function popupHtml(p: DamageFeature["properties"]) {
-  const mapsUrl = googleMapsUrl(p);
+function formatSignalValue(value: number | null | undefined) {
+  return value === null || value === undefined ? "suppressed" : String(value);
+}
+
+function signalPriorityLabel(priority: OperationalSignalFeature["properties"]["priority"]) {
+  if (priority === "high") return "High review priority";
+  if (priority === "medium") return "Medium review priority";
+  return "Context signal";
+}
+
+function signalPopupHtml(p: OperationalSignalFeature["properties"]) {
+  return (
+    `<strong>${escapeHtml(p.id)}</strong>` +
+    `<span>${escapeHtml(signalPriorityLabel(p.priority))}</span>` +
+    `<span>Community: ${escapeHtml(formatSignalValue(p.communityReports))}</span>` +
+    `<span>EMS D/D: ${p.emsOfficialDestroyedDamaged}</span>` +
+    `<span>External gap: ${escapeHtml(formatSignalValue(p.externalGapCandidates))}</span>` +
+    `<small>Aggregate zone only · triage guidance</small>`
+  );
+}
+
+function popupHtml(feature: DamageFeature) {
+  const p = feature.properties;
+  const mapsUrl = googleMapsUrl(feature);
   const label = p.not_official_ems ? "External" : "EMS";
   const id = String(p.source_feature_id ?? p.id);
   const aoiId = String(p.aoi_id ?? "");

@@ -114,6 +114,15 @@ export function computeImportantUrls(
 
 export type PrecacheProgress = { done: number; total: number };
 
+function isCrossOriginUrl(url: string) {
+  if (typeof window === "undefined") return false;
+  try {
+    return new URL(url, window.location.href).origin !== window.location.origin;
+  } catch {
+    return false;
+  }
+}
+
 export async function getOfflineBudgetBytes(): Promise<number> {
   try {
     const est = await navigator.storage?.estimate?.();
@@ -168,8 +177,11 @@ export async function precacheUrls(
       try {
         const existing = await cache.match(url);
         if (!existing) {
-          const res = await fetch(url, { signal: opts.signal });
-          if (res.ok) await cache.put(url, res.clone());
+          const res = await fetch(url, {
+            mode: isCrossOriginUrl(url) ? "no-cors" : "cors",
+            signal: opts.signal,
+          });
+          if (res.ok || res.type === "opaque") await cache.put(url, res.clone());
         }
       } catch {
         // best effort for field devices with intermittent links

@@ -4,7 +4,7 @@
 
 - Vercel project: `takoves-projects/crisis-damage-intelligence`
 - Public URL: `https://crisis-damage-intelligence.vercel.app`
-- Source repo: `https://github.com/takove/crisis-damage-intelligence`
+- Source repo: `https://github.com/respuestavenezuela-org/crisis-damage-intelligence`
 - Public viewing path: static Next.js + `public/data/**`
 - Public viewing does not require Supabase, workers, or live VLM calls. The current imagery-heavy package still depends on static local or CDN/R2-hosted assets for chips/tiles.
 
@@ -157,11 +157,7 @@ npm install
 npm run build
 ```
 
-Generated package:
-
-```text
-/Users/luisrosal/Documents/Codex/2026-06-26/he/outputs/crisis_damage_intelligence_vercel_remote_assets
-```
+Generated package: `../crisis_damage_intelligence_vercel_remote_assets` relative to this repo.
 
 The package rewrites local asset references to:
 
@@ -215,7 +211,7 @@ R2 token note:
 Repo:
 
 ```text
-https://github.com/takove/crisis-damage-intelligence
+https://github.com/respuestavenezuela-org/crisis-damage-intelligence
 ```
 
 Workflows:

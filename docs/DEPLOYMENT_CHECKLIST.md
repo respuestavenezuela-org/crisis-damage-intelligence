@@ -7,7 +7,11 @@ Run from the package root:
 ```bash
 npm ci
 npm run lint
+npm run typecheck
 npm run build
+python3 scripts/validate_catalog_schema.py
+python3 scripts/audit_asset_budget.py
+python3 scripts/validate_mobile_performance_budget.py
 ```
 
 Expected result:
@@ -36,11 +40,12 @@ ops/remote_asset_validation/latest.json
 ops/remote_asset_validation/latest.md
 ```
 
-Do not deploy the remote-asset package until these URLs return HTTP 200:
+Do not deploy the remote-asset package until sampled remote assets return HTTP 200/206 with expected content types, versioned tiles/chips include long-lived immutable cache headers, and COG URLs honor byte-range requests:
 
 ```text
 https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/tiles/<aoi>/<kind>/<z>/<x>/<y>.webp
 https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/<aoi>/<chip>.png
+https://.../<aoi>/<imagery>.tif
 ```
 
 ## Vercel Settings
@@ -87,6 +92,7 @@ curl -I https://crisis-damage-intelligence.vercel.app
 - Confirm CSV/GeoJSON/KML links resolve under `/data/aoi/<aoi-id>/`.
 - Confirm large rasters are not committed to Vercel; use object storage/CDN if imagery becomes large.
 - If using the remote-asset package, confirm `public/data/catalog.json` tile/chip URLs point to R2/CDN and not local `/data/tiles` or `/data/chips`.
+- Confirm `ops/performance_audit/latest.md` and `ops/performance_audit/mobile_budget.md` show no hard budget failures.
 
 ## Smoke Test After Deploy
 

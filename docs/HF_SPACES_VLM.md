@@ -16,7 +16,9 @@ The VLM runners now default to Hugging Face Spaces:
 
 ```bash
 export VLM_PROVIDER=hf_space
-export HF_SPACE_API_URL="https://<space-host>/..."
+export HF_SPACE_ID="takove/respuesta-venezuela-vlm"
+# or, equivalently:
+export HF_SPACE_API_URL="https://takove-respuesta-venezuela-vlm.hf.space/predict"
 export HF_VLM_MODEL="Qwen/Qwen3-VL-8B-Instruct"
 # optional for private Spaces:
 export HF_TOKEN="..."
@@ -48,24 +50,22 @@ Create and upload once a Hugging Face write token is available:
 ```bash
 export HF_TOKEN="<write token from https://huggingface.co/settings/tokens>"
 
-hf repo create takove/respuesta-venezuela-vlm \
-  --type space \
-  --space-sdk docker \
-  --public \
-  --exist-ok \
-  --env HF_VLM_MODEL=Qwen/Qwen3-VL-8B-Instruct \
-  --env DRY_RUN=1 \
-  --token "$HF_TOKEN"
-
-cd spaces/vlm-damage-triage
-git init
-git remote add origin https://huggingface.co/spaces/takove/respuesta-venezuela-vlm
-git add README.md Dockerfile requirements.txt app.py
-git commit -m "Create Respuesta Venezuela VLM Space"
-git push https://takove:${HF_TOKEN}@huggingface.co/spaces/takove/respuesta-venezuela-vlm main
+python3 scripts/publish_hf_vlm_space.py \
+  --repo-id takove/respuesta-venezuela-vlm
 ```
 
-After credits/hardware are assigned, set `DRY_RUN=0` and choose an appropriate GPU. For the 8B VL models, start with `l4x1` or better if available.
+That first publish keeps `DRY_RUN=1`, so the Space can be reached and the batch contract can be tested without loading the VLM or burning GPU. After credits/hardware are assigned, publish again with inference enabled:
+
+```bash
+python3 scripts/publish_hf_vlm_space.py \
+  --repo-id takove/respuesta-venezuela-vlm \
+  --hardware l4x1 \
+  --sleep-time 3600 \
+  --enable-inference \
+  --restart
+```
+
+For the 8B VL models, start with `l4x1` or better if available. If the Space is private/protected, keep `HF_TOKEN` set in the local batch environment so the offline runner can authenticate to `/predict`.
 
 ## Expected HF Space Contract
 
@@ -101,8 +101,13 @@ The adapter records `vlm_provider: hf_space` in new outputs.
 Preferred scripts:
 
 ```bash
+export VLM_PROVIDER=hf_space
+export HF_SPACE_ID=takove/respuesta-venezuela-vlm
+
 python3 scripts/run_hf_space_ems_before_after_review.py emsr884-aoi12-caraballeda --limit 10
 python3 scripts/run_hf_space_ems_post_event_review.py emsr884-aoi08-san-felipe --limit 10
 ```
 
 Legacy filenames still work, but they now call the shared provider adapter and default to HF Spaces unless `VLM_PROVIDER=minimax` is explicitly set.
+
+The provider adapter retries sleeping or warming Spaces on transient `408`, `429`, `500`, `502`, `503`, and `504` responses. Tune with `HF_SPACE_RETRIES`, `HF_SPACE_RETRY_SECONDS`, and `HF_SPACE_TIMEOUT_SECONDS` if the model cold start takes longer than expected.

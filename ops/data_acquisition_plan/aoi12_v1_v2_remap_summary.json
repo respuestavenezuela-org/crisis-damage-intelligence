@@ -1,0 +1,26 @@
+{
+  "old_public_v1_features": 120,
+  "new_official_v2_features": 166,
+  "remap_rows": 181,
+  "matched_old_features": 105,
+  "new_v2_unmatched_features": 61,
+  "old_v1_unmatched_features": 15,
+  "before_after_vlm_rows": 107,
+  "action_counts": {
+    "reuse_geometry_minor_change": 101,
+    "retire_or_manual_locate": 15,
+    "reuse": 1,
+    "reuse_geometry_update_official_attrs": 3,
+    "new_regenerate": 61
+  },
+  "vlm_action_counts": {
+    "reuse_existing_vlm_with_v2_binding": 93,
+    "retire_existing_vlm_no_v2_binding": 14
+  },
+  "damage_transition_counts": {
+    "Possibly damaged -> Damaged": 3
+  },
+  "remap_csv": "ops/data_acquisition_plan/aoi12_v1_v2_remap.csv",
+  "vlm_queue_csv": "ops/data_acquisition_plan/aoi12_vlm_v1_v2_reuse_queue.csv",
+  "v2_geojson": "ops/data_acquisition_plan/aoi12_gra_v2_builtup.geojson"
+}

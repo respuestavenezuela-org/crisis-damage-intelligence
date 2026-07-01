@@ -13,6 +13,7 @@ import json
 import shutil
 import subprocess
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -80,8 +81,6 @@ CSV_FIELDS = [
 ]
 MAP_GEOJSON_FIELDS = [
     "id",
-    "source_id",
-    "damage_gra",
     "damage_class",
     "damage_percent",
     "not_official_ems",
@@ -157,14 +156,13 @@ def compact_coordinates(value: object, digits: int = 6) -> object:
 def map_payload_feature(feature: dict) -> dict:
     props = feature["properties"]
     compact_props = {field: props[field] for field in MAP_GEOJSON_FIELDS if field in props}
-    compact_props["aoi_id"] = props.get("aoi")
     compact_props["triage_only"] = True
     return {
         "type": "Feature",
         "properties": compact_props,
         "geometry": {
-            **(feature.get("geometry") or {}),
-            "coordinates": compact_coordinates((feature.get("geometry") or {}).get("coordinates", [])),
+            "type": "Point",
+            "coordinates": [props["centroid_lon"], props["centroid_lat"]],
         },
     }
 
@@ -313,7 +311,7 @@ def write_layer(layer_id: str, summary: dict, manifest: list[dict]) -> dict:
         "total_source_features": summary["feature_count"],
         "exported_triage_features": len(features),
         "official_damage_counts_included": False,
-        "map_payload": "damage.geojson is a compact browser map payload with trimmed properties and 6 decimal coordinate precision; use CSV or the HDX source GPKG for full attribute review.",
+        "map_payload": "damage.geojson is a compact browser map payload with point geometry, centroid coordinates, and trimmed properties; use CSV or the HDX source GPKG for full footprint/attribute review.",
         "kml_public_download": (
             "Included in the static package."
             if kml_written
@@ -381,7 +379,7 @@ def update_catalog(entries: list[dict]) -> None:
     managed_ids = {entry["id"] for entry in entries}
     catalog["aois"] = [aoi for aoi in catalog.get("aois", []) if aoi.get("id") not in managed_ids]
     catalog["aois"].extend(entries)
-    catalog["updatedAt"] = "2026-06-28T14:40:00Z"
+    catalog["updatedAt"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     CATALOG_PATH.write_text(json.dumps(catalog, indent=2) + "\n")
 
 

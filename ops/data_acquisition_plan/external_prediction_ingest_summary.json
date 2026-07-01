@@ -1,0 +1,8 @@
+{
+  "downloaded_gpkg_count": 4,
+  "total_downloaded_bytes": 17522688,
+  "layer_count": 4,
+  "field_profile_count": 20,
+  "inventory_csv": "ops/data_acquisition_plan/external_prediction_gpkg_inventory.csv",
+  "field_profiles_csv": "ops/data_acquisition_plan/external_prediction_field_profiles.csv"
+}

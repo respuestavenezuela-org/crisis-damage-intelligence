@@ -16,8 +16,8 @@ export const INTERNAL_API_SOURCE_LABELS = {
     role: "Imagery-only records provide context and do not publish official damage counts.",
   },
   externalPredictionTriage: {
-    statuses: ["external-prediction"],
-    role: "External prediction layers are search and triage leads only, not official EMS damage labels.",
+    statuses: ["external-prediction", "external-gap"],
+    role: "External prediction and visual-gap layers are search and triage leads only, not official EMS damage labels.",
   },
   vlmTriage: {
     statuses: ["vlm"],

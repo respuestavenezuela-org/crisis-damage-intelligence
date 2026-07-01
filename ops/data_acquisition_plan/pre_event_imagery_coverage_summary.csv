@@ -1,0 +1,16 @@
+aoi_id,pre_event_scene_count,eligible_scene_count,eligible_features_covered_sum,best_gate
+emsr884-aoi02-caracas,5,4,50,eligible_after_chip_qa
+emsr884-aoi02-caracas-monitor01,2,2,21,eligible_after_chip_qa
+emsr884-aoi03-antimano,4,0,0,coverage_only_zero_current_features
+emsr884-aoi05-santa-cruz,0,0,0,no_vantor_pre_event_coverage
+emsr884-aoi06-moron,0,0,0,no_vantor_pre_event_coverage
+emsr884-aoi06-moron-monitor01,0,0,0,no_vantor_pre_event_coverage
+emsr884-aoi08-san-felipe,0,0,0,no_vantor_pre_event_coverage
+emsr884-aoi08-san-felipe-monitor01,0,0,0,no_vantor_pre_event_coverage
+emsr884-aoi10-guacara,0,0,0,no_vantor_pre_event_coverage
+emsr884-aoi12-caraballeda,4,3,235,eligible_after_chip_qa
+emsr884-aoi12-caraballeda-monitor01,4,3,1618,eligible_after_chip_qa
+external-msft-catia-la-mar-predicted-damage,3,2,15051,eligible_after_chip_qa
+external-msft-caraballeda-east-predicted-damage,1,1,464,eligible_after_chip_qa
+external-msft-catia-la-mar-east-predicted-damage,3,2,2293,eligible_after_chip_qa
+external-msft-la-guaira-east-predicted-damage,1,1,17,eligible_after_chip_qa

@@ -184,8 +184,8 @@ export async function readVlmRecords(aoi: AoiRecord) {
 export function sourceClassForStatus(status: AoiStatus): SourceClass {
   if (status === "official-vector") return "official_ems_vector";
   if (status === "official-monitor-points") return "official_ems_monitor_points";
-  if (status === "external-prediction") return "external_prediction_triage";
-  if (status === "imagery-only" || status === "no-official-product" || status === "external-gap") {
+  if (status === "external-prediction" || status === "external-gap") return "external_prediction_triage";
+  if (status === "imagery-only" || status === "no-official-product") {
     return "imagery_only_context";
   }
   if (status === "test-fixture") return "test_fixture";
