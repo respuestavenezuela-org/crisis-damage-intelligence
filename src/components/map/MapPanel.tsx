@@ -54,6 +54,7 @@ type Props = {
 type OlDamageFeature = Feature & { original?: DamageFeature };
 type RasterLayer = WebGLTileLayer | TileLayer<XYZ>;
 const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
+const PUBLIC_IMAGERY_MAX_ZOOM = 18;
 type InteriorGeometry = {
   getType: () => string;
   getCoordinates?: () => unknown;
@@ -350,7 +351,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
         attributions: "Tiles © Esri, Maxar, Earthstar Geographics, and the GIS User Community",
         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         crossOrigin: "anonymous",
-        maxZoom: 19,
+        maxZoom: PUBLIC_IMAGERY_MAX_ZOOM,
       }),
       visible: basemapRef.current === "aerial",
       zIndex: 0,
@@ -366,7 +367,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       target: nodeRef.current,
       layers: [base, aerialBase, vector, highlight, marker],
       overlays: [popup],
-      view: new View({ center: fromLonLat([aoi.center[1], aoi.center[0]]), zoom: 12 }),
+      view: new View({ center: fromLonLat([aoi.center[1], aoi.center[0]]), zoom: 12, maxZoom: PUBLIC_IMAGERY_MAX_ZOOM }),
       controls: [],
     });
     baseRef.current = base;
@@ -441,7 +442,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
             attributions: aoi.imagery?.approximateReference?.source ?? "Reference imagery",
             url: aoi.imagery?.approximateReference?.urlTemplate,
             crossOrigin: "anonymous",
-            maxZoom: 19,
+            maxZoom: PUBLIC_IMAGERY_MAX_ZOOM,
             transition: 0,
           }),
           opacity: 1,
