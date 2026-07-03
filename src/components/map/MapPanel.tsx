@@ -367,7 +367,7 @@ export default function MapPanel({ aoi, features, mode, opacity, filter, basemap
       target: nodeRef.current,
       layers: [base, aerialBase, vector, highlight, marker],
       overlays: [popup],
-      view: new View({ center: fromLonLat([aoi.center[1], aoi.center[0]]), zoom: 12, maxZoom: PUBLIC_IMAGERY_MAX_ZOOM }),
+      view: new View({ center: fromLonLat([aoi.center[1], aoi.center[0]]), zoom: 12 }),
       controls: [],
     });
     baseRef.current = base;
