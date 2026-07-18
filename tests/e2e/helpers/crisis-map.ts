@@ -33,6 +33,14 @@ export async function keepMapRastersLight(page: Page) {
   await page.route("https://vantor-opendata.s3.amazonaws.com/**", (route) => route.abort("blockedbyclient"));
 }
 
+export async function dismissFirstVisitThanks(page: Page) {
+  const modal = page.getByTestId("first-visit-thanks-modal");
+  if (await modal.waitFor({ state: "visible", timeout: 2000 }).then(() => true).catch(() => false)) {
+    await modal.getByRole("button", { name: "Entendido" }).click();
+    await expect(modal).toBeHidden();
+  }
+}
+
 export async function expectActiveDownloadReachable(scope: Page | Locator) {
   const download = scope.getByRole("link", { name: "CSV" }).first();
   await download.scrollIntoViewIfNeeded();

@@ -1,6 +1,7 @@
 "use client";
 
 import { type RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import Fuse from "fuse.js";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +12,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { trackAnalytics } from "@/lib/analytics";
 import { persistLang, readStoredLang } from "@/lib/lang";
+import { operationalSignalSectorLabel } from "@/lib/operational-signal-label";
 import { getOfflineBudgetBytes, precacheAoi } from "@/lib/offline-cache";
 import { cn } from "@/lib/utils";
 import { featureInspectionPoint } from "./map/feature-location";
@@ -73,6 +75,8 @@ const copy = {
     title: "Respuesta Venezuela",
     subtitle: "Geospatial damage triage for earthquake response",
     live: "Public read-only",
+    liteView: "Lite view",
+    opsConsole: "Operations console",
     language: "Language",
     aoi: "Go to affected area",
     quickStart: "Start with La Guaira · open Priority · tap red structures",
@@ -86,21 +90,22 @@ const copy = {
     fieldGuideVerify: "Verify before sending resources. AI is not perfect — red may mark structures that are still standing. Use before/after imagery and your judgment.",
     fieldGuideContact: "Contact: somos@respuestavenezuela.org",
     rankingNote: "Ranked by response value: official EMS destroyed/damaged first, then possible/MONIT01, VLM triage, and capped external predictions.",
-    operationalSignals: "Operational zones",
-    operationalSignalsTitle: "Aggregated operational signals",
-    operationalSignalsBrief: "Zones combine community reports, official EMS, MONIT01, and external gaps without exposing individual reports.",
+    operationalSignals: "Impact zones",
+    operationalSignalsTitle: "Impact zones to review",
+    operationalSignalsBrief: "Aggregated signals by evidence-derived impact envelope: official EMS geometry first, MONIT01/external gaps as triage, and community volume only in aggregate. No individual reports, names, phones, or exact addresses.",
     operationalSignalsWarning: "Triage guidance only. Not an official damage count.",
-    operationalSignalsLoading: "Loading aggregated operational zones...",
-    operationalSignalsError: "Aggregated operational zones are unavailable. Official EMS layers remain usable.",
-    showOperationalSignals: "Show zones",
-    selectedSignalZone: "Selected zone",
-    topSignalZones: "Top zones",
+    operationalSignalsLoading: "Loading impact zones...",
+    operationalSignalsError: "Impact zones are unavailable. Official EMS layers remain usable.",
+    showOperationalSignals: "Impact zones",
+    selectedSignalZone: "Selected impact zone",
+    topSignalZones: "Top impact zones",
     signalHigh: "High",
     signalMedium: "Medium",
     signalLow: "Context",
     communityReports: "Community",
     officialDamage: "Official EMS D/D",
     monitorPoints: "MONIT01 D/D",
+    monitorPossible: "MONIT01 possible",
     externalGap: "External gap",
     suppressed: "suppressed",
     generated: "Updated",
@@ -163,6 +168,25 @@ const copy = {
     evidence: "Evidence queue",
     operationalBrief: "Operational brief",
     recommendedAction: "Recommended action",
+    planningLens: "Planning lens",
+    planningCard: "Planning card",
+    lensPrioritize: "Prioritize",
+    lensReview: "Verify",
+    lensAccess: "Access",
+    priorityReason: "Priority reason",
+    trustLine: "Source confidence",
+    accessLine: "Access",
+    nextStep: "Next step",
+    accessSignalPresent: "Access reports present",
+    accessSignalMissing: "No access data published for this zone",
+    accessSignalWarning: "Not a cleared route. Verify access before moving teams.",
+    officialTrust: "Official EMS source of record",
+    monitorTrust: "MONIT01 operational leads - separate from official GRA counts",
+    triageTrust: "Triage only - verify before action",
+    imageryTrust: "Imagery context only - no official damage vector",
+    prioritizeAction: "Start with the highest official damage and impact-zone signals, then open field packets.",
+    reviewAction: "Use evidence and before/after context before committing people or supplies.",
+    accessAction: "Check impact-zone access signals and field reports before moving teams.",
     reviewPriority: "Review priority",
     fieldDownloads: "Field downloads",
     priorityReady: "priority rows ready",
@@ -222,6 +246,8 @@ const copy = {
     title: "Respuesta Venezuela",
     subtitle: "Triage geoespacial de daños para respuesta al terremoto",
     live: "Público solo lectura",
+    liteView: "Vista ligera",
+    opsConsole: "Consola operativa",
     language: "Idioma",
     aoi: "Ir a zona afectada",
     quickStart: "Empieza por La Guaira · abre Prioridad · toca estructuras rojas",
@@ -235,14 +261,14 @@ const copy = {
     fieldGuideVerify: "Verifica antes de enviar recursos. La IA no es perfecta — el rojo puede marcar estructuras que siguen en pie. Usa las imágenes antes/después y tu criterio en terreno.",
     fieldGuideContact: "Contacto: somos@respuestavenezuela.org",
     rankingNote: "Ordenado por valor de respuesta: primero destruido/dañado oficial EMS, luego posible/MONIT01, triage VLM y predicciones externas limitadas.",
-    operationalSignals: "Zonas operativas",
-    operationalSignalsTitle: "Señales operativas agregadas",
-    operationalSignalsBrief: "Las zonas cruzan reportes comunitarios, EMS oficial, MONIT01 y brechas externas sin exponer reportes individuales.",
+    operationalSignals: "Zonas de impacto",
+    operationalSignalsTitle: "Zonas de impacto para revisar",
+    operationalSignalsBrief: "Señales agregadas por envolvente de impacto derivada de evidencia: geometría EMS oficial primero, MONIT01/brechas externas como triage y comunidad solo agregada. Sin reportes individuales, nombres, teléfonos ni direcciones exactas.",
     operationalSignalsWarning: "Solo orientación de triage. No es conteo oficial de daño.",
-    operationalSignalsLoading: "Cargando zonas operativas agregadas...",
-    operationalSignalsError: "Las zonas operativas agregadas no están disponibles. Las capas EMS oficiales siguen usables.",
-    showOperationalSignals: "Mostrar zonas",
-    selectedSignalZone: "Zona seleccionada",
+    operationalSignalsLoading: "Cargando zonas de impacto...",
+    operationalSignalsError: "Las zonas de impacto no están disponibles. Las capas EMS oficiales siguen usables.",
+    showOperationalSignals: "Zonas",
+    selectedSignalZone: "Zona de impacto seleccionada",
     topSignalZones: "Zonas principales",
     signalHigh: "Alta",
     signalMedium: "Media",
@@ -250,6 +276,7 @@ const copy = {
     communityReports: "Comunidad",
     officialDamage: "EMS oficial D/D",
     monitorPoints: "MONIT01 D/D",
+    monitorPossible: "MONIT01 posibles",
     externalGap: "Brecha externa",
     suppressed: "suprimido",
     generated: "Actualizado",
@@ -312,6 +339,25 @@ const copy = {
     evidence: "Cola de evidencia",
     operationalBrief: "Brief operativo",
     recommendedAction: "Acción recomendada",
+    planningLens: "Lente de planificación",
+    planningCard: "Tarjeta de planificación",
+    lensPrioritize: "Priorizar",
+    lensReview: "Verificar",
+    lensAccess: "Acceso",
+    priorityReason: "Razón de prioridad",
+    trustLine: "Confianza de fuente",
+    accessLine: "Acceso",
+    nextStep: "Siguiente paso",
+    accessSignalPresent: "Reportes de acceso presentes",
+    accessSignalMissing: "Sin datos de acceso publicados para esta zona",
+    accessSignalWarning: "No es una ruta despejada. Verifica el acceso antes de mover equipos.",
+    officialTrust: "EMS oficial como fuente principal",
+    monitorTrust: "Pistas operativas MONIT01 - separadas de los conteos GRA oficiales",
+    triageTrust: "Solo triage - verificar antes de actuar",
+    imageryTrust: "Solo contexto visual - sin vector oficial de daños",
+    prioritizeAction: "Empieza por el mayor daño oficial y las señales por zona de impacto; luego abre paquetes de campo.",
+    reviewAction: "Usa evidencia y contexto antes/después antes de comprometer personas o insumos.",
+    accessAction: "Revisa señales de acceso por zona de impacto y reportes de campo antes de mover equipos.",
     reviewPriority: "Ver prioridad",
     fieldDownloads: "Descargas de campo",
     priorityReady: "filas de prioridad listas",
@@ -372,6 +418,7 @@ const copy = {
 type Filter = "all" | "severe" | "vlm";
 type Mode = "before" | "after";
 type Basemap = "map" | "aerial";
+type PlanningLens = "prioritize" | "review" | "access";
 type LoadStatus = "idle" | "loading" | "ready" | "error";
 type MobileSheet = "none" | "about" | "zona" | "capas";
 type MobilePanelSurface = Exclude<MobileSheet, "none"> | "inspector";
@@ -706,6 +753,24 @@ function operationalSignalValue(value: number | null | undefined, language: Lang
   return value === null || value === undefined ? copy[language].suppressed : String(value);
 }
 
+function signalRowSummary(p: OperationalSignalFeature["properties"], language: Language) {
+  const t = copy[language];
+  const parts: string[] = [];
+  if (p.communityReports !== null && p.communityReports !== undefined) {
+    parts.push(`${t.communityReports} ${p.communityReports}`);
+  }
+  if (p.emsOfficialDestroyedDamaged > 0 || p.emsOfficialPossible > 0) {
+    parts.push(`${t.officialDamage} ${p.emsOfficialDestroyedDamaged} · ${t.possible} ${p.emsOfficialPossible}`);
+  }
+  if (p.externalGapCandidates !== null && p.externalGapCandidates !== undefined) {
+    parts.push(`${t.externalGap} ${p.externalGapCandidates}`);
+  }
+  if (parts.length === 0 && (p.emsMonitorDestroyedDamaged > 0 || p.emsMonitorPossible > 0)) {
+    parts.push(`${t.monitorPoints} ${p.emsMonitorDestroyedDamaged} · ${t.monitorPossible} ${p.emsMonitorPossible}`);
+  }
+  return parts.join(" · ");
+}
+
 function signalCoordinatePairs(signal: OperationalSignalFeature) {
   const coords = signal.geometry.coordinates;
   if (signal.geometry.type === "Polygon") return coords.flat(1) as number[][];
@@ -742,6 +807,7 @@ function signalIntersectsAoi(signal: OperationalSignalFeature, aoi: AoiRecord, m
 }
 
 function signalContextLabel(signal: OperationalSignalFeature, language: Language) {
+  if (signal.properties.sectorLabel) return operationalSignalSectorLabel(signal.properties, language);
   const labels = signal.properties.aoiLabels;
   if (!labels.length) return language === "es" ? "Zona agregada" : "Aggregate zone";
   const joined = labels.join(" ");
@@ -766,6 +832,25 @@ function signalEventLabel(event: string, language: Language) {
   return labels[event]?.[language] ?? event.replaceAll("_", " ");
 }
 
+function accessEventCount(signals: OperationalSignalFeature[]) {
+  return signals.reduce((sum, signal) => sum + n(signal.properties.communityEvents.access), 0);
+}
+
+function planningLensAction(lens: PlanningLens, language: Language) {
+  const t = copy[language];
+  if (lens === "review") return t.reviewAction;
+  if (lens === "access") return t.accessAction;
+  return t.prioritizeAction;
+}
+
+function planningSourceTrust(aoi: AoiRecord, language: Language) {
+  const t = copy[language];
+  if (aoi.status === "external-prediction" || aoi.status === "external-gap") return t.triageTrust;
+  if (aoi.status === "imagery-only") return t.imageryTrust;
+  if (aoi.status === "official-monitor-points") return t.monitorTrust;
+  return t.officialTrust;
+}
+
 export default function OperationsConsole() {
   const [catalog, setCatalog] = useState<AoiCatalog | null>(null);
   const [catalogStatus, setCatalogStatus] = useState<LoadStatus>("loading");
@@ -775,6 +860,7 @@ export default function OperationsConsole() {
   const [filter, setFilter] = useState<Filter>("all");
   const [mode, setMode] = useState<Mode>("after");
   const [basemap, setBasemap] = useState<Basemap>("aerial");
+  const [planningLens, setPlanningLens] = useState<PlanningLens>("prioritize");
   const [showOperationalSignals, setShowOperationalSignals] = useState(true);
   const [opacity, setOpacity] = useState(52);
   const [selected, setSelected] = useState<DamageFeature | null>(null);
@@ -971,7 +1057,7 @@ export default function OperationsConsole() {
   const topOperationalSignals = useMemo(
     () => [...activeOperationalSignals]
       .sort((a, b) => b.properties.score - a.properties.score || a.properties.id.localeCompare(b.properties.id))
-      .slice(0, 8),
+      .slice(0, 6),
     [activeOperationalSignals],
   );
 
@@ -1305,6 +1391,11 @@ export default function OperationsConsole() {
     }
     setFilter(nextFilter);
   };
+  const changePlanningLens = (nextLens: PlanningLens) => {
+    trackFirstInteraction("planning_lens");
+    setPlanningLens(nextLens);
+    if (nextLens === "access") setShowOperationalSignals(true);
+  };
   const toggleOperationalSignals = () => {
     trackFirstInteraction("operational_signals");
     const nextVisible = !showOperationalSignals;
@@ -1330,6 +1421,7 @@ export default function OperationsConsole() {
     });
     setSelected(feature);
     setSelectedSignal(null);
+    setPlanningLens("review");
     setFilter("all");
     setMapControlsOpen(false);
     setInspectorOpen(false);
@@ -1337,10 +1429,13 @@ export default function OperationsConsole() {
     rightRailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
   const scrollToPriority = () => {
+    setPlanningLens("review");
     setInspectorOpen(true);
     requestAnimationFrame(() => {
-      const target = isSmallViewport() ? mobilePriorityRef.current : desktopPriorityRef.current;
-      target?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+      requestAnimationFrame(() => {
+        const target = isSmallViewport() ? mobilePriorityRef.current : desktopPriorityRef.current;
+        target?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+      });
     });
   };
   const adjustOpacity = (delta: number) => setOpacity((value) => Math.max(5, Math.min(90, value + delta)));
@@ -1377,10 +1472,15 @@ export default function OperationsConsole() {
   const selectedSummary = selected
     ? String(selected.properties.source_feature_id ?? selected.properties.id)
     : selectedSignal
-      ? `${t.operationalSignals}: ${selectedSignal.properties.id}`
+      ? `${t.operationalSignals}: ${signalContextLabel(selectedSignal, language)}`
     : prioritySummary;
   const priorityTitle = language === "es" ? "Prioridad" : "Priority";
   const activeCity = cityNavItems.find((item) => item.sourceIds.includes(activeId));
+  const planningLensOptions: Array<{ id: PlanningLens; label: string }> = [
+    { id: "prioritize", label: t.lensPrioritize },
+    { id: "review", label: t.lensReview },
+    { id: "access", label: t.lensAccess },
+  ];
   const searchItems = useMemo<SearchResultItem[]>(() => {
     const items: SearchResultItem[] = [];
     for (const item of cityNavItems) {
@@ -1598,6 +1698,7 @@ export default function OperationsConsole() {
                       if (!feature) return;
                       setSelected(feature);
                       setSelectedSignal(null);
+                      setPlanningLens("review");
                       setFilter("all");
                       setMapControlsOpen(false);
                       setInspectorOpen(false);
@@ -1687,161 +1788,210 @@ export default function OperationsConsole() {
       </details>
     </>
   );
-  const renderInspectorBody = (bodyId: string, prioritySectionRef: RefObject<HTMLElement | null>) => (
-    <div className="inspector-body" id={bodyId}>
-      <OperationalSignalsPanel
-        language={language}
-        signals={activeOperationalSignals}
-        topSignals={topOperationalSignals}
-        selectedSignal={selectedSignal}
-        summary={operationalSignalsSummary}
-        status={operationalSignalsStatus}
-        visible={showOperationalSignals}
-        onToggle={toggleOperationalSignals}
-        onSelect={(signal, rank) => {
-          trackFirstInteraction("operational_signal");
-          trackAnalytics("operational_signal_clicked", {
-            aoi_id: activeId,
-            rank,
-            signal_priority: signal.properties.priority,
-            signal_id: signal.properties.id,
-          });
-          setSelected(null);
-          setSelectedSignal(signal);
-          setShowOperationalSignals(true);
-          setMapControlsOpen(false);
-          setInspectorOpen(false);
-          setFocusToken((value) => value + 1);
-          rightRailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
-        }}
-      />
-      {active && !selected && (
-        <OperationalBrief
-          aoi={active}
-          language={language}
-          priorityCount={priorityFeatures.length}
-          onReviewPriority={scrollToPriority}
-        />
-      )}
-      <Card className="ops-card evidence-panel" size="sm">
-        <CardHeader>
-          <CardTitle>{t.evidence}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {selected ? (
-            <Evidence feature={selected} vlm={vlm[selected.properties.id]} language={language} onBackToPriority={scrollToPriority} onCopyCoords={copyFeatureCoords} />
-          ) : (
-            <p className="muted">{t.noSelection}</p>
-          )}
-        </CardContent>
-      </Card>
-      <Card className="ops-card priority-panel" ref={prioritySectionRef as RefObject<HTMLDivElement | null>} size="sm">
-        <CardHeader>
-          <CardTitle>{priorityTitle}</CardTitle>
-          <CardAction>
-            <Badge variant="outline">{priorityFeatures.length}</Badge>
-          </CardAction>
-        </CardHeader>
-        <CardContent className="priority-list">
-          <div className="priority-sort" role="group" aria-label={language === "es" ? "Ordenar prioridad" : "Sort priority"} data-testid="priority-sort">
-            {prioritySortOptions.map((option) => (
-              <Button
-                key={option.id}
-                type="button"
-                variant={prioritySort === option.id ? "default" : "outline"}
-                size="sm"
-                className={prioritySort === option.id ? "active" : ""}
-                aria-pressed={prioritySort === option.id}
-                data-testid={option.id === "default" ? "priority-sort-response-value" : option.id === "source" ? "priority-sort-source" : `priority-sort-${option.id}`}
-                onClick={() => setPrioritySort(option.id)}
-              >
-                {option.label}
-              </Button>
-            ))}
-          </div>
-          {priorityFeatures.length === 0 && (
-            <p className="muted">
-              {currentLayerState.damage === "error"
-                ? t.damageError
-                : currentLayerState.damage === "loading"
-                  ? t.loadingDamage
-                  : language === "es" ? "Sin filas de prioridad para este AOI." : "No priority rows for this AOI."}
-            </p>
-          )}
-          {priorityFeatures.map((feature, index) => {
-            const p = feature.properties;
-            const label = priorityFeatureLabel(feature, vlm[p.id], language, active?.status);
-            const mapsUrl = googleMapsUrlForFeature(feature);
-            return (
-              <div key={p.id} className={selected?.properties.id === p.id ? "priority-row-shell active" : "priority-row-shell"}>
-                <Button variant="outline" data-testid={`priority-${p.source_feature_id ?? p.id}`} aria-pressed={selected?.properties.id === p.id} className="priority-row" onClick={() => selectPriorityFeature(feature, index + 1)}>
-                  <b>{p.source_feature_id ?? p.id}</b>
-                  <span>{label} · {String(p.damage_score ?? p.damage_percent ?? "-")}</span>
-                </Button>
-                <div className="priority-actions">
-                  <Button type="button" variant="outline" size="sm" onClick={() => void copyFeatureCoords(feature)}>
-                    {t.copyCoords}
+  const renderInspectorBody = (bodyId: string, prioritySectionRef: RefObject<HTMLElement | null>) => {
+    const showPrioritize = planningLens === "prioritize";
+    const showReview = planningLens === "review";
+    const showAccess = planningLens === "access";
+    const showEvidence = showPrioritize || showReview || Boolean(selected);
+    const showPriority = showPrioritize || showReview;
+    const showSectors = showPrioritize || showAccess || Boolean(selectedSignal);
+
+    return (
+      <div className="inspector-body" id={bodyId}>
+        {active && (
+          <PlanningCard
+            aoi={active}
+            activeLabel={activeCity?.name[language] ?? active.name[language]}
+            language={language}
+            lens={planningLens}
+            lensOptions={planningLensOptions}
+            priorityCount={priorityFeatures.length}
+            signals={activeOperationalSignals}
+            onLensChange={changePlanningLens}
+          />
+        )}
+
+        {showSectors && (
+          <OperationalSignalsPanel
+            language={language}
+            signals={activeOperationalSignals}
+            topSignals={topOperationalSignals}
+            selectedSignal={selectedSignal}
+            summary={operationalSignalsSummary}
+            status={operationalSignalsStatus}
+            visible={showOperationalSignals}
+            onToggle={toggleOperationalSignals}
+            onSelect={(signal, rank) => {
+              trackFirstInteraction("operational_signal");
+              trackAnalytics("operational_signal_clicked", {
+                aoi_id: activeId,
+                rank,
+                signal_priority: signal.properties.priority,
+                signal_id: signal.properties.id,
+              });
+              setSelected(null);
+              setSelectedSignal(signal);
+              setShowOperationalSignals(true);
+              setMapControlsOpen(false);
+              setInspectorOpen(false);
+              setFocusToken((value) => value + 1);
+              rightRailRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          />
+        )}
+
+        {active && !selected && (showPrioritize || showAccess) && (
+          <OperationalBrief
+            aoi={active}
+            language={language}
+            priorityCount={priorityFeatures.length}
+            onReviewPriority={scrollToPriority}
+          />
+        )}
+
+        {showEvidence && (
+          <Card className="ops-card evidence-panel" size="sm">
+            <CardHeader>
+              <CardTitle>{t.evidence}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {selected ? (
+                <Evidence feature={selected} vlm={vlm[selected.properties.id]} language={language} onBackToPriority={scrollToPriority} onCopyCoords={copyFeatureCoords} />
+              ) : (
+                <p className="muted">{t.noSelection}</p>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {showPriority && (
+          <Card className="ops-card priority-panel" ref={prioritySectionRef as RefObject<HTMLDivElement | null>} size="sm">
+            <CardHeader>
+              <CardTitle>{priorityTitle}</CardTitle>
+              <CardAction>
+                <Badge variant="outline">{priorityFeatures.length}</Badge>
+              </CardAction>
+            </CardHeader>
+            <CardContent className="priority-list">
+              <div className="priority-sort" role="group" aria-label={language === "es" ? "Ordenar prioridad" : "Sort priority"} data-testid="priority-sort">
+                {prioritySortOptions.map((option) => (
+                  <Button
+                    key={option.id}
+                    type="button"
+                    variant={prioritySort === option.id ? "default" : "outline"}
+                    size="sm"
+                    className={prioritySort === option.id ? "active" : ""}
+                    aria-pressed={prioritySort === option.id}
+                    data-testid={option.id === "default" ? "priority-sort-response-value" : option.id === "source" ? "priority-sort-source" : `priority-sort-${option.id}`}
+                    onClick={() => setPrioritySort(option.id)}
+                  >
+                    {option.label}
                   </Button>
-                  {mapsUrl && (
-                    <a
-                      className={cn(buttonVariants({ variant: "outline", size: "sm" }), "priority-map-link")}
-                      href={mapsUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      data-analytics-event="google_maps_link_clicked"
-                      data-analytics-aoi={String(p.aoi_id ?? activeId)}
-                      data-analytics-surface="priority_row"
-                    >
-                      {t.maps}
-                    </a>
-                  )}
-                </div>
+                ))}
               </div>
-            );
-          })}
-        </CardContent>
-      </Card>
-      {active?.imagery && (
-        <ImageryCoveragePanel
-          aoi={active}
-          language={language}
-          hasAfterLayer={hasAfterImagery}
-          hasBeforeLayer={hasNativeBeforeImagery}
-          hasNativeBeforeLayer={hasNativeBeforeImagery}
-        />
-      )}
-      <Card className="ops-card confidence-panel" size="sm">
-        <CardHeader>
-          <CardTitle>{t.confidenceTitle}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>{t.confidenceText}</p>
-        </CardContent>
-      </Card>
-      {active && <VlmQualityPanel aoi={active} language={language} />}
-      <Card className="ops-card watch-panel" size="sm">
-        <CardHeader>
-          <CardTitle>{t.watchlist}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {catalog?.watchlist.map((item) => (
-            <div className="watch-row" key={item.id}>
-              <b>{item.name[language]}</b>
-              <span>{statusLabel(item.status)} · {item.expectedUtc}</span>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
-      <Card className="ops-card architecture" size="sm">
-        <CardHeader>
-          <CardTitle>{t.architecture}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>{t.architectureText}</p>
-        </CardContent>
-      </Card>
-    </div>
-  );
+              {priorityFeatures.length === 0 && (
+                <p className="muted">
+                  {currentLayerState.damage === "error"
+                    ? t.damageError
+                    : currentLayerState.damage === "loading"
+                      ? t.loadingDamage
+                      : language === "es" ? "Sin filas de prioridad para este AOI." : "No priority rows for this AOI."}
+                </p>
+              )}
+              {priorityFeatures.map((feature, index) => {
+                const p = feature.properties;
+                const label = priorityFeatureLabel(feature, vlm[p.id], language, active?.status);
+                const mapsUrl = googleMapsUrlForFeature(feature);
+                return (
+                  <div key={p.id} className={selected?.properties.id === p.id ? "priority-row-shell active" : "priority-row-shell"}>
+                    <Button variant="outline" data-testid={`priority-${p.source_feature_id ?? p.id}`} aria-pressed={selected?.properties.id === p.id} className="priority-row" onClick={() => selectPriorityFeature(feature, index + 1)}>
+                      <b>{p.source_feature_id ?? p.id}</b>
+                      <span>{label} · {String(p.damage_score ?? p.damage_percent ?? "-")}</span>
+                    </Button>
+                    <div className="priority-actions">
+                      <Button type="button" variant="outline" size="sm" onClick={() => void copyFeatureCoords(feature)}>
+                        {t.copyCoords}
+                      </Button>
+                      {mapsUrl && (
+                        <a
+                          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "priority-map-link")}
+                          href={mapsUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          data-analytics-event="google_maps_link_clicked"
+                          data-analytics-aoi={String(p.aoi_id ?? activeId)}
+                          data-analytics-surface="priority_row"
+                        >
+                          {t.maps}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </CardContent>
+          </Card>
+        )}
+
+        {showReview && active?.imagery && (
+          <ImageryCoveragePanel
+            aoi={active}
+            language={language}
+            hasAfterLayer={hasAfterImagery}
+            hasBeforeLayer={hasNativeBeforeImagery}
+            hasNativeBeforeLayer={hasNativeBeforeImagery}
+          />
+        )}
+
+        <details className="ops-details-card" open={showReview}>
+          <summary>{language === "es" ? "Confianza, imagen y VLM" : "Confidence, imagery, and VLM"}</summary>
+          {!showReview && active?.imagery && (
+            <ImageryCoveragePanel
+              aoi={active}
+              language={language}
+              hasAfterLayer={hasAfterImagery}
+              hasBeforeLayer={hasNativeBeforeImagery}
+              hasNativeBeforeLayer={hasNativeBeforeImagery}
+            />
+          )}
+          <Card className="ops-card confidence-panel" size="sm">
+            <CardHeader>
+              <CardTitle>{t.confidenceTitle}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>{t.confidenceText}</p>
+            </CardContent>
+          </Card>
+          {active && <VlmQualityPanel aoi={active} language={language} />}
+        </details>
+
+        <details className="ops-details-card">
+          <summary>{language === "es" ? "Más contexto operativo" : "More operational context"}</summary>
+          <Card className="ops-card watch-panel" size="sm">
+            <CardHeader>
+              <CardTitle>{t.watchlist}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {catalog?.watchlist.map((item) => (
+                <div className="watch-row" key={item.id}>
+                  <b>{item.name[language]}</b>
+                  <span>{statusLabel(item.status)} · {item.expectedUtc}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+          <Card className="ops-card architecture" size="sm">
+            <CardHeader>
+              <CardTitle>{t.architecture}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>{t.architectureText}</p>
+            </CardContent>
+          </Card>
+        </details>
+      </div>
+    );
+  };
 
   const offlinePct = offlineStatus.total > 0 ? Math.round((offlineStatus.done / offlineStatus.total) * 100) : 0;
   const offlineLabel = offlineStatus.ready
@@ -1901,6 +2051,7 @@ export default function OperationsConsole() {
           <Button variant={language === "es" ? "default" : "outline"} className={language === "es" ? "active" : ""} aria-pressed={language === "es"} onClick={() => changeLanguage("es")}>ES</Button>
           <Button variant={language === "en" ? "default" : "outline"} className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => changeLanguage("en")}>EN</Button>
         </div>
+        {!isMobileLayout && <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>}
         {!isMobileLayout && (
           <>
             {renderSearchPanel("desktop")}
@@ -1983,6 +2134,7 @@ export default function OperationsConsole() {
             opacity={opacity / 100}
             filter={filter}
             basemap={basemap}
+            language={language}
             vlm={vlm}
             operationalSignals={activeOperationalSignals}
             showOperationalSignals={showOperationalSignals && operationalSignalsStatus === "ready"}
@@ -2014,7 +2166,10 @@ export default function OperationsConsole() {
                 });
               }
               setSelected(feature);
-              if (feature) setSelectedSignal(null);
+              if (feature) {
+                setSelectedSignal(null);
+                setPlanningLens("review");
+              }
               setMapControlsOpen(false);
               setInspectorOpen(false);
             }}
@@ -2116,6 +2271,7 @@ export default function OperationsConsole() {
               <ScrollArea className="mobile-sheet-content mobile-sheet-scroller">
                 <div className="mobile-sheet-body">
                   <p>{t.subtitle}</p>
+                  <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
                   <p className="quick-start">{t.quickStart}</p>
                   <section className="field-guide">
                     <b>{t.fieldGuideTitle}</b>
@@ -2220,6 +2376,121 @@ export default function OperationsConsole() {
   );
 }
 
+function PlanningCard({
+  aoi,
+  activeLabel,
+  language,
+  lens,
+  lensOptions,
+  priorityCount,
+  signals,
+  onLensChange,
+}: {
+  aoi: AoiRecord;
+  activeLabel: string;
+  language: Language;
+  lens: PlanningLens;
+  lensOptions: Array<{ id: PlanningLens; label: string }>;
+  priorityCount: number;
+  signals: OperationalSignalFeature[];
+  onLensChange: (lens: PlanningLens) => void;
+}) {
+  const t = copy[language];
+  const confirmed = n(aoi.metrics.damagedConfirmed);
+  const possible = n(aoi.metrics.possibleDamage);
+  const monitorConfirmed = n(aoi.metrics.damagedConfirmedMonitor ?? aoi.metrics.monitorConfirmed);
+  const candidates = n(aoi.metrics.candidates ?? aoi.metrics.features);
+  const accessCount = accessEventCount(signals);
+  const fieldDownloads = buildDownloadGroups(aoi.downloads, language).find((group) => group.id === "field")?.items ?? [];
+  const priorityReason = confirmed || possible
+    ? `${confirmed} ${t.confirmed} · ${possible} ${t.possible}`
+    : candidates
+      ? `${candidates} ${t.candidates}`
+      : `${n(aoi.metrics.features)} ${t.features}`;
+  const accessText = accessCount
+    ? `${t.accessSignalPresent}: ${accessCount}`
+    : t.accessSignalMissing;
+  const lensLabel = lens === "review" ? t.lensReview : lens === "access" ? t.lensAccess : t.lensPrioritize;
+
+  return (
+    <Card className={`ops-card planning-card ${lens}`} size="sm" data-testid="planning-card">
+      <CardHeader>
+        <CardTitle>{t.planningCard}</CardTitle>
+        <CardAction>
+          <Badge variant="secondary">{lensLabel}</Badge>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <div className="planning-lens-heading">
+          <span>{t.planningLens}</span>
+          <Link className="lite-link" href="/lite">{t.liteView}</Link>
+        </div>
+        <div className="planning-lens-switch" role="group" aria-label={t.planningLens}>
+          {lensOptions.map((option) => (
+            <Button
+              key={option.id}
+              type="button"
+              variant={lens === option.id ? "default" : "outline"}
+              size="sm"
+              className={lens === option.id ? "active" : ""}
+              aria-pressed={lens === option.id}
+              data-testid={`planning-lens-${option.id}`}
+              onClick={() => onLensChange(option.id)}
+            >
+              {option.label}
+            </Button>
+          ))}
+        </div>
+        <div className="planning-card-title">
+          <b>{activeLabel}</b>
+          <span>{aoi.id}</span>
+        </div>
+        <div className="planning-card-grid">
+          <div>
+            <span>{t.priorityReason}</span>
+            <b>{priorityReason}</b>
+          </div>
+          <div>
+            <span>{t.trustLine}</span>
+            <b>{planningSourceTrust(aoi, language)}</b>
+          </div>
+          <div>
+            <span>{t.accessLine}</span>
+            <b>{accessText}</b>
+          </div>
+          <div>
+            <span>{t.reviewPriority}</span>
+            <b>{priorityCount}</b>
+          </div>
+        </div>
+        {monitorConfirmed > 0 && (
+          <p className="muted planning-card-note">MONIT01: {monitorConfirmed} {t.confirmed}</p>
+        )}
+        <div className="brief-callout planning-action">
+          <small>{t.nextStep}</small>
+          <p>{planningLensAction(lens, language)}</p>
+        </div>
+        <p className="muted planning-card-note">{t.accessSignalWarning}</p>
+      </CardContent>
+      <CardContent className="brief-actions">
+        {fieldDownloads.slice(0, 2).map((item) => (
+          <a
+            key={item.kind}
+            className={cn(buttonVariants({ variant: "outline" }), "text-action")}
+            href={item.href}
+            data-analytics-event="data_download_clicked"
+            data-analytics-aoi={aoi.id}
+            data-analytics-format={item.kind.toLowerCase()}
+            data-analytics-surface="planning_card"
+          >
+            {item.label}
+          </a>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
+
 function OperationalSignalsPanel({
   language,
   signals,
@@ -2245,7 +2516,8 @@ function OperationalSignalsPanel({
   const selected = selectedSignal?.properties;
   const top = topSignals.slice(0, 6);
   const highSignalCount = signals.filter((signal) => signal.properties.priority === "high").length;
-  const communityRecordCount = (summary?.kobo.records ?? 0) + (summary?.whatsapp?.records ?? 0);
+  const communityRecordCount = summary?.sectorAssignment?.["assigned:community"] ??
+    ((summary?.kobo.mappedRecords ?? 0) + (summary?.whatsapp?.mappedRecords ?? 0));
   return (
     <Card className="ops-card operational-signals-panel" size="sm">
       <CardHeader>
@@ -2279,8 +2551,8 @@ function OperationalSignalsPanel({
         {selected && (
           <section className="selected-signal" aria-label={t.selectedSignalZone}>
             <div className={`signal-priority ${selected.priority}`}>{operationalSignalLabel(selected.priority, language)}</div>
-            <h3>{selected.id}</h3>
-            <p>{signalContextLabel(selectedSignal as OperationalSignalFeature, language)}</p>
+            <h3>{signalContextLabel(selectedSignal as OperationalSignalFeature, language)}</h3>
+            <p>{selected.sectorLabel ? selected.id : signalContextLabel(selectedSignal as OperationalSignalFeature, language)}</p>
             <div className="signal-facts">
               <div><span>{t.communityReports}</span><b>{operationalSignalValue(selected.communityReports, language)}</b></div>
               <div><span>{t.officialDamage}</span><b>{selected.emsOfficialDestroyedDamaged}</b></div>
@@ -2316,9 +2588,9 @@ function OperationalSignalsPanel({
                   onClick={() => onSelect(signal, index + 1)}
                 >
                   <span className={`signal-dot ${p.priority}`} aria-hidden="true" />
-                  <b>{p.id}</b>
+                  <b>{signalContextLabel(signal, language)}</b>
                   <small>
-                    {operationalSignalLabel(p.priority, language)} · {t.communityReports} {operationalSignalValue(p.communityReports, language)} · {t.officialDamage} {p.emsOfficialDestroyedDamaged}
+                    {operationalSignalLabel(p.priority, language)} · {signalRowSummary(p, language)}
                   </small>
                 </Button>
               );

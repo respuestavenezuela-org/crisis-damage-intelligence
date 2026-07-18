@@ -15,11 +15,13 @@ import GeoTIFF from "ol/source/GeoTIFF.js";
 import VectorSource from "ol/source/Vector.js";
 import { Fill, Stroke, Style } from "ol/style.js";
 import CircleStyle from "ol/style/Circle.js";
+import Text from "ol/style/Text.js";
 import { fromLonLat, toLonLat } from "ol/proj.js";
 import { boundingExtent, getCenter } from "ol/extent.js";
 import "ol/ol.css";
-import type { AoiRecord, DamageFeature, OperationalSignalFeature, VlmRecord } from "../types";
+import type { AoiRecord, DamageFeature, Language, OperationalSignalFeature, VlmRecord } from "../types";
 import { featureInspectionPoint } from "./feature-location";
+import { operationalSignalSectorLabel } from "@/lib/operational-signal-label";
 
 declare global {
   interface Window {
@@ -45,6 +47,7 @@ type Props = {
   opacity: number;
   filter: "all" | "severe" | "vlm";
   basemap: "map" | "aerial";
+  language: Language;
   vlm: Record<string, VlmRecord>;
   operationalSignals: OperationalSignalFeature[];
   showOperationalSignals: boolean;
@@ -63,6 +66,8 @@ type OlDamageFeature = Feature & { original?: DamageFeature };
 type OlSignalFeature = Feature & { signal?: OperationalSignalFeature };
 type RasterLayer = WebGLTileLayer | TileLayer<XYZ>;
 const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
+// Intentional origin/main policy (3e97c398, b4c6d7ac): stop public source requests at z18 but permit local overzoom.
+const PUBLIC_IMAGERY_MAX_ZOOM = 18;
 type InteriorGeometry = {
   getType: () => string;
   getCoordinates?: () => unknown;
@@ -134,6 +139,7 @@ export default function MapPanel({
   opacity,
   filter,
   basemap,
+  language,
   vlm,
   operationalSignals,
   showOperationalSignals,
@@ -254,13 +260,24 @@ export default function MapPanel({
 
   const signalStyleFor = useCallback((feature: OlSignalFeature) => {
     const priority = feature.signal?.properties.priority ?? "low";
-    const color = priority === "high" ? "#4c3b82" : priority === "medium" ? "#c77700" : "#42635b";
-    const alpha = priority === "high" ? 0.34 : priority === "medium" ? 0.28 : 0.18;
+    const color = priority === "high" ? "#c43a31" : priority === "medium" ? "#c97b00" : "#2f7664";
+    const label = priority === "high"
+      ? (language === "es" ? "Alta" : "High")
+      : priority === "medium"
+        ? (language === "es" ? "Media" : "Med")
+        : (language === "es" ? "Ctx" : "Ctx");
     return new Style({
-      stroke: new Stroke({ color: hexToRgba(color, 0.92), width: priority === "high" ? 2.5 : 1.5 }),
-      fill: new Fill({ color: hexToRgba(color, alpha) }),
+      stroke: new Stroke({ color: hexToRgba(color, priority === "high" ? 0.95 : 0.82), width: priority === "high" ? 2.5 : 1.7 }),
+      fill: new Fill({ color: hexToRgba(color, priority === "high" ? 0.24 : priority === "medium" ? 0.18 : 0.12) }),
+      text: new Text({
+        text: label,
+        overflow: true,
+        font: "700 12px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        fill: new Fill({ color: "#111111" }),
+        stroke: new Stroke({ color: "rgba(255,253,248,0.9)", width: 3 }),
+      }),
     });
-  }, []);
+  }, [language]);
 
   const styleFor = useCallback((feature: OlDamageFeature) => {
     const original = feature.original;
@@ -368,27 +385,28 @@ export default function MapPanel({
     const geometry = olSignal.getGeometry();
     if (!geometry) return;
     map.getView().fit(geometry.getExtent(), { padding: [80, 80, 80, 80], duration: 0, maxZoom: 13 });
-    const [lng, lat] = toLonLat(getCenter(geometry.getExtent()));
+    const center = getCenter(geometry.getExtent());
+    const [lng, lat] = toLonLat(center);
     highlightRef.current?.getSource()?.clear();
     const highlightFeature = olSignal.clone() as OlSignalFeature;
     highlightFeature.signal = signal;
     highlightRef.current?.getSource()?.addFeature(highlightFeature);
     highlightRef.current?.setStyle(new Style({
-      stroke: new Stroke({ color: "#ffffff", width: 5 }),
-      fill: new Fill({ color: "rgba(255,255,255,0.10)" }),
+      stroke: new Stroke({ color: "#fffdf8", width: 4 }),
+      fill: new Fill({ color: "rgba(255,253,248,0.04)" }),
     }));
     markerRef.current?.getSource()?.clear();
     popupOverlayRef.current?.setPosition(undefined);
     if (popupRef.current) {
-      popupRef.current.innerHTML = signalPopupHtml(signal.properties);
-      popupOverlayRef.current?.setPosition(getCenter(geometry.getExtent()));
+      popupRef.current.innerHTML = signalPopupHtml(signal.properties, language);
+      popupOverlayRef.current?.setPosition(center);
     }
     nodeRef.current?.setAttribute("data-focused-id", "");
     nodeRef.current?.setAttribute("data-focused-internal-id", "");
     nodeRef.current?.setAttribute("data-focused-signal-id", id);
     nodeRef.current?.setAttribute("data-map-center", `${lat.toFixed(7)},${lng.toFixed(7)}`);
     nodeRef.current?.setAttribute("data-map-zoom", String(map.getView().getZoom()));
-  }, []);
+  }, [language]);
 
   const renderSignals = useCallback(() => {
     const vector = signalRef.current;
@@ -510,7 +528,7 @@ export default function MapPanel({
         attributions: "Tiles © Esri, Maxar, Earthstar Geographics, and the GIS User Community",
         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         crossOrigin: "anonymous",
-        maxZoom: 19,
+        maxZoom: PUBLIC_IMAGERY_MAX_ZOOM,
       }),
       visible: basemapRef.current === "aerial",
       zIndex: 0,
@@ -616,7 +634,7 @@ export default function MapPanel({
             attributions: aoi.imagery?.approximateReference?.source ?? "Reference imagery",
             url: aoi.imagery?.approximateReference?.urlTemplate,
             crossOrigin: "anonymous",
-            maxZoom: 19,
+            maxZoom: PUBLIC_IMAGERY_MAX_ZOOM,
             transition: 0,
           }),
           opacity: 1,
@@ -686,7 +704,7 @@ export default function MapPanel({
       ref={nodeRef}
       className="map-node"
       role="region"
-      aria-label={`Mapa operacional de ${aoi.name.es}`}
+      aria-label={language === "es" ? `Mapa operacional de ${aoi.name.es}` : `Operational map of ${aoi.name.en}`}
       data-filter={filter}
       data-mode={mode}
       data-basemap={basemap}
@@ -722,24 +740,31 @@ function googleMapsUrl(feature: DamageFeature) {
   return `https://www.google.com/maps/search/?api=1&query=${point.lat},${point.lon}`;
 }
 
-function formatSignalValue(value: number | null | undefined) {
-  return value === null || value === undefined ? "suppressed" : String(value);
+function formatSignalValue(value: number | null | undefined, language: Language) {
+  return value === null || value === undefined
+    ? (language === "es" ? "suprimido" : "suppressed")
+    : String(value);
 }
 
-function signalPriorityLabel(priority: OperationalSignalFeature["properties"]["priority"]) {
-  if (priority === "high") return "High review priority";
-  if (priority === "medium") return "Medium review priority";
-  return "Context signal";
+function signalPriorityLabel(priority: OperationalSignalFeature["properties"]["priority"], language: Language) {
+  if (priority === "high") return language === "es" ? "Prioridad alta" : "High priority";
+  if (priority === "medium") return language === "es" ? "Prioridad media" : "Medium priority";
+  return language === "es" ? "Señal de contexto" : "Context signal";
 }
 
-function signalPopupHtml(p: OperationalSignalFeature["properties"]) {
+function signalPopupHtml(p: OperationalSignalFeature["properties"], language: Language) {
+  const community = language === "es" ? "Comunidad" : "Community";
+  const externalGap = language === "es" ? "Brecha externa" : "External gap";
+  const note = language === "es"
+    ? "Envolvente de impacto derivada de evidencia · triage"
+    : "Evidence-derived impact envelope · triage";
   return (
-    `<strong>${escapeHtml(p.id)}</strong>` +
-    `<span>${escapeHtml(signalPriorityLabel(p.priority))}</span>` +
-    `<span>Community: ${escapeHtml(formatSignalValue(p.communityReports))}</span>` +
+    `<strong>${escapeHtml(operationalSignalSectorLabel(p, language))}</strong>` +
+    `<span>${escapeHtml(signalPriorityLabel(p.priority, language))}</span>` +
+    `<span>${community}: ${escapeHtml(formatSignalValue(p.communityReports, language))}</span>` +
     `<span>EMS D/D: ${p.emsOfficialDestroyedDamaged}</span>` +
-    `<span>External gap: ${escapeHtml(formatSignalValue(p.externalGapCandidates))}</span>` +
-    `<small>Aggregate zone only · triage guidance</small>`
+    `<span>${externalGap}: ${escapeHtml(formatSignalValue(p.externalGapCandidates, language))}</span>` +
+    `<small>${note}</small>`
   );
 }
 

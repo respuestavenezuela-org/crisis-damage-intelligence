@@ -1,13 +1,13 @@
 # Remote Asset Validation
 
-- Generated UTC: `2026-07-01T18:02:56.530848+00:00`
+- Generated UTC: `2026-07-18T22:57:46.774223+00:00`
 - Remote base: `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev`
 - Result: `pass`
 
 ## Package Pressure
 
-- `public/data`: 74772 files, 288.0 MB
-- `public/data/chips`: 834 files, 88.5 MB
+- `public/data`: 74619 files, 267.0 MB
+- `public/data/chips`: 681 files, 67.3 MB
 - `public/data/tiles`: 73837 files, 186.0 MB
 
 ### Largest Bundled Files

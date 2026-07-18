@@ -132,10 +132,14 @@ export type OperationalSignalFeature = {
   geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon;
   properties: {
     id: string;
+    sectorId?: string | null;
+    sectorLabel?: string | null;
+    sectorRow?: number | null;
+    sectorCol?: number | null;
     priority: OperationalSignalPriority;
     score: number;
     communityReports: number | null;
-    communityReportsSuppressed: boolean;
+    communityReportsSuppressed: boolean | null;
     communityEvents: Record<string, number>;
     latestSubmissionDate: string | null;
     emsOfficialDestroyedDamaged: number;
@@ -147,6 +151,11 @@ export type OperationalSignalFeature = {
     aoiIds: string[];
     aoiLabels: string[];
     reasons: string[];
+    geometryMethod?: string;
+    geometrySource?: "official-ems" | "monit01" | "external-gap" | "external-prediction" | "community-aggregate" | string;
+    overlapPolicy?: string;
+    isOfficialDamageBoundary?: boolean;
+    impactEnvelopeBufferDegrees?: number;
     publicNote: string;
   };
 };
@@ -159,9 +168,23 @@ export type OperationalSignalsSummary = {
     rawWhatsappWritten: boolean;
     exactReportPointsWritten: boolean;
     freeTextWritten: boolean;
+    minCommunityReportsPerVisibleZone?: number;
+    minDistinctSubmissionMinutesPerVisibleZone?: number;
     minCommunityReportsPerVisibleCell: number;
     minDistinctSubmissionMinutesPerVisibleCell: number;
-    gridDegrees: number;
+    geometryMethod?: string;
+    impactOverlapPolicy?: string;
+    sectorTargetDegrees?: number;
+    sectorMinColumns?: number;
+    sectorMaxColumns?: number;
+    sectorMinRows?: number;
+    sectorMaxRows?: number;
+    sectorAssignmentMarginDegrees?: number;
+    impactEnvelopeBufferDegrees?: number;
+    impactEnvelopeInsetDegrees?: number;
+    impactEnvelopeSimplifyDegrees?: number;
+    impactEnvelopeMinAreaDegrees?: number;
+    impactAssignmentMarginDegrees?: number;
   };
   kobo: {
     source: string;
@@ -185,6 +208,8 @@ export type OperationalSignalsSummary = {
     outsideOfficialGraRows: number;
   };
   visibleCells: number;
+  visibleZones?: number;
+  sectorAssignment?: Record<string, number>;
   priorityCounts: Partial<Record<OperationalSignalPriority, number>>;
   warning: string;
 };

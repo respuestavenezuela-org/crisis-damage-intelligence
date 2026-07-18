@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { LANG_EVENT, readStoredLang } from "@/lib/lang";
+import { FIRST_VISIT_THANKS_EVENT, isFirstVisitThanksOpen } from "@/lib/prompt-coordination";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -67,14 +68,16 @@ export default function InstallPrompt() {
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null);
   const [mode, setMode] = useState<Mode | null>(null);
   const [lang, setLang] = useState<Lang>("es");
+  const [thanksOpen, setThanksOpen] = useState(false);
   const barRef = useRef<HTMLDivElement | null>(null);
-  const visible = mode !== null;
+  const visible = mode !== null && !thanksOpen;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const canPrompt = !isStandalone() && !dismissedRecently();
     const initialStateFrame = requestAnimationFrame(() => {
       setLang(readStoredLang());
+      setThanksOpen(isFirstVisitThanksOpen());
       setMode(canPrompt ? initialMode() : null);
     });
     if (!canPrompt) return () => cancelAnimationFrame(initialStateFrame);
@@ -92,15 +95,20 @@ export default function InstallPrompt() {
       const next = (event as CustomEvent).detail;
       if (next === "es" || next === "en") setLang(next);
     };
+    const onFirstVisitThanks = (event: Event) => {
+      setThanksOpen(Boolean((event as CustomEvent).detail));
+    };
 
     window.addEventListener("beforeinstallprompt", onBeforeInstall);
     window.addEventListener("appinstalled", onInstalled);
     window.addEventListener(LANG_EVENT, onLangChange);
+    window.addEventListener(FIRST_VISIT_THANKS_EVENT, onFirstVisitThanks);
     return () => {
       cancelAnimationFrame(initialStateFrame);
       window.removeEventListener("beforeinstallprompt", onBeforeInstall);
       window.removeEventListener("appinstalled", onInstalled);
       window.removeEventListener(LANG_EVENT, onLangChange);
+      window.removeEventListener(FIRST_VISIT_THANKS_EVENT, onFirstVisitThanks);
     };
   }, []);
 

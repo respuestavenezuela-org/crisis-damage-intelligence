@@ -10,12 +10,47 @@ const COPY: Record<Lang, { msg: string; action: string; aria: string }> = {
   en: { msg: "New version available", action: "Update", aria: "Update available" },
 };
 
+const ENABLE_DEV_SW = process.env.NEXT_PUBLIC_ENABLE_DEV_SW === "1";
+const DEV_SW_CLEARED_KEY = "rv-dev-sw-cleared";
+
+function shouldRegisterServiceWorker() {
+  return process.env.NODE_ENV === "production" || ENABLE_DEV_SW;
+}
+
+function isLocalPreviewHost() {
+  if (typeof window === "undefined") return false;
+  const host = window.location.hostname;
+  return host === "localhost" || host === "127.0.0.1" || host.endsWith(".localhost");
+}
+
+async function clearDevServiceWorkerState() {
+  if (typeof navigator === "undefined" || !("serviceWorker" in navigator) || !isLocalPreviewHost()) return;
+
+  const wasControlled = Boolean(navigator.serviceWorker.controller);
+  const registrations = await navigator.serviceWorker.getRegistrations();
+  await Promise.all(registrations.map((registration) => registration.unregister()));
+
+  if (typeof caches !== "undefined") {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter((key) => key.startsWith("rv-")).map((key) => caches.delete(key)));
+  }
+
+  if (wasControlled && !sessionStorage.getItem(DEV_SW_CLEARED_KEY)) {
+    sessionStorage.setItem(DEV_SW_CLEARED_KEY, "1");
+    window.location.reload();
+  }
+}
+
 export default function ServiceWorkerRegister() {
   const [waiting, setWaiting] = useState<ServiceWorker | null>(null);
   const [lang, setLang] = useState<Lang>(() => readStoredLang());
 
   useEffect(() => {
     if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
+    if (!shouldRegisterServiceWorker()) {
+      clearDevServiceWorkerState().catch((error) => console.warn("Dev service worker cleanup failed", error));
+      return;
+    }
 
     const onLang = (event: Event) => {
       const next = (event as CustomEvent).detail;
@@ -79,6 +114,7 @@ export default function ServiceWorkerRegister() {
       navigator.serviceWorker
         .register("/sw.js", { updateViaCache: "none" })
         .then((reg) => {
+          if (!reg) return;
           watch(reg);
           reg.update().catch(() => {});
           updateTimer = setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);

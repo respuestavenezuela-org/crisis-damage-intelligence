@@ -3,6 +3,7 @@ import {
   DEFAULT_AOI_ID,
   DEFAULT_CITY_LABEL,
   DEFAULT_PRIORITY_FEATURE_ID,
+  dismissFirstVisitThanks,
   expectMobileDockUsable,
   focusedMapState,
   globalSearchInput,
@@ -28,6 +29,7 @@ async function loadMap(page: Page, viewport = { width: 390, height: 844 }) {
   await keepMapRastersLight(page);
   await page.setViewportSize(viewport);
   await page.goto("/");
+  await dismissFirstVisitThanks(page);
   await expect(page.getByRole("heading", { name: "Respuesta Venezuela" })).toBeVisible();
   await expect(page.getByRole("region", { name: /Mapa operacional de/i })).toBeVisible();
 }

@@ -1,6 +1,7 @@
 import { expect, type Page, test } from "@playwright/test";
 import {
   closeSheet,
+  dismissFirstVisitThanks,
   expectActiveDownloadReachable,
   keepMapRastersLight,
   openMobileSheet,
@@ -84,6 +85,7 @@ test("mobile critical AOI workflow stays usable", async ({ page }) => {
   });
 
   await page.goto("/");
+  await dismissFirstVisitThanks(page);
 
   await expect(page.getByRole("heading", { name: "Respuesta Venezuela" })).toBeVisible();
   await expect(page.getByTestId("mobile-zona-toggle")).toContainText("La Guaira");
@@ -144,6 +146,117 @@ test("mobile critical AOI workflow stays usable", async ({ page }) => {
   await expect(page.getByTestId("mobile-inspector-toggle")).toContainText(/ems_\d+/);
 });
 
+test("first visit thanks modal dismisses once per browser", async ({ page }) => {
+  await keepMapRastersLight(page);
+  await page.goto("/");
+
+  const modal = page.getByTestId("first-visit-thanks-modal");
+  await expect(modal).toBeVisible();
+  await expect(modal).toContainText("Gracias por ayudar a las comunidades afectadas.");
+  await expect(page.locator(".install-prompt")).toHaveCount(0);
+  await modal.getByRole("button", { name: "Entendido" }).click();
+  await expect(modal).toBeHidden();
+  await expect(page.locator(".install-prompt")).toBeVisible();
+
+  await page.reload();
+  await expect(page.getByTestId("first-visit-thanks-modal")).toHaveCount(0);
+});
+
+test("first visit and lite view honor a stored English preference", async ({ page }) => {
+  await page.addInitScript(() => window.localStorage.setItem("rv-lang", "en"));
+  await keepMapRastersLight(page);
+  await page.goto("/");
+
+  const modal = page.getByTestId("first-visit-thanks-modal");
+  await expect(modal).toContainText("Thank you for helping affected communities.");
+  await modal.getByRole("button", { name: "Got it" }).click();
+
+  await page.goto("/lite");
+  await expect(page.getByText("Lite view").first()).toBeVisible();
+  await expect(page.getByRole("region", { name: "Public priority" })).toBeVisible();
+});
+
+test("lite view falls back to Spanish when browser storage is blocked", async ({ page }) => {
+  await page.addInitScript(() => {
+    Storage.prototype.getItem = () => {
+      throw new DOMException("Storage blocked", "SecurityError");
+    };
+    Storage.prototype.setItem = () => {
+      throw new DOMException("Storage blocked", "SecurityError");
+    };
+  });
+  await page.goto("/lite");
+
+  await expect(page.getByText("Vista ligera").first()).toBeVisible();
+  await expect(page.getByRole("region", { name: "Prioridad pública" })).toBeVisible();
+});
+
+test("desktop map owns the viewport between rails and localizes impact zones", async ({ page }) => {
+  await keepMapRastersLight(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await dismissFirstVisitThanks(page);
+
+  const mapBox = await page.locator(".map-node").boundingBox();
+  expect(mapBox).not.toBeNull();
+  expect(mapBox?.x).toBeGreaterThanOrEqual(330);
+  expect((mapBox?.x ?? 0) + (mapBox?.width ?? 0)).toBeLessThanOrEqual(1440 - 360);
+
+  await page.getByRole("button", { name: "EN", exact: true }).click();
+  await expect(page.getByTestId("right-rail")).toContainText("Impact zone");
+  await expect(page.getByTestId("right-rail")).not.toContainText("Zona de impacto");
+});
+
+test("planning lenses keep operations focused without hiding core actions", async ({ page }) => {
+  await keepMapRastersLight(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await dismissFirstVisitThanks(page);
+
+  await page.getByTestId("mobile-inspector-toggle").click();
+  const inspector = page.getByTestId("mobile-inspector-sheet");
+  await expect(inspector).toBeVisible();
+  await expect(inspector.getByTestId("planning-card")).toBeVisible();
+  await expect(inspector.getByTestId("planning-lens-prioritize")).toHaveAttribute("aria-pressed", "true");
+  await expect(inspector).toContainText("Brief operativo");
+  await expect(inspector.getByRole("button", { name: "Ver prioridad" }).first()).toBeVisible();
+
+  const reviewLens = inspector.getByTestId("planning-lens-review");
+  await reviewLens.scrollIntoViewIfNeeded();
+  await reviewLens.click();
+  await expect(reviewLens).toHaveAttribute("aria-pressed", "true");
+  await expect(inspector).toContainText("Cola de evidencia");
+  await expect(inspector).toContainText("Confianza");
+
+  const accessLens = inspector.getByTestId("planning-lens-access");
+  await accessLens.scrollIntoViewIfNeeded();
+  await accessLens.click();
+  await expect(accessLens).toHaveAttribute("aria-pressed", "true");
+  await expect(inspector).toContainText("No es una ruta despejada");
+  await expect(inspector).toContainText("Zonas");
+});
+
+test("lite view stays catalog-first and links back to operations", async ({ page }) => {
+  const loadedHeavyUrls: string[] = [];
+  page.on("request", (request) => {
+    const url = request.url();
+    if (url.includes("/data/aoi/") || url.includes("/data/chips/") || url.includes("/data/tiles/")) {
+      loadedHeavyUrls.push(url);
+    }
+  });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/lite");
+
+  await expect(page.getByRole("heading", { name: "Respuesta Venezuela" })).toBeVisible();
+  await expect(page.getByText("Vista ligera").first()).toBeVisible();
+  await expect(page.getByRole("region", { name: "Prioridad pública" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /La Guaira/i }).first()).toBeVisible();
+  await expect(page.getByText(/1004 MONIT01/).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Consola operativa" }).first()).toHaveAttribute("href", "/");
+  expect(loadedHeavyUrls).toEqual([]);
+});
+
 test("analytics friction events stay coarse and private", async ({ page }) => {
   await captureAnalyticsEvents(page);
   await keepMapRastersLight(page);
@@ -160,6 +273,7 @@ test("analytics friction events stay coarse and private", async ({ page }) => {
   });
 
   await page.goto("/");
+  await dismissFirstVisitThanks(page);
 
   await waitForAnalyticsEvent(page, "app_loaded");
   await expect(page.locator(".map-node")).toHaveAttribute("data-visible-features", "1");
@@ -210,6 +324,7 @@ for (const viewport of [
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
 
     await page.goto("/");
+    await dismissFirstVisitThanks(page);
 
     await expect(page.getByRole("heading", { name: "Respuesta Venezuela" })).toBeVisible();
     await expect(page.getByRole("region", { name: /Mapa operacional de/i })).toBeVisible();
@@ -278,6 +393,7 @@ test("mobile shell keeps downloads and AOI metadata visible when active damage a
   });
 
   await page.goto("/");
+  await dismissFirstVisitThanks(page);
 
   await expect(page.getByTestId("mobile-zona-toggle")).toBeVisible();
   const dataStatus = page.locator(".data-status");

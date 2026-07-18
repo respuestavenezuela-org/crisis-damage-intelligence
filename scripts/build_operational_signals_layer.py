@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-"""Build public aggregate operational-signal cells.
+"""Build public aggregate operational-signal zones.
 
 The output is safe-by-design for the public app: no raw Kobo rows, WhatsApp
 messages, exact report points, report text, links, names, phones, photos, or
-addresses are written. Community reports are only shown when a grid cell passes
-minimum k-anonymity and distinct-timestamp thresholds.
+addresses are written. Community reports are only shown when an aggregate zone
+passes minimum k-anonymity and distinct-timestamp thresholds.
 """
 
 from __future__ import annotations
 
 import csv
 import json
-import math
 import os
 import re
 from collections import Counter
@@ -21,7 +20,8 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from shapely.geometry import shape
+from shapely.geometry import Point, mapping, shape
+from shapely.ops import unary_union
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,10 +30,44 @@ CATALOG = ROOT / "public/data/catalog.json"
 EXTERNAL_DETAIL = ROOT / "ops/data_acquisition_plan/external_prediction_official_overlap_detail.csv"
 OUT_DIR = ROOT / "public/data/operational-signals"
 WHATSAPP_CHAT_ENV = "OPERATIONAL_SIGNALS_WHATSAPP_CHAT"
-GRID_DEGREES = 0.02
-MIN_COMMUNITY_REPORTS = 5
-MIN_DISTINCT_SUBMISSION_MINUTES = 3
+KOBO_MAX_PAGES = 100
+IMPACT_ENVELOPE_BUFFER_DEGREES = 0.0035
+IMPACT_ENVELOPE_INSET_DEGREES = 0.0012
+IMPACT_ENVELOPE_SIMPLIFY_DEGREES = 0.00035
+IMPACT_ENVELOPE_MIN_AREA_DEGREES = 0.000002
+IMPACT_BASE_STATUSES = {
+    "official-vector",
+    "official-monitor-points",
+    "external-gap",
+    "external-prediction",
+}
+IMPACT_OVERLAP_POLICY = "source_precedence_non_overlapping"
+IMPACT_SOURCE_PRECEDENCE = {
+    "official-ems": 0,
+    "monit01": 1,
+    "external-gap": 2,
+    "external-prediction": 2,
+    "community-aggregate": 3,
+}
+MIN_COMMUNITY_REPORTS = 8
+MIN_DISTINCT_SUBMISSION_MINUTES = 5
 MIN_EXTERNAL_GAP_CANDIDATES = 20
+OFFICIAL_IMPACT_NOTE = (
+    "Operational impact envelope derived from official EMS damaged/possibly damaged feature geometry. "
+    "Counts remain EMS source-of-record; community, MONIT01, VLM, and external signals are triage only."
+)
+MONITOR_IMPACT_NOTE = (
+    "Operational impact envelope derived from MONIT01 point geometry where no matching GRA vector envelope is published. "
+    "MONIT01 remains separate from official GRA counts."
+)
+EXTERNAL_IMPACT_NOTE = (
+    "Operational triage envelope derived from external visual gap polygons outside official GRA. "
+    "Not an official EMS damage area."
+)
+EXTERNAL_PREDICTION_IMPACT_NOTE = (
+    "Operational triage envelope derived from Microsoft AI4G prediction geometry outside official GRA. "
+    "External predictions are not official EMS damage labels or counts."
+)
 
 WHATSAPP_MESSAGE_RE = re.compile(
     r"^(?P<date>\d{1,2}/\d{1,2}/\d{2}),\s+"
@@ -47,14 +81,33 @@ DMS_PAIR_RE = re.compile(
     r"(?P<lond>\d{1,3})[°º]\s*(?P<lonm>\d{1,2})['’]\s*(?P<lons>\d{1,2}(?:\.\d+)?)\"?\s*(?P<lonhem>[EW])",
     re.IGNORECASE,
 )
-DECIMAL_PAIR_RE = re.compile(r"(?<!\d)(?P<lat>1[0-4]\.\d{3,})\s*,?\s*(?P<lon>-[5-7]\d\.\d{3,})(?!\d)")
+DECIMAL_PAIR_RE = re.compile(r"(?<!\d)(?P<lat>\d{1,2}\.\d{3,})\s*,?\s*(?P<lon>-[5-7]\d\.\d{3,})(?!\d)")
 
 
 @dataclass
-class Cell:
-    key: str
-    lat_idx: int
-    lon_idx: int
+class SignalObservation:
+    lat: float
+    lon: float
+    kind: str
+    event: str | None = None
+    submitted_at: str | None = None
+    damage: str | None = None
+    aoi_id: str | None = None
+    aoi_label: str | None = None
+
+
+@dataclass
+class Zone:
+    sector_id: str | None = None
+    sector_label: str | None = None
+    sector_row: int | None = None
+    sector_col: int | None = None
+    geometry: Any | None = None
+    public_geometry: Any | None = None
+    geometry_method: str = "evidence_impact_envelope"
+    geometry_source: str = "official-ems"
+    public_note: str = OFFICIAL_IMPACT_NOTE
+    observations: list[SignalObservation] = field(default_factory=list)
     community_total_raw: int = 0
     community_events: Counter[str] = field(default_factory=Counter)
     community_time_buckets: set[str] = field(default_factory=set)
@@ -67,42 +120,42 @@ class Cell:
     aoi_ids: set[str] = field(default_factory=set)
     aoi_labels: set[str] = field(default_factory=set)
 
-    @property
-    def south(self) -> float:
-        return self.lat_idx * GRID_DEGREES
-
-    @property
-    def north(self) -> float:
-        return (self.lat_idx + 1) * GRID_DEGREES
-
-    @property
-    def west(self) -> float:
-        return self.lon_idx * GRID_DEGREES
-
-    @property
-    def east(self) -> float:
-        return (self.lon_idx + 1) * GRID_DEGREES
-
-    @property
-    def center_lat(self) -> float:
-        return (self.south + self.north) / 2
-
-    @property
-    def center_lon(self) -> float:
-        return (self.west + self.east) / 2
+    def add(self, observation: SignalObservation) -> None:
+        self.observations.append(observation)
+        if observation.aoi_id:
+            self.aoi_ids.add(observation.aoi_id)
+        if observation.aoi_label:
+            self.aoi_labels.add(observation.aoi_label)
+        if observation.kind == "community":
+            self.community_total_raw += 1
+            if observation.event:
+                self.community_events[observation.event] += 1
+            submitted = parse_dt(observation.submitted_at)
+            if submitted:
+                iso = submitted.isoformat().replace("+00:00", "Z")
+                self.community_time_buckets.add(iso[:16])
+                if not self.latest_submission or iso > self.latest_submission:
+                    self.latest_submission = iso
+        elif observation.kind == "ems_official":
+            if observation.damage in {"destroyed", "damaged"}:
+                self.ems_official_destroyed_damaged += 1
+            elif observation.damage == "possible":
+                self.ems_official_possible += 1
+        elif observation.kind == "ems_monitor":
+            if observation.damage in {"destroyed", "damaged"}:
+                self.ems_monitor_destroyed_damaged += 1
+            elif observation.damage == "possible":
+                self.ems_monitor_possible += 1
+        elif observation.kind == "external_gap":
+            self.external_gap_candidates += 1
 
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
-def get_cell(cells: dict[str, Cell], lat: float, lon: float) -> Cell:
-    lat_idx = math.floor(lat / GRID_DEGREES)
-    lon_idx = math.floor(lon / GRID_DEGREES)
-    key = f"z{lat_idx}_{lon_idx}"
-    if key not in cells:
-        cells[key] = Cell(key=key, lat_idx=lat_idx, lon_idx=lon_idx)
-    return cells[key]
+def valid_venezuela_coordinate(lat: Any, lon: Any) -> bool:
+    return isinstance(lat, (int, float)) and isinstance(lon, (int, float)) and 0 <= lat <= 15 and -75 <= lon <= -55
 
 
 def parse_dt(value: str | None) -> datetime | None:
@@ -137,7 +190,11 @@ def event_bucket(raw: str | None) -> str:
 def fetch_kobo_minimal_rows() -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     url = f"{KOBO_URL}?limit=1000"
+    pages = 0
     while url:
+        pages += 1
+        if pages > KOBO_MAX_PAGES:
+            raise RuntimeError(f"Kobo pagination exceeded {KOBO_MAX_PAGES} pages")
         response = requests.get(url, timeout=30)
         response.raise_for_status()
         payload = response.json()
@@ -159,7 +216,7 @@ def fetch_kobo_minimal_rows() -> list[dict[str, Any]]:
     return rows
 
 
-def add_kobo(cells: dict[str, Cell]) -> dict[str, Any]:
+def add_kobo(observations: list[SignalObservation]) -> dict[str, Any]:
     rows = fetch_kobo_minimal_rows()
     event_counts: Counter[str] = Counter()
     validation_counts: Counter[str] = Counter()
@@ -170,20 +227,17 @@ def add_kobo(cells: dict[str, Cell]) -> dict[str, Any]:
         event = event_bucket(row.get("event"))
         event_counts[event] += 1
         lat, lon = row.get("lat"), row.get("lon")
-        if not isinstance(lat, (int, float)) or not isinstance(lon, (int, float)):
-            continue
-        if not (0 <= lat <= 15 and -75 <= lon <= -55):
+        if not valid_venezuela_coordinate(lat, lon):
             continue
         mapped += 1
-        cell = get_cell(cells, float(lat), float(lon))
-        cell.community_total_raw += 1
-        cell.community_events[event] += 1
         submitted = parse_dt(row.get("submitted_at"))
-        if submitted:
-            iso = submitted.isoformat().replace("+00:00", "Z")
-            cell.community_time_buckets.add(iso[:16])
-            if not cell.latest_submission or iso > cell.latest_submission:
-                cell.latest_submission = iso
+        observations.append(SignalObservation(
+            lat=float(lat),
+            lon=float(lon),
+            kind="community",
+            event=event,
+            submitted_at=submitted.isoformat().replace("+00:00", "Z") if submitted else None,
+        ))
     return {
         "source": "Kobo public API",
         "records": len(rows),
@@ -264,7 +318,7 @@ def parse_whatsapp_minimal_rows(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
-def add_whatsapp(cells: dict[str, Cell]) -> dict[str, Any]:
+def add_whatsapp(observations: list[SignalObservation]) -> dict[str, Any]:
     configured_path = os.environ.get(WHATSAPP_CHAT_ENV)
     if not configured_path:
         return {
@@ -297,18 +351,17 @@ def add_whatsapp(cells: dict[str, Cell]) -> dict[str, Any]:
         if not isinstance(lat, (int, float)) or not isinstance(lon, (int, float)):
             continue
         coordinate_messages += 1
-        if not (0 <= lat <= 15 and -75 <= lon <= -55):
+        if not valid_venezuela_coordinate(lat, lon):
             continue
         mapped += 1
-        cell = get_cell(cells, float(lat), float(lon))
-        cell.community_total_raw += 1
-        cell.community_events[event] += 1
         submitted = parse_dt(row.get("submitted_at"))
-        if submitted:
-            iso = submitted.isoformat().replace("+00:00", "Z")
-            cell.community_time_buckets.add(iso[:16])
-            if not cell.latest_submission or iso > cell.latest_submission:
-                cell.latest_submission = iso
+        observations.append(SignalObservation(
+            lat=float(lat),
+            lon=float(lon),
+            kind="community",
+            event=event,
+            submitted_at=submitted.isoformat().replace("+00:00", "Z") if submitted else None,
+        ))
     return {
         "source": "local WhatsApp chat export",
         "configured": True,
@@ -330,17 +383,232 @@ def localized_name(aoi: dict[str, Any]) -> str:
     return str(value)
 
 
-def add_aoi_hint(cell: Cell, aois: list[dict[str, Any]]) -> None:
+def aoi_label(aoi: dict[str, Any]) -> str:
+    return localized_name(aoi).replace(" - Vector oficial EMSR884", "").replace(" - Official EMSR884 Vector", "")
+
+
+def short_aoi_label(aoi: dict[str, Any]) -> str:
+    return re.sub(r"^AOI\d+\s+", "", aoi_label(aoi))
+
+
+def should_build_impact_aoi(aoi: dict[str, Any]) -> bool:
+    status = str(aoi.get("status") or "")
+    if status not in IMPACT_BASE_STATUSES:
+        return False
+    damage_ref = (aoi.get("layers") or {}).get("damage")
+    return bool(damage_ref and str(damage_ref).startswith("/data/"))
+
+
+def impact_geometry_context(aoi: dict[str, Any]) -> tuple[str, str, str, str]:
+    status = str(aoi.get("status") or "")
+    if status == "external-gap":
+        return "external_gap_impact_envelope", "external-gap", EXTERNAL_IMPACT_NOTE, "Zona triage externo"
+    if status == "external-prediction":
+        return (
+            "external_prediction_impact_envelope",
+            "external-prediction",
+            EXTERNAL_PREDICTION_IMPACT_NOTE,
+            "Zona predicción externa",
+        )
+    if status == "official-monitor-points":
+        return "monitor_triage_impact_envelope", "monit01", MONITOR_IMPACT_NOTE, "Zona MONIT01"
+    return "official_ems_impact_envelope", "official-ems", OFFICIAL_IMPACT_NOTE, "Zona de impacto"
+
+
+def load_aoi_damage_geometries(aoi: dict[str, Any]) -> list[Any]:
+    damage_ref = (aoi.get("layers") or {}).get("damage")
+    if not damage_ref or not str(damage_ref).startswith("/data/"):
+        return []
+    path = ROOT / "public" / str(damage_ref).lstrip("/")
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return []
+    geometries: list[Any] = []
+    for feature in data.get("features", []):
+        raw_geometry = feature.get("geometry")
+        if not raw_geometry:
+            continue
+        try:
+            geometry = shape(raw_geometry)
+        except Exception:
+            continue
+        if geometry.is_empty:
+            continue
+        cls = damage_class(feature.get("properties") or {})
+        if str(aoi.get("status") or "") == "official-vector" and cls == "unknown":
+            continue
+        geometries.append(geometry)
+    return geometries
+
+
+def polygon_parts(geometry: Any) -> list[Any]:
+    if geometry.is_empty:
+        return []
+    if geometry.geom_type == "Polygon":
+        return [geometry]
+    if geometry.geom_type == "MultiPolygon":
+        return list(geometry.geoms)
+    if geometry.geom_type == "GeometryCollection":
+        parts: list[Any] = []
+        for item in geometry.geoms:
+            parts.extend(polygon_parts(item))
+        return parts
+    return []
+
+
+def impact_envelopes(source_geometries: list[Any]) -> list[Any]:
+    buffered = []
+    for geometry in source_geometries:
+        try:
+            expanded = geometry.buffer(IMPACT_ENVELOPE_BUFFER_DEGREES)
+        except Exception:
+            continue
+        if not expanded.is_empty:
+            buffered.append(expanded)
+    if not buffered:
+        return []
+    union = unary_union(buffered)
+    envelope = union.buffer(-IMPACT_ENVELOPE_INSET_DEGREES)
+    if envelope.is_empty:
+        envelope = union
+    envelope = envelope.simplify(IMPACT_ENVELOPE_SIMPLIFY_DEGREES, preserve_topology=True)
+    parts = []
+    for polygon in polygon_parts(envelope):
+        if polygon.area < IMPACT_ENVELOPE_MIN_AREA_DEGREES:
+            continue
+        if not polygon.is_valid:
+            polygon = polygon.buffer(0)
+        if not polygon.is_empty:
+            parts.append(polygon)
+    return sorted(parts, key=lambda item: (-item.area, item.bounds[0], item.bounds[1]))
+
+
+def source_precedence(zone: Zone) -> int:
+    return IMPACT_SOURCE_PRECEDENCE.get(zone.geometry_source, 99)
+
+
+def polygonal_geometry(geometry: Any) -> Any | None:
+    parts = []
+    for polygon in polygon_parts(geometry):
+        if polygon.area < IMPACT_ENVELOPE_MIN_AREA_DEGREES:
+            continue
+        if not polygon.is_valid:
+            polygon = polygon.buffer(0)
+        if not polygon.is_empty:
+            parts.append(polygon)
+    if not parts:
+        return None
+    merged = unary_union(parts)
+    if not merged.is_valid:
+        merged = merged.buffer(0)
+    if merged.is_empty:
+        return None
+    return merged
+
+
+def make_non_overlapping_impact_zones(zones: list[Zone]) -> list[Zone]:
+    """Publish one operational surface: higher-confidence sources own the overlap."""
+    ordered = sorted(
+        zones,
+        key=lambda zone: (
+            source_precedence(zone),
+            -(zone.geometry.area if zone.geometry is not None else 0),
+            zone.sector_id or "",
+        ),
+    )
+    claimed_geometries: list[Any] = []
+    for zone in ordered:
+        if zone.geometry is None or zone.geometry.is_empty:
+            continue
+        geometry = zone.geometry
+        if claimed_geometries:
+            claimed = unary_union(claimed_geometries)
+            geometry = geometry.difference(claimed)
+        public_geometry = polygonal_geometry(geometry)
+        if public_geometry is None:
+            continue
+        zone.public_geometry = public_geometry
+        claimed_geometries.append(public_geometry)
+    return zones
+
+
+def build_impact_zones(aois: list[dict[str, Any]]) -> list[Zone]:
+    zones: list[Zone] = []
+    for aoi in aois:
+        if not should_build_impact_aoi(aoi):
+            continue
+        source_geometries = load_aoi_damage_geometries(aoi)
+        envelopes = impact_envelopes(source_geometries)
+        if not envelopes:
+            continue
+        geometry_method, geometry_source, public_note, label_prefix = impact_geometry_context(aoi)
+        label = short_aoi_label(aoi)
+        for index, geometry in enumerate(envelopes, start=1):
+            zone = Zone(
+                sector_id=f"{aoi.get('id')}-impact-{index:02d}",
+                sector_label=f"{label} · {label_prefix} {index}",
+                sector_row=None,
+                sector_col=None,
+                geometry=geometry,
+                geometry_method=geometry_method,
+                geometry_source=geometry_source,
+                public_note=public_note,
+            )
+            zone.aoi_ids.add(str(aoi.get("id")))
+            zone.aoi_labels.add(aoi_label(aoi))
+            zones.append(zone)
+    return make_non_overlapping_impact_zones(zones)
+
+
+def best_sector_for_observation(observation: SignalObservation, zones: list[Zone]) -> Zone | None:
+    point = Point(observation.lon, observation.lat)
+    containing = [
+        zone
+        for zone in zones
+        if zone.public_geometry is not None and zone.public_geometry.covers(point)
+    ]
+    if containing:
+        best_precedence = min(source_precedence(zone) for zone in containing)
+        candidates = [zone for zone in containing if source_precedence(zone) == best_precedence]
+        if observation.aoi_id:
+            matching_source = [zone for zone in candidates if observation.aoi_id in zone.aoi_ids]
+            if matching_source:
+                candidates = matching_source
+        return min(
+            candidates,
+            key=lambda zone: zone.public_geometry.area if zone.public_geometry is not None else float("inf"),
+        )
+    return None
+
+
+def assign_observations_to_sector_zones(observations: list[SignalObservation], zones: list[Zone]) -> dict[str, int]:
+    stats: Counter[str] = Counter()
+    for observation in observations:
+        zone = best_sector_for_observation(observation, zones)
+        if not zone:
+            stats["droppedOutsideSectors"] += 1
+            stats[f"dropped:{observation.kind}"] += 1
+            continue
+        zone.add(observation)
+        stats["assigned"] += 1
+        stats[f"assigned:{observation.kind}"] += 1
+    return dict(stats)
+
+
+def add_aoi_hint(zone: Zone, aois: list[dict[str, Any]], geometry: Any) -> None:
+    point = geometry.representative_point()
     for aoi in aois:
         bounds = aoi.get("bounds")
         if not bounds or len(bounds) != 2:
             continue
         south, west = bounds[0]
         north, east = bounds[1]
-        if south <= cell.center_lat <= north and west <= cell.center_lon <= east:
-            cell.aoi_ids.add(str(aoi.get("id")))
-            label = localized_name(aoi).replace(" - Vector oficial EMSR884", "").replace(" - Official EMSR884 Vector", "")
-            cell.aoi_labels.add(label)
+        if south <= point.y <= north and west <= point.x <= east:
+            zone.aoi_ids.add(str(aoi.get("id")))
+            zone.aoi_labels.add(aoi_label(aoi))
 
 
 def damage_class(props: dict[str, Any]) -> str:
@@ -367,10 +635,11 @@ def feature_centroid(feature: dict[str, Any]) -> tuple[float, float] | None:
     return float(centroid.y), float(centroid.x)
 
 
-def add_ems(cells: dict[str, Cell], aois: list[dict[str, Any]]) -> dict[str, int]:
+def add_ems(observations: list[SignalObservation], aois: list[dict[str, Any]]) -> dict[str, int]:
     counts: Counter[str] = Counter()
     for aoi in aois:
-        if aoi.get("status") == "external-prediction":
+        status = str(aoi.get("status") or "")
+        if status not in {"official-vector", "official-monitor-points"}:
             continue
         damage_ref = (aoi.get("layers") or {}).get("damage")
         if not damage_ref or not str(damage_ref).startswith("/data/"):
@@ -378,34 +647,51 @@ def add_ems(cells: dict[str, Cell], aois: list[dict[str, Any]]) -> dict[str, int
         path = ROOT / "public" / str(damage_ref).lstrip("/")
         if not path.exists():
             continue
-        status = str(aoi.get("status") or "")
-        is_monitor = status == "official-monitor-points" or "monitor01" in str(aoi.get("id"))
-        data = json.loads(path.read_text())
+        is_monitor = status == "official-monitor-points"
+        kind = "ems_monitor" if is_monitor else "ems_official"
+        try:
+            data = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            counts[f"{status}:read_error"] += 1
+            continue
         for feature in data.get("features", []):
             centroid = feature_centroid(feature)
             if not centroid:
                 continue
-            cell = get_cell(cells, centroid[0], centroid[1])
             cls = damage_class(feature.get("properties") or {})
-            if is_monitor:
-                if cls in {"destroyed", "damaged"}:
-                    cell.ems_monitor_destroyed_damaged += 1
-                elif cls == "possible":
-                    cell.ems_monitor_possible += 1
-            else:
-                if cls in {"destroyed", "damaged"}:
-                    cell.ems_official_destroyed_damaged += 1
-                elif cls == "possible":
-                    cell.ems_official_possible += 1
+            observations.append(SignalObservation(
+                lat=centroid[0],
+                lon=centroid[1],
+                kind=kind,
+                damage=cls,
+                aoi_id=str(aoi.get("id")),
+                aoi_label=aoi_label(aoi),
+            ))
             counts[f"{status}:{cls}"] += 1
     return dict(counts)
 
 
-def add_external_gaps(cells: dict[str, Cell]) -> dict[str, Any]:
+def external_prediction_aoi_id(row: dict[str, str]) -> str | None:
+    layer_name = str(row.get("layer_name") or "").lower()
+    source_name = str(row.get("source_name") or "").lower()
+    if "caraballeda" in layer_name:
+        return "external-msft-caraballeda-east-predicted-damage"
+    if "east-catia-la-mar" in layer_name:
+        return "external-msft-catia-la-mar-east-predicted-damage"
+    if "catia_la_mar_maxar" in layer_name:
+        return "external-msft-catia-la-mar-predicted-damage"
+    if layer_name == "out" or "la guaira" in source_name:
+        return "external-msft-la-guaira-east-predicted-damage"
+    return None
+
+
+def add_external_gaps(observations: list[SignalObservation], aois: list[dict[str, Any]]) -> dict[str, Any]:
     if not EXTERNAL_DETAIL.exists():
         return {"status": "missing"}
+    aoi_by_id = {str(aoi.get("id")): aoi for aoi in aois}
     total = 0
     outside = 0
+    mapped_to_aoi = 0
     with EXTERNAL_DETAIL.open(newline="") as handle:
         reader = csv.DictReader(handle)
         for row in reader:
@@ -418,22 +704,37 @@ def add_external_gaps(cells: dict[str, Cell]) -> dict[str, Any]:
             except (KeyError, TypeError, ValueError):
                 continue
             outside += 1
-            get_cell(cells, lat, lon).external_gap_candidates += 1
-    return {"detailRows": total, "outsideOfficialGraRows": outside}
+            aoi_id = external_prediction_aoi_id(row)
+            aoi = aoi_by_id.get(aoi_id or "")
+            if aoi:
+                mapped_to_aoi += 1
+            observations.append(SignalObservation(
+                lat=lat,
+                lon=lon,
+                kind="external_gap",
+                aoi_id=aoi_id,
+                aoi_label=aoi_label(aoi) if aoi else None,
+            ))
+    return {
+        "detailRows": total,
+        "outsideOfficialGraRows": outside,
+        "mappedToPredictionAoiRows": mapped_to_aoi,
+    }
 
 
-def community_is_public(cell: Cell) -> bool:
+def community_is_public(zone: Zone) -> bool:
     return (
-        cell.community_total_raw >= MIN_COMMUNITY_REPORTS
-        and len(cell.community_time_buckets) >= MIN_DISTINCT_SUBMISSION_MINUTES
+        zone.community_total_raw >= MIN_COMMUNITY_REPORTS
+        and len(zone.community_time_buckets) >= MIN_DISTINCT_SUBMISSION_MINUTES
     )
 
 
-def priority_for(cell: Cell) -> tuple[str, int, list[str]]:
-    safe_reports = cell.community_total_raw if community_is_public(cell) else 0
-    structural = cell.community_events.get("structural_damage", 0) if safe_reports else 0
-    official = cell.ems_official_destroyed_damaged
-    external = cell.external_gap_candidates if cell.external_gap_candidates >= MIN_EXTERNAL_GAP_CANDIDATES else 0
+def priority_for(zone: Zone) -> tuple[str, int, list[str]]:
+    safe_reports = zone.community_total_raw if community_is_public(zone) else 0
+    structural = zone.community_events.get("structural_damage", 0) if safe_reports else 0
+    official = zone.ems_official_destroyed_damaged
+    monitor = zone.ems_monitor_destroyed_damaged
+    external = zone.external_gap_candidates if zone.external_gap_candidates >= MIN_EXTERNAL_GAP_CANDIDATES else 0
     score = 0
     reasons: list[str] = []
     if safe_reports:
@@ -445,12 +746,15 @@ def priority_for(cell: Cell) -> tuple[str, int, list[str]]:
     if official:
         score += min(25, official * 2)
         reasons.append(f"{official} official EMS destroyed/damaged features")
+    if monitor:
+        score += min(20, max(2, monitor // 25))
+        reasons.append(f"{monitor} MONIT01 destroyed/damaged points, kept separate from GRA")
     if external:
         score += min(30, max(8, external // 4))
         reasons.append(f"{external} external candidates outside GRA")
     if structural >= 5 and official == 0:
         score += 25
-        reasons.append("gap: community structural reports without GRA damage in this cell")
+        reasons.append("gap: community structural reports without GRA damage in this zone")
     if external >= 50 and official == 0:
         score += 20
         reasons.append("gap: dense external candidates outside GRA")
@@ -461,80 +765,112 @@ def priority_for(cell: Cell) -> tuple[str, int, list[str]]:
     return "low", score, reasons
 
 
-def polygon_for(cell: Cell) -> dict[str, Any]:
-    return {
-        "type": "Polygon",
-        "coordinates": [[
-            [cell.west, cell.south],
-            [cell.east, cell.south],
-            [cell.east, cell.north],
-            [cell.west, cell.north],
-            [cell.west, cell.south],
-        ]],
-    }
+def round_coordinates(value: Any) -> Any:
+    if isinstance(value, float):
+        return round(value, 6)
+    if isinstance(value, int):
+        return value
+    if isinstance(value, tuple):
+        return [round_coordinates(item) for item in value]
+    if isinstance(value, list):
+        return [round_coordinates(item) for item in value]
+    if isinstance(value, dict):
+        return {key: round_coordinates(item) for key, item in value.items()}
+    return value
 
 
-def visible_properties(cell: Cell, sequence: int, aois: list[dict[str, Any]]) -> dict[str, Any] | None:
-    safe_reports = community_is_public(cell)
-    external_visible = cell.external_gap_candidates >= MIN_EXTERNAL_GAP_CANDIDATES
+def public_geometry_for(zone: Zone) -> Any | None:
+    return zone.public_geometry
+
+
+def geojson_geometry(geometry: Any) -> dict[str, Any]:
+    return round_coordinates(mapping(geometry))
+
+
+def visible_properties(zone: Zone, sequence: int, aois: list[dict[str, Any]], geometry: Any) -> dict[str, Any] | None:
+    safe_reports = community_is_public(zone)
+    external_visible = zone.external_gap_candidates >= MIN_EXTERNAL_GAP_CANDIDATES
     ems_visible = (
-        cell.ems_official_destroyed_damaged
-        + cell.ems_official_possible
-        + cell.ems_monitor_destroyed_damaged
-        + cell.ems_monitor_possible
+        zone.ems_official_destroyed_damaged
+        + zone.ems_official_possible
+        + zone.ems_monitor_destroyed_damaged
+        + zone.ems_monitor_possible
     ) > 0
     if not safe_reports and not external_visible and not ems_visible:
         return None
-    add_aoi_hint(cell, aois)
-    priority, score, reasons = priority_for(cell)
+    if not zone.aoi_ids:
+        add_aoi_hint(zone, aois, geometry)
+    priority, score, reasons = priority_for(zone)
     community_events = {
         key: int(value)
-        for key, value in cell.community_events.items()
+        for key, value in zone.community_events.items()
         if safe_reports and value > 0
     }
     return {
         "id": f"ops-zone-{sequence:03d}",
+        "sectorId": zone.sector_id,
+        "sectorLabel": zone.sector_label,
+        "sectorRow": zone.sector_row,
+        "sectorCol": zone.sector_col,
         "priority": priority,
         "score": score,
-        "communityReports": int(cell.community_total_raw) if safe_reports else None,
-        "communityReportsSuppressed": not safe_reports and cell.community_total_raw > 0,
+        "communityReports": int(zone.community_total_raw) if safe_reports else None,
+        "communityReportsSuppressed": not safe_reports and zone.community_total_raw > 0,
         "communityEvents": community_events,
-        "latestSubmissionDate": cell.latest_submission[:10] if safe_reports and cell.latest_submission else None,
-        "emsOfficialDestroyedDamaged": cell.ems_official_destroyed_damaged,
-        "emsOfficialPossible": cell.ems_official_possible,
-        "emsMonitorDestroyedDamaged": cell.ems_monitor_destroyed_damaged,
-        "emsMonitorPossible": cell.ems_monitor_possible,
-        "externalGapCandidates": cell.external_gap_candidates if external_visible else None,
-        "externalGapSuppressed": not external_visible and cell.external_gap_candidates > 0,
-        "aoiIds": sorted(cell.aoi_ids),
-        "aoiLabels": sorted(cell.aoi_labels)[:3],
+        "latestSubmissionDate": zone.latest_submission[:10] if safe_reports and zone.latest_submission else None,
+        "emsOfficialDestroyedDamaged": zone.ems_official_destroyed_damaged,
+        "emsOfficialPossible": zone.ems_official_possible,
+        "emsMonitorDestroyedDamaged": zone.ems_monitor_destroyed_damaged,
+        "emsMonitorPossible": zone.ems_monitor_possible,
+        "externalGapCandidates": zone.external_gap_candidates if external_visible else None,
+        "externalGapSuppressed": not external_visible and zone.external_gap_candidates > 0,
+        "aoiIds": sorted(zone.aoi_ids),
+        "aoiLabels": sorted(zone.aoi_labels)[:3],
         "reasons": reasons[:4],
-        "publicNote": "Aggregate zone only; no raw reports, exact points, names, phones, links, photos, or addresses.",
+        "geometryMethod": zone.geometry_method,
+        "geometrySource": zone.geometry_source,
+        "overlapPolicy": IMPACT_OVERLAP_POLICY,
+        "isOfficialDamageBoundary": False,
+        "impactEnvelopeBufferDegrees": IMPACT_ENVELOPE_BUFFER_DEGREES,
+        "publicNote": f"{zone.public_note} No names, phones, links, photos, text, exact report points, or addresses are published.",
     }
 
 
-def build_geojson(cells: dict[str, Cell], aois: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+def build_geojson(observations: list[SignalObservation], aois: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+    zones = build_impact_zones(aois)
+    assignment_stats = assign_observations_to_sector_zones(observations, zones)
     ordered = sorted(
-        cells.values(),
-        key=lambda cell: (
-            {"high": 0, "medium": 1, "low": 2}[priority_for(cell)[0]],
-            -priority_for(cell)[1],
-            -cell.community_total_raw,
-            -cell.external_gap_candidates,
+        zones,
+        key=lambda zone: (
+            {"high": 0, "medium": 1, "low": 2}[priority_for(zone)[0]],
+            -priority_for(zone)[1],
+            -zone.community_total_raw,
+            -zone.external_gap_candidates,
         ),
     )
     features: list[dict[str, Any]] = []
-    for sequence, cell in enumerate(ordered, start=1):
-        props = visible_properties(cell, sequence, aois)
+    sequence = 1
+    for zone in ordered:
+        geometry = public_geometry_for(zone)
+        if geometry is None:
+            continue
+        props = visible_properties(zone, sequence, aois, geometry)
         if not props:
             continue
-        features.append({"type": "Feature", "properties": props, "geometry": polygon_for(cell)})
+        features.append({"type": "Feature", "properties": props, "geometry": geojson_geometry(geometry)})
+        sequence += 1
     return {
         "type": "FeatureCollection",
         "metadata": {
             "status": "public-aggregate-not-official-damage",
             "generatedAt": generated_at,
-            "gridDegrees": GRID_DEGREES,
+            "geometryMethod": "evidence_impact_envelopes",
+            "impactOverlapPolicy": IMPACT_OVERLAP_POLICY,
+            "impactEnvelopeBufferDegrees": IMPACT_ENVELOPE_BUFFER_DEGREES,
+            "impactEnvelopeInsetDegrees": IMPACT_ENVELOPE_INSET_DEGREES,
+            "impactEnvelopeSimplifyDegrees": IMPACT_ENVELOPE_SIMPLIFY_DEGREES,
+            "impactEnvelopeMinAreaDegrees": IMPACT_ENVELOPE_MIN_AREA_DEGREES,
+            "sectorAssignment": assignment_stats,
             "minCommunityReports": MIN_COMMUNITY_REPORTS,
             "minDistinctSubmissionMinutes": MIN_DISTINCT_SUBMISSION_MINUTES,
             "minExternalGapCandidates": MIN_EXTERNAL_GAP_CANDIDATES,
@@ -546,13 +882,13 @@ def build_geojson(cells: dict[str, Cell], aois: list[dict[str, Any]], generated_
 
 def main() -> int:
     generated_at = now_utc()
-    cells: dict[str, Cell] = {}
+    observations: list[SignalObservation] = []
     aois = load_catalog()
-    kobo = add_kobo(cells)
-    whatsapp = add_whatsapp(cells)
-    ems = add_ems(cells, aois)
-    external = add_external_gaps(cells)
-    geojson = build_geojson(cells, aois, generated_at)
+    kobo = add_kobo(observations)
+    whatsapp = add_whatsapp(observations)
+    ems = add_ems(observations, aois)
+    external = add_external_gaps(observations, aois)
+    geojson = build_geojson(observations, aois, generated_at)
     priority_counts = Counter(feature["properties"]["priority"] for feature in geojson["features"])
     summary = {
         "status": "public-aggregate-not-official-damage",
@@ -562,15 +898,24 @@ def main() -> int:
             "rawWhatsappWritten": False,
             "exactReportPointsWritten": False,
             "freeTextWritten": False,
+            "minCommunityReportsPerVisibleZone": MIN_COMMUNITY_REPORTS,
+            "minDistinctSubmissionMinutesPerVisibleZone": MIN_DISTINCT_SUBMISSION_MINUTES,
             "minCommunityReportsPerVisibleCell": MIN_COMMUNITY_REPORTS,
             "minDistinctSubmissionMinutesPerVisibleCell": MIN_DISTINCT_SUBMISSION_MINUTES,
-            "gridDegrees": GRID_DEGREES,
+            "geometryMethod": "evidence_impact_envelopes",
+            "impactOverlapPolicy": IMPACT_OVERLAP_POLICY,
+            "impactEnvelopeBufferDegrees": IMPACT_ENVELOPE_BUFFER_DEGREES,
+            "impactEnvelopeInsetDegrees": IMPACT_ENVELOPE_INSET_DEGREES,
+            "impactEnvelopeSimplifyDegrees": IMPACT_ENVELOPE_SIMPLIFY_DEGREES,
+            "impactEnvelopeMinAreaDegrees": IMPACT_ENVELOPE_MIN_AREA_DEGREES,
         },
         "kobo": kobo,
         "whatsapp": whatsapp,
         "emsCounts": ems,
         "externalGap": external,
+        "visibleZones": len(geojson["features"]),
         "visibleCells": len(geojson["features"]),
+        "sectorAssignment": geojson["metadata"].get("sectorAssignment", {}),
         "priorityCounts": dict(priority_counts),
         "warning": "Community, VLM, and external prediction signals are triage only and must not be counted as official EMS damage.",
     }

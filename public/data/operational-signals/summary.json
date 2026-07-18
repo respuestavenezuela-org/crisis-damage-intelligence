@@ -1,41 +1,42 @@
 {
   "status": "public-aggregate-not-official-damage",
-  "generatedAt": "2026-07-01T16:32:34Z",
+  "generatedAt": "2026-07-18T22:28:08Z",
   "privacy": {
     "rawKoboWritten": false,
     "rawWhatsappWritten": false,
     "exactReportPointsWritten": false,
     "freeTextWritten": false,
-    "minCommunityReportsPerVisibleCell": 5,
-    "minDistinctSubmissionMinutesPerVisibleCell": 3,
-    "gridDegrees": 0.02
+    "minCommunityReportsPerVisibleZone": 8,
+    "minDistinctSubmissionMinutesPerVisibleZone": 5,
+    "minCommunityReportsPerVisibleCell": 8,
+    "minDistinctSubmissionMinutesPerVisibleCell": 5,
+    "geometryMethod": "evidence_impact_envelopes",
+    "impactOverlapPolicy": "source_precedence_non_overlapping",
+    "impactEnvelopeBufferDegrees": 0.0035,
+    "impactEnvelopeInsetDegrees": 0.0012,
+    "impactEnvelopeSimplifyDegrees": 0.00035,
+    "impactEnvelopeMinAreaDegrees": 2e-06
   },
   "kobo": {
     "source": "Kobo public API",
-    "records": 2593,
-    "mappedRecords": 2541,
+    "records": 2681,
+    "mappedRecords": 2630,
     "eventCounts": {
-      "structural_damage": 179,
+      "structural_damage": 187,
       "aid_collection_first_aid": 53,
-      "other": 2361
+      "other": 2441
     },
     "validationCounts": {
-      "unreviewed": 2593
+      "unreviewed": 2681
     }
   },
   "whatsapp": {
     "source": "local WhatsApp chat export",
-    "configured": true,
-    "records": 81,
-    "mappedRecords": 4,
-    "coordinateMessages": 4,
-    "eventCounts": {
-      "other": 66,
-      "structural_damage": 10,
-      "aid_collection_first_aid": 2,
-      "health": 1,
-      "access": 2
-    }
+    "configured": false,
+    "records": 0,
+    "mappedRecords": 0,
+    "coordinateMessages": 0,
+    "eventCounts": {}
   },
   "emsCounts": {
     "official-vector:possible": 169,
@@ -47,13 +48,24 @@
   },
   "externalGap": {
     "detailRows": 7897,
-    "outsideOfficialGraRows": 7897
+    "outsideOfficialGraRows": 7897,
+    "mappedToPredictionAoiRows": 7897
   },
-  "visibleCells": 70,
+  "visibleZones": 43,
+  "visibleCells": 43,
+  "sectorAssignment": {
+    "droppedOutsideSectors": 1285,
+    "dropped:community": 1285,
+    "assigned": 10857,
+    "assigned:community": 1345,
+    "assigned:ems_official": 309,
+    "assigned:ems_monitor": 1306,
+    "assigned:external_gap": 7897
+  },
   "priorityCounts": {
-    "high": 7,
-    "medium": 19,
-    "low": 44
+    "high": 5,
+    "medium": 6,
+    "low": 32
   },
   "warning": "Community, VLM, and external prediction signals are triage only and must not be counted as official EMS damage."
 }

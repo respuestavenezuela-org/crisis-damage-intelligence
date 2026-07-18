@@ -55,6 +55,8 @@ output/playwright/*.png
 # local Codex/coworker artifacts
 .codex/coworkers/
 .codex/operational_signals_preview/
+.omo/
+.playwright-cli/
 
 # typescript
 *.tsbuildinfo

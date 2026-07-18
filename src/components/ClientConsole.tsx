@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import FirstVisitThanksModal from "./FirstVisitThanksModal";
 
 const OperationsConsole = dynamic(() => import("./OperationsConsole"), {
   ssr: false,
@@ -8,5 +9,10 @@ const OperationsConsole = dynamic(() => import("./OperationsConsole"), {
 });
 
 export default function ClientConsole() {
-  return <OperationsConsole />;
+  return (
+    <>
+      <OperationsConsole />
+      <FirstVisitThanksModal />
+    </>
+  );
 }
