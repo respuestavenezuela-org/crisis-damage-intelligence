@@ -43,8 +43,21 @@ jobs:
         run: |
           bash scripts/emsr884-aoi12-ingest.sh "data/incoming/${AOI_ID}.zip" "${OUTPUT_PREFIX}"
           python3 scripts/queue_vlm_candidates.py "${AOI_ID}" "${OUTPUT_PREFIX}/damage.geojson" "${OUTPUT_PREFIX}/vlm_queue.jsonl"
+      - name: Check object storage configuration
+        id: object-storage
+        env:
+          S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          if [[ -n "${S3_ENDPOINT_URL}" && -n "${S3_BUCKET}" && -n "${AWS_ACCESS_KEY_ID}" && -n "${AWS_SECRET_ACCESS_KEY}" ]]; then
+            echo "configured=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "configured=false" >> "${GITHUB_OUTPUT}"
+          fi
       - name: Upload to object storage when configured
-        if: ${{ secrets.S3_ENDPOINT_URL != '' && secrets.S3_BUCKET != '' && secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}
+        if: ${{ steps.object-storage.outputs.configured == 'true' }}
         env:
           AOI_ID: ${{ inputs.aoi_id }}
           OUTPUT_PREFIX: ${{ inputs.output_prefix }}
