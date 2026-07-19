@@ -1,6 +1,6 @@
 {
   "status": "public-aggregate-not-official-damage",
-  "generatedAt": "2026-07-18T22:28:08Z",
+  "generatedAt": "2026-07-18T23:19:13Z",
   "privacy": {
     "rawKoboWritten": false,
     "rawWhatsappWritten": false,
@@ -32,11 +32,18 @@
   },
   "whatsapp": {
     "source": "local WhatsApp chat export",
-    "configured": false,
-    "records": 0,
-    "mappedRecords": 0,
-    "coordinateMessages": 0,
-    "eventCounts": {}
+    "configured": true,
+    "records": 1107,
+    "mappedRecords": 32,
+    "coordinateMessages": 32,
+    "eventCounts": {
+      "other": 967,
+      "structural_damage": 101,
+      "aid_collection_first_aid": 5,
+      "health": 6,
+      "access": 16,
+      "water": 12
+    }
   },
   "emsCounts": {
     "official-vector:possible": 169,
@@ -56,8 +63,8 @@
   "sectorAssignment": {
     "droppedOutsideSectors": 1285,
     "dropped:community": 1285,
-    "assigned": 10857,
-    "assigned:community": 1345,
+    "assigned": 10889,
+    "assigned:community": 1377,
     "assigned:ems_official": 309,
     "assigned:ems_monitor": 1306,
     "assigned:external_gap": 7897

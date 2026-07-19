@@ -1,0 +1,31 @@
+name: Production Remote-Asset Package
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 8 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  build-production-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate remote tiles, chips, and COG range support
+        run: python3 scripts/validate_remote_asset_urls.py
+      - name: Build pruned production package
+        run: python3 scripts/build_vercel_remote_asset_package.py --out "$RUNNER_TEMP/crisis-damage-production" --force
+      - name: Revalidate production package
+        run: python3 scripts/build_vercel_remote_asset_package.py --check-only --package "$RUNNER_TEMP/crisis-damage-production"
+      - name: Upload deployable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: crisis-damage-production
+          path: ${{ runner.temp }}/crisis-damage-production
+          if-no-files-found: error
+          retention-days: 7

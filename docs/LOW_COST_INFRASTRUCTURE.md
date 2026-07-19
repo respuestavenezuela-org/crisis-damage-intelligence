@@ -144,9 +144,9 @@ https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/ems/generated/aoi/emsr884-ao
 Current remote asset status:
 
 - Evidence chips are mirrored to public R2 under `data/chips/...`.
-- AOI12 Caraballeda/La Guaira z12-z16 before/after tiles are mirrored to public R2 under `data/tiles/emsr884-aoi12-caraballeda/...`.
-- Most z17-z18 residential tiles and non-AOI12 tile pyramids are not yet mirrored to public R2/CDN paths.
-- Vercel deployment should not rely exclusively on remote tiles until all required zoom levels for the operational AOIs return HTTP 200.
+- Published AOI tile pyramids are served from the corresponding public R2 `data/tiles/...` keys.
+- The latest production gate checked 116 representative tile/chip/COG requests with zero HTTP, content-type, cache, or COG Range failures.
+- Vercel production builds rerun the remote check and stop if the report is not green, is more than 24 hours old, or its tile/chip reference fingerprint is stale.
 
 Remote-asset Vercel package:
 

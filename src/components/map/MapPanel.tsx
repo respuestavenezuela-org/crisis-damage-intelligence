@@ -66,8 +66,9 @@ type OlDamageFeature = Feature & { original?: DamageFeature };
 type OlSignalFeature = Feature & { signal?: OperationalSignalFeature };
 type RasterLayer = WebGLTileLayer | TileLayer<XYZ>;
 const DIRECT_RASTER_MOBILE_MAX_BYTES = 250_000_000;
-// Intentional origin/main policy (3e97c398, b4c6d7ac): stop public source requests at z18 but permit local overzoom.
-const PUBLIC_IMAGERY_MAX_ZOOM = 18;
+// External basemaps stay capped at z18. First-party pyramids honor their catalog metadata,
+// so publishing a validated higher-resolution pyramid does not require a code change.
+const PUBLIC_EXTERNAL_IMAGERY_MAX_ZOOM = 18;
 type InteriorGeometry = {
   getType: () => string;
   getCoordinates?: () => unknown;
@@ -126,6 +127,10 @@ function canRenderBeforeImage(aoi: AoiRecord) {
 
 function canRenderAfterImage(aoi: AoiRecord) {
   return Boolean(aoi.layers.afterImage && directRasterIsMobileSafe(aoi.imagery?.after?.bytes));
+}
+
+function tilePyramidMaxZoom(aoi: AoiRecord, mode: Props["mode"]) {
+  return aoi.imagery?.[mode]?.tilePyramid?.maxZoom ?? PUBLIC_EXTERNAL_IMAGERY_MAX_ZOOM;
 }
 
 function hasBeforeLayer(aoi: AoiRecord) {
@@ -528,7 +533,7 @@ export default function MapPanel({
         attributions: "Tiles © Esri, Maxar, Earthstar Geographics, and the GIS User Community",
         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         crossOrigin: "anonymous",
-        maxZoom: PUBLIC_IMAGERY_MAX_ZOOM,
+        maxZoom: PUBLIC_EXTERNAL_IMAGERY_MAX_ZOOM,
       }),
       visible: basemapRef.current === "aerial",
       zIndex: 0,
@@ -616,7 +621,12 @@ export default function MapPanel({
     if (aoi.layers.beforeTiles || beforeImageUrl || aoi.imagery?.approximateReference?.urlTemplate) {
       beforeRef.current = aoi.layers.beforeTiles
         ? new TileLayer({
-          source: new XYZ({ url: aoi.layers.beforeTiles, maxZoom: 18, minZoom: 12, transition: 0 }),
+          source: new XYZ({
+            url: aoi.layers.beforeTiles,
+            maxZoom: tilePyramidMaxZoom(aoi, "before"),
+            minZoom: aoi.imagery?.before?.tilePyramid?.minZoom ?? 12,
+            transition: 0,
+          }),
           extent: bounds3857,
           opacity: 1,
           visible: modeRef.current === "before",
@@ -634,7 +644,7 @@ export default function MapPanel({
             attributions: aoi.imagery?.approximateReference?.source ?? "Reference imagery",
             url: aoi.imagery?.approximateReference?.urlTemplate,
             crossOrigin: "anonymous",
-            maxZoom: PUBLIC_IMAGERY_MAX_ZOOM,
+            maxZoom: PUBLIC_EXTERNAL_IMAGERY_MAX_ZOOM,
             transition: 0,
           }),
           opacity: 1,
@@ -647,7 +657,12 @@ export default function MapPanel({
     if (aoi.layers.afterTiles || afterImageUrl) {
       afterRef.current = aoi.layers.afterTiles
         ? new TileLayer({
-          source: new XYZ({ url: aoi.layers.afterTiles, maxZoom: 18, minZoom: 12, transition: 0 }),
+          source: new XYZ({
+            url: aoi.layers.afterTiles,
+            maxZoom: tilePyramidMaxZoom(aoi, "after"),
+            minZoom: aoi.imagery?.after?.tilePyramid?.minZoom ?? 12,
+            transition: 0,
+          }),
           extent: bounds3857,
           opacity: 1,
           visible: modeRef.current === "after",

@@ -1,0 +1,10 @@
+---
+description: Crisis map guardrails for Respuesta Venezuela
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+`AGENTS.md` is the canonical source. Follow it before changing code, data, CI, or docs.
+
+Keep the public app static-first. Do not add mandatory Supabase, live VLM, paid map SDK, or private services to public runtime. Preserve official-vs-triage labels. Do not eager-load all AOI damage/VLM files. Do not commit secrets, local paths, or heavy imagery without a measured reason. Preserve image quality unless visual QA and rollback/original access are documented.

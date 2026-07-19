@@ -12,11 +12,11 @@ Baseline observed during this audit:
 - `public/data/catalog.json`: 61.3 KB, 15 AOIs.
 - Largest local public files include `external-msft-catia-la-mar-predicted-damage/damage.kml` at 16.2 MB, AOI12 EMS PDF at 10.9 MB, and `external-msft-catia-la-mar-predicted-damage/damage.geojson` at 8.6 MB.
 
-## Top Risks
+## Original Audit Risks And Current Status
 
 ### P0
 
-1. Raw production package can include hundreds of MB of local public assets. `README.md:47` and `docs/DEPLOYMENT_CHECKLIST.md:20` say large rasters/chips/tiles should stay out of Vercel, but the checked-out `public/data/tiles` and `public/data/chips` are large enough to make a raw deploy fragile. Use `scripts/build_vercel_remote_asset_package.py` plus remote validation before production deploys.
+1. **Resolved for production:** the development checkout still contains hundreds of MB of local public assets. `.vercelignore` removes tiles/chips from CLI uploads, while `vercel.json` reruns remote validation and prunes them inside Git-connected Vercel checkouts before `next build`. The build refuses attestations older than 24 hours, stale validation fingerprints, surviving local heavy references, more than 15,000 files, or more than 250 MB.
 2. Browser-side COG fallback can become a full or slow remote raster path if tiled imagery is absent or fails. `src/components/map/MapPanel.tsx:415` and `src/components/map/MapPanel.tsx:445` instantiate `GeoTIFF` sources directly from `beforeImage`/`afterImage`; catalog COG URLs are in `public/data/catalog.json:43`, `216`, `302`, `391`, `551`, `710`, and `801`.
 3. Analytics privacy defaults were too permissive at audit start: `src/components/OpenPanelAnalytics.tsx:17-19` enabled screen views, outgoing-link tracking, and attribute tracking. Outgoing links can expose full Google Maps/chip/download URLs, contrary to `docs/ANALYTICS.md:18-20`.
 4. External prediction data is large and operationally sensitive. `public/data/catalog.json:965-997` publishes the Catia La Mar Microsoft/HDX prediction layer with 9,134 features. It is labeled external prediction, but any future UI/analytics/reporting must keep it out of official EMS counts.
@@ -88,7 +88,7 @@ Downloads are static catalog links under each AOI. They must stay usable even wh
 
 ### Deployment
 
-Raw source app can run locally with bundled assets. Production should use `scripts/validate_remote_asset_urls.py` and `scripts/build_vercel_remote_asset_package.py` when tiles/chips are mirrored to R2/CDN.
+Raw source app can run locally with bundled assets. Production is forced through the validated remote-asset preparation by `.vercelignore` and `vercel.json`; explicit and rollback deployments can still use the generated sibling package.
 
 ## Risk Detail
 
@@ -100,7 +100,8 @@ Raw source app can run locally with bundled assets. Production should use `scrip
 
 ### Repo Size / Vercel Package
 
-- `scripts/build_vercel_remote_asset_package.py:37-40` excludes `public/data/tiles` and `public/data/chips` from a pruned package.
+- `scripts/build_vercel_remote_asset_package.py` excludes `public/data/tiles` and `public/data/chips`, rejects stale source-reference validation, and enforces package file/byte ceilings.
+- `.vercelignore` and `vercel.json` apply the same guarded path to Vercel Git and CLI deployments.
 - `docs/DEPLOYMENT_CHECKLIST.md:22-30` documents the remote-asset package flow.
 - New `scripts/audit_asset_budget.py` measures current pressure and writes `ops/performance_audit/latest.md`.
 

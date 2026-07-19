@@ -33,12 +33,27 @@ npm install
 npm run build
 ```
 
+Vercel Git deployments use the same guarded path automatically:
+
+- `.vercelignore` removes `public/data/tiles` and `public/data/chips` from Vercel CLI uploads.
+- Git-connected deployments receive tracked files, so the `vercel.json` install command reruns the public remote checks, writes the verbose report to ephemeral `/tmp`, validates the fresh deploy attestation/fingerprint, and then prunes the heavy directories only inside Vercel's ephemeral checkout.
+- Preview deployments run the same deterministic rewrite/prune/package guards but skip flaky live network checks; only `VERCEL_ENV=production` may mint and require a fresh remote attestation.
+- The same pre-install command rewrites public tile/chip references to the validated R2 base before `npm ci` and `next build`; runtime dependency/cache directories are excluded from the source-package budget.
+- The build stops before `next build` if the live remote validation fails, the resulting attestation is older than 24 hours, COG Range support is missing, heavy directories remain, or local tile/chip references survive.
+
+For an explicit or rollback deployment, keep using the generated sibling package above. The scheduled `Production Remote-Asset Package` workflow also publishes a seven-day deployable artifact after rerunning the remote checks.
+
 The remote asset validator writes:
 
 ```text
 ops/remote_asset_validation/latest.json
 ops/remote_asset_validation/latest.md
+deploy/remote_asset_validation.json
 ```
+
+The `deploy/` copy is the build attestation retained after `.vercelignore` removes local operational artifacts. Its tile/chip reference fingerprint must match the source being prepared and its timestamp must be no more than 24 hours old or the production build stops.
+
+When CLI ignore rules or a generated rollback package have already removed the local sample files, the validator reuses the packaged attestation's tile/chip sample manifest only when its source fingerprint matches, then refetches those URLs. A fingerprint mismatch or zero sampled tiles or chips is a production deploy blocker.
 
 Do not deploy the remote-asset package until sampled remote assets return HTTP 200/206 with expected content types, versioned tiles/chips include long-lived immutable cache headers, and COG URLs honor byte-range requests:
 
@@ -51,8 +66,8 @@ https://.../<aoi>/<imagery>.tif
 ## Vercel Settings
 
 - Root directory: repository/package root
-- Install command: `npm ci`
-- Build command: `npm run build`
+- Install command: use the committed `vercel.json` command; it prepares the remote-asset source and then runs `npm ci`
+- Build command: `npm run build` from the committed `vercel.json`; source preparation is already complete in the install phase
 - Output directory: leave default for Next.js
 - Environment variables: none required for static public viewing. Analytics provider variables are optional; see `docs/ANALYTICS.md`.
 - Canonical domain: `respuestavenezuela.org`

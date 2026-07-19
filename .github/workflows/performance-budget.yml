@@ -1,0 +1,37 @@
+name: Performance Budget
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  performance-budget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build for bundle baseline
+        run: npm run build
+      - name: Audit assets
+        run: python3 scripts/audit_asset_budget.py
+      - name: Validate mobile performance budget
+        run: python3 scripts/validate_mobile_performance_budget.py
+      - name: Upload performance reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-budget
+          path: ops/performance_audit/
+          if-no-files-found: ignore

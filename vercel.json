@@ -1,0 +1,4 @@
+{
+  "installCommand": "if [ \"$VERCEL_ENV\" = \"production\" ]; then python3 scripts/validate_remote_asset_urls.py --report /tmp/cdi-remote-asset-validation.json && python3 scripts/build_vercel_remote_asset_package.py --prepare-package . --prune-heavy; elif [ \"$VERCEL_ENV\" = \"preview\" ]; then python3 scripts/build_vercel_remote_asset_package.py --prepare-package . --prune-heavy --skip-remote-validation-report; else echo \"Unsupported VERCEL_ENV=$VERCEL_ENV\" >&2; exit 1; fi && npm ci",
+  "buildCommand": "npm run build"
+}

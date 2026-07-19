@@ -1,6 +1,6 @@
 # Remote Asset Validation
 
-- Generated UTC: `2026-07-18T22:57:46.774223+00:00`
+- Generated UTC: `2026-07-19T13:57:42.655402+00:00`
 - Remote base: `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev`
 - Result: `pass`
 
@@ -33,6 +33,8 @@
 - Ready for pruned remote-asset package: `True`
 - COG Range requirement: COG fallback URLs must honor Range: bytes=0-0 with HTTP 206 and a Content-Range header starting with 'bytes 0-0/'.
 - COG content-type requirement: COG fallback URLs must return a GeoTIFF-compatible content type; binary/octet-stream is accepted for EMS/Vantor/Sentinel public S3 COGs when byte ranges work.
+- Sampled tile URLs: `72`
+- Sampled chip URLs: `32`
 - Sampled COG URLs: `12`
 
 ## Remote Asset Checks

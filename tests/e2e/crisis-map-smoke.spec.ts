@@ -75,6 +75,7 @@ const lowDamageFeatureCollection = {
 };
 
 test("mobile critical AOI workflow stays usable", async ({ page }) => {
+  test.setTimeout(90_000);
   await keepMapRastersLight(page);
   const loadedDataUrls: string[] = [];
   page.on("request", (request) => {

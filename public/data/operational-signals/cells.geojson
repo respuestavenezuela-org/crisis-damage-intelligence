@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "metadata": {
     "status": "public-aggregate-not-official-damage",
-    "generatedAt": "2026-07-18T22:28:08Z",
+    "generatedAt": "2026-07-18T23:19:13Z",
     "geometryMethod": "evidence_impact_envelopes",
     "impactOverlapPolicy": "source_precedence_non_overlapping",
     "impactEnvelopeBufferDegrees": 0.0035,
@@ -12,8 +12,8 @@
     "sectorAssignment": {
       "droppedOutsideSectors": 1285,
       "dropped:community": 1285,
-      "assigned": 10857,
-      "assigned:community": 1345,
+      "assigned": 10889,
+      "assigned:community": 1377,
       "assigned:ems_official": 309,
       "assigned:ems_monitor": 1306,
       "assigned:external_gap": 7897
@@ -34,12 +34,14 @@
         "sectorCol": null,
         "priority": "high",
         "score": 145,
-        "communityReports": 231,
+        "communityReports": 241,
         "communityReportsSuppressed": false,
         "communityEvents": {
-          "structural_damage": 56,
-          "other": 174,
-          "aid_collection_first_aid": 1
+          "structural_damage": 57,
+          "other": 176,
+          "aid_collection_first_aid": 1,
+          "access": 5,
+          "water": 2
         },
         "latestSubmissionDate": "2026-07-02",
         "emsOfficialDestroyedDamaged": 53,
@@ -60,8 +62,8 @@
           "Catia La Mar - Daño predicho Microsoft AI4G"
         ],
         "reasons": [
-          "231 aggregated community reports",
-          "56 structural-damage reports",
+          "241 aggregated community reports",
+          "57 structural-damage reports",
           "53 official EMS destroyed/damaged features",
           "511 MONIT01 destroyed/damaged points, kept separate from GRA"
         ],
@@ -230,11 +232,12 @@
         "sectorCol": null,
         "priority": "high",
         "score": 118,
-        "communityReports": 684,
+        "communityReports": 704,
         "communityReportsSuppressed": false,
         "communityEvents": {
-          "structural_damage": 55,
-          "other": 629
+          "structural_damage": 65,
+          "other": 638,
+          "access": 1
         },
         "latestSubmissionDate": "2026-07-07",
         "emsOfficialDestroyedDamaged": 29,
@@ -254,8 +257,8 @@
           "Caraballeda Este - Candidatos triage Microsoft AI4G"
         ],
         "reasons": [
-          "684 aggregated community reports",
-          "55 structural-damage reports",
+          "704 aggregated community reports",
+          "65 structural-damage reports",
           "29 official EMS destroyed/damaged features",
           "192 MONIT01 destroyed/damaged points, kept separate from GRA"
         ],
@@ -876,11 +879,11 @@
         "sectorCol": null,
         "priority": "high",
         "score": 94,
-        "communityReports": 49,
+        "communityReports": 50,
         "communityReportsSuppressed": false,
         "communityEvents": {
           "structural_damage": 13,
-          "other": 35,
+          "other": 36,
           "aid_collection_first_aid": 1
         },
         "latestSubmissionDate": "2026-07-02",
@@ -901,7 +904,7 @@
           "La Guaira Este - Candidatos triage Microsoft AI4G"
         ],
         "reasons": [
-          "49 aggregated community reports",
+          "50 aggregated community reports",
           "13 structural-damage reports",
           "7 official EMS destroyed/damaged features",
           "31 MONIT01 destroyed/damaged points, kept separate from GRA"
@@ -2411,13 +2414,13 @@
         "sectorCol": null,
         "priority": "medium",
         "score": 51,
-        "communityReports": 55,
+        "communityReports": 56,
         "communityReportsSuppressed": false,
         "communityEvents": {
-          "other": 52,
+          "other": 53,
           "structural_damage": 3
         },
-        "latestSubmissionDate": "2026-06-28",
+        "latestSubmissionDate": "2026-07-01",
         "emsOfficialDestroyedDamaged": 0,
         "emsOfficialPossible": 0,
         "emsMonitorDestroyedDamaged": 4,
@@ -2433,7 +2436,7 @@
           "Caraballeda Este - Candidatos triage Microsoft AI4G"
         ],
         "reasons": [
-          "55 aggregated community reports",
+          "56 aggregated community reports",
           "3 structural-damage reports",
           "4 MONIT01 destroyed/damaged points, kept separate from GRA"
         ],

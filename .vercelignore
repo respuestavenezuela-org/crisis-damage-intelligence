@@ -1,0 +1,22 @@
+# Development keeps local imagery for offline and low-dependency testing.
+# Production rewrites these references to the validated public R2 base.
+public/data/tiles
+public/data/chips
+
+.git
+.next
+.vercel
+.cursor
+.codex
+.omo
+.playwright-cli
+node_modules
+ops
+output
+outputs
+qa
+test-results
+tmp
+
+.env
+.env.*

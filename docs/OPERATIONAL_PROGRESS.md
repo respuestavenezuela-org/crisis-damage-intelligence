@@ -262,7 +262,7 @@ QA evidence:
 - Result:
   - The before/after VLM pipeline now supports a parallel candidate-only workflow for areas without official EMS damage vectors.
   - AOI03 can produce a triage review queue, but the current post-event imagery quality is too weak for public operational claims.
-- Blockers:
+- Blockers at that time:
   - AOI03 needs better post-event imagery, official damage vectors, or human-verified candidate reports before any candidate layer should be published.
   - The Vantor `/vsicurl/` path emits GDAL `.msk` warnings and can be slow; larger batches need chunking/timeouts or cached source rasters.
 - Next recommended action:
@@ -1111,7 +1111,10 @@ Do not run post-event-only VLM as if it were before/after comparison.
 - Blockers:
   - AOI06/AOI08/AOI10 still do not have credible high-resolution pre-event imagery for true before/after VLM.
   - AOI03 remains internal-only until human validation promotes candidates.
-  - Vercel Git autodeploy from the heavy source repo can still upload local tiles unless the remote-asset package path is used for production deployments.
+- Deployment follow-up resolved 2026-07-18:
+  - `.vercelignore` removes local tile/chip trees from CLI uploads.
+  - `vercel.json` validates `deploy/remote_asset_validation.json`, then prunes tracked tile/chip trees inside Git-connected Vercel checkouts before rewriting references.
+  - The guard rejects stale reference fingerprints, surviving local heavy references, more than 15,000 files, or more than 250 MB.
+  - The explicit sibling package remains available for rollback/manual deployment and validates at about 21.8 MB with 327 files, including its manifest.
 - Next recommended action:
-  - Make the remote-asset package the only deployment path, or remove heavy tile/chip directories from the deploy source after confirming the team no longer needs local fallback in the production repo.
   - Continue VLM work only where before/after imagery is credible; keep post-event-only VLM separately labeled.

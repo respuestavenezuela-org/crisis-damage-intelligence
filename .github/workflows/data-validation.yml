@@ -1,0 +1,35 @@
+name: Data Validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate catalog schema and guardrails
+        run: python3 scripts/validate_catalog_schema.py
+      - name: Validate VLM publication guardrails
+        run: python3 scripts/validate_vlm_publication_guardrails.py
+      - name: Validate external source registry
+        run: python3 scripts/validate_external_source_registry.py
+      - name: Audit asset budget
+        run: python3 scripts/audit_asset_budget.py
+      - name: Validate mobile budget
+        run: python3 scripts/validate_mobile_performance_budget.py
+      - name: Upload validation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-validation-reports
+          path: ops/performance_audit/
+          if-no-files-found: ignore

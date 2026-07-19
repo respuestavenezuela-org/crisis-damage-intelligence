@@ -20,11 +20,14 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
+from build_vercel_remote_asset_package import heavy_reference_fingerprint, manifest_source_fingerprint
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "public" / "data" / "catalog.json"
 DEFAULT_REMOTE_BASE = "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev"
 DEFAULT_REPORT = ROOT / "ops" / "remote_asset_validation" / "latest.json"
+DEFAULT_DEPLOY_REPORT = ROOT / "deploy" / "remote_asset_validation.json"
 TILE_TEMPLATE_RE = re.compile(r"/data/tiles/([^/]+)/([^/]+)/\{z\}/\{x\}/\{y\}\.webp")
 COG_SUFFIXES = {".tif", ".tiff"}
 EXPECTED_CONTENT_TYPES = {
@@ -163,6 +166,64 @@ def sample_chip_files(limit: int) -> list[Path]:
     if not chips_root.exists():
         return []
     return evenly_sample(sorted(chips_root.rglob("*.png")), limit)
+
+
+def prior_attestation_inputs(
+    path: Path,
+    remote_base: str,
+    sample_per_template: int,
+    sample_chips: int,
+) -> tuple[list[dict[str, str]], dict[str, Any] | None]:
+    if not path.exists():
+        return [], None
+    try:
+        report = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return [], None
+    if report.get("remote_base") != remote_base:
+        return [], None
+
+    tile_groups: dict[str, list[dict[str, str]]] = {}
+    chip_checks: list[dict[str, str]] = []
+    for item in (report.get("remote_assets") or {}).get("checks") or []:
+        if not isinstance(item, dict):
+            continue
+        kind = item.get("kind")
+        data_path = item.get("data_path")
+        catalog_path = item.get("catalog_path")
+        expected_prefix = f"/data/{kind}s/" if kind in {"tile", "chip"} else None
+        if (
+            expected_prefix is None
+            or not isinstance(data_path, str)
+            or not data_path.startswith(expected_prefix)
+            or not isinstance(catalog_path, str)
+        ):
+            continue
+        check = {
+            "kind": kind,
+            "catalog_path": catalog_path,
+            "data_path": data_path,
+            "url": remote_url(remote_base, data_path),
+        }
+        if kind == "tile":
+            tile_groups.setdefault(catalog_path, []).append(check)
+        else:
+            chip_checks.append(check)
+
+    checks: list[dict[str, str]] = []
+    for records in tile_groups.values():
+        checks.extend(evenly_sample_records(records, sample_per_template))
+    checks.extend(evenly_sample_records(chip_checks, sample_chips))
+    fingerprint = report.get("source_reference_fingerprint")
+    if not (
+        isinstance(fingerprint, dict)
+        and fingerprint.get("algorithm") == "sha256"
+        and isinstance(fingerprint.get("sha256"), str)
+        and isinstance(fingerprint.get("reference_count"), int)
+        and fingerprint["reference_count"] > 0
+    ):
+        fingerprint = None
+    return checks, fingerprint
 
 
 def public_data_path(path: Path) -> str:
@@ -319,6 +380,8 @@ def deploy_gate(
     failures: list[dict[str, Any]],
     missing_static: list[dict[str, Any]],
     quality_errors: list[dict[str, Any]],
+    sampled_tiles: list[dict[str, str]],
+    sampled_chips: list[dict[str, str]],
     sampled_cogs: list[dict[str, str]],
 ) -> dict[str, Any]:
     blockers: list[str] = []
@@ -330,6 +393,10 @@ def deploy_gate(
         blockers.append(f"{len(failures)} sampled remote asset checks failed")
     if quality_errors:
         blockers.append(f"{len(quality_errors)} sampled remote asset checks have content/range quality errors")
+    if not sampled_tiles:
+        blockers.append("no tile URLs were sampled, so remote tile availability is unverified")
+    if not sampled_chips:
+        blockers.append("no chip URLs were sampled, so remote evidence-chip availability is unverified")
     if not sampled_cogs:
         blockers.append("no COG URLs were sampled, so COG fallback Range/content-type support is unverified")
     if cog_failures or cog_quality_errors:
@@ -343,6 +410,8 @@ def deploy_gate(
         "cog_range_requirement": COG_RANGE_REQUIREMENT,
         "cog_content_type_requirement": COG_CONTENT_TYPE_REQUIREMENT,
         "expected_content_types": {key: sorted(value) for key, value in EXPECTED_CONTENT_TYPES.items()},
+        "sampled_tile_count": len(sampled_tiles),
+        "sampled_chip_count": len(sampled_chips),
         "sampled_cog_count": len(sampled_cogs),
         "cog_failure_count": len(cog_failures),
         "cog_quality_error_count": len(cog_quality_errors),
@@ -378,6 +447,8 @@ def write_markdown(report: dict[str, Any], path: Path) -> None:
         f"- Ready for pruned remote-asset package: `{report['deploy_gate']['pruned_remote_asset_package_ready']}`",
         f"- COG Range requirement: {report['deploy_gate']['cog_range_requirement']}",
         f"- COG content-type requirement: {report['deploy_gate']['cog_content_type_requirement']}",
+        f"- Sampled tile URLs: `{report['deploy_gate']['sampled_tile_count']}`",
+        f"- Sampled chip URLs: `{report['deploy_gate']['sampled_chip_count']}`",
         f"- Sampled COG URLs: `{report['deploy_gate']['sampled_cog_count']}`",
     ])
     if report["deploy_gate"]["blockers"]:
@@ -420,6 +491,12 @@ def main() -> None:
     parser.add_argument("--timeout", type=float, default=8)
     parser.add_argument("--pause", type=float, default=0.05, help="Seconds to pause between public URL checks.")
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument(
+        "--deploy-report",
+        type=Path,
+        default=DEFAULT_DEPLOY_REPORT,
+        help="Validation attestation kept in the pruned Vercel source tree",
+    )
     parser.add_argument("--allow-failures", action="store_true", help="Write the report and exit 0 even when remote URLs fail.")
     args = parser.parse_args()
 
@@ -427,6 +504,16 @@ def main() -> None:
     remote_base = normalize_base(args.remote_base)
     static_refs = local_static_refs(catalog)
     templates = tile_templates(catalog)
+    source_fingerprint = heavy_reference_fingerprint(ROOT)
+    if source_fingerprint["reference_count"] == 0:
+        source_fingerprint = manifest_source_fingerprint(ROOT) or source_fingerprint
+    prior_checks, prior_fingerprint = prior_attestation_inputs(
+        args.deploy_report,
+        remote_base,
+        args.sample_per_template,
+        args.sample_chips,
+    )
+    prior_fingerprint_matches = prior_fingerprint == source_fingerprint
 
     checks: list[dict[str, str]] = []
     for template in templates:
@@ -446,6 +533,12 @@ def main() -> None:
             "data_path": data_path,
             "url": remote_url(remote_base, data_path),
         })
+    local_tile_count = sum(1 for item in checks if item["kind"] == "tile")
+    local_chip_count = sum(1 for item in checks if item["kind"] == "chip")
+    if not local_tile_count and prior_fingerprint_matches:
+        checks.extend(item for item in prior_checks if item["kind"] == "tile")
+    if not local_chip_count and prior_fingerprint_matches:
+        checks.extend(item for item in prior_checks if item["kind"] == "chip")
     checks.extend(remote_cog_urls(catalog, args.sample_cogs))
 
     results: list[dict[str, Any]] = []
@@ -472,12 +565,22 @@ def main() -> None:
         for item in results
         if item["quality_warnings"]
     ]
+    sampled_tiles = [item for item in checks if item["kind"] == "tile"]
+    sampled_chips = [item for item in checks if item["kind"] == "chip"]
     sampled_cogs = [item for item in checks if item["kind"] == "cog"]
-    gate = deploy_gate(failures, missing_static, quality_errors, sampled_cogs)
+    gate = deploy_gate(
+        failures,
+        missing_static,
+        quality_errors,
+        sampled_tiles,
+        sampled_chips,
+        sampled_cogs,
+    )
     report = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "catalog": rel(args.catalog),
         "remote_base": remote_base,
+        "source_reference_fingerprint": source_fingerprint,
         "result": "pass" if gate["pruned_remote_asset_package_ready"] else "fail",
         "deploy_gate": gate,
         "package_pressure": {
@@ -494,6 +597,15 @@ def main() -> None:
         },
         "remote_assets": {
             "tile_templates": templates,
+            "sample_source": {
+                "local_tile_checks": local_tile_count,
+                "local_chip_checks": local_chip_count,
+                "prior_attestation_fingerprint_match": prior_fingerprint_matches,
+                "prior_attestation_fallback_checks": (
+                    (len(sampled_tiles) if not local_tile_count else 0)
+                    + (len(sampled_chips) if not local_chip_count else 0)
+                ),
+            },
             "sampled_cogs": sampled_cogs,
             "checked": len(results),
             "ok": len(results) - len(failures),
@@ -510,12 +622,15 @@ def main() -> None:
 
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + "\n")
+    args.deploy_report.parent.mkdir(parents=True, exist_ok=True)
+    args.deploy_report.write_text(json.dumps(report, indent=2) + "\n")
     markdown_path = args.report.with_suffix(".md")
     write_markdown(report, markdown_path)
 
     print(json.dumps({
         "result": report["result"],
         "report": rel(args.report),
+        "deploy_report": rel(args.deploy_report),
         "markdown": rel(markdown_path),
         "static_missing": len(missing_static),
         "remote_checked": len(results),

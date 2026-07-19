@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Basic secret pattern scan
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          roots = [Path("src"), Path("scripts"), Path("public"), Path("supabase"), Path(".github")]
+          pattern = re.compile(r"(?i)(api[_-]?key|secret|token|password|service[_-]?role)\s*[:=]\s*['\"][A-Za-z0-9_./+=:-]{16,}['\"]")
+          hits = []
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in root.rglob("*"):
+                  if path.is_file() and path.suffix.lower() in {".ts", ".tsx", ".js", ".mjs", ".py", ".sql", ".json", ".yml", ".yaml"}:
+                      text = path.read_text(errors="ignore")
+                      for match in pattern.finditer(text):
+                          hits.append(f"{path}:{text[:match.start()].count(chr(10)) + 1}: possible secret")
+          if hits:
+              print("\n".join(hits))
+              raise SystemExit(1)
+          print("No obvious secret literals found.")
+          PY
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee .ci-build.log
+      - name: Dependency audit report
+        if: always()
+        run: npm audit --omit=dev --audit-level=critical > .npm-audit.log 2>&1 || true
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-logs
+          path: |
+            .ci-build.log
+            .npm-audit.log
+          if-no-files-found: ignore

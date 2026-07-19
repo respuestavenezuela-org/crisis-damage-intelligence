@@ -34,7 +34,7 @@ Warnings:
 
 ## Raw Package Rule
 
-The current repository checkout is a development package, not a safe production package. `public/data/tiles` and `public/data/chips` exceed the local targets and make `scripts/build_vercel_remote_asset_package.py` required before production deploys.
+The current repository checkout is a development package, not a production payload. `public/data/tiles` and `public/data/chips` exceed the local targets, while `.vercelignore` plus `vercel.json` now force Vercel through the validated remote-asset preparation. Explicit deployments should still use `scripts/build_vercel_remote_asset_package.py`.
 
 Review `ops/performance_audit/latest.md` and `ops/performance_audit/mobile_budget.md` on every PR that changes `public/data/**`. The reports identify:
 
