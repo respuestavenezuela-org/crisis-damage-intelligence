@@ -1,6 +1,6 @@
 # Decision 0006: Use the neutral canvas behind desktop rails
 
-- Status: Accepted
+- Status: Superseded by Decision 0007
 - Date: 2026-07-20
 - Commit: `Remove black rail gutters`
 

@@ -192,16 +192,30 @@ test("lite view falls back to Spanish when browser storage is blocked", async ({
   await expect(page.getByRole("region", { name: "Prioridad pública" })).toBeVisible();
 });
 
-test("desktop map owns the viewport between rails and localizes impact zones", async ({ page }) => {
+test("desktop map fills the viewport behind rails and localizes impact zones", async ({ page }) => {
   await keepMapRastersLight(page);
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   await dismissFirstVisitThanks(page);
 
   const mapBox = await page.locator(".map-node").boundingBox();
+  const leftRailBox = await page.locator(".left-rail").boundingBox();
+  const rightRailBox = await page.getByTestId("right-rail").boundingBox();
+  const toolbarBox = await page.getByTestId("map-toolbar").boundingBox();
   expect(mapBox).not.toBeNull();
-  expect(mapBox?.x).toBeGreaterThanOrEqual(330);
-  expect((mapBox?.x ?? 0) + (mapBox?.width ?? 0)).toBeLessThanOrEqual(1440 - 360);
+  expect(leftRailBox).not.toBeNull();
+  expect(rightRailBox).not.toBeNull();
+  expect(toolbarBox).not.toBeNull();
+  expect(mapBox?.x).toBe(0);
+  expect(mapBox?.width).toBeGreaterThanOrEqual(1440);
+  expect(leftRailBox?.x).toBeGreaterThan(mapBox?.x ?? 0);
+  expect((rightRailBox?.x ?? 0) + (rightRailBox?.width ?? 0)).toBeLessThanOrEqual(
+    (mapBox?.x ?? 0) + (mapBox?.width ?? 0),
+  );
+  expect(toolbarBox?.x).toBeGreaterThanOrEqual(
+    (leftRailBox?.x ?? 0) + (leftRailBox?.width ?? 0),
+  );
+  expect((toolbarBox?.x ?? 0) + (toolbarBox?.width ?? 0)).toBeLessThanOrEqual(rightRailBox?.x ?? 0);
 
   await page.getByRole("button", { name: "EN", exact: true }).click();
   await expect(page.getByTestId("right-rail")).toContainText("Impact zone");

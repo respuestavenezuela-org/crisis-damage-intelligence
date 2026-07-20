@@ -242,7 +242,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .kpi-grid b { display: block; font-size: 23px; }
 .kpi-grid span { color: var(--ops-muted); font-size: 12px; }
 h2 { margin: 0 0 10px; font-size: 15px; }
-.map-stage { position: absolute; inset: 0 368px 0 332px; min-width: 0; z-index: 1; }
+.map-stage { position: absolute; inset: 0; min-width: 0; z-index: 1; }
 .map-node { position: absolute; inset: 0; background: #c9c3b7; }
 
 /* Lite public view */
@@ -434,8 +434,8 @@ h2 { margin: 0 0 10px; font-size: 15px; }
 .ol-popup a { text-decoration: underline; font-weight: 700; }
 .map-toolbar {
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 346px;
+  right: 382px;
   top: 14px;
   z-index: 850;
   width: auto;
@@ -604,13 +604,9 @@ dd { margin: 0; text-align: right; font-weight: 700; }
     border: 1px solid rgba(23, 24, 22, .18);
     box-shadow: 0 -10px 24px rgba(0,0,0,.16);
   }
-  .map-stage {
-    right: 14px;
-    bottom: calc(34vh + 28px);
-  }
   .right-rail section:not(.planning-lens-panel):not(.operational-signals-panel):not(.operational-brief):not(.evidence-panel):not(.priority-panel) { display: none; }
   .map-toolbar {
-    left: 14px;
+    left: 346px;
     right: 14px;
     max-width: none;
   }
