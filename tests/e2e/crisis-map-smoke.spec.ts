@@ -232,7 +232,10 @@ test("planning lenses keep operations focused without hiding core actions", asyn
   const inspector = page.getByTestId("mobile-inspector-sheet");
   await expect(inspector).toBeVisible();
   await expect(inspector.getByTestId("planning-card")).toBeVisible();
-  await expect(inspector.getByTestId("planning-lens-prioritize")).toHaveAttribute("aria-pressed", "true");
+  const prioritizeLens = inspector.getByTestId("planning-lens-prioritize");
+  await expect(prioritizeLens).toHaveAttribute("aria-pressed", "true");
+  await expect(prioritizeLens).toHaveCSS("color", "rgb(255, 253, 248)");
+  await expect(prioritizeLens).toHaveCSS("background-color", "rgb(17, 18, 15)");
   await expect(inspector).toContainText("Brief operativo");
   await expect(inspector.getByRole("button", { name: "Ver prioridad" }).first()).toBeVisible();
 
@@ -240,6 +243,7 @@ test("planning lenses keep operations focused without hiding core actions", asyn
   await reviewLens.scrollIntoViewIfNeeded();
   await reviewLens.click();
   await expect(reviewLens).toHaveAttribute("aria-pressed", "true");
+  await expect(reviewLens).toHaveCSS("color", "rgb(255, 253, 248)");
   await expect(inspector).toContainText("Cola de evidencia");
   await expect(inspector).toContainText("Confianza");
 
@@ -247,6 +251,7 @@ test("planning lenses keep operations focused without hiding core actions", asyn
   await accessLens.scrollIntoViewIfNeeded();
   await accessLens.click();
   await expect(accessLens).toHaveAttribute("aria-pressed", "true");
+  await expect(accessLens).toHaveCSS("color", "rgb(255, 253, 248)");
   await expect(inspector).toContainText("No es una ruta despejada");
   await expect(inspector).toContainText("Zonas");
 });
