@@ -1,6 +1,6 @@
 # Mobile Performance Budget
 
-- Generated UTC: `2026-07-19T13:56:48.307187+00:00`
+- Generated UTC: `2026-07-20T09:34:41.692278+00:00`
 - Result: `pass`
 - Catalog: `65.1 KB` / `195.3 KB`
 - Initial AOI list bytes: `65.1 KB` / `244.1 KB`
