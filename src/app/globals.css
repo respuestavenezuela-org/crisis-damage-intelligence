@@ -72,7 +72,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
   height: calc(100dvh - var(--install-bar, 0px));
   margin-top: var(--install-bar, 0px);
   overflow: hidden;
-  background: #11120f;
+  background: var(--bg);
 }
 .left-rail, .right-rail {
   position: absolute;
