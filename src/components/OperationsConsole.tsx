@@ -76,6 +76,7 @@ const copy = {
     subtitle: "Geospatial damage triage for earthquake response",
     live: "Public read-only",
     liteView: "Lite view",
+    timelineView: "Aftermath timeline",
     opsConsole: "Operations console",
     language: "Language",
     aoi: "Go to affected area",
@@ -247,6 +248,7 @@ const copy = {
     subtitle: "Triage geoespacial de daños para respuesta al terremoto",
     live: "Público solo lectura",
     liteView: "Vista ligera",
+    timelineView: "Cronología del impacto",
     opsConsole: "Consola operativa",
     language: "Idioma",
     aoi: "Ir a zona afectada",
@@ -2051,7 +2053,12 @@ export default function OperationsConsole() {
           <Button variant={language === "es" ? "default" : "outline"} className={language === "es" ? "active" : ""} aria-pressed={language === "es"} onClick={() => changeLanguage("es")}>ES</Button>
           <Button variant={language === "en" ? "default" : "outline"} className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => changeLanguage("en")}>EN</Button>
         </div>
-        {!isMobileLayout && <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>}
+        {!isMobileLayout && (
+          <nav className="sidebar-view-links" aria-label={language === "es" ? "Vistas públicas" : "Public views"}>
+            <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
+            <Link className="timeline-inline-link" href="/timeline">{t.timelineView}</Link>
+          </nav>
+        )}
         {!isMobileLayout && (
           <>
             {renderSearchPanel("desktop")}
@@ -2271,7 +2278,10 @@ export default function OperationsConsole() {
               <ScrollArea className="mobile-sheet-content mobile-sheet-scroller">
                 <div className="mobile-sheet-body">
                   <p>{t.subtitle}</p>
-                  <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
+                  <nav className="sidebar-view-links" aria-label={language === "es" ? "Vistas públicas" : "Public views"}>
+                    <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
+                    <Link className="timeline-inline-link" href="/timeline">{t.timelineView}</Link>
+                  </nav>
                   <p className="quick-start">{t.quickStart}</p>
                   <section className="field-guide">
                     <b>{t.fieldGuideTitle}</b>
@@ -2423,7 +2433,10 @@ function PlanningCard({
       <CardContent>
         <div className="planning-lens-heading">
           <span>{t.planningLens}</span>
-          <Link className="lite-link" href="/lite">{t.liteView}</Link>
+          <span className="planning-view-links">
+            <Link className="lite-link" href="/lite">{t.liteView}</Link>
+            <Link className="timeline-link" href="/timeline">{t.timelineView}</Link>
+          </span>
         </div>
         <div className="planning-lens-switch" role="group" aria-label={t.planningLens}>
           {lensOptions.map((option) => (

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-20T09:34:38.102968+00:00",
+  "generated_utc": "2026-07-21T03:06:24.518341+00:00",
   "catalog": {
     "path": "public/data/catalog.json",
     "bytes": 66684,
@@ -10,27 +10,27 @@
   },
   "bundle": {
     "build_present": true,
-    "js_files": 27,
-    "js_bytes": 1904308,
-    "js_human": "1.8 MB",
-    "css_files": 2,
-    "css_bytes": 83498,
-    "css_human": "81.5 KB",
+    "js_files": 29,
+    "js_bytes": 1946635,
+    "js_human": "1.9 MB",
+    "css_files": 3,
+    "css_bytes": 112028,
+    "css_human": "109.4 KB",
     "next_dir": {
       "path": ".next",
       "exists": true,
-      "files": 2470,
-      "bytes": 445922647,
-      "human": "425.3 MB"
+      "files": 2689,
+      "bytes": 478708157,
+      "human": "456.5 MB"
     }
   },
   "public_data": {
     "data": {
       "path": "public/data",
       "exists": true,
-      "files": 74619,
-      "bytes": 279992087,
-      "human": "267.0 MB"
+      "files": 74620,
+      "bytes": 280035760,
+      "human": "267.1 MB"
     },
     "aoi": {
       "path": "public/data/aoi",
@@ -61,13 +61,13 @@
     "raw_local_package_safe": false,
     "remote_asset_package_required": true,
     "unsafe_reasons": [
-      "public/data is 267.0 MB, above the raw package target 119.2 MB",
+      "public/data is 267.1 MB, above the raw package target 119.2 MB",
       "public/data/tiles is 186.0 MB, above the local tile target 71.5 MB",
       "public/data/chips is 67.3 MB, above the local chip target 38.1 MB"
     ],
     "remote_excluded_bytes": 265676933,
     "remote_excluded_human": "253.4 MB",
-    "non_remote_public_data_bytes": 14315154,
+    "non_remote_public_data_bytes": 14358827,
     "non_remote_public_data_human": "13.7 MB",
     "large_local_aoi_file_count": 0,
     "large_local_aoi_bytes": 0,

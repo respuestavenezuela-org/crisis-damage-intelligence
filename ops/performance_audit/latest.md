@@ -1,10 +1,10 @@
 # Performance Audit Baseline
 
-- Generated UTC: `2026-07-20T09:34:38.102968+00:00`
+- Generated UTC: `2026-07-21T03:06:24.518341+00:00`
 - Catalog: `65.1 KB` across `16` AOIs
-- JS bundle in `.next/static`: `1.8 MB` across `27` files
-- CSS bundle in `.next/static`: `81.5 KB` across `2` files
-- `public/data`: `267.0 MB` across `74619` files
+- JS bundle in `.next/static`: `1.9 MB` across `29` files
+- CSS bundle in `.next/static`: `109.4 KB` across `3` files
+- `public/data`: `267.1 MB` across `74620` files
 - `public/data/tiles`: `186.0 MB` across `73837` files
 - `public/data/chips`: `67.3 MB` across `681` files
 - Raw local production package safe: `False`
@@ -27,7 +27,7 @@
 
 ### Raw Local Package Unsafe Reasons
 
-- public/data is 267.0 MB, above the raw package target 119.2 MB
+- public/data is 267.1 MB, above the raw package target 119.2 MB
 - public/data/tiles is 186.0 MB, above the local tile target 71.5 MB
 - public/data/chips is 67.3 MB, above the local chip target 38.1 MB
 

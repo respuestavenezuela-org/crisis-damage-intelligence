@@ -4,6 +4,10 @@ Static-first, bilingual earthquake response and damage triage platform for publi
 
 Canonical public URL: `https://respuestavenezuela.org`
 
+Public earthquake aftermath reconstruction: `/timeline`. It separates reported,
+mobilized, arrived-in-country, arrived-in-region, observed-on-site, and operational
+evidence so that aid movement is not mistaken for aid reaching a specific community.
+
 > **For rescue teams / Para equipos de rescate:** field guide in
 > [Español](docs/RESCUE_FIELD_GUIDE_ES.md) · [English](docs/RESCUE_FIELD_GUIDE_EN.md).
 > Includes the volunteer translator (ES ⇄ EN): [traduceme](https://suvadityamuk-traduceme.hf.space/) · Telegram [@TraducemeVzlaBot](https://t.me/TraducemeVzlaBot).
@@ -61,6 +65,7 @@ The public app only requires static files:
 
 ```text
 public/data/catalog.json
+public/data/reconstruction/la-guaira-timeline.json
 public/data/aoi/<aoi-id>/damage.geojson
 public/data/aoi/<aoi-id>/damage.csv
 public/data/aoi/<aoi-id>/damage.kml

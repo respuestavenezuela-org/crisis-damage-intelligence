@@ -1,0 +1,996 @@
+{
+  "version": 1,
+  "id": "venezuela-earthquake-2026-la-guaira-reconstruction",
+  "updatedAt": "2026-07-20T23:59:00-04:00",
+  "eventOrigin": "2026-06-24T18:04:33-04:00",
+  "coverage": {
+    "geography": {
+      "es": "La Guaira, Caraballeda y Catia La Mar",
+      "en": "La Guaira, Caraballeda and Catia La Mar"
+    },
+    "startsAt": "2026-06-24T18:04:33-04:00",
+    "endsAt": "2026-07-20T23:59:00-04:00",
+    "latestEvidenceAt": "2026-07-20T00:00:00-04:00",
+    "latestOpenSatelliteAt": "2026-06-29T23:59:00-04:00",
+    "note": {
+      "es": "La cobertura es una reconstrucción de observaciones fechadas, no un registro continuo. La imagen pública de muy alta resolución identificada llega hasta el 29 de junio; la actividad posterior depende más de mapas humanitarios, reportes operativos, fotos de campo y periodismo.",
+      "en": "Coverage is a reconstruction from dated observations, not a continuous recording. Identified public very-high-resolution imagery extends through June 29; later activity relies more heavily on humanitarian maps, operational reports, field photography and journalism."
+    }
+  },
+  "method": {
+    "confidenceLevels": [
+      {
+        "id": "confirmed",
+        "label": {
+          "es": "Confirmado",
+          "en": "Confirmed"
+        },
+        "definition": {
+          "es": "Fuente primaria u oficial, o evidencia visual directa con fecha y ubicación suficientes.",
+          "en": "Primary or official source, or direct visual evidence with sufficient date and location."
+        }
+      },
+      {
+        "id": "corroborated",
+        "label": {
+          "es": "Corroborado",
+          "en": "Corroborated"
+        },
+        "definition": {
+          "es": "Dos o más fuentes independientes apoyan el mismo hecho general.",
+          "en": "Two or more independent sources support the same general fact."
+        }
+      },
+      {
+        "id": "single-source",
+        "label": {
+          "es": "Una fuente",
+          "en": "Single source"
+        },
+        "definition": {
+          "es": "Afirmación atribuida a una sola fuente creíble; necesita contraste adicional.",
+          "en": "Claim attributed to one credible source; further corroboration is needed."
+        }
+      },
+      {
+        "id": "inferred",
+        "label": {
+          "es": "Inferido",
+          "en": "Inferred"
+        },
+        "definition": {
+          "es": "Interpretación conservadora de imagen o datos. No equivale a confirmación de actividad, propiedad o suficiencia.",
+          "en": "Conservative interpretation of imagery or data. It does not confirm activity, ownership or adequacy."
+        }
+      }
+    ],
+    "absenceRule": {
+      "es": "No observado no significa que no ocurrió. La ausencia solo se describe cuando una fuente situada reporta una carencia concreta.",
+      "en": "Not observed does not mean it did not happen. Absence is described only when a situated source reports a specific gap."
+    },
+    "arrivalRule": {
+      "es": "Separamos anunciado, movilizado, llegado al país o región, observado en un sitio y operativo. Esas etapas no son intercambiables.",
+      "en": "We separate announced, mobilized, arrived in country or region, observed at a site and operational. Those stages are not interchangeable."
+    }
+  },
+  "first72Assessment": {
+    "cutoff": "2026-06-27T18:04:33-04:00",
+    "headline": {
+      "es": "La ayuda se movilizó pronto, pero la evidencia no permite decir que llegó de forma uniforme a los sitios críticos durante las primeras 72 horas.",
+      "en": "Help mobilized quickly, but the evidence does not support saying it reached critical sites uniformly within the first 72 hours."
+    },
+    "summary": {
+      "es": "La respuesta local y civil comenzó de inmediato. El 25 de junio la ONU describía equipos internacionales entrantes; el 26 hablaba de decenas de equipos en despliegue. Una imagen Copernicus del 26 de junio, unas 41 horas después de los sismos, muestra vehículos y una probable excavadora junto a por lo menos un sitio de colapso en Caraballeda. El mismo día, periodismo en terreno reportó caravanas de maquinaria y camiones hacia La Guaira, pero también residentes excavando con pocos equipos estatales visibles en zonas muy afectadas. Para el 27, la ONU describía más de 2.000 rescatistas desplegados, aunque la hora exacta y su distribución por sitio no están establecidas. La mayor escala logística queda documentada con más claridad después de la ventana de 72 horas.",
+      "en": "Local and civilian response began immediately. On June 25 the UN described incoming international teams; on June 26 it described dozens of teams deploying. A Copernicus image from June 26, about 41 hours after the earthquakes, shows vehicles and a probable excavator beside at least one collapse site in Caraballeda. The same day, on-the-ground journalism reported convoys of machinery and dump trucks toward La Guaira, while residents in heavily affected areas also reported digging with few state teams visible. By June 27 the UN described more than 2,000 rescuers as deployed, although the exact time and site-by-site distribution are not established. Larger-scale logistics are documented much more clearly after the 72-hour window."
+    },
+    "findings": [
+      {
+        "id": "local-response-immediate",
+        "status": "observed-site",
+        "confidence": "corroborated",
+        "title": {
+          "es": "Rescate local inmediato",
+          "en": "Immediate local rescue"
+        },
+        "body": {
+          "es": "Familias, vecinos, bomberos, protección civil y otros equipos nacionales comenzaron búsqueda, evacuación y atención durante la noche del 24 y el día 25.",
+          "en": "Families, neighbours, firefighters, civil protection and other national teams began search, evacuation and care during the night of June 24 and on June 25."
+        },
+        "sourceIds": [
+          "un-june-25",
+          "un-geneva-june-26",
+          "ap-june-26"
+        ]
+      },
+      {
+        "id": "machinery-by-41-hours",
+        "status": "observed-site",
+        "confidence": "inferred",
+        "title": {
+          "es": "Maquinaria visible en al menos un sitio",
+          "en": "Machinery visible at at least one site"
+        },
+        "body": {
+          "es": "La imagen Copernicus adquirida el 26 de junio a las 15:10 UTC contiene múltiples vehículos y un objeto amarillo compatible con excavadora junto a un campo de escombros. La resolución no permite identificar operador, función ni suficiencia.",
+          "en": "Copernicus imagery acquired on June 26 at 15:10 UTC contains multiple vehicles and a yellow object consistent with an excavator beside a debris field. Resolution does not establish operator, function or adequacy."
+        },
+        "sourceIds": [
+          "copernicus-aoi12-june-26"
+        ],
+        "image": {
+          "src": "/data/chips/emsr884-aoi12-caraballeda/ems_00119_before_after_compare.png",
+          "alt": {
+            "es": "Comparación antes y después de un sitio destruido en Caraballeda; en la imagen posterior aparecen varios vehículos y una probable máquina amarilla junto a la vía.",
+            "en": "Before-and-after comparison of a destroyed site in Caraballeda; the post-event image shows several vehicles and a probable yellow machine beside the road."
+          },
+          "caption": {
+            "es": "Vantor pre-evento / Copernicus EMS post-evento, 26 jun 2026 15:10 UTC. La observación de maquinaria es candidata y requiere revisión humana.",
+            "en": "Vantor pre-event / Copernicus EMS post-event, June 26 2026 15:10 UTC. Machinery identification is a candidate observation requiring human review."
+          }
+        }
+      },
+      {
+        "id": "international-teams-deploying",
+        "status": "mobilized",
+        "confidence": "confirmed",
+        "title": {
+          "es": "Equipos internacionales en despliegue",
+          "en": "International teams deploying"
+        },
+        "body": {
+          "es": "La ONU informó el 26 que 30 equipos, más de 1.600 personas y más de 100 perros se estaban desplegando. El lenguaje de la fuente es despliegue, no operación confirmada en cada sitio.",
+          "en": "The UN reported on June 26 that 30 teams, more than 1,600 personnel and over 100 dogs were deploying. The source says deployment, not confirmed operations at every site."
+        },
+        "sourceIds": [
+          "un-june-26"
+        ]
+      },
+      {
+        "id": "site-level-gap",
+        "status": "reported",
+        "confidence": "single-source",
+        "title": {
+          "es": "Brecha entre tránsito regional y presencia local",
+          "en": "Gap between regional movement and local presence"
+        },
+        "body": {
+          "es": "Un reporte de campo del 26 describió caravanas de fuerzas, equipos de emergencia, volquetas y maquinaria pesada rumbo a la zona, mientras residentes de sectores muy afectados dijeron haber visto pocos equipos y continuaban excavando por su cuenta.",
+          "en": "A June 26 field report described convoys of state forces, emergency crews, dump trucks and heavy machinery heading toward the disaster area, while residents in badly affected sectors said they had seen few teams and continued digging themselves."
+        },
+        "sourceIds": [
+          "ap-june-26"
+        ]
+      },
+      {
+        "id": "cargo-scale-after-window",
+        "status": "arrived-country",
+        "confidence": "confirmed",
+        "title": {
+          "es": "La escala logística mayor se documenta después",
+          "en": "Larger-scale logistics are documented later"
+        },
+        "body": {
+          "es": "El primer envío aéreo UNICEF de 20 toneladas llegó a Valencia el 27 de junio, pero la hora no permite asegurar que ocurrió antes del corte exacto de 72 horas ni que fue entregado en La Guaira dentro de esa ventana. Los envíos y servicios logísticos de mayor escala aparecen claramente en fuentes del 29 de junio en adelante.",
+          "en": "UNICEF's first 20-ton air shipment reached Valencia on June 27, but the published time does not establish that it arrived before the exact 72-hour cutoff or reached La Guaira within it. Larger shipments and logistics services become clearly documented from June 29 onward."
+        },
+        "sourceIds": [
+          "un-june-29",
+          "logistics-july-2"
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "emsc-doublet",
+      "publisher": "European-Mediterranean Seismological Centre",
+      "title": "Mw 7.2 and Mw 7.5 Venezuela on June 24th 2026",
+      "publishedAt": "2026-06-24T22:05:11Z",
+      "url": "https://m.emsc-csem.org/Special_reports/?id=420",
+      "type": "scientific-record",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "un-june-25",
+      "publisher": "United Nations",
+      "title": "Noon briefing of 25 June 2026",
+      "publishedAt": "2026-06-25T12:00:00-04:00",
+      "url": "https://www.un.org/sg/en/content/highlight/2026-06-25.html",
+      "type": "official-briefing",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "un-june-26",
+      "publisher": "United Nations",
+      "title": "Noon briefing of 26 June 2026",
+      "publishedAt": "2026-06-26T12:00:00-04:00",
+      "url": "https://www.un.org/sg/en/content/highlight/2026-06-26.html",
+      "type": "official-briefing",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "unfpa-june-26",
+      "publisher": "UNFPA",
+      "title": "Venezuela Earthquake Flash Update, 24–26 June 2026",
+      "publishedAt": "2026-06-26T18:00:00-04:00",
+      "url": "https://www.unfpa.org/sites/default/files/resource-pdf/UNFPA%20Venezuela%20Flash%20Update%20%2824-26%20Jun%202026%29.pdf",
+      "type": "situation-report",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "un-geneva-june-26",
+      "publisher": "United Nations Geneva",
+      "title": "Venezuela earthquake response: OCHA, IOM, PAHO, UNHCR, OHCHR, IFRC",
+      "publishedAt": "2026-06-26T12:00:00Z",
+      "url": "https://www.unognewsroom.org/story/en/3177/venezuela-earthquake-response-ocha-iom-paho-unhcr-ohchr-ifrc/9463",
+      "type": "official-media-briefing",
+      "evidenceClass": "primary",
+      "license": "UN media terms; link only"
+    },
+    {
+      "id": "copernicus-aoi12-june-26",
+      "publisher": "Copernicus Emergency Management Service",
+      "title": "EMSR884 AOI12 Legion post-event orthomosaic",
+      "publishedAt": "2026-06-26T15:10:00Z",
+      "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+      "type": "satellite-imagery",
+      "evidenceClass": "primary",
+      "license": "Copernicus EMS public product terms"
+    },
+    {
+      "id": "ap-june-26",
+      "publisher": "Associated Press",
+      "title": "Venezuelans take search for the missing into their own hands as earthquake death toll climbs",
+      "publishedAt": "2026-06-26T04:29:30Z",
+      "url": "https://apnews.com/article/b07aff1cb886cfe616a0e89b3687b8b8",
+      "type": "field-reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; link only"
+    },
+    {
+      "id": "un-june-27",
+      "publisher": "United Nations",
+      "title": "International rescue teams join the search for survivors",
+      "publishedAt": "2026-06-27T12:00:00-04:00",
+      "url": "https://www.un.org/en/venezuela-international-rescue-teams-join-search-survivors-earthquake-deaths-surpass-1400",
+      "type": "official-update",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "un-june-29",
+      "publisher": "United Nations",
+      "title": "Noon briefing of 29 June 2026",
+      "publishedAt": "2026-06-29T12:00:00-04:00",
+      "url": "https://www.un.org/sg/en/content/highlight/2026-06-29.html",
+      "type": "official-briefing",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "undp-debris-june-29",
+      "publisher": "United Nations Development Programme",
+      "title": "UNDP estimates 1.2 million tonnes of debris in La Guaira area",
+      "publishedAt": "2026-06-29T12:00:00-04:00",
+      "url": "https://www.undp.org/latin-america/press-releases/undp-estimates-12-million-tonnes-debris-la-guaira-area-after-earthquakes-venezuela",
+      "type": "official-assessment",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "hot-response",
+      "publisher": "Humanitarian OpenStreetMap Team",
+      "title": "Respuesta al terremoto de Venezuela de 2026",
+      "publishedAt": "2026-07-09T12:00:00-04:00",
+      "url": "https://www.hotosm.org/es/proyectos/respuesta-al-terremoto-de-venezuela-de-2026/",
+      "type": "response-hub",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "unhcr-june-29",
+      "publisher": "UNHCR",
+      "title": "Venezuela Earthquake Emergency Update, 24–29 June 2026",
+      "publishedAt": "2026-06-29T23:59:00-04:00",
+      "url": "https://www.unhcr.org/sites/default/files/docs/default/2026-07/venezuela-earthquake-emergency-update-june-2026.pdf",
+      "type": "situation-report",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "mapaction-live",
+      "publisher": "MapAction",
+      "title": "MapAction Venezuela response live updates",
+      "publishedAt": "2026-07-14T12:05:00Z",
+      "url": "https://mapaction.org/updated-mapaction-sending-team-to-support-response-to-venezuelan-earthquakes/",
+      "type": "response-timeline",
+      "evidenceClass": "primary",
+      "license": "License not specified; link only"
+    },
+    {
+      "id": "mapaction-ma013",
+      "publisher": "MapAction",
+      "title": "La Guaira USAR sectors, shelters, distribution points and damage estimates",
+      "publishedAt": "2026-07-04T19:00:00Z",
+      "url": "https://maps.mapaction.org/dataset/2026-ven-001-ma013-v4",
+      "type": "humanitarian-map",
+      "evidenceClass": "primary",
+      "license": "License not specified; link only"
+    },
+    {
+      "id": "mapaction-ma018",
+      "publisher": "MapAction",
+      "title": "Campamento Transitorio Polideportivo José María Vargas",
+      "publishedAt": "2026-07-07T23:59:00-04:00",
+      "url": "https://maps.mapaction.org/dataset/2026-ven-001-ma018-v3",
+      "type": "humanitarian-map",
+      "evidenceClass": "primary",
+      "license": "License not specified; link only"
+    },
+    {
+      "id": "logistics-july-2",
+      "publisher": "Logistics Cluster / Venezuela Logistics Working Group",
+      "title": "Venezuela Earthquake Response Situation Report #1",
+      "publishedAt": "2026-07-02T23:59:00-04:00",
+      "url": "https://logcluster.org/en/documents/venezuela-respuesta-terremotos-reporte-situacional-1-2-julio-2026",
+      "type": "logistics-report",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "logistics-meeting-july-2",
+      "publisher": "Logistics Cluster / Venezuela Logistics Working Group",
+      "title": "Earthquake response meeting minutes, July 2",
+      "publishedAt": "2026-07-02T23:59:00-04:00",
+      "url": "https://logcluster.org/en/documents/venezuela-minutas-de-la-reunion-respuesta-al-terremoto-caracas-2-julio-de-2026",
+      "type": "coordination-minutes",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "efe-july-6",
+      "publisher": "EFE",
+      "title": "La Guaira: search for bodies continues amid excavators and long lines for food",
+      "publishedAt": "2026-07-06T12:00:00-04:00",
+      "url": "https://efe.com/english/latest-news/2026-07-06/la-guaira-search-for-bodies-continues-amid-excavators-and-long-lines-for-food/",
+      "type": "field-reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; link only"
+    },
+    {
+      "id": "government-debris-july-7",
+      "publisher": "Ministerio del Poder Popular para Relaciones Exteriores",
+      "title": "Evalúan plan de remoción de escombros en La Guaira",
+      "publishedAt": "2026-07-07T12:00:00-04:00",
+      "url": "https://mppre.gob.ve/publicacion/7643-evaluan-plan-de-remocion-de-escombros-en-la-guaira-tras-eventos-sismicos",
+      "type": "government-update",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "un-july-8",
+      "publisher": "United Nations",
+      "title": "Venezuela: la ONU llama a transformar la solidaridad en ayuda sostenida",
+      "publishedAt": "2026-07-08T12:00:00-04:00",
+      "url": "https://peru.un.org/es/319280-venezuela-la-onu-llama-transformar-la-solidaridad-internacional-en-ayuda-sostenida-tras-los",
+      "type": "official-update",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "logistics-july-9",
+      "publisher": "Logistics Cluster / Venezuela Logistics Working Group",
+      "title": "Earthquake response meeting minutes, July 9",
+      "publishedAt": "2026-07-09T23:59:00-04:00",
+      "url": "https://logcluster.org/en/documents/venezuela-minutas-de-la-reunion-respuesta-al-terremoto-caracas-9-julio-2026",
+      "type": "coordination-minutes",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "un-july-15",
+      "publisher": "United Nations",
+      "title": "Noon briefing of 15 July 2026",
+      "publishedAt": "2026-07-15T12:00:00-04:00",
+      "url": "https://www.un.org/sg/en/content/highlight/2026-07-15.html",
+      "type": "official-briefing",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "lemonde-july-20",
+      "publisher": "Le Monde",
+      "title": "Hundreds of thousands of Venezuelans need aid after earthquakes",
+      "publishedAt": "2026-07-20T01:48:54Z",
+      "url": "https://www.lemonde.fr/en/international/article/2026/07/20/hundreds-of-thousands-of-venezuelans-need-aid-after-earthquakes-we-have-no-income-left_6755638_4.html",
+      "type": "field-reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; link only"
+    }
+  ],
+  "events": [
+    {
+      "id": "earthquake-doublet",
+      "startsAt": "2026-06-24T18:04:33-04:00",
+      "timePrecision": "second",
+      "phase": "impact",
+      "responseStage": "impact",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Norte-centro de Venezuela",
+        "precision": "regional"
+      },
+      "title": {
+        "es": "Dos terremotos en 39 segundos",
+        "en": "Two earthquakes in 39 seconds"
+      },
+      "summary": {
+        "es": "Un sismo Mw 7,2 a las 18:04:33 fue seguido por uno Mw 7,5 a las 18:05:11, hora local. El segundo evento amplificó una emergencia ya en curso.",
+        "en": "A Mw 7.2 earthquake at 18:04:33 was followed by a Mw 7.5 event at 18:05:11 local time. The second shock amplified an emergency already unfolding."
+      },
+      "sourceIds": [
+        "emsc-doublet"
+      ],
+      "tags": [
+        "seismic",
+        "impact"
+      ]
+    },
+    {
+      "id": "immediate-local-response",
+      "startsAt": "2026-06-24T18:06:00-04:00",
+      "endsAt": "2026-06-25T23:59:00-04:00",
+      "timePrecision": "range",
+      "phase": "search-rescue",
+      "responseStage": "observed-site",
+      "first72Hours": true,
+      "confidence": "corroborated",
+      "location": {
+        "label": "La Guaira, Caraballeda y Catia La Mar",
+        "precision": "municipality"
+      },
+      "title": {
+        "es": "La búsqueda empieza con quienes ya estaban allí",
+        "en": "The search begins with those already there"
+      },
+      "summary": {
+        "es": "Vecinos, familias, bomberos, protección civil, fuerzas nacionales y personal sanitario comenzaron evacuación, búsqueda y atención. Reportes posteriores describen personas excavando a mano en algunos sectores muy afectados.",
+        "en": "Neighbours, families, firefighters, civil protection, national forces and health workers began evacuation, search and care. Later reporting describes people digging by hand in some badly affected sectors."
+      },
+      "sourceIds": [
+        "un-june-25",
+        "un-geneva-june-26",
+        "ap-june-26"
+      ],
+      "tags": [
+        "local-response",
+        "rescue",
+        "gap"
+      ]
+    },
+    {
+      "id": "state-emergency-infrastructure",
+      "startsAt": "2026-06-25T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "coordination",
+      "responseStage": "operational",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "La Guaira y Caracas",
+        "precision": "state"
+      },
+      "title": {
+        "es": "Emergencia declarada; acceso y servicios interrumpidos",
+        "en": "Emergency declared; access and services disrupted"
+      },
+      "summary": {
+        "es": "El Gobierno declaró el estado de emergencia y activó mecanismos nacionales. Electricidad, agua, telecomunicaciones, transporte y salud registraron afectaciones. Maiquetía fue reportado cerrado durante la fase inicial.",
+        "en": "The Government declared a state of emergency and activated national mechanisms. Electricity, water, telecommunications, transport and health services were disrupted. Maiquetía was reported closed during the initial phase."
+      },
+      "sourceIds": [
+        "un-june-25",
+        "unfpa-june-26"
+      ],
+      "tags": [
+        "coordination",
+        "access",
+        "airport",
+        "utilities"
+      ]
+    },
+    {
+      "id": "international-usar-mobilization",
+      "startsAt": "2026-06-25T12:00:00-04:00",
+      "endsAt": "2026-06-26T23:59:00-04:00",
+      "timePrecision": "range",
+      "phase": "search-rescue",
+      "responseStage": "mobilized",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Venezuela",
+        "precision": "country"
+      },
+      "title": {
+        "es": "La ayuda internacional se anuncia y moviliza",
+        "en": "International assistance is announced and mobilized"
+      },
+      "summary": {
+        "es": "El 25 la ONU esperaba equipos USAR en las horas siguientes. El 26 informó que 30 equipos, más de 1.600 personas y más de 100 perros se estaban desplegando. Esta evidencia demuestra movilización, no presencia operativa uniforme.",
+        "en": "On June 25 the UN expected USAR teams in the following hours. On June 26 it reported 30 teams, more than 1,600 personnel and over 100 dogs deploying. This proves mobilization, not uniform operational presence."
+      },
+      "sourceIds": [
+        "un-june-25",
+        "un-june-26"
+      ],
+      "tags": [
+        "international",
+        "usar",
+        "mobilization"
+      ]
+    },
+    {
+      "id": "copernicus-41-hour-image",
+      "startsAt": "2026-06-26T11:10:00-04:00",
+      "timePrecision": "minute",
+      "phase": "search-rescue",
+      "responseStage": "observed-site",
+      "first72Hours": true,
+      "confidence": "inferred",
+      "location": {
+        "label": "Caraballeda",
+        "precision": "site"
+      },
+      "title": {
+        "es": "Imagen a +41 h: vehículos y probable excavadora",
+        "en": "+41 h image: vehicles and probable excavator"
+      },
+      "summary": {
+        "es": "La imagen Copernicus muestra destrucción extensa y, junto a un sitio colapsado, varios vehículos y una forma amarilla compatible con excavadora. La imagen confirma presencia puntual candidata, no cantidad total ni cobertura de la respuesta.",
+        "en": "Copernicus imagery shows extensive destruction and, beside a collapsed site, several vehicles and a yellow form consistent with an excavator. The image supports a candidate site-level presence observation, not total numbers or response coverage."
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "image": {
+        "src": "/data/chips/emsr884-aoi12-caraballeda/ems_00119_before_after_compare.png",
+        "alt": {
+          "es": "Comparación antes y después de un complejo destruido; la imagen posterior muestra escombros, vehículos y una probable excavadora amarilla.",
+          "en": "Before-and-after comparison of a destroyed complex; the post-event image shows debris, vehicles and a probable yellow excavator."
+        },
+        "caption": {
+          "es": "Vantor pre-evento / Copernicus EMS post-evento. La identificación de equipos es una observación candidata.",
+          "en": "Vantor pre-event / Copernicus EMS post-event. Equipment identification is a candidate observation."
+        }
+      },
+      "tags": [
+        "imagery",
+        "vehicles",
+        "heavy-machinery",
+        "damage"
+      ]
+    },
+    {
+      "id": "machinery-convoy-local-gap",
+      "startsAt": "2026-06-26T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "search-rescue",
+      "responseStage": "reported",
+      "first72Hours": true,
+      "confidence": "single-source",
+      "location": {
+        "label": "Autopista Caracas–La Guaira y sectores afectados",
+        "precision": "corridor"
+      },
+      "title": {
+        "es": "Maquinaria en ruta, carencia reportada en sitios",
+        "en": "Machinery en route, reported shortage at sites"
+      },
+      "summary": {
+        "es": "Associated Press describió caravanas de fuerzas, emergencia, volquetas y maquinaria pesada en dirección a La Guaira. En el mismo reporte, residentes de áreas muy afectadas dijeron haber visto pocos equipos estatales y continuaban excavando. Ambas observaciones pueden ser ciertas al mismo tiempo.",
+        "en": "Associated Press described convoys of state forces, emergency crews, dump trucks and heavy machinery heading toward La Guaira. In the same report, residents in badly affected areas said they had seen few state teams and continued digging. Both observations can be true at the same time."
+      },
+      "sourceIds": [
+        "ap-june-26"
+      ],
+      "tags": [
+        "heavy-machinery",
+        "trucks",
+        "access",
+        "gap"
+      ]
+    },
+    {
+      "id": "maiquetia-humanitarian-cargo",
+      "startsAt": "2026-06-26T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "logistics",
+      "responseStage": "operational",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Aeropuerto Internacional de Maiquetía",
+        "precision": "site"
+      },
+      "title": {
+        "es": "Maiquetía se reserva para carga de respuesta",
+        "en": "Maiquetía reserved for response cargo"
+      },
+      "summary": {
+        "es": "El Gobierno anunció que el aeropuerto se dedicaría a carga humanitaria gobierno-a-gobierno y del sistema ONU. Fuentes posteriores señalan que procedimientos para otras organizaciones todavía no estaban definidos.",
+        "en": "The Government announced that the airport would be dedicated to government-to-government and UN-system humanitarian cargo. Later sources note that procedures for other organizations were still undefined."
+      },
+      "sourceIds": [
+        "logistics-july-2"
+      ],
+      "tags": [
+        "airport",
+        "cargo",
+        "logistics"
+      ]
+    },
+    {
+      "id": "usar-june-27",
+      "startsAt": "2026-06-27T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "search-rescue",
+      "responseStage": "arrived-region",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Venezuela, con operaciones en áreas afectadas",
+        "precision": "country"
+      },
+      "title": {
+        "es": "La ONU reporta más de 2.000 rescatistas desplegados",
+        "en": "UN reports more than 2,000 rescuers deployed"
+      },
+      "summary": {
+        "es": "La actualización del 27 habló de personal de 27 países desplegado para localizar personas atrapadas. No publica una hora que permita ubicar a todos antes del corte exacto de las 18:04 ni una distribución completa por sitio.",
+        "en": "The June 27 update described personnel from 27 countries deployed to locate trapped people. It does not publish a time establishing that all were present before the exact 18:04 cutoff or provide a complete site distribution."
+      },
+      "sourceIds": [
+        "un-june-27"
+      ],
+      "tags": [
+        "international",
+        "usar",
+        "arrival"
+      ]
+    },
+    {
+      "id": "unicef-first-flight",
+      "startsAt": "2026-06-27T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "logistics",
+      "responseStage": "arrived-country",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Valencia, Venezuela",
+        "precision": "airport"
+      },
+      "title": {
+        "es": "Primer envío UNICEF llega a Valencia",
+        "en": "First UNICEF shipment reaches Valencia"
+      },
+      "summary": {
+        "es": "Un vuelo con 20 toneladas de suministros médicos y WASH llegó desde Panamá. La fuente no establece la hora ni demuestra entrega en La Guaira dentro de las primeras 72 horas.",
+        "en": "A flight carrying 20 tonnes of medical and WASH supplies arrived from Panama. The source does not establish the arrival time or prove delivery in La Guaira within the first 72 hours."
+      },
+      "sourceIds": [
+        "un-june-29"
+      ],
+      "tags": [
+        "cargo",
+        "unicef",
+        "arrival"
+      ]
+    },
+    {
+      "id": "response-fully-mobilized",
+      "startsAt": "2026-06-29T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "search-rescue",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "La Guaira y otros municipios afectados",
+        "precision": "regional"
+      },
+      "title": {
+        "es": "La operación internacional ya se describe como plenamente movilizada",
+        "en": "International operation described as fully mobilized"
+      },
+      "summary": {
+        "es": "La ONU informó más de 70 equipos especializados y 2.300 personas trabajando junto a autoridades nacionales. WFP estaba en terreno; insumos preposicionados y 400 carpas se utilizaban para la respuesta.",
+        "en": "The UN reported more than 70 specialized teams and 2,300 personnel working with national authorities. WFP was on the ground; pre-positioned items and 400 tents were being used in the response."
+      },
+      "sourceIds": [
+        "un-june-29",
+        "unhcr-june-29"
+      ],
+      "tags": [
+        "usar",
+        "shelter",
+        "food",
+        "operational"
+      ]
+    },
+    {
+      "id": "debris-estimate",
+      "startsAt": "2026-06-29T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "debris-recovery",
+      "responseStage": "assessment",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Catia La Mar, Caraballeda y Urimare",
+        "precision": "municipality"
+      },
+      "title": {
+        "es": "UNDP estima 1,2 millones de toneladas de escombros",
+        "en": "UNDP estimates 1.2 million tonnes of debris"
+      },
+      "summary": {
+        "es": "La evaluación combinó imagen satelital, daño de edificios, huellas y alturas. Identificó Catia La Mar, Caraballeda y Urimare como concentraciones prioritarias para retiro, transporte y disposición.",
+        "en": "The assessment combined satellite imagery, building damage, footprints and heights. It identified Catia La Mar, Caraballeda and Urimare as priority concentrations for removal, transport and disposal."
+      },
+      "sourceIds": [
+        "undp-debris-june-29"
+      ],
+      "tags": [
+        "debris",
+        "recovery",
+        "assessment"
+      ]
+    },
+    {
+      "id": "chatmap-camps-field-evidence",
+      "startsAt": "2026-06-30T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "shelter",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Caracas y La Guaira",
+        "precision": "regional"
+      },
+      "title": {
+        "es": "Reportes de campo empiezan a mapear daños y campamentos",
+        "en": "Field reports begin mapping damage and camps"
+      },
+      "summary": {
+        "es": "HOT activó un flujo ChatMap con ubicación, fotos y videos revisados por voluntariado capacitado. Después se abrió una tarea específica para campamentos y refugios emergentes solicitada por socios humanitarios.",
+        "en": "HOT activated a ChatMap flow using location, photos and videos reviewed by trained volunteers. A separate task later mapped emerging camps and shelters at the request of humanitarian partners."
+      },
+      "sourceIds": [
+        "hot-response"
+      ],
+      "tags": [
+        "field-evidence",
+        "shelter",
+        "community"
+      ]
+    },
+    {
+      "id": "three-multiservice-shelters",
+      "startsAt": "2026-07-02T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "shelter",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Polideportivo Vargas, Estadio César Nieves y Estadio Playa Grande",
+        "precision": "named-sites"
+      },
+      "title": {
+        "es": "Tres centros multiservicio funcionan como refugios",
+        "en": "Three multiservice centres operate as shelters"
+      },
+      "summary": {
+        "es": "El reporte logístico identifica tres refugios principales. UNHCR informó que más de 3.000 personas estaban alojadas en centros liderados por el Gobierno, además de familias en espacios comunitarios.",
+        "en": "The logistics report identifies three principal shelters. UNHCR reported that more than 3,000 people were hosted in government-led centres, in addition to families staying in community spaces."
+      },
+      "sourceIds": [
+        "logistics-july-2",
+        "unhcr-june-29",
+        "mapaction-ma018"
+      ],
+      "tags": [
+        "shelter",
+        "displacement",
+        "named-sites"
+      ]
+    },
+    {
+      "id": "distribution-points-mapped",
+      "startsAt": "2026-07-04T15:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "relief",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "La Guaira",
+        "precision": "map-series"
+      },
+      "title": {
+        "es": "Refugios y puntos de distribución entran al cuadro operativo",
+        "en": "Shelters and distribution points enter the operational picture"
+      },
+      "summary": {
+        "es": "MapAction publicó una serie con sectores USAR, refugios, puntos de distribución, educación, salud y estimaciones de daño. El mapa prueba que esos puntos estaban registrados para coordinación, no su capacidad o inventario exacto.",
+        "en": "MapAction published a series showing USAR sectors, shelters, distribution points, education, health and damage estimates. The map proves those points were registered for coordination, not their exact capacity or inventory."
+      },
+      "sourceIds": [
+        "mapaction-live",
+        "mapaction-ma013"
+      ],
+      "tags": [
+        "distribution",
+        "shelter",
+        "humanitarian-map"
+      ]
+    },
+    {
+      "id": "heavy-machinery-increases",
+      "startsAt": "2026-07-06T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "debris-recovery",
+      "responseStage": "observed-site",
+      "first72Hours": false,
+      "confidence": "single-source",
+      "location": {
+        "label": "La Guaira",
+        "precision": "city"
+      },
+      "title": {
+        "es": "Se reporta mayor presencia de maquinaria pesada",
+        "en": "Increased heavy-machinery presence reported"
+      },
+      "summary": {
+        "es": "EFE describió excavadoras retirando restos, una reducción de búsqueda y rescate, y largas filas para alimentos y medicinas. La formulación 'mayor presencia' indica una evolución respecto a días anteriores, pero no proporciona un inventario de máquinas.",
+        "en": "EFE described excavators clearing remains, reduced search-and-rescue activity and long lines for food and medicine. The phrase 'increased presence' indicates change from earlier days but does not provide a machinery inventory."
+      },
+      "sourceIds": [
+        "efe-july-6"
+      ],
+      "tags": [
+        "heavy-machinery",
+        "debris",
+        "food",
+        "transition"
+      ]
+    },
+    {
+      "id": "formal-debris-plan",
+      "startsAt": "2026-07-07T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "debris-recovery",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "La Guaira",
+        "precision": "state"
+      },
+      "title": {
+        "es": "Se coordina un plan formal de despeje y remoción",
+        "en": "A formal clearance and debris-removal plan is coordinated"
+      },
+      "summary": {
+        "es": "Autoridades nacionales e internacionales coordinaron fases para despeje y remoción. Al día siguiente, la ONU describió el ruido de maquinaria pesada en sitios visitados y el paso hacia recuperación sostenida.",
+        "en": "National and international authorities coordinated clearance and removal phases. The next day, the UN described heavy machinery audible at visited sites and the transition toward sustained recovery."
+      },
+      "sourceIds": [
+        "government-debris-july-7",
+        "un-july-8"
+      ],
+      "tags": [
+        "debris",
+        "heavy-machinery",
+        "government"
+      ]
+    },
+    {
+      "id": "international-airlift-july-9",
+      "startsAt": "2026-07-09T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "logistics",
+      "responseStage": "arrived-region",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Aeropuerto Internacional de Maiquetía",
+        "precision": "site"
+      },
+      "title": {
+        "es": "Primer vuelo del puente aéreo EEUU–Airlink–Amazon",
+        "en": "First US–Airlink–Amazon airlift flight"
+      },
+      "summary": {
+        "es": "Las minutas logísticas registran la llegada programada del primer vuelo y detallan descarga, almacenamiento temporal y transporte terrestre. También muestran que aterrizar no equivalía automáticamente a entregar: la carga necesitaba receptor, retiro y ruta.",
+        "en": "Logistics minutes record the scheduled arrival of the first flight and describe unloading, temporary storage and onward transport. They also show that landing did not equal delivery: cargo still needed a recipient, pickup and route."
+      },
+      "sourceIds": [
+        "logistics-meeting-july-2",
+        "logistics-july-9"
+      ],
+      "tags": [
+        "airlift",
+        "cargo",
+        "logistics"
+      ]
+    },
+    {
+      "id": "sustained-assistance-july-15",
+      "startsAt": "2026-07-15T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "relief",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "La Guaira y comunidades en varios estados",
+        "precision": "regional"
+      },
+      "title": {
+        "es": "La respuesta se estabiliza en asistencia sostenida",
+        "en": "Response stabilizes into sustained assistance"
+      },
+      "summary": {
+        "es": "La ONU informó asistencia en cuatro campamentos de La Guaira; WFP había alcanzado a más de 67.000 personas e IOM apoyaba gestión de campamentos para más de 6.000. La prioridad ya incluía recuperación durante seis meses.",
+        "en": "The UN reported assistance through four camps in La Guaira; WFP had reached more than 67,000 people and IOM supported camp management for more than 6,000. Priorities now included a six-month recovery horizon."
+      },
+      "sourceIds": [
+        "un-july-15"
+      ],
+      "tags": [
+        "food",
+        "shelter",
+        "recovery"
+      ]
+    },
+    {
+      "id": "latest-evidence-july-20",
+      "startsAt": "2026-07-20T00:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "recovery",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "single-source",
+      "location": {
+        "label": "La Guaira",
+        "precision": "city"
+      },
+      "title": {
+        "es": "La distribución continúa mientras la recuperación apenas comienza",
+        "en": "Distribution continues as recovery only begins"
+      },
+      "summary": {
+        "es": "Periodismo en terreno todavía describía filas para cajas de alimentos y ropa, edificios reducidos a escombros y excavadoras y grúas trabajando. La fase aguda había cedido, pero la necesidad material seguía presente.",
+        "en": "On-the-ground reporting still described lines for food and clothing boxes, buildings reduced to rubble and excavators and cranes working. The acute phase had receded, but material need remained."
+      },
+      "sourceIds": [
+        "lemonde-july-20"
+      ],
+      "tags": [
+        "latest",
+        "distribution",
+        "heavy-machinery",
+        "recovery"
+      ]
+    }
+  ]
+}

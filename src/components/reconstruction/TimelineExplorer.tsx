@@ -1,0 +1,516 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo, useState, useSyncExternalStore } from "react";
+import { DEFAULT_LANGUAGE, persistLang, readStoredLang, subscribeStoredLang } from "@/lib/lang";
+import type { Language } from "@/components/types";
+import type {
+  First72Finding,
+  ReconstructionConfidence,
+  ReconstructionData,
+  ReconstructionEvent,
+  ReconstructionSource,
+  ResponseStage,
+} from "./types";
+import styles from "./timeline.module.css";
+
+const copy = {
+  es: {
+    reconstruction: "Reconstrucción pública · evidencia en desarrollo",
+    title: "Lo que pasó después",
+    dek: "Una reconstrucción fechada y verificable de los terremotos del 24 de junio y su respuesta en La Guaira, Caraballeda y Catia La Mar.",
+    openMap: "Abrir mapa de daños",
+    scope: "Alcance",
+    evidenceCutoff: "Evidencia más reciente",
+    sources: "Fuentes registradas",
+    events: "Eventos reconstruidos",
+    first72: "Las primeras 72 horas",
+    first72Kicker: "La pregunta crítica",
+    first72Question: "¿Cuándo llegó la ayuda — y cuándo llegó realmente a los sitios?",
+    assessment: "Evaluación actual",
+    evidenceRule: "Cómo leer esta conclusión",
+    evidenceRuleText: "Anunciado, movilizado, llegado, observado y operativo son estados distintos. El atlas no los mezcla.",
+    filters: "Filtrar la cronología",
+    all: "Todo",
+    timeline: "Cronología de la respuesta",
+    timelineIntro: "Cada entrada distingue lo observado de lo inferido y enlaza las fuentes que sostienen la descripción.",
+    first72Only: "Dentro de 72 h",
+    after72: "Después de 72 h",
+    evidence: "evidencia",
+    source: "fuente",
+    sourcePlural: "fuentes",
+    openSource: "Abrir fuente",
+    sourceLedger: "Registro de fuentes",
+    sourceLedgerIntro: "Se enlaza el material original. Cuando la licencia de reutilización no está clara, no copiamos la imagen ni el documento.",
+    method: "Método y límites",
+    notObserved: "No observado ≠ no ocurrió",
+    arrivalStages: "Llegar no es una sola cosa",
+    imageEvidence: "Evidencia de imagen",
+    imageCaveat: "La detección de vehículos o maquinaria es candidata hasta revisión humana. Una imagen no prueba propiedad, función, suficiencia ni movimiento.",
+    latest: "Última actualización",
+    backToTop: "Volver arriba",
+    present: "Presencia",
+    primary: "Primaria",
+    secondary: "Secundaria",
+    derived: "Derivada",
+    phase: {
+      impact: "Impacto",
+      "search-rescue": "Búsqueda y rescate",
+      coordination: "Coordinación",
+      logistics: "Logística",
+      shelter: "Refugio",
+      relief: "Asistencia",
+      "debris-recovery": "Escombros",
+      recovery: "Recuperación",
+    } as Record<string, string>,
+  },
+  en: {
+    reconstruction: "Public reconstruction · evidence in progress",
+    title: "What happened after",
+    dek: "A dated, verifiable reconstruction of the June 24 earthquakes and the response in La Guaira, Caraballeda and Catia La Mar.",
+    openMap: "Open damage map",
+    scope: "Scope",
+    evidenceCutoff: "Latest evidence",
+    sources: "Registered sources",
+    events: "Reconstructed events",
+    first72: "The first 72 hours",
+    first72Kicker: "The critical question",
+    first72Question: "When did help arrive — and when did it actually reach sites?",
+    assessment: "Current assessment",
+    evidenceRule: "How to read this conclusion",
+    evidenceRuleText: "Announced, mobilized, arrived, observed and operational are different states. The atlas does not merge them.",
+    filters: "Filter the timeline",
+    all: "All",
+    timeline: "Response timeline",
+    timelineIntro: "Every entry separates observation from inference and links the sources supporting its description.",
+    first72Only: "Within 72 h",
+    after72: "After 72 h",
+    evidence: "evidence",
+    source: "source",
+    sourcePlural: "sources",
+    openSource: "Open source",
+    sourceLedger: "Source ledger",
+    sourceLedgerIntro: "Original material is linked. When reuse rights are unclear, the image or document is not copied.",
+    method: "Method and limits",
+    notObserved: "Not observed ≠ did not happen",
+    arrivalStages: "Arrival is not one thing",
+    imageEvidence: "Image evidence",
+    imageCaveat: "Vehicle or machinery detections remain candidates until human review. One image cannot establish ownership, function, adequacy or movement.",
+    latest: "Last updated",
+    backToTop: "Back to top",
+    present: "Presence",
+    primary: "Primary",
+    secondary: "Secondary",
+    derived: "Derived",
+    phase: {
+      impact: "Impact",
+      "search-rescue": "Search & rescue",
+      coordination: "Coordination",
+      logistics: "Logistics",
+      shelter: "Shelter",
+      relief: "Relief",
+      "debris-recovery": "Debris",
+      recovery: "Recovery",
+    } as Record<string, string>,
+  },
+};
+
+const confidenceLabels: Record<Language, Record<ReconstructionConfidence, string>> = {
+  es: {
+    confirmed: "Confirmado",
+    corroborated: "Corroborado",
+    "single-source": "Una fuente",
+    inferred: "Inferido",
+  },
+  en: {
+    confirmed: "Confirmed",
+    corroborated: "Corroborated",
+    "single-source": "Single source",
+    inferred: "Inferred",
+  },
+};
+
+const stageLabels: Record<Language, Record<ResponseStage, string>> = {
+  es: {
+    impact: "Impacto",
+    announced: "Anunciado",
+    reported: "Reportado",
+    mobilized: "Movilizado",
+    "arrived-country": "Llegó al país",
+    "arrived-region": "Llegó a la región",
+    "observed-site": "Observado en sitio",
+    operational: "Operativo",
+    assessment: "Evaluación",
+    recovery: "Recuperación",
+  },
+  en: {
+    impact: "Impact",
+    announced: "Announced",
+    reported: "Reported",
+    mobilized: "Mobilized",
+    "arrived-country": "Arrived in country",
+    "arrived-region": "Arrived in region",
+    "observed-site": "Observed at site",
+    operational: "Operational",
+    assessment: "Assessment",
+    recovery: "Recovery",
+  },
+};
+
+function formatDate(value: string, language: Language, precision: ReconstructionEvent["timePrecision"] = "day") {
+  const date = new Date(value);
+  return new Intl.DateTimeFormat(language === "es" ? "es-VE" : "en-US", {
+    timeZone: "America/Caracas",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    ...(precision === "minute" || precision === "second"
+      ? { hour: "2-digit", minute: "2-digit", hour12: false }
+      : {}),
+  }).format(date);
+}
+
+function formatCompactDate(value: string, language: Language) {
+  return new Intl.DateTimeFormat(language === "es" ? "es-VE" : "en-US", {
+    timeZone: "America/Caracas",
+    day: "numeric",
+    month: "short",
+  }).format(new Date(value));
+}
+
+function hourOffset(origin: string, value: string) {
+  return Math.max(0, Math.round((new Date(value).getTime() - new Date(origin).getTime()) / 3_600_000));
+}
+
+function SourceLinks({
+  ids,
+  sourcesById,
+}: {
+  ids: string[];
+  sourcesById: Map<string, ReconstructionSource>;
+}) {
+  return (
+    <div className={styles.sourceLinks}>
+      {ids.map((id, index) => {
+        const source = sourcesById.get(id);
+        if (!source) return null;
+        return (
+          <a key={id} href={source.url} target="_blank" rel="noreferrer">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            {source.publisher}
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+function EvidenceImage({
+  finding,
+  language,
+}: {
+  finding: First72Finding | ReconstructionEvent;
+  language: Language;
+}) {
+  if (!finding.image) return null;
+  return (
+    <figure className={styles.evidenceFigure}>
+      <Image
+        src={finding.image.src}
+        width={1024}
+        height={548}
+        unoptimized
+        sizes="(max-width: 760px) 100vw, 760px"
+        alt={finding.image.alt[language]}
+      />
+      <figcaption>{finding.image.caption[language]}</figcaption>
+    </figure>
+  );
+}
+
+export default function TimelineExplorer({ data }: { data: ReconstructionData }) {
+  const language = useSyncExternalStore(subscribeStoredLang, readStoredLang, () => DEFAULT_LANGUAGE);
+  const [phase, setPhase] = useState("all");
+  const [windowFilter, setWindowFilter] = useState<"all" | "first72" | "after72">("all");
+  const t = copy[language];
+  const sourceMap = useMemo(() => new Map(data.sources.map((source) => [source.id, source])), [data.sources]);
+  const phases = useMemo(
+    () => Array.from(new Set(data.events.map((event) => event.phase))),
+    [data.events],
+  );
+  const filteredEvents = useMemo(
+    () =>
+      data.events.filter((event) => {
+        if (phase !== "all" && event.phase !== phase) return false;
+        if (windowFilter === "first72" && !event.first72Hours) return false;
+        if (windowFilter === "after72" && event.first72Hours) return false;
+        return true;
+      }),
+    [data.events, phase, windowFilter],
+  );
+
+  const changeLanguage = (nextLanguage: Language) => {
+    persistLang(nextLanguage);
+    document.documentElement.lang = nextLanguage;
+  };
+
+  const heroImage = data.events.find((event) => event.id === "copernicus-41-hour-image")?.image;
+
+  return (
+    <main className={styles.page} id="top">
+      <nav className={styles.topbar} aria-label={language === "es" ? "Navegación principal" : "Main navigation"}>
+        <Link href="/" className={styles.wordmark}>
+          <span>RV</span>
+          <b>Respuesta Venezuela</b>
+        </Link>
+        <div className={styles.topActions}>
+          <div className={styles.languageSwitch} aria-label={language === "es" ? "Idioma" : "Language"}>
+            <button type="button" onClick={() => changeLanguage("es")} aria-pressed={language === "es"}>ES</button>
+            <button type="button" onClick={() => changeLanguage("en")} aria-pressed={language === "en"}>EN</button>
+          </div>
+          <Link href="/" className={styles.mapLink}>{t.openMap}</Link>
+        </div>
+      </nav>
+
+      <header className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>{t.reconstruction}</p>
+          <h1>{t.title}</h1>
+          <p className={styles.dek}>{t.dek}</p>
+          <dl className={styles.heroStats}>
+            <div>
+              <dt>{t.scope}</dt>
+              <dd>{data.coverage.geography[language]}</dd>
+            </div>
+            <div>
+              <dt>{t.evidenceCutoff}</dt>
+              <dd>{formatDate(data.coverage.latestEvidenceAt, language)}</dd>
+            </div>
+            <div>
+              <dt>{t.events}</dt>
+              <dd>{data.events.length}</dd>
+            </div>
+            <div>
+              <dt>{t.sources}</dt>
+              <dd>{data.sources.length}</dd>
+            </div>
+          </dl>
+        </div>
+
+        {heroImage && (
+          <figure className={styles.heroImage}>
+            <Image
+              src={heroImage.src}
+              width={1024}
+              height={548}
+              priority
+              unoptimized
+              sizes="(max-width: 900px) 100vw, 54vw"
+              alt={heroImage.alt[language]}
+            />
+            <figcaption>
+              <span>+41 h</span>
+              {heroImage.caption[language]}
+            </figcaption>
+          </figure>
+        )}
+      </header>
+
+      <section className={styles.coverageNote} aria-label={language === "es" ? "Límite de cobertura" : "Coverage limit"}>
+        <span>01</span>
+        <p>{data.coverage.note[language]}</p>
+      </section>
+
+      <section className={styles.first72} id="first-72">
+        <div className={styles.sectionHeading}>
+          <p>{t.first72Kicker}</p>
+          <h2>{t.first72Question}</h2>
+        </div>
+
+        <div className={styles.horizon} aria-label={t.first72}>
+          <div className={styles.horizonRail}>
+            <span style={{ left: "0%" }}>0 h</span>
+            <span style={{ left: "33.33%" }}>24 h</span>
+            <span style={{ left: "66.66%" }}>48 h</span>
+            <span style={{ left: "100%" }}>72 h</span>
+          </div>
+          <div className={styles.horizonTicks}>
+            {data.events.filter((event) => event.first72Hours).map((event) => {
+              const offset = Math.min(72, hourOffset(data.eventOrigin, event.startsAt));
+              return (
+                <a
+                  key={event.id}
+                  href={`#event-${event.id}`}
+                  style={{ left: `${(offset / 72) * 100}%` }}
+                  title={`${event.title[language]} · +${offset} h`}
+                >
+                  <span className="sr-only">{event.title[language]}</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        <article className={styles.assessment}>
+          <div>
+            <p className={styles.monoLabel}>{t.assessment}</p>
+            <h3>{data.first72Assessment.headline[language]}</h3>
+          </div>
+          <p>{data.first72Assessment.summary[language]}</p>
+        </article>
+
+        <div className={styles.findings}>
+          {data.first72Assessment.findings.map((finding, index) => (
+            <article key={finding.id} className={styles.finding}>
+              <div className={styles.findingIndex}>{String(index + 1).padStart(2, "0")}</div>
+              <div>
+                <div className={styles.badgeRow}>
+                  <span className={`${styles.confidence} ${styles[finding.confidence]}`}>
+                    {confidenceLabels[language][finding.confidence]}
+                  </span>
+                  <span className={styles.stage}>{stageLabels[language][finding.status]}</span>
+                </div>
+                <h3>{finding.title[language]}</h3>
+                <p>{finding.body[language]}</p>
+                <SourceLinks ids={finding.sourceIds} sourcesById={sourceMap} />
+              </div>
+              <EvidenceImage finding={finding} language={language} />
+            </article>
+          ))}
+        </div>
+
+        <aside className={styles.readingRule}>
+          <div>
+            <span>!</span>
+            <b>{t.evidenceRule}</b>
+          </div>
+          <p>{t.evidenceRuleText}</p>
+        </aside>
+      </section>
+
+      <section className={styles.timelineSection} id="timeline">
+        <div className={styles.timelineHeader}>
+          <div className={styles.sectionHeading}>
+            <p>{t.timeline}</p>
+            <h2>{t.timelineIntro}</h2>
+          </div>
+          <div className={styles.filterPanel}>
+            <p>{t.filters}</p>
+            <div className={styles.filterRow}>
+              <button type="button" aria-pressed={phase === "all"} onClick={() => setPhase("all")}>{t.all}</button>
+              {phases.map((item) => (
+                <button key={item} type="button" aria-pressed={phase === item} onClick={() => setPhase(item)}>
+                  {t.phase[item] ?? item}
+                </button>
+              ))}
+            </div>
+            <div className={styles.filterRow}>
+              <button type="button" aria-pressed={windowFilter === "all"} onClick={() => setWindowFilter("all")}>{t.all}</button>
+              <button type="button" aria-pressed={windowFilter === "first72"} onClick={() => setWindowFilter("first72")}>{t.first72Only}</button>
+              <button type="button" aria-pressed={windowFilter === "after72"} onClick={() => setWindowFilter("after72")}>{t.after72}</button>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.timeline}>
+          {filteredEvents.map((event, index) => {
+            const offset = hourOffset(data.eventOrigin, event.startsAt);
+            return (
+              <article key={event.id} className={styles.event} id={`event-${event.id}`}>
+                <div className={styles.eventDate}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <time dateTime={event.startsAt}>{formatDate(event.startsAt, language, event.timePrecision)}</time>
+                  <small>+{offset} h</small>
+                </div>
+                <div className={styles.eventBody}>
+                  <div className={styles.badgeRow}>
+                    <span className={styles.phase}>{t.phase[event.phase] ?? event.phase}</span>
+                    <span className={`${styles.confidence} ${styles[event.confidence]}`}>
+                      {confidenceLabels[language][event.confidence]}
+                    </span>
+                    <span className={styles.stage}>{stageLabels[language][event.responseStage]}</span>
+                  </div>
+                  <h3>{event.title[language]}</h3>
+                  <p>{event.summary[language]}</p>
+                  <div className={styles.locationLine}>
+                    <span>{event.location.label}</span>
+                    <small>{event.location.precision}</small>
+                  </div>
+                  <SourceLinks ids={event.sourceIds} sourcesById={sourceMap} />
+                  <EvidenceImage finding={event} language={language} />
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className={styles.methodSection} id="method">
+        <div className={styles.sectionHeading}>
+          <p>{t.method}</p>
+          <h2>{language === "es" ? "Una afirmación tan fuerte como su evidencia." : "A claim only as strong as its evidence."}</h2>
+        </div>
+        <div className={styles.methodGrid}>
+          <article>
+            <span>01</span>
+            <h3>{t.notObserved}</h3>
+            <p>{data.method.absenceRule[language]}</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>{t.arrivalStages}</h3>
+            <p>{data.method.arrivalRule[language]}</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>{t.imageEvidence}</h3>
+            <p>{t.imageCaveat}</p>
+          </article>
+        </div>
+        <div className={styles.confidenceGrid}>
+          {data.method.confidenceLevels.map((level) => (
+            <article key={level.id}>
+              <span className={`${styles.confidence} ${styles[level.id]}`}>{level.label[language]}</span>
+              <p>{level.definition[language]}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.sourcesSection} id="sources">
+        <div className={styles.sectionHeading}>
+          <p>{t.sourceLedger}</p>
+          <h2>{t.sourceLedgerIntro}</h2>
+        </div>
+        <div className={styles.sourceLedger}>
+          {data.sources.map((source, index) => (
+            <article key={source.id}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <p>{source.publisher}</p>
+                <h3>{source.title}</h3>
+                <small>
+                  {formatCompactDate(source.publishedAt, language)} · {source.type} · {t[source.evidenceClass]}
+                </small>
+              </div>
+              <a href={source.url} target="_blank" rel="noreferrer">
+                {t.openSource}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer className={styles.footer}>
+        <div>
+          <span>RV / 2026</span>
+          <p>{data.coverage.geography[language]}</p>
+        </div>
+        <p>{t.latest}: {formatDate(data.updatedAt, language, "minute")}</p>
+        <a href="#top">{t.backToTop} ↑</a>
+      </footer>
+    </main>
+  );
+}
