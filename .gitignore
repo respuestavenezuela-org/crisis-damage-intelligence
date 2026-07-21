@@ -51,6 +51,7 @@ ops/external_source_review/analysis/**/*.sample.geojson
 
 # QA screenshots
 output/playwright/*.png
+output/aoi12_temporal_response_grid/
 
 # local Codex/coworker artifacts
 .codex/coworkers/

@@ -37,6 +37,19 @@ REQUIRED_KEYS = {
         "action_priority",
         "uncertainty_reason",
     ),
+    "temporal_response_comparison": (
+        "response_class",
+        "confidence",
+        "image_quality",
+        "alignment_quality",
+        "observed_assets",
+        "temporal_change",
+        "first_visible_date",
+        "last_absent_date",
+        "evidence",
+        "human_review_priority",
+        "uncertainty_reason",
+    ),
 }
 
 
@@ -124,6 +137,79 @@ def call_hf_space(system: str, prompt: str, image_paths: list[str | Path], metad
     return result
 
 
+def call_hf_router(system: str, prompt: str, image_paths: list[str | Path], metadata: dict, review_type: str) -> dict:
+    """Call Hugging Face's OpenAI-compatible inference router.
+
+    The router uses the user's Hugging Face credits and avoids coupling batch
+    work to the lifecycle of the project's optional private Space.
+    """
+
+    token = hf_token()
+    if not token:
+        cached = Path.home() / ".cache" / "huggingface" / "token"
+        if cached.is_file():
+            token = cached.read_text().strip()
+    if not token:
+        raise SystemExit("HF_TOKEN missing and no cached Hugging Face token was found.")
+
+    url = os.environ.get("HF_ROUTER_API_URL", "https://router.huggingface.co/v1/chat/completions").strip()
+    model = os.environ.get("HF_VLM_MODEL", "Qwen/Qwen3-VL-30B-A3B-Instruct")
+    content = [
+        {"type": "image_url", "image_url": {"url": encode_image(path)}}
+        for path in image_paths
+    ]
+    content.append({"type": "text", "text": prompt})
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": content},
+        ],
+        "temperature": 0,
+        "max_tokens": int(os.environ.get("HF_ROUTER_MAX_TOKENS", "900")),
+        "response_format": {"type": "json_object"},
+    }
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+    }
+    raw = ""
+    attempts = max(1, int(os.environ.get("HF_ROUTER_RETRIES", "4")))
+    retry_seconds = max(1.0, float(os.environ.get("HF_ROUTER_RETRY_SECONDS", "6")))
+    timeout = int(os.environ.get("HF_ROUTER_TIMEOUT_SECONDS", "180"))
+    for attempt in range(1, attempts + 1):
+        req = Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+        try:
+            with urlopen(req, timeout=timeout) as resp:
+                raw = resp.read().decode("utf-8")
+            break
+        except HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")
+            if exc.code not in (408, 429, 500, 502, 503, 504) or attempt == attempts:
+                raise RuntimeError(f"HF Router HTTP {exc.code}: {detail}") from exc
+            time.sleep(retry_seconds * attempt)
+        except URLError as exc:
+            if attempt == attempts:
+                raise RuntimeError(f"HF Router request failed: {exc}") from exc
+            time.sleep(retry_seconds * attempt)
+
+    data = json.loads(raw)
+    choices = data.get("choices") or []
+    if not choices:
+        raise ValueError(f"Unexpected HF Router response shape: {raw[:600]}")
+    result = choices[0].get("message", {}).get("content")
+    if isinstance(result, str):
+        result = _extract_json_text(result)
+    if not isinstance(result, dict):
+        raise ValueError(f"Unexpected HF Router model output: {raw[:600]}")
+    validate_result(result, review_type)
+    result["vlm_model"] = data.get("model") or model
+    result["vlm_provider"] = "hf_router"
+    result["review_type"] = review_type
+    result["source_metadata"] = metadata
+    return result
+
+
 def call_minimax_legacy(system: str, prompt: str, image_paths: list[str | Path], review_type: str) -> dict:
     key = os.environ.get("MINIMAX_API_KEY")
     if not key:
@@ -165,8 +251,10 @@ def call_minimax_legacy(system: str, prompt: str, image_paths: list[str | Path],
 
 def call_vlm(system: str, prompt: str, image_paths: list[str | Path], metadata: dict, review_type: str) -> dict:
     provider = os.environ.get("VLM_PROVIDER", "hf_space").strip().lower()
+    if provider in ("hf_router", "huggingface_router", "router"):
+        return call_hf_router(system, prompt, image_paths, metadata, review_type)
     if provider in ("hf", "hf_space", "huggingface", "huggingface_space"):
         return call_hf_space(system, prompt, image_paths, metadata, review_type)
     if provider == "minimax":
         return call_minimax_legacy(system, prompt, image_paths, review_type)
-    raise SystemExit(f"Unsupported VLM_PROVIDER={provider!r}; use hf_space or minimax")
+    raise SystemExit(f"Unsupported VLM_PROVIDER={provider!r}; use hf_router, hf_space, or minimax")

@@ -64,8 +64,8 @@ const copy = {
     derived: "Derivada",
     aerialKicker: "Lectura aérea fechada · +41 a +257 horas",
     aerialTitle: "¿Qué respuesta puede verse desde arriba?",
-    aerialIntro: "Una revisión humana de vehículos, maquinaria y uso de sitio en imágenes del 26, 27 y 29 de junio, más una prueba de cobertura oficial del 5 de julio.",
-    reviewedCandidates: "Candidatos revisados",
+    aerialIntro: "Un barrido de 734 celdas útiles de 250 m, con comparación fechada y revisión humana de las señales prioritarias. Los objetos se validan a ~0,326 m/píxel, sin superresolución.",
+    reviewedCandidates: "Celdas analizadas",
     publishedSites: "Sitios publicados",
     likelyResponseSites: "Señales probables",
     identifiableShelters: "Refugios identificables",
@@ -94,7 +94,7 @@ const copy = {
     sourceVolume: "Volumen fuente",
     openInventory: "Abrir inventario completo",
     temporalReview: "Prueba temporal",
-    temporalReviewIntro: "El 5 de julio no aportó píxeles utilizables en los cinco sitios publicados. Las escenas abiertas de Vantor del 27 y 29 de junio sí permitieron cinco comparaciones fechadas.",
+    temporalReviewIntro: "El pase de detalle compara píxeles nativos del 26 y 29 de junio. La adquisición del 5 de julio sigue limitada por nubes o falta de cobertura útil.",
     datedChange: "Cambio fechado",
     laterEnhanced: "Seguimiento 2×",
     followupFinding: "Lectura del seguimiento",
@@ -157,8 +157,8 @@ const copy = {
     derived: "Derived",
     aerialKicker: "Dated aerial reading · +41 to +257 hours",
     aerialTitle: "What response can be seen from above?",
-    aerialIntro: "A human review of vehicle, machinery and site-use candidates in June 26, 27 and 29 imagery, plus an official July 5 coverage test.",
-    reviewedCandidates: "Candidates reviewed",
+    aerialIntro: "A 734-cell scan using useful 250 m cells, dated comparisons and human review of priority signals. Objects are validated at ~0.326 m/pixel, without super-resolution.",
+    reviewedCandidates: "Cells analyzed",
     publishedSites: "Published sites",
     likelyResponseSites: "Probable signals",
     identifiableShelters: "Identifiable shelters",
@@ -187,7 +187,7 @@ const copy = {
     sourceVolume: "Source volume",
     openInventory: "Open full inventory",
     temporalReview: "Temporal test",
-    temporalReviewIntro: "The July 5 acquisition supplied no usable pixels at the five published sites. Open Vantor scenes from June 27 and 29 did support five dated comparisons.",
+    temporalReviewIntro: "The detail pass compares native June 26 and 29 pixels. The July 5 acquisition remains limited by cloud or missing useful coverage.",
     datedChange: "Dated change",
     laterEnhanced: "Follow-up 2×",
     followupFinding: "Follow-up reading",
@@ -364,7 +364,7 @@ function AerialEvidenceExplorer({
         <dl>
           <div>
             <dt>{t.reviewedCandidates}</dt>
-            <dd>{evidence.review.candidateRecords}</dd>
+            <dd>{evidence.gridReview?.coverage.gridCellsAnalyzed ?? evidence.review.candidateRecords}</dd>
           </div>
           <div>
             <dt>{t.publishedSites}</dt>
@@ -381,7 +381,10 @@ function AerialEvidenceExplorer({
         </dl>
         <div>
           <p>{evidence.review.summary[language]}</p>
-          <small>{evidence.review.absenceCaveat[language]}</small>
+          <small>
+            {evidence.review.absenceCaveat[language]}
+            {evidence.gridReview ? ` ${evidence.gridReview.resolution.policy[language]}` : ""}
+          </small>
         </div>
       </div>
 
@@ -416,7 +419,9 @@ function AerialEvidenceExplorer({
         <aside>
           <span>{t.temporalReview}</span>
           <p>{t.temporalReviewIntro}</p>
-          <small>{evidence.temporalReview.summary[language]}</small>
+          <small>
+            {evidence.gridReview?.calibration[language] ?? evidence.temporalReview.summary[language]}
+          </small>
         </aside>
       </div>
 
@@ -458,21 +463,25 @@ function AerialEvidenceExplorer({
 
       <div className={styles.aerialGrid}>
         {observations.map((observation) => {
-          const isEnhanced = imageMode === "enhanced" || imageMode === "followup-enhanced";
+          const isEnhanced = imageMode === "enhanced"
+            ? Boolean(observation.enhancedImage)
+            : imageMode === "followup-enhanced"
+              ? Boolean(observation.temporalFollowup.enhancedImage)
+              : false;
           const isTemporal = imageMode === "temporal";
           const isFollowup = isTemporal || imageMode === "followup-enhanced";
           const image = imageMode === "enhanced"
-            ? observation.enhancedImage
+            ? observation.enhancedImage ?? observation.nativeImage
             : imageMode === "temporal"
               ? observation.temporalFollowup.compareImage
               : imageMode === "followup-enhanced"
-                ? observation.temporalFollowup.enhancedImage
+                ? observation.temporalFollowup.enhancedImage ?? observation.temporalFollowup.nativeImage
                 : observation.nativeImage;
-          const imageLabel = imageMode === "enhanced"
+          const imageLabel = imageMode === "enhanced" && isEnhanced
             ? t.enhancedView
             : imageMode === "temporal"
               ? t.datedChange
-              : imageMode === "followup-enhanced"
+              : imageMode === "followup-enhanced" && isEnhanced
                 ? t.laterEnhanced
                 : t.nativePixels;
           return (

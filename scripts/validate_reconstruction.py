@@ -89,6 +89,31 @@ def validate_aerial_evidence(path: Path) -> dict[str, int]:
     assert external_followup.get("usableComparisons") == 5
     require_localized(external_followup.get("finding"), f"{prefix}.temporalReview.externalFollowup.finding")
 
+    grid_review = payload.get("gridReview", {})
+    assert grid_review.get("status") == "human-reviewed", f"{prefix}: detail grid review missing"
+    assert grid_review.get("profile") == "detail-250m", f"{prefix}: wrong grid profile"
+    require_localized(grid_review.get("geography"), f"{prefix}.gridReview.geography")
+    require_localized(grid_review.get("calibration"), f"{prefix}.gridReview.calibration")
+    resolution = grid_review.get("resolution", {})
+    assert resolution.get("cellSizeMeters") == 250, f"{prefix}: unsafe grid cell size"
+    assert resolution.get("chipPixels") == 768, f"{prefix}: unsafe grid chip size"
+    assert 0.32 <= resolution.get("outputGroundSampleDistanceMeters", 0) <= 0.34
+    assert resolution.get("superResolutionUsedForEvidence") is False
+    require_localized(resolution.get("policy"), f"{prefix}.gridReview.resolution.policy")
+    grid_coverage = grid_review.get("coverage", {})
+    assert grid_coverage.get("gridCellsConsidered") == 1022
+    assert grid_coverage.get("gridCellsAnalyzed") == 734
+    assert grid_coverage.get("gridCellsRejectedForCoverageOrQuality") == 288
+    assert grid_coverage.get("priorityCells") == 226
+    assert grid_coverage.get("secondaryModelReviewed") == 226
+    assert grid_coverage.get("crossModelPositiveAgreements") == 46
+    assert grid_coverage.get("priorityCellsHumanReviewed") == 55
+    assert grid_review.get("models", {}).get("primary", {}).get("records") == 734
+    assert grid_review.get("models", {}).get("minimax", {}).get("status") in {
+        "not-run-provider-credential-unavailable",
+        "completed",
+    }
+
     review = payload.get("review", {})
     require_localized(review.get("method"), f"{prefix}.review.method")
     require_localized(review.get("summary"), f"{prefix}.review.summary")
@@ -125,14 +150,17 @@ def validate_aerial_evidence(path: Path) -> dict[str, int]:
         assert observation.get("status") in {"likely-response-related", "unresolved"}
         likely_count += observation.get("status") == "likely-response-related"
         unresolved_count += observation.get("status") == "unresolved"
-        assert observation.get("confidence") == "inferred", f"{prefix}: imagery observations must be inferred"
+        assert observation.get("confidence") in {
+            "inferred",
+            "corroborated",
+        }, f"{prefix}: unsupported aerial confidence"
         assert observation.get("category") in {"heavy-machinery", "large-vehicles", "site-use"}
         require_localized(observation.get("title"), f"{prefix}: {observation_id}.title")
         require_localized(observation.get("finding"), f"{prefix}: {observation_id}.finding")
-        for image_key, hash_key in (
-            ("nativeImage", "nativeSha256"),
-            ("enhancedImage", "enhancedSha256"),
-        ):
+        image_pairs = [("nativeImage", "nativeSha256")]
+        if observation.get("enhancedImage"):
+            image_pairs.append(("enhancedImage", "enhancedSha256"))
+        for image_key, hash_key in image_pairs:
             src = str(observation.get(image_key, ""))
             assert src.startswith("/data/"), f"{prefix}: {observation_id}.{image_key} must be public data"
             image_path = ROOT / "public" / src.lstrip("/")
@@ -148,14 +176,17 @@ def validate_aerial_evidence(path: Path) -> dict[str, int]:
             "weakens-response-attribution",
             "supports-object-persistence",
             "not-discernible-in-followup",
+            "supports-new-response-site",
         }
         require_localized(followup.get("finding"), f"{prefix}: {observation_id}.temporalFollowup.finding")
         require_localized(followup.get("limitations"), f"{prefix}: {observation_id}.temporalFollowup.limitations")
-        for image_key, hash_key in (
+        followup_pairs = [
             ("nativeImage", "nativeSha256"),
-            ("enhancedImage", "enhancedSha256"),
             ("compareImage", "compareSha256"),
-        ):
+        ]
+        if followup.get("enhancedImage"):
+            followup_pairs.append(("enhancedImage", "enhancedSha256"))
+        for image_key, hash_key in followup_pairs:
             src = str(followup.get(image_key, ""))
             assert src.startswith("/data/"), (
                 f"{prefix}: {observation_id}.temporalFollowup.{image_key} must be public data"
@@ -169,6 +200,7 @@ def validate_aerial_evidence(path: Path) -> dict[str, int]:
     assert review.get("publishedSites") == len(observations), f"{prefix}: published site count mismatch"
     assert review.get("likelyResponseSites") == likely_count, f"{prefix}: likely site count mismatch"
     assert review.get("unresolvedSites") == unresolved_count, f"{prefix}: unresolved site count mismatch"
+    assert grid_coverage.get("newPublishedSites") == 5
     return {
         "candidates": len(candidate_ids),
         "observations": len(observations),

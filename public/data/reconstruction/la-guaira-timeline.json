@@ -1,7 +1,7 @@
 {
   "version": 1,
   "id": "venezuela-earthquake-2026-la-guaira-reconstruction",
-  "updatedAt": "2026-07-21T12:03:44Z",
+  "updatedAt": "2026-07-21T14:54:39Z",
   "eventOrigin": "2026-06-24T18:04:33-04:00",
   "coverage": {
     "geography": {
@@ -13,8 +13,8 @@
     "latestEvidenceAt": "2026-07-20T00:00:00-04:00",
     "latestOpenSatelliteAt": "2026-07-05T15:05:00Z",
     "note": {
-      "es": "La cobertura es una reconstrucción de observaciones fechadas, no un registro continuo. Hay imagen pública de muy alta resolución hasta el 5 de julio, pero la adquisición oficial de ese día no aporta píxeles utilizables en los cinco sitios de respuesta publicados. Las conclusiones temporales de esos sitios usan escenas abiertas del 27 y 29 de junio y permanecen como evidencia externa de triage.",
-      "en": "Coverage is a reconstruction from dated observations, not a continuous recording. Public very-high-resolution imagery extends through July 5, but that official acquisition supplies no usable pixels at the five published response sites. Temporal findings for those sites use open June 27 and 29 scenes and remain external triage evidence."
+      "es": "La cobertura es una reconstrucción de observaciones fechadas, no un registro continuo. El nuevo barrido usa 734 celdas útiles de 250 m a ~0,326 m/píxel y compara el 26 con el 29 de junio. La adquisición oficial del 5 de julio sigue limitada por nubes o falta de píxeles en estos sitios.",
+      "en": "Coverage is a reconstruction from dated observations, not a continuous recording. The new scan uses 734 useful 250 m cells at ~0.326 m/pixel and compares June 26 with June 29. The official July 5 acquisition remains limited by cloud or missing pixels at these sites."
     }
   },
   "method": {
@@ -80,8 +80,8 @@
       "en": "Help mobilized quickly, but the evidence does not support saying it reached critical sites uniformly within the first 72 hours."
     },
     "summary": {
-      "es": "La respuesta local y civil comenzó de inmediato. El 25 de junio la ONU describía equipos internacionales entrantes; el 26 hablaba de decenas de equipos en despliegue. Una imagen Copernicus del 26 de junio, unas 41 horas después de los sismos, muestra vehículos y una probable excavadora junto a por lo menos un sitio de colapso en Caraballeda. El mismo día, periodismo en terreno reportó caravanas de maquinaria y camiones hacia La Guaira, pero también residentes excavando con pocos equipos estatales visibles en zonas muy afectadas. Para el 27, la ONU describía más de 2.000 rescatistas desplegados, aunque la hora exacta y su distribución por sitio no están establecidas. La mayor escala logística queda documentada con más claridad después de la ventana de 72 horas.",
-      "en": "Local and civilian response began immediately. On June 25 the UN described incoming international teams; on June 26 it described dozens of teams deploying. A Copernicus image from June 26, about 41 hours after the earthquakes, shows vehicles and a probable excavator beside at least one collapse site in Caraballeda. The same day, on-the-ground journalism reported convoys of machinery and dump trucks toward La Guaira, while residents in heavily affected areas also reported digging with few state teams visible. By June 27 the UN described more than 2,000 rescuers as deployed, although the exact time and site-by-site distribution are not established. Larger-scale logistics are documented much more clearly after the 72-hour window."
+      "es": "La respuesta local y civil comenzó de inmediato. El 25 de junio la ONU describía equipos internacionales entrantes; el 26 hablaba de decenas de equipos en despliegue. Una imagen Copernicus del 26, unas 41 horas después, muestra vehículos, una probable excavadora junto a escombros y una concentración organizada nueva en el campo de golf de Caraballeda. Reportes de terreno del 28 identificaron ese campo como hospital, helipuerto y refugio. El mismo 26, periodismo en terreno reportó caravanas hacia La Guaira y residentes excavando con pocos equipos visibles. La evidencia prueba llegada a sitios concretos, no cobertura uniforme.",
+      "en": "Local and civilian response began immediately. On June 25 the UN described incoming international teams; on June 26 it described dozens of teams deploying. A June 26 Copernicus image, about 41 hours after the earthquakes, shows vehicles, a probable excavator beside debris and a new organized concentration at the Caraballeda golf course. June 28 ground reporting identified that course as a hospital, helipad and shelter. The same day, field journalism reported convoys toward La Guaira and residents digging with few teams visible. The evidence establishes arrival at specific sites, not uniform coverage."
     },
     "findings": [
       {
@@ -177,6 +177,34 @@
           "un-june-29",
           "logistics-july-2"
         ]
+      },
+      {
+        "id": "golf-course-response-by-41-hours",
+        "status": "observed-site",
+        "confidence": "corroborated",
+        "title": {
+          "es": "Un centro de respuesta ya era visible en el campo de golf a +41 h",
+          "en": "A response centre was already visible at the golf course by +41 h"
+        },
+        "body": {
+          "es": "La imagen del 26 muestra una concentración organizada que no estaba en el baseline. Reportes del 28 identifican el lugar como hospital, helipuerto y refugio. Esto acota presencia en el sitio a +41 h, pero no la hora de apertura ni su capacidad.",
+          "en": "The June 26 image shows an organized concentration absent from the baseline. June 28 reporting identifies the site as a hospital, helipad and shelter. This bounds site presence to +41 h, but not opening time or capacity."
+        },
+        "sourceIds": [
+          "copernicus-aoi12-june-26",
+          "panorama-golf-june-28"
+        ],
+        "image": {
+          "src": "/data/reconstruction/evidence/la-guaira/grid/caraballeda-golf_20260626_20260629_compare.webp",
+          "alt": {
+            "es": "Comparación del campo de golf de Caraballeda entre el 26 y el 29 de junio.",
+            "en": "Comparison of the Caraballeda golf course between June 26 and June 29."
+          },
+          "caption": {
+            "es": "Copernicus EMS 26 jun / Vantor Open Data 29 jun. Celdas de 250 m a ~0,326 m/píxel; sin superresolución.",
+            "en": "Copernicus EMS June 26 / Vantor Open Data June 29. 250 m cells at ~0.326 m/pixel; no super-resolution."
+          }
+        }
       }
     ]
   },
@@ -440,6 +468,36 @@
       "type": "official-post-event-vhr-imagery",
       "evidenceClass": "primary",
       "license": "Copernicus EMS public product terms"
+    },
+    {
+      "id": "panorama-golf-june-28",
+      "publisher": "Panorama",
+      "title": "Caraballeda golf course converted into hospital, helipad and shelter",
+      "publishedAt": "2026-06-28T21:21:00-04:00",
+      "url": "https://panorama.onl/sucesos/caraballeda-el-campo-de-golf-de-la-guaira-convertido-en-refugio-tras-los-terremotos-20260628-2221.html",
+      "type": "field-reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; link only"
+    },
+    {
+      "id": "paho-emt-july-2",
+      "publisher": "PAHO/WHO",
+      "title": "Venezuela earthquake Emergency Medical Team deployment map, 2 July 2026",
+      "publishedAt": "2026-07-02T23:59:00-04:00",
+      "url": "https://www.paho.org/sites/default/files/2026/07/emt-response-venezuela-earthquakes-02062026-v3.pdf",
+      "type": "official-deployment-map",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
+    },
+    {
+      "id": "vtv-golf-july-9",
+      "publisher": "Venezolana de Televisión",
+      "title": "FANB operations post at the Caraballeda golf course",
+      "publishedAt": "2026-07-09T12:00:00-04:00",
+      "url": "https://vtv.com.ve/presidenta-e-delcy-rodriguez-supervisa-despliegue-de-fanb-en-caraballeda/",
+      "type": "government-update",
+      "evidenceClass": "primary",
+      "license": "Link and attribution"
     }
   ],
   "events": [
@@ -765,6 +823,51 @@
         "unicef",
         "arrival"
       ]
+    },
+    {
+      "id": "organized-response-sites-june-29",
+      "startsAt": "2026-06-29T10:09:55-04:00",
+      "timePrecision": "minute",
+      "phase": "shelter",
+      "responseStage": "observed-site",
+      "first72Hours": false,
+      "confidence": "corroborated",
+      "location": {
+        "label": "La Guaira, Macuto y Caraballeda",
+        "precision": "cinco celdas de 250 m"
+      },
+      "title": {
+        "es": "El 29 de junio aparecen varios sitios temporales organizados",
+        "en": "Several organized temporary sites are visible on June 29"
+      },
+      "summary": {
+        "es": "El barrido temporal de 734 celdas muestra instalaciones nuevas en el Estadio Jorge García, un lote costero de Punta de Mulatos y una pista de El Palmar; el campo de golf de Caraballeda se expande. Las fuentes terrestres corroboran función de respuesta en el estadio y el campo de golf. En los otros sitios, función y operador siguen inferidos.",
+        "en": "The 734-cell temporal scan shows new installations at Jorge García Stadium, a Punta de Mulatos waterfront lot and an El Palmar track; the Caraballeda golf-course site expands. Ground sources corroborate response functions at the stadium and golf course. Function and operator at the other sites remain inferred."
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26",
+        "vantor-aoi12-june-29",
+        "panorama-golf-june-28",
+        "paho-emt-july-2"
+      ],
+      "tags": [
+        "aerial-imagery",
+        "temporary-sites",
+        "shelter",
+        "medical",
+        "logistics"
+      ],
+      "image": {
+        "src": "/data/reconstruction/evidence/la-guaira/grid/estadio-jorge-garcia_20260626_20260629_compare.webp",
+        "alt": {
+          "es": "Comparación del Estadio Jorge García entre el 26 y el 29 de junio.",
+          "en": "Comparison of Jorge García Stadium between June 26 and June 29."
+        },
+        "caption": {
+          "es": "Copernicus EMS 26 jun / Vantor Open Data 29 jun. El campo pasa de casi vacío a una instalación temporal densa.",
+          "en": "Copernicus EMS June 26 / Vantor Open Data June 29. The field changes from largely empty to a dense temporary installation."
+        }
+      }
     },
     {
       "id": "response-fully-mobilized",

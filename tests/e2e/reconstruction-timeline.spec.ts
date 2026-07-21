@@ -24,7 +24,7 @@ test.describe("public aftermath reconstruction", () => {
 
     await page.getByRole("button", { name: "Después de 72 h" }).click();
     await expect(page.getByRole("button", { name: "Después de 72 h" })).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator('article[id^="event-"]')).toHaveCount(11);
+    await expect(page.locator('article[id^="event-"]')).toHaveCount(12);
 
     await page.getByRole("button", { name: "EN", exact: true }).click();
     await expect(page.getByRole("heading", { name: "What happened after" })).toBeVisible();
@@ -52,9 +52,10 @@ test.describe("public aftermath reconstruction", () => {
 
     const section = page.locator("#aerial-evidence");
     await expect(section.getByRole("heading", { name: "¿Qué respuesta puede verse desde arriba?" })).toBeVisible();
-    await expect(section.getByText("26", { exact: true })).toBeVisible();
-    await expect(section.locator("figure")).toHaveCount(5);
-    await expect(section.getByText(/Ningún chip revisado permite identificar con confianza/)).toBeVisible();
+    await expect(section.getByText("734", { exact: true })).toBeVisible();
+    await expect(section.locator("figure")).toHaveCount(10);
+    await expect(section.getByText(/cuatro nuevos sitios temporales compatibles con respuesta/)).toBeVisible();
+    await expect(section.getByText(/sin superresolución/)).toBeVisible();
     await expect(section.getByText("Inventario oficial de adquisiciones")).toBeVisible();
     await expect(section.getByText("Adquisiciones ópticas distintas")).toBeVisible();
     await expect(section.getByText("21", { exact: true })).toBeVisible();

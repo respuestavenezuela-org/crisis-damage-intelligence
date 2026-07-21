@@ -35,9 +35,9 @@ export type AerialEvidenceObservation = {
   title: LocalizedText;
   finding: LocalizedText;
   nativeImage: string;
-  enhancedImage: string;
+  enhancedImage?: string;
   nativeSha256: string;
-  enhancedSha256: string;
+  enhancedSha256?: string;
   mapUrl: string;
   sourceIds: string[];
   temporalFollowup: {
@@ -49,16 +49,60 @@ export type AerialEvidenceObservation = {
     reviewStatus:
       | "weakens-response-attribution"
       | "supports-object-persistence"
-      | "not-discernible-in-followup";
+      | "not-discernible-in-followup"
+      | "supports-new-response-site";
     nativeImage: string;
-    enhancedImage: string;
+    enhancedImage?: string;
     compareImage: string;
     nativeSha256: string;
-    enhancedSha256: string;
+    enhancedSha256?: string;
     compareSha256: string;
     finding: LocalizedText;
     limitations: LocalizedText;
   };
+};
+
+export type AerialGridReview = {
+  status: "human-reviewed";
+  profile: "detail-250m";
+  geography: LocalizedText;
+  resolution: {
+    cellSizeMeters: number;
+    chipPixels: number;
+    outputGroundSampleDistanceMeters: number;
+    sourceGroundSampleDistanceMeters: string;
+    superResolutionUsedForEvidence: boolean;
+    policy: LocalizedText;
+  };
+  coverage: {
+    gridCellsConsidered: number;
+    gridCellsAnalyzed: number;
+    gridCellsRejectedForCoverageOrQuality: number;
+    primaryModelLikely: number;
+    primaryModelPossible: number;
+    priorityCells: number;
+    secondaryModelReviewed: number;
+    crossModelPositiveAgreements: number;
+    priorityCellsHumanReviewed: number;
+    newPublishedSites: number;
+  };
+  models: {
+    primary: {
+      provider: string;
+      modelId: string;
+      records: number;
+    };
+    secondary: Array<{
+      provider: string;
+      modelId: string;
+      records: number;
+    }>;
+    minimax: {
+      status: string;
+      role: string;
+    };
+  };
+  calibration: LocalizedText;
 };
 
 export type AerialEvidenceCollection = {
@@ -107,6 +151,7 @@ export type AerialEvidenceCollection = {
       finding: LocalizedText;
     };
   };
+  gridReview?: AerialGridReview;
   review: {
     method: LocalizedText;
     summary: LocalizedText;

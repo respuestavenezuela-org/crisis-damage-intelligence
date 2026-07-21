@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-21T12:03:44Z",
+  "updatedAt": "2026-07-21T14:54:39Z",
   "defaultSlug": "la-guaira",
   "entries": [
     {
@@ -17,11 +17,11 @@
         "es": "Respuesta, rescate, maquinaria, refugios, distribución y recuperación en el principal corredor de daño documentado.",
         "en": "Response, rescue, machinery, shelter, distribution and recovery across the principal documented damage corridor."
       },
-      "updatedAt": "2026-07-21T12:03:44Z",
+      "updatedAt": "2026-07-21T14:54:39Z",
       "evidenceCutoff": "2026-07-20T00:00:00-04:00",
-      "eventCount": 21,
-      "sourceCount": 26,
-      "imageEventCount": 2,
+      "eventCount": 22,
+      "sourceCount": 29,
+      "imageEventCount": 3,
       "officialDamage": {
         "destroyed": 10,
         "damagedConfirmed": 96,
@@ -29,12 +29,12 @@
       },
       "gaps": [
         {
-          "es": "Distribución exacta de equipos por sitio durante las primeras 72 horas",
-          "en": "Exact site-level distribution of teams during the first 72 hours"
+          "es": "Hora exacta de apertura y capacidad de los sitios temporales observados",
+          "en": "Exact opening time and capacity of observed temporary sites"
         },
         {
-          "es": "Propiedad, función y tiempo de operación de maquinaria visible",
-          "en": "Ownership, function and operating time of visible machinery"
+          "es": "Propiedad, función y tiempo de operación de maquinaria y vehículos visibles",
+          "en": "Ownership, function and operating time of visible machinery and vehicles"
         }
       ]
     },
