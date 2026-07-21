@@ -12,6 +12,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "public" / "data" / "reconstruction"
 CATALOG_PATH = DATA_DIR / "catalog.json"
+AERIAL_EVIDENCE_PATH = DATA_DIR / "aerial-response-evidence-la-guaira.json"
 OUT_DIR = ROOT / "ops" / "reconstruction"
 OUT_JSON = OUT_DIR / "review_queue.json"
 OUT_MD = OUT_DIR / "review_queue.md"
@@ -31,6 +32,7 @@ def load_packet(data_path: str) -> dict[str, Any]:
 
 def main() -> None:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+    aerial_evidence = json.loads(AERIAL_EVIDENCE_PATH.read_text(encoding="utf-8"))
     queue: list[dict[str, Any]] = []
 
     for entry in catalog["entries"]:
@@ -73,6 +75,23 @@ def main() -> None:
                     "reviewQuestion": {
                         "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
                         "en": "Can an independent, primary or visual source raise or lower this confidence?"
+                    }
+                })
+
+        if entry["slug"] == "la-guaira":
+            for observation in aerial_evidence["observations"]:
+                queue.append({
+                    "id": f"la-guaira-aerial-observation-{observation['chipId']}",
+                    "packet": "la-guaira",
+                    "kind": "aerial-observation",
+                    "priority": entry["priority"] * 10,
+                    "confidence": observation["confidence"],
+                    "title": observation["title"],
+                    "sourceIds": observation["sourceIds"],
+                    "status": "open",
+                    "reviewQuestion": {
+                        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+                        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
                     }
                 })
 

@@ -1,9 +1,104 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-21T03:41:33.549947+00:00",
-  "itemCount": 21,
-  "openCount": 21,
+  "generatedAt": "2026-07-21T04:21:22.168684+00:00",
+  "itemCount": 26,
+  "openCount": 26,
   "items": [
+    {
+      "id": "la-guaira-aerial-observation-ems_00031",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Vehículo o remolque rojo grande en un patio industrial",
+        "en": "Large red vehicle or trailer in an industrial yard"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00056",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Vehículos en un área despejada; no confirma refugio o acopio",
+        "en": "Vehicles in a cleared area; does not confirm shelter or collection"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00108",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Objeto amarillo de escala vehicular: relación con la respuesta no resuelta",
+        "en": "Vehicle-scale yellow object: response relationship unresolved"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00117",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Vehículos rojos grandes en un bloque severamente afectado",
+        "en": "Large red vehicles at a severely affected block"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00119",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Probable máquina amarilla y varios vehículos junto a escombros",
+        "en": "Probable yellow machine and several vehicles beside debris"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
     {
       "id": "la-guaira-gap-01",
       "packet": "la-guaira",

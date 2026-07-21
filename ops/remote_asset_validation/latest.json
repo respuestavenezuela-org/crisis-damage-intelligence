@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-07-21T03:43:26.790224+00:00",
+  "generated_utc": "2026-07-21T04:24:40.020937+00:00",
   "catalog": "public/data/catalog.json",
   "remote_base": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev",
   "source_reference_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "5492b44de68dbbf67821d49e574bc77ca969dc64fa6c71ba57785a966b3338e7",
-    "reference_count": 1132
+    "sha256": "7c6af6cad12c6ee1c560092228fc8ee3ab90ed2e9f9a18ad9d0d0b7216f90df7",
+    "reference_count": 1137
   },
   "result": "pass",
   "deploy_gate": {
@@ -37,9 +37,9 @@
     "public_data": {
       "path": "public/data",
       "exists": true,
-      "files": 74622,
-      "bytes": 280067579,
-      "human": "267.1 MB"
+      "files": 74628,
+      "bytes": 280588907,
+      "human": "267.6 MB"
     },
     "chips": {
       "path": "public/data/chips",
@@ -239,7 +239,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 483,
+        "elapsed_ms": 333,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -256,7 +256,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 355,
+        "elapsed_ms": 250,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -273,7 +273,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 327,
+        "elapsed_ms": 282,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -290,7 +290,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 266,
+        "elapsed_ms": 378,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -307,7 +307,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 276,
+        "elapsed_ms": 303,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -324,7 +324,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 269,
+        "elapsed_ms": 263,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -341,7 +341,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 305,
+        "elapsed_ms": 255,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -358,7 +358,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 312,
+        "elapsed_ms": 278,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -375,7 +375,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 281,
+        "elapsed_ms": 301,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -392,7 +392,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 272,
+        "elapsed_ms": 259,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -426,7 +426,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 265,
+        "elapsed_ms": 243,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -443,7 +443,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 237,
+        "elapsed_ms": 306,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -460,7 +460,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 288,
+        "elapsed_ms": 234,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -477,7 +477,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 279,
+        "elapsed_ms": 256,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -494,7 +494,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 265,
+        "elapsed_ms": 175,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -511,7 +511,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 251,
+        "elapsed_ms": 296,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -528,7 +528,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 257,
+        "elapsed_ms": 281,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -545,7 +545,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 289,
+        "elapsed_ms": 260,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -562,7 +562,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 198,
+        "elapsed_ms": 262,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -579,7 +579,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 297,
+        "elapsed_ms": 287,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -596,7 +596,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 329,
+        "elapsed_ms": 222,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -613,7 +613,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 359,
+        "elapsed_ms": 230,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -630,7 +630,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 256,
+        "elapsed_ms": 220,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -647,7 +647,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 359,
+        "elapsed_ms": 244,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -664,7 +664,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 195,
+        "elapsed_ms": 247,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -681,7 +681,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 311,
+        "elapsed_ms": 233,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -698,7 +698,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 287,
+        "elapsed_ms": 262,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -715,7 +715,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 235,
+        "elapsed_ms": 208,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -732,7 +732,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 212,
+        "elapsed_ms": 268,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -749,7 +749,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 272,
+        "elapsed_ms": 208,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -766,7 +766,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 216,
+        "elapsed_ms": 263,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -783,7 +783,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 290,
+        "elapsed_ms": 259,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -800,7 +800,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 260,
+        "elapsed_ms": 219,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -817,7 +817,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 207,
+        "elapsed_ms": 235,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -834,7 +834,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 283,
+        "elapsed_ms": 217,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -851,7 +851,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 274,
+        "elapsed_ms": 257,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -868,7 +868,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 268,
+        "elapsed_ms": 237,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -885,7 +885,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 238,
+        "elapsed_ms": 276,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -902,7 +902,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 211,
+        "elapsed_ms": 225,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -919,7 +919,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 282,
+        "elapsed_ms": 388,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -936,7 +936,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 257,
+        "elapsed_ms": 357,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -953,7 +953,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 406,
+        "elapsed_ms": 214,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -970,7 +970,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 212,
+        "elapsed_ms": 293,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -987,7 +987,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 233,
+        "elapsed_ms": 360,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1004,7 +1004,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 216,
+        "elapsed_ms": 264,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1021,7 +1021,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 262,
+        "elapsed_ms": 224,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1038,7 +1038,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 316,
+        "elapsed_ms": 216,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1055,7 +1055,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 279,
+        "elapsed_ms": 220,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1072,7 +1072,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 223,
+        "elapsed_ms": 254,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1089,7 +1089,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 218,
+        "elapsed_ms": 225,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1106,7 +1106,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 277,
+        "elapsed_ms": 255,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1123,7 +1123,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 265,
+        "elapsed_ms": 220,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1140,7 +1140,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 233,
+        "elapsed_ms": 261,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1157,7 +1157,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 280,
+        "elapsed_ms": 284,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1174,7 +1174,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 220,
+        "elapsed_ms": 248,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1191,7 +1191,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 178,
+        "elapsed_ms": 230,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1208,7 +1208,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 247,
+        "elapsed_ms": 204,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1225,7 +1225,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 253,
+        "elapsed_ms": 218,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1242,7 +1242,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 284,
+        "elapsed_ms": 296,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1259,7 +1259,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 230,
+        "elapsed_ms": 229,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1276,7 +1276,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 349,
+        "elapsed_ms": 230,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1293,7 +1293,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 219,
+        "elapsed_ms": 230,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1310,7 +1310,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 259,
+        "elapsed_ms": 223,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1327,7 +1327,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 230,
+        "elapsed_ms": 246,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1344,7 +1344,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 217,
+        "elapsed_ms": 256,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1361,7 +1361,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 228,
+        "elapsed_ms": 271,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1378,7 +1378,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 266,
+        "elapsed_ms": 220,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1395,7 +1395,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 243,
+        "elapsed_ms": 238,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1412,7 +1412,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 371,
+        "elapsed_ms": 219,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1429,7 +1429,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 221,
+        "elapsed_ms": 264,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1446,7 +1446,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 231,
+        "elapsed_ms": 223,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1463,7 +1463,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 263,
+        "elapsed_ms": 279,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1480,7 +1480,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 256,
+        "elapsed_ms": 301,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1497,7 +1497,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 217,
+        "elapsed_ms": 359,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1514,7 +1514,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 207,
+        "elapsed_ms": 360,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1531,7 +1531,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 338,
+        "elapsed_ms": 326,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1548,7 +1548,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 335,
+        "elapsed_ms": 210,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1565,7 +1565,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 234,
+        "elapsed_ms": 290,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1582,7 +1582,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 207,
+        "elapsed_ms": 286,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1599,7 +1599,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 234,
+        "elapsed_ms": 182,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1616,7 +1616,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 230,
+        "elapsed_ms": 246,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1633,7 +1633,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 207,
+        "elapsed_ms": 247,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1650,7 +1650,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 320,
+        "elapsed_ms": 214,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1667,7 +1667,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 245,
+        "elapsed_ms": 233,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1684,7 +1684,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 208,
+        "elapsed_ms": 212,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1701,7 +1701,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 227,
+        "elapsed_ms": 267,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1718,7 +1718,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 278,
+        "elapsed_ms": 245,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1735,7 +1735,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 219,
+        "elapsed_ms": 255,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1752,7 +1752,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 233,
+        "elapsed_ms": 240,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1769,7 +1769,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 220,
+        "elapsed_ms": 232,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1786,7 +1786,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 201,
+        "elapsed_ms": 214,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1803,7 +1803,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 271,
+        "elapsed_ms": 225,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1820,7 +1820,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 227,
+        "elapsed_ms": 202,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1837,7 +1837,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 273,
+        "elapsed_ms": 282,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1854,7 +1854,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 227,
+        "elapsed_ms": 346,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1871,7 +1871,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 238,
+        "elapsed_ms": 210,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1888,7 +1888,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 216,
+        "elapsed_ms": 226,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1905,7 +1905,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 225,
+        "elapsed_ms": 250,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1922,7 +1922,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 239,
+        "elapsed_ms": 273,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1939,7 +1939,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 409,
+        "elapsed_ms": 206,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1956,7 +1956,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 233,
+        "elapsed_ms": 184,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1973,7 +1973,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 240,
+        "elapsed_ms": 213,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -1990,7 +1990,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 293,
+        "elapsed_ms": 253,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2007,7 +2007,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 682,
+        "elapsed_ms": 804,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2024,7 +2024,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 457,
+        "elapsed_ms": 436,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2041,7 +2041,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 629,
+        "elapsed_ms": 592,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2058,7 +2058,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 865,
+        "elapsed_ms": 673,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2075,7 +2075,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 626,
+        "elapsed_ms": 621,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2092,7 +2092,7 @@
         "accept_ranges": "bytes",
         "cache_control": "public, max-age=31536000, immutable",
         "content_length": "1",
-        "elapsed_ms": 556,
+        "elapsed_ms": 570,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2109,7 +2109,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 662,
+        "elapsed_ms": 661,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2126,7 +2126,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 615,
+        "elapsed_ms": 609,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2143,7 +2143,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 637,
+        "elapsed_ms": 623,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2160,7 +2160,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 381,
+        "elapsed_ms": 433,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2177,7 +2177,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 364,
+        "elapsed_ms": 372,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []
@@ -2194,7 +2194,7 @@
         "accept_ranges": "bytes",
         "cache_control": null,
         "content_length": "1",
-        "elapsed_ms": 499,
+        "elapsed_ms": 457,
         "error": null,
         "quality_errors": [],
         "quality_warnings": []

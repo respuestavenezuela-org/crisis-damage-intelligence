@@ -6,6 +6,7 @@ import { useMemo, useState, useSyncExternalStore } from "react";
 import { DEFAULT_LANGUAGE, persistLang, readStoredLang, subscribeStoredLang } from "@/lib/lang";
 import type { Language } from "@/components/types";
 import type {
+  AerialEvidenceCollection,
   First72Finding,
   ReconstructionConfidence,
   ReconstructionCatalog,
@@ -61,6 +62,30 @@ const copy = {
     primary: "Primaria",
     secondary: "Secundaria",
     derived: "Derivada",
+    aerialKicker: "Lectura aérea · +41 horas",
+    aerialTitle: "¿Qué respuesta puede verse desde arriba?",
+    aerialIntro: "Una revisión humana de los candidatos de vehículos, maquinaria y uso de sitio en la ortofoto Copernicus del 26 de junio.",
+    reviewedCandidates: "Candidatos revisados",
+    publishedSites: "Sitios publicados",
+    likelyResponseSites: "Señales probables",
+    identifiableShelters: "Refugios identificables",
+    nativePixels: "Píxeles nativos",
+    enhancedView: "Vista mejorada 2×",
+    displayOnly: "Derivada · solo visualización",
+    category: "Tipo de observación",
+    status: "Estado de revisión",
+    heavyMachinery: "Maquinaria",
+    largeVehicles: "Vehículos grandes",
+    siteUse: "Uso del sitio",
+    likelyResponse: "Probable respuesta",
+    unresolved: "No resuelto",
+    openLocation: "Abrir ubicación",
+    sourceHash: "Huella del original",
+    modelAudit: "Auditoría de modelos",
+    modelAuditIntro: "Solo la mejora 2× pasó la revisión, y únicamente como ayuda visual. Los detectores y la mejora 4× fueron rechazados.",
+    acceptedDisplay: "Aceptado para visualización",
+    rejected: "Rechazado",
+    enhancementWarning: "La mejora no crea detalle real. Toda observación debe seguir siendo defendible en el chip nativo.",
     phase: {
       impact: "Impacto",
       "search-rescue": "Búsqueda y rescate",
@@ -116,6 +141,30 @@ const copy = {
     primary: "Primary",
     secondary: "Secondary",
     derived: "Derived",
+    aerialKicker: "Aerial reading · +41 hours",
+    aerialTitle: "What response can be seen from above?",
+    aerialIntro: "A human review of vehicle, machinery and site-use candidates in the June 26 Copernicus orthomosaic.",
+    reviewedCandidates: "Candidates reviewed",
+    publishedSites: "Published sites",
+    likelyResponseSites: "Probable signals",
+    identifiableShelters: "Identifiable shelters",
+    nativePixels: "Native pixels",
+    enhancedView: "Enhanced 2× view",
+    displayOnly: "Derivative · display only",
+    category: "Observation type",
+    status: "Review status",
+    heavyMachinery: "Machinery",
+    largeVehicles: "Large vehicles",
+    siteUse: "Site use",
+    likelyResponse: "Likely response",
+    unresolved: "Unresolved",
+    openLocation: "Open location",
+    sourceHash: "Source fingerprint",
+    modelAudit: "Model audit",
+    modelAuditIntro: "Only the 2× enhancement passed review, and only as a viewing aid. The detectors and 4× enhancement were rejected.",
+    acceptedDisplay: "Accepted for display",
+    rejected: "Rejected",
+    enhancementWarning: "Enhancement does not create real detail. Every observation must remain supportable in the native chip.",
     phase: {
       impact: "Impact",
       "search-rescue": "Search & rescue",
@@ -239,6 +288,159 @@ function EvidenceImage({
       />
       <figcaption>{finding.image.caption[language]}</figcaption>
     </figure>
+  );
+}
+
+function AerialEvidenceExplorer({
+  evidence,
+  language,
+}: {
+  evidence: AerialEvidenceCollection;
+  language: Language;
+}) {
+  const t = copy[language];
+  const [category, setCategory] = useState<"all" | "heavy-machinery" | "large-vehicles" | "site-use">("all");
+  const [status, setStatus] = useState<"all" | "likely-response-related" | "unresolved">("all");
+  const [imageMode, setImageMode] = useState<"native" | "enhanced">("native");
+  const observations = evidence.observations.filter((observation) => {
+    if (category !== "all" && observation.category !== category) return false;
+    if (status !== "all" && observation.status !== status) return false;
+    return true;
+  });
+  const categoryLabels = {
+    "heavy-machinery": t.heavyMachinery,
+    "large-vehicles": t.largeVehicles,
+    "site-use": t.siteUse,
+  };
+
+  return (
+    <section className={styles.aerialSection} id="aerial-evidence">
+      <div className={styles.aerialHeader}>
+        <div className={styles.sectionHeading}>
+          <p>{t.aerialKicker}</p>
+          <h2>{t.aerialTitle}</h2>
+        </div>
+        <p>{t.aerialIntro}</p>
+      </div>
+
+      <div className={styles.aerialSummary}>
+        <dl>
+          <div>
+            <dt>{t.reviewedCandidates}</dt>
+            <dd>{evidence.review.candidateRecords}</dd>
+          </div>
+          <div>
+            <dt>{t.publishedSites}</dt>
+            <dd>{evidence.review.publishedSites}</dd>
+          </div>
+          <div>
+            <dt>{t.likelyResponseSites}</dt>
+            <dd>{evidence.review.likelyResponseSites}</dd>
+          </div>
+          <div>
+            <dt>{t.identifiableShelters}</dt>
+            <dd>{evidence.review.confidentSheltersOrSleepingSites}</dd>
+          </div>
+        </dl>
+        <div>
+          <p>{evidence.review.summary[language]}</p>
+          <small>{evidence.review.absenceCaveat[language]}</small>
+        </div>
+      </div>
+
+      <div className={styles.aerialControls}>
+        <div>
+          <p>{t.category}</p>
+          <div className={styles.filterRow}>
+            <button type="button" aria-pressed={category === "all"} onClick={() => setCategory("all")}>{t.all}</button>
+            <button type="button" aria-pressed={category === "heavy-machinery"} onClick={() => setCategory("heavy-machinery")}>{t.heavyMachinery}</button>
+            <button type="button" aria-pressed={category === "large-vehicles"} onClick={() => setCategory("large-vehicles")}>{t.largeVehicles}</button>
+            <button type="button" aria-pressed={category === "site-use"} onClick={() => setCategory("site-use")}>{t.siteUse}</button>
+          </div>
+        </div>
+        <div>
+          <p>{t.status}</p>
+          <div className={styles.filterRow}>
+            <button type="button" aria-pressed={status === "all"} onClick={() => setStatus("all")}>{t.all}</button>
+            <button type="button" aria-pressed={status === "likely-response-related"} onClick={() => setStatus("likely-response-related")}>{t.likelyResponse}</button>
+            <button type="button" aria-pressed={status === "unresolved"} onClick={() => setStatus("unresolved")}>{t.unresolved}</button>
+          </div>
+        </div>
+        <div>
+          <p>{language === "es" ? "Imagen" : "Image"}</p>
+          <div className={styles.filterRow}>
+            <button type="button" aria-pressed={imageMode === "native"} onClick={() => setImageMode("native")}>{t.nativePixels}</button>
+            <button type="button" aria-pressed={imageMode === "enhanced"} onClick={() => setImageMode("enhanced")}>{t.enhancedView}</button>
+          </div>
+        </div>
+      </div>
+
+      {imageMode === "enhanced" && (
+        <aside className={styles.enhancementWarning}>
+          <span>AI / 2×</span>
+          <p>{t.enhancementWarning}</p>
+        </aside>
+      )}
+
+      <div className={styles.aerialGrid}>
+        {observations.map((observation) => {
+          const isEnhanced = imageMode === "enhanced";
+          const image = isEnhanced ? observation.enhancedImage : observation.nativeImage;
+          return (
+            <article key={observation.id} className={styles.aerialCard}>
+              <figure>
+                <Image
+                  src={image}
+                  width={isEnhanced ? 1024 : 512}
+                  height={isEnhanced ? 1024 : 512}
+                  unoptimized
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                  alt={`${observation.title[language]} · ${isEnhanced ? t.enhancedView : t.nativePixels}`}
+                />
+                <figcaption>
+                  <span>{isEnhanced ? t.displayOnly : t.nativePixels}</span>
+                  <small>{observation.chipId}</small>
+                </figcaption>
+              </figure>
+              <div className={styles.aerialCardBody}>
+                <div className={styles.badgeRow}>
+                  <span className={`${styles.confidence} ${styles[observation.confidence]}`}>
+                    {confidenceLabels[language][observation.confidence]}
+                  </span>
+                  <span className={styles.stage}>
+                    {observation.status === "likely-response-related" ? t.likelyResponse : t.unresolved}
+                  </span>
+                  <span className={styles.phase}>{categoryLabels[observation.category]}</span>
+                </div>
+                <h3>{observation.title[language]}</h3>
+                <p>{observation.finding[language]}</p>
+                <div className={styles.aerialMeta}>
+                  <span>{observation.location.label}</span>
+                  <small>{t.sourceHash}: {observation.nativeSha256.slice(0, 12)}…</small>
+                </div>
+                <a href={observation.mapUrl} target="_blank" rel="noreferrer">
+                  {t.openLocation} ↗
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <details className={styles.modelAudit}>
+        <summary>{t.modelAudit}</summary>
+        <p>{t.modelAuditIntro}</p>
+        <div>
+          {evidence.modelBenchmarks.map((benchmark) => (
+            <article key={benchmark.modelId}>
+              <span>{benchmark.result === "accepted-display-only" ? t.acceptedDisplay : t.rejected}</span>
+              <h3>{benchmark.modelId}</h3>
+              <p>{benchmark.note[language]}</p>
+            </article>
+          ))}
+        </div>
+      </details>
+    </section>
   );
 }
 
@@ -466,6 +668,10 @@ export default function TimelineExplorer({
           <p>{t.evidenceRuleText}</p>
         </aside>
       </section>
+
+      {data.aerialEvidence && (
+        <AerialEvidenceExplorer evidence={data.aerialEvidence} language={language} />
+      )}
 
       <section className={styles.timelineSection} id="timeline">
         <div className={styles.timelineHeader}>

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "public" / "data" / "reconstruction"
 CATALOG_PATH = DATA_DIR / "catalog.json"
+AERIAL_EVIDENCE_PATH = DATA_DIR / "aerial-response-evidence-la-guaira.json"
 
 ALLOWED_CONFIDENCE = {"confirmed", "corroborated", "single-source", "inferred"}
 ALLOWED_STAGE = {
@@ -48,6 +50,85 @@ def validate_image(image: dict[str, Any], label: str) -> None:
     assert image_path.is_file(), f"{label} image missing: {image_path}"
     require_localized(image.get("alt"), f"{label}.image.alt")
     require_localized(image.get("caption"), f"{label}.image.caption")
+
+
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def validate_aerial_evidence(path: Path) -> dict[str, int]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    prefix = path.name
+    assert payload.get("version") == 1, f"{prefix}: unsupported version"
+    assert payload.get("aoiId") == "emsr884-aoi12-caraballeda", f"{prefix}: wrong AOI"
+    parse_datetime(payload["updatedAt"], f"{prefix}.updatedAt")
+    parse_datetime(payload["acquisitionAt"], f"{prefix}.acquisitionAt")
+
+    review = payload.get("review", {})
+    require_localized(review.get("method"), f"{prefix}.review.method")
+    require_localized(review.get("summary"), f"{prefix}.review.summary")
+    require_localized(review.get("absenceCaveat"), f"{prefix}.review.absenceCaveat")
+    candidate_ids = review.get("candidateIds")
+    assert isinstance(candidate_ids, list) and candidate_ids, f"{prefix}: candidateIds missing"
+    assert len(candidate_ids) == len(set(candidate_ids)), f"{prefix}: duplicate candidate ids"
+    assert review.get("candidateRecords") == len(candidate_ids), f"{prefix}: candidate count mismatch"
+
+    enhancement = payload.get("enhancement", {})
+    assert enhancement.get("status") == "display-only", f"{prefix}: enhancement must be display-only"
+    assert enhancement.get("scale") == 2, f"{prefix}: only reviewed 2x derivatives are allowed"
+    require_localized(enhancement.get("method"), f"{prefix}.enhancement.method")
+    require_localized(enhancement.get("acceptanceRule"), f"{prefix}.enhancement.acceptanceRule")
+
+    benchmarks = payload.get("modelBenchmarks")
+    assert isinstance(benchmarks, list) and benchmarks, f"{prefix}: model benchmarks missing"
+    accepted = [item for item in benchmarks if item.get("result") == "accepted-display-only"]
+    assert len(accepted) == 1, f"{prefix}: exactly one display-only model must be accepted"
+    for benchmark in benchmarks:
+        assert benchmark.get("result") in {"accepted-display-only", "rejected"}
+        require_localized(benchmark.get("note"), f"{prefix}: benchmark {benchmark.get('modelId')}.note")
+
+    observations = payload.get("observations")
+    assert isinstance(observations, list) and observations, f"{prefix}: observations missing"
+    observation_ids = [item.get("id") for item in observations]
+    assert len(observation_ids) == len(set(observation_ids)), f"{prefix}: duplicate observations"
+    likely_count = 0
+    unresolved_count = 0
+    for observation in observations:
+        observation_id = observation.get("id")
+        chip_id = observation.get("chipId")
+        assert chip_id in candidate_ids, f"{prefix}: {observation_id} was not in the review queue"
+        assert observation.get("status") in {"likely-response-related", "unresolved"}
+        likely_count += observation.get("status") == "likely-response-related"
+        unresolved_count += observation.get("status") == "unresolved"
+        assert observation.get("confidence") == "inferred", f"{prefix}: imagery observations must be inferred"
+        assert observation.get("category") in {"heavy-machinery", "large-vehicles", "site-use"}
+        require_localized(observation.get("title"), f"{prefix}: {observation_id}.title")
+        require_localized(observation.get("finding"), f"{prefix}: {observation_id}.finding")
+        for image_key, hash_key in (
+            ("nativeImage", "nativeSha256"),
+            ("enhancedImage", "enhancedSha256"),
+        ):
+            src = str(observation.get(image_key, ""))
+            assert src.startswith("/data/"), f"{prefix}: {observation_id}.{image_key} must be public data"
+            image_path = ROOT / "public" / src.lstrip("/")
+            assert image_path.is_file(), f"{prefix}: missing image {image_path}"
+            assert file_sha256(image_path) == observation.get(hash_key), (
+                f"{prefix}: hash mismatch for {observation_id}.{image_key}"
+            )
+        assert str(observation.get("mapUrl", "")).startswith("https://www.google.com/maps/")
+
+    assert review.get("publishedSites") == len(observations), f"{prefix}: published site count mismatch"
+    assert review.get("likelyResponseSites") == likely_count, f"{prefix}: likely site count mismatch"
+    assert review.get("unresolvedSites") == unresolved_count, f"{prefix}: unresolved site count mismatch"
+    return {
+        "candidates": len(candidate_ids),
+        "observations": len(observations),
+        "likely": likely_count,
+    }
 
 
 def validate_packet(path: Path) -> dict[str, Any]:
@@ -143,6 +224,7 @@ def validate_packet(path: Path) -> dict[str, Any]:
 
 
 def main() -> None:
+    aerial_result = validate_aerial_evidence(AERIAL_EVIDENCE_PATH)
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     assert catalog.get("version") == 1, "unsupported catalog version"
     parse_datetime(catalog["updatedAt"], "catalog.updatedAt")
@@ -184,7 +266,11 @@ def main() -> None:
         f"{slug}: {result['events']} events/{result['sources']} sources"
         for slug, result in results
     )
-    print(f"Reconstruction catalog valid ({len(results)} packets): {summary}.")
+    print(
+        f"Reconstruction catalog valid ({len(results)} packets): {summary}. "
+        f"Aerial review valid ({aerial_result['candidates']} candidates/"
+        f"{aerial_result['observations']} published/{aerial_result['likely']} likely response sites)."
+    )
 
 
 if __name__ == "__main__":

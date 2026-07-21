@@ -20,6 +20,74 @@ export type ReconstructionImage = {
   caption: LocalizedText;
 };
 
+export type AerialEvidenceObservation = {
+  id: string;
+  chipId: string;
+  status: "likely-response-related" | "unresolved";
+  confidence: ReconstructionConfidence;
+  category: "heavy-machinery" | "large-vehicles" | "site-use";
+  location: {
+    label: string;
+    latitude: number;
+    longitude: number;
+    precision: string;
+  };
+  title: LocalizedText;
+  finding: LocalizedText;
+  nativeImage: string;
+  enhancedImage: string;
+  nativeSha256: string;
+  enhancedSha256: string;
+  mapUrl: string;
+  sourceIds: string[];
+};
+
+export type AerialEvidenceCollection = {
+  version: number;
+  id: string;
+  updatedAt: string;
+  aoiId: string;
+  acquisitionAt: string;
+  hoursAfterEvent: number;
+  sourceId: string;
+  source: {
+    publisher: string;
+    sensor: string;
+    product: string;
+    url: string;
+    license: string;
+  };
+  review: {
+    method: LocalizedText;
+    summary: LocalizedText;
+    absenceCaveat: LocalizedText;
+    candidateRecords: number;
+    publishedSites: number;
+    likelyResponseSites: number;
+    unresolvedSites: number;
+    confidentCollectionCentres: number;
+    confidentSheltersOrSleepingSites: number;
+    candidateIds: string[];
+  };
+  enhancement: {
+    status: "display-only";
+    modelId: string;
+    modelRevision: string;
+    scale: number;
+    license: string;
+    method: LocalizedText;
+    acceptanceRule: LocalizedText;
+  };
+  modelBenchmarks: Array<{
+    modelId: string;
+    revision: string;
+    task: string;
+    result: "accepted-display-only" | "rejected";
+    note: LocalizedText;
+  }>;
+  observations: AerialEvidenceObservation[];
+};
+
 export type ReconstructionSource = {
   id: string;
   publisher: string;
@@ -89,6 +157,7 @@ export type ReconstructionData = {
     summary: LocalizedText;
     findings: First72Finding[];
   };
+  aerialEvidence?: AerialEvidenceCollection;
   sources: ReconstructionSource[];
   events: ReconstructionEvent[];
 };

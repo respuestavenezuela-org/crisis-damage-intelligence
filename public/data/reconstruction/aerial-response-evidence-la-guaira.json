@@ -1,0 +1,268 @@
+{
+  "version": 1,
+  "id": "aoi12-la-guaira-aerial-response-review",
+  "updatedAt": "2026-07-21T00:45:00-04:00",
+  "aoiId": "emsr884-aoi12-caraballeda",
+  "acquisitionAt": "2026-06-26T15:10:00Z",
+  "hoursAfterEvent": 41,
+  "sourceId": "copernicus-aoi12-june-26",
+  "source": {
+    "publisher": "Copernicus Emergency Management Service",
+    "sensor": "Legion",
+    "product": "EMSR884 AOI12 GRA post-event orthomosaic",
+    "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+    "license": "Copernicus EMS public product terms"
+  },
+  "review": {
+    "method": {
+      "es": "Se buscaron términos de respuesta en 107 registros VLM antes/después, se revisaron manualmente los 26 chips candidatos contra los píxeles nativos y se publicaron cinco sitios que muestran una observación útil o un límite importante. El VLM y los detectores solo sirvieron para triage; no establecen los hallazgos.",
+      "en": "Response-related terms were searched across 107 before/after VLM records, all 26 candidate chips were manually checked against the native pixels, and five sites were published because they show a useful observation or an important resolution limit. The VLM and detectors were used only for triage; they do not establish the findings."
+    },
+    "summary": {
+      "es": "Dos sitios contienen señales visuales compatibles con una respuesta en terreno: una probable máquina amarilla con varios vehículos y un grupo de vehículos rojos grandes junto a destrucción severa. Otros tres casos siguen sin resolver. Ningún chip revisado permite identificar con confianza un centro de acopio, un refugio o personas durmiendo.",
+      "en": "Two sites contain visual signals consistent with an on-site response: a probable yellow machine with several vehicles, and a cluster of large red vehicles beside severe destruction. Three other cases remain unresolved. None of the reviewed chips supports a confident identification of a collection centre, shelter or people sleeping."
+    },
+    "absenceCaveat": {
+      "es": "Que esos usos no sean identificables en estos chips no demuestra que no existieran. La cobertura es una sola adquisición y los objetos pequeños pueden quedar por debajo de la resolución útil.",
+      "en": "Their not being identifiable in these chips does not show that they did not exist. Coverage is a single acquisition, and small objects may fall below the useful resolution."
+    },
+    "candidateRecords": 26,
+    "publishedSites": 5,
+    "likelyResponseSites": 2,
+    "unresolvedSites": 3,
+    "confidentCollectionCentres": 0,
+    "confidentSheltersOrSleepingSites": 0,
+    "candidateIds": [
+      "ems_00002",
+      "ems_00003",
+      "ems_00005",
+      "ems_00006",
+      "ems_00007",
+      "ems_00008",
+      "ems_00012",
+      "ems_00015",
+      "ems_00031",
+      "ems_00033",
+      "ems_00034",
+      "ems_00035",
+      "ems_00040",
+      "ems_00043",
+      "ems_00050",
+      "ems_00051",
+      "ems_00056",
+      "ems_00060",
+      "ems_00066",
+      "ems_00067",
+      "ems_00077",
+      "ems_00078",
+      "ems_00108",
+      "ems_00117",
+      "ems_00119",
+      "ems_00120"
+    ]
+  },
+  "enhancement": {
+    "status": "display-only",
+    "modelId": "caidas/swin2SR-classical-sr-x2-64",
+    "modelRevision": "cee1c923c6a37361c6e5650b65dcf4be821e5d52",
+    "scale": 2,
+    "license": "Apache-2.0",
+    "method": {
+      "es": "Swin2SR 2× ejecutado localmente sobre el chip PNG nativo; salida WebP calidad 86. La imagen derivada reduce la borrosidad de compresión para inspección, pero no agrega evidencia y nunca sustituye al original.",
+      "en": "Swin2SR 2× run locally on the native PNG chip; WebP quality 86 output. The derivative reduces compression blur for inspection, but adds no evidence and never replaces the original."
+    },
+    "acceptanceRule": {
+      "es": "Una observación solo se publica si sigue siendo defendible en la imagen nativa. Los rasgos que aparecen únicamente en la mejora se descartan.",
+      "en": "An observation is published only when it remains supportable in the native image. Features appearing only in the enhancement are discarded."
+    }
+  },
+  "modelBenchmarks": [
+    {
+      "modelId": "caidas/swin2SR-classical-sr-x2-64",
+      "revision": "cee1c923c6a37361c6e5650b65dcf4be821e5d52",
+      "task": "super-resolution",
+      "result": "accepted-display-only",
+      "note": {
+        "es": "Mejoró la legibilidad de bordes y compresión sin cambiar la geometría general en la comparación revisada.",
+        "en": "Improved edge and compression legibility without changing the overall geometry in the reviewed comparison."
+      }
+    },
+    {
+      "modelId": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+      "revision": "bb13f02e45e88d00b6c202b3fbe6a181af144606",
+      "task": "super-resolution",
+      "result": "rejected",
+      "note": {
+        "es": "El resultado 4× suavizó superficies y generó estructura aparente en bordes; no es adecuado para lectura de evidencia.",
+        "en": "The 4× result smoothed surfaces and generated apparent edge structure; it is unsuitable for evidence reading."
+      }
+    },
+    {
+      "modelId": "IDEA-Research/grounding-dino-tiny",
+      "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+      "task": "zero-shot-object-detection",
+      "result": "rejected",
+      "note": {
+        "es": "Produjo cajas desplazadas y etiquetas inestables sobre objetos aéreos pequeños.",
+        "en": "Produced misplaced boxes and unstable labels on small aerial objects."
+      }
+    },
+    {
+      "modelId": "mshamrai/yolov8s-visdrone",
+      "revision": "996db9c3fbdf92ecdcf58411449a39232bfbcff6",
+      "task": "aerial-object-detection",
+      "result": "rejected",
+      "note": {
+        "es": "A un umbral bajo de 0,15 solo señaló artefactos en los bordes de dos chips y no recuperó los objetos visibles revisados.",
+        "en": "At a low 0.15 threshold it only marked edge artifacts in two chips and did not recover the reviewed visible objects."
+      }
+    }
+  ],
+  "observations": [
+    {
+      "id": "aerial-ems-00119",
+      "chipId": "ems_00119",
+      "status": "likely-response-related",
+      "confidence": "inferred",
+      "category": "heavy-machinery",
+      "location": {
+        "label": "Caraballeda oriental",
+        "latitude": 10.61876540826087,
+        "longitude": -66.84911322956522,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Probable máquina amarilla y varios vehículos junto a escombros",
+        "en": "Probable yellow machine and several vehicles beside debris"
+      },
+      "finding": {
+        "es": "En el borde norte del chip posterior se distingue un objeto amarillo del tamaño y forma general de una excavadora, junto a varios vehículos y un campo de destrucción. La imagen nativa permite sostener «probable maquinaria pesada», no marca, operador, actividad ni suficiencia.",
+        "en": "At the northern edge of the post-event chip, a yellow object has the general size and shape of an excavator, beside several vehicles and a destruction field. The native image supports “probable heavy machinery,” not make, operator, activity or adequacy."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00119_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00119_after_event_swin2sr_x2.webp",
+      "nativeSha256": "812b02851b6289cc9cf82829547c08a5a714fd70bd0e9fc002e32c2bfec14a24",
+      "enhancedSha256": "b8f3acbc03f8bd92c929878e4921e8de7ee36969829e3f31620ae93d82b51d01",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.61876540826087,-66.84911322956522",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ]
+    },
+    {
+      "id": "aerial-ems-00117",
+      "chipId": "ems_00117",
+      "status": "likely-response-related",
+      "confidence": "inferred",
+      "category": "large-vehicles",
+      "location": {
+        "label": "Caraballeda oriental",
+        "latitude": 10.619438562435898,
+        "longitude": -66.84675992099068,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Vehículos rojos grandes en un bloque severamente afectado",
+        "en": "Large red vehicles at a severely affected block"
+      },
+      "finding": {
+        "es": "Se observan varios vehículos rojos grandes agrupados entre árboles, vías y destrucción extensa. Su color y escala son compatibles con vehículos de emergencia o respuesta, pero la resolución no permite confirmar el tipo exacto ni si estaban operando.",
+        "en": "Several large red vehicles are grouped among trees, roads and extensive destruction. Their colour and scale are consistent with emergency or response vehicles, but the resolution does not confirm the exact type or whether they were operating."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00117_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00117_after_event_swin2sr_x2.webp",
+      "nativeSha256": "c1a66dddd15f444f3648c94aff997abd1ce7bb1f02daa4234a53fb002046d9f7",
+      "enhancedSha256": "9d6e0e5a4c4cee9b93e17c026ae26025bd9b7ff1292b3b391b814ac66a2b4f15",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.619438562435898,-66.84675992099068",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ]
+    },
+    {
+      "id": "aerial-ems-00108",
+      "chipId": "ems_00108",
+      "status": "unresolved",
+      "confidence": "inferred",
+      "category": "heavy-machinery",
+      "location": {
+        "label": "Caraballeda oriental",
+        "latitude": 10.6148392825,
+        "longitude": -66.837810166,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Objeto amarillo de escala vehicular: relación con la respuesta no resuelta",
+        "en": "Vehicle-scale yellow object: response relationship unresolved"
+      },
+      "finding": {
+        "es": "Un objeto amarillo de escala vehicular aparece cerca del borde norte de una estructura afectada. Puede ser maquinaria, pero la geometría distinta entre imágenes y la falta de detalle impiden afirmar que llegó después del sismo o que formaba parte de la respuesta.",
+        "en": "A vehicle-scale yellow object appears near the northern edge of a damaged structure. It may be machinery, but differing image geometry and limited detail prevent saying it arrived after the earthquake or was part of the response."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00108_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00108_after_event_swin2sr_x2.webp",
+      "nativeSha256": "325f2b049d97c3679fef9048824b8f51a81f214096171b5a30dd34d585971c75",
+      "enhancedSha256": "0f186994d31044c9fe2c6be4d131fa5ec1cc650e3d15920ee29bc5abc0d9132f",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.6148392825,-66.837810166",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ]
+    },
+    {
+      "id": "aerial-ems-00031",
+      "chipId": "ems_00031",
+      "status": "unresolved",
+      "confidence": "inferred",
+      "category": "large-vehicles",
+      "location": {
+        "label": "La Guaira occidental",
+        "latitude": 10.605771187419354,
+        "longitude": -67.02861496232258,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Vehículo o remolque rojo grande en un patio industrial",
+        "en": "Large red vehicle or trailer in an industrial yard"
+      },
+      "finding": {
+        "es": "El chip posterior muestra una forma roja alargada compatible con un camión, autobús o remolque. El entorno industrial y la falta de una comparación geométrica limpia impiden atribuirlo a la respuesta o incluso fijar su tipo.",
+        "en": "The post-event chip shows an elongated red form consistent with a truck, bus or trailer. The industrial setting and lack of a clean geometric comparison prevent attributing it to the response or fixing its type."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00031_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00031_after_event_swin2sr_x2.webp",
+      "nativeSha256": "d808b747df905ddb0ff3fdf5d69f713e4609aa4fdd41fa411195611b9c03da02",
+      "enhancedSha256": "1f581f64ce22d0c3c159e534731aac1384da466865b3983ce95d2f600ad56ab7",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.605771187419354,-67.02861496232258",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ]
+    },
+    {
+      "id": "aerial-ems-00056",
+      "chipId": "ems_00056",
+      "status": "unresolved",
+      "confidence": "inferred",
+      "category": "site-use",
+      "location": {
+        "label": "La Guaira",
+        "latitude": 10.610860842897884,
+        "longitude": -67.02103362942042,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Vehículos en un área despejada; no confirma refugio o acopio",
+        "en": "Vehicles in a cleared area; does not confirm shelter or collection"
+      },
+      "finding": {
+        "es": "Se ven varios vehículos pequeños en un área abierta junto a un edificio afectado. Las formas rojas cercanas no pueden distinguirse con confianza como estructuras temporales. Este chip no permite afirmar que el lugar fuera centro de acopio, refugio o alojamiento.",
+        "en": "Several small vehicles are visible in an open area beside a damaged building. Nearby red forms cannot be confidently distinguished as temporary structures. This chip does not support calling the place a collection centre, shelter or lodging site."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00056_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00056_after_event_swin2sr_x2.webp",
+      "nativeSha256": "c2f70810324c87b798fa5132f052a0d1c59e1a23278031f11df4aceeb6f07e1b",
+      "enhancedSha256": "518a5c06b0ba08a0ffb13b77a73dc98f514777dfef2c13182e8eec8294c5ecae",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.610860842897884,-67.02103362942042",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ]
+    }
+  ]
+}

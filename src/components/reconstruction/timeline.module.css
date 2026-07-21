@@ -1025,6 +1025,333 @@
   color: rgba(245, 241, 231, 0.56);
 }
 
+.aerialSection {
+  background: var(--recon-night);
+  padding: clamp(82px, 10vw, 150px) clamp(20px, 6vw, 90px);
+  color: var(--recon-paper-soft);
+}
+
+.aerialHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: clamp(30px, 8vw, 130px);
+  align-items: end;
+}
+
+.aerialHeader .sectionHeading {
+  margin-bottom: 0;
+}
+
+.aerialHeader > p {
+  max-width: 620px;
+  margin: 0 0 4px;
+  color: rgba(245, 241, 231, 0.68);
+  font-size: clamp(17px, 2vw, 25px);
+  line-height: 1.35;
+}
+
+.aerialSummary {
+  display: grid;
+  grid-template-columns: minmax(420px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 6vw, 90px);
+  margin-top: clamp(50px, 7vw, 94px);
+  border-top: 1px solid rgba(233, 229, 219, 0.22);
+  border-bottom: 1px solid rgba(233, 229, 219, 0.22);
+  padding: 30px 0;
+}
+
+.aerialSummary dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid rgba(233, 229, 219, 0.22);
+  border-left: 1px solid rgba(233, 229, 219, 0.22);
+}
+
+.aerialSummary dl div {
+  min-height: 112px;
+  border-right: 1px solid rgba(233, 229, 219, 0.22);
+  border-bottom: 1px solid rgba(233, 229, 219, 0.22);
+  padding: 12px;
+}
+
+.aerialSummary dt {
+  min-height: 34px;
+  color: rgba(245, 241, 231, 0.52);
+  font-family: var(--recon-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aerialSummary dd {
+  margin: 15px 0 0;
+  color: var(--recon-lime);
+  font-size: 35px;
+}
+
+.aerialSummary > div > p {
+  margin: 0;
+  font-size: clamp(20px, 2.1vw, 30px);
+  line-height: 1.22;
+}
+
+.aerialSummary > div > small {
+  display: block;
+  margin-top: 18px;
+  color: rgba(245, 241, 231, 0.58);
+  font-family: var(--recon-mono);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.aerialControls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 42px;
+}
+
+.aerialControls > div > p {
+  margin: 0 0 10px;
+  color: rgba(245, 241, 231, 0.52);
+  font-family: var(--recon-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aerialSection .filterRow button {
+  border-color: rgba(233, 229, 219, 0.3);
+  color: var(--recon-paper-soft);
+}
+
+.aerialSection .filterRow button:hover,
+.aerialSection .filterRow button[aria-pressed="true"] {
+  border-color: var(--recon-lime);
+  background: var(--recon-lime);
+  color: var(--recon-ink);
+}
+
+.enhancementWarning {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+  margin-top: 28px;
+  border: 1px solid var(--recon-gold);
+  padding: 16px 18px;
+}
+
+.enhancementWarning span {
+  color: var(--recon-gold);
+  font-family: var(--recon-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.enhancementWarning p {
+  margin: 0;
+  color: rgba(245, 241, 231, 0.76);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.aerialGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 34px;
+  background: rgba(233, 229, 219, 0.22);
+}
+
+.aerialCard {
+  min-width: 0;
+  background: var(--recon-night-soft);
+}
+
+.aerialCard:last-child:nth-child(odd) {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aerialCard:last-child:nth-child(odd) figure {
+  height: 100%;
+  min-height: 560px;
+  aspect-ratio: auto;
+}
+
+.aerialCard figure {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  overflow: hidden;
+  background: #302f2a;
+}
+
+.aerialCard figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aerialCard figure figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(17, 18, 15, 0.9);
+  padding: 8px 12px;
+  font-family: var(--recon-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.aerialCard figure figcaption span {
+  color: var(--recon-lime);
+}
+
+.aerialCard figure figcaption small {
+  color: rgba(245, 241, 231, 0.58);
+  font-size: 9px;
+}
+
+.aerialCardBody {
+  padding: clamp(24px, 4vw, 48px);
+}
+
+.aerialCardBody h3 {
+  max-width: 670px;
+  margin: 22px 0 14px;
+  font-size: clamp(31px, 3.5vw, 54px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.aerialCardBody > p {
+  max-width: 700px;
+  margin: 0;
+  color: rgba(245, 241, 231, 0.7);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.aerialMeta {
+  display: grid;
+  gap: 6px;
+  margin-top: 28px;
+  border-top: 1px solid rgba(233, 229, 219, 0.22);
+  padding-top: 12px;
+}
+
+.aerialMeta span,
+.aerialMeta small,
+.aerialCardBody > a {
+  font-family: var(--recon-mono);
+}
+
+.aerialMeta span {
+  font-size: 11px;
+}
+
+.aerialMeta small {
+  overflow: hidden;
+  color: rgba(245, 241, 231, 0.48);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aerialCardBody > a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 18px;
+  border-bottom: 1px solid var(--recon-lime);
+  color: var(--recon-lime);
+  font-family: var(--recon-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.modelAudit {
+  margin-top: 46px;
+  border-top: 1px solid rgba(233, 229, 219, 0.22);
+  border-bottom: 1px solid rgba(233, 229, 219, 0.22);
+  padding: 22px 0;
+}
+
+.modelAudit summary {
+  min-height: 44px;
+  cursor: pointer;
+  color: var(--recon-lime);
+  font-family: var(--recon-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.modelAudit > p {
+  max-width: 760px;
+  margin: 4px 0 28px;
+  color: rgba(245, 241, 231, 0.65);
+  line-height: 1.5;
+}
+
+.modelAudit > div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(233, 229, 219, 0.22);
+  border-left: 1px solid rgba(233, 229, 219, 0.22);
+}
+
+.modelAudit article {
+  min-width: 0;
+  border-right: 1px solid rgba(233, 229, 219, 0.22);
+  border-bottom: 1px solid rgba(233, 229, 219, 0.22);
+  padding: 18px;
+}
+
+.modelAudit article > span {
+  color: var(--recon-signal);
+  font-family: var(--recon-mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.modelAudit article:first-child > span {
+  color: var(--recon-lime);
+}
+
+.modelAudit article h3 {
+  overflow-wrap: anywhere;
+  margin: 20px 0 12px;
+  font-family: var(--recon-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.modelAudit article p {
+  margin: 0;
+  color: rgba(245, 241, 231, 0.58);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 @media (max-width: 980px) {
   .areaCards {
     grid-template-columns: 1fr;
@@ -1043,6 +1370,16 @@
   .heroImage {
     min-height: auto;
     aspect-ratio: 16 / 10;
+  }
+
+  .aerialHeader,
+  .aerialSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .aerialControls,
+  .modelAudit > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .assessment,
@@ -1184,6 +1521,7 @@
   }
 
   .first72,
+  .aerialSection,
   .timelineSection,
   .methodSection,
   .sourcesSection {
@@ -1242,6 +1580,40 @@
     grid-template-columns: 1fr;
     gap: 14px;
     padding: 18px;
+  }
+
+  .aerialSummary dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aerialControls,
+  .aerialGrid,
+  .modelAudit > div {
+    grid-template-columns: 1fr;
+  }
+
+  .aerialCardBody {
+    padding: 26px 18px 34px;
+  }
+
+  .aerialCard:last-child:nth-child(odd) {
+    display: block;
+    grid-column: auto;
+  }
+
+  .aerialCard:last-child:nth-child(odd) figure {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+  }
+
+  .aerialCardBody h3 {
+    font-size: 34px;
+  }
+
+  .enhancementWarning {
+    grid-template-columns: 78px minmax(0, 1fr);
+    padding: 14px;
   }
 
   .timelineHeader {

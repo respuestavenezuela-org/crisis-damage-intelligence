@@ -1,10 +1,10 @@
 # Performance Audit Baseline
 
-- Generated UTC: `2026-07-21T03:42:40.901591+00:00`
-- Catalog: `65.1 KB` across `16` AOIs
+- Generated UTC: `2026-07-21T04:23:42.498759+00:00`
+- Catalog: `65.3 KB` across `16` AOIs
 - JS bundle in `.next/static`: `1.9 MB` across `29` files
-- CSS bundle in `.next/static`: `113.0 KB` across `3` files
-- `public/data`: `267.1 MB` across `74622` files
+- CSS bundle in `.next/static`: `120.2 KB` across `3` files
+- `public/data`: `267.6 MB` across `74628` files
 - `public/data/tiles`: `186.0 MB` across `73837` files
 - `public/data/chips`: `67.3 MB` across `681` files
 - Raw local production package safe: `False`
@@ -12,22 +12,22 @@
 
 ## Initial Load Estimate
 
-- AOI list before active AOI data: `65.1 KB`
-- Default AOI vector/VLM plus catalog: `981.1 KB`
+- AOI list before active AOI data: `65.3 KB`
+- Default AOI vector/VLM plus catalog: `981.3 KB`
 - Non-default damage/VLM bytes that would load if eager: `5.2 MB`
 - Frontend eager-load pattern detected: `False`
 
 ## Production Package Pressure
 
 - Local tiles/chips removable by remote-asset package: `253.4 MB`
-- Public data remaining after remote tiles/chips are excluded: `13.7 MB`
+- Public data remaining after remote tiles/chips are excluded: `14.2 MB`
 - Local AOI files >= 5.0 MB: `0` files / `0 B`
 - External-prediction large local files: `0 B`
 - Local report large files: `0 B`
 
 ### Raw Local Package Unsafe Reasons
 
-- public/data is 267.1 MB, above the raw package target 119.2 MB
+- public/data is 267.6 MB, above the raw package target 119.2 MB
 - public/data/tiles is 186.0 MB, above the local tile target 71.5 MB
 - public/data/chips is 67.3 MB, above the local chip target 38.1 MB
 

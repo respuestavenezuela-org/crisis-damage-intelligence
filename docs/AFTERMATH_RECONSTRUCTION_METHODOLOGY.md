@@ -51,6 +51,27 @@ resolve the object at the available ground sample distance. Models may propose
 candidates but cannot determine ownership, activity, arrival time, intent, or
 adequacy from a single image.
 
+The La Guaira packet also publishes a bounded aerial-response review:
+
+```text
+public/data/reconstruction/aerial-response-evidence-la-guaira.json
+```
+
+Its current method searches the existing AOI12 VLM record for response-related
+terms, manually reviews every resulting native chip, and publishes both useful
+observations and important unresolved cases. The public statistics describe the
+review queue, not an exhaustive count of vehicles, machinery, shelters, or
+response sites across the AOI.
+
+Swin2SR 2× derivatives under
+`public/data/reconstruction/evidence/la-guaira/` are display-only inspection
+aids. They preserve a link and SHA-256 fingerprint for the native Copernicus
+chip. An observation must remain defensible in the native pixels; a feature
+that appears only after enhancement is discarded. The 4× Swin2SR benchmark was
+rejected for smoothing and apparent edge invention. Grounding DINO and a
+VisDrone YOLO checkpoint were rejected because their boxes did not survive
+human review on these chips.
+
 ## Privacy
 
 - Do not publish names, phone numbers, license plates, faces, or exact private
@@ -79,6 +100,7 @@ Then run:
 ```bash
 python3 scripts/validate_reconstruction.py
 python3 scripts/build_reconstruction_review_queue.py
+python3 scripts/generate_aerial_evidence_enhancements.py
 npm run lint
 npm run typecheck
 npm run build

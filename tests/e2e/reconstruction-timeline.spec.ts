@@ -47,6 +47,29 @@ test.describe("public aftermath reconstruction", () => {
     expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
   });
 
+  test("publishes the audited aerial response review without promoting model detections", async ({ page }) => {
+    await page.goto("/timeline");
+
+    const section = page.locator("#aerial-evidence");
+    await expect(section.getByRole("heading", { name: "¿Qué respuesta puede verse desde arriba?" })).toBeVisible();
+    await expect(section.getByText("26", { exact: true })).toBeVisible();
+    await expect(section.locator("figure")).toHaveCount(5);
+    await expect(section.getByText(/Ningún chip revisado permite identificar con confianza/)).toBeVisible();
+
+    await section.getByRole("button", { name: "Maquinaria", exact: true }).click();
+    await expect(section.locator("figure")).toHaveCount(2);
+    await section.getByRole("button", { name: "Probable respuesta", exact: true }).click();
+    await expect(section.locator("figure")).toHaveCount(1);
+
+    await section.getByRole("button", { name: "Vista mejorada 2×", exact: true }).click();
+    await expect(section.getByText(/La mejora no crea detalle real/)).toBeVisible();
+    await expect(section.locator("figure img")).toHaveAttribute(
+      "src",
+      /\/data\/reconstruction\/evidence\/la-guaira\/ems_00119_after_event_swin2sr_x2\.webp$/,
+    );
+    await expect(section.getByText("Derivada · solo visualización")).toBeVisible();
+  });
+
   test("is discoverable from lite view", async ({ page }) => {
     await page.goto("/lite");
     await expect(page.getByRole("link", { name: "Cronología" })).toHaveAttribute("href", "/timeline");

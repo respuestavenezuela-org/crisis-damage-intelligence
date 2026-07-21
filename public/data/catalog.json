@@ -805,7 +805,8 @@
         "vlm_summary": "/data/aoi/emsr884-aoi12-caraballeda/vlm_summary.json",
         "vlm_before_after_jsonl": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
         "vlm_before_after_csv": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.csv",
-        "vlm_before_after_summary": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.json"
+        "vlm_before_after_summary": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.json",
+        "aerial_response_evidence": "/data/reconstruction/aerial-response-evidence-la-guaira.json"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
@@ -835,7 +836,10 @@
         "vlmPostEventPossibleMajor": 33,
         "vlmPostEventMinor": 24,
         "vlmPostEventNoVisibleDamage": 5,
-        "vlmPostEventUrgentReview": 20
+        "vlmPostEventUrgentReview": 20,
+        "aerialResponseCandidatesReviewed": 26,
+        "aerialResponseSitesPublished": 5,
+        "aerialLikelyResponseSites": 2
       },
       "imagery": {
         "after": {

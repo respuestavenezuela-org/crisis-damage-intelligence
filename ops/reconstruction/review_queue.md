@@ -1,10 +1,15 @@
 # Reconstruction review queue
 
-Generated: 2026-07-21T03:41:33.549947+00:00
-Open items: 21
+Generated: 2026-07-21T04:21:22.168684+00:00
+Open items: 26
 
 | Priority | Packet | Kind | Confidence | Review item |
 |---:|---|---|---|---|
+| 10 | la-guaira | aerial-observation | inferred | Large red vehicle or trailer in an industrial yard |
+| 10 | la-guaira | aerial-observation | inferred | Vehicles in a cleared area; does not confirm shelter or collection |
+| 10 | la-guaira | aerial-observation | inferred | Vehicle-scale yellow object: response relationship unresolved |
+| 10 | la-guaira | aerial-observation | inferred | Large red vehicles at a severely affected block |
+| 10 | la-guaira | aerial-observation | inferred | Probable yellow machine and several vehicles beside debris |
 | 10 | la-guaira | coverage-gap | n/a | Exact site-level distribution of teams during the first 72 hours |
 | 10 | la-guaira | coverage-gap | n/a | Ownership, function and operating time of visible machinery |
 | 10 | la-guaira | first72-finding | inferred | Machinery visible at at least one site |

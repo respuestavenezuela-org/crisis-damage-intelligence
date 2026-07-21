@@ -69,6 +69,8 @@ public/data/catalog.json
 public/data/reconstruction/la-guaira-timeline.json
 public/data/reconstruction/moron-timeline.json
 public/data/reconstruction/catalog.json
+public/data/reconstruction/aerial-response-evidence-la-guaira.json
+public/data/reconstruction/evidence/la-guaira/*.webp
 public/data/aoi/<aoi-id>/damage.geojson
 public/data/aoi/<aoi-id>/damage.csv
 public/data/aoi/<aoi-id>/damage.kml
