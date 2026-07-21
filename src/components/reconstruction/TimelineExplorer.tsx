@@ -62,9 +62,9 @@ const copy = {
     primary: "Primaria",
     secondary: "Secundaria",
     derived: "Derivada",
-    aerialKicker: "Lectura aérea · +41 horas",
+    aerialKicker: "Lectura aérea fechada · +41 a +257 horas",
     aerialTitle: "¿Qué respuesta puede verse desde arriba?",
-    aerialIntro: "Una revisión humana de los candidatos de vehículos, maquinaria y uso de sitio en la ortofoto Copernicus del 26 de junio.",
+    aerialIntro: "Una revisión humana de vehículos, maquinaria y uso de sitio en imágenes del 26, 27 y 29 de junio, más una prueba de cobertura oficial del 5 de julio.",
     reviewedCandidates: "Candidatos revisados",
     publishedSites: "Sitios publicados",
     likelyResponseSites: "Señales probables",
@@ -86,6 +86,19 @@ const copy = {
     acceptedDisplay: "Aceptado para visualización",
     rejected: "Rechazado",
     enhancementWarning: "La mejora no crea detalle real. Toda observación debe seguir siendo defendible en el chip nativo.",
+    acquisitionLedger: "Inventario oficial de adquisiciones",
+    officialAois: "AOI oficiales",
+    opticalAois: "AOI ópticos locales",
+    distinctOptical: "Adquisiciones ópticas distintas",
+    readableCogs: "COG ópticos legibles",
+    sourceVolume: "Volumen fuente",
+    openInventory: "Abrir inventario completo",
+    temporalReview: "Prueba temporal",
+    temporalReviewIntro: "El 5 de julio no aportó píxeles utilizables en los cinco sitios publicados. Las escenas abiertas de Vantor del 27 y 29 de junio sí permitieron cinco comparaciones fechadas.",
+    datedChange: "Cambio fechado",
+    laterEnhanced: "Seguimiento 2×",
+    followupFinding: "Lectura del seguimiento",
+    followupSource: "Fuente del seguimiento",
     phase: {
       impact: "Impacto",
       "search-rescue": "Búsqueda y rescate",
@@ -93,6 +106,7 @@ const copy = {
       logistics: "Logística",
       shelter: "Refugio",
       relief: "Asistencia",
+      assessment: "Evaluación",
       "debris-recovery": "Escombros",
       recovery: "Recuperación",
     } as Record<string, string>,
@@ -141,9 +155,9 @@ const copy = {
     primary: "Primary",
     secondary: "Secondary",
     derived: "Derived",
-    aerialKicker: "Aerial reading · +41 hours",
+    aerialKicker: "Dated aerial reading · +41 to +257 hours",
     aerialTitle: "What response can be seen from above?",
-    aerialIntro: "A human review of vehicle, machinery and site-use candidates in the June 26 Copernicus orthomosaic.",
+    aerialIntro: "A human review of vehicle, machinery and site-use candidates in June 26, 27 and 29 imagery, plus an official July 5 coverage test.",
     reviewedCandidates: "Candidates reviewed",
     publishedSites: "Published sites",
     likelyResponseSites: "Probable signals",
@@ -165,6 +179,19 @@ const copy = {
     acceptedDisplay: "Accepted for display",
     rejected: "Rejected",
     enhancementWarning: "Enhancement does not create real detail. Every observation must remain supportable in the native chip.",
+    acquisitionLedger: "Official acquisition inventory",
+    officialAois: "Official AOIs",
+    opticalAois: "Local optical AOIs",
+    distinctOptical: "Distinct optical acquisitions",
+    readableCogs: "Readable optical COGs",
+    sourceVolume: "Source volume",
+    openInventory: "Open full inventory",
+    temporalReview: "Temporal test",
+    temporalReviewIntro: "The July 5 acquisition supplied no usable pixels at the five published sites. Open Vantor scenes from June 27 and 29 did support five dated comparisons.",
+    datedChange: "Dated change",
+    laterEnhanced: "Follow-up 2×",
+    followupFinding: "Follow-up reading",
+    followupSource: "Follow-up source",
     phase: {
       impact: "Impact",
       "search-rescue": "Search & rescue",
@@ -172,6 +199,7 @@ const copy = {
       logistics: "Logistics",
       shelter: "Shelter",
       relief: "Relief",
+      assessment: "Assessment",
       "debris-recovery": "Debris",
       recovery: "Recovery",
     } as Record<string, string>,
@@ -241,6 +269,13 @@ function formatCompactDate(value: string, language: Language) {
   }).format(new Date(value));
 }
 
+function formatDecimalGb(bytes: number, language: Language) {
+  return new Intl.NumberFormat(language === "es" ? "es-VE" : "en-US", {
+    maximumFractionDigits: 1,
+    minimumFractionDigits: 1,
+  }).format(bytes / 1_000_000_000) + " GB";
+}
+
 function hourOffset(origin: string, value: string) {
   return Math.max(0, Math.round((new Date(value).getTime() - new Date(origin).getTime()) / 3_600_000));
 }
@@ -301,7 +336,9 @@ function AerialEvidenceExplorer({
   const t = copy[language];
   const [category, setCategory] = useState<"all" | "heavy-machinery" | "large-vehicles" | "site-use">("all");
   const [status, setStatus] = useState<"all" | "likely-response-related" | "unresolved">("all");
-  const [imageMode, setImageMode] = useState<"native" | "enhanced">("native");
+  const [imageMode, setImageMode] = useState<
+    "native" | "enhanced" | "temporal" | "followup-enhanced"
+  >("native");
   const observations = evidence.observations.filter((observation) => {
     if (category !== "all" && observation.category !== category) return false;
     if (status !== "all" && observation.status !== status) return false;
@@ -348,6 +385,41 @@ function AerialEvidenceExplorer({
         </div>
       </div>
 
+      <div className={styles.aerialInventory}>
+        <div>
+          <p>{t.acquisitionLedger}</p>
+          <dl>
+            <div>
+              <dt>{t.officialAois}</dt>
+              <dd>{evidence.inventory.officialAois}</dd>
+            </div>
+            <div>
+              <dt>{t.opticalAois}</dt>
+              <dd>{evidence.inventory.localOpticalAois}</dd>
+            </div>
+            <div>
+              <dt>{t.distinctOptical}</dt>
+              <dd>{evidence.inventory.distinctOpticalAcquisitions}</dd>
+            </div>
+            <div>
+              <dt>{t.readableCogs}</dt>
+              <dd>{evidence.inventory.publiclyReadableOpticalCogs}</dd>
+            </div>
+            <div>
+              <dt>{t.sourceVolume}</dt>
+              <dd>{formatDecimalGb(evidence.inventory.readableOpticalBytes, language)}</dd>
+            </div>
+          </dl>
+          <small>{evidence.inventory.countingNote[language]}</small>
+          <a href={evidence.inventory.url}>{t.openInventory} →</a>
+        </div>
+        <aside>
+          <span>{t.temporalReview}</span>
+          <p>{t.temporalReviewIntro}</p>
+          <small>{evidence.temporalReview.summary[language]}</small>
+        </aside>
+      </div>
+
       <div className={styles.aerialControls}>
         <div>
           <p>{t.category}</p>
@@ -371,11 +443,13 @@ function AerialEvidenceExplorer({
           <div className={styles.filterRow}>
             <button type="button" aria-pressed={imageMode === "native"} onClick={() => setImageMode("native")}>{t.nativePixels}</button>
             <button type="button" aria-pressed={imageMode === "enhanced"} onClick={() => setImageMode("enhanced")}>{t.enhancedView}</button>
+            <button type="button" aria-pressed={imageMode === "temporal"} onClick={() => setImageMode("temporal")}>{t.datedChange}</button>
+            <button type="button" aria-pressed={imageMode === "followup-enhanced"} onClick={() => setImageMode("followup-enhanced")}>{t.laterEnhanced}</button>
           </div>
         </div>
       </div>
 
-      {imageMode === "enhanced" && (
+      {(imageMode === "enhanced" || imageMode === "followup-enhanced") && (
         <aside className={styles.enhancementWarning}>
           <span>AI / 2×</span>
           <p>{t.enhancementWarning}</p>
@@ -384,21 +458,36 @@ function AerialEvidenceExplorer({
 
       <div className={styles.aerialGrid}>
         {observations.map((observation) => {
-          const isEnhanced = imageMode === "enhanced";
-          const image = isEnhanced ? observation.enhancedImage : observation.nativeImage;
+          const isEnhanced = imageMode === "enhanced" || imageMode === "followup-enhanced";
+          const isTemporal = imageMode === "temporal";
+          const isFollowup = isTemporal || imageMode === "followup-enhanced";
+          const image = imageMode === "enhanced"
+            ? observation.enhancedImage
+            : imageMode === "temporal"
+              ? observation.temporalFollowup.compareImage
+              : imageMode === "followup-enhanced"
+                ? observation.temporalFollowup.enhancedImage
+                : observation.nativeImage;
+          const imageLabel = imageMode === "enhanced"
+            ? t.enhancedView
+            : imageMode === "temporal"
+              ? t.datedChange
+              : imageMode === "followup-enhanced"
+                ? t.laterEnhanced
+                : t.nativePixels;
           return (
             <article key={observation.id} className={styles.aerialCard}>
-              <figure>
+              <figure className={isTemporal ? styles.temporalFigure : undefined}>
                 <Image
                   src={image}
-                  width={isEnhanced ? 1024 : 512}
-                  height={isEnhanced ? 1024 : 512}
+                  width={isEnhanced || isTemporal ? 1024 : 512}
+                  height={isTemporal ? 548 : isEnhanced ? 1024 : 512}
                   unoptimized
                   sizes="(max-width: 720px) 100vw, 50vw"
-                  alt={`${observation.title[language]} · ${isEnhanced ? t.enhancedView : t.nativePixels}`}
+                  alt={`${observation.title[language]} · ${imageLabel}`}
                 />
                 <figcaption>
-                  <span>{isEnhanced ? t.displayOnly : t.nativePixels}</span>
+                  <span>{isEnhanced ? `${imageLabel} · ${t.displayOnly}` : imageLabel}</span>
                   <small>{observation.chipId}</small>
                 </figcaption>
               </figure>
@@ -414,9 +503,21 @@ function AerialEvidenceExplorer({
                 </div>
                 <h3>{observation.title[language]}</h3>
                 <p>{observation.finding[language]}</p>
+                {isFollowup && (
+                  <div className={styles.temporalFinding}>
+                    <span>{t.followupFinding}</span>
+                    <p>{observation.temporalFollowup.finding[language]}</p>
+                    <small>{observation.temporalFollowup.limitations[language]}</small>
+                  </div>
+                )}
                 <div className={styles.aerialMeta}>
                   <span>{observation.location.label}</span>
-                  <small>{t.sourceHash}: {observation.nativeSha256.slice(0, 12)}…</small>
+                  <small>
+                    {isFollowup ? t.followupSource : t.sourceHash}:{" "}
+                    {isFollowup
+                      ? `${observation.temporalFollowup.sensor} · ${formatDate(observation.temporalFollowup.acquisitionAt, language, "minute")}`
+                      : `${observation.nativeSha256.slice(0, 12)}…`}
+                  </small>
                 </div>
                 <a href={observation.mapUrl} target="_blank" rel="noreferrer">
                   {t.openLocation} ↗

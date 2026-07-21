@@ -1,7 +1,7 @@
 {
   "version": 1,
   "id": "aoi12-la-guaira-aerial-response-review",
-  "updatedAt": "2026-07-21T00:45:00-04:00",
+  "updatedAt": "2026-07-21T12:03:44Z",
   "aoiId": "emsr884-aoi12-caraballeda",
   "acquisitionAt": "2026-06-26T15:10:00Z",
   "hoursAfterEvent": 41,
@@ -146,7 +146,29 @@
       "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.61876540826087,-66.84911322956522",
       "sourceIds": [
         "copernicus-aoi12-june-26"
-      ]
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:32.624709Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "not-discernible-in-followup",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_compare.png",
+        "nativeSha256": "e5274c2bf865d89c829a7525e5efdc0b295d5e4cbea6e3bd1b07c43a9d9f5335",
+        "enhancedSha256": "07df65d4be21dffd4dccee51402abb96412059539dfab01a613b826274b8a9d1",
+        "compareSha256": "32648d12adeb92e99b28bf8a91465643b237216bb4beeee67b480028c1e62b30",
+        "finding": {
+          "es": "La imagen del 29 de junio cubre el mismo sitio de escombros, pero el objeto amarillo parecido a excavadora del 26 de junio ya no se distingue en la misma posición junto a la vía. Pudo moverse o quedar oculto por geometría y resolución; la imagen no permite inferir trabajo realizado ni hora de salida.",
+          "en": "The June 29 image covers the same debris site, but the June 26 yellow excavator-like object is no longer discernible at the same road-edge position. It may have moved or be masked by geometry and resolution; the image does not establish work performed or departure time."
+        },
+        "limitations": {
+          "es": "No visible en el seguimiento no significa ausente. La comparación es entre sensores y ángulos distintos.",
+          "en": "Not visible in the follow-up does not mean absent. The comparison uses different sensors and viewing angles."
+        }
+      }
     },
     {
       "id": "aerial-ems-00117",
@@ -175,7 +197,29 @@
       "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.619438562435898,-66.84675992099068",
       "sourceIds": [
         "copernicus-aoi12-june-26"
-      ]
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:32.624709Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-object-persistence",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_compare.png",
+        "nativeSha256": "56bb06f84de6617cf52ae3a54eb50befedf8b4b408919a435a3c67ff0d4bbc30",
+        "enhancedSha256": "e013d4b42c29c187f4d988576b721f4206257f9ee675cc70c1992aa81e4d19de",
+        "compareSha256": "7a04e8c0663d5f6336f5ab8b6deade38525854cbb9c3abf760900a998291277b",
+        "finding": {
+          "es": "La escena del 29 de junio muestra objetos grandes verdes y rojos en la misma parcela arbolada. La persistencia respalda que había objetos de escala vehicular o de carga, pero también es compatible con equipo almacenado; la atribución a vehículos de emergencia sigue sin resolverse.",
+          "en": "The June 29 scene shows large green and red objects in the same tree-lined parcel. Persistence supports the presence of vehicle- or cargo-scale objects, but is also compatible with stored equipment; attribution to emergency vehicles remains unresolved."
+        },
+        "limitations": {
+          "es": "Cambios de color, ángulo y resolución impiden contar o tipificar los objetos de forma consistente.",
+          "en": "Changes in colour, angle and resolution prevent consistent object counting or typing."
+        }
+      }
     },
     {
       "id": "aerial-ems-00108",
@@ -204,7 +248,29 @@
       "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.6148392825,-66.837810166",
       "sourceIds": [
         "copernicus-aoi12-june-26"
-      ]
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:32.624709Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-object-persistence",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_compare.png",
+        "nativeSha256": "d7eec4c42b28443201947c0c77e695916ec9d0851f4ef12501abbec62b373146",
+        "enhancedSha256": "9884ba749e80b69e10b6e9130cb8d6c8b90bbaed4e66497f579979a69ab4948c",
+        "compareSha256": "2ceb81fa8a8bc538d779e8ff5771858880c2c0f42f676a2a98363ffee8eb31f4",
+        "finding": {
+          "es": "La vista del 29 de junio todavía muestra un objeto amarillo de escala de maquinaria junto a un objeto rojo alargado en el mismo sitio de apariencia industrial. La persistencia respalda la presencia de equipo o maquinaria, pero no cuándo llegó ni si tenía una función de emergencia.",
+          "en": "The June 29 view still shows a yellow equipment-scale object beside a long red object at the same industrial-looking site. Persistence supports the presence of equipment or machinery, but not when it arrived or whether it served an emergency function."
+        },
+        "limitations": {
+          "es": "La resolución no establece operador, propiedad, actividad ni relación causal con el sismo.",
+          "en": "Resolution does not establish operator, ownership, activity or a causal relationship to the earthquake."
+        }
+      }
     },
     {
       "id": "aerial-ems-00031",
@@ -233,7 +299,29 @@
       "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.605771187419354,-67.02861496232258",
       "sourceIds": [
         "copernicus-aoi12-june-26"
-      ]
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-27T13:48:10.374681Z",
+        "hoursAfterEvent": 64,
+        "sourceId": "vantor-aoi12-june-27",
+        "sensor": "LG05",
+        "sourceRole": "external-triage",
+        "reviewStatus": "weakens-response-attribution",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_compare.png",
+        "nativeSha256": "53cffb1771208d01663ee9696f55ac1628a9c5f443b925b9847e956de3908806",
+        "enhancedSha256": "6d2c7ca2de561b60a6c1d504023ddae3543a54d1307b229c4826712a61cbcc53",
+        "compareSha256": "10baa89146dfc1e8f7b96b20afc0f74638a4e89a8d28eb3c45f3cdac859f87df",
+        "finding": {
+          "es": "La imagen del 27 de junio muestra varios vehículos, remolques o contenedores largos y de colores vivos en el mismo patio industrial. La persistencia y el contexto debilitan la atribución de la forma roja del 26 de junio a la respuesta sísmica; el tipo exacto de objeto sigue sin resolverse.",
+          "en": "The June 27 image shows several long, brightly coloured vehicles, trailers or containers in the same industrial yard. Persistence and yard context weaken attribution of the June 26 red form to the earthquake response; exact object type remains unresolved."
+        },
+        "limitations": {
+          "es": "Sensores, geometría y sombras distintos. La persistencia no demuestra función, propiedad ni movimiento.",
+          "en": "Different sensors, geometry and shadows. Persistence does not establish function, ownership or movement."
+        }
+      }
     },
     {
       "id": "aerial-ems-00056",
@@ -262,7 +350,78 @@
       "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.610860842897884,-67.02103362942042",
       "sourceIds": [
         "copernicus-aoi12-june-26"
-      ]
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-27T13:48:10.374681Z",
+        "hoursAfterEvent": 64,
+        "sourceId": "vantor-aoi12-june-27",
+        "sensor": "LG05",
+        "sourceRole": "external-triage",
+        "reviewStatus": "weakens-response-attribution",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_compare.png",
+        "nativeSha256": "04686cc96f82116a0732fb0d7cfa48e3fc9065cfbb7621fc6c7df5d7096cf1d8",
+        "enhancedSha256": "f8f9ded04008e5012f731a12708b46151ad7aeac241785831fe1975a6077b6e4",
+        "compareSha256": "2295452d7f64786d60724ee612a56e7e62189abb9acee9a258191795bb9ced8a",
+        "finding": {
+          "es": "La vista más limpia del 27 de junio muestra un patio con vehículos u objetos pequeños alrededor de edificios preexistentes de techo rojo. No se identifica un centro de acopio organizado ni un área de pernocta. Esto debilita la interpretación de uso de respuesta, pero no demuestra que esos usos no existieran en otro lugar o momento.",
+          "en": "The cleaner June 27 view shows a yard with small vehicles or objects around pre-existing red-roofed buildings. No organised collection centre or sleeping area is identifiable. This weakens the response-site interpretation but does not show those uses were absent elsewhere or at another time."
+        },
+        "limitations": {
+          "es": "Una escena puntual no mide actividad, ocupación ni uso fuera de la hora de adquisición.",
+          "en": "A single scene does not measure activity, occupancy or use outside its acquisition time."
+        }
+      }
     }
-  ]
+  ],
+  "inventory": {
+    "url": "/data/imagery/emsr884-acquisitions.json",
+    "checkedAt": "2026-07-21T12:03:41Z",
+    "officialAois": 13,
+    "localOpticalAois": 12,
+    "opticalProductRecords": 22,
+    "distinctOpticalAcquisitions": 21,
+    "publiclyReadableOpticalCogs": 22,
+    "readableOpticalBytes": 9606780336,
+    "countingNote": {
+      "es": "Los registros de producto y las adquisiciones físicas no son lo mismo: AOI12 repite la escena del 26 de junio en PRODUCT y MONIT01. El inventario conserva ambos registros y publica un identificador de adquisición deduplicado.",
+      "en": "Product records and physical acquisitions are not the same: AOI12 repeats the June 26 scene in PRODUCT and MONIT01. The inventory keeps both records and publishes a deduplicated acquisition identifier."
+    }
+  },
+  "temporalReview": {
+    "status": "human-reviewed",
+    "summary": {
+      "es": "El segundo producto oficial de AOI12, adquirido el 5 de julio, fue probado en las 26 ubicaciones candidatas. En los cinco sitios publicados no produjo una comparación de objetos utilizable: tres quedaron sin píxeles útiles y dos bajo nube o bruma. Escenas abiertas de Vantor del 27 y 29 de junio sí permitieron comparar los cinco sitios; son evidencia externa de triage, no conteos oficiales EMS.",
+      "en": "The second official AOI12 product, acquired July 5, was tested at all 26 candidate locations. It yielded no usable object comparison at the five published sites: three lacked useful pixels and two were cloud- or haze-obscured. Open Vantor scenes from June 27 and 29 did support comparisons at all five sites; they are external triage evidence, not official EMS counts."
+    },
+    "officialJuly5": {
+      "acquisitionAt": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceId": "copernicus-aoi12-july-5",
+      "candidateLocationsChecked": 26,
+      "publishedSitesChecked": 5,
+      "publishedSitesUsableForObjectComparison": 0,
+      "finding": {
+        "es": "La existencia de una adquisición posterior no equivale a cobertura útil. No se publican conclusiones temporales desde estos cinco recortes.",
+        "en": "A later acquisition does not automatically provide useful coverage. No temporal conclusions are published from these five chips."
+      }
+    },
+    "externalFollowup": {
+      "sourceIds": [
+        "vantor-aoi12-june-27",
+        "vantor-aoi12-june-29"
+      ],
+      "publishedSitesChecked": 5,
+      "usableComparisons": 5,
+      "acquisitionDates": [
+        "2026-06-27T13:48:10.374681Z",
+        "2026-06-29T14:09:32.624709Z"
+      ],
+      "finding": {
+        "es": "Dos sitios occidentales tienen seguimiento del 27 de junio y tres sitios orientales del 29. Las comparaciones aportan persistencia o no discernibilidad, no propiedad, función ni suficiencia de la respuesta.",
+        "en": "Two western sites have June 27 follow-up and three eastern sites have June 29 follow-up. The comparisons establish persistence or non-discernibility, not ownership, function or response adequacy."
+      }
+    }
+  }
 }

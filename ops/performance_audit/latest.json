@@ -1,42 +1,42 @@
 {
-  "generated_utc": "2026-07-21T04:23:42.498759+00:00",
+  "generated_utc": "2026-07-21T12:26:17.981127+00:00",
   "catalog": {
     "path": "public/data/catalog.json",
-    "bytes": 66915,
-    "human": "65.3 KB",
-    "updated_at": "2026-07-01T17:55:00Z",
-    "aoi_count": 16,
+    "bytes": 110947,
+    "human": "108.3 KB",
+    "updated_at": "2026-07-21T12:03:44Z",
+    "aoi_count": 22,
     "watchlist_count": 4
   },
   "bundle": {
     "build_present": true,
     "js_files": 29,
-    "js_bytes": 1956907,
+    "js_bytes": 1961491,
     "js_human": "1.9 MB",
     "css_files": 3,
-    "css_bytes": 123066,
-    "css_human": "120.2 KB",
+    "css_bytes": 126633,
+    "css_human": "123.7 KB",
     "next_dir": {
       "path": ".next",
       "exists": true,
       "files": 2661,
-      "bytes": 436680795,
-      "human": "416.5 MB"
+      "bytes": 436888928,
+      "human": "416.6 MB"
     }
   },
   "public_data": {
     "data": {
       "path": "public/data",
       "exists": true,
-      "files": 74628,
-      "bytes": 280588907,
-      "human": "267.6 MB"
+      "files": 74668,
+      "bytes": 283040332,
+      "human": "269.9 MB"
     },
     "aoi": {
       "path": "public/data/aoi",
       "exists": true,
-      "files": 97,
-      "bytes": 14045466,
+      "files": 121,
+      "bytes": 14048558,
       "human": "13.4 MB"
     },
     "tiles": {
@@ -61,14 +61,14 @@
     "raw_local_package_safe": false,
     "remote_asset_package_required": true,
     "unsafe_reasons": [
-      "public/data is 267.6 MB, above the raw package target 119.2 MB",
+      "public/data is 269.9 MB, above the raw package target 119.2 MB",
       "public/data/tiles is 186.0 MB, above the local tile target 71.5 MB",
       "public/data/chips is 67.3 MB, above the local chip target 38.1 MB"
     ],
     "remote_excluded_bytes": 265676933,
     "remote_excluded_human": "253.4 MB",
-    "non_remote_public_data_bytes": 14911974,
-    "non_remote_public_data_human": "14.2 MB",
+    "non_remote_public_data_bytes": 17363399,
+    "non_remote_public_data_human": "16.6 MB",
     "large_local_aoi_file_count": 0,
     "large_local_aoi_bytes": 0,
     "large_local_aoi_human": "0 B",
@@ -80,17 +80,17 @@
   },
   "initial_load_estimate": {
     "default_aoi_id": "emsr884-aoi12-caraballeda",
-    "aoi_list_bytes_before_active_data": 66915,
-    "aoi_list_human": "65.3 KB",
+    "aoi_list_bytes_before_active_data": 110947,
+    "aoi_list_human": "108.3 KB",
     "default_damage_bytes": 619576,
     "default_vlm_bytes": 318376,
-    "default_metadata_and_vector_bytes": 1004867,
-    "default_metadata_and_vector_human": "981.3 KB",
-    "non_default_damage_bytes_if_eager": 5188330,
+    "default_metadata_and_vector_bytes": 1048899,
+    "default_metadata_and_vector_human": "1.0 MB",
+    "non_default_damage_bytes_if_eager": 5188642,
     "non_default_vlm_bytes_if_eager": 287816,
     "non_default_data_human_if_eager": "5.2 MB",
     "note": "Tile bytes are intentionally excluded because first visible tile count depends on viewport, zoom, CDN cache, and network.",
-    "aoi_inventory_count": 16
+    "aoi_inventory_count": 22
   },
   "frontend_loading_scan": {
     "source": "src/components/OperationsConsole.tsx",
@@ -101,6 +101,287 @@
     "loads_all_aois_on_initial_render": false
   },
   "aois": [
+    {
+      "id": "emsr884-aoi00-central-coastal-venezuela",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi00-central-coastal-venezuela",
+        "exists": true,
+        "files": 4,
+        "bytes": 541,
+        "human": "541 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi00-central-coastal-venezuela",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi00-central-coastal-venezuela",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 307,
+          "human": "307 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 111,
+          "human": "111 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.geojson",
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.kml",
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi00-central-coastal-venezuela/source_metadata.json",
+          "bytes": 307,
+          "human": "307 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.kml",
+          "exists": true,
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/source_metadata.json",
+          "exists": true,
+          "bytes": 307,
+          "human": "307 B"
+        },
+        {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.product_zip",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].url",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi01-petare",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi01-petare",
+        "exists": true,
+        "files": 4,
+        "bytes": 503,
+        "human": "503 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi01-petare",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi01-petare",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 269,
+          "human": "269 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 111,
+          "human": "111 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi01-petare/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi01-petare/damage.geojson",
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi01-petare/damage.kml",
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi01-petare/source_metadata.json",
+          "bytes": 269,
+          "human": "269 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi01-petare/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi01-petare/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi01-petare/damage.kml",
+          "exists": true,
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi01-petare/source_metadata.json",
+          "exists": true,
+          "bytes": 269,
+          "human": "269 B"
+        },
+        {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi01-petare/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI01/GRA_PRODUCT/EMSR884_AOI01_GRA_PRODUCT_LEGION_20260627_1348_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.baseline_product",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI01/EMSR884_AOI01_BLP.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI01/GRA_PRODUCT/EMSR884_AOI01_GRA_PRODUCT_LEGION_20260627_1348_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI01/GRA_PRODUCT/EMSR884_AOI01_GRA_PRODUCT_LEGION_20260627_1348_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        }
+      ]
+    },
     {
       "id": "emsr884-aoi02-caracas",
       "status": "official-vector",
@@ -277,6 +558,13 @@
           "human": "524 B"
         },
         {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/emsr884-aoi02-caracas/damage.geojson",
           "exists": true,
@@ -351,6 +639,26 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_MONIT01/EMSR884_AOI02_GRA_MONIT01_PNEO_20260626_1519_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI02/GRA_MONIT01/EMSR884_AOI02_GRA_MONIT01_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
         }
       ]
     },
@@ -569,6 +877,13 @@
           "human": "109 B"
         },
         {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/emsr884-aoi03-antimano/damage.geojson",
           "exists": true,
@@ -606,6 +921,154 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI03/GRA_PRODUCT/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi04-maracay",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi04-maracay",
+        "exists": true,
+        "files": 4,
+        "bytes": 505,
+        "human": "505 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi04-maracay",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi04-maracay",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 271,
+          "human": "271 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 111,
+          "human": "111 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi04-maracay/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi04-maracay/damage.geojson",
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi04-maracay/damage.kml",
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi04-maracay/source_metadata.json",
+          "bytes": 271,
+          "human": "271 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi04-maracay/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi04-maracay/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi04-maracay/damage.kml",
+          "exists": true,
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi04-maracay/source_metadata.json",
+          "exists": true,
+          "bytes": 271,
+          "human": "271 B"
+        },
+        {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi04-maracay/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.baseline_product",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI04/EMSR884_AOI04_BLP.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "layers.afterImage",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
         }
       ]
     },
@@ -710,6 +1173,13 @@
           "human": "267 B"
         },
         {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson",
           "exists": true,
@@ -752,6 +1222,21 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_MONIT01/EMSR884_AOI05_GRA_MONIT01_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
         }
       ]
     },
@@ -895,6 +1380,13 @@
           "human": "652 B"
         },
         {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/emsr884-aoi06-moron/damage.geojson",
           "exists": true,
@@ -958,6 +1450,26 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_MONIT01/EMSR884_AOI06_GRA_MONIT01_LEGION_20260626_1511_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI06/GRA_MONIT01/EMSR884_AOI06_GRA_MONIT01_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
         }
       ]
     },
@@ -1079,6 +1591,149 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi07-puerto-cabello",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi07-puerto-cabello",
+        "exists": true,
+        "files": 4,
+        "bytes": 519,
+        "human": "519 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi07-puerto-cabello",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi07-puerto-cabello",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 285,
+          "human": "285 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 111,
+          "human": "111 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi07-puerto-cabello/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi07-puerto-cabello/damage.geojson",
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi07-puerto-cabello/damage.kml",
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi07-puerto-cabello/source_metadata.json",
+          "bytes": 285,
+          "human": "285 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.kml",
+          "exists": true,
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi07-puerto-cabello/source_metadata.json",
+          "exists": true,
+          "bytes": 285,
+          "human": "285 B"
+        },
+        {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_PRODUCT/EMSR884_AOI07_GRA_PRODUCT_LEGION_20260626_1403_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.baseline_product",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI07/EMSR884_AOI07_BLP.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_PRODUCT/EMSR884_AOI07_GRA_PRODUCT_LEGION_20260626_1403_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_PRODUCT/EMSR884_AOI07_GRA_PRODUCT_LEGION_20260626_1403_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_MONIT01/EMSR884_AOI07_GRA_MONIT01_LEGION_20260627_1516_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
         }
       ]
     },
@@ -1252,6 +1907,13 @@
           "human": "545 B"
         },
         {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/emsr884-aoi08-san-felipe/damage.geojson",
           "exists": true,
@@ -1315,6 +1977,51 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_LEGION_20260625_2037_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[2].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_LEGION_20260626_2020_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[2].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[3].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_PNEO_20260626_1518_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[3].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[4].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_MONIT02/EMSR884_AOI08_GRA_MONIT02_WORLDVIEW2_20260705_1517_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
         }
       ]
     },
@@ -1440,6 +2147,144 @@
       ]
     },
     {
+      "id": "emsr884-aoi09-valencia",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi09-valencia",
+        "exists": true,
+        "files": 4,
+        "bytes": 507,
+        "human": "507 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi09-valencia",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi09-valencia",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 273,
+          "human": "273 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 111,
+          "human": "111 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi09-valencia/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi09-valencia/damage.geojson",
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi09-valencia/damage.kml",
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi09-valencia/source_metadata.json",
+          "bytes": 273,
+          "human": "273 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi09-valencia/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi09-valencia/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi09-valencia/damage.kml",
+          "exists": true,
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi09-valencia/source_metadata.json",
+          "exists": true,
+          "bytes": 273,
+          "human": "273 B"
+        },
+        {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi09-valencia/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI09/GRA_PRODUCT/EMSR884_AOI09_GRA_PRODUCT_LEGION_20260626_1404_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.baseline_product",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI09/EMSR884_AOI09_BLP.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI09/GRA_PRODUCT/EMSR884_AOI09_GRA_PRODUCT_LEGION_20260626_1404_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI09/GRA_PRODUCT/EMSR884_AOI09_GRA_PRODUCT_LEGION_20260626_1404_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        }
+      ]
+    },
+    {
       "id": "emsr884-aoi10-guacara",
       "status": "imagery-only",
       "metrics_features": 0,
@@ -1533,6 +2378,13 @@
           "human": "109 B"
         },
         {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
           "catalog_path": "layers.damage",
           "path": "/data/aoi/emsr884-aoi10-guacara/damage.geojson",
           "exists": true,
@@ -1570,6 +2422,149 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI10/GRA_PRODUCT/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        }
+      ]
+    },
+    {
+      "id": "emsr884-aoi11-villa-de-cura",
+      "status": "imagery-only",
+      "metrics_features": 0,
+      "aoi_dir": {
+        "path": "public/data/aoi/emsr884-aoi11-villa-de-cura",
+        "exists": true,
+        "files": 4,
+        "bytes": 517,
+        "human": "517 B"
+      },
+      "chips": {
+        "path": "public/data/chips/emsr884-aoi11-villa-de-cura",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "tiles": {
+        "path": "public/data/tiles/emsr884-aoi11-villa-de-cura",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "human": "0 B"
+      },
+      "by_suffix": {
+        ".csv": {
+          "files": 1,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        ".geojson": {
+          "files": 1,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        ".json": {
+          "files": 1,
+          "bytes": 283,
+          "human": "283 B"
+        },
+        ".kml": {
+          "files": 1,
+          "bytes": 111,
+          "human": "111 B"
+        }
+      },
+      "data_files": [
+        {
+          "path": "public/data/aoi/emsr884-aoi11-villa-de-cura/damage.csv",
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi11-villa-de-cura/damage.geojson",
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi11-villa-de-cura/damage.kml",
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "path": "public/data/aoi/emsr884-aoi11-villa-de-cura/source_metadata.json",
+          "bytes": 283,
+          "human": "283 B"
+        }
+      ],
+      "damage_geojson_features": 0,
+      "vlm_jsonl_records": null,
+      "local_catalog_refs": [
+        {
+          "catalog_path": "downloads.csv",
+          "path": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.csv",
+          "exists": true,
+          "bytes": 71,
+          "human": "71 B"
+        },
+        {
+          "catalog_path": "downloads.geojson",
+          "path": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        },
+        {
+          "catalog_path": "downloads.kml",
+          "path": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.kml",
+          "exists": true,
+          "bytes": 111,
+          "human": "111 B"
+        },
+        {
+          "catalog_path": "downloads.metadata",
+          "path": "/data/aoi/emsr884-aoi11-villa-de-cura/source_metadata.json",
+          "exists": true,
+          "bytes": 283,
+          "human": "283 B"
+        },
+        {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
+        },
+        {
+          "catalog_path": "layers.damage",
+          "path": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.geojson",
+          "exists": true,
+          "bytes": 52,
+          "human": "52 B"
+        }
+      ],
+      "remote_catalog_refs": [
+        {
+          "catalog_path": "downloads.cog",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI11/GRA_PRODUCT/EMSR884_AOI11_GRA_PRODUCT_PNEO_20260626_1519_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "downloads.baseline_product",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI11/EMSR884_AOI11_BLP.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.after.url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI11/GRA_PRODUCT/EMSR884_AOI11_GRA_PRODUCT_PNEO_20260626_1519_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI11/GRA_PRODUCT/EMSR884_AOI11_GRA_PRODUCT_PNEO_20260626_1519_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
         }
       ]
     },
@@ -1782,8 +2777,15 @@
           "catalog_path": "downloads.aerial_response_evidence",
           "path": "/data/reconstruction/aerial-response-evidence-la-guaira.json",
           "exists": true,
-          "bytes": 14389,
-          "human": "14.1 KB"
+          "bytes": 26568,
+          "human": "25.9 KB"
+        },
+        {
+          "catalog_path": "downloads.imagery_inventory",
+          "path": "/data/imagery/emsr884-acquisitions.json",
+          "exists": true,
+          "bytes": 41815,
+          "human": "40.8 KB"
         },
         {
           "catalog_path": "layers.damage",
@@ -1875,6 +2877,36 @@
           "catalog_path": "imagery.approximateReference.urlTemplate",
           "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
           "host": "server.arcgisonline.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[0].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_v1.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT01/EMSR884_AOI12_GRA_MONIT01_LEGION_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[1].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_MONIT01/EMSR884_AOI12_GRA_MONIT01_v3.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[2].url",
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+          "host": "rapidmapping-viewer.s3.eu-west-1.amazonaws.com"
+        },
+        {
+          "catalog_path": "imagery.acquisitions[2].productDownloadUrl",
+          "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_v2.zip",
+          "host": "rapidmapping.emergency.copernicus.eu"
         }
       ]
     },

@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "aoiId": "emsr884-aoi12-caraballeda",
+  "source": {
+    "publisher": "Copernicus Emergency Management Service",
+    "product": "EMSR884 AOI12 GRA_MONIT02",
+    "sensor": "GeoEye-1",
+    "acquisitionUtc": "2026-07-05T15:05:00Z",
+    "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+    "license": "Copernicus EMS public product terms"
+  },
+  "candidateCount": 26,
+  "generatedCount": 26,
+  "failedIds": [],
+  "publicationRule": "Contact sheets are review aids. A temporal finding may be published only after human inspection of both dated native chips; absence in one chip is not proof of absence.",
+  "chips": [
+    {
+      "chipId": "ems_00002",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00002_20260705.png",
+      "sha256": "95e8b3eb0768dde7cf73a486bf655a095df7cae4cfef5e9a33e6a5b68ccf6d13",
+      "bytes": 36264,
+      "published": false
+    },
+    {
+      "chipId": "ems_00003",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00003_20260705.png",
+      "sha256": "ba543eba7f06f5ee5bc7cead9f9708bcfc12734ea41cb215dbe7a0ec512001dc",
+      "bytes": 36432,
+      "published": false
+    },
+    {
+      "chipId": "ems_00005",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00005_20260705.png",
+      "sha256": "f8e32e493f42d8e3c53a03f547ed001cb7ff8c9258e937e9a351c750f465c23c",
+      "bytes": 12921,
+      "published": false
+    },
+    {
+      "chipId": "ems_00006",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00006_20260705.png",
+      "sha256": "31899d3ed3d2d8f3432ef6ba110f02c06cef11661fd635d1c14f3d356ae6c15f",
+      "bytes": 36728,
+      "published": false
+    },
+    {
+      "chipId": "ems_00007",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00007_20260705.png",
+      "sha256": "c4d6020603b2fc1aba59cf1f796f4a87eb2ed2dcbef4dccc9c3d39fe2dd5fa34",
+      "bytes": 34823,
+      "published": false
+    },
+    {
+      "chipId": "ems_00008",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00008_20260705.png",
+      "sha256": "ca6f670dd221506b29bb50f2215561ed6ff1d489df56cbd28f06841d29461e28",
+      "bytes": 25708,
+      "published": false
+    },
+    {
+      "chipId": "ems_00012",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00012_20260705.png",
+      "sha256": "16cd11da69c3c47a7ae0a3f72da009dbe45e3ec86ecf833096ae974dc9c5e238",
+      "bytes": 7905,
+      "published": false
+    },
+    {
+      "chipId": "ems_00015",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00015_20260705.png",
+      "sha256": "938d8a295c6cb9f25270a737f13ab755d8b27f8804691de60f652f8d8024a4f5",
+      "bytes": 7976,
+      "published": false
+    },
+    {
+      "chipId": "ems_00031",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00031_20260705.png",
+      "sha256": "c38122eda88279c84ddab95682b71ef4348a33bdd878c93ff1f92fbdf9948aa9",
+      "bytes": 29762,
+      "published": true,
+      "reviewNativePath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00031_20260705.png",
+      "reviewNativeSha256": "c38122eda88279c84ddab95682b71ef4348a33bdd878c93ff1f92fbdf9948aa9",
+      "reviewComparePath": "ops/data_acquisition_plan/aoi12_july5_review/comparisons/ems_00031_20260626_20260705_compare.png",
+      "reviewCompareSha256": "b505f01cae1babd9083507745fd5368ae104701b27f6504da1ea3a01e5d54aeb"
+    },
+    {
+      "chipId": "ems_00033",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00033_20260705.png",
+      "sha256": "2929e9031cdcbfe6962082a1ca9e1444d86df8044e1ac5f1f8e2dac956c11499",
+      "bytes": 21717,
+      "published": false
+    },
+    {
+      "chipId": "ems_00034",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00034_20260705.png",
+      "sha256": "6c71c58dd35ab5e2c1abdd268a2bef6960ca301de748421ac68bb1ad0c33168c",
+      "bytes": 40130,
+      "published": false
+    },
+    {
+      "chipId": "ems_00035",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00035_20260705.png",
+      "sha256": "d00255e3afec523883c63de78423b9979d6b1b793d8e936e65f8cb65b494a74a",
+      "bytes": 32675,
+      "published": false
+    },
+    {
+      "chipId": "ems_00040",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00040_20260705.png",
+      "sha256": "43dae6ddb0fceb07861bd7f5c683f973c22b77416f368516f7f6d0fac12f92c5",
+      "bytes": 24268,
+      "published": false
+    },
+    {
+      "chipId": "ems_00043",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00043_20260705.png",
+      "sha256": "94df20f771454840e5abcad31a328316f6d22f50c4af3700473107ef77a9f79d",
+      "bytes": 11862,
+      "published": false
+    },
+    {
+      "chipId": "ems_00050",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00050_20260705.png",
+      "sha256": "4aa658c246b4e62deaead6781ef5f7e42affd3ea38646a683a34fadae7227f0a",
+      "bytes": 27154,
+      "published": false
+    },
+    {
+      "chipId": "ems_00051",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00051_20260705.png",
+      "sha256": "6a834e99583f642581ce9d640ab5315c435de16b65ceec609aa2794fd6cceb7c",
+      "bytes": 21791,
+      "published": false
+    },
+    {
+      "chipId": "ems_00056",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00056_20260705.png",
+      "sha256": "d821a8a5522b80fda886c8ca62e972dd248a1a4b0e275b470a1cd5bdfd957846",
+      "bytes": 17296,
+      "published": true,
+      "reviewNativePath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00056_20260705.png",
+      "reviewNativeSha256": "d821a8a5522b80fda886c8ca62e972dd248a1a4b0e275b470a1cd5bdfd957846",
+      "reviewComparePath": "ops/data_acquisition_plan/aoi12_july5_review/comparisons/ems_00056_20260626_20260705_compare.png",
+      "reviewCompareSha256": "02b1c297306c8acf781b2c9a37482cd56acb9f6af4c14fe3ec2fd25a64f982ec"
+    },
+    {
+      "chipId": "ems_00060",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00060_20260705.png",
+      "sha256": "4434755261df71b07f22e082bd17328d1c1a40be3ddb21b5c94247c061d4a354",
+      "bytes": 38418,
+      "published": false
+    },
+    {
+      "chipId": "ems_00066",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00066_20260705.png",
+      "sha256": "61daa777e181d0cc86247bae8046c0c15282064dc72e02b0a0be64d4cd978d2e",
+      "bytes": 12776,
+      "published": false
+    },
+    {
+      "chipId": "ems_00067",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00067_20260705.png",
+      "sha256": "94f8f069c85f5a0f5c281d66a71789c826606b0d9c8e0392ada536f0165fabf5",
+      "bytes": 12884,
+      "published": false
+    },
+    {
+      "chipId": "ems_00077",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00077_20260705.png",
+      "sha256": "652191c5aff83dbe3d9c2b17ddde69d80c4bf77cb8e90b9bffd9a29a2f2e5175",
+      "bytes": 14629,
+      "published": false
+    },
+    {
+      "chipId": "ems_00078",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00078_20260705.png",
+      "sha256": "39b647b97fcb85e4fc624f21b421c8ef23a9436acb34b21f003cd1392d08d29e",
+      "bytes": 11238,
+      "published": false
+    },
+    {
+      "chipId": "ems_00108",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00108_20260705.png",
+      "sha256": "a3eed02dceec14eff78bd3213d6c469f02db8d02e3e42e3438392d0130ea0475",
+      "bytes": 8726,
+      "published": true,
+      "reviewNativePath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00108_20260705.png",
+      "reviewNativeSha256": "a3eed02dceec14eff78bd3213d6c469f02db8d02e3e42e3438392d0130ea0475",
+      "reviewComparePath": "ops/data_acquisition_plan/aoi12_july5_review/comparisons/ems_00108_20260626_20260705_compare.png",
+      "reviewCompareSha256": "0750f3780593099feded15ceb0a3df348d5483c456d9a9f7d85fb29ef183ecf5"
+    },
+    {
+      "chipId": "ems_00117",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00117_20260705.png",
+      "sha256": "60fbe5690028a3a1b1a13e615a74a4e671a74c7cfba3c63b4a5aafc70ca3e5b7",
+      "bytes": 2955,
+      "published": true,
+      "reviewNativePath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00117_20260705.png",
+      "reviewNativeSha256": "60fbe5690028a3a1b1a13e615a74a4e671a74c7cfba3c63b4a5aafc70ca3e5b7",
+      "reviewComparePath": "ops/data_acquisition_plan/aoi12_july5_review/comparisons/ems_00117_20260626_20260705_compare.png",
+      "reviewCompareSha256": "8cb2fcd31cb326ed275947a2d55b45983d696ea6f514f47f641567882dff718f"
+    },
+    {
+      "chipId": "ems_00119",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00119_20260705.png",
+      "sha256": "c710d1b579cf49d66ea136450dfb487c3d1ce548d1f9a2fdfccea855b172022c",
+      "bytes": 1981,
+      "published": true,
+      "reviewNativePath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00119_20260705.png",
+      "reviewNativeSha256": "c710d1b579cf49d66ea136450dfb487c3d1ce548d1f9a2fdfccea855b172022c",
+      "reviewComparePath": "ops/data_acquisition_plan/aoi12_july5_review/comparisons/ems_00119_20260626_20260705_compare.png",
+      "reviewCompareSha256": "89c6bdb53c73eae18d09f5d9e28df53dbf82a65e56d8cbc31086df12f31e03ad"
+    },
+    {
+      "chipId": "ems_00120",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+      "opsPath": "ops/data_acquisition_plan/aoi12_july5_review/chips/ems_00120_20260705.png",
+      "sha256": "97b61139130d8156f30e49eeccee90d063a03e7932c17c181db36799f3735194",
+      "bytes": 2574,
+      "published": false
+    }
+  ]
+}

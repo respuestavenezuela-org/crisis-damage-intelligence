@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "aoiId": "emsr884-aoi12-caraballeda",
+  "sourceRole": "Vantor Open Data temporal triage evidence; not official EMS",
+  "license": "CC-BY-NC-4.0",
+  "publicationRule": "Publish only findings visible in native pixels after checking clouds, coverage, alignment and acquisition time. Do not interpret non-visibility as absence.",
+  "records": [
+    {
+      "chipId": "ems_00031",
+      "sceneId": "B15000110186C610",
+      "acquisitionUtc": "2026-06-27T13:48:10.374681Z",
+      "sensor": "LG05",
+      "cloudCover": 6,
+      "panGsdM": 0.35,
+      "chipIds": [
+        "ems_00031",
+        "ems_00056"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B15000110186C610/B15000110186C610.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00031_B15000110186C610.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00031_B15000110186C610_compare.png",
+      "status": "human-reviewed-selected",
+      "publicNativePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_native.png",
+      "publicNativeSha256": "53cffb1771208d01663ee9696f55ac1628a9c5f443b925b9847e956de3908806",
+      "publicComparePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_compare.png",
+      "publicCompareSha256": "10baa89146dfc1e8f7b96b20afc0f74638a4e89a8d28eb3c45f3cdac859f87df"
+    },
+    {
+      "chipId": "ems_00056",
+      "sceneId": "B15000110186C610",
+      "acquisitionUtc": "2026-06-27T13:48:10.374681Z",
+      "sensor": "LG05",
+      "cloudCover": 6,
+      "panGsdM": 0.35,
+      "chipIds": [
+        "ems_00031",
+        "ems_00056"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B15000110186C610/B15000110186C610.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00056_B15000110186C610.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00056_B15000110186C610_compare.png",
+      "status": "human-reviewed-selected",
+      "publicNativePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_native.png",
+      "publicNativeSha256": "04686cc96f82116a0732fb0d7cfa48e3fc9065cfbb7621fc6c7df5d7096cf1d8",
+      "publicComparePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_compare.png",
+      "publicCompareSha256": "2295452d7f64786d60724ee612a56e7e62189abb9acee9a258191795bb9ced8a"
+    },
+    {
+      "chipId": "ems_00108",
+      "sceneId": "B140001100B5C710",
+      "acquisitionUtc": "2026-06-29T14:09:32.624709Z",
+      "sensor": "LG04",
+      "cloudCover": 39,
+      "panGsdM": 0.41,
+      "chipIds": [
+        "ems_00108",
+        "ems_00117",
+        "ems_00119"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B140001100B5C710/B140001100B5C710.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00108_B140001100B5C710.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00108_B140001100B5C710_compare.png",
+      "status": "human-reviewed-selected",
+      "publicNativePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_native.png",
+      "publicNativeSha256": "d7eec4c42b28443201947c0c77e695916ec9d0851f4ef12501abbec62b373146",
+      "publicComparePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_compare.png",
+      "publicCompareSha256": "2ceb81fa8a8bc538d779e8ff5771858880c2c0f42f676a2a98363ffee8eb31f4"
+    },
+    {
+      "chipId": "ems_00117",
+      "sceneId": "B140001100B5C710",
+      "acquisitionUtc": "2026-06-29T14:09:32.624709Z",
+      "sensor": "LG04",
+      "cloudCover": 39,
+      "panGsdM": 0.41,
+      "chipIds": [
+        "ems_00108",
+        "ems_00117",
+        "ems_00119"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B140001100B5C710/B140001100B5C710.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00117_B140001100B5C710.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00117_B140001100B5C710_compare.png",
+      "status": "human-reviewed-selected",
+      "publicNativePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_native.png",
+      "publicNativeSha256": "56bb06f84de6617cf52ae3a54eb50befedf8b4b408919a435a3c67ff0d4bbc30",
+      "publicComparePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_compare.png",
+      "publicCompareSha256": "7a04e8c0663d5f6336f5ab8b6deade38525854cbb9c3abf760900a998291277b"
+    },
+    {
+      "chipId": "ems_00119",
+      "sceneId": "B140001100B5C710",
+      "acquisitionUtc": "2026-06-29T14:09:32.624709Z",
+      "sensor": "LG04",
+      "cloudCover": 39,
+      "panGsdM": 0.41,
+      "chipIds": [
+        "ems_00108",
+        "ems_00117",
+        "ems_00119"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B140001100B5C710/B140001100B5C710.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00119_B140001100B5C710.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00119_B140001100B5C710_compare.png",
+      "status": "human-reviewed-selected",
+      "publicNativePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_native.png",
+      "publicNativeSha256": "e5274c2bf865d89c829a7525e5efdc0b295d5e4cbea6e3bd1b07c43a9d9f5335",
+      "publicComparePath": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_compare.png",
+      "publicCompareSha256": "32648d12adeb92e99b28bf8a91465643b237216bb4beeee67b480028c1e62b30"
+    },
+    {
+      "chipId": "ems_00108",
+      "sceneId": "B140001100B5C810",
+      "acquisitionUtc": "2026-06-29T14:09:55.124782Z",
+      "sensor": "LG04",
+      "cloudCover": 41,
+      "panGsdM": 0.48,
+      "chipIds": [
+        "ems_00108",
+        "ems_00117",
+        "ems_00119"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B140001100B5C810/B140001100B5C810.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00108_B140001100B5C810.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00108_B140001100B5C810_compare.png",
+      "status": "pending-human-review"
+    },
+    {
+      "chipId": "ems_00117",
+      "sceneId": "B140001100B5C810",
+      "acquisitionUtc": "2026-06-29T14:09:55.124782Z",
+      "sensor": "LG04",
+      "cloudCover": 41,
+      "panGsdM": 0.48,
+      "chipIds": [
+        "ems_00108",
+        "ems_00117",
+        "ems_00119"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B140001100B5C810/B140001100B5C810.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00117_B140001100B5C810.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00117_B140001100B5C810_compare.png",
+      "status": "pending-human-review"
+    },
+    {
+      "chipId": "ems_00119",
+      "sceneId": "B140001100B5C810",
+      "acquisitionUtc": "2026-06-29T14:09:55.124782Z",
+      "sensor": "LG04",
+      "cloudCover": 41,
+      "panGsdM": 0.48,
+      "chipIds": [
+        "ems_00108",
+        "ems_00117",
+        "ems_00119"
+      ],
+      "url": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/vantor/venezuela-earthquake-jun-2026/B140001100B5C810/B140001100B5C810.tif",
+      "nativePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/chips/ems_00119_B140001100B5C810.png",
+      "comparePath": "ops/data_acquisition_plan/aoi12_vantor_temporal_review/comparisons/ems_00119_B140001100B5C810_compare.png",
+      "status": "pending-human-review"
+    }
+  ],
+  "failures": []
+}

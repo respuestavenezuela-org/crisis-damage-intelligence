@@ -1,7 +1,177 @@
 {
-  "updatedAt": "2026-07-01T17:55:00Z",
+  "updatedAt": "2026-07-21T12:03:44Z",
   "platform": "Respuesta Venezuela",
   "aois": [
+    {
+      "id": "emsr884-aoi00-central-coastal-venezuela",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "AOI00 Central Coastal Venezuela - Regional Sentinel-1 context",
+        "es": "AOI00 Venezuela centro-costera - Contexto regional Sentinel-1"
+      },
+      "status": "imagery-only",
+      "source": "Copernicus EMSR884 AOI00 GRM regional Sentinel-1 product. This SAR overview is context only and is not a building-, vehicle- or shelter-level optical record. No official damage counts are published from this catalog record.",
+      "bounds": [
+        [
+          9.790538,
+          -69.165602
+        ],
+        [
+          10.848623,
+          -66.194695
+        ]
+      ],
+      "center": [
+        10.3195805,
+        -67.6801485
+      ],
+      "downloads": {
+        "csv": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.csv",
+        "geojson": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.geojson",
+        "kml": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.kml",
+        "metadata": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/source_metadata.json",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json",
+        "product_zip": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip"
+      },
+      "layers": {
+        "damage": "/data/aoi/emsr884-aoi00-central-coastal-venezuela/damage.geojson"
+      },
+      "metrics": {
+        "features": 0,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "before": null,
+        "after": null,
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI00-GRM_PRODUCT-47ba3f6f-af12-4159-8ec1-03df9f36eea7",
+            "distinctAcquisitionId": "212ca3a1fe229e5d",
+            "product": "GRM_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "sar",
+            "sensor": "Sentinel-1",
+            "resolutionClass": "HR+",
+            "acquisitionUtc": "2026-06-25T22:42:00",
+            "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+            "bytes": 0,
+            "httpStatus": 403,
+            "publiclyReadable": false,
+            "acceptRanges": "",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Regional SAR context; not a direct replacement for optical building or vehicle inspection.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI00-GRM_PRODUCT-7b0582a7-28cb-4be1-a72a-01c1e8327c55",
+            "distinctAcquisitionId": "268edf99055065dd",
+            "product": "GRM_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "sar",
+            "sensor": "Sentinel-1",
+            "resolutionClass": "HR+",
+            "acquisitionUtc": "2026-06-24T22:49:00",
+            "url": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+            "bytes": 0,
+            "httpStatus": 403,
+            "publiclyReadable": false,
+            "acceptRanges": "",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI00/GRM_PRODUCT/EMSR884_AOI00_GRM_PRODUCT_v2.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Regional SAR context; not a direct replacement for optical building or vehicle inspection.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ],
+        "note": "The two AOI00 Sentinel-1 image records are official regional SAR context. Their derived viewer COG endpoints returned HTTP 403 at the inventory check, so the public catalog links the official product ZIP instead of claiming direct raster access."
+      }
+    },
+    {
+      "id": "emsr884-aoi01-petare",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "AOI01 Petare - Imagery available, no official damage vector",
+        "es": "AOI01 Petare - Imagen disponible, sin vector oficial de daños"
+      },
+      "status": "imagery-only",
+      "source": "Copernicus EMSR884 public dashboard imagery metadata for AOI01. No official GRA damage vector product was produced; imagery is context only and must not be converted into official damage counts.",
+      "bounds": [
+        [
+          10.395392,
+          -66.876312
+        ],
+        [
+          10.514347,
+          -66.721745
+        ]
+      ],
+      "center": [
+        10.454869500000001,
+        -66.79902849999999
+      ],
+      "downloads": {
+        "csv": "/data/aoi/emsr884-aoi01-petare/damage.csv",
+        "geojson": "/data/aoi/emsr884-aoi01-petare/damage.geojson",
+        "kml": "/data/aoi/emsr884-aoi01-petare/damage.kml",
+        "metadata": "/data/aoi/emsr884-aoi01-petare/source_metadata.json",
+        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI01/GRA_PRODUCT/EMSR884_AOI01_GRA_PRODUCT_LEGION_20260627_1348_ORTHO_cog.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json",
+        "baseline_product": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI01/EMSR884_AOI01_BLP.zip"
+      },
+      "layers": {
+        "damage": "/data/aoi/emsr884-aoi01-petare/damage.geojson"
+      },
+      "metrics": {
+        "features": 0,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "before": null,
+        "after": {
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI01/GRA_PRODUCT/EMSR884_AOI01_GRA_PRODUCT_LEGION_20260627_1348_ORTHO_cog.tif",
+          "sensor": "Legion",
+          "acquisitionUtc": "2026-06-27T13:48:00",
+          "bytes": 540730695,
+          "source": "Copernicus EMSR884 post-event VHR optical COG",
+          "license": "Copernicus EMS public product terms",
+          "coverage": "Official EMSR884 AOI01 imagery footprint.",
+          "limitations": "Imagery-only context. No official damage vector was produced. The source COG is linked for evidence access but is not loaded directly on mobile because it exceeds the direct-raster budget."
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI01-GRA_PRODUCT-68e44fab-3b82-40c7-a5fe-9d5f3aa7df64",
+            "distinctAcquisitionId": "dc3626b27a871bde",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-27T13:48:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI01/GRA_PRODUCT/EMSR884_AOI01_GRA_PRODUCT_LEGION_20260627_1348_ORTHO_cog.tif",
+            "bytes": 540730695,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ],
+        "note": "All dated Copernicus image records for this AOI are listed under acquisitions. No pre-event comparison is claimed, and absence of a visible feature is not evidence of absence."
+      }
+    },
     {
       "id": "emsr884-aoi02-caracas",
       "country": "Venezuela",
@@ -36,7 +206,8 @@
         "vlm_before_after_summary": "/data/aoi/emsr884-aoi02-caracas/vlm_before_after_summary.json",
         "vlm_jsonl": "/data/aoi/emsr884-aoi02-caracas/vlm_review.jsonl",
         "vlm_csv": "/data/aoi/emsr884-aoi02-caracas/vlm_review_summary.csv",
-        "vlm_summary": "/data/aoi/emsr884-aoi02-caracas/vlm_summary.json"
+        "vlm_summary": "/data/aoi/emsr884-aoi02-caracas/vlm_summary.json",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi02-caracas/damage.geojson",
@@ -125,7 +296,49 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
-        }
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI02-GRA_PRODUCT-7002519b-14a5-4c25-a329-c42a7d2ca42a",
+            "distinctAcquisitionId": "b706279916ece0f1",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Pleiades Neo",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-25T14:59:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+            "bytes": 188120283,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI02/GRA_PRODUCT/EMSR884_AOI02_GRA_PRODUCT_v1.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI02-GRA_MONIT01-9ab2cc0d-4742-4c23-8349-077d465757c4",
+            "distinctAcquisitionId": "8cd6ab9dc136b878",
+            "product": "GRA_MONIT01",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Pleiades Neo",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T15:19:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI02/GRA_MONIT01/EMSR884_AOI02_GRA_MONIT01_PNEO_20260626_1519_ORTHO_cog.tif",
+            "bytes": 308430340,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI02/GRA_MONIT01/EMSR884_AOI02_GRA_MONIT01_v2.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ]
       }
     },
     {
@@ -213,7 +426,8 @@
         "csv": "/data/aoi/emsr884-aoi03-antimano/damage.csv",
         "geojson": "/data/aoi/emsr884-aoi03-antimano/damage.geojson",
         "kml": "/data/aoi/emsr884-aoi03-antimano/damage.kml",
-        "before_cog": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif"
+        "before_cog": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FD1910.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi03-antimano/damage.geojson"
@@ -265,7 +479,110 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
-        }
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI03-GRA_PRODUCT-f49d9294-1b95-4cc0-80df-c7301fd8b338",
+            "distinctAcquisitionId": "62ca0ff1ce812757",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-25T15:17:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI03/GRA_PRODUCT/EMSR884_AOI03_GRA_PRODUCT_LEGION_20260625_1517_ORTHO_cog.tif",
+            "bytes": 267288991,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emsr884-aoi04-maracay",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "AOI04 Maracay - Imagery available, no official damage vector",
+        "es": "AOI04 Maracay - Imagen disponible, sin vector oficial de daños"
+      },
+      "status": "imagery-only",
+      "source": "Copernicus EMSR884 public dashboard imagery metadata for AOI04. No official GRA damage vector product was produced; imagery is context only and must not be converted into official damage counts.",
+      "bounds": [
+        [
+          10.211424,
+          -67.750737
+        ],
+        [
+          10.331947,
+          -67.434963
+        ]
+      ],
+      "center": [
+        10.2716855,
+        -67.59285
+      ],
+      "downloads": {
+        "csv": "/data/aoi/emsr884-aoi04-maracay/damage.csv",
+        "geojson": "/data/aoi/emsr884-aoi04-maracay/damage.geojson",
+        "kml": "/data/aoi/emsr884-aoi04-maracay/damage.kml",
+        "metadata": "/data/aoi/emsr884-aoi04-maracay/source_metadata.json",
+        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json",
+        "baseline_product": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI04/EMSR884_AOI04_BLP.zip"
+      },
+      "layers": {
+        "damage": "/data/aoi/emsr884-aoi04-maracay/damage.geojson",
+        "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif"
+      },
+      "metrics": {
+        "features": 0,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "before": null,
+        "after": {
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+          "sensor": "WorldView-3",
+          "acquisitionUtc": "2026-06-27T15:30:00",
+          "bytes": 135509892,
+          "source": "Copernicus EMSR884 post-event VHR optical COG",
+          "license": "Copernicus EMS public product terms",
+          "coverage": "Official EMSR884 AOI04 imagery footprint.",
+          "limitations": "Imagery-only context. No official damage vector was produced. The source COG is within the direct-raster budget but may still be slow on constrained links."
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI04-GRA_PRODUCT-98d30358-4cff-46ec-a2f7-8b4060e248b3",
+            "distinctAcquisitionId": "53dd2c77554cab5d",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "WorldView-3",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-27T15:30:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI04/GRA_PRODUCT/EMSR884_AOI04_GRA_PRODUCT_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+            "bytes": 135509892,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ],
+        "note": "All dated Copernicus image records for this AOI are listed under acquisitions. No pre-event comparison is claimed, and absence of a visible feature is not evidence of absence."
       }
     },
     {
@@ -299,7 +616,8 @@
         "metadata": "/data/aoi/emsr884-aoi05-santa-cruz/source_metadata.json",
         "zip": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_v1.zip",
         "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
-        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif"
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi05-santa-cruz/damage.geojson"
@@ -354,7 +672,49 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation only when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event, and must not be used for official damage counts."
-        }
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI05-GRA_PRODUCT-a632605f-da3f-41d2-a497-8d703e68e427",
+            "distinctAcquisitionId": "7decc78a0b50eda3",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "WorldView-3",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T15:10:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_WORLDVIEW3_20260626_1510_ORTHO_cog.tif",
+            "bytes": 377353322,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI05/GRA_PRODUCT/EMSR884_AOI05_GRA_PRODUCT_v1.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI05-GRA_MONIT01-0a280ea8-12fa-41bd-88da-4385fc14d359",
+            "distinctAcquisitionId": "bce6be9964591a95",
+            "product": "GRA_MONIT01",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "WorldView-3",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-27T15:30:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI05/GRA_MONIT01/EMSR884_AOI05_GRA_MONIT01_WORLDVIEW3_20260627_1530_ORTHO_cog.tif",
+            "bytes": 54153495,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ]
       },
       "geometryType": "Point"
     },
@@ -390,7 +750,8 @@
         "vlm_jsonl": "/data/aoi/emsr884-aoi06-moron/vlm_review.jsonl",
         "vlm_csv": "/data/aoi/emsr884-aoi06-moron/vlm_review_summary.csv",
         "vlm_summary": "/data/aoi/emsr884-aoi06-moron/vlm_summary.json",
-        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif"
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi06-moron/damage.geojson",
@@ -462,7 +823,49 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
-        }
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI06-GRA_MONIT01-74f8b6b3-b74a-420f-893b-09fab0e4dcaa",
+            "distinctAcquisitionId": "94e09f139b8d5d22",
+            "product": "GRA_MONIT01",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T15:11:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_MONIT01/EMSR884_AOI06_GRA_MONIT01_LEGION_20260626_1511_ORTHO_cog.tif",
+            "bytes": 258847448,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI06/GRA_MONIT01/EMSR884_AOI06_GRA_MONIT01_v2.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI06-GRA_PRODUCT-826238ba-3dd2-45ec-bd53-ee8afad85b4b",
+            "distinctAcquisitionId": "9a4226b4592a1329",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-25T20:36:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
+            "bytes": 311844612,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_v1.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ]
       }
     },
     {
@@ -522,6 +925,106 @@
       "geometryType": "Point"
     },
     {
+      "id": "emsr884-aoi07-puerto-cabello",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "AOI07 Puerto Cabello - Imagery available, no official damage vector",
+        "es": "AOI07 Puerto Cabello - Imagen disponible, sin vector oficial de daños"
+      },
+      "status": "imagery-only",
+      "source": "Copernicus EMSR884 public dashboard imagery metadata for AOI07. No official GRA damage vector product was produced; imagery is context only and must not be converted into official damage counts.",
+      "bounds": [
+        [
+          10.445128,
+          -68.120282
+        ],
+        [
+          10.500829,
+          -67.971526
+        ]
+      ],
+      "center": [
+        10.4729785,
+        -68.04590400000001
+      ],
+      "downloads": {
+        "csv": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.csv",
+        "geojson": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.geojson",
+        "kml": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.kml",
+        "metadata": "/data/aoi/emsr884-aoi07-puerto-cabello/source_metadata.json",
+        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_PRODUCT/EMSR884_AOI07_GRA_PRODUCT_LEGION_20260626_1403_ORTHO_cog.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json",
+        "baseline_product": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI07/EMSR884_AOI07_BLP.zip"
+      },
+      "layers": {
+        "damage": "/data/aoi/emsr884-aoi07-puerto-cabello/damage.geojson"
+      },
+      "metrics": {
+        "features": 0,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "before": null,
+        "after": {
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_PRODUCT/EMSR884_AOI07_GRA_PRODUCT_LEGION_20260626_1403_ORTHO_cog.tif",
+          "sensor": "Legion",
+          "acquisitionUtc": "2026-06-26T14:03:00",
+          "bytes": 470258272,
+          "source": "Copernicus EMSR884 post-event VHR optical COG",
+          "license": "Copernicus EMS public product terms",
+          "coverage": "Official EMSR884 AOI07 imagery footprint.",
+          "limitations": "Imagery-only context. No official damage vector was produced. The source COG is linked for evidence access but is not loaded directly on mobile because it exceeds the direct-raster budget."
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI07-GRA_PRODUCT-0d261f7c-4054-4bd2-87a5-de0828322c37",
+            "distinctAcquisitionId": "b7843836f17fbe1a",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T14:03:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_PRODUCT/EMSR884_AOI07_GRA_PRODUCT_LEGION_20260626_1403_ORTHO_cog.tif",
+            "bytes": 470258272,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI07-GRA_MONIT01-2a90d5db-71b0-41a7-8458-3a54246fde83",
+            "distinctAcquisitionId": "5fb12cb952d6f0cf",
+            "product": "GRA_MONIT01",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-27T15:16:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI07/GRA_MONIT01/EMSR884_AOI07_GRA_MONIT01_LEGION_20260627_1516_ORTHO_cog.tif",
+            "bytes": 718023496,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ],
+        "note": "All dated Copernicus image records for this AOI are listed under acquisitions. No pre-event comparison is claimed, and absence of a visible feature is not evidence of absence."
+      }
+    },
+    {
       "id": "emsr884-aoi08-san-felipe",
       "country": "Venezuela",
       "event": "EMSR884 Venezuela earthquake",
@@ -553,7 +1056,8 @@
         "vlm_jsonl": "/data/aoi/emsr884-aoi08-san-felipe/vlm_review.jsonl",
         "vlm_csv": "/data/aoi/emsr884-aoi08-san-felipe/vlm_review_summary.csv",
         "vlm_summary": "/data/aoi/emsr884-aoi08-san-felipe/vlm_summary.json",
-        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif"
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/EM/2026/2/S2B_19PEM_20260205_0_L2A/TCI.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json"
       },
       "layers": {
         "afterImage": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
@@ -626,7 +1130,109 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
-        }
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI08-GRA_PRODUCT-6b6975aa-f3e8-4de7-b944-08286e3bc2ea",
+            "distinctAcquisitionId": "c0c17dcaf6753dba",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Pleiades Neo",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-25T15:00:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_PNEO_20260625_1500_ORTHO_cog.tif",
+            "bytes": 222077456,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_v1.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI08-GRA_PRODUCT-80c185b6-1675-47d7-a2ac-7bce58dc533e",
+            "distinctAcquisitionId": "cb2456d71fdcb923",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-25T20:37:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_LEGION_20260625_2037_ORTHO_cog.tif",
+            "bytes": 271918321,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_PRODUCT/EMSR884_AOI08_GRA_PRODUCT_v1.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI08-GRA_MONIT01-88b6dfa1-5287-434a-8496-22fe02e40269",
+            "distinctAcquisitionId": "cd14d6356b00074c",
+            "product": "GRA_MONIT01",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T20:20:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_LEGION_20260626_2020_ORTHO_cog.tif",
+            "bytes": 211884738,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_v2.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI08-GRA_MONIT01-1b124e77-c4fd-46f7-ab7c-d6357552e05e",
+            "distinctAcquisitionId": "408d1f23c9c61b80",
+            "product": "GRA_MONIT01",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Pleiades Neo",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T15:18:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_PNEO_20260626_1518_ORTHO_cog.tif",
+            "bytes": 281758142,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI08/GRA_MONIT01/EMSR884_AOI08_GRA_MONIT01_v2.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          },
+          {
+            "recordId": "EMSR884-AOI08-GRA_MONIT02-34f69f38-e3a3-4b9d-8ad6-261c8001e7f1",
+            "distinctAcquisitionId": "c2594249f0648ca9",
+            "product": "GRA_MONIT02",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-07-05T15:17:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI08/GRA_MONIT02/EMSR884_AOI08_GRA_MONIT02_WORLDVIEW2_20260705_1517_ORTHO_cog.tif",
+            "bytes": 282652188,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ]
       }
     },
     {
@@ -686,6 +1292,86 @@
       "geometryType": "Point"
     },
     {
+      "id": "emsr884-aoi09-valencia",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "AOI09 Valencia - Imagery available, no official damage vector",
+        "es": "AOI09 Valencia - Imagen disponible, sin vector oficial de daños"
+      },
+      "status": "imagery-only",
+      "source": "Copernicus EMSR884 public dashboard imagery metadata for AOI09. No official GRA damage vector product was produced; imagery is context only and must not be converted into official damage counts.",
+      "bounds": [
+        [
+          10.094285,
+          -68.072038
+        ],
+        [
+          10.313376,
+          -67.895844
+        ]
+      ],
+      "center": [
+        10.203830499999999,
+        -67.983941
+      ],
+      "downloads": {
+        "csv": "/data/aoi/emsr884-aoi09-valencia/damage.csv",
+        "geojson": "/data/aoi/emsr884-aoi09-valencia/damage.geojson",
+        "kml": "/data/aoi/emsr884-aoi09-valencia/damage.kml",
+        "metadata": "/data/aoi/emsr884-aoi09-valencia/source_metadata.json",
+        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI09/GRA_PRODUCT/EMSR884_AOI09_GRA_PRODUCT_LEGION_20260626_1404_ORTHO_cog.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json",
+        "baseline_product": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI09/EMSR884_AOI09_BLP.zip"
+      },
+      "layers": {
+        "damage": "/data/aoi/emsr884-aoi09-valencia/damage.geojson"
+      },
+      "metrics": {
+        "features": 0,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "before": null,
+        "after": {
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI09/GRA_PRODUCT/EMSR884_AOI09_GRA_PRODUCT_LEGION_20260626_1404_ORTHO_cog.tif",
+          "sensor": "Legion",
+          "acquisitionUtc": "2026-06-26T14:04:00",
+          "bytes": 1102729826,
+          "source": "Copernicus EMSR884 post-event VHR optical COG",
+          "license": "Copernicus EMS public product terms",
+          "coverage": "Official EMSR884 AOI09 imagery footprint.",
+          "limitations": "Imagery-only context. No official damage vector was produced. The source COG is linked for evidence access but is not loaded directly on mobile because it exceeds the direct-raster budget."
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI09-GRA_PRODUCT-3c9f21ae-40d3-4adc-b266-f5535e880bfd",
+            "distinctAcquisitionId": "46ab9c9145b8417b",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T14:04:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI09/GRA_PRODUCT/EMSR884_AOI09_GRA_PRODUCT_LEGION_20260626_1404_ORTHO_cog.tif",
+            "bytes": 1102729826,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ],
+        "note": "All dated Copernicus image records for this AOI are listed under acquisitions. No pre-event comparison is claimed, and absence of a visible feature is not evidence of absence."
+      }
+    },
+    {
       "id": "emsr884-aoi10-guacara",
       "country": "Venezuela",
       "event": "EMSR884 Venezuela earthquake",
@@ -714,7 +1400,8 @@
         "csv": "/data/aoi/emsr884-aoi10-guacara/damage.csv",
         "geojson": "/data/aoi/emsr884-aoi10-guacara/damage.geojson",
         "kml": "/data/aoi/emsr884-aoi10-guacara/damage.kml",
-        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif"
+        "before_cog": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/P/FM/2026/2/S2B_19PFM_20260205_0_L2A/TCI.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi10-guacara/damage.geojson"
@@ -768,7 +1455,109 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
-        }
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI10-GRA_PRODUCT-3f01cb0c-bb04-49c0-b204-528380015f4e",
+            "distinctAcquisitionId": "806225888295e739",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Pleiades Neo",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-25T14:59:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI10/GRA_PRODUCT/EMSR884_AOI10_GRA_PRODUCT_PNEO_20260625_1459_ORTHO_cog.tif",
+            "bytes": 706216767,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emsr884-aoi11-villa-de-cura",
+      "country": "Venezuela",
+      "event": "EMSR884 Venezuela earthquake",
+      "name": {
+        "en": "AOI11 Villa de Cura - Imagery available, no official damage vector",
+        "es": "AOI11 Villa de Cura - Imagen disponible, sin vector oficial de daños"
+      },
+      "status": "imagery-only",
+      "source": "Copernicus EMSR884 public dashboard imagery metadata for AOI11. No official GRA damage vector product was produced; imagery is context only and must not be converted into official damage counts.",
+      "bounds": [
+        [
+          9.98571,
+          -67.639389
+        ],
+        [
+          10.153015,
+          -67.420152
+        ]
+      ],
+      "center": [
+        10.0693625,
+        -67.5297705
+      ],
+      "downloads": {
+        "csv": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.csv",
+        "geojson": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.geojson",
+        "kml": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.kml",
+        "metadata": "/data/aoi/emsr884-aoi11-villa-de-cura/source_metadata.json",
+        "cog": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI11/GRA_PRODUCT/EMSR884_AOI11_GRA_PRODUCT_PNEO_20260626_1519_ORTHO_cog.tif",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json",
+        "baseline_product": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI11/EMSR884_AOI11_BLP.zip"
+      },
+      "layers": {
+        "damage": "/data/aoi/emsr884-aoi11-villa-de-cura/damage.geojson"
+      },
+      "metrics": {
+        "features": 0,
+        "destroyed": 0,
+        "damagedConfirmed": 0,
+        "possibleDamage": 0,
+        "vlmReviewed": 0
+      },
+      "imagery": {
+        "before": null,
+        "after": {
+          "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI11/GRA_PRODUCT/EMSR884_AOI11_GRA_PRODUCT_PNEO_20260626_1519_ORTHO_cog.tif",
+          "sensor": "Pleiades Neo",
+          "acquisitionUtc": "2026-06-26T15:19:00",
+          "bytes": 955020223,
+          "source": "Copernicus EMSR884 post-event VHR optical COG",
+          "license": "Copernicus EMS public product terms",
+          "coverage": "Official EMSR884 AOI11 imagery footprint.",
+          "limitations": "Imagery-only context. No official damage vector was produced. The source COG is linked for evidence access but is not loaded directly on mobile because it exceeds the direct-raster budget."
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI11-GRA_PRODUCT-14e02d02-d005-4b87-a843-add7548321d9",
+            "distinctAcquisitionId": "61f7e533f510499e",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "N",
+            "sensorType": "optical",
+            "sensor": "Pleiades Neo",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T15:19:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI11/GRA_PRODUCT/EMSR884_AOI11_GRA_PRODUCT_PNEO_20260626_1519_ORTHO_cog.tif",
+            "bytes": 955020223,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": null,
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "not-reviewed-for-response-logistics"
+          }
+        ],
+        "note": "All dated Copernicus image records for this AOI are listed under acquisitions. No pre-event comparison is claimed, and absence of a visible feature is not evidence of absence."
       }
     },
     {
@@ -806,7 +1595,8 @@
         "vlm_before_after_jsonl": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_review.jsonl",
         "vlm_before_after_csv": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.csv",
         "vlm_before_after_summary": "/data/aoi/emsr884-aoi12-caraballeda/vlm_before_after_summary.json",
-        "aerial_response_evidence": "/data/reconstruction/aerial-response-evidence-la-guaira.json"
+        "aerial_response_evidence": "/data/reconstruction/aerial-response-evidence-la-guaira.json",
+        "imagery_inventory": "/data/imagery/emsr884-acquisitions.json"
       },
       "layers": {
         "damage": "/data/aoi/emsr884-aoi12-caraballeda/damage.geojson",
@@ -920,7 +1710,70 @@
           "source": "Esri World Imagery / Maxar / Earthstar Geographics / GIS User Community basemap as displayed in the app aerial toggle",
           "intendedUse": "Human visual orientation and low-confidence VLM context when no dated high-resolution pre-event baseline is available.",
           "limitations": "Not official EMS before imagery, not guaranteed to be pre-event at each tile, licensing/terms must be reviewed before bulk downloading or redistributing tiles, and it must not be used for official damage counts."
-        }
+        },
+        "acquisitions": [
+          {
+            "recordId": "EMSR884-AOI12-GRA_MONIT02-534a680a-8713-40fa-a979-b4d8e2b0d37e",
+            "distinctAcquisitionId": "33ad99039da80930",
+            "product": "GRA_MONIT02",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "GeoEye-1",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-07-05T15:05:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif",
+            "bytes": 109259109,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_v1.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "temporal-follow-up-pending-human-review"
+          },
+          {
+            "recordId": "EMSR884-AOI12-GRA_MONIT01-9ca2ccac-7240-4d8c-acd9-df55f2f672f1",
+            "distinctAcquisitionId": "a823346bb546255f",
+            "product": "GRA_MONIT01",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T15:10:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT01/EMSR884_AOI12_GRA_MONIT01_LEGION_20260626_1510_ORTHO_cog.tif",
+            "bytes": 916351360,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_MONIT01/EMSR884_AOI12_GRA_MONIT01_v3.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "duplicate-product-record",
+            "duplicateOf": "EMSR884-AOI12-GRA_PRODUCT"
+          },
+          {
+            "recordId": "EMSR884-AOI12-GRA_PRODUCT-e5f11e9b-e597-478c-be95-b7f0651d565e",
+            "distinctAcquisitionId": "a823346bb546255f",
+            "product": "GRA_PRODUCT",
+            "productStatusCode": "F",
+            "sensorType": "optical",
+            "sensor": "Legion",
+            "resolutionClass": "VHR1",
+            "acquisitionUtc": "2026-06-26T15:10:00",
+            "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+            "bytes": 916351360,
+            "httpStatus": 200,
+            "publiclyReadable": true,
+            "acceptRanges": "bytes",
+            "productDownloadUrl": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_v2.zip",
+            "source": "Copernicus EMSR884 public dashboard API and Rapid Mapping Viewer",
+            "license": "Copernicus EMS public product terms",
+            "role": "Post-event VHR optical context; official EMS vectors remain the damage source of record.",
+            "analysisStatus": "reviewed-response-sites"
+          }
+        ]
       }
     },
     {
@@ -985,7 +1838,7 @@
       "event": "Venezuela earthquake June 2026",
       "name": {
         "en": "Catia La Mar - Microsoft AI4G Predicted Damage",
-        "es": "Catia La Mar - Da\u00f1o predicho Microsoft AI4G"
+        "es": "Catia La Mar - Daño predicho Microsoft AI4G"
       },
       "status": "external-prediction",
       "source": "HDX dataset from Microsoft AI for Good Lab: Venezuela Earthquakes: Building Damage Assessment in Catia La Mar. External predicted building-footprint damage, not official Copernicus EMS damage labels.",
@@ -1309,7 +2162,7 @@
       "id": "external-gap-tucacas-falcon",
       "name": {
         "en": "Tucacas / Falcon - public data gap",
-        "es": "Tucacas / Falc\u00f3n - brecha de datos p\u00fablicos"
+        "es": "Tucacas / Falcón - brecha de datos públicos"
       },
       "status": "external-gap",
       "expectedUtc": "No EMSR884 AOI/catalog layer in the current app; needs public imagery, reports, OSM/field validation, or external source review",
@@ -1335,5 +2188,6 @@
       "expectedUtc": "EMSR884 AOI09 GRA PRODUCT is N/not produced as of 2026-06-28 18:02 UTC",
       "priority": "medium"
     }
-  ]
+  ],
+  "imageryInventory": "/data/imagery/emsr884-acquisitions.json"
 }

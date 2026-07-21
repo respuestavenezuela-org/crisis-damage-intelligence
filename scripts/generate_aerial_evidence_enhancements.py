@@ -23,6 +23,7 @@ from transformers import AutoImageProcessor, Swin2SRForImageSuperResolution
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "public" / "data" / "chips" / "emsr884-aoi12-caraballeda"
 OUTPUT_DIR = ROOT / "public" / "data" / "reconstruction" / "evidence" / "la-guaira"
+TEMPORAL_DIR = OUTPUT_DIR / "temporal"
 MODEL_ID = "caidas/swin2SR-classical-sr-x2-64"
 MODEL_REVISION = "cee1c923c6a37361c6e5650b65dcf4be821e5d52"
 CHIP_IDS = (
@@ -31,6 +32,13 @@ CHIP_IDS = (
     "ems_00108",
     "ems_00117",
     "ems_00119",
+)
+TEMPORAL_SOURCES = (
+    ("ems_00031", "B15000110186C610"),
+    ("ems_00056", "B15000110186C610"),
+    ("ems_00108", "B140001100B5C710"),
+    ("ems_00117", "B140001100B5C710"),
+    ("ems_00119", "B140001100B5C710"),
 )
 
 
@@ -51,8 +59,24 @@ def main() -> None:
     ).to(device).eval()
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    for chip_id in CHIP_IDS:
-        source = SOURCE_DIR / f"{chip_id}_after_event.png"
+    sources = [
+        (
+            chip_id,
+            SOURCE_DIR / f"{chip_id}_after_event.png",
+            OUTPUT_DIR / f"{chip_id}_after_event_swin2sr_x2.webp",
+        )
+        for chip_id in CHIP_IDS
+    ]
+    sources.extend(
+        (
+            f"{chip_id}_{scene_id}",
+            TEMPORAL_DIR / f"{chip_id}_{scene_id}_native.png",
+            TEMPORAL_DIR / f"{chip_id}_{scene_id}_swin2sr_x2.webp",
+        )
+        for chip_id, scene_id in TEMPORAL_SOURCES
+    )
+
+    for label, source, destination in sources:
         image = Image.open(source).convert("RGB")
         inputs = {
             key: value.to(device)
@@ -65,10 +89,9 @@ def main() -> None:
         array = np.moveaxis(array, source=0, destination=-1)
         array = (array * 255.0).round().astype(np.uint8)
         enhanced = Image.fromarray(array).crop((0, 0, image.width * 2, image.height * 2))
-        destination = OUTPUT_DIR / f"{chip_id}_after_event_swin2sr_x2.webp"
         enhanced.save(destination, "WEBP", quality=86, method=6)
         print(
-            f"{chip_id}: {image.width}x{image.height} -> "
+            f"{label}: {image.width}x{image.height} -> "
             f"{enhanced.width}x{enhanced.height}; "
             f"source_sha256={sha256(source)}; "
             f"derived_sha256={sha256(destination)}; "

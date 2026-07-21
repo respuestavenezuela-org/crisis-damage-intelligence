@@ -1,12 +1,12 @@
 # Remote Asset Validation
 
-- Generated UTC: `2026-07-21T04:24:40.020937+00:00`
+- Generated UTC: `2026-07-21T12:27:03.553463+00:00`
 - Remote base: `https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev`
 - Result: `pass`
 
 ## Package Pressure
 
-- `public/data`: 74628 files, 267.6 MB
+- `public/data`: 74668 files, 269.9 MB
 - `public/data/chips`: 681 files, 67.3 MB
 - `public/data/tiles`: 73837 files, 186.0 MB
 
@@ -25,7 +25,7 @@
 
 ## Supabase-Free Static Data
 
-- Local `/data/aoi` references checked: 95
+- Local `/data/aoi` references checked: 125
 - Missing local static references: 0
 
 ## Pruned Deploy Gate

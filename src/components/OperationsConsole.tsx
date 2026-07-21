@@ -140,6 +140,9 @@ const copy = {
     nonOfficialBefore: "Public/OpenData reference - not official EMS imagery",
     coverage: "Coverage",
     imageryOnly: "Imagery only - no official damage vector yet",
+    acquisitions: "Dated acquisitions",
+    readableCog: "public COG",
+    linkedEvidence: "linked evidence",
     opacity: "Damage opacity",
     filters: "Filters",
     controls: "Controls",
@@ -312,6 +315,9 @@ const copy = {
     nonOfficialBefore: "Referencia publica/OpenData - no es imagen oficial EMS",
     coverage: "Cobertura",
     imageryOnly: "Solo imagen - sin vector oficial de danos aun",
+    acquisitions: "Adquisiciones fechadas",
+    readableCog: "COG público",
+    linkedEvidence: "evidencia enlazada",
     opacity: "Opacidad de daño",
     filters: "Filtros",
     controls: "Controles",
@@ -2752,6 +2758,7 @@ function ImageryCoveragePanel({
       ? `${t.mapLayerAvailable} · ${aoi.imagery.approximateReference.label}`
     : t.notAvailable;
   const hasCogDownload = Boolean(aoi.imagery?.after?.url);
+  const acquisitions = aoi.imagery?.acquisitions ?? [];
 
   return (
     <section className="imagery-panel">
@@ -2774,6 +2781,25 @@ function ImageryCoveragePanel({
       )}
       {!aoi.metrics.features && <p className="muted">{t.imageryOnly}</p>}
       {aoi.imagery?.note && <p className="muted imagery-note">{aoi.imagery.note}</p>}
+      {acquisitions.length > 0 && (
+        <details className="imagery-acquisitions">
+          <summary>{acquisitions.length} {t.acquisitions}</summary>
+          <ul>
+            {acquisitions.map((acquisition) => (
+              <li key={acquisition.recordId}>
+                <a href={acquisition.url} target="_blank" rel="noreferrer">
+                  <span>{acquisition.acquisitionUtc.replace("T", " ").replace("Z", " UTC")}</span>
+                  <strong>{acquisition.sensor}</strong>
+                  <small>
+                    {acquisition.product} · {formatBytes(acquisition.bytes)} ·{" "}
+                    {acquisition.publiclyReadable ? t.readableCog : t.linkedEvidence}
+                  </small>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
       {hasCogDownload && (
         <div className="download-row">
           <a

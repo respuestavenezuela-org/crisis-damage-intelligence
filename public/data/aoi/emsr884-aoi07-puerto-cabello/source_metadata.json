@@ -1,0 +1,8 @@
+{
+  "source": "Copernicus EMSR884 imagery metadata; no official GRA damage vector product",
+  "aoi": "emsr884-aoi07-puerto-cabello",
+  "aoiCode": "AOI07",
+  "aoiName": "Puerto Cabello",
+  "imageryInventory": "/data/imagery/emsr884-acquisitions.json",
+  "officialDamageCounts": false
+}

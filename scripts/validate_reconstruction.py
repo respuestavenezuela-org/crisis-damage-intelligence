@@ -68,6 +68,27 @@ def validate_aerial_evidence(path: Path) -> dict[str, int]:
     parse_datetime(payload["updatedAt"], f"{prefix}.updatedAt")
     parse_datetime(payload["acquisitionAt"], f"{prefix}.acquisitionAt")
 
+    inventory = payload.get("inventory", {})
+    assert inventory.get("url") == "/data/imagery/emsr884-acquisitions.json", f"{prefix}: imagery inventory missing"
+    assert inventory.get("officialAois") == 13, f"{prefix}: official AOI count mismatch"
+    assert inventory.get("localOpticalAois") == 12, f"{prefix}: local optical AOI count mismatch"
+    assert inventory.get("opticalProductRecords") >= inventory.get("distinctOpticalAcquisitions", 0)
+    assert inventory.get("publiclyReadableOpticalCogs") >= inventory.get("distinctOpticalAcquisitions", 0)
+    require_localized(inventory.get("countingNote"), f"{prefix}.inventory.countingNote")
+
+    temporal_review = payload.get("temporalReview", {})
+    assert temporal_review.get("status") == "human-reviewed", f"{prefix}: temporal review status missing"
+    require_localized(temporal_review.get("summary"), f"{prefix}.temporalReview.summary")
+    official_july5 = temporal_review.get("officialJuly5", {})
+    assert official_july5.get("candidateLocationsChecked") == 26
+    assert official_july5.get("publishedSitesChecked") == 5
+    assert official_july5.get("publishedSitesUsableForObjectComparison") == 0
+    require_localized(official_july5.get("finding"), f"{prefix}.temporalReview.officialJuly5.finding")
+    external_followup = temporal_review.get("externalFollowup", {})
+    assert external_followup.get("publishedSitesChecked") == 5
+    assert external_followup.get("usableComparisons") == 5
+    require_localized(external_followup.get("finding"), f"{prefix}.temporalReview.externalFollowup.finding")
+
     review = payload.get("review", {})
     require_localized(review.get("method"), f"{prefix}.review.method")
     require_localized(review.get("summary"), f"{prefix}.review.summary")
@@ -120,6 +141,30 @@ def validate_aerial_evidence(path: Path) -> dict[str, int]:
                 f"{prefix}: hash mismatch for {observation_id}.{image_key}"
             )
         assert str(observation.get("mapUrl", "")).startswith("https://www.google.com/maps/")
+        followup = observation.get("temporalFollowup", {})
+        parse_datetime(followup["acquisitionAt"], f"{prefix}: {observation_id}.temporalFollowup.acquisitionAt")
+        assert followup.get("sourceRole") == "external-triage"
+        assert followup.get("reviewStatus") in {
+            "weakens-response-attribution",
+            "supports-object-persistence",
+            "not-discernible-in-followup",
+        }
+        require_localized(followup.get("finding"), f"{prefix}: {observation_id}.temporalFollowup.finding")
+        require_localized(followup.get("limitations"), f"{prefix}: {observation_id}.temporalFollowup.limitations")
+        for image_key, hash_key in (
+            ("nativeImage", "nativeSha256"),
+            ("enhancedImage", "enhancedSha256"),
+            ("compareImage", "compareSha256"),
+        ):
+            src = str(followup.get(image_key, ""))
+            assert src.startswith("/data/"), (
+                f"{prefix}: {observation_id}.temporalFollowup.{image_key} must be public data"
+            )
+            image_path = ROOT / "public" / src.lstrip("/")
+            assert image_path.is_file(), f"{prefix}: missing temporal image {image_path}"
+            assert file_sha256(image_path) == followup.get(hash_key), (
+                f"{prefix}: temporal hash mismatch for {observation_id}.{image_key}"
+            )
 
     assert review.get("publishedSites") == len(observations), f"{prefix}: published site count mismatch"
     assert review.get("likelyResponseSites") == likely_count, f"{prefix}: likely site count mismatch"

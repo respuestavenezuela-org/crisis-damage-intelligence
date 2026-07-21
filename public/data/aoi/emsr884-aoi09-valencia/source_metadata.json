@@ -1,0 +1,8 @@
+{
+  "source": "Copernicus EMSR884 imagery metadata; no official GRA damage vector product",
+  "aoi": "emsr884-aoi09-valencia",
+  "aoiCode": "AOI09",
+  "aoiName": "Valencia",
+  "imageryInventory": "/data/imagery/emsr884-acquisitions.json",
+  "officialDamageCounts": false
+}

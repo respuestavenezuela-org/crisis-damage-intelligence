@@ -40,6 +40,25 @@ export type AerialEvidenceObservation = {
   enhancedSha256: string;
   mapUrl: string;
   sourceIds: string[];
+  temporalFollowup: {
+    acquisitionAt: string;
+    hoursAfterEvent: number;
+    sourceId: string;
+    sensor: string;
+    sourceRole: "external-triage";
+    reviewStatus:
+      | "weakens-response-attribution"
+      | "supports-object-persistence"
+      | "not-discernible-in-followup";
+    nativeImage: string;
+    enhancedImage: string;
+    compareImage: string;
+    nativeSha256: string;
+    enhancedSha256: string;
+    compareSha256: string;
+    finding: LocalizedText;
+    limitations: LocalizedText;
+  };
 };
 
 export type AerialEvidenceCollection = {
@@ -56,6 +75,37 @@ export type AerialEvidenceCollection = {
     product: string;
     url: string;
     license: string;
+  };
+  inventory: {
+    url: string;
+    checkedAt: string;
+    officialAois: number;
+    localOpticalAois: number;
+    opticalProductRecords: number;
+    distinctOpticalAcquisitions: number;
+    publiclyReadableOpticalCogs: number;
+    readableOpticalBytes: number;
+    countingNote: LocalizedText;
+  };
+  temporalReview: {
+    status: "human-reviewed";
+    summary: LocalizedText;
+    officialJuly5: {
+      acquisitionAt: string;
+      sensor: string;
+      sourceId: string;
+      candidateLocationsChecked: number;
+      publishedSitesChecked: number;
+      publishedSitesUsableForObjectComparison: number;
+      finding: LocalizedText;
+    };
+    externalFollowup: {
+      sourceIds: string[];
+      publishedSitesChecked: number;
+      usableComparisons: number;
+      acquisitionDates: string[];
+      finding: LocalizedText;
+    };
   };
   review: {
     method: LocalizedText;

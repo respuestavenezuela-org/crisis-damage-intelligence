@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-21T03:30:00-04:00",
+  "updatedAt": "2026-07-21T12:03:44Z",
   "defaultSlug": "la-guaira",
   "entries": [
     {
@@ -17,11 +17,11 @@
         "es": "Respuesta, rescate, maquinaria, refugios, distribución y recuperación en el principal corredor de daño documentado.",
         "en": "Response, rescue, machinery, shelter, distribution and recovery across the principal documented damage corridor."
       },
-      "updatedAt": "2026-07-20T21:10:00-04:00",
-      "evidenceCutoff": "2026-07-20T23:59:59-04:00",
-      "eventCount": 19,
-      "sourceCount": 23,
-      "imageEventCount": 1,
+      "updatedAt": "2026-07-21T12:03:44Z",
+      "evidenceCutoff": "2026-07-20T00:00:00-04:00",
+      "eventCount": 21,
+      "sourceCount": 26,
+      "imageEventCount": 2,
       "officialDamage": {
         "destroyed": 10,
         "damagedConfirmed": 96,
