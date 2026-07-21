@@ -51,4 +51,28 @@ test.describe("public aftermath reconstruction", () => {
     await page.goto("/lite");
     await expect(page.getByRole("link", { name: "Cronología" })).toHaveAttribute("href", "/timeline");
   });
+
+  test("switches to the Morón evidence packet without loading map data", async ({ page }) => {
+    const loadedHeavyData: string[] = [];
+    page.on("request", (request) => {
+      const url = request.url();
+      if (/\/data\/(?:aoi|tiles)\//.test(url) || /\.(?:geojson|jsonl|pmtiles|tif)$/i.test(url)) {
+        loadedHeavyData.push(url);
+      }
+    });
+
+    await page.goto("/timeline/moron");
+
+    await expect(page.getByRole("link", { name: /Morón y municipio Juan José Mora/ })).toHaveAttribute("aria-current", "page");
+    await expect(page.getByText("Morón y municipio Juan José Mora, Carabobo").last()).toBeVisible();
+    await expect(page.getByText(/su respuesta en Morón y municipio Juan José Mora/)).toBeVisible();
+    await expect(page.getByText(/El daño fue cartografiado dentro de las primeras 24 horas/)).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Copernicus adquiere imagen postevento de Morón" })).toBeVisible();
+    await expect(page.getByRole("img", { name: /elemento destruido en Morón/ }).first()).toBeVisible();
+    await expect(page.getByText("Maquinaria pesada: hora de llegada no resuelta")).toBeVisible();
+    expect(loadedHeavyData).toEqual([]);
+
+    await page.getByRole("button", { name: "EN", exact: true }).click();
+    await expect(page.getByText("Heavy machinery: arrival time unresolved")).toBeVisible();
+  });
 });

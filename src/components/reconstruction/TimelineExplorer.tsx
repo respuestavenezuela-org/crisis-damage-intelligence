@@ -8,6 +8,7 @@ import type { Language } from "@/components/types";
 import type {
   First72Finding,
   ReconstructionConfidence,
+  ReconstructionCatalog,
   ReconstructionData,
   ReconstructionEvent,
   ReconstructionSource,
@@ -19,7 +20,6 @@ const copy = {
   es: {
     reconstruction: "Reconstrucción pública · evidencia en desarrollo",
     title: "Lo que pasó después",
-    dek: "Una reconstrucción fechada y verificable de los terremotos del 24 de junio y su respuesta en La Guaira, Caraballeda y Catia La Mar.",
     openMap: "Abrir mapa de daños",
     scope: "Alcance",
     evidenceCutoff: "Evidencia más reciente",
@@ -51,6 +51,13 @@ const copy = {
     latest: "Última actualización",
     backToTop: "Volver arriba",
     present: "Presencia",
+    areaIndex: "Reconstrucciones publicadas",
+    areaIndexIntro: "Cambia de territorio sin perder las reglas de evidencia.",
+    officialRecord: "Registro oficial EMS",
+    confirmedDamage: "destruidos/dañados",
+    possibleDamage: "posibles",
+    evidenceGaps: "Brechas abiertas",
+    activeArea: "Área activa",
     primary: "Primaria",
     secondary: "Secundaria",
     derived: "Derivada",
@@ -68,7 +75,6 @@ const copy = {
   en: {
     reconstruction: "Public reconstruction · evidence in progress",
     title: "What happened after",
-    dek: "A dated, verifiable reconstruction of the June 24 earthquakes and the response in La Guaira, Caraballeda and Catia La Mar.",
     openMap: "Open damage map",
     scope: "Scope",
     evidenceCutoff: "Latest evidence",
@@ -100,6 +106,13 @@ const copy = {
     latest: "Last updated",
     backToTop: "Back to top",
     present: "Presence",
+    areaIndex: "Published reconstructions",
+    areaIndexIntro: "Move between territories without changing the evidence rules.",
+    officialRecord: "Official EMS record",
+    confirmedDamage: "destroyed/damaged",
+    possibleDamage: "possible",
+    evidenceGaps: "Open gaps",
+    activeArea: "Active area",
     primary: "Primary",
     secondary: "Secondary",
     derived: "Derived",
@@ -229,7 +242,15 @@ function EvidenceImage({
   );
 }
 
-export default function TimelineExplorer({ data }: { data: ReconstructionData }) {
+export default function TimelineExplorer({
+  data,
+  catalog,
+  activeSlug,
+}: {
+  data: ReconstructionData;
+  catalog: ReconstructionCatalog;
+  activeSlug: string;
+}) {
   const language = useSyncExternalStore(subscribeStoredLang, readStoredLang, () => DEFAULT_LANGUAGE);
   const [phase, setPhase] = useState("all");
   const [windowFilter, setWindowFilter] = useState<"all" | "first72" | "after72">("all");
@@ -256,6 +277,11 @@ export default function TimelineExplorer({ data }: { data: ReconstructionData })
   };
 
   const heroImage = data.events.find((event) => event.id === "copernicus-41-hour-image")?.image;
+  const resolvedHeroImage = heroImage ?? data.events.find((event) => event.image)?.image;
+  const activeEntry = catalog.entries.find((entry) => entry.slug === activeSlug);
+  const heroDek = language === "es"
+    ? `Una reconstrucción fechada y verificable de los terremotos del 24 de junio y su respuesta en ${data.coverage.geography.es}.`
+    : `A dated, verifiable reconstruction of the June 24 earthquakes and the response in ${data.coverage.geography.en}.`;
 
   return (
     <main className={styles.page} id="top">
@@ -273,11 +299,56 @@ export default function TimelineExplorer({ data }: { data: ReconstructionData })
         </div>
       </nav>
 
+      <section className={styles.areaIndex} aria-labelledby="reconstruction-area-title">
+        <div className={styles.areaIndexHeading}>
+          <div>
+            <p>{t.areaIndex}</p>
+            <h2 id="reconstruction-area-title">{t.areaIndexIntro}</h2>
+          </div>
+          <span>{catalog.entries.filter((entry) => entry.status === "published").length}</span>
+        </div>
+        <div className={styles.areaCards}>
+          {catalog.entries.filter((entry) => entry.status === "published").map((entry) => {
+            const isActive = entry.slug === activeSlug;
+            const href = entry.slug === catalog.defaultSlug ? "/timeline" : `/timeline/${entry.slug}`;
+            return (
+              <Link
+                key={entry.id}
+                href={href}
+                className={`${styles.areaCard} ${isActive ? styles.areaCardActive : ""}`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <span>{String(entry.priority).padStart(2, "0")}</span>
+                <div>
+                  <small>{isActive ? t.activeArea : t.officialRecord}</small>
+                  <h3>{entry.geography[language]}</h3>
+                  <p>{entry.description[language]}</p>
+                  <dl>
+                    <div>
+                      <dt>{t.confirmedDamage}</dt>
+                      <dd>{entry.officialDamage.damagedConfirmed}</dd>
+                    </div>
+                    <div>
+                      <dt>{t.possibleDamage}</dt>
+                      <dd>{entry.officialDamage.possibleDamage}</dd>
+                    </div>
+                    <div>
+                      <dt>{t.evidenceGaps}</dt>
+                      <dd>{entry.gaps.length}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
       <header className={styles.hero}>
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>{t.reconstruction}</p>
           <h1>{t.title}</h1>
-          <p className={styles.dek}>{t.dek}</p>
+          <p className={styles.dek}>{heroDek}</p>
           <dl className={styles.heroStats}>
             <div>
               <dt>{t.scope}</dt>
@@ -298,20 +369,20 @@ export default function TimelineExplorer({ data }: { data: ReconstructionData })
           </dl>
         </div>
 
-        {heroImage && (
+        {resolvedHeroImage && (
           <figure className={styles.heroImage}>
             <Image
-              src={heroImage.src}
+              src={resolvedHeroImage.src}
               width={1024}
               height={548}
               priority
               unoptimized
               sizes="(max-width: 900px) 100vw, 54vw"
-              alt={heroImage.alt[language]}
+              alt={resolvedHeroImage.alt[language]}
             />
             <figcaption>
-              <span>+41 h</span>
-              {heroImage.caption[language]}
+              <span>{activeSlug === "la-guaira" ? "+41 h" : "+22 h"}</span>
+              {resolvedHeroImage.caption[language]}
             </figcaption>
           </figure>
         )}
@@ -319,7 +390,14 @@ export default function TimelineExplorer({ data }: { data: ReconstructionData })
 
       <section className={styles.coverageNote} aria-label={language === "es" ? "Límite de cobertura" : "Coverage limit"}>
         <span>01</span>
-        <p>{data.coverage.note[language]}</p>
+        <div>
+          <p>{data.coverage.note[language]}</p>
+          {activeEntry && (
+            <ul className={styles.gapList} aria-label={t.evidenceGaps}>
+              {activeEntry.gaps.map((gap) => <li key={gap.en}>{gap[language]}</li>)}
+            </ul>
+          )}
+        </div>
       </section>
 
       <section className={styles.first72} id="first-72">

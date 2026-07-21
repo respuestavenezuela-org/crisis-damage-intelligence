@@ -1,10 +1,10 @@
 # Performance Audit Baseline
 
-- Generated UTC: `2026-07-21T03:06:24.518341+00:00`
+- Generated UTC: `2026-07-21T03:42:40.901591+00:00`
 - Catalog: `65.1 KB` across `16` AOIs
 - JS bundle in `.next/static`: `1.9 MB` across `29` files
-- CSS bundle in `.next/static`: `109.4 KB` across `3` files
-- `public/data`: `267.1 MB` across `74620` files
+- CSS bundle in `.next/static`: `113.0 KB` across `3` files
+- `public/data`: `267.1 MB` across `74622` files
 - `public/data/tiles`: `186.0 MB` across `73837` files
 - `public/data/chips`: `67.3 MB` across `681` files
 - Raw local production package safe: `False`

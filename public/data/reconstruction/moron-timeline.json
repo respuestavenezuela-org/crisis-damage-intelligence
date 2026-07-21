@@ -1,0 +1,642 @@
+{
+  "version": 1,
+  "id": "venezuela-earthquake-2026-moron",
+  "updatedAt": "2026-07-21T03:30:00-04:00",
+  "eventOrigin": "2026-06-24T18:04:33-04:00",
+  "coverage": {
+    "geography": {
+      "es": "Morón y municipio Juan José Mora, Carabobo",
+      "en": "Morón and Juan José Mora municipality, Carabobo"
+    },
+    "startsAt": "2026-06-24T18:04:33-04:00",
+    "endsAt": "2026-07-19T23:59:59-04:00",
+    "latestEvidenceAt": "2026-07-19T23:59:59-04:00",
+    "latestOpenSatelliteAt": "2026-06-25T20:36:00Z",
+    "note": {
+      "es": "La imagen pública de alta resolución disponible es posterior al evento. No existe en este paquete una línea base preevento de resolución suficiente para una comparación edificio por edificio. Los 129 registros de daño son vectores oficiales de Copernicus EMS; las descripciones de ayuda, refugio y necesidades proceden de fuentes operativas y periodísticas enlazadas.",
+      "en": "The available public high-resolution image is post-event only. This packet has no pre-event baseline suitable for building-by-building comparison. The 129 damage records are official Copernicus EMS vectors; aid, shelter and needs descriptions come from linked operational and journalistic sources."
+    }
+  },
+  "method": {
+    "confidenceLevels": [
+      {
+        "id": "confirmed",
+        "label": {
+          "es": "Confirmado",
+          "en": "Confirmed"
+        },
+        "definition": {
+          "es": "Fuente primaria u oficial, o evidencia visual fechada que sostiene directamente la afirmación.",
+          "en": "A primary or official source, or dated visual evidence, directly supports the claim."
+        }
+      },
+      {
+        "id": "corroborated",
+        "label": {
+          "es": "Corroborado",
+          "en": "Corroborated"
+        },
+        "definition": {
+          "es": "Dos o más fuentes independientes sostienen el mismo hecho general.",
+          "en": "Two or more independent sources support the same general fact."
+        }
+      },
+      {
+        "id": "single-source",
+        "label": {
+          "es": "Una fuente",
+          "en": "Single source"
+        },
+        "definition": {
+          "es": "Una fuente identificada sostiene la afirmación; requiere contraste adicional.",
+          "en": "One identified source supports the claim; further corroboration is needed."
+        }
+      },
+      {
+        "id": "inferred",
+        "label": {
+          "es": "Inferido",
+          "en": "Inferred"
+        },
+        "definition": {
+          "es": "Interpretación conservadora de imagen o del conjunto de evidencia, marcada como candidata.",
+          "en": "A conservative interpretation of imagery or the evidence set, marked as a candidate."
+        }
+      }
+    ],
+    "absenceRule": {
+      "es": "No encontrar una imagen o reporte de maquinaria no demuestra que no existiera. Este paquete describe una brecha documental, no una ausencia física.",
+      "en": "Failing to find an image or report of machinery does not prove it was absent. This packet describes a documentary gap, not physical absence."
+    },
+    "arrivalRule": {
+      "es": "Un centro de acopio, una salida de carga, una llegada a Puerto Cabello o una delegación recibida en Valencia no prueban entrega ni operación en un sitio específico de Morón.",
+      "en": "A collection center, cargo departure, arrival in Puerto Cabello or a delegation received in Valencia do not prove delivery or operation at a specific Morón site."
+    }
+  },
+  "first72Assessment": {
+    "cutoff": "2026-06-27T18:04:33-04:00",
+    "headline": {
+      "es": "El daño fue cartografiado dentro de las primeras 24 horas y hay movimientos de ayuda documentados antes de las 72, pero la llegada de maquinaria pesada a sitios de Morón sigue sin fecha verificable.",
+      "en": "Damage was mapped within the first 24 hours and aid movements are documented before 72 hours, but heavy-machinery arrival at Morón sites remains undated."
+    },
+    "summary": {
+      "es": "Copernicus adquirió imagen postevento de Morón unas 22 horas y media después del doblete y su producto oficial registra 129 elementos: 2 destruidos, 34 dañados adicionales y 93 posibles. El 26 de junio una cámara empresarial habilitó un centro de acopio y anunció transporte con camiones privados; el 27 una primera carga fue trasladada a la Diócesis de Puerto Cabello para distribución vía Cáritas. Esas fuentes prueban evaluación, movilización y llegada regional, no cuándo hubo maquinaria pesada operativa en comunidades o estructuras concretas de Morón.",
+      "en": "Copernicus acquired post-event imagery of Morón about 22.5 hours after the doublet, and its official product records 129 features: 2 destroyed, 34 additional damaged and 93 possible. On June 26 a business association opened a collection center and announced transport using member trucks; on June 27 a first load was moved to the Diocese of Puerto Cabello for distribution through Cáritas. These sources establish assessment, mobilization and regional arrival—not when heavy machinery became operational at specific Morón communities or structures."
+    },
+    "findings": [
+      {
+        "id": "moron-official-assessment-22h",
+        "status": "assessment",
+        "confidence": "confirmed",
+        "title": {
+          "es": "Evaluación oficial disponible a +22 h",
+          "en": "Official assessment available at +22 h"
+        },
+        "body": {
+          "es": "La imagen Copernicus fue adquirida el 25 de junio a las 20:36 UTC. El producto GRA oficial identifica 129 elementos de daño dentro de AOI06.",
+          "en": "Copernicus imagery was acquired on June 25 at 20:36 UTC. The official GRA product identifies 129 damage features within AOI06."
+        },
+        "sourceIds": [
+          "copernicus-aoi06-gra"
+        ],
+        "image": {
+          "src": "/data/chips/emsr884-aoi06-moron/ems_00016_post_event.png",
+          "alt": {
+            "es": "Imagen postevento Copernicus de un elemento clasificado oficialmente como destruido en Morón.",
+            "en": "Copernicus post-event image of a feature officially classified as destroyed in Morón."
+          },
+          "caption": {
+            "es": "Copernicus EMS postevento, 25 jun. 2026 20:36 UTC. Imagen posterior solamente; el daño oficial proviene del vector GRA, no de una comparación antes/después.",
+            "en": "Copernicus EMS post-event, June 25, 2026 20:36 UTC. Post-event only; the official damage label comes from the GRA vector, not a before/after comparison."
+          }
+        }
+      },
+      {
+        "id": "moron-collection-center-mobilized",
+        "status": "mobilized",
+        "confidence": "single-source",
+        "title": {
+          "es": "Centro de acopio y camiones anunciados",
+          "en": "Collection center and trucks announced"
+        },
+        "body": {
+          "es": "Capemiac convirtió sus instalaciones en centro de acopio y anunció comida, médicos, donaciones y transporte hacia Puerto Cabello y Morón usando camiones de sus agremiados.",
+          "en": "Capemiac converted its facilities into a collection center and announced food, medical staff, donations and transport toward Puerto Cabello and Morón using member trucks."
+        },
+        "sourceIds": [
+          "capemiac-june26"
+        ]
+      },
+      {
+        "id": "moron-first-cargo-region",
+        "status": "arrived-region",
+        "confidence": "single-source",
+        "title": {
+          "es": "Primera carga documentada en Puerto Cabello",
+          "en": "First documented load in Puerto Cabello"
+        },
+        "body": {
+          "es": "El 27 de junio El Impulso reportó una carga de alimentos, ropa, higiene y limpieza trasladada a la Diócesis de Puerto Cabello para distribución mediante Cáritas. La fuente no desglosa hora ni entrega final por comunidad de Morón.",
+          "en": "On June 27 El Impulso reported food, clothing, hygiene and cleaning supplies moved to the Diocese of Puerto Cabello for distribution through Cáritas. The source does not provide an hour or final delivery by Morón community."
+        },
+        "sourceIds": [
+          "el-impulso-june27"
+        ]
+      },
+      {
+        "id": "moron-machinery-unresolved",
+        "status": "reported",
+        "confidence": "confirmed",
+        "title": {
+          "es": "Maquinaria pesada: hora de llegada no resuelta",
+          "en": "Heavy machinery: arrival time unresolved"
+        },
+        "body": {
+          "es": "Ninguna fuente registrada para las primeras 72 horas coloca maquinaria pesada operativa en un sitio específico de Morón. Esto es una brecha de evidencia, no prueba de ausencia.",
+          "en": "No registered first-72-hour source places operational heavy machinery at a specific Morón site. This is an evidence gap, not proof of absence."
+        },
+        "sourceIds": [
+          "human-analytics-june25",
+          "capemiac-june26",
+          "el-impulso-june27"
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "human-analytics-june25",
+      "publisher": "Human Analytics",
+      "title": "Alerta analítica: terremotos Venezuela",
+      "publishedAt": "2026-06-25T14:00:00-04:00",
+      "url": "https://human-analytics.org/sites/default/files/publicacion/1-ha_alerta_analitica_terremotos_venezuela_2026-06-25.pdf",
+      "type": "analytical alert",
+      "evidenceClass": "derived",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "copernicus-aoi06-gra",
+      "publisher": "Copernicus Emergency Management Service",
+      "title": "EMSR884 AOI06 Morón GRA product and post-event orthomosaic",
+      "publishedAt": "2026-06-25T20:36:00Z",
+      "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI06/GRA_PRODUCT/EMSR884_AOI06_GRA_PRODUCT_LEGION_20260625_2036_ORTHO_cog.tif",
+      "type": "official vector and imagery",
+      "evidenceClass": "primary",
+      "license": "Copernicus EMS public product terms"
+    },
+    {
+      "id": "adra-june25",
+      "publisher": "ADRA International",
+      "title": "ADRA Assessing Needs Following Major Earthquake in Venezuela",
+      "publishedAt": "2026-06-25T12:00:00-04:00",
+      "url": "https://adra.org/adra-assessing-needs-following-major-earthquake-in-venezuela",
+      "type": "humanitarian update",
+      "evidenceClass": "primary",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "capemiac-june26",
+      "publisher": "El Carabobeño",
+      "title": "Capemiac llevará comida y atención médica a afectados de terremotos en Puerto Cabello y Morón",
+      "publishedAt": "2026-06-26T12:06:00-04:00",
+      "url": "https://www.el-carabobeno.com/capemiac-llevara-comida-y-atencion-medica-a-afectados-de-terremotos-en-puerto-cabello-y-moron/",
+      "type": "local reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "el-impulso-june27",
+      "publisher": "El Impulso",
+      "title": "Centro de acopio entrega primeras donaciones en zonas afectadas de Morón y Tucacas",
+      "publishedAt": "2026-06-27T12:00:00-04:00",
+      "url": "https://www.elimpulso.com/2026/06/27/video-centro-de-acopio-de-el-impulso-entrega-primeras-donaciones-en-zonas-afectadas-de-moron-y-tucacas-27jun/",
+      "type": "local reporting and video",
+      "evidenceClass": "secondary",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "carabobeno-shelter-june28",
+      "publisher": "El Carabobeño",
+      "title": "Desalojados de edificios en Morón denunciaron que refugio no reúne condiciones adecuadas",
+      "publishedAt": "2026-06-28T13:27:00-04:00",
+      "url": "https://www.el-carabobeno.com/desalojados-de-edificios-en-moron-denunciaron-que-refugio-no-reune-condiciones-adecuadas/",
+      "type": "situated local reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "logistics-cluster-july2",
+      "publisher": "Logistics Cluster",
+      "title": "Venezuela earthquake response situation report 1",
+      "publishedAt": "2026-07-02T19:00:00-04:00",
+      "url": "https://logcluster.org/es/documents/venezuela-respuesta-terremotos-reporte-situacional-1-2-julio-2026",
+      "type": "operational situation report",
+      "evidenceClass": "primary",
+      "license": "Linked operational document"
+    },
+    {
+      "id": "moron-housing-claim-july5",
+      "publisher": "El Tiempo",
+      "title": "Voluntarios en Morón atienden a afectados ante poca respuesta gubernamental en Carabobo",
+      "publishedAt": "2026-07-18T12:00:00-04:00",
+      "url": "https://eltiempove.com/voluntarios-en-moron-atienden-a-afectados-ante-poca-respuesta-gubernamental-en-carabobo/",
+      "type": "local reporting quoting state and volunteers",
+      "evidenceClass": "secondary",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "red-cross-valencia-july6",
+      "publisher": "Universidad de Carabobo FMUC",
+      "title": "Cruz Roja Valencia amplía operativos humanitarios y logísticos tras sismos",
+      "publishedAt": "2026-07-06T12:00:00-04:00",
+      "url": "https://fm.uc.edu.ve/2026/07/06/cruz-roja-valencia-amplia-operativos-humanitarios-y-logisticos-tras-sismos/10/",
+      "type": "institutional interview",
+      "evidenceClass": "primary",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "carabobeno-displacement-july17",
+      "publisher": "El Carabobeño",
+      "title": "Casas inhabitables y camas hundiéndose en el lodo: damnificados de Morón",
+      "publishedAt": "2026-07-17T16:12:00-04:00",
+      "url": "https://www.el-carabobeno.com/casas-inhabitables-y-camas-hundiendose-en-el-lodo-el-crudo-relato-de-los-damnificados-de-moron/",
+      "type": "situated local reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; linked, not republished"
+    },
+    {
+      "id": "notitarde-july19",
+      "publisher": "Notitarde",
+      "title": "Carabobo Sostenible impulsó creaciones para afectados por el doblete sísmico",
+      "publishedAt": "2026-07-19T12:00:00-04:00",
+      "url": "https://www.notitarde.com.ve/carabobo/104202/carabobo-sostenible-impulso-creaciones-hechas-a-mano-para-afectados-por-el-doblete-sismico",
+      "type": "local reporting",
+      "evidenceClass": "secondary",
+      "license": "Copyright; linked, not republished"
+    }
+  ],
+  "events": [
+    {
+      "id": "moron-earthquake-doublet",
+      "startsAt": "2026-06-24T18:04:33-04:00",
+      "endsAt": "2026-06-24T18:05:11-04:00",
+      "timePrecision": "second",
+      "phase": "impact",
+      "responseStage": "impact",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Yaracuy–Carabobo, 16 km southwest of Morón",
+        "precision": "EPICENTRAL"
+      },
+      "title": {
+        "es": "Dos terremotos en 39 segundos",
+        "en": "Two earthquakes in 39 seconds"
+      },
+      "summary": {
+        "es": "El doblete M7,2 y M7,5 ocurrió a las 18:04:33 y 18:05:11. El segundo evento fue localizado aproximadamente 16 km al suroeste de Morón.",
+        "en": "The M7.2 and M7.5 doublet occurred at 18:04:33 and 18:05:11. The second event was located about 16 km southwest of Morón."
+      },
+      "sourceIds": [
+        "human-analytics-june25"
+      ],
+      "tags": [
+        "earthquake",
+        "impact",
+        "moron"
+      ]
+    },
+    {
+      "id": "moron-needs-assessment",
+      "startsAt": "2026-06-25T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "coordination",
+      "responseStage": "assessment",
+      "first72Hours": true,
+      "confidence": "single-source",
+      "location": {
+        "label": "Carabobo and Yaracuy",
+        "precision": "REGIONAL"
+      },
+      "title": {
+        "es": "ADRA informa evaluación de necesidades",
+        "en": "ADRA reports needs assessment"
+      },
+      "summary": {
+        "es": "ADRA informó que estaba en Venezuela evaluando necesidades tras el sismo centrado cerca de Morón. La actualización no sitúa un equipo en una comunidad específica de Morón.",
+        "en": "ADRA reported being in Venezuela assessing needs after the earthquake centered near Morón. The update does not place a team in a specific Morón community."
+      },
+      "sourceIds": [
+        "adra-june25"
+      ],
+      "tags": [
+        "assessment",
+        "humanitarian"
+      ]
+    },
+    {
+      "id": "moron-copernicus-imagery",
+      "startsAt": "2026-06-25T16:36:00-04:00",
+      "timePrecision": "minute",
+      "phase": "coordination",
+      "responseStage": "assessment",
+      "first72Hours": true,
+      "confidence": "confirmed",
+      "location": {
+        "label": "AOI06 Morón",
+        "precision": "AOI"
+      },
+      "title": {
+        "es": "Copernicus adquiere imagen postevento de Morón",
+        "en": "Copernicus acquires post-event Morón imagery"
+      },
+      "summary": {
+        "es": "La ortoimagen oficial fue adquirida unas 22 horas y media después del evento. El producto vectorial asociado registra 2 elementos destruidos, 34 dañados adicionales y 93 posibles; estos son datos oficiales EMS, no resultados VLM.",
+        "en": "The official orthomosaic was acquired about 22.5 hours after the event. Its associated vector product records 2 destroyed features, 34 additional damaged and 93 possible; these are official EMS data, not VLM results."
+      },
+      "sourceIds": [
+        "copernicus-aoi06-gra"
+      ],
+      "tags": [
+        "imagery",
+        "official-damage",
+        "assessment"
+      ],
+      "image": {
+        "src": "/data/chips/emsr884-aoi06-moron/ems_00016_post_event.png",
+        "alt": {
+          "es": "Imagen postevento Copernicus de un elemento destruido en Morón.",
+          "en": "Copernicus post-event image of a destroyed feature in Morón."
+        },
+        "caption": {
+          "es": "Elemento ems_00016, clasificado Destroyed en el vector oficial EMS. Imagen posterior solamente; no permite fechar la destrucción dentro de la ventana de 22 horas.",
+          "en": "Feature ems_00016, classified Destroyed in the official EMS vector. Post-event only; it cannot date the destruction within the 22-hour window."
+        }
+      }
+    },
+    {
+      "id": "moron-capemiac-collection",
+      "startsAt": "2026-06-26T12:06:00-04:00",
+      "timePrecision": "minute",
+      "phase": "relief",
+      "responseStage": "mobilized",
+      "first72Hours": true,
+      "confidence": "single-source",
+      "location": {
+        "label": "Carabobo toward Puerto Cabello and Morón",
+        "precision": "REGIONAL"
+      },
+      "title": {
+        "es": "Capemiac habilita centro de acopio",
+        "en": "Capemiac opens collection center"
+      },
+      "summary": {
+        "es": "La cámara empresarial anunció comida preparada, médicos, agua e insumos para el litoral carabobeño, con transporte mediante camiones de sus agremiados durante el fin de semana.",
+        "en": "The business association announced prepared food, medical staff, water and supplies for coastal Carabobo, using member trucks for weekend transport."
+      },
+      "sourceIds": [
+        "capemiac-june26"
+      ],
+      "tags": [
+        "collection-center",
+        "trucks",
+        "medical",
+        "food"
+      ]
+    },
+    {
+      "id": "moron-first-donations-puerto-cabello",
+      "startsAt": "2026-06-27T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "logistics",
+      "responseStage": "arrived-region",
+      "first72Hours": true,
+      "confidence": "single-source",
+      "location": {
+        "label": "Diocese of Puerto Cabello",
+        "precision": "REGIONAL HUB"
+      },
+      "title": {
+        "es": "Primera carga entregada a nodo regional",
+        "en": "First load delivered to regional hub"
+      },
+      "summary": {
+        "es": "Una carga de alimentos, ropa, artículos de higiene y limpieza llegó a la Diócesis de Puerto Cabello para distribución mediante Cáritas. No se publica entrega final por comunidad de Morón.",
+        "en": "A load of food, clothing, hygiene and cleaning items reached the Diocese of Puerto Cabello for distribution through Cáritas. Final delivery by Morón community is not published."
+      },
+      "sourceIds": [
+        "el-impulso-june27"
+      ],
+      "tags": [
+        "donations",
+        "regional-hub",
+        "caritas"
+      ]
+    },
+    {
+      "id": "moron-shelter-conditions",
+      "startsAt": "2026-06-28T13:27:00-04:00",
+      "timePrecision": "minute",
+      "phase": "shelter",
+      "responseStage": "reported",
+      "first72Hours": false,
+      "confidence": "single-source",
+      "location": {
+        "label": "Colinas de Mara and Jesús Manuel Subero school",
+        "precision": "COMMUNITY"
+      },
+      "title": {
+        "es": "Más de 200 familias desalojadas cuestionan refugio",
+        "en": "More than 200 evacuated families question shelter"
+      },
+      "summary": {
+        "es": "Residentes de Colinas de Mara dijeron que el refugio habilitado en el colegio Jesús Manuel Subero no reunía condiciones adecuadas. Algunas familias dormían con parientes; otras permanecían cerca de los edificios para cuidar pertenencias.",
+        "en": "Colinas de Mara residents said the shelter at Jesús Manuel Subero school lacked adequate conditions. Some families slept with relatives; others remained near the buildings to protect belongings."
+      },
+      "sourceIds": [
+        "carabobeno-shelter-june28"
+      ],
+      "tags": [
+        "shelter",
+        "displacement",
+        "sleeping"
+      ]
+    },
+    {
+      "id": "puerto-cabello-status-unverified",
+      "startsAt": "2026-07-02T19:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "logistics",
+      "responseStage": "reported",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Puerto Cabello and Valencia",
+        "precision": "LOGISTICS NODES"
+      },
+      "title": {
+        "es": "Puerto Cabello seguía sin estado operativo verificado",
+        "en": "Puerto Cabello still lacked verified operating status"
+      },
+      "summary": {
+        "es": "El Clúster de Logística informó que no contaba con información oficial o verificada sobre las operaciones del puerto de Puerto Cabello. El aeropuerto Arturo Michelena de Valencia sí figuraba operativo.",
+        "en": "The Logistics Cluster reported no official or verified information on Puerto Cabello port operations. Valencia's Arturo Michelena airport was listed as operational."
+      },
+      "sourceIds": [
+        "logistics-cluster-july2"
+      ],
+      "tags": [
+        "port",
+        "airport",
+        "access-gap"
+      ]
+    },
+    {
+      "id": "moron-500-houses-claim",
+      "startsAt": "2026-07-05T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "recovery",
+      "responseStage": "announced",
+      "first72Hours": false,
+      "confidence": "single-source",
+      "location": {
+        "label": "Morón",
+        "precision": "CITY"
+      },
+      "title": {
+        "es": "Autoridad estatal afirma que 500 casas «cayeron»",
+        "en": "State authority says 500 houses “fell”"
+      },
+      "summary": {
+        "es": "Una nota posterior atribuye al gobernador de Carabobo la afirmación del 5 de julio de que 500 casas cayeron y que se iniciaría su recuperación. La cifra no se incorpora a los conteos oficiales EMS.",
+        "en": "Later reporting attributes to Carabobo's governor a July 5 statement that 500 houses fell and recovery would begin. The figure is not added to official EMS counts."
+      },
+      "sourceIds": [
+        "moron-housing-claim-july5"
+      ],
+      "tags": [
+        "housing",
+        "government-claim",
+        "recovery"
+      ]
+    },
+    {
+      "id": "red-cross-moron-operations",
+      "startsAt": "2026-07-06T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "relief",
+      "responseStage": "operational",
+      "first72Hours": false,
+      "confidence": "confirmed",
+      "location": {
+        "label": "Valencia, Puerto Cabello and Morón",
+        "precision": "REGIONAL"
+      },
+      "title": {
+        "es": "Cruz Roja amplía evaluación y apoyo en Morón",
+        "en": "Red Cross expands assessment and support in Morón"
+      },
+      "summary": {
+        "es": "La Cruz Roja Valencia describió evaluación EDAN con Bomberos y Protección Civil, recepción de especialistas y carga internacional en Valencia, y equipos de apoyo psicosocial trasladados con la filial Puerto Cabello hacia comunidades de Morón.",
+        "en": "Valencia Red Cross described EDAN assessments with fire and civil-protection services, international specialists and cargo received in Valencia, and psychosocial teams travelling with the Puerto Cabello branch to Morón communities."
+      },
+      "sourceIds": [
+        "red-cross-valencia-july6"
+      ],
+      "tags": [
+        "red-cross",
+        "assessment",
+        "psychosocial",
+        "international-aid"
+      ]
+    },
+    {
+      "id": "moron-displaced-naguanagua",
+      "startsAt": "2026-07-17T16:12:00-04:00",
+      "timePrecision": "minute",
+      "phase": "shelter",
+      "responseStage": "reported",
+      "first72Hours": false,
+      "confidence": "single-source",
+      "location": {
+        "label": "San Diego and Jabillo I, Morón; host homes in Naguanagua",
+        "precision": "HOUSEHOLD"
+      },
+      "title": {
+        "es": "Familias desplazadas siguen alojadas con parientes",
+        "en": "Displaced families remain hosted by relatives"
+      },
+      "summary": {
+        "es": "Una familia de Naguanagua alojaba a 17 desplazados de Morón; otros permanecían en viviendas vecinas de familiares. El reporte documenta colchonetas donadas, apoyo comunitario y necesidades cambiantes de medicinas.",
+        "en": "A Naguanagua household was hosting 17 people displaced from Morón; others stayed in neighboring relatives' homes. The report documents donated mattresses, community support and changing medicine needs."
+      },
+      "sourceIds": [
+        "carabobeno-displacement-july17"
+      ],
+      "tags": [
+        "displacement",
+        "host-families",
+        "medicine"
+      ]
+    },
+    {
+      "id": "moron-machinery-still-needed",
+      "startsAt": "2026-07-18T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "debris-recovery",
+      "responseStage": "reported",
+      "first72Hours": false,
+      "confidence": "single-source",
+      "location": {
+        "label": "La Pedrera, La Victoria, Simón Bolívar and other Morón sectors",
+        "precision": "COMMUNITY"
+      },
+      "title": {
+        "es": "Voluntarios reportan maquinaria como necesidad pendiente",
+        "en": "Volunteers report machinery as an outstanding need"
+      },
+      "summary": {
+        "es": "Organizaciones que recorrieron comunidades identificaron agua, medicamentos y maquinaria pesada para retirar escombros entre las principales necesidades. También reportaron personas durmiendo en la calle o en campamentos temporales por temor estructural.",
+        "en": "Organizations visiting communities identified water, medicine and heavy machinery for debris removal among the main needs. They also reported people sleeping outside or in temporary camps because of structural fears."
+      },
+      "sourceIds": [
+        "moron-housing-claim-july5"
+      ],
+      "tags": [
+        "heavy-machinery",
+        "debris",
+        "water",
+        "sleeping-outside"
+      ]
+    },
+    {
+      "id": "moron-community-items-prepared",
+      "startsAt": "2026-07-19T12:00:00-04:00",
+      "timePrecision": "day",
+      "phase": "relief",
+      "responseStage": "mobilized",
+      "first72Hours": false,
+      "confidence": "single-source",
+      "location": {
+        "label": "Carabobo toward Juan José Mora",
+        "precision": "REGIONAL"
+      },
+      "title": {
+        "es": "Red local prepara artículos para familias de Juan José Mora",
+        "en": "Local network prepares items for Juan José Mora families"
+      },
+      "summary": {
+        "es": "Un programa estatal y comunitario reportó almohadas, mantas, ropa infantil y bolsos preparados para familias afectadas. La fuente indica destino previsto, no confirma entrega final.",
+        "en": "A state and community program reported pillows, blankets, children's clothing and bags prepared for affected families. The source states intended destination, not confirmed final delivery."
+      },
+      "sourceIds": [
+        "notitarde-july19"
+      ],
+      "tags": [
+        "relief-items",
+        "mobilized",
+        "children"
+      ]
+    }
+  ]
+}

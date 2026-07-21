@@ -92,3 +92,31 @@ export type ReconstructionData = {
   sources: ReconstructionSource[];
   events: ReconstructionEvent[];
 };
+
+export type ReconstructionCatalogEntry = {
+  id: string;
+  slug: string;
+  dataPath: string;
+  status: "published" | "developing" | "queued";
+  priority: number;
+  geography: LocalizedText;
+  description: LocalizedText;
+  updatedAt: string;
+  evidenceCutoff: string;
+  eventCount: number;
+  sourceCount: number;
+  imageEventCount: number;
+  officialDamage: {
+    destroyed: number;
+    damagedConfirmed: number;
+    possibleDamage: number;
+  };
+  gaps: LocalizedText[];
+};
+
+export type ReconstructionCatalog = {
+  version: number;
+  updatedAt: string;
+  defaultSlug: string;
+  entries: ReconstructionCatalogEntry[];
+};

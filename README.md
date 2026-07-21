@@ -4,7 +4,8 @@ Static-first, bilingual earthquake response and damage triage platform for publi
 
 Canonical public URL: `https://respuestavenezuela.org`
 
-Public earthquake aftermath reconstruction: `/timeline`. It separates reported,
+Public earthquake aftermath reconstruction: `/timeline`. Published area packets
+currently cover La Guaira and Morón. The system separates reported,
 mobilized, arrived-in-country, arrived-in-region, observed-on-site, and operational
 evidence so that aid movement is not mistaken for aid reaching a specific community.
 
@@ -66,6 +67,8 @@ The public app only requires static files:
 ```text
 public/data/catalog.json
 public/data/reconstruction/la-guaira-timeline.json
+public/data/reconstruction/moron-timeline.json
+public/data/reconstruction/catalog.json
 public/data/aoi/<aoi-id>/damage.geojson
 public/data/aoi/<aoi-id>/damage.csv
 public/data/aoi/<aoi-id>/damage.kml

@@ -1,20 +1,9 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Newsreader } from "next/font/google";
 import TimelineExplorer from "@/components/reconstruction/TimelineExplorer";
-import type { ReconstructionData } from "@/components/reconstruction/types";
-import reconstruction from "../../../public/data/reconstruction/la-guaira-timeline.json";
-import styles from "@/components/reconstruction/timeline.module.css";
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  variable: "--font-reconstruction-serif",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-reconstruction-mono",
-});
+import {
+  getDefaultReconstruction,
+  reconstructionCatalog,
+} from "@/lib/reconstruction";
 
 export const metadata: Metadata = {
   title: "Lo que pasó después | Respuesta Venezuela",
@@ -36,8 +25,10 @@ export const metadata: Metadata = {
 
 export default function TimelinePage() {
   return (
-    <div className={`${newsreader.variable} ${ibmPlexMono.variable} ${styles.fontScope}`}>
-      <TimelineExplorer data={reconstruction as ReconstructionData} />
-    </div>
+    <TimelineExplorer
+      data={getDefaultReconstruction()}
+      catalog={reconstructionCatalog}
+      activeSlug={reconstructionCatalog.defaultSlug}
+    />
   );
 }

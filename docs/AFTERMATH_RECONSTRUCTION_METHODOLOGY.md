@@ -3,8 +3,9 @@
 ## Purpose
 
 The public reconstruction at `/timeline` explains what can be established about
-the June 24, 2026 Venezuela earthquakes and their aftermath in La Guaira,
-Caraballeda, and Catia La Mar.
+the June 24, 2026 Venezuela earthquakes and their aftermath through independent
+area packets. Published packets currently cover La Guaira / Caraballeda / Catia
+La Mar and Morón / Juan José Mora.
 
 It is an evidence index, not a continuous recording and not an official finding
 about response adequacy.
@@ -61,16 +62,23 @@ adequacy from a single image.
 
 ## Updating
 
-Edit:
+Register each packet in:
 
 ```text
-public/data/reconstruction/la-guaira-timeline.json
+public/data/reconstruction/catalog.json
+```
+
+Then add or edit its packet:
+
+```text
+public/data/reconstruction/<area>-timeline.json
 ```
 
 Then run:
 
 ```bash
 python3 scripts/validate_reconstruction.py
+python3 scripts/build_reconstruction_review_queue.py
 npm run lint
 npm run typecheck
 npm run build
@@ -85,3 +93,7 @@ Every new event must:
 - use an allowed confidence level and response stage;
 - preserve contradictory evidence and caveats;
 - avoid converting a model detection into a factual claim.
+
+The review-queue builder places all open catalog gaps and every `inferred` or
+`single-source` finding/event in `ops/reconstruction/review_queue.json`. This is
+the editorial work queue; it is not shipped to the public runtime.

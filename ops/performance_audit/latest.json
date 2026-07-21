@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-21T03:06:24.518341+00:00",
+  "generated_utc": "2026-07-21T03:42:40.901591+00:00",
   "catalog": {
     "path": "public/data/catalog.json",
     "bytes": 66684,
@@ -11,25 +11,25 @@
   "bundle": {
     "build_present": true,
     "js_files": 29,
-    "js_bytes": 1946635,
+    "js_bytes": 1949192,
     "js_human": "1.9 MB",
     "css_files": 3,
-    "css_bytes": 112028,
-    "css_human": "109.4 KB",
+    "css_bytes": 115756,
+    "css_human": "113.0 KB",
     "next_dir": {
       "path": ".next",
       "exists": true,
-      "files": 2689,
-      "bytes": 478708157,
-      "human": "456.5 MB"
+      "files": 2728,
+      "bytes": 479571275,
+      "human": "457.4 MB"
     }
   },
   "public_data": {
     "data": {
       "path": "public/data",
       "exists": true,
-      "files": 74620,
-      "bytes": 280035760,
+      "files": 74622,
+      "bytes": 280067579,
       "human": "267.1 MB"
     },
     "aoi": {
@@ -67,7 +67,7 @@
     ],
     "remote_excluded_bytes": 265676933,
     "remote_excluded_human": "253.4 MB",
-    "non_remote_public_data_bytes": 14358827,
+    "non_remote_public_data_bytes": 14390646,
     "non_remote_public_data_human": "13.7 MB",
     "large_local_aoi_file_count": 0,
     "large_local_aoi_bytes": 0,
