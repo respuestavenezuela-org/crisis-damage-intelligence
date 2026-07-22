@@ -1,0 +1,92 @@
+name: Publish response evidence to R2
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Temporary draft release containing the evidence archive
+        required: true
+        type: string
+      asset_name:
+        description: Release asset name
+        required: true
+        default: full-pilot-response-evidence.tar.gz
+        type: string
+      dry_run:
+        description: Validate the archive without uploading
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Download evidence archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          ASSET_NAME: ${{ inputs.asset_name }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/evidence"
+          gh release download "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern "$ASSET_NAME" \
+            --dir "$RUNNER_TEMP"
+          tar -tzf "$RUNNER_TEMP/$ASSET_NAME" > "$RUNNER_TEMP/archive-files.txt"
+          if grep -Eq '(^/|(^|/)\.\.(/|$))' "$RUNNER_TEMP/archive-files.txt"; then
+            echo "Archive contains an unsafe path" >&2
+            exit 1
+          fi
+          tar -xzf "$RUNNER_TEMP/$ASSET_NAME" -C "$RUNNER_TEMP/evidence"
+
+      - name: Validate evidence package
+        run: |
+          ROOT="$RUNNER_TEMP/evidence/public/data/chips/full-pilot-response-evidence"
+          test -d "$ROOT/native"
+          test -f "$RUNNER_TEMP/evidence/public/data/reconstruction/full-pilot-response-evidence-crops.jsonl"
+          if find "$ROOT" -type f -size 0 -print -quit | grep -q .; then
+            echo "Evidence package contains an empty file" >&2
+            exit 1
+          fi
+          echo "Files: $(find "$ROOT" -type f | wc -l | tr -d ' ')"
+          echo "Bytes: $(du -sk "$ROOT" | awk '{print $1 * 1024}')"
+
+      - name: Configure AWS CLI
+        if: ${{ !inputs.dry_run }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: auto
+
+      - name: Upload immutable evidence images
+        if: ${{ !inputs.dry_run }}
+        env:
+          S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: |
+          test -n "$S3_ENDPOINT_URL"
+          test -n "$S3_BUCKET"
+          aws s3 sync \
+            "$RUNNER_TEMP/evidence/public/data/chips/full-pilot-response-evidence" \
+            "s3://$S3_BUCKET/data/chips/full-pilot-response-evidence" \
+            --endpoint-url "$S3_ENDPOINT_URL" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --only-show-errors
+
+      - name: Verify public sample
+        if: ${{ !inputs.dry_run }}
+        env:
+          PUBLIC_BASE: https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev
+        run: |
+          SAMPLE="$(find "$RUNNER_TEMP/evidence/public/data/chips/full-pilot-response-evidence/native" -type f | sort | head -1)"
+          RELATIVE="${SAMPLE#"$RUNNER_TEMP/evidence/public/"}"
+          curl --fail --silent --show-error --head \
+            "$PUBLIC_BASE/$RELATIVE" \
+            | tee "$RUNNER_TEMP/public-head.txt"
+          grep -Eiq '^cache-control:.*immutable' "$RUNNER_TEMP/public-head.txt"
