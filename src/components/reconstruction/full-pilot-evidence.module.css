@@ -29,6 +29,22 @@
   line-height: 1.55;
 }
 
+.explorerLink {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border: 1px solid #12150f;
+  background: #12150f;
+  padding: 10px 14px;
+  color: #fffdf8;
+  font-family: var(--font-reconstruction-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .kicker {
   margin: 0;
   color: #9f351a;
