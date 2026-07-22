@@ -72,6 +72,54 @@ test.describe("full-pilot evidence explorer", () => {
     ).toBeVisible();
   });
 
+  test("publishes mapped response sites without unstable visual unit counts", async ({ page }) => {
+    const sourceImages: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().includes("maps.mapaction.org") && /\.(jpg|png|pdf)$/i.test(request.url())) {
+        sourceImages.push(request.url());
+      }
+    });
+
+    await page.goto("/evidence/la-guaira");
+
+    await expect(
+      page.getByRole("heading", { name: "Dónde funcionó la respuesta" }),
+    ).toBeVisible();
+    await expect(page.locator("article").filter({ hasText: "Campamento Transitorio" })).toHaveCount(4);
+    await expect(
+      page.getByRole("heading", { name: "Campo de Golf de Caraballeda" }),
+    ).toBeVisible();
+    await expect(page.getByText("3.260", { exact: true })).toBeVisible();
+    await expect(page.getByText("14", { exact: true }).first()).toBeVisible();
+    await expect(
+      page.getByText(/No publicamos conteos visuales de carpas/),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/MiniMax y Qwen produjeron rangos incompatibles/),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /Abrir mapa fuente/ }),
+    ).toHaveCount(5);
+    expect(sourceImages).toEqual([]);
+  });
+
+  test("keeps the core atlas usable when the documentary expansion is unavailable", async ({ page }) => {
+    await page.route("**/mapaction-response-sites-la-guaira.json", (route) =>
+      route.fulfill({ status: 503, body: "temporarily unavailable" }),
+    );
+
+    await page.goto("/evidence/la-guaira");
+
+    await expect(
+      page.getByRole("heading", { name: "Lo que la evidencia permite sostener" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Dónde funcionó la respuesta" }),
+    ).toHaveCount(0);
+    await page.getByRole("tab", { name: "Explorar 399" }).click();
+    await expect(page.getByRole("heading", { name: "399 resultados" })).toBeVisible();
+  });
+
   test("has no horizontal overflow and uses a closable evidence drawer on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/evidence/la-guaira");

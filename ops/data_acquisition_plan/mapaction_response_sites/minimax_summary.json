@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "provider": "minimax",
+  "cases": 7,
+  "completed": 7,
+  "pending": 0,
+  "usage": {
+    "prompt_tokens": 39231,
+    "completion_tokens": 29174,
+    "total_tokens": 68405
+  },
+  "output": "ops/data_acquisition_plan/mapaction_response_sites/minimax.jsonl",
+  "guardrails": [
+    "Map labels are documentary evidence as of the stated source date.",
+    "Visual shelter counts are ranges, not capacity or occupancy figures.",
+    "Missing labels do not prove absence.",
+    "Source products remain external; this pipeline stores no republished map imagery."
+  ]
+}
