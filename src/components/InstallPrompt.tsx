@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { LANG_EVENT, readStoredLang } from "@/lib/lang";
 import { FIRST_VISIT_THANKS_EVENT, isFirstVisitThanksOpen } from "@/lib/prompt-coordination";
 
@@ -65,12 +66,16 @@ function initialMode(): Mode | null {
 }
 
 export default function InstallPrompt() {
+  const pathname = usePathname();
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null);
   const [mode, setMode] = useState<Mode | null>(null);
   const [lang, setLang] = useState<Lang>("es");
   const [thanksOpen, setThanksOpen] = useState(false);
   const barRef = useRef<HTMLDivElement | null>(null);
-  const visible = mode !== null && !thanksOpen;
+  const visible =
+    mode !== null &&
+    !thanksOpen &&
+    !pathname.startsWith("/evidence/");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
