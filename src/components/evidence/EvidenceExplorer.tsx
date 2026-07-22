@@ -27,7 +27,7 @@ import type {
 } from "./types";
 import styles from "./evidence-explorer.module.css";
 
-type ExplorerTab = "explorer" | "highlights" | "chronology" | "sources";
+type ExplorerTab = "findings" | "highlights" | "explorer" | "sources";
 type SortMode = "strength" | "earliest" | "latest" | "cell";
 type ImageMode = "native" | "enhanced";
 
@@ -43,19 +43,22 @@ const CELL_DETAIL_BASE =
 
 const copy = {
   es: {
-    title: "Atlas de evidencia aérea",
+    title: "Qué muestran las imágenes",
+    atlasLabel: "Atlas de evidencia aérea",
     eyebrow: "La Guaira · Caraballeda · Catia La Mar",
-    dek: "Todos los resultados del piloto, desde los diez casos revisados hasta las 399 celdas candidatas. Cada señal conserva sus fechas, modelos, imágenes y límites.",
+    dek: "Una lectura pública de cuándo y dónde se volvió visible la respuesta, seguida por los casos revisados y el inventario completo de señales candidatas.",
     back: "Volver a la cronología",
     map: "Abrir mapa de daños",
     candidates: "celdas candidatas",
     pairs: "pares de evidencia",
     reviewed: "casos revisados",
     within72: "visibles ≤72 h",
-    explorer: "Todas las candidatas",
-    highlights: "10 revisadas",
-    chronology: "Cronología",
-    sources: "Fuentes",
+    findings: "Hallazgos",
+    explorer: "Explorar 399",
+    highlights: "Casos revisados",
+    sources: "Método y fuentes",
+    heroFindings: "Leer hallazgos",
+    heroExplore: "Explorar detecciones",
     triage: "Triage automatizado",
     triageText:
       "Una candidata no es un hecho confirmado. Los resultados señalan dónde revisar píxeles; no prueban función, propiedad, suficiencia ni hora real de llegada.",
@@ -96,6 +99,7 @@ const copy = {
     models: "Lectura de modelos",
     detectorSignal: "Señal independiente WALDO30",
     noDetector: "Sin aumento positivo del detector",
+    comparisonCount: "comparaciones publicadas",
     openLocation: "Abrir coordenadas",
     imageView: "Vista de imagen",
     native: "Píxeles nativos",
@@ -121,6 +125,11 @@ const copy = {
     timelineIntro:
       "Cada barra indica cuántas celdas mostraron su primera señal visible en una adquisición. No representa la hora real de llegada.",
     filterThisWindow: "Ver candidatas de esta ventana",
+    filters: "Filtros",
+    showFilters: "Mostrar filtros",
+    hideFilters: "Ocultar filtros",
+    applyFilters: "Ver resultados",
+    activeFilters: "filtros activos",
     candidateCells: "celdas",
     bothModels: "ambos positivos",
     detectorSupported: "con detector",
@@ -134,21 +143,65 @@ const copy = {
     cropManifest: "JSONL · 500 pares",
     clear: "Limpiar filtros",
     noResults: "Ninguna candidata coincide con estos filtros.",
+    findingsKicker: "Lectura pública · evidencia acotada",
+    findingsTitle: "Lo que la evidencia permite sostener",
+    findingsIntro:
+      "La señal más útil no es el total de detecciones, sino cómo cambia la evidencia por tiempo, lugar y tipo de respuesta. Estos hallazgos combinan imágenes fechadas con fuentes de terreno; ninguno fija por sí solo una hora exacta de llegada.",
+    canSay: "Lo que sí podemos decir",
+    cannotSay: "Lo que todavía no podemos decir",
+    earlySignalTitle: "La mayor expansión visible aparece entre 24 y 48 horas",
+    earlySignalBody:
+      "Diez celdas candidatas mostraron su primera señal visible durante las primeras 24 horas; 279 lo hicieron entre 24 y 48 horas. Esto describe la cobertura disponible y no prueba que la ayuda estuviera ausente antes.",
+    trucksTitle: "Camiones y distribución ya eran observables en Catia La Mar el 26 de junio",
+    trucksBody:
+      "EFE reportó un contingente de camiones con ayuda y una terminal usada para distribuir alimentos y productos básicos. El reporte no permite fijar la hora exacta de llegada.",
+    sitesTitle: "Los sitios temporales crecieron entre el 26 y el 29 de junio",
+    sitesBody:
+      "Las imágenes revisadas muestran un campo de golf ya organizado a +41 h y, para el 29 de junio, estadios, estacionamientos y pistas ocupados por módulos, vehículos o campamentos.",
+    machineryTitle: "La maquinaria pesada no aparece de forma uniforme",
+    machineryBody:
+      "El 25 de junio se reportó disponibilidad limitada; el 28 se describió un aumento más amplio. El 29 todavía había al menos un sitio de colapso reportado sin maquinaria grande.",
+    sourceBasis: "Base documental",
+    imageBasis: "Base de imagen",
+    firstVisibleWindows: "Primera señal visible en imágenes disponibles",
+    firstVisibleWindowsIntro:
+      "Las barras agrupan celdas candidatas por la ventana en que se volvieron visibles por primera vez. No son una medición de llegadas.",
+    reviewedEvidenceTitle: "Evidencia revisada que ayuda a explicar la respuesta",
+    reviewedEvidenceIntro:
+      "Estos casos convierten píxeles y fechas en afirmaciones legibles, con límites explícitos.",
+    viewAllReviewed: "Ver los 10 casos revisados",
+    exploreAll: "Abrir las 399 candidatas",
+    methodLink: "Revisar método y fuentes",
+    noExactArrival:
+      "No existe una adquisición continua ni una bitácora completa por sitio; por eso no podemos convertir «primera vez visible» en «hora de llegada».",
+    noAbsence:
+      "Una señal no observada puede quedar fuera de cobertura, ocultarse por nubes o no ser distinguible a esta resolución.",
+    candidateDisclosure:
+      "Los conteos son celdas candidatas de triage automatizado. Las categorías se superponen y no equivalen a objetos confirmados.",
+    nativePolicy:
+      "Los recortes de píxeles nativos son la vista de evidencia. Las imágenes mejoradas son solo para visualización y no pueden confirmar una característica.",
+    arrivalPolicy:
+      "Las fechas son límites de primera visibilidad en las adquisiciones disponibles, no horas reales de llegada.",
+    absencePolicy:
+      "No observado no significa que no haya ocurrido.",
   },
   en: {
-    title: "Aerial evidence atlas",
+    title: "What the imagery shows",
+    atlasLabel: "Aerial evidence atlas",
     eyebrow: "La Guaira · Caraballeda · Catia La Mar",
-    dek: "Every pilot result, from ten reviewed cases to all 399 candidate cells. Each signal retains its dates, model outputs, imagery and limits.",
+    dek: "A public reading of when and where response activity became visible, followed by reviewed cases and the complete candidate-signal inventory.",
     back: "Back to the timeline",
     map: "Open damage map",
     candidates: "candidate cells",
     pairs: "evidence pairs",
     reviewed: "reviewed cases",
     within72: "visible ≤72 h",
-    explorer: "All candidates",
-    highlights: "10 reviewed",
-    chronology: "Chronology",
-    sources: "Sources",
+    findings: "Findings",
+    explorer: "Explore 399",
+    highlights: "Reviewed cases",
+    sources: "Method & sources",
+    heroFindings: "Read findings",
+    heroExplore: "Explore detections",
     triage: "Automated triage",
     triageText:
       "A candidate is not a confirmed fact. Results identify pixels to review; they do not prove function, ownership, adequacy or actual arrival time.",
@@ -189,6 +242,7 @@ const copy = {
     models: "Model reading",
     detectorSignal: "Independent WALDO30 signal",
     noDetector: "No positive detector increase",
+    comparisonCount: "published comparisons",
     openLocation: "Open coordinates",
     imageView: "Image view",
     native: "Native pixels",
@@ -214,6 +268,11 @@ const copy = {
     timelineIntro:
       "Each bar shows how many cells first became visible in an acquisition. It is not the actual arrival time.",
     filterThisWindow: "View candidates in this window",
+    filters: "Filters",
+    showFilters: "Show filters",
+    hideFilters: "Hide filters",
+    applyFilters: "View results",
+    activeFilters: "active filters",
     candidateCells: "cells",
     bothModels: "both positive",
     detectorSupported: "detector-supported",
@@ -227,8 +286,77 @@ const copy = {
     cropManifest: "JSONL · 500 pairs",
     clear: "Clear filters",
     noResults: "No candidates match these filters.",
+    findingsKicker: "Public reading · bounded evidence",
+    findingsTitle: "What the evidence can support",
+    findingsIntro:
+      "The useful signal is not the raw detection total, but how evidence changes by time, place and response type. These findings combine dated imagery with field sources; neither establishes an exact arrival time on its own.",
+    canSay: "What we can say",
+    cannotSay: "What we still cannot say",
+    earlySignalTitle: "The largest visible expansion appears between 24 and 48 hours",
+    earlySignalBody:
+      "Ten candidate cells first became visible during the first 24 hours; 279 did so between 24 and 48 hours. This describes available coverage and does not prove assistance was absent earlier.",
+    trucksTitle: "Trucks and distribution were observable in Catia La Mar by June 26",
+    trucksBody:
+      "EFE reported a contingent of aid trucks and a terminal distributing food and basic goods. The report does not establish an exact arrival time.",
+    sitesTitle: "Temporary response sites grew between June 26 and June 29",
+    sitesBody:
+      "Reviewed imagery shows an organized golf-course operation at +41 h and, by June 29, stadiums, parking lots and tracks occupied by modules, vehicles or camps.",
+    machineryTitle: "Heavy machinery was not reported uniformly",
+    machineryBody:
+      "Availability was reported as limited on June 25; a broader increase was described on June 28. At least one reported collapse site still lacked large machinery on June 29.",
+    sourceBasis: "Documentary basis",
+    imageBasis: "Imagery basis",
+    firstVisibleWindows: "First visible signal in available imagery",
+    firstVisibleWindowsIntro:
+      "Bars group candidate cells by the window in which they first became visible. They are not a measurement of arrivals.",
+    reviewedEvidenceTitle: "Reviewed evidence that helps explain the response",
+    reviewedEvidenceIntro:
+      "These cases turn pixels and dates into readable claims with explicit limits.",
+    viewAllReviewed: "View all 10 reviewed cases",
+    exploreAll: "Open all 399 candidates",
+    methodLink: "Review method and sources",
+    noExactArrival:
+      "There is no continuous acquisition or complete site-by-site operating log, so “first visible” cannot be converted into an arrival time.",
+    noAbsence:
+      "An unobserved signal may fall outside coverage, be obscured by clouds, or remain indistinguishable at this resolution.",
+    candidateDisclosure:
+      "Counts are automated-triage candidate cells. Categories overlap and do not equal confirmed objects.",
+    nativePolicy:
+      "Native crops are the evidence view. Enhanced images are display-only and cannot establish a feature.",
+    arrivalPolicy:
+      "Dates are earliest visible bounds in available acquisitions, not actual arrival times.",
+    absencePolicy:
+      "Not observed does not mean it did not occur.",
   },
 } satisfies Record<EvidenceLanguage, Record<string, string>>;
+
+const sourceLimitationsEs: Record<string, string> = {
+  "eldiario-2026-06-25-la-guaira":
+    "Algunas afirmaciones se atribuyen a residentes u otros reportes y no constituyen un inventario completo de la respuesta estatal.",
+  "efe-2026-06-26-catia-aid":
+    "El artículo no identifica la terminal y el reporte no permite establecer las condiciones de todos los sectores de Catia La Mar.",
+  "wfp-2026-06-26-la-guaira":
+    "Es un reporte a escala estatal, no una bitácora operativa sitio por sitio.",
+  "logistics-cluster-2026-06-26":
+    "La información operativa se describió como sujeta a cambios rápidos.",
+  "efe-2026-06-29-playa-grande":
+    "La ausencia de maquinaria grande corresponde a un sitio específico y no puede generalizarse a toda La Guaira.",
+  "undp-2026-06-29-debris":
+    "La estimación combina imágenes satelitales, evaluación de daños con IA y conocimiento de ingeniería; sirve para planificación, no como registro del despliegue de maquinaria.",
+  "logistics-cluster-2026-07-02-sitrep":
+    "Confirma la operación al 2 de julio, pero no la hora exacta de apertura de cada refugio.",
+  "logistics-cluster-2026-07-02-minutes":
+    "No aporta coordenadas exactas de los campamentos ni fechas de apertura para los 13 sitios de La Guaira.",
+};
+
+const sourceTypeEs: Record<string, string> = {
+  "reported field account": "reporte de campo",
+  "place-specific field reporting": "reporte de campo localizado",
+  "primary humanitarian agency update": "actualización humanitaria primaria",
+  "primary inter-agency meeting minutes": "minuta interagencial primaria",
+  "primary UN assessment": "evaluación primaria de la ONU",
+  "primary inter-agency situation report": "reporte de situación interagencial primario",
+};
 
 const categoryOptions = [
   ["all", "all"],
@@ -325,6 +453,34 @@ function tierLabel(value: string, language: EvidenceLanguage) {
   return labels[value]?.[language === "es" ? 0 : 1] ?? value;
 }
 
+function consensusLabel(value: string, language: EvidenceLanguage) {
+  const labels: Record<string, [string, string]> = {
+    both_positive: ["Ambos modelos positivos", "Both models positive"],
+    contested: ["Los modelos no coinciden", "Models disagree"],
+    qwen_only: ["Solo Qwen positivo", "Qwen positive only"],
+    minimax_only: ["Solo MiniMax positivo", "MiniMax positive only"],
+  };
+  return labels[value]?.[language === "es" ? 0 : 1] ?? value.replaceAll("_", " ");
+}
+
+function detectionLabel(value: string, language: EvidenceLanguage) {
+  const labels: Record<string, [string, string]> = {
+    Container: ["Contenedor", "Container"],
+    Digger: ["Excavadora", "Digger"],
+    LightVehicle: ["Vehículo liviano", "Light vehicle"],
+    Truck: ["Camión", "Truck"],
+  };
+  return labels[value]?.[language === "es" ? 0 : 1] ?? value;
+}
+
+const windowFindings = [
+  { key: "0_24h", label: "0–24 h", tone: "early" },
+  { key: "24_48h", label: "24–48 h", tone: "surge" },
+  { key: "48_72h", label: "48–72 h", tone: "early" },
+  { key: "72h_7d", label: "72 h–7 d", tone: "late" },
+  { key: "after_7d", label: ">7 d", tone: "late" },
+] as const;
+
 function EvidenceImageView({
   image,
   mode,
@@ -412,7 +568,7 @@ function DetailPanel({
       <button className={styles.closeDetail} type="button" onClick={onClose} aria-label={t.close}>×</button>
       <div className={styles.detailTopline}>
         <span>{tierLabel(observation.evidenceTier, language)}</span>
-        <b>{observation.priorityScore}</b>
+        <b>{detail.pairCount} {t.comparisonCount}</b>
       </div>
       <h2 id="selected-cell-title">{observation.cellId}</h2>
       <div className={styles.detailCategories}>
@@ -431,7 +587,7 @@ function DetailPanel({
         </div>
         <div>
           <dt>{t.models}</dt>
-          <dd>{observation.consensus.replaceAll("_", " ")}</dd>
+          <dd>{consensusLabel(observation.consensus, language)}</dd>
         </div>
         <div>
           <dt>{t.imagery}</dt>
@@ -443,7 +599,7 @@ function DetailPanel({
         {Object.keys(detectorCounts).length ? (
           <div>
             {Object.entries(detectorCounts).map(([name, value]) => (
-              <b key={name}>{name} +{value}</b>
+              <b key={name}>{detectionLabel(name, language)} +{value}</b>
             ))}
           </div>
         ) : (
@@ -476,7 +632,11 @@ function DetailPanel({
             <article key={pair.pairId} className={styles.pair}>
               <header>
                 <span>{t.pair} {pairIndex + 1}/{detail.evidencePairs.length}</span>
-                <b>{pair.targetDetection?.class ?? pair.pairId}</b>
+                <b>
+                  {pair.targetDetection?.class
+                    ? detectionLabel(pair.targetDetection.class, language)
+                    : pair.pairId}
+                </b>
                 {pair.targetDetection?.confidence != null && (
                   <small>{Math.round(pair.targetDetection.confidence * 100)}% {t.confidence}</small>
                 )}
@@ -516,9 +676,9 @@ function DetailPanel({
       )}
 
       <div className={styles.detailPolicy}>
-        <p>{detail.policy.nativePixels}</p>
-        <p>{detail.policy.arrival}</p>
-        <p>{detail.policy.absence}</p>
+        <p>{t.nativePolicy}</p>
+        <p>{t.arrivalPolicy}</p>
+        <p>{t.absencePolicy}</p>
       </div>
     </aside>
   );
@@ -557,6 +717,162 @@ function HighlightCard({
   );
 }
 
+function FindingsOverview({
+  summary,
+  curated,
+  language,
+  onReviewed,
+  onExplore,
+  onSources,
+}: {
+  summary: EvidenceSummary;
+  curated: CuratedEvidence | null;
+  language: EvidenceLanguage;
+  onReviewed: () => void;
+  onExplore: () => void;
+  onSources: () => void;
+}) {
+  const t = copy[language];
+  const maxWindow = Math.max(
+    ...windowFindings.map(({ key }) => summary.timeWindowCounts[key] ?? 0),
+  );
+  const reviewedPreview = [
+    "aerial-grid-caraballeda-golf",
+    "aerial-grid-estadio-jorge-garcia",
+    "aerial-ems-00119",
+  ]
+    .map((id) => curated?.observations.find((item) => item.id === id))
+    .filter((item): item is CuratedObservation => Boolean(item));
+  const findings = [
+    {
+      index: "01",
+      title: t.earlySignalTitle,
+      body: t.earlySignalBody,
+      basis: `${t.imageBasis} · ${summary.timeWindowCounts["0_24h"] ?? 0} / ${summary.timeWindowCounts["24_48h"] ?? 0}`,
+      tone: "image",
+    },
+    {
+      index: "02",
+      title: t.trucksTitle,
+      body: t.trucksBody,
+      basis: `${t.sourceBasis} · EFE · 26 jun 2026`,
+      tone: "source",
+    },
+    {
+      index: "03",
+      title: t.sitesTitle,
+      body: t.sitesBody,
+      basis: `${t.imageBasis} · +41 h / 29 jun 2026`,
+      tone: "image",
+    },
+    {
+      index: "04",
+      title: t.machineryTitle,
+      body: t.machineryBody,
+      basis: `${t.sourceBasis} · El Diario / EFE`,
+      tone: "source",
+    },
+  ];
+
+  return (
+    <section className={styles.findings} aria-labelledby="findings-title">
+      <header className={styles.findingsHeader}>
+        <div>
+          <span>{t.findingsKicker}</span>
+          <h2 id="findings-title">{t.findingsTitle}</h2>
+        </div>
+        <p>{t.findingsIntro}</p>
+      </header>
+
+      <div className={styles.findingGrid}>
+        {findings.map((finding) => (
+          <article
+            key={finding.index}
+            className={styles.findingCard}
+            data-tone={finding.tone}
+          >
+            <span>{finding.index}</span>
+            <h3>{finding.title}</h3>
+            <p>{finding.body}</p>
+            <small>{finding.basis}</small>
+          </article>
+        ))}
+      </div>
+
+      <div className={styles.findingLimits}>
+        <article>
+          <span>{t.canSay}</span>
+          <p>{t.candidateDisclosure}</p>
+        </article>
+        <article>
+          <span>{t.cannotSay}</span>
+          <p>{t.noExactArrival}</p>
+          <p>{t.noAbsence}</p>
+        </article>
+      </div>
+
+      <section className={styles.evidenceClock} aria-labelledby="evidence-clock-title">
+        <header>
+          <div>
+            <span>0–257 h</span>
+            <h3 id="evidence-clock-title">{t.firstVisibleWindows}</h3>
+          </div>
+          <p>{t.firstVisibleWindowsIntro}</p>
+        </header>
+        <div className={styles.windowBars}>
+          {windowFindings.map(({ key, label, tone }) => {
+            const value = summary.timeWindowCounts[key] ?? 0;
+            return (
+              <article key={key} data-tone={tone}>
+                <div>
+                  <span>{label}</span>
+                  <strong>{formatNumber(value, language)}</strong>
+                </div>
+                <div aria-hidden="true">
+                  <i style={{ width: `${Math.max(2, (value / maxWindow) * 100)}%` }} />
+                </div>
+                <button type="button" onClick={onExplore}>
+                  {t.exploreAll} →
+                </button>
+              </article>
+            );
+          })}
+        </div>
+        <small>{t.candidateDisclosure}</small>
+      </section>
+
+      <section className={styles.reviewedPreview} aria-labelledby="reviewed-preview-title">
+        <header>
+          <div>
+            <span>3 / 10</span>
+            <h3 id="reviewed-preview-title">{t.reviewedEvidenceTitle}</h3>
+          </div>
+          <p>{t.reviewedEvidenceIntro}</p>
+        </header>
+        {reviewedPreview.length ? (
+          <div className={styles.reviewedPreviewGrid}>
+            {reviewedPreview.map((observation) => (
+              <HighlightCard
+                key={observation.id}
+                observation={observation}
+                language={language}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className={styles.status}>{t.loading}</p>
+        )}
+      </section>
+
+      <nav className={styles.findingActions} aria-label={t.findingsTitle}>
+        <button type="button" onClick={onReviewed}>{t.viewAllReviewed} →</button>
+        <button type="button" onClick={onExplore}>{t.exploreAll} →</button>
+        <button type="button" onClick={onSources}>{t.methodLink} →</button>
+      </nav>
+    </section>
+  );
+}
+
 export default function EvidenceExplorer() {
   const language = useSyncExternalStore(
     subscribeStoredLang,
@@ -568,8 +884,10 @@ export default function EvidenceExplorer() {
   const [observations, setObservations] = useState<EvidenceObservation[]>([]);
   const [curated, setCurated] = useState<CuratedEvidence | null>(null);
   const [loading, setLoading] = useState(true);
+  const [observationsLoaded, setObservationsLoaded] = useState(false);
   const [loadError, setLoadError] = useState(false);
-  const [tab, setTab] = useState<ExplorerTab>("explorer");
+  const [tab, setTab] = useState<ExplorerTab>("findings");
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [agreement, setAgreement] = useState("all");
@@ -582,29 +900,26 @@ export default function EvidenceExplorer() {
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState(false);
   const resultHeadingRef = useRef<HTMLHeadingElement>(null);
+  const initialCellRef = useRef<string | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
+    const initialCell = new URLSearchParams(window.location.search).get("cell");
+    initialCellRef.current = initialCell;
     Promise.all([
       fetch(SUMMARY_URL, { signal: controller.signal }).then((response) => {
         if (!response.ok) throw new Error(`summary:${response.status}`);
         return response.json() as Promise<EvidenceSummary>;
       }),
-      fetch(OBSERVATIONS_URL, { signal: controller.signal }).then(async (response) => {
-        if (!response.ok) throw new Error(`observations:${response.status}`);
-        return parseJsonl<EvidenceObservation>(await response.text());
+      fetch(CURATED_URL, { signal: controller.signal }).then((response) => {
+        if (!response.ok) throw new Error(`curated:${response.status}`);
+        return response.json() as Promise<CuratedEvidence>;
       }),
     ])
-      .then(([nextSummary, nextObservations]) => {
+      .then(([nextSummary, nextCurated]) => {
         setSummary(nextSummary);
-        setObservations(nextObservations);
-        const initialCell = new URLSearchParams(window.location.search).get("cell");
-        if (initialCell && nextObservations.some((row) => row.cellId === initialCell)) {
-          setDetailLoading(true);
-          setDetailError(false);
-          setDetail(null);
-          setSelectedCellId(initialCell);
-        }
+        setCurated(nextCurated);
+        if (initialCell) setTab("explorer");
       })
       .catch((error: unknown) => {
         if (!(error instanceof DOMException && error.name === "AbortError")) {
@@ -616,17 +931,32 @@ export default function EvidenceExplorer() {
   }, []);
 
   useEffect(() => {
-    if (tab !== "highlights" || curated) return;
+    if (tab !== "explorer" || observationsLoaded) return;
     const controller = new AbortController();
-    fetch(CURATED_URL, { signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) throw new Error(String(response.status));
-        return response.json() as Promise<CuratedEvidence>;
+    fetch(OBSERVATIONS_URL, { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`observations:${response.status}`);
+        return parseJsonl<EvidenceObservation>(await response.text());
       })
-      .then(setCurated)
-      .catch(() => undefined);
+      .then((nextObservations) => {
+        setObservations(nextObservations);
+        setObservationsLoaded(true);
+        const initialCell = initialCellRef.current;
+        if (initialCell && nextObservations.some((row) => row.cellId === initialCell)) {
+          setDetailLoading(true);
+          setDetailError(false);
+          setDetail(null);
+          setSelectedCellId(initialCell);
+          initialCellRef.current = null;
+        }
+      })
+      .catch((error: unknown) => {
+        if (!(error instanceof DOMException && error.name === "AbortError")) {
+          setLoadError(true);
+        }
+      });
     return () => controller.abort();
-  }, [tab, curated]);
+  }, [tab, observationsLoaded]);
 
   useEffect(() => {
     if (!selectedCellId) return;
@@ -695,6 +1025,13 @@ export default function EvidenceExplorer() {
     (safePage - 1) * PAGE_SIZE,
     safePage * PAGE_SIZE,
   );
+  const activeFilterCount = [
+    query.trim() ? "query" : "",
+    category !== "all" ? category : "",
+    agreement !== "all" ? agreement : "",
+    timeWindow !== "all" ? timeWindow : "",
+    imagery !== "all" ? imagery : "",
+  ].filter(Boolean).length;
 
   const selectCell = (cellId: string) => {
     setDetailLoading(true);
@@ -725,11 +1062,14 @@ export default function EvidenceExplorer() {
     setPage(1);
   };
 
-  const openTimeWindow = (window: string) => {
-    setTimeWindow(window);
-    setPage(1);
-    setTab("explorer");
-    requestAnimationFrame(() => resultHeadingRef.current?.focus());
+  const openTab = (nextTab: ExplorerTab) => {
+    setTab(nextTab);
+    requestAnimationFrame(() => {
+      document.getElementById(`${nextTab}-panel`)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
   };
 
   return (
@@ -753,14 +1093,38 @@ export default function EvidenceExplorer() {
         <div className={styles.heroIndex} aria-hidden="true">399</div>
         <div className={styles.heroCopy}>
           <p>{t.eyebrow}</p>
+          <b>{t.atlasLabel}</b>
           <h1>{t.title}</h1>
           <span>{t.dek}</span>
+          <div className={styles.heroActions}>
+            <button type="button" onClick={() => openTab("findings")}>
+              {t.heroFindings} →
+            </button>
+            <button type="button" onClick={() => openTab("explorer")}>
+              {t.heroExplore}
+            </button>
+          </div>
         </div>
         <dl className={styles.heroStats}>
-          <div><dt>399</dt><dd>{t.candidates}</dd></div>
-          <div><dt>500</dt><dd>{t.pairs}</dd></div>
-          <div><dt>10</dt><dd>{t.reviewed}</dd></div>
-          <div><dt>311</dt><dd>{t.within72}</dd></div>
+          <div>
+            <dt>{summary?.coverage.withinFirst72Hours ?? 311}</dt>
+            <dd>{t.within72} · {t.candidates}</dd>
+          </div>
+          <div>
+            <dt>{summary?.assetCategoryCounts.heavy_machinery ?? 75}</dt>
+            <dd>{t.machinery} · {t.candidates}</dd>
+          </div>
+          <div>
+            <dt>{summary?.assetCategoryCounts.trucks_or_large_vehicles ?? 128}</dt>
+            <dd>{t.trucks} · {t.candidates}</dd>
+          </div>
+          <div>
+            <dt>
+              {(summary?.evidenceTierCounts.cross_model_positive ?? 33) +
+                (summary?.evidenceTierCounts.cross_model_positive_with_detector_delta ?? 71)}
+            </dt>
+            <dd>{t.bothPositive}</dd>
+          </div>
         </dl>
       </header>
 
@@ -772,26 +1136,74 @@ export default function EvidenceExplorer() {
 
       <div className={styles.tabRail} role="tablist" aria-label={t.title}>
         {([
-          ["explorer", t.explorer, "399"],
+          ["findings", t.findings, "01"],
           ["highlights", t.highlights, "10"],
-          ["chronology", t.chronology, "14"],
-          ["sources", t.sources, "8"],
+          ["explorer", t.explorer, "399"],
+          ["sources", t.sources, "08"],
         ] as const).map(([value, label, count]) => (
           <button
             key={value}
             type="button"
             role="tab"
             aria-selected={tab === value}
-            onClick={() => setTab(value)}
+            aria-controls={`${value}-panel`}
+            aria-label={label}
+            onClick={() => openTab(value)}
           >
-            <span>{count}</span>{label}
+            <span aria-hidden="true">{count}</span>
+            {label}
           </button>
         ))}
       </div>
 
+      {tab === "findings" && (
+        <div id="findings-panel" role="tabpanel">
+          {loading && <p className={styles.status} aria-live="polite">{t.loading}</p>}
+          {loadError && <p className={`${styles.status} ${styles.error}`} role="alert">{t.error}</p>}
+          {summary && (
+            <FindingsOverview
+              summary={summary}
+              curated={curated}
+              language={language}
+              onReviewed={() => openTab("highlights")}
+              onExplore={() => openTab("explorer")}
+              onSources={() => openTab("sources")}
+            />
+          )}
+        </div>
+      )}
+
       {tab === "explorer" && (
-        <section className={styles.explorer} aria-labelledby="all-candidates-title">
-          <div className={styles.filters}>
+        <section
+          id="explorer-panel"
+          className={styles.explorer}
+          role="tabpanel"
+          aria-labelledby="all-candidates-title"
+        >
+          <div className={styles.explorerIntro}>
+            <div>
+              <span>399 / 500</span>
+              <h2>{t.explorer}</h2>
+            </div>
+            <p>{t.candidateDisclosure}</p>
+          </div>
+          <button
+            className={styles.filterToggle}
+            type="button"
+            aria-expanded={filtersOpen}
+            aria-controls="candidate-filters"
+            onClick={() => setFiltersOpen((open) => !open)}
+          >
+            <b>{filtersOpen ? t.hideFilters : t.showFilters}</b>
+            {activeFilterCount > 0 && (
+              <span>{activeFilterCount} {t.activeFilters}</span>
+            )}
+          </button>
+          <div
+            id="candidate-filters"
+            className={styles.filters}
+            data-open={filtersOpen ? "true" : "false"}
+          >
             <label className={styles.searchField}>
               <span>{t.search}</span>
               <input
@@ -838,12 +1250,22 @@ export default function EvidenceExplorer() {
                 <button type="button" aria-pressed={imagery === "post_event_only"} onClick={() => setImagery("post_event_only")}>{t.postOnly}</button>
               </div>
             </fieldset>
+            <button
+              className={styles.applyFilters}
+              type="button"
+              onClick={() => {
+                setFiltersOpen(false);
+                requestAnimationFrame(() => resultHeadingRef.current?.focus());
+              }}
+            >
+              {t.applyFilters} →
+            </button>
           </div>
 
-          {loading && <p className={styles.status} aria-live="polite">{t.loading}</p>}
+          {!observationsLoaded && <p className={styles.status} aria-live="polite">{t.loading}</p>}
           {loadError && <p className={`${styles.status} ${styles.error}`} role="alert">{t.error}</p>}
 
-          {!loading && observations.length > 0 && (
+          {observationsLoaded && observations.length > 0 && (
             <>
               <div className={styles.resultBar}>
                 <h2 id="all-candidates-title" ref={resultHeadingRef} tabIndex={-1}>
@@ -895,10 +1317,9 @@ export default function EvidenceExplorer() {
                             <span>
                               {observation.hoursAfterEvent != null ? `+${observation.hoursAfterEvent.toFixed(1)} h` : "—"}
                               {" · "}
-                              {observation.cropPairIds.length} {t.pairs}
+                              {observation.stackStatus === "before_after" ? t.beforeAfter : t.postOnly}
                             </span>
                           </div>
-                          <strong>{observation.priorityScore}</strong>
                         </button>
                       ))}
                     </div>
@@ -921,13 +1342,15 @@ export default function EvidenceExplorer() {
                     tabIndex={-1}
                   />
                 )}
-                <DetailPanel
-                  detail={detail}
-                  loading={detailLoading}
-                  error={detailError}
-                  language={language}
-                  onClose={closeDetail}
-                />
+                {selectedCellId && (
+                  <DetailPanel
+                    detail={detail}
+                    loading={detailLoading}
+                    error={detailError}
+                    language={language}
+                    onClose={closeDetail}
+                  />
+                )}
               </div>
             </>
           )}
@@ -935,7 +1358,12 @@ export default function EvidenceExplorer() {
       )}
 
       {tab === "highlights" && (
-        <section className={styles.editorialSection} aria-labelledby="reviewed-title">
+        <section
+          id="highlights-panel"
+          className={styles.editorialSection}
+          role="tabpanel"
+          aria-labelledby="reviewed-title"
+        >
           <header>
             <span>10 / 399</span>
             <h2 id="reviewed-title">{t.highlights}</h2>
@@ -953,37 +1381,13 @@ export default function EvidenceExplorer() {
         </section>
       )}
 
-      {tab === "chronology" && summary && (
-        <section className={styles.editorialSection} aria-labelledby="chronology-title">
-          <header>
-            <span>14 {language === "es" ? "adquisiciones" : "acquisitions"}</span>
-            <h2 id="chronology-title">{t.chronology}</h2>
-            <p>{t.timelineIntro}</p>
-          </header>
-          <div className={styles.chronology}>
-            {summary.timelineEvents.map((event, index) => {
-              const max = Math.max(...summary.timelineEvents.map((item) => item.candidateCells));
-              return (
-                <article key={`${event.acquisitionUtc}-${index}`}>
-                  <time>{formatAcquisition(event.acquisitionUtc, language)}</time>
-                  <div>
-                    <span style={{ width: `${Math.max(2, (event.candidateCells / max) * 100)}%` }} />
-                  </div>
-                  <dl>
-                    <div><dt>{t.candidateCells}</dt><dd>{event.candidateCells}</dd></div>
-                    <div><dt>{t.bothModels}</dt><dd>{event.bothModelsPositive}</dd></div>
-                    <div><dt>{t.detectorSupported}</dt><dd>{event.detectorSupported}</dd></div>
-                  </dl>
-                  <button type="button" onClick={() => openTimeWindow(event.timeWindow)}>{t.filterThisWindow} →</button>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
       {tab === "sources" && summary && (
-        <section className={styles.editorialSection} aria-labelledby="sources-title">
+        <section
+          id="sources-panel"
+          className={styles.editorialSection}
+          role="tabpanel"
+          aria-labelledby="sources-title"
+        >
           <header>
             <span>{summary.documentaryEvidence.sources.length} {t.sources.toLowerCase()}</span>
             <h2 id="sources-title">{t.sources}</h2>
@@ -1002,7 +1406,12 @@ export default function EvidenceExplorer() {
           <div className={styles.sources}>
             {summary.documentaryEvidence.sources.map((source, index) => (
               <article key={source.id}>
-                <span>{String(index + 1).padStart(2, "0")} · {source.sourceType}</span>
+                <span>
+                  {String(index + 1).padStart(2, "0")} ·{" "}
+                  {language === "es"
+                    ? sourceTypeEs[source.sourceType] ?? source.sourceType
+                    : source.sourceType}
+                </span>
                 <h3>{source.publisher}</h3>
                 <time>{source.publishedAt.slice(0, 10)}</time>
                 <ul>
@@ -1010,7 +1419,11 @@ export default function EvidenceExplorer() {
                     <li key={claim}>{claim}</li>
                   ))}
                 </ul>
-                <p>{source.limitations}</p>
+                <p>
+                  {language === "es"
+                    ? sourceLimitationsEs[source.id] ?? source.limitations
+                    : source.limitations}
+                </p>
                 <a href={source.url} target="_blank" rel="noreferrer">{t.openSource} ↗</a>
               </article>
             ))}
@@ -1021,7 +1434,7 @@ export default function EvidenceExplorer() {
       <footer className={styles.footer}>
         <div>
           <b>{t.downloads}</b>
-          <p>{summary?.method.arrivalRule ?? t.triageText}</p>
+          <p>{t.arrivalPolicy}</p>
         </div>
         <nav aria-label={t.downloads}>
           <a href={summary?.downloads.candidateGeoJson ?? "/data/reconstruction/full-pilot-response-evidence.geojson"}>{t.geojson}</a>
