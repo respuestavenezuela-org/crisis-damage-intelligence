@@ -114,6 +114,18 @@
   text-transform: uppercase;
 }
 
+.evidenceAtlasLink {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  border-bottom: 1px solid var(--recon-gold);
+  color: var(--recon-gold) !important;
+  font-family: var(--recon-mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .areaIndex {
   border-bottom: 1px solid rgba(233, 229, 219, 0.18);
   background: var(--recon-night-soft);
@@ -1039,6 +1051,55 @@
   align-items: end;
 }
 
+.fullEvidenceCallout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px;
+  margin: 28px 0;
+  border: 1px solid rgba(230, 187, 85, 0.62);
+  border-left: 8px solid var(--recon-gold);
+  background: rgba(230, 187, 85, 0.1);
+  padding: 20px;
+}
+
+.fullEvidenceCallout span {
+  color: var(--recon-gold);
+  font-family: var(--recon-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fullEvidenceCallout h3 {
+  margin: 7px 0 5px;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 400;
+}
+
+.fullEvidenceCallout p {
+  max-width: 760px;
+  margin: 0;
+  color: rgba(245, 241, 231, 0.7);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.fullEvidenceCallout > a {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  border: 1px solid var(--recon-gold);
+  background: var(--recon-gold);
+  padding: 9px 13px;
+  color: var(--recon-ink) !important;
+  font-family: var(--recon-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .aerialHeader .sectionHeading {
   margin-bottom: 0;
 }
@@ -1491,6 +1552,11 @@
     grid-template-columns: 1fr;
   }
 
+  .fullEvidenceCallout {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
   .aerialInventory dl {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1544,6 +1610,10 @@
     min-height: 44px;
     padding-inline: 9px;
     font-size: 9px;
+  }
+
+  .evidenceAtlasLink {
+    display: none;
   }
 
   .areaIndex {

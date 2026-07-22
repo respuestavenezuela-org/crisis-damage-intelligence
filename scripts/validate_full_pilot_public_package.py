@@ -22,6 +22,8 @@ SUMMARY = PUBLIC / "full-pilot-response-evidence-summary.json"
 GEOJSON = PUBLIC / "full-pilot-response-evidence.geojson"
 OBSERVATIONS = PUBLIC / "full-pilot-response-evidence.jsonl"
 CROPS = PUBLIC / "full-pilot-response-evidence-crops.jsonl"
+EXPLORER_CELLS = PUBLIC / "full-pilot-evidence-cells"
+EXPLORER_SUMMARY = PUBLIC / "full-pilot-evidence-explorer-summary.json"
 REMOTE_PREFIX = (
     "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/"
     "data/chips/full-pilot-response-evidence/"
@@ -38,17 +40,19 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 
 def main() -> int:
     errors: list[str] = []
-    for path in (SUMMARY, GEOJSON, OBSERVATIONS, CROPS):
+    for path in (SUMMARY, GEOJSON, OBSERVATIONS, CROPS, EXPLORER_SUMMARY):
         if not path.is_file():
             errors.append(f"missing:{path.relative_to(ROOT)}")
     if errors:
         raise SystemExit("\n".join(errors))
 
     summary = json.loads(SUMMARY.read_text())
+    explorer_summary = json.loads(EXPLORER_SUMMARY.read_text())
     geojson = json.loads(GEOJSON.read_text())
     observations = read_jsonl(OBSERVATIONS)
     crops = read_jsonl(CROPS)
     coverage = summary.get("coverage") or {}
+    observation_ids = {row.get("cellId") for row in observations}
 
     if coverage.get("gridCells") != 2283:
         errors.append("coverage.gridCells must equal 2283")
@@ -63,6 +67,13 @@ def main() -> int:
         errors.append("GeoJSON feature count does not match observations")
     if len(summary.get("topObservations") or []) > 24:
         errors.append("topObservations exceeds the bounded 24-item payload")
+    if "topObservations" in explorer_summary:
+        errors.append("explorer summary must not embed top observations")
+    explorer_metadata = explorer_summary.get("explorer") or {}
+    if explorer_metadata.get("candidateCells") != len(observations):
+        errors.append("explorer summary candidate count does not match observations")
+    if explorer_metadata.get("cropPairs") != len(crops):
+        errors.append("explorer summary crop pair count does not match manifest")
     imagery_grid = summary.get("imageryGrid") or {}
     if imagery_grid.get("validationStatus") != "pass":
         errors.append("imagery validation did not pass")
@@ -98,6 +109,25 @@ def main() -> int:
     if enhanced_images != coverage.get("enhancedDisplayImages"):
         errors.append("enhanced image count does not match summary")
 
+    detail_files = sorted(EXPLORER_CELLS.glob("*.json"))
+    if len(detail_files) != len(observations):
+        errors.append("explorer detail file count does not match observations")
+    detail_pair_count = 0
+    for path in detail_files:
+        detail = json.loads(path.read_text())
+        observation = detail.get("observation") or {}
+        cell_id = observation.get("cellId")
+        if path.stem != cell_id or cell_id not in observation_ids:
+            errors.append(f"invalid explorer cell detail:{path.name}")
+        pairs = detail.get("evidencePairs") or []
+        detail_pair_count += len(pairs)
+        if detail.get("pairCount") != len(pairs):
+            errors.append(f"invalid explorer pair count:{path.name}")
+        if any(pair.get("cellId") != cell_id for pair in pairs):
+            errors.append(f"cross-cell explorer pair:{path.name}")
+    if detail_pair_count != len(crops):
+        errors.append("explorer detail pair total does not match crop manifest")
+
     for source in (summary.get("documentaryEvidence") or {}).get("sources") or []:
         if not str(source.get("url") or "").startswith("https://"):
             errors.append(f"non-HTTPS documentary source:{source.get('id')}")
@@ -124,10 +154,14 @@ def main() -> int:
         "cropPairs": len(crops),
         "nativeCropImages": native_images,
         "enhancedDisplayImages": enhanced_images,
+        "explorerDetailFiles": len(detail_files),
+        "explorerDetailPairs": detail_pair_count,
+        "explorerSummaryBytes": EXPLORER_SUMMARY.stat().st_size,
         "documentarySources": len(
             (summary.get("documentaryEvidence") or {}).get("sources") or []
         ),
     }
+    PROFILE.mkdir(parents=True, exist_ok=True)
     (PROFILE / "public_package_validation.json").write_text(
         json.dumps(report, indent=2) + "\n"
     )

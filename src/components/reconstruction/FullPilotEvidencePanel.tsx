@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Language } from "@/components/types";
 import styles from "./full-pilot-evidence.module.css";
@@ -133,6 +134,7 @@ const content = {
     absence: "No observado no significa que no ocurrió.",
     counts: "Los conteos entre fechas nunca son un total simultáneo de activos.",
     detector: "Señal independiente del detector",
+    explore: "Explorar las 399 candidatas y 500 pares",
   },
   en: {
     kicker: "Full aerial pilot · automated triage",
@@ -171,6 +173,7 @@ const content = {
     absence: "Not observed does not mean it did not happen.",
     counts: "Counts across dates are never a simultaneous asset total.",
     detector: "Independent detector signal",
+    explore: "Explore all 399 candidates and 500 pairs",
   },
 };
 
@@ -319,6 +322,9 @@ export default function FullPilotEvidencePanel({
           <h2>{t.title}</h2>
         </div>
         <p>{t.intro}</p>
+        <Link href="/evidence/la-guaira" className={styles.explorerLink}>
+          {t.explore} →
+        </Link>
       </header>
 
       <div className={styles.stats}>

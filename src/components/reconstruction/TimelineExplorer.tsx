@@ -23,6 +23,7 @@ const copy = {
     reconstruction: "Reconstrucción pública · evidencia en desarrollo",
     title: "Lo que pasó después",
     openMap: "Abrir mapa de daños",
+    evidenceAtlas: "Atlas de evidencia",
     scope: "Alcance",
     evidenceCutoff: "Evidencia más reciente",
     sources: "Fuentes registradas",
@@ -66,6 +67,10 @@ const copy = {
     aerialKicker: "Lectura aérea fechada · +41 a +257 horas",
     aerialTitle: "¿Qué respuesta puede verse desde arriba?",
     aerialIntro: "Un barrido de 734 celdas útiles de 250 m, con comparación fechada y revisión humana de las señales prioritarias. Los objetos se validan a ~0,326 m/píxel, sin superresolución.",
+    reviewedEvidenceKicker: "Selección revisada · 10 casos",
+    reviewedEvidenceTitle: "Estos son ejemplos revisados, no todos los resultados",
+    reviewedEvidenceBody: "El atlas completo permite explorar las 399 celdas candidatas y sus 500 pares de evidencia.",
+    reviewedEvidenceCta: "Explorar las 399 candidatas",
     reviewedCandidates: "Celdas analizadas",
     publishedSites: "Sitios publicados",
     likelyResponseSites: "Señales probables",
@@ -116,6 +121,7 @@ const copy = {
     reconstruction: "Public reconstruction · evidence in progress",
     title: "What happened after",
     openMap: "Open damage map",
+    evidenceAtlas: "Evidence atlas",
     scope: "Scope",
     evidenceCutoff: "Latest evidence",
     sources: "Registered sources",
@@ -159,6 +165,10 @@ const copy = {
     aerialKicker: "Dated aerial reading · +41 to +257 hours",
     aerialTitle: "What response can be seen from above?",
     aerialIntro: "A 734-cell scan using useful 250 m cells, dated comparisons and human review of priority signals. Objects are validated at ~0.326 m/pixel, without super-resolution.",
+    reviewedEvidenceKicker: "Reviewed selection · 10 cases",
+    reviewedEvidenceTitle: "These are reviewed examples, not every result",
+    reviewedEvidenceBody: "The complete atlas exposes all 399 candidate cells and their 500 evidence pairs.",
+    reviewedEvidenceCta: "Explore all 399 candidates",
     reviewedCandidates: "Cells analyzed",
     publishedSites: "Published sites",
     likelyResponseSites: "Probable signals",
@@ -360,6 +370,15 @@ function AerialEvidenceExplorer({
         </div>
         <p>{t.aerialIntro}</p>
       </div>
+
+      <aside className={styles.fullEvidenceCallout}>
+        <div>
+          <span>{t.reviewedEvidenceKicker}</span>
+          <h3>{t.reviewedEvidenceTitle}</h3>
+          <p>{t.reviewedEvidenceBody}</p>
+        </div>
+        <Link href="/evidence/la-guaira">{t.reviewedEvidenceCta} →</Link>
+      </aside>
 
       <div className={styles.aerialSummary}>
         <dl>
@@ -608,6 +627,9 @@ export default function TimelineExplorer({
             <button type="button" onClick={() => changeLanguage("es")} aria-pressed={language === "es"}>ES</button>
             <button type="button" onClick={() => changeLanguage("en")} aria-pressed={language === "en"}>EN</button>
           </div>
+          {activeSlug === "la-guaira" && (
+            <Link href="/evidence/la-guaira" className={styles.evidenceAtlasLink}>{t.evidenceAtlas}</Link>
+          )}
           <Link href="/" className={styles.mapLink}>{t.openMap}</Link>
         </div>
       </nav>
