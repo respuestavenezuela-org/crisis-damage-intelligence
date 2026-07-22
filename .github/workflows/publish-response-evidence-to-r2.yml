@@ -56,17 +56,13 @@ jobs:
           echo "Files: $(find "$ROOT" -type f | wc -l | tr -d ' ')"
           echo "Bytes: $(du -sk "$ROOT" | awk '{print $1 * 1024}')"
 
-      - name: Configure AWS CLI
-        if: ${{ !inputs.dry_run }}
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: auto
-
       - name: Upload immutable evidence images
         if: ${{ !inputs.dry_run }}
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_EC2_METADATA_DISABLED: true
           S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
         run: |
