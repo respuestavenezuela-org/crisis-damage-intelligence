@@ -1,0 +1,3419 @@
+{
+  "version": 1,
+  "id": "full-pilot-response-evidence-2026",
+  "updatedAt": "2026-07-22T06:35:09.058422+00:00",
+  "status": "public-ai-triage",
+  "scope": {
+    "es": "La Guaira, Caraballeda y Catia La Mar",
+    "en": "La Guaira, Caraballeda and Catia La Mar"
+  },
+  "eventOrigin": "2026-06-24T18:04:33-04:00",
+  "imageryGrid": {
+    "cellWidthMetersApprox": 250,
+    "nativeContentPixels": [
+      768,
+      768
+    ],
+    "labeledAnalysisChipPixels": [
+      768,
+      802
+    ],
+    "nominalOutputSamplingMetersPerPixel": 0.326,
+    "selectedDatedSceneImages": 9794,
+    "validationStatus": "pass",
+    "readableImages": 9794,
+    "hashesChecked": 9794,
+    "validationFailureCount": 0,
+    "selectionPolicy": "Reuse exact completed AOI12 cells; otherwise select one usable pre-event reference and the best usable scene per post-event acquisition date, with metadata-ranked fallback.",
+    "warning": "Output sampling preserves available detail but does not improve the source sensor ground sample distance."
+  },
+  "coverage": {
+    "gridCells": 2283,
+    "eligibleImageryStacks": 2283,
+    "pairedVlmCoverage": 2283,
+    "postEventOnlyCells": 355,
+    "candidateCells": 399,
+    "withinFirst72Hours": 311,
+    "waldo30Cells": 2283,
+    "cropPairs": 500,
+    "nativeCropImages": 972,
+    "enhancedDisplayImages": 197
+  },
+  "evidenceTierCounts": {
+    "contested_positive": 132,
+    "contested_positive_with_detector_delta": 163,
+    "cross_model_positive": 33,
+    "cross_model_positive_with_detector_delta": 71
+  },
+  "timeWindowCounts": {
+    "0_24h": 10,
+    "24_48h": 279,
+    "48_72h": 22,
+    "72h_7d": 45,
+    "after_7d": 2,
+    "undated": 41
+  },
+  "assetCategoryCounts": {
+    "collection_or_staging": 224,
+    "debris_clearance": 127,
+    "emergency_or_service_vehicle": 44,
+    "heavy_machinery": 75,
+    "temporary_shelter": 295,
+    "trucks_or_large_vehicles": 128
+  },
+  "sourceAreaCandidateCounts": {
+    "emsr884-aoi12-caraballeda": 201,
+    "external-msft-caraballeda-east-predicted-damage": 72,
+    "external-msft-catia-la-mar-east-predicted-damage": 240,
+    "external-msft-catia-la-mar-predicted-damage": 194,
+    "external-msft-la-guaira-east-predicted-damage": 26
+  },
+  "sourceAreaCoverageCounts": {
+    "emsr884-aoi12-caraballeda": 1022,
+    "external-msft-caraballeda-east-predicted-damage": 349,
+    "external-msft-catia-la-mar-east-predicted-damage": 893,
+    "external-msft-catia-la-mar-predicted-damage": 1145,
+    "external-msft-la-guaira-east-predicted-damage": 328
+  },
+  "timelineEvents": [
+    {
+      "acquisitionUtc": "2026-06-25T15:17:49.499492Z",
+      "hoursAfterEvent": 17.22,
+      "timeWindow": "0_24h",
+      "candidateCells": 8,
+      "bothModelsPositive": 1,
+      "detectorSupported": 0
+    },
+    {
+      "acquisitionUtc": "2026-06-25T21:29:28.499714Z",
+      "hoursAfterEvent": 23.42,
+      "timeWindow": "0_24h",
+      "candidateCells": 2,
+      "bothModelsPositive": 0,
+      "detectorSupported": 1
+    },
+    {
+      "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "candidateCells": 215,
+      "bothModelsPositive": 53,
+      "detectorSupported": 160
+    },
+    {
+      "acquisitionUtc": "2026-06-26T15:09:50.723001Z",
+      "hoursAfterEvent": 41.09,
+      "timeWindow": "24_48h",
+      "candidateCells": 32,
+      "bothModelsPositive": 9,
+      "detectorSupported": 25
+    },
+    {
+      "acquisitionUtc": "2026-06-26T15:10:00Z",
+      "hoursAfterEvent": 41.09,
+      "timeWindow": "24_48h",
+      "candidateCells": 8,
+      "bothModelsPositive": 2,
+      "detectorSupported": 2
+    },
+    {
+      "acquisitionUtc": "2026-06-26T21:13:46.374593Z",
+      "hoursAfterEvent": 47.15,
+      "timeWindow": "24_48h",
+      "candidateCells": 24,
+      "bothModelsPositive": 15,
+      "detectorSupported": 14
+    },
+    {
+      "acquisitionUtc": "2026-06-27T13:48:10.374681Z",
+      "hoursAfterEvent": 63.73,
+      "timeWindow": "48_72h",
+      "candidateCells": 20,
+      "bothModelsPositive": 5,
+      "detectorSupported": 9
+    },
+    {
+      "acquisitionUtc": "2026-06-27T15:15:06.41416Z",
+      "hoursAfterEvent": 65.18,
+      "timeWindow": "48_72h",
+      "candidateCells": 2,
+      "bothModelsPositive": 1,
+      "detectorSupported": 0
+    },
+    {
+      "acquisitionUtc": "2026-06-29T14:09:32Z",
+      "hoursAfterEvent": 112.08,
+      "timeWindow": "72h_7d",
+      "candidateCells": 12,
+      "bothModelsPositive": 3,
+      "detectorSupported": 9
+    },
+    {
+      "acquisitionUtc": "2026-06-29T14:09:32.624709Z",
+      "hoursAfterEvent": 112.08,
+      "timeWindow": "72h_7d",
+      "candidateCells": 1,
+      "bothModelsPositive": 1,
+      "detectorSupported": 0
+    },
+    {
+      "acquisitionUtc": "2026-06-29T14:09:55Z",
+      "hoursAfterEvent": 112.09,
+      "timeWindow": "72h_7d",
+      "candidateCells": 24,
+      "bothModelsPositive": 11,
+      "detectorSupported": 11
+    },
+    {
+      "acquisitionUtc": "2026-06-29T14:09:55.124782Z",
+      "hoursAfterEvent": 112.09,
+      "timeWindow": "72h_7d",
+      "candidateCells": 1,
+      "bothModelsPositive": 1,
+      "detectorSupported": 1
+    },
+    {
+      "acquisitionUtc": "2026-06-29T14:10:16.249659Z",
+      "hoursAfterEvent": 112.1,
+      "timeWindow": "72h_7d",
+      "candidateCells": 7,
+      "bothModelsPositive": 1,
+      "detectorSupported": 2
+    },
+    {
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "hoursAfterEvent": 257.01,
+      "timeWindow": "after_7d",
+      "candidateCells": 2,
+      "bothModelsPositive": 1,
+      "detectorSupported": 0
+    }
+  ],
+  "topObservations": [
+    {
+      "cellId": "pilot_r006_c060",
+      "longitude": -66.98400205,
+      "latitude": 10.53022758,
+      "cellBoundsWgs84": [
+        [
+          -66.985125,
+          10.5291236
+        ],
+        [
+          -66.9828792,
+          10.5291236
+        ],
+        [
+          -66.9828792,
+          10.5313316
+        ],
+        [
+          -66.985125,
+          10.5313316
+        ],
+        [
+          -66.985125,
+          10.5291236
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 2,
+          "Digger": 1,
+          "Truck": 2
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 2,
+          "Digger": 1,
+          "Truck": 2
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0023_pilot_r006_c060_container",
+        "pair_0164_pilot_r006_c060_lightvehicle",
+        "pair_0165_pilot_r006_c060_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0023_pilot_r006_c060_container",
+        "rank": 23,
+        "rankScore": 376,
+        "cellId": "pilot_r006_c060",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Container",
+          "confidence": 0.544,
+          "xyxyn": [
+            0.5083,
+            0.09012,
+            0.75771,
+            0.21918
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0023_pilot_r006_c060_container_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0023_pilot_r006_c060_container_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "2df91956197e56df5825cffccb8bb6bf21438e559fe240637e49f23dd572964f",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0023_pilot_r006_c060_container_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0023_pilot_r006_c060_container_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "6c2dd45569f5acd6794f78bc86b28029aa221543891ae3d43ae51965e27398b8",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0023_pilot_r006_c060_container_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0023_pilot_r006_c060_container_2_post_detection_B040001100075610.png",
+            "nativeSha256": "87c128cf2b817cb978f908143cc9b2b95998011d0f7dbbe9183a3006faa97def",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0023_pilot_r006_c060_container_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0023_pilot_r006_c060_container_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "2fac3073f1a09e603d9080281d626c10978cf631d9c891416b610d7c93342027",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r033_c064",
+      "longitude": -66.9750189,
+      "latitude": 10.58983689,
+      "cellBoundsWgs84": [
+        [
+          -66.9761418,
+          10.5887331
+        ],
+        [
+          -66.973896,
+          10.5887331
+        ],
+        [
+          -66.973896,
+          10.5909407
+        ],
+        [
+          -66.9761418,
+          10.5909407
+        ],
+        [
+          -66.9761418,
+          10.5887331
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 12,
+          "Digger": 1,
+          "Person": 2,
+          "Truck": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 5,
+          "Digger": 1,
+          "Person": 2,
+          "Truck": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0009_pilot_r033_c064_truck",
+        "pair_0017_pilot_r033_c064_container",
+        "pair_0018_pilot_r033_c064_container"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0009_pilot_r033_c064_truck",
+        "rank": 9,
+        "rankScore": 395,
+        "cellId": "pilot_r033_c064",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.4802,
+          "xyxyn": [
+            0.851,
+            0.27184,
+            0.9578,
+            0.32914
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0009_pilot_r033_c064_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0009_pilot_r033_c064_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "397523af0f87f045e395c5aa35eac11508be1b0be59025e764bb9a7a59b42cbc",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0009_pilot_r033_c064_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0009_pilot_r033_c064_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "81e9f62c9c814d91ce048272ba8c20e5d3f7cc2bb5b08eb952a92ea726212693",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0009_pilot_r033_c064_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0009_pilot_r033_c064_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "3312d295b503158c78398a2fd24c4351de0477dc25c3dc3d450a2662e22366b2",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0009_pilot_r033_c064_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0009_pilot_r033_c064_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "dd0af7d7c51042668765c3d90f2a6ba6e4c22cc549e81c6bb59a209334b2e468",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r036_c037",
+      "longitude": -67.03565518,
+      "latitude": 10.59645943,
+      "cellBoundsWgs84": [
+        [
+          -67.0367781,
+          10.5953557
+        ],
+        [
+          -67.0345323,
+          10.5953557
+        ],
+        [
+          -67.0345323,
+          10.5975632
+        ],
+        [
+          -67.0367781,
+          10.5975632
+        ],
+        [
+          -67.0367781,
+          10.5953557
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "debris_clearance",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 5
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 5
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0028_pilot_r036_c037_container",
+        "pair_0036_pilot_r036_c037_container",
+        "pair_0181_pilot_r036_c037_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0028_pilot_r036_c037_container",
+        "rank": 28,
+        "rankScore": 375,
+        "cellId": "pilot_r036_c037",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "debris_clearance",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Container",
+          "confidence": 0.5209,
+          "xyxyn": [
+            0.35678,
+            0.50473,
+            0.39047,
+            0.55905
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0028_pilot_r036_c037_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0028_pilot_r036_c037_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "402f1ea6d72fc7507d471f14e7170cfe18a00271ca2bf8e7aeb4201e634fdf30",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0028_pilot_r036_c037_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0028_pilot_r036_c037_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "41e633087be301173f08ff3e39c443e62a440febbefe2677f67d76128c0ae37c",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0028_pilot_r036_c037_container_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0028_pilot_r036_c037_container_2_post_detection_B040001100075610.png",
+            "nativeSha256": "3042b00c508398d72c71c595a3309c7b071880e20b3800f697dcfefed2647d35",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0028_pilot_r036_c037_container_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0028_pilot_r036_c037_container_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "58b7e88316dcade9f2086c6371720b80fe97bfff53c2b414952a673f720a2db5",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r040_c044",
+      "longitude": -67.01993467,
+      "latitude": 10.60528926,
+      "cellBoundsWgs84": [
+        [
+          -67.0210576,
+          10.6041855
+        ],
+        [
+          -67.0188118,
+          10.6041855
+        ],
+        [
+          -67.0188118,
+          10.606393
+        ],
+        [
+          -67.0210576,
+          10.606393
+        ],
+        [
+          -67.0210576,
+          10.6041855
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 16,
+          "Digger": 2,
+          "Truck": 5
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 14,
+          "Truck": 5
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0003_pilot_r040_c044_digger",
+        "pair_0005_pilot_r040_c044_digger",
+        "pair_0010_pilot_r040_c044_truck"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0003_pilot_r040_c044_digger",
+        "rank": 3,
+        "rankScore": 401,
+        "cellId": "pilot_r040_c044",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Digger",
+          "confidence": 0.3062,
+          "xyxyn": [
+            0.79762,
+            0.21956,
+            0.81492,
+            0.25669
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0003_pilot_r040_c044_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0003_pilot_r040_c044_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "27a24560c8d9432b68fdf0624ee3b47627305958fdb2900aa20366ec329ff65f",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0003_pilot_r040_c044_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0003_pilot_r040_c044_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "de2e6857da8ac3627741b17b35932b4c785eecfde71088253864be91c84e0569",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0003_pilot_r040_c044_digger_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0003_pilot_r040_c044_digger_2_post_detection_B040001100075610.png",
+            "nativeSha256": "abcbce46c5a4c286e3c8c93c1026804f4018bed8f4adddb35a107ec955126692",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0003_pilot_r040_c044_digger_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0003_pilot_r040_c044_digger_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "c77cd284a8f881c1d8744562f46dd00418df9e2f38c7862ec6f624473e982c30",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r040_c046",
+      "longitude": -67.01544309,
+      "latitude": 10.60528926,
+      "cellBoundsWgs84": [
+        [
+          -67.016566,
+          10.6041855
+        ],
+        [
+          -67.0143202,
+          10.6041855
+        ],
+        [
+          -67.0143202,
+          10.606393
+        ],
+        [
+          -67.016566,
+          10.606393
+        ],
+        [
+          -67.016566,
+          10.6041855
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Digger": 4,
+          "Person": 1,
+          "Truck": 4
+        },
+        "positiveMaxCountDeltas": {
+          "Digger": 4,
+          "Person": 2,
+          "Truck": 4
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0001_pilot_r040_c046_digger",
+        "pair_0002_pilot_r040_c046_digger",
+        "pair_0004_pilot_r040_c046_digger"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0001_pilot_r040_c046_digger",
+        "rank": 1,
+        "rankScore": 406,
+        "cellId": "pilot_r040_c046",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Digger",
+          "confidence": 0.561,
+          "xyxyn": [
+            0.80373,
+            0.76694,
+            0.82333,
+            0.79747
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0001_pilot_r040_c046_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0001_pilot_r040_c046_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "634a37a3bbf283b13ad5028a4f5dfc743cc2ac6dd49f4e977fa378ffeeb76bf8",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0001_pilot_r040_c046_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0001_pilot_r040_c046_digger_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "3a971c1ab2b5ac8d3a96904ddef4356943aff1a4c23f2b77d4ab3214d827807c",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0001_pilot_r040_c046_digger_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0001_pilot_r040_c046_digger_2_post_detection_B040001100075610.png",
+            "nativeSha256": "f6cb90b1959fa6b5d15e6de2ca315ed6a79284cda7089fdd42a0f83ca4d6fafb",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0001_pilot_r040_c046_digger_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0001_pilot_r040_c046_digger_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "28a9d69e92b6f49c06b1c064e0a521446c0eb7538f1f77ad3349de79fef04a7d",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r041_c041",
+      "longitude": -67.02667203,
+      "latitude": 10.60749668,
+      "cellBoundsWgs84": [
+        [
+          -67.0277949,
+          10.606393
+        ],
+        [
+          -67.0255491,
+          10.606393
+        ],
+        [
+          -67.0255491,
+          10.6086004
+        ],
+        [
+          -67.0277949,
+          10.6086004
+        ],
+        [
+          -67.0277949,
+          10.606393
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 7,
+          "Digger": 1,
+          "Person": 1,
+          "Truck": 3
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 7,
+          "Person": 1,
+          "Truck": 2
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0007_pilot_r041_c041_truck",
+        "pair_0012_pilot_r041_c041_truck",
+        "pair_0013_pilot_r041_c041_truck"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0007_pilot_r041_c041_truck",
+        "rank": 7,
+        "rankScore": 397,
+        "cellId": "pilot_r041_c041",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.6162,
+          "xyxyn": [
+            0.3586,
+            0.5115,
+            0.37616,
+            0.54923
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0007_pilot_r041_c041_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0007_pilot_r041_c041_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "65349d3abd8f95223356c8199c23f77513d821f7723644bc21af51f8d228a6e9",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0007_pilot_r041_c041_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0007_pilot_r041_c041_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "b6a4ca7b78d8c4e85b3ad2aba894dc81980e391897a0b62bb6c76b4dbc607b03",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0007_pilot_r041_c041_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0007_pilot_r041_c041_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "e73c86e2b62d3a81ca5d02a2be1c792f2dcee8e1ce05d9874da268ac5464e290",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0007_pilot_r041_c041_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0007_pilot_r041_c041_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "98c3a2b3d0554a5e187ff245a03400708c5ccefe743f4f89b5efe59507057fe2",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r041_c044",
+      "longitude": -67.01993467,
+      "latitude": 10.60749668,
+      "cellBoundsWgs84": [
+        [
+          -67.0210576,
+          10.606393
+        ],
+        [
+          -67.0188118,
+          10.606393
+        ],
+        [
+          -67.0188118,
+          10.6086004
+        ],
+        [
+          -67.0210576,
+          10.6086004
+        ],
+        [
+          -67.0210576,
+          10.606393
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 8,
+          "Truck": 3
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 8,
+          "Truck": 3
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0014_pilot_r041_c044_truck",
+        "pair_0015_pilot_r041_c044_truck",
+        "pair_0027_pilot_r041_c044_container"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0014_pilot_r041_c044_truck",
+        "rank": 14,
+        "rankScore": 390,
+        "cellId": "pilot_r041_c044",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.2645,
+          "xyxyn": [
+            0.57987,
+            0.70104,
+            0.59552,
+            0.74219
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0014_pilot_r041_c044_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0014_pilot_r041_c044_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "07011dc432678d95b28815460d56570b8d38e917f4c8fe92a83221e40122e2ca",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0014_pilot_r041_c044_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0014_pilot_r041_c044_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "29c38da94441ce4581e188df42c3cd2e990f0446eb5fa4ee8bf2f674b11df103",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0014_pilot_r041_c044_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0014_pilot_r041_c044_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "5877e0d45b83d90da3d40a9f473aef53bc85d46e61a26f97a12bd7331dc21544",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0014_pilot_r041_c044_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0014_pilot_r041_c044_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "6b5d4a55d1a3a92e2c97500a8727dcf62482f380d44f21d499ee3363ac19bc19",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r041_c061",
+      "longitude": -66.98175627,
+      "latitude": 10.60749668,
+      "cellBoundsWgs84": [
+        [
+          -66.9828792,
+          10.606393
+        ],
+        [
+          -66.9806334,
+          10.606393
+        ],
+        [
+          -66.9806334,
+          10.6086004
+        ],
+        [
+          -66.9828792,
+          10.6086004
+        ],
+        [
+          -66.9828792,
+          10.606393
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Person": 1,
+          "Truck": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 1,
+          "Person": 1,
+          "Truck": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0158_pilot_r041_c061_lightvehicle",
+        "pair_0159_pilot_r041_c061_lightvehicle",
+        "pair_0171_pilot_r041_c061_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0158_pilot_r041_c061_lightvehicle",
+        "rank": 158,
+        "rankScore": 331,
+        "cellId": "pilot_r041_c061",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "LightVehicle",
+          "confidence": 0.8133,
+          "xyxyn": [
+            0.26409,
+            0.33653,
+            0.29097,
+            0.36016
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0158_pilot_r041_c061_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0158_pilot_r041_c061_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "4c1c300c4faeb3b541a760d0fdbaec55a900d452cc09ac815645a02142daf36a",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0158_pilot_r041_c061_lightvehicle_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0158_pilot_r041_c061_lightvehicle_2_post_detection_B040001100075610.png",
+            "nativeSha256": "505ecac77f246f8149fb06e9abe23305a29c72f254d0d7723691507d0d1d5ac4",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r042_c041",
+      "longitude": -67.02667203,
+      "latitude": 10.60970408,
+      "cellBoundsWgs84": [
+        [
+          -67.0277949,
+          10.6086004
+        ],
+        [
+          -67.0255491,
+          10.6086004
+        ],
+        [
+          -67.0255491,
+          10.6108078
+        ],
+        [
+          -67.0277949,
+          10.6108078
+        ],
+        [
+          -67.0277949,
+          10.6086004
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Digger": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Digger": 1,
+          "Person": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0175_pilot_r042_c041_lightvehicle",
+        "pair_0176_pilot_r042_c041_lightvehicle",
+        "pair_0177_pilot_r042_c041_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0175_pilot_r042_c041_lightvehicle",
+        "rank": 175,
+        "rankScore": 330,
+        "cellId": "pilot_r042_c041",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "LightVehicle",
+          "confidence": 0.7743,
+          "xyxyn": [
+            0.86794,
+            0.60774,
+            0.88671,
+            0.62253
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0175_pilot_r042_c041_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0175_pilot_r042_c041_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "ba23f394ffe4dd3cbf791399ecd83634e8e2c91ee5787080170783e607e5a55d",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0175_pilot_r042_c041_lightvehicle_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0175_pilot_r042_c041_lightvehicle_2_post_detection_B040001100075610.png",
+            "nativeSha256": "e5c7f9e005c3104381d941c2825fda8d262b989d007e0bb8dae635fcd587dc6c",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r044_c124",
+      "longitude": -66.84027161,
+      "latitude": 10.61411884,
+      "cellBoundsWgs84": [
+        [
+          -66.8413945,
+          10.6130152
+        ],
+        [
+          -66.8391487,
+          10.6130152
+        ],
+        [
+          -66.8391487,
+          10.6152225
+        ],
+        [
+          -66.8413945,
+          10.6152225
+        ],
+        [
+          -66.8413945,
+          10.6130152
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-caraballeda-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+      "hoursAfterEvent": 47.15,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Digger": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Digger": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0160_pilot_r044_c124_lightvehicle",
+        "pair_0184_pilot_r044_c124_lightvehicle",
+        "pair_0185_pilot_r044_c124_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0160_pilot_r044_c124_lightvehicle",
+        "rank": 160,
+        "rankScore": 331,
+        "cellId": "pilot_r044_c124",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "LightVehicle",
+          "confidence": 0.776,
+          "xyxyn": [
+            0.07261,
+            0.20364,
+            0.09592,
+            0.22986
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0160_pilot_r044_c124_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0160_pilot_r044_c124_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "fec0a33a91c186c8a14d7d52f64a077162da2f3d2a6a8ce059a337a227e1f669",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B1600011017A8610",
+            "acquisitionUtc": "2026-06-26T21:13:46.374593Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0160_pilot_r044_c124_lightvehicle_2_post_detection_B1600011017A8610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0160_pilot_r044_c124_lightvehicle_2_post_detection_B1600011017A8610.png",
+            "nativeSha256": "8cdab42bd21d3d0696a1d0918a11aa02541c124d89360e0b7f12e11a19d50367",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r045_c119",
+      "longitude": -66.85150055,
+      "latitude": 10.61632619,
+      "cellBoundsWgs84": [
+        [
+          -66.8526235,
+          10.6152225
+        ],
+        [
+          -66.8503777,
+          10.6152225
+        ],
+        [
+          -66.8503777,
+          10.6174299
+        ],
+        [
+          -66.8526235,
+          10.6174299
+        ],
+        [
+          -66.8526235,
+          10.6152225
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-caraballeda-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:50.723001Z",
+      "hoursAfterEvent": 41.09,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 1,
+          "Person": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 1,
+          "Digger": 1,
+          "Person": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0161_pilot_r045_c119_lightvehicle",
+        "pair_0162_pilot_r045_c119_lightvehicle",
+        "pair_0163_pilot_r045_c119_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0161_pilot_r045_c119_lightvehicle",
+        "rank": 161,
+        "rankScore": 331,
+        "cellId": "pilot_r045_c119",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "LightVehicle",
+          "confidence": 0.7809,
+          "xyxyn": [
+            0.37566,
+            0.79918,
+            0.3964,
+            0.81214
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:50.723001Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0161_pilot_r045_c119_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0161_pilot_r045_c119_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "e0353e1fc84990b03cce6d4ffeed418016200b60981af179225359850f8ab7df",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075510",
+            "acquisitionUtc": "2026-06-26T15:09:50.723001Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0161_pilot_r045_c119_lightvehicle_2_post_detection_B040001100075510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0161_pilot_r045_c119_lightvehicle_2_post_detection_B040001100075510.png",
+            "nativeSha256": "6d514ab6fecf606eee29a945e5cf6514a84cf6acb2cd9278ce313b83e94e1ced",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r045_c123",
+      "longitude": -66.8425174,
+      "latitude": 10.61632619,
+      "cellBoundsWgs84": [
+        [
+          -66.8436403,
+          10.6152225
+        ],
+        [
+          -66.8413945,
+          10.6152225
+        ],
+        [
+          -66.8413945,
+          10.6174299
+        ],
+        [
+          -66.8436403,
+          10.6174299
+        ],
+        [
+          -66.8436403,
+          10.6152225
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-caraballeda-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+      "hoursAfterEvent": 47.15,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Person": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Digger": 1,
+          "Person": 1,
+          "Truck": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0186_pilot_r045_c123_lightvehicle",
+        "pair_0187_pilot_r045_c123_lightvehicle",
+        "pair_0188_pilot_r045_c123_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0186_pilot_r045_c123_lightvehicle",
+        "rank": 186,
+        "rankScore": 329,
+        "cellId": "pilot_r045_c123",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "LightVehicle",
+          "confidence": 0.7035,
+          "xyxyn": [
+            0.52221,
+            0.7887,
+            0.54382,
+            0.79968
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0186_pilot_r045_c123_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0186_pilot_r045_c123_lightvehicle_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "7b6d728366222a0a2f984d9f4bdf35e5cd458db1f35fbf4e49df92168dd70de2",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B1600011017A8610",
+            "acquisitionUtc": "2026-06-26T21:13:46.374593Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0186_pilot_r045_c123_lightvehicle_2_post_detection_B1600011017A8610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0186_pilot_r045_c123_lightvehicle_2_post_detection_B1600011017A8610.png",
+            "nativeSha256": "3671d4386e534a4de8167e1b728ac49ce62e222e1d832bf61aaeb89613024956",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r046_c120",
+      "longitude": -66.84925476,
+      "latitude": 10.61853353,
+      "cellBoundsWgs84": [
+        [
+          -66.8503777,
+          10.6174299
+        ],
+        [
+          -66.8481319,
+          10.6174299
+        ],
+        [
+          -66.8481319,
+          10.6196372
+        ],
+        [
+          -66.8503777,
+          10.6196372
+        ],
+        [
+          -66.8503777,
+          10.6174299
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-caraballeda-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:50.723001Z",
+      "hoursAfterEvent": 41.09,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 225,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 2,
+          "Person": 3,
+          "Truck": 3
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 1,
+          "Person": 13,
+          "Truck": 3
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0006_pilot_r046_c120_truck",
+        "pair_0008_pilot_r046_c120_truck",
+        "pair_0011_pilot_r046_c120_truck"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0006_pilot_r046_c120_truck",
+        "rank": 6,
+        "rankScore": 398,
+        "cellId": "pilot_r046_c120",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.6535,
+          "xyxyn": [
+            0.47363,
+            0.67531,
+            0.50918,
+            0.69097
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:50.723001Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0006_pilot_r046_c120_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0006_pilot_r046_c120_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "b0eaf107618e46973896448ee9e17983ea5af60fba247ff89ec1f8a98a6c1347",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0006_pilot_r046_c120_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0006_pilot_r046_c120_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "5d503d61487d2556ea930b43149b062e7c6c8d17056f6e99f74a1860095c01d3",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075510",
+            "acquisitionUtc": "2026-06-26T15:09:50.723001Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0006_pilot_r046_c120_truck_2_post_detection_B040001100075510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0006_pilot_r046_c120_truck_2_post_detection_B040001100075510.png",
+            "nativeSha256": "909328cadd2083db8587800ce3d1341fb76fb09e704287231b9dec5ff7dc79f0",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0006_pilot_r046_c120_truck_2_post_detection_B040001100075510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0006_pilot_r046_c120_truck_2_post_detection_B040001100075510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "aa15421f75d0435b61b604e01314ec01198bc77a26a522a16d8564ca7dd9e7da",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r046_c121",
+      "longitude": -66.84700897,
+      "latitude": 10.61853353,
+      "cellBoundsWgs84": [
+        [
+          -66.8481319,
+          10.6174299
+        ],
+        [
+          -66.8458861,
+          10.6174299
+        ],
+        [
+          -66.8458861,
+          10.6196372
+        ],
+        [
+          -66.8481319,
+          10.6196372
+        ],
+        [
+          -66.8481319,
+          10.6174299
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-caraballeda-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+      "hoursAfterEvent": 47.15,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 210,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "emergency_or_service_vehicle",
+        "heavy_machinery",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Truck": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Person": 2,
+          "Truck": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0021_pilot_r046_c121_truck",
+        "pair_0258_pilot_r046_c121_lightvehicle",
+        "pair_0263_pilot_r046_c121_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0021_pilot_r046_c121_truck",
+        "rank": 21,
+        "rankScore": 378,
+        "cellId": "pilot_r046_c121",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "emergency_or_service_vehicle",
+          "heavy_machinery",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.3906,
+          "xyxyn": [
+            0.20407,
+            0.76459,
+            0.2208,
+            0.80123
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0021_pilot_r046_c121_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0021_pilot_r046_c121_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "e6c7232f8db3d5e095ac976f64b45a0b19883456de0c9bcd18e39e26fdc1ef1e",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0021_pilot_r046_c121_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0021_pilot_r046_c121_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "ccff32f2083f2519f458b364fb38493be700da76049d9172fcc1c8bfc64d1d63",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B1600011017A8610",
+            "acquisitionUtc": "2026-06-26T21:13:46.374593Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0021_pilot_r046_c121_truck_2_post_detection_B1600011017A8610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0021_pilot_r046_c121_truck_2_post_detection_B1600011017A8610.png",
+            "nativeSha256": "e2df45d5c1c7279cbd90d1a303a84f2d524759e87cb718f28f3723eb6f5510ae",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0021_pilot_r046_c121_truck_2_post_detection_B1600011017A8610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0021_pilot_r046_c121_truck_2_post_detection_B1600011017A8610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "f2dd9f474decb9cbffb71acb370dc6fde30047786a01034ab6a4f3d7dc4e3c7c",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r037_c071",
+      "longitude": -66.95929838,
+      "latitude": 10.59866691,
+      "cellBoundsWgs84": [
+        [
+          -66.9604213,
+          10.5975632
+        ],
+        [
+          -66.9581755,
+          10.5975632
+        ],
+        [
+          -66.9581755,
+          10.5997706
+        ],
+        [
+          -66.9604213,
+          10.5997706
+        ],
+        [
+          -66.9604213,
+          10.5975632
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-27T13:48:10.374681Z",
+      "hoursAfterEvent": 63.73,
+      "timeWindow": "48_72h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 205,
+      "assetCategories": [
+        "collection_or_staging",
+        "heavy_machinery",
+        "temporary_shelter"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Bus": 1,
+          "Container": 37,
+          "Truck": 5
+        },
+        "positiveMaxCountDeltas": {
+          "Bus": 1,
+          "Container": 36,
+          "Digger": 1,
+          "Person": 1,
+          "Truck": 6
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0019_pilot_r037_c071_truck",
+        "pair_0029_pilot_r037_c071_truck",
+        "pair_0042_pilot_r037_c071_truck"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0019_pilot_r037_c071_truck",
+        "rank": 19,
+        "rankScore": 378,
+        "cellId": "pilot_r037_c071",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "heavy_machinery",
+          "temporary_shelter"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.6496,
+          "xyxyn": [
+            0.60732,
+            0.89596,
+            0.64876,
+            0.95297
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-27T13:48:10.374681Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0019_pilot_r037_c071_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0019_pilot_r037_c071_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "db9900c064ac1bedab5a1c31d99419878931b8537efa0ee881671372685fc1c2",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0019_pilot_r037_c071_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0019_pilot_r037_c071_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "30b6df8f15d69b4d38da6196a7dc83152fd22787c3c5d681d499118e8101792c",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B15000110186C610",
+            "acquisitionUtc": "2026-06-27T13:48:10.374681Z",
+            "sensor": "LG05",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0019_pilot_r037_c071_truck_2_post_detection_B15000110186C610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0019_pilot_r037_c071_truck_2_post_detection_B15000110186C610.png",
+            "nativeSha256": "61734cbeb0bc478a20009a77a84ddfdd50b05a77a8298c55f939b9edef27bae5",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0019_pilot_r037_c071_truck_2_post_detection_B15000110186C610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0019_pilot_r037_c071_truck_2_post_detection_B15000110186C610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "56ae178a061606ad82a05ed415eabeebaa168731af905f779823f00476e59f02",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r007_c061",
+      "longitude": -66.98175627,
+      "latitude": 10.53243554,
+      "cellBoundsWgs84": [
+        [
+          -66.9828792,
+          10.5313316
+        ],
+        [
+          -66.9806334,
+          10.5313316
+        ],
+        [
+          -66.9806334,
+          10.5335395
+        ],
+        [
+          -66.9828792,
+          10.5335395
+        ],
+        [
+          -66.9828792,
+          10.5313316
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "collection_or_staging",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 5,
+          "Truck": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 6,
+          "Digger": 1,
+          "Truck": 2
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0064_pilot_r007_c061_truck",
+        "pair_0106_pilot_r007_c061_container",
+        "pair_0112_pilot_r007_c061_container"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0064_pilot_r007_c061_truck",
+        "rank": 64,
+        "rankScore": 366,
+        "cellId": "pilot_r007_c061",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.2849,
+          "xyxyn": [
+            0.0,
+            0.59586,
+            0.04406,
+            0.63895
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0064_pilot_r007_c061_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0064_pilot_r007_c061_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "9a40cdf28362b4d5c39d418357fbb2acf71f1f4b0574e21532ab4fac7b4209b0",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0064_pilot_r007_c061_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0064_pilot_r007_c061_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "e2b47ccc5d51e2772750b9bcbd9f5917308ead6561beb5d385330f08086885cd",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0064_pilot_r007_c061_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0064_pilot_r007_c061_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "933bdb6ce3de287bf5c3b236a1fdcec2f01b5a7720f930b0305c3a915ccc517a",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0064_pilot_r007_c061_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0064_pilot_r007_c061_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "a1a258b8064714a4e827a43f5c051ebc4aa8459fa28ebc86290f0d2576e1dba4",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r009_c058",
+      "longitude": -66.98849363,
+      "latitude": 10.5368514,
+      "cellBoundsWgs84": [
+        [
+          -66.9896165,
+          10.5357474
+        ],
+        [
+          -66.9873707,
+          10.5357474
+        ],
+        [
+          -66.9873707,
+          10.5379554
+        ],
+        [
+          -66.9896165,
+          10.5379554
+        ],
+        [
+          -66.9896165,
+          10.5357474
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "collection_or_staging",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 1,
+          "Truck": 5
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 1,
+          "Digger": 2,
+          "Truck": 5
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0024_pilot_r009_c058_truck",
+        "pair_0025_pilot_r009_c058_truck",
+        "pair_0035_pilot_r009_c058_truck"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0024_pilot_r009_c058_truck",
+        "rank": 24,
+        "rankScore": 376,
+        "cellId": "pilot_r009_c058",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.7901,
+          "xyxyn": [
+            0.7075,
+            0.19092,
+            0.73687,
+            0.23423
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0024_pilot_r009_c058_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0024_pilot_r009_c058_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "b10ecbe7b123988a80337ddf45411fdaf29b314e864a123b3c0d82aac46bc024",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0024_pilot_r009_c058_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0024_pilot_r009_c058_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "81923d27d1c5490b4a8ae4cad61ea4efd02545552ee6afc20b10fb4a4469be2a",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0024_pilot_r009_c058_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0024_pilot_r009_c058_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "e849ad29d63780ccd514a8100f7be3f76b375bb1e82fbae749c2d6a752156e7c",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0024_pilot_r009_c058_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0024_pilot_r009_c058_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "a7bdbadba8290d1417781f9f85981a2b71cc4db05ceab8e0be7f8aa499dfa6cb",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r010_c057",
+      "longitude": -66.99073942,
+      "latitude": 10.53905931,
+      "cellBoundsWgs84": [
+        [
+          -66.9918623,
+          10.5379554
+        ],
+        [
+          -66.9896165,
+          10.5379554
+        ],
+        [
+          -66.9896165,
+          10.5401633
+        ],
+        [
+          -66.9918623,
+          10.5401633
+        ],
+        [
+          -66.9918623,
+          10.5379554
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "collection_or_staging",
+        "emergency_or_service_vehicle",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Truck": 2
+        },
+        "positiveMaxCountDeltas": {
+          "Truck": 2
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0052_pilot_r010_c057_truck",
+        "pair_0322_pilot_r010_c057_lightvehicle",
+        "pair_0335_pilot_r010_c057_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0052_pilot_r010_c057_truck",
+        "rank": 52,
+        "rankScore": 370,
+        "cellId": "pilot_r010_c057",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "emergency_or_service_vehicle",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.5055,
+          "xyxyn": [
+            0.59933,
+            0.29052,
+            0.63387,
+            0.31732
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0052_pilot_r010_c057_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0052_pilot_r010_c057_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "0d46a26e7e0ee837e7aaeb6a0bc220e8ac8e90cefce5ab303375a9add97e5f5e",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0052_pilot_r010_c057_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0052_pilot_r010_c057_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "53364ad9c945e55fd94914d209062e61cf75be0bd2106147e9b0a4bc10e6299a",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0052_pilot_r010_c057_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0052_pilot_r010_c057_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "ef26f1b2ed84dc68c5badc86a591e303f750ac021c5f65ac1c3f5cba645c4af4",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0052_pilot_r010_c057_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0052_pilot_r010_c057_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "33cdd42fb9f2521e2cf962e73fe1c29940235cc825232cb15b047a7f2e303b32",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r033_c056",
+      "longitude": -66.99298521,
+      "latitude": 10.58983689,
+      "cellBoundsWgs84": [
+        [
+          -66.9941081,
+          10.5887331
+        ],
+        [
+          -66.9918623,
+          10.5887331
+        ],
+        [
+          -66.9918623,
+          10.5909407
+        ],
+        [
+          -66.9941081,
+          10.5909407
+        ],
+        [
+          -66.9941081,
+          10.5887331
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Truck": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Bus": 1,
+          "Container": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0336_pilot_r033_c056_lightvehicle",
+        "pair_0337_pilot_r033_c056_lightvehicle",
+        "pair_0338_pilot_r033_c056_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0336_pilot_r033_c056_lightvehicle",
+        "rank": 336,
+        "rankScore": 305,
+        "cellId": "pilot_r033_c056",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "LightVehicle",
+          "confidence": 0.7731,
+          "xyxyn": [
+            0.03782,
+            0.69412,
+            0.05834,
+            0.71073
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0336_pilot_r033_c056_lightvehicle_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0336_pilot_r033_c056_lightvehicle_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "3833a7a3d55d3cdaea4165a352d4f80e55fea0734f12532a40d68146d66b6240",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0336_pilot_r033_c056_lightvehicle_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0336_pilot_r033_c056_lightvehicle_2_post_detection_B040001100075610.png",
+            "nativeSha256": "dbe421c836456f60dec9b0e6122ef029e4016595ff99ab26f364bfa3ac3abab1",
+            "enhancedImage": null,
+            "enhancedLocalFallback": null,
+            "enhancedSha256": null,
+            "enhancementStatus": "not-generated"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r036_c054",
+      "longitude": -66.99747678,
+      "latitude": 10.59645943,
+      "cellBoundsWgs84": [
+        [
+          -66.9985997,
+          10.5953557
+        ],
+        [
+          -66.9963539,
+          10.5953557
+        ],
+        [
+          -66.9963539,
+          10.5975632
+        ],
+        [
+          -66.9985997,
+          10.5975632
+        ],
+        [
+          -66.9985997,
+          10.5953557
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Bus": 1,
+          "Digger": 1,
+          "Truck": 2
+        },
+        "positiveMaxCountDeltas": {
+          "Bus": 1,
+          "Digger": 1,
+          "Truck": 2
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0037_pilot_r036_c054_truck",
+        "pair_0040_pilot_r036_c054_truck",
+        "pair_0073_pilot_r036_c054_bus"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0037_pilot_r036_c054_truck",
+        "rank": 37,
+        "rankScore": 373,
+        "cellId": "pilot_r036_c054",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.6675,
+          "xyxyn": [
+            0.89114,
+            0.47976,
+            0.93257,
+            0.50675
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0037_pilot_r036_c054_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0037_pilot_r036_c054_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "8c0e21d7f0c64d1111ba219b046028438b06bf883eaacb3f6a7af12d2eab0152",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0037_pilot_r036_c054_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0037_pilot_r036_c054_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "a0a67b9d553248fae1cea17df031e32814ffb98c86c810bfb7e45fd15a879701",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0037_pilot_r036_c054_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0037_pilot_r036_c054_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "1a9e0ae80a5e904b8922e867944ae60bc822c8ed9fdc36eb482ae79cc24eb4fe",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0037_pilot_r036_c054_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0037_pilot_r036_c054_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "87e640412462fd609414a0e276b163651143936084716b92c678bf6b68924875",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r036_c056",
+      "longitude": -66.99298521,
+      "latitude": 10.59645943,
+      "cellBoundsWgs84": [
+        [
+          -66.9941081,
+          10.5953557
+        ],
+        [
+          -66.9918623,
+          10.5953557
+        ],
+        [
+          -66.9918623,
+          10.5975632
+        ],
+        [
+          -66.9941081,
+          10.5975632
+        ],
+        [
+          -66.9941081,
+          10.5953557
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "collection_or_staging",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Truck": 3
+        },
+        "positiveMaxCountDeltas": {
+          "Bus": 1,
+          "Truck": 3
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0041_pilot_r036_c056_truck",
+        "pair_0062_pilot_r036_c056_truck",
+        "pair_0343_pilot_r036_c056_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0041_pilot_r036_c056_truck",
+        "rank": 41,
+        "rankScore": 372,
+        "cellId": "pilot_r036_c056",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.6148,
+          "xyxyn": [
+            0.40068,
+            0.18358,
+            0.45208,
+            0.21037
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0041_pilot_r036_c056_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0041_pilot_r036_c056_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "2ef79be86aa5a232e65b50042c99c0486c6d2ba7f1effe4c1d766629973f4278",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0041_pilot_r036_c056_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0041_pilot_r036_c056_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "7efc4dad543c16b94cd844608294ed837f386a29c9ab9f35fa781873bee1671d",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0041_pilot_r036_c056_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0041_pilot_r036_c056_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "ebe42b03dcde9e9db2c1c1622abae1c20d0b95a9c767aed11ce8dab4914f0130",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0041_pilot_r036_c056_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0041_pilot_r036_c056_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "c719fab0070439acabc4a0c67548e2b7dfc9f6e5cb7d6244ea6186eef777cb2d",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r036_c062",
+      "longitude": -66.97951048,
+      "latitude": 10.59645943,
+      "cellBoundsWgs84": [
+        [
+          -66.9806334,
+          10.5953557
+        ],
+        [
+          -66.9783876,
+          10.5953557
+        ],
+        [
+          -66.9783876,
+          10.5975632
+        ],
+        [
+          -66.9806334,
+          10.5975632
+        ],
+        [
+          -66.9806334,
+          10.5953557
+        ]
+      ],
+      "coveredByAois": [
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "collection_or_staging",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Truck": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Truck": 3
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0053_pilot_r036_c062_truck",
+        "pair_0347_pilot_r036_c062_lightvehicle",
+        "pair_0348_pilot_r036_c062_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0053_pilot_r036_c062_truck",
+        "rank": 53,
+        "rankScore": 370,
+        "cellId": "pilot_r036_c062",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.5126,
+          "xyxyn": [
+            0.76074,
+            0.38726,
+            0.80112,
+            0.4134
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "B160001100FF4510",
+            "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0053_pilot_r036_c062_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0053_pilot_r036_c062_truck_1_pre_comparator_B160001100FF4510.png",
+            "nativeSha256": "08a57be17907764901e05b66d5a03bec0b80592b3a831d86ce6df57766dc3b43",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0053_pilot_r036_c062_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0053_pilot_r036_c062_truck_1_pre_comparator_B160001100FF4510_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "8bcb745f288f8f0e25369ec6ac68394f9b934cb2019a2f92564433008374765f",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "recorded",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0053_pilot_r036_c062_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0053_pilot_r036_c062_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "fbe55c550672d8a9f1a953c60c527aea812b645b77cf51ebd83fbc65acdb2999",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0053_pilot_r036_c062_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0053_pilot_r036_c062_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "4218805a5b73f83d83f8b6db8108ec7f86335b8b9a12ce91eb88996d6712a65a",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r038_c039",
+      "longitude": -67.03116361,
+      "latitude": 10.60087438,
+      "cellBoundsWgs84": [
+        [
+          -67.0322865,
+          10.5997706
+        ],
+        [
+          -67.0300407,
+          10.5997706
+        ],
+        [
+          -67.0300407,
+          10.6019781
+        ],
+        [
+          -67.0322865,
+          10.6019781
+        ],
+        [
+          -67.0322865,
+          10.5997706
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "hoursAfterEvent": 41.08,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "collection_or_staging",
+        "emergency_or_service_vehicle",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Truck": 1
+        },
+        "positiveMaxCountDeltas": {
+          "Truck": 1
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0063_pilot_r038_c039_truck",
+        "pair_0350_pilot_r038_c039_lightvehicle",
+        "pair_0351_pilot_r038_c039_lightvehicle"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0063_pilot_r038_c039_truck",
+        "rank": 63,
+        "rankScore": 367,
+        "cellId": "pilot_r038_c039",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "emergency_or_service_vehicle",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Truck",
+          "confidence": 0.3316,
+          "xyxyn": [
+            0.65029,
+            0.71135,
+            0.67113,
+            0.76895
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T15:09:37.473432Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0063_pilot_r038_c039_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0063_pilot_r038_c039_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "4059d4afdeed8dfb3222ca552a6687a82cdeff607b6be0f174bf848465f378fd",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0063_pilot_r038_c039_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0063_pilot_r038_c039_truck_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "f90f330c28d82cf0553ce08daed13b07d06a08c4525491e32f9117570ecf88a5",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B040001100075610",
+            "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+            "sensor": "WV03",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0063_pilot_r038_c039_truck_2_post_detection_B040001100075610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0063_pilot_r038_c039_truck_2_post_detection_B040001100075610.png",
+            "nativeSha256": "3d9cc09048e0b9d2a57edb206c59875eb6723003042e59d7f0973373ac958614",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0063_pilot_r038_c039_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0063_pilot_r038_c039_truck_2_post_detection_B040001100075610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "7a96f21d0f35543354be9cb28867932e77090ca3fb525f9532a6664365260d86",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    },
+    {
+      "cellId": "pilot_r038_c044",
+      "longitude": -67.01993467,
+      "latitude": 10.60087438,
+      "cellBoundsWgs84": [
+        [
+          -67.0210576,
+          10.5997706
+        ],
+        [
+          -67.0188118,
+          10.5997706
+        ],
+        [
+          -67.0188118,
+          10.6019781
+        ],
+        [
+          -67.0210576,
+          10.6019781
+        ],
+        [
+          -67.0210576,
+          10.5997706
+        ]
+      ],
+      "coveredByAois": [
+        "emsr884-aoi12-caraballeda",
+        "external-msft-catia-la-mar-predicted-damage",
+        "external-msft-catia-la-mar-east-predicted-damage"
+      ],
+      "stackStatus": "before_after",
+      "firstVisibleAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+      "hoursAfterEvent": 47.15,
+      "timeWindow": "24_48h",
+      "evidenceTier": "cross_model_positive_with_detector_delta",
+      "consensus": "both_positive",
+      "priorityScore": 200,
+      "assetCategories": [
+        "collection_or_staging",
+        "debris_clearance",
+        "emergency_or_service_vehicle",
+        "temporary_shelter",
+        "trucks_or_large_vehicles"
+      ],
+      "detector": {
+        "sameAcquisitionCounts": {
+          "Container": 4,
+          "Person": 2
+        },
+        "positiveMaxCountDeltas": {
+          "Container": 4,
+          "Person": 2
+        },
+        "supportStatus": "independent_triage_support",
+        "warning": "WALDO30 boxes and cross-date count deltas may be false positives."
+      },
+      "cropPairIds": [
+        "pair_0095_pilot_r038_c044_container",
+        "pair_0109_pilot_r038_c044_container",
+        "pair_0113_pilot_r038_c044_container"
+      ],
+      "publicationStatus": "ai-triage-native-review-required",
+      "arrivalInterpretation": "This acquisition provides an earliest visible bound within the available imagery, not the actual arrival time of assistance.",
+      "evidencePair": {
+        "pairId": "pair_0095_pilot_r038_c044_container",
+        "rank": 95,
+        "rankScore": 352,
+        "cellId": "pilot_r038_c044",
+        "consensus": "both_positive",
+        "assetCategories": [
+          "collection_or_staging",
+          "debris_clearance",
+          "emergency_or_service_vehicle",
+          "temporary_shelter",
+          "trucks_or_large_vehicles"
+        ],
+        "targetDetection": {
+          "class": "Container",
+          "confidence": 0.6111,
+          "xyxyn": [
+            0.19679,
+            0.91651,
+            0.27248,
+            0.93281
+          ]
+        },
+        "targetAcquisitionUtc": "2026-06-26T21:13:46.374593Z",
+        "targetWithinFirst72Hours": true,
+        "images": [
+          {
+            "role": "pre_comparator",
+            "sceneId": "VANTOR_PRE_EVENT_MOSAIC",
+            "acquisitionUtc": "2025-11-03/2026-03-21/2026-04-07",
+            "sensor": "Vantor LG02/LG03/LG06 mosaic",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0095_pilot_r038_c044_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0095_pilot_r038_c044_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC.png",
+            "nativeSha256": "40081671ca66b399970ab3b5f9af773d32ac6363bd487d16fc24b48e887c2fe3",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0095_pilot_r038_c044_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0095_pilot_r038_c044_container_1_pre_comparator_VANTOR_PRE_EVENT_MOSAIC_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "b52eb3c36ba9031fb34afc69070be2e17968a8afc7651ee321a5dc6fe0aecf0d",
+            "enhancementStatus": "display-only"
+          },
+          {
+            "role": "post_detection",
+            "sceneId": "B1600011017A8610",
+            "acquisitionUtc": "2026-06-26T21:13:46.374593Z",
+            "sensor": "LG06",
+            "sourceFamily": "vantor_open_data",
+            "license": "CC-BY-NC-4.0",
+            "provenanceStatus": "derived_from_scene_identity",
+            "nativeImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/native/pair_0095_pilot_r038_c044_container_2_post_detection_B1600011017A8610.png",
+            "nativeLocalFallback": "/data/chips/full-pilot-response-evidence/native/pair_0095_pilot_r038_c044_container_2_post_detection_B1600011017A8610.png",
+            "nativeSha256": "85b2d020e4711dadb5b27cc290dc1241dfd152e26f599e9d175b01b8f3b2dd32",
+            "enhancedImage": "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0095_pilot_r038_c044_container_2_post_detection_B1600011017A8610_swin2sr_x2_visualization-only.png",
+            "enhancedLocalFallback": "/data/chips/full-pilot-response-evidence/enhanced-visualization-only/pair_0095_pilot_r038_c044_container_2_post_detection_B1600011017A8610_swin2sr_x2_visualization-only.png",
+            "enhancedSha256": "8a357513266c367c72bbee545e4a0ecb9ccbe6854a2298ed3916aa2a463c5183",
+            "enhancementStatus": "display-only"
+          }
+        ],
+        "policy": "The native crop is the evidence view. The Swin2SR image is labeled visualization-only and cannot establish a feature."
+      }
+    }
+  ],
+  "documentaryEvidence": {
+    "version": 1,
+    "generatedAt": "2026-07-21T00:00:00-05:00",
+    "scope": "Public documentary evidence for La Guaira, Catia La Mar, Caraballeda, Playa Grande and nearby coastal communities after the June 24, 2026 earthquakes.",
+    "interpretationPolicy": [
+      "Publication time is not automatically treated as the event time.",
+      "A place-specific witness report may conflict with a regional deployment claim without either being globally false.",
+      "Lack of reporting or imagery is never treated as proof that assistance was absent.",
+      "Documentary reports remain separate from aerial-image observations and official EMS damage data."
+    ],
+    "sources": [
+      {
+        "id": "eldiario-2026-06-25-la-guaira",
+        "publisher": "El Diario",
+        "sourceType": "reported field account",
+        "publishedAt": "2026-06-25T18:19:00-04:00",
+        "url": "https://eldiario.com/2026/06/25/la-guaira-edificios-colapsados-y-hospitales-saturados-terremotos/",
+        "places": [
+          "La Guaira",
+          "Catia La Mar",
+          "Playa Bahía de Los Niños"
+        ],
+        "claims": [
+          "On June 25, firefighters were reported as overwhelmed and heavy-machinery availability for rubble removal was limited.",
+          "Residents reported that they did not know where shelters for displaced people were operating.",
+          "Families in La Llanada requested water, food and other basic supplies."
+        ],
+        "claimsEs": [
+          "El 25 de junio se reportó que los bomberos estaban desbordados y que había poca maquinaria pesada disponible para retirar escombros.",
+          "Residentes dijeron no saber dónde funcionaban los refugios para personas desplazadas.",
+          "Familias de La Llanada solicitaron agua, alimentos y otros suministros básicos."
+        ],
+        "timePrecision": "publication-day field report; individual observations lack exact times",
+        "limitations": "Some statements are attributed to residents or other reporting and are not a comprehensive inventory of the state response."
+      },
+      {
+        "id": "efe-2026-06-26-catia-aid",
+        "publisher": "EFE",
+        "sourceType": "place-specific field reporting",
+        "publishedAt": "2026-06-26",
+        "url": "https://efe.com/mundo/2026-06-26/saqueos-terremotos-venezuela/",
+        "places": [
+          "Catia La Mar"
+        ],
+        "claims": [
+          "EFE observed a large contingent of trucks bearing Chinese flags arrive in Catia La Mar with aid; private trucks and cars also delivered supplies.",
+          "A terminal was being used to distribute food and basic products.",
+          "Hundreds of people were sleeping on mattresses, sheets, chairs, in tents and improvised camps on asphalt, planters, plazas and sports courts."
+        ],
+        "claimsEs": [
+          "EFE observó la llegada a Catia La Mar de un gran contingente de camiones con banderas chinas y ayuda; también llegaron suministros en camiones y vehículos privados.",
+          "Una terminal se utilizaba para distribuir alimentos y productos básicos.",
+          "Cientos de personas dormían en colchones, sábanas, sillas, carpas y campamentos improvisados sobre asfalto, jardineras, plazas y canchas."
+        ],
+        "timePrecision": "observed by publication date; no exact arrival time for the truck contingent",
+        "limitations": "The terminal is not named in the article and the report cannot establish conditions across every Catia La Mar sector."
+      },
+      {
+        "id": "wfp-2026-06-26-la-guaira",
+        "publisher": "World Food Programme",
+        "sourceType": "primary humanitarian agency update",
+        "publishedAt": "2026-06-26",
+        "url": "https://es.wfp.org/historias/wfp-apoya-la-respuesta-al-terremoto-en-venezuela-con-alimentos-y-otra-asistencia",
+        "places": [
+          "La Guaira state"
+        ],
+        "claims": [
+          "WFP reported beginning emergency food distribution in La Guaira in the days after the earthquakes.",
+          "WFP reported beginning installation of temporary food-distribution centers in La Guaira.",
+          "Response teams were deployed to affected areas and thousands of people were reported sleeping in evacuation shelters."
+        ],
+        "claimsEs": [
+          "El PMA informó que comenzó a distribuir alimentos de emergencia en La Guaira durante los días posteriores a los terremotos.",
+          "El PMA informó que comenzó a instalar centros temporales de distribución de alimentos en La Guaira.",
+          "Se desplegaron equipos de respuesta en las zonas afectadas y se reportó que miles de personas dormían en refugios de evacuación."
+        ],
+        "timePrecision": "agency update published June 26; wording does not give exact opening times or site coordinates",
+        "limitations": "State-level report, not a site-by-site operating log."
+      },
+      {
+        "id": "logistics-cluster-2026-06-26",
+        "publisher": "Logistics Working Group / Logistics Cluster",
+        "sourceType": "primary inter-agency meeting minutes",
+        "publishedAt": "2026-06-26",
+        "url": "https://logcluster.org/sites/default/files/public/2026-06/venezuelagrupo-de-trabajo-de-logistica_0260626.pdf",
+        "places": [
+          "Maiquetía",
+          "La Guaira state"
+        ],
+        "claims": [
+          "Maiquetía airport was enabled for receiving humanitarian assistance, cargo and people, while its coordination protocol was still pending.",
+          "The Caracas-La Guaira highway was open but congested, creating access delays.",
+          "Access to La Guaira was restricted and required prior registration to facilitate rescue and humanitarian operations."
+        ],
+        "claimsEs": [
+          "El aeropuerto de Maiquetía fue habilitado para recibir asistencia humanitaria, carga y personas, mientras su protocolo de coordinación seguía pendiente.",
+          "La autopista Caracas-La Guaira estaba abierta pero congestionada, lo que generaba demoras de acceso.",
+          "El acceso a La Guaira estaba restringido y requería registro previo para facilitar las operaciones de rescate y asistencia humanitaria."
+        ],
+        "timePrecision": "meeting status on June 26",
+        "limitations": "Operational information was described as rapidly changing."
+      },
+      {
+        "id": "efe-2026-06-29-playa-grande",
+        "publisher": "EFE",
+        "sourceType": "place-specific field reporting",
+        "publishedAt": "2026-06-29",
+        "url": "https://efe.com/mundo/2026-06-29/esperanza-busqueda-rescate-personas-la-guaira-terremotos-venezuela/",
+        "places": [
+          "Catia La Mar",
+          "Playa Grande",
+          "Belo Horizonte building"
+        ],
+        "claims": [
+          "At the reported Playa Grande collapse site, relatives described assistance from civilians, small firefighter and civil-protection teams, and international rescuers but no large machinery at that location.",
+          "A linked EFE update dated June 28 described a broader increase in heavy-machinery deployment for rubble removal."
+        ],
+        "claimsEs": [
+          "En el sitio de colapso reportado en Playa Grande, familiares describieron ayuda de civiles, pequeños equipos de bomberos y protección civil, y rescatistas internacionales, pero no maquinaria grande en ese lugar.",
+          "Una actualización relacionada de EFE del 28 de junio describió un aumento más amplio del despliegue de maquinaria pesada para retirar escombros."
+        ],
+        "timePrecision": "site account four days after the earthquakes; broader deployment statement dated June 28",
+        "limitations": "The lack of large machinery is site-specific and cannot be generalized to all of La Guaira."
+      },
+      {
+        "id": "undp-2026-06-29-debris",
+        "publisher": "United Nations Development Programme",
+        "sourceType": "primary UN assessment",
+        "publishedAt": "2026-06-29",
+        "url": "https://www.undp.org/es/venezuela/comunicados-de-prensa/el-pnud-estima-12-millones-de-toneladas-de-escombros-en-la-guaira-tras-los-terremotos-en-venezuela",
+        "places": [
+          "Catia La Mar",
+          "Caraballeda",
+          "Urimare",
+          "La Guaira state"
+        ],
+        "claims": [
+          "UNDP estimated approximately 1.2 million tonnes of debris in the most affected parts of La Guaira.",
+          "Catia La Mar, Caraballeda and Urimare were identified as areas with the greatest estimated debris volumes and priorities for debris management."
+        ],
+        "claimsEs": [
+          "El PNUD estimó aproximadamente 1,2 millones de toneladas de escombros en las zonas más afectadas de La Guaira.",
+          "Catia La Mar, Caraballeda y Urimare fueron identificadas como las áreas con mayor volumen estimado de escombros y como prioridades para su gestión."
+        ],
+        "timePrecision": "assessment published June 29",
+        "limitations": "The estimate combines satellite imagery, AI damage assessment and engineering knowledge; it is planning evidence, not a machinery-deployment log."
+      },
+      {
+        "id": "logistics-cluster-2026-07-02-sitrep",
+        "publisher": "Logistics Working Group / Logistics Cluster",
+        "sourceType": "primary inter-agency situation report",
+        "publishedAt": "2026-07-02",
+        "url": "https://logcluster.org/es/documents/venezuela-respuesta-terremotos-reporte-situacional-1-2-julio-2026",
+        "places": [
+          "Polideportivo Vargas",
+          "Estadio César Nieves",
+          "Catia La Mar",
+          "Estadio Playa Grande",
+          "Maiquetía"
+        ],
+        "claims": [
+          "Three multiservice shelters were enabled in La Guaira: Polideportivo Vargas, Estadio César Nieves in Catia La Mar and provisional Estadio Playa Grande.",
+          "The June 26 government decision reserved Maiquetía airport for response-related cargo; by July 2 it had received government-to-government and UN humanitarian cargo."
+        ],
+        "claimsEs": [
+          "Se habilitaron tres refugios multiservicio en La Guaira: Polideportivo Vargas, Estadio César Nieves en Catia La Mar y el refugio provisional Estadio Playa Grande.",
+          "La decisión gubernamental del 26 de junio reservó el aeropuerto de Maiquetía para carga vinculada con la respuesta; para el 2 de julio ya había recibido carga humanitaria bilateral y de la ONU."
+        ],
+        "timePrecision": "status as of July 2; shelter opening times are not specified",
+        "limitations": "Confirms operation by July 2 but not the exact opening time of each shelter."
+      },
+      {
+        "id": "logistics-cluster-2026-07-02-minutes",
+        "publisher": "Logistics Working Group / Logistics Cluster",
+        "sourceType": "primary inter-agency meeting minutes",
+        "publishedAt": "2026-07-02",
+        "url": "https://logcluster.org/es/documents/venezuela-minutas-de-la-reunion-respuesta-al-terremoto-caracas-2-julio-de-2026",
+        "places": [
+          "La Guaira state",
+          "Catia La Mar",
+          "Playa Grande",
+          "Maiquetía",
+          "Port of La Guaira"
+        ],
+        "claims": [
+          "Thirteen of 25 reported transitional camps were in La Guaira.",
+          "Polideportivo Vargas, Estadio César Nieves and provisional Estadio Playa Grande remained active as multiservice shelters.",
+          "Maiquetía airport and the Port of La Guaira were restricted to humanitarian cargo under reported operating arrangements.",
+          "Access on the Caracas-La Guaira highway remained regulated for humanitarian movements."
+        ],
+        "claimsEs": [
+          "Trece de los 25 campamentos transitorios reportados estaban en La Guaira.",
+          "Polideportivo Vargas, Estadio César Nieves y el refugio provisional Estadio Playa Grande seguían activos como refugios multiservicio.",
+          "El aeropuerto de Maiquetía y el Puerto de La Guaira estaban restringidos a carga humanitaria bajo los arreglos operativos reportados.",
+          "El acceso por la autopista Caracas-La Guaira seguía regulado para los movimientos humanitarios."
+        ],
+        "timePrecision": "status discussed July 2",
+        "limitations": "Does not provide exact camp coordinates or opening dates for all 13 La Guaira sites."
+      }
+    ],
+    "conflictsAndBounds": [
+      {
+        "topic": "Heavy machinery timing",
+        "topicEs": "Cuándo llegó la maquinaria pesada",
+        "finding": "Regional reporting indicates machinery was mobilizing by June 25-26 and a broader increase by June 28, while a June 29 Playa Grande site report still described no large machinery at that specific collapse.",
+        "findingEs": "Los reportes regionales indican que la maquinaria comenzó a movilizarse entre el 25 y el 26 de junio y que hubo un aumento más amplio para el 28; sin embargo, un reporte del 29 de junio todavía describía la ausencia de maquinaria grande en un colapso específico de Playa Grande.",
+        "interpretation": "The evidence supports uneven deployment and site-level gaps, not a single statewide arrival time.",
+        "interpretationEs": "La evidencia respalda un despliegue desigual y vacíos a nivel de sitio, no una única hora de llegada para todo el estado."
+      },
+      {
+        "topic": "Shelter availability",
+        "topicEs": "Disponibilidad de refugios",
+        "finding": "Residents reported not knowing shelter locations on June 25; people were observed sleeping outdoors in Catia La Mar on June 26; named multiservice shelters are confirmed active by July 2.",
+        "findingEs": "Residentes dijeron no conocer la ubicación de refugios el 25 de junio; el 26 se observó a personas durmiendo al aire libre en Catia La Mar; para el 2 de julio se confirma que funcionaban refugios multiservicio con nombre.",
+        "interpretation": "The evidence bounds a transition from unclear or insufficient shelter access to confirmed named facilities, but does not establish exact opening times.",
+        "interpretationEs": "La evidencia acota una transición desde un acceso incierto o insuficiente hacia instalaciones confirmadas, pero no establece sus horas exactas de apertura."
+      },
+      {
+        "topic": "Aid arrival",
+        "topicEs": "Llegada de ayuda",
+        "finding": "Aid trucks and a terminal distribution point were observed in Catia La Mar by June 26, while access restrictions and congestion could delay or unevenly distribute assistance.",
+        "findingEs": "Para el 26 de junio se observaron camiones de ayuda y un punto de distribución en una terminal de Catia La Mar, mientras las restricciones de acceso y la congestión podían demorar o distribuir de forma desigual la asistencia.",
+        "interpretation": "Arrival in Catia La Mar does not establish delivery to every affected neighborhood.",
+        "interpretationEs": "La llegada a Catia La Mar no demuestra que la ayuda alcanzara todos los sectores afectados."
+      }
+    ]
+  },
+  "downloads": {
+    "candidateGeoJson": "/data/reconstruction/full-pilot-response-evidence.geojson",
+    "candidateJsonl": "/data/reconstruction/full-pilot-response-evidence.jsonl",
+    "cropManifest": "/data/reconstruction/full-pilot-response-evidence-crops.jsonl"
+  },
+  "method": {
+    "vlmProviders": [
+      "Hugging Face Qwen3-VL",
+      "MiniMax-M3"
+    ],
+    "detector": "StephanST/WALDO30",
+    "enhancement": "Swin2SR classical 2x; display-only",
+    "arrivalRule": "Dates are earliest visible bounds in available acquisitions, not actual arrival times.",
+    "absenceRule": "Not observed does not mean did not occur."
+  },
+  "guardrails": [
+    "No model or detector observation is an official EMS fact.",
+    "No negative screen is evidence that help or an asset was absent.",
+    "First-visible acquisition time is not actual arrival time.",
+    "Pre-existing industrial assets and ordinary activity are major confounders.",
+    "Native pixels and source metadata require review before publication.",
+    "Super-resolution images are visualization-only and may introduce artifacts."
+  ]
+}

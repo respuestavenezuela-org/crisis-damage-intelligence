@@ -76,6 +76,7 @@ const copy = {
     subtitle: "Geospatial damage triage for earthquake response",
     live: "Public read-only",
     liteView: "Lite view",
+    timelineView: "Aftermath timeline",
     opsConsole: "Operations console",
     language: "Language",
     aoi: "Go to affected area",
@@ -139,6 +140,9 @@ const copy = {
     nonOfficialBefore: "Public/OpenData reference - not official EMS imagery",
     coverage: "Coverage",
     imageryOnly: "Imagery only - no official damage vector yet",
+    acquisitions: "Dated acquisitions",
+    readableCog: "public COG",
+    linkedEvidence: "linked evidence",
     opacity: "Damage opacity",
     filters: "Filters",
     controls: "Controls",
@@ -247,6 +251,7 @@ const copy = {
     subtitle: "Triage geoespacial de daños para respuesta al terremoto",
     live: "Público solo lectura",
     liteView: "Vista ligera",
+    timelineView: "Cronología del impacto",
     opsConsole: "Consola operativa",
     language: "Idioma",
     aoi: "Ir a zona afectada",
@@ -310,6 +315,9 @@ const copy = {
     nonOfficialBefore: "Referencia publica/OpenData - no es imagen oficial EMS",
     coverage: "Cobertura",
     imageryOnly: "Solo imagen - sin vector oficial de danos aun",
+    acquisitions: "Adquisiciones fechadas",
+    readableCog: "COG público",
+    linkedEvidence: "evidencia enlazada",
     opacity: "Opacidad de daño",
     filters: "Filtros",
     controls: "Controles",
@@ -2051,7 +2059,12 @@ export default function OperationsConsole() {
           <Button variant={language === "es" ? "default" : "outline"} className={language === "es" ? "active" : ""} aria-pressed={language === "es"} onClick={() => changeLanguage("es")}>ES</Button>
           <Button variant={language === "en" ? "default" : "outline"} className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => changeLanguage("en")}>EN</Button>
         </div>
-        {!isMobileLayout && <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>}
+        {!isMobileLayout && (
+          <nav className="sidebar-view-links" aria-label={language === "es" ? "Vistas públicas" : "Public views"}>
+            <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
+            <Link className="timeline-inline-link" href="/timeline">{t.timelineView}</Link>
+          </nav>
+        )}
         {!isMobileLayout && (
           <>
             {renderSearchPanel("desktop")}
@@ -2271,7 +2284,10 @@ export default function OperationsConsole() {
               <ScrollArea className="mobile-sheet-content mobile-sheet-scroller">
                 <div className="mobile-sheet-body">
                   <p>{t.subtitle}</p>
-                  <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
+                  <nav className="sidebar-view-links" aria-label={language === "es" ? "Vistas públicas" : "Public views"}>
+                    <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
+                    <Link className="timeline-inline-link" href="/timeline">{t.timelineView}</Link>
+                  </nav>
                   <p className="quick-start">{t.quickStart}</p>
                   <section className="field-guide">
                     <b>{t.fieldGuideTitle}</b>
@@ -2423,7 +2439,10 @@ function PlanningCard({
       <CardContent>
         <div className="planning-lens-heading">
           <span>{t.planningLens}</span>
-          <Link className="lite-link" href="/lite">{t.liteView}</Link>
+          <span className="planning-view-links">
+            <Link className="lite-link" href="/lite">{t.liteView}</Link>
+            <Link className="timeline-link" href="/timeline">{t.timelineView}</Link>
+          </span>
         </div>
         <div className="planning-lens-switch" role="group" aria-label={t.planningLens}>
           {lensOptions.map((option) => (
@@ -2739,6 +2758,7 @@ function ImageryCoveragePanel({
       ? `${t.mapLayerAvailable} · ${aoi.imagery.approximateReference.label}`
     : t.notAvailable;
   const hasCogDownload = Boolean(aoi.imagery?.after?.url);
+  const acquisitions = aoi.imagery?.acquisitions ?? [];
 
   return (
     <section className="imagery-panel">
@@ -2761,6 +2781,25 @@ function ImageryCoveragePanel({
       )}
       {!aoi.metrics.features && <p className="muted">{t.imageryOnly}</p>}
       {aoi.imagery?.note && <p className="muted imagery-note">{aoi.imagery.note}</p>}
+      {acquisitions.length > 0 && (
+        <details className="imagery-acquisitions">
+          <summary>{acquisitions.length} {t.acquisitions}</summary>
+          <ul>
+            {acquisitions.map((acquisition) => (
+              <li key={acquisition.recordId}>
+                <a href={acquisition.url} target="_blank" rel="noreferrer">
+                  <span>{acquisition.acquisitionUtc.replace("T", " ").replace("Z", " UTC")}</span>
+                  <strong>{acquisition.sensor}</strong>
+                  <small>
+                    {acquisition.product} · {formatBytes(acquisition.bytes)} ·{" "}
+                    {acquisition.publiclyReadable ? t.readableCog : t.linkedEvidence}
+                  </small>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
       {hasCogDownload && (
         <div className="download-row">
           <a

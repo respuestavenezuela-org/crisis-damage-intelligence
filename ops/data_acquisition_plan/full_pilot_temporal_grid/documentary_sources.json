@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-21T00:00:00-05:00",
+  "scope": "Public documentary evidence for La Guaira, Catia La Mar, Caraballeda, Playa Grande and nearby coastal communities after the June 24, 2026 earthquakes.",
+  "interpretationPolicy": [
+    "Publication time is not automatically treated as the event time.",
+    "A place-specific witness report may conflict with a regional deployment claim without either being globally false.",
+    "Lack of reporting or imagery is never treated as proof that assistance was absent.",
+    "Documentary reports remain separate from aerial-image observations and official EMS damage data."
+  ],
+  "sources": [
+    {
+      "id": "eldiario-2026-06-25-la-guaira",
+      "publisher": "El Diario",
+      "sourceType": "reported field account",
+      "publishedAt": "2026-06-25T18:19:00-04:00",
+      "url": "https://eldiario.com/2026/06/25/la-guaira-edificios-colapsados-y-hospitales-saturados-terremotos/",
+      "places": ["La Guaira", "Catia La Mar", "Playa Bahía de Los Niños"],
+      "claims": [
+        "On June 25, firefighters were reported as overwhelmed and heavy-machinery availability for rubble removal was limited.",
+        "Residents reported that they did not know where shelters for displaced people were operating.",
+        "Families in La Llanada requested water, food and other basic supplies."
+      ],
+      "claimsEs": [
+        "El 25 de junio se reportó que los bomberos estaban desbordados y que había poca maquinaria pesada disponible para retirar escombros.",
+        "Residentes dijeron no saber dónde funcionaban los refugios para personas desplazadas.",
+        "Familias de La Llanada solicitaron agua, alimentos y otros suministros básicos."
+      ],
+      "timePrecision": "publication-day field report; individual observations lack exact times",
+      "limitations": "Some statements are attributed to residents or other reporting and are not a comprehensive inventory of the state response."
+    },
+    {
+      "id": "efe-2026-06-26-catia-aid",
+      "publisher": "EFE",
+      "sourceType": "place-specific field reporting",
+      "publishedAt": "2026-06-26",
+      "url": "https://efe.com/mundo/2026-06-26/saqueos-terremotos-venezuela/",
+      "places": ["Catia La Mar"],
+      "claims": [
+        "EFE observed a large contingent of trucks bearing Chinese flags arrive in Catia La Mar with aid; private trucks and cars also delivered supplies.",
+        "A terminal was being used to distribute food and basic products.",
+        "Hundreds of people were sleeping on mattresses, sheets, chairs, in tents and improvised camps on asphalt, planters, plazas and sports courts."
+      ],
+      "claimsEs": [
+        "EFE observó la llegada a Catia La Mar de un gran contingente de camiones con banderas chinas y ayuda; también llegaron suministros en camiones y vehículos privados.",
+        "Una terminal se utilizaba para distribuir alimentos y productos básicos.",
+        "Cientos de personas dormían en colchones, sábanas, sillas, carpas y campamentos improvisados sobre asfalto, jardineras, plazas y canchas."
+      ],
+      "timePrecision": "observed by publication date; no exact arrival time for the truck contingent",
+      "limitations": "The terminal is not named in the article and the report cannot establish conditions across every Catia La Mar sector."
+    },
+    {
+      "id": "wfp-2026-06-26-la-guaira",
+      "publisher": "World Food Programme",
+      "sourceType": "primary humanitarian agency update",
+      "publishedAt": "2026-06-26",
+      "url": "https://es.wfp.org/historias/wfp-apoya-la-respuesta-al-terremoto-en-venezuela-con-alimentos-y-otra-asistencia",
+      "places": ["La Guaira state"],
+      "claims": [
+        "WFP reported beginning emergency food distribution in La Guaira in the days after the earthquakes.",
+        "WFP reported beginning installation of temporary food-distribution centers in La Guaira.",
+        "Response teams were deployed to affected areas and thousands of people were reported sleeping in evacuation shelters."
+      ],
+      "claimsEs": [
+        "El PMA informó que comenzó a distribuir alimentos de emergencia en La Guaira durante los días posteriores a los terremotos.",
+        "El PMA informó que comenzó a instalar centros temporales de distribución de alimentos en La Guaira.",
+        "Se desplegaron equipos de respuesta en las zonas afectadas y se reportó que miles de personas dormían en refugios de evacuación."
+      ],
+      "timePrecision": "agency update published June 26; wording does not give exact opening times or site coordinates",
+      "limitations": "State-level report, not a site-by-site operating log."
+    },
+    {
+      "id": "logistics-cluster-2026-06-26",
+      "publisher": "Logistics Working Group / Logistics Cluster",
+      "sourceType": "primary inter-agency meeting minutes",
+      "publishedAt": "2026-06-26",
+      "url": "https://logcluster.org/sites/default/files/public/2026-06/venezuelagrupo-de-trabajo-de-logistica_0260626.pdf",
+      "places": ["Maiquetía", "La Guaira state"],
+      "claims": [
+        "Maiquetía airport was enabled for receiving humanitarian assistance, cargo and people, while its coordination protocol was still pending.",
+        "The Caracas-La Guaira highway was open but congested, creating access delays.",
+        "Access to La Guaira was restricted and required prior registration to facilitate rescue and humanitarian operations."
+      ],
+      "claimsEs": [
+        "El aeropuerto de Maiquetía fue habilitado para recibir asistencia humanitaria, carga y personas, mientras su protocolo de coordinación seguía pendiente.",
+        "La autopista Caracas-La Guaira estaba abierta pero congestionada, lo que generaba demoras de acceso.",
+        "El acceso a La Guaira estaba restringido y requería registro previo para facilitar las operaciones de rescate y asistencia humanitaria."
+      ],
+      "timePrecision": "meeting status on June 26",
+      "limitations": "Operational information was described as rapidly changing."
+    },
+    {
+      "id": "efe-2026-06-29-playa-grande",
+      "publisher": "EFE",
+      "sourceType": "place-specific field reporting",
+      "publishedAt": "2026-06-29",
+      "url": "https://efe.com/mundo/2026-06-29/esperanza-busqueda-rescate-personas-la-guaira-terremotos-venezuela/",
+      "places": ["Catia La Mar", "Playa Grande", "Belo Horizonte building"],
+      "claims": [
+        "At the reported Playa Grande collapse site, relatives described assistance from civilians, small firefighter and civil-protection teams, and international rescuers but no large machinery at that location.",
+        "A linked EFE update dated June 28 described a broader increase in heavy-machinery deployment for rubble removal."
+      ],
+      "claimsEs": [
+        "En el sitio de colapso reportado en Playa Grande, familiares describieron ayuda de civiles, pequeños equipos de bomberos y protección civil, y rescatistas internacionales, pero no maquinaria grande en ese lugar.",
+        "Una actualización relacionada de EFE del 28 de junio describió un aumento más amplio del despliegue de maquinaria pesada para retirar escombros."
+      ],
+      "timePrecision": "site account four days after the earthquakes; broader deployment statement dated June 28",
+      "limitations": "The lack of large machinery is site-specific and cannot be generalized to all of La Guaira."
+    },
+    {
+      "id": "undp-2026-06-29-debris",
+      "publisher": "United Nations Development Programme",
+      "sourceType": "primary UN assessment",
+      "publishedAt": "2026-06-29",
+      "url": "https://www.undp.org/es/venezuela/comunicados-de-prensa/el-pnud-estima-12-millones-de-toneladas-de-escombros-en-la-guaira-tras-los-terremotos-en-venezuela",
+      "places": ["Catia La Mar", "Caraballeda", "Urimare", "La Guaira state"],
+      "claims": [
+        "UNDP estimated approximately 1.2 million tonnes of debris in the most affected parts of La Guaira.",
+        "Catia La Mar, Caraballeda and Urimare were identified as areas with the greatest estimated debris volumes and priorities for debris management."
+      ],
+      "claimsEs": [
+        "El PNUD estimó aproximadamente 1,2 millones de toneladas de escombros en las zonas más afectadas de La Guaira.",
+        "Catia La Mar, Caraballeda y Urimare fueron identificadas como las áreas con mayor volumen estimado de escombros y como prioridades para su gestión."
+      ],
+      "timePrecision": "assessment published June 29",
+      "limitations": "The estimate combines satellite imagery, AI damage assessment and engineering knowledge; it is planning evidence, not a machinery-deployment log."
+    },
+    {
+      "id": "logistics-cluster-2026-07-02-sitrep",
+      "publisher": "Logistics Working Group / Logistics Cluster",
+      "sourceType": "primary inter-agency situation report",
+      "publishedAt": "2026-07-02",
+      "url": "https://logcluster.org/es/documents/venezuela-respuesta-terremotos-reporte-situacional-1-2-julio-2026",
+      "places": [
+        "Polideportivo Vargas",
+        "Estadio César Nieves",
+        "Catia La Mar",
+        "Estadio Playa Grande",
+        "Maiquetía"
+      ],
+      "claims": [
+        "Three multiservice shelters were enabled in La Guaira: Polideportivo Vargas, Estadio César Nieves in Catia La Mar and provisional Estadio Playa Grande.",
+        "The June 26 government decision reserved Maiquetía airport for response-related cargo; by July 2 it had received government-to-government and UN humanitarian cargo."
+      ],
+      "claimsEs": [
+        "Se habilitaron tres refugios multiservicio en La Guaira: Polideportivo Vargas, Estadio César Nieves en Catia La Mar y el refugio provisional Estadio Playa Grande.",
+        "La decisión gubernamental del 26 de junio reservó el aeropuerto de Maiquetía para carga vinculada con la respuesta; para el 2 de julio ya había recibido carga humanitaria bilateral y de la ONU."
+      ],
+      "timePrecision": "status as of July 2; shelter opening times are not specified",
+      "limitations": "Confirms operation by July 2 but not the exact opening time of each shelter."
+    },
+    {
+      "id": "logistics-cluster-2026-07-02-minutes",
+      "publisher": "Logistics Working Group / Logistics Cluster",
+      "sourceType": "primary inter-agency meeting minutes",
+      "publishedAt": "2026-07-02",
+      "url": "https://logcluster.org/es/documents/venezuela-minutas-de-la-reunion-respuesta-al-terremoto-caracas-2-julio-de-2026",
+      "places": [
+        "La Guaira state",
+        "Catia La Mar",
+        "Playa Grande",
+        "Maiquetía",
+        "Port of La Guaira"
+      ],
+      "claims": [
+        "Thirteen of 25 reported transitional camps were in La Guaira.",
+        "Polideportivo Vargas, Estadio César Nieves and provisional Estadio Playa Grande remained active as multiservice shelters.",
+        "Maiquetía airport and the Port of La Guaira were restricted to humanitarian cargo under reported operating arrangements.",
+        "Access on the Caracas-La Guaira highway remained regulated for humanitarian movements."
+      ],
+      "claimsEs": [
+        "Trece de los 25 campamentos transitorios reportados estaban en La Guaira.",
+        "Polideportivo Vargas, Estadio César Nieves y el refugio provisional Estadio Playa Grande seguían activos como refugios multiservicio.",
+        "El aeropuerto de Maiquetía y el Puerto de La Guaira estaban restringidos a carga humanitaria bajo los arreglos operativos reportados.",
+        "El acceso por la autopista Caracas-La Guaira seguía regulado para los movimientos humanitarios."
+      ],
+      "timePrecision": "status discussed July 2",
+      "limitations": "Does not provide exact camp coordinates or opening dates for all 13 La Guaira sites."
+    }
+  ],
+  "conflictsAndBounds": [
+    {
+      "topic": "Heavy machinery timing",
+      "topicEs": "Cuándo llegó la maquinaria pesada",
+      "finding": "Regional reporting indicates machinery was mobilizing by June 25-26 and a broader increase by June 28, while a June 29 Playa Grande site report still described no large machinery at that specific collapse.",
+      "findingEs": "Los reportes regionales indican que la maquinaria comenzó a movilizarse entre el 25 y el 26 de junio y que hubo un aumento más amplio para el 28; sin embargo, un reporte del 29 de junio todavía describía la ausencia de maquinaria grande en un colapso específico de Playa Grande.",
+      "interpretation": "The evidence supports uneven deployment and site-level gaps, not a single statewide arrival time.",
+      "interpretationEs": "La evidencia respalda un despliegue desigual y vacíos a nivel de sitio, no una única hora de llegada para todo el estado."
+    },
+    {
+      "topic": "Shelter availability",
+      "topicEs": "Disponibilidad de refugios",
+      "finding": "Residents reported not knowing shelter locations on June 25; people were observed sleeping outdoors in Catia La Mar on June 26; named multiservice shelters are confirmed active by July 2.",
+      "findingEs": "Residentes dijeron no conocer la ubicación de refugios el 25 de junio; el 26 se observó a personas durmiendo al aire libre en Catia La Mar; para el 2 de julio se confirma que funcionaban refugios multiservicio con nombre.",
+      "interpretation": "The evidence bounds a transition from unclear or insufficient shelter access to confirmed named facilities, but does not establish exact opening times.",
+      "interpretationEs": "La evidencia acota una transición desde un acceso incierto o insuficiente hacia instalaciones confirmadas, pero no establece sus horas exactas de apertura."
+    },
+    {
+      "topic": "Aid arrival",
+      "topicEs": "Llegada de ayuda",
+      "finding": "Aid trucks and a terminal distribution point were observed in Catia La Mar by June 26, while access restrictions and congestion could delay or unevenly distribute assistance.",
+      "findingEs": "Para el 26 de junio se observaron camiones de ayuda y un punto de distribución en una terminal de Catia La Mar, mientras las restricciones de acceso y la congestión podían demorar o distribuir de forma desigual la asistencia.",
+      "interpretation": "Arrival in Catia La Mar does not establish delivery to every affected neighborhood.",
+      "interpretationEs": "La llegada a Catia La Mar no demuestra que la ayuda alcanzara todos los sectores afectados."
+    }
+  ]
+}

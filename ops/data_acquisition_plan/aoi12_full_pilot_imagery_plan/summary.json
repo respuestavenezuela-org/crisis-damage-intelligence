@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-21T19:38:56.969846+00:00",
+  "scope": "La Guaira\u2013Caraballeda\u2013Catia La Mar full pilot",
+  "cellSizeM": 250,
+  "corridorBufferM": 1000,
+  "gridCells": 2283,
+  "sourceAoiCellCounts": {
+    "emsr884-aoi12-caraballeda": 1022,
+    "external-msft-caraballeda-east-predicted-damage": 349,
+    "external-msft-catia-la-mar-east-predicted-damage": 893,
+    "external-msft-catia-la-mar-predicted-damage": 1145,
+    "external-msft-la-guaira-east-predicted-damage": 328
+  },
+  "eligibilityCounts": {
+    "post_event_only": 307,
+    "pre_first72_later": 1976
+  },
+  "sceneCount": 17,
+  "preEventSceneCount": 4,
+  "postEventSceneCount": 13,
+  "newlyIdentifiedPostSceneCount": 8,
+  "newlyIdentifiedPostSceneIds": [
+    "B110001100BB2510",
+    "B16000110179D310",
+    "B16000110179D410",
+    "B040001100075610",
+    "B040001100075510",
+    "B1600011017A8610",
+    "B0300011000DFB10",
+    "B140001100B5CA10"
+  ],
+  "guardrails": [
+    "External Microsoft predictions define triage coverage only, not official damage.",
+    "Scene bounds indicate metadata coverage, not necessarily usable pixels.",
+    "No visible model signal is not evidence of absence.",
+    "Vantor derivatives remain subject to CC-BY-NC-4.0."
+  ],
+  "outputs": {
+    "cells": "ops/data_acquisition_plan/aoi12_full_pilot_imagery_plan/cells.jsonl",
+    "cellsGeoJson": "ops/data_acquisition_plan/aoi12_full_pilot_imagery_plan/cells.geojson",
+    "scenes": "ops/data_acquisition_plan/aoi12_full_pilot_imagery_plan/scenes.json"
+  }
+}

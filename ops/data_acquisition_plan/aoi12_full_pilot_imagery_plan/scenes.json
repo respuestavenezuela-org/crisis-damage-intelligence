@@ -1,0 +1,338 @@
+{
+  "scenes": [
+    {
+      "sceneId": "B130001101BE2A00",
+      "acquisitionUtc": "2025-11-03T12:56:33.749851Z",
+      "sensor": "LG03",
+      "phase": "pre",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.37,
+      "cloudCoverPercent": 0,
+      "offNadirDegrees": 21.42,
+      "publishedUtc": "2026-06-25T22:07:22.859226",
+      "bounds": [
+        -66.85242183064146,
+        10.55267008694,
+        -66.74512524647216,
+        10.652549694604497
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B130001101BE2A00.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B130001101BE2A00.json"
+    },
+    {
+      "sceneId": "B160001100FF4510",
+      "acquisitionUtc": "2026-03-21T14:31:32.374596Z",
+      "sensor": "LG06",
+      "phase": "pre",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.45,
+      "cloudCoverPercent": 3,
+      "offNadirDegrees": 32.49,
+      "publishedUtc": "2026-06-25T21:31:46.308154",
+      "bounds": [
+        -67.04410394214342,
+        10.237667250740488,
+        -66.90687189215781,
+        10.689784714850836
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FF4510.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B160001100FF4510.json"
+    },
+    {
+      "sceneId": "B120001100513B10",
+      "acquisitionUtc": "2026-04-07T15:14:46.124708Z",
+      "sensor": "LG02",
+      "phase": "pre",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.48,
+      "cloudCoverPercent": 12,
+      "offNadirDegrees": 35.17,
+      "publishedUtc": "2026-06-25T21:14:24.206654",
+      "bounds": [
+        -67.0855750803715,
+        10.520139443278675,
+        -66.96742443234409,
+        10.677619873097626
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B120001100513B10.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B120001100513B10.json"
+    },
+    {
+      "sceneId": "10400100B979DD00",
+      "acquisitionUtc": "2026-05-31T14:57:27.599765Z",
+      "sensor": "WV03",
+      "phase": "pre",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.33,
+      "cloudCoverPercent": 30,
+      "offNadirDegrees": 16.7,
+      "publishedUtc": "2026-06-26T18:24:35.919377",
+      "bounds": [
+        -67.19066809582516,
+        9.485857552479576,
+        -67.051183231357,
+        10.774355494879583
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/10400100B979DD00.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/10400100B979DD00.json"
+    },
+    {
+      "sceneId": "B110001100BB2510",
+      "acquisitionUtc": "2026-06-25T15:17:49.499492Z",
+      "sensor": "LG01",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.46,
+      "cloudCoverPercent": 32,
+      "offNadirDegrees": 33.19,
+      "publishedUtc": "2026-06-26T00:40:58.945806",
+      "bounds": [
+        -67.05339460388248,
+        10.3802195482518,
+        -66.93464123412056,
+        10.59160019240196
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B110001100BB2510.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B110001100BB2510.json"
+    },
+    {
+      "sceneId": "B16000110179D310",
+      "acquisitionUtc": "2026-06-25T21:29:28.499714Z",
+      "sensor": "LG06",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.53,
+      "cloudCoverPercent": 18,
+      "offNadirDegrees": 39.02,
+      "publishedUtc": "2026-06-26T14:16:44.214212",
+      "bounds": [
+        -67.17193615161182,
+        10.154839481265283,
+        -67.03913949569807,
+        10.585934801035895
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B16000110179D310.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B16000110179D310.json"
+    },
+    {
+      "sceneId": "B16000110179D410",
+      "acquisitionUtc": "2026-06-25T21:29:47.749647Z",
+      "sensor": "LG06",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.49,
+      "cloudCoverPercent": 34,
+      "offNadirDegrees": 35.4,
+      "publishedUtc": "2026-06-26T14:29:13.624176",
+      "bounds": [
+        -67.0673851919892,
+        10.151966110046164,
+        -66.9362396681519,
+        10.573109933456317
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B16000110179D410.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B16000110179D410.json"
+    },
+    {
+      "sceneId": "B040001100075610",
+      "acquisitionUtc": "2026-06-26T15:09:37.473432Z",
+      "sensor": "WV03",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.38,
+      "cloudCoverPercent": 4,
+      "offNadirDegrees": 27.27,
+      "publishedUtc": "2026-06-26T20:12:45.353610",
+      "bounds": [
+        -67.1068835042014,
+        10.282677080534947,
+        -66.9648793122347,
+        10.73849530520547
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B040001100075610.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B040001100075610.json"
+    },
+    {
+      "sceneId": "B040001100075510",
+      "acquisitionUtc": "2026-06-26T15:09:50.723001Z",
+      "sensor": "WV03",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.35,
+      "cloudCoverPercent": 20,
+      "offNadirDegrees": 22.31,
+      "publishedUtc": "2026-06-26T19:59:05.656010",
+      "bounds": [
+        -66.98542605507255,
+        10.265150193989212,
+        -66.84648738706387,
+        10.715136987705785
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B040001100075510.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B040001100075510.json"
+    },
+    {
+      "sceneId": "COPERNICUS_LEGION_20260626",
+      "acquisitionUtc": "2026-06-26T15:10:00Z",
+      "sensor": "Legion",
+      "phase": "post",
+      "sourceFamily": "copernicus_ems",
+      "license": "Copernicus EMS public product terms",
+      "panGsdM": null,
+      "cloudCoverPercent": null,
+      "bounds": [
+        -67.0852916,
+        10.5720789,
+        -66.8041548,
+        10.6268948
+      ],
+      "assetUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif"
+    },
+    {
+      "sceneId": "B1600011017A8610",
+      "acquisitionUtc": "2026-06-26T21:13:46.374593Z",
+      "sensor": "LG06",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.38,
+      "cloudCoverPercent": 26,
+      "offNadirDegrees": 21.74,
+      "publishedUtc": "2026-06-27T20:36:10.739760",
+      "bounds": [
+        -67.11432927803459,
+        10.54379927459416,
+        -66.771432619826,
+        10.653591578742347
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B1600011017A8610.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B1600011017A8610.json"
+    },
+    {
+      "sceneId": "B15000110186C610",
+      "acquisitionUtc": "2026-06-27T13:48:10.374681Z",
+      "sensor": "LG05",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.35,
+      "cloudCoverPercent": 6,
+      "offNadirDegrees": 14.68,
+      "publishedUtc": "2026-06-27T20:27:57.714345",
+      "bounds": [
+        -67.04310158347296,
+        10.525499436001521,
+        -66.94296575146687,
+        10.641054423359
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B15000110186C610.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B15000110186C610.json"
+    },
+    {
+      "sceneId": "B0300011000DFB10",
+      "acquisitionUtc": "2026-06-27T15:15:06.41416Z",
+      "sensor": "WV02",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.94,
+      "cloudCoverPercent": 19,
+      "offNadirDegrees": 45.0,
+      "publishedUtc": "2026-06-27T21:09:30.299852",
+      "bounds": [
+        -67.29526225180908,
+        10.318075558186116,
+        -66.98672453076283,
+        10.77688641023472
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B0300011000DFB10.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B0300011000DFB10.json"
+    },
+    {
+      "sceneId": "B140001100B5C710",
+      "acquisitionUtc": "2026-06-29T14:09:32.624709Z",
+      "sensor": "LG04",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.41,
+      "cloudCoverPercent": 39,
+      "offNadirDegrees": 28.91,
+      "publishedUtc": "2026-06-29T17:56:39.127346",
+      "bounds": [
+        -66.8527836481891,
+        10.279787306381394,
+        -66.71805186151676,
+        10.729151085255866
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B140001100B5C710.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B140001100B5C710.json"
+    },
+    {
+      "sceneId": "B140001100B5C810",
+      "acquisitionUtc": "2026-06-29T14:09:55.124782Z",
+      "sensor": "LG04",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.48,
+      "cloudCoverPercent": 41,
+      "offNadirDegrees": 36.58,
+      "publishedUtc": "2026-06-29T17:19:22.690511",
+      "bounds": [
+        -66.96967174520964,
+        10.26486419235638,
+        -66.80394830056815,
+        10.723178936846043
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B140001100B5C810.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B140001100B5C810.json"
+    },
+    {
+      "sceneId": "B140001100B5CA10",
+      "acquisitionUtc": "2026-06-29T14:10:16.249659Z",
+      "sensor": "LG04",
+      "phase": "post",
+      "sourceFamily": "vantor_open_data",
+      "license": "CC-BY-NC-4.0",
+      "panGsdM": 0.6,
+      "cloudCoverPercent": 30,
+      "offNadirDegrees": 44.03,
+      "publishedUtc": "2026-06-29T17:30:30.384603",
+      "bounds": [
+        -67.13252350799686,
+        10.250565117094466,
+        -66.91878991549817,
+        10.753194074273193
+      ],
+      "assetUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B140001100B5CA10.tif",
+      "metadataUrl": "https://vantor-opendata.s3.amazonaws.com/events/Venezuela-Earthquake-Jun-2026/B140001100B5CA10.json"
+    },
+    {
+      "sceneId": "COPERNICUS_GEOEYE1_20260705",
+      "acquisitionUtc": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "phase": "post",
+      "sourceFamily": "copernicus_ems",
+      "license": "Copernicus EMS public product terms",
+      "panGsdM": null,
+      "cloudCoverPercent": null,
+      "bounds": [
+        -67.0858916,
+        10.5600296,
+        -66.5412555,
+        10.6295592
+      ],
+      "assetUrl": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_MONIT02/EMSR884_AOI12_GRA_MONIT02_GEOEYE1_20260705_1505_ORTHO_cog.tif"
+    }
+  ]
+}

@@ -67,6 +67,27 @@ export type AoiRecord = {
         quality?: number;
       };
     };
+    acquisitions?: Array<{
+      recordId: string;
+      distinctAcquisitionId: string;
+      product: string;
+      productStatusCode?: string;
+      sensorType: string;
+      sensor: string;
+      resolutionClass?: string;
+      acquisitionUtc: string;
+      url: string;
+      bytes?: number;
+      httpStatus?: number | null;
+      publiclyReadable: boolean;
+      acceptRanges?: string;
+      productDownloadUrl?: string | null;
+      source: string;
+      license: string;
+      role: string;
+      analysisStatus: string;
+      duplicateOf?: string;
+    }>;
     approximateReference?: {
       label: string;
       urlTemplate: string;

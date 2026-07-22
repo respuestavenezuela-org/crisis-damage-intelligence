@@ -1,0 +1,492 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-21T04:21:22.168684+00:00",
+  "itemCount": 26,
+  "openCount": 26,
+  "items": [
+    {
+      "id": "la-guaira-aerial-observation-ems_00031",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Vehículo o remolque rojo grande en un patio industrial",
+        "en": "Large red vehicle or trailer in an industrial yard"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00056",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Vehículos en un área despejada; no confirma refugio o acopio",
+        "en": "Vehicles in a cleared area; does not confirm shelter or collection"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00108",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Objeto amarillo de escala vehicular: relación con la respuesta no resuelta",
+        "en": "Vehicle-scale yellow object: response relationship unresolved"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00117",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Vehículos rojos grandes en un bloque severamente afectado",
+        "en": "Large red vehicles at a severely affected block"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-aerial-observation-ems_00119",
+      "packet": "la-guaira",
+      "kind": "aerial-observation",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Probable máquina amarilla y varios vehículos junto a escombros",
+        "en": "Probable yellow machine and several vehicles beside debris"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede otra adquisición fechada o evidencia de campo confirmar el tipo, llegada y uso del objeto sin depender de la mejora 2×?",
+        "en": "Can another dated acquisition or field evidence confirm the object's type, arrival and use without relying on the 2× enhancement?"
+      }
+    },
+    {
+      "id": "la-guaira-gap-01",
+      "packet": "la-guaira",
+      "kind": "coverage-gap",
+      "priority": 10,
+      "confidence": null,
+      "title": {
+        "es": "Distribución exacta de equipos por sitio durante las primeras 72 horas",
+        "en": "Exact site-level distribution of teams during the first 72 hours"
+      },
+      "sourceIds": [],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Existe evidencia fechada y situada que cierre esta brecha sin inferir ausencia?",
+        "en": "Is there dated, situated evidence that closes this gap without inferring absence?"
+      }
+    },
+    {
+      "id": "la-guaira-gap-02",
+      "packet": "la-guaira",
+      "kind": "coverage-gap",
+      "priority": 10,
+      "confidence": null,
+      "title": {
+        "es": "Propiedad, función y tiempo de operación de maquinaria visible",
+        "en": "Ownership, function and operating time of visible machinery"
+      },
+      "sourceIds": [],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Existe evidencia fechada y situada que cierre esta brecha sin inferir ausencia?",
+        "en": "Is there dated, situated evidence that closes this gap without inferring absence?"
+      }
+    },
+    {
+      "id": "la-guaira-first72-finding-machinery-by-41-hours",
+      "packet": "la-guaira",
+      "kind": "first72-finding",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Maquinaria visible en al menos un sitio",
+        "en": "Machinery visible at at least one site"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "la-guaira-timeline-event-copernicus-41-hour-image",
+      "packet": "la-guaira",
+      "kind": "timeline-event",
+      "priority": 10,
+      "confidence": "inferred",
+      "title": {
+        "es": "Imagen a +41 h: vehículos y probable excavadora",
+        "en": "+41 h image: vehicles and probable excavator"
+      },
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "la-guaira-first72-finding-site-level-gap",
+      "packet": "la-guaira",
+      "kind": "first72-finding",
+      "priority": 11,
+      "confidence": "single-source",
+      "title": {
+        "es": "Brecha entre tránsito regional y presencia local",
+        "en": "Gap between regional movement and local presence"
+      },
+      "sourceIds": [
+        "ap-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "la-guaira-timeline-event-heavy-machinery-increases",
+      "packet": "la-guaira",
+      "kind": "timeline-event",
+      "priority": 11,
+      "confidence": "single-source",
+      "title": {
+        "es": "Se reporta mayor presencia de maquinaria pesada",
+        "en": "Increased heavy-machinery presence reported"
+      },
+      "sourceIds": [
+        "efe-july-6"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "la-guaira-timeline-event-latest-evidence-july-20",
+      "packet": "la-guaira",
+      "kind": "timeline-event",
+      "priority": 11,
+      "confidence": "single-source",
+      "title": {
+        "es": "La distribución continúa mientras la recuperación apenas comienza",
+        "en": "Distribution continues as recovery only begins"
+      },
+      "sourceIds": [
+        "lemonde-july-20"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "la-guaira-timeline-event-machinery-convoy-local-gap",
+      "packet": "la-guaira",
+      "kind": "timeline-event",
+      "priority": 11,
+      "confidence": "single-source",
+      "title": {
+        "es": "Maquinaria en ruta, carencia reportada en sitios",
+        "en": "Machinery en route, reported shortage at sites"
+      },
+      "sourceIds": [
+        "ap-june-26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-gap-01",
+      "packet": "moron",
+      "kind": "coverage-gap",
+      "priority": 20,
+      "confidence": null,
+      "title": {
+        "es": "Hora y sitio de llegada de maquinaria pesada durante las primeras 72 horas",
+        "en": "Time and site of heavy-machinery arrival during the first 72 hours"
+      },
+      "sourceIds": [],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Existe evidencia fechada y situada que cierre esta brecha sin inferir ausencia?",
+        "en": "Is there dated, situated evidence that closes this gap without inferring absence?"
+      }
+    },
+    {
+      "id": "moron-gap-02",
+      "packet": "moron",
+      "kind": "coverage-gap",
+      "priority": 20,
+      "confidence": null,
+      "title": {
+        "es": "Inventario completo y condiciones de refugios en Juan José Mora",
+        "en": "Complete shelter inventory and conditions in Juan José Mora"
+      },
+      "sourceIds": [],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Existe evidencia fechada y situada que cierre esta brecha sin inferir ausencia?",
+        "en": "Is there dated, situated evidence that closes this gap without inferring absence?"
+      }
+    },
+    {
+      "id": "moron-gap-03",
+      "packet": "moron",
+      "kind": "coverage-gap",
+      "priority": 20,
+      "confidence": null,
+      "title": {
+        "es": "Estado operativo verificado del Puerto de Puerto Cabello",
+        "en": "Verified operating status of Puerto Cabello port"
+      },
+      "sourceIds": [],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Existe evidencia fechada y situada que cierre esta brecha sin inferir ausencia?",
+        "en": "Is there dated, situated evidence that closes this gap without inferring absence?"
+      }
+    },
+    {
+      "id": "moron-first72-finding-moron-collection-center-mobilized",
+      "packet": "moron",
+      "kind": "first72-finding",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Centro de acopio y camiones anunciados",
+        "en": "Collection center and trucks announced"
+      },
+      "sourceIds": [
+        "capemiac-june26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-first72-finding-moron-first-cargo-region",
+      "packet": "moron",
+      "kind": "first72-finding",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Primera carga documentada en Puerto Cabello",
+        "en": "First documented load in Puerto Cabello"
+      },
+      "sourceIds": [
+        "el-impulso-june27"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-500-houses-claim",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Autoridad estatal afirma que 500 casas «cayeron»",
+        "en": "State authority says 500 houses “fell”"
+      },
+      "sourceIds": [
+        "moron-housing-claim-july5"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-capemiac-collection",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Capemiac habilita centro de acopio",
+        "en": "Capemiac opens collection center"
+      },
+      "sourceIds": [
+        "capemiac-june26"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-community-items-prepared",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Red local prepara artículos para familias de Juan José Mora",
+        "en": "Local network prepares items for Juan José Mora families"
+      },
+      "sourceIds": [
+        "notitarde-july19"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-displaced-naguanagua",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Familias desplazadas siguen alojadas con parientes",
+        "en": "Displaced families remain hosted by relatives"
+      },
+      "sourceIds": [
+        "carabobeno-displacement-july17"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-first-donations-puerto-cabello",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Primera carga entregada a nodo regional",
+        "en": "First load delivered to regional hub"
+      },
+      "sourceIds": [
+        "el-impulso-june27"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-machinery-still-needed",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Voluntarios reportan maquinaria como necesidad pendiente",
+        "en": "Volunteers report machinery as an outstanding need"
+      },
+      "sourceIds": [
+        "moron-housing-claim-july5"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-needs-assessment",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "ADRA informa evaluación de necesidades",
+        "en": "ADRA reports needs assessment"
+      },
+      "sourceIds": [
+        "adra-june25"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    },
+    {
+      "id": "moron-timeline-event-moron-shelter-conditions",
+      "packet": "moron",
+      "kind": "timeline-event",
+      "priority": 21,
+      "confidence": "single-source",
+      "title": {
+        "es": "Más de 200 familias desalojadas cuestionan refugio",
+        "en": "More than 200 evacuated families question shelter"
+      },
+      "sourceIds": [
+        "carabobeno-shelter-june28"
+      ],
+      "status": "open",
+      "reviewQuestion": {
+        "es": "¿Puede una fuente independiente, primaria o visual aumentar o reducir esta confianza?",
+        "en": "Can an independent, primary or visual source raise or lower this confidence?"
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-21T14:54:39Z",
+  "defaultSlug": "la-guaira",
+  "entries": [
+    {
+      "id": "venezuela-earthquake-2026-la-guaira-reconstruction",
+      "slug": "la-guaira",
+      "dataPath": "/data/reconstruction/la-guaira-timeline.json",
+      "status": "published",
+      "priority": 1,
+      "geography": {
+        "es": "La Guaira, Caraballeda y Catia La Mar",
+        "en": "La Guaira, Caraballeda and Catia La Mar"
+      },
+      "description": {
+        "es": "Respuesta, rescate, maquinaria, refugios, distribución y recuperación en el principal corredor de daño documentado.",
+        "en": "Response, rescue, machinery, shelter, distribution and recovery across the principal documented damage corridor."
+      },
+      "updatedAt": "2026-07-21T14:54:39Z",
+      "evidenceCutoff": "2026-07-20T00:00:00-04:00",
+      "eventCount": 22,
+      "sourceCount": 29,
+      "imageEventCount": 3,
+      "officialDamage": {
+        "destroyed": 10,
+        "damagedConfirmed": 96,
+        "possibleDamage": 24
+      },
+      "gaps": [
+        {
+          "es": "Hora exacta de apertura y capacidad de los sitios temporales observados",
+          "en": "Exact opening time and capacity of observed temporary sites"
+        },
+        {
+          "es": "Propiedad, función y tiempo de operación de maquinaria y vehículos visibles",
+          "en": "Ownership, function and operating time of visible machinery and vehicles"
+        }
+      ]
+    },
+    {
+      "id": "venezuela-earthquake-2026-moron",
+      "slug": "moron",
+      "dataPath": "/data/reconstruction/moron-timeline.json",
+      "status": "published",
+      "priority": 2,
+      "geography": {
+        "es": "Morón y municipio Juan José Mora, Carabobo",
+        "en": "Morón and Juan José Mora municipality, Carabobo"
+      },
+      "description": {
+        "es": "Daño oficial, primeras entregas, refugio, desplazamiento y brechas de maquinaria en el entorno del epicentro.",
+        "en": "Official damage, first deliveries, shelter, displacement and machinery gaps near the epicentral area."
+      },
+      "updatedAt": "2026-07-21T03:30:00-04:00",
+      "evidenceCutoff": "2026-07-19T23:59:59-04:00",
+      "eventCount": 12,
+      "sourceCount": 11,
+      "imageEventCount": 1,
+      "officialDamage": {
+        "destroyed": 2,
+        "damagedConfirmed": 36,
+        "possibleDamage": 93
+      },
+      "gaps": [
+        {
+          "es": "Hora y sitio de llegada de maquinaria pesada durante las primeras 72 horas",
+          "en": "Time and site of heavy-machinery arrival during the first 72 hours"
+        },
+        {
+          "es": "Inventario completo y condiciones de refugios en Juan José Mora",
+          "en": "Complete shelter inventory and conditions in Juan José Mora"
+        },
+        {
+          "es": "Estado operativo verificado del Puerto de Puerto Cabello",
+          "en": "Verified operating status of Puerto Cabello port"
+        }
+      ]
+    }
+  ]
+}

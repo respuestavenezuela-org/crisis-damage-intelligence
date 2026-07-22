@@ -1,0 +1,8 @@
+{
+  "source": "Copernicus EMSR884 imagery metadata; no official GRA damage vector product",
+  "aoi": "emsr884-aoi01-petare",
+  "aoiCode": "AOI01",
+  "aoiName": "Petare",
+  "imageryInventory": "/data/imagery/emsr884-acquisitions.json",
+  "officialDamageCounts": false
+}

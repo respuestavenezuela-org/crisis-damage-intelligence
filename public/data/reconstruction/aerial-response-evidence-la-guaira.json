@@ -1,0 +1,733 @@
+{
+  "version": 1,
+  "id": "aoi12-la-guaira-aerial-response-review",
+  "updatedAt": "2026-07-21T14:54:39Z",
+  "aoiId": "emsr884-aoi12-caraballeda",
+  "acquisitionAt": "2026-06-26T15:10:00Z",
+  "hoursAfterEvent": 41,
+  "sourceId": "copernicus-aoi12-june-26",
+  "source": {
+    "publisher": "Copernicus Emergency Management Service",
+    "sensor": "Legion",
+    "product": "EMSR884 AOI12 GRA post-event orthomosaic",
+    "url": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR884/AOI12/GRA_PRODUCT/EMSR884_AOI12_GRA_PRODUCT_LEGION_20260626_1510_ORTHO_cog.tif",
+    "license": "Copernicus EMS public product terms"
+  },
+  "review": {
+    "method": {
+      "es": "Además de la cola anterior de 26 chips EMS, se dividió el corredor en 1.022 celdas de 250 m. Se analizaron 734 celdas con cobertura útil a 768 px (~0,326 m/píxel), se adjudicaron 226 prioridades con un segundo VLM y se revisaron manualmente 55 celdas de mayor señal o acuerdo. Solo se publican cambios defendibles en píxeles nativos.",
+      "en": "In addition to the earlier 26-chip EMS queue, the corridor was divided into 1,022 250 m cells. The 734 cells with useful coverage were analyzed at 768 px (~0.326 m/pixel), 226 priority cells were adjudicated by a second VLM, and 55 highest-signal or agreement cells were manually reviewed. Only changes supportable in native pixels are published."
+    },
+    "summary": {
+      "es": "La revisión ampliada identifica cuatro nuevos sitios temporales compatibles con respuesta: el campo de golf de Caraballeda ya activo a +41 h, y para el 29 de junio el Estadio Jorge García, un lote costero en Punta de Mulatos y una pista en El Palmar. Un quinto lote muestra vehículos grandes desde +41 h, pero su función sigue sin resolver.",
+      "en": "The expanded review identifies four new temporary sites consistent with response use: the Caraballeda golf course already active at +41 h, and by June 29 the Jorge García Stadium, a Punta de Mulatos waterfront lot and an El Palmar track. A fifth lot shows large vehicles from +41 h, but their function remains unresolved."
+    },
+    "absenceCaveat": {
+      "es": "El barrido cubre el corredor oficial y fechas concretas, no cada calle ni cada hora. No ver un objeto no demuestra ausencia, y la imagen no permite medir suficiencia.",
+      "en": "The scan covers the official corridor and specific dates, not every street or every hour. Failure to see an object does not prove absence, and imagery cannot measure adequacy."
+    },
+    "candidateRecords": 31,
+    "publishedSites": 10,
+    "likelyResponseSites": 6,
+    "unresolvedSites": 4,
+    "confidentCollectionCentres": 0,
+    "confidentSheltersOrSleepingSites": 1,
+    "candidateIds": [
+      "ems_00002",
+      "ems_00003",
+      "ems_00005",
+      "ems_00006",
+      "ems_00007",
+      "ems_00008",
+      "ems_00012",
+      "ems_00015",
+      "ems_00031",
+      "ems_00033",
+      "ems_00034",
+      "ems_00035",
+      "ems_00040",
+      "ems_00043",
+      "ems_00050",
+      "ems_00051",
+      "ems_00056",
+      "ems_00060",
+      "ems_00066",
+      "ems_00067",
+      "ems_00077",
+      "ems_00078",
+      "ems_00108",
+      "ems_00117",
+      "ems_00119",
+      "ems_00120",
+      "aoi12_r018_c111",
+      "aoi12_r013_c083",
+      "aoi12_r013_c073",
+      "aoi12_r019_c103",
+      "aoi12_r019_c107"
+    ]
+  },
+  "enhancement": {
+    "status": "display-only",
+    "modelId": "caidas/swin2SR-classical-sr-x2-64",
+    "modelRevision": "cee1c923c6a37361c6e5650b65dcf4be821e5d52",
+    "scale": 2,
+    "license": "Apache-2.0",
+    "method": {
+      "es": "Swin2SR 2× ejecutado localmente sobre el chip PNG nativo; salida WebP calidad 86. La imagen derivada reduce la borrosidad de compresión para inspección, pero no agrega evidencia y nunca sustituye al original.",
+      "en": "Swin2SR 2× run locally on the native PNG chip; WebP quality 86 output. The derivative reduces compression blur for inspection, but adds no evidence and never replaces the original."
+    },
+    "acceptanceRule": {
+      "es": "Una observación solo se publica si sigue siendo defendible en la imagen nativa. Los rasgos que aparecen únicamente en la mejora se descartan.",
+      "en": "An observation is published only when it remains supportable in the native image. Features appearing only in the enhancement are discarded."
+    }
+  },
+  "modelBenchmarks": [
+    {
+      "modelId": "caidas/swin2SR-classical-sr-x2-64",
+      "revision": "cee1c923c6a37361c6e5650b65dcf4be821e5d52",
+      "task": "super-resolution",
+      "result": "accepted-display-only",
+      "note": {
+        "es": "Mejoró la legibilidad de bordes y compresión sin cambiar la geometría general en la comparación revisada.",
+        "en": "Improved edge and compression legibility without changing the overall geometry in the reviewed comparison."
+      }
+    },
+    {
+      "modelId": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+      "revision": "bb13f02e45e88d00b6c202b3fbe6a181af144606",
+      "task": "super-resolution",
+      "result": "rejected",
+      "note": {
+        "es": "El resultado 4× suavizó superficies y generó estructura aparente en bordes; no es adecuado para lectura de evidencia.",
+        "en": "The 4× result smoothed surfaces and generated apparent edge structure; it is unsuitable for evidence reading."
+      }
+    },
+    {
+      "modelId": "IDEA-Research/grounding-dino-tiny",
+      "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+      "task": "zero-shot-object-detection",
+      "result": "rejected",
+      "note": {
+        "es": "Produjo cajas desplazadas y etiquetas inestables sobre objetos aéreos pequeños.",
+        "en": "Produced misplaced boxes and unstable labels on small aerial objects."
+      }
+    },
+    {
+      "modelId": "mshamrai/yolov8s-visdrone",
+      "revision": "996db9c3fbdf92ecdcf58411449a39232bfbcff6",
+      "task": "aerial-object-detection",
+      "result": "rejected",
+      "note": {
+        "es": "A un umbral bajo de 0,15 solo señaló artefactos en los bordes de dos chips y no recuperó los objetos visibles revisados.",
+        "en": "At a low 0.15 threshold it only marked edge artifacts in two chips and did not recover the reviewed visible objects."
+      }
+    }
+  ],
+  "observations": [
+    {
+      "id": "aerial-ems-00119",
+      "chipId": "ems_00119",
+      "status": "likely-response-related",
+      "confidence": "inferred",
+      "category": "heavy-machinery",
+      "location": {
+        "label": "Caraballeda oriental",
+        "latitude": 10.61876540826087,
+        "longitude": -66.84911322956522,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Probable máquina amarilla y varios vehículos junto a escombros",
+        "en": "Probable yellow machine and several vehicles beside debris"
+      },
+      "finding": {
+        "es": "En el borde norte del chip posterior se distingue un objeto amarillo del tamaño y forma general de una excavadora, junto a varios vehículos y un campo de destrucción. La imagen nativa permite sostener «probable maquinaria pesada», no marca, operador, actividad ni suficiencia.",
+        "en": "At the northern edge of the post-event chip, a yellow object has the general size and shape of an excavator, beside several vehicles and a destruction field. The native image supports “probable heavy machinery,” not make, operator, activity or adequacy."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00119_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00119_after_event_swin2sr_x2.webp",
+      "nativeSha256": "812b02851b6289cc9cf82829547c08a5a714fd70bd0e9fc002e32c2bfec14a24",
+      "enhancedSha256": "b8f3acbc03f8bd92c929878e4921e8de7ee36969829e3f31620ae93d82b51d01",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.61876540826087,-66.84911322956522",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:32.624709Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "not-discernible-in-followup",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00119_B140001100B5C710_compare.png",
+        "nativeSha256": "e5274c2bf865d89c829a7525e5efdc0b295d5e4cbea6e3bd1b07c43a9d9f5335",
+        "enhancedSha256": "07df65d4be21dffd4dccee51402abb96412059539dfab01a613b826274b8a9d1",
+        "compareSha256": "32648d12adeb92e99b28bf8a91465643b237216bb4beeee67b480028c1e62b30",
+        "finding": {
+          "es": "La imagen del 29 de junio cubre el mismo sitio de escombros, pero el objeto amarillo parecido a excavadora del 26 de junio ya no se distingue en la misma posición junto a la vía. Pudo moverse o quedar oculto por geometría y resolución; la imagen no permite inferir trabajo realizado ni hora de salida.",
+          "en": "The June 29 image covers the same debris site, but the June 26 yellow excavator-like object is no longer discernible at the same road-edge position. It may have moved or be masked by geometry and resolution; the image does not establish work performed or departure time."
+        },
+        "limitations": {
+          "es": "No visible en el seguimiento no significa ausente. La comparación es entre sensores y ángulos distintos.",
+          "en": "Not visible in the follow-up does not mean absent. The comparison uses different sensors and viewing angles."
+        }
+      }
+    },
+    {
+      "id": "aerial-ems-00117",
+      "chipId": "ems_00117",
+      "status": "likely-response-related",
+      "confidence": "inferred",
+      "category": "large-vehicles",
+      "location": {
+        "label": "Caraballeda oriental",
+        "latitude": 10.619438562435898,
+        "longitude": -66.84675992099068,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Vehículos rojos grandes en un bloque severamente afectado",
+        "en": "Large red vehicles at a severely affected block"
+      },
+      "finding": {
+        "es": "Se observan varios vehículos rojos grandes agrupados entre árboles, vías y destrucción extensa. Su color y escala son compatibles con vehículos de emergencia o respuesta, pero la resolución no permite confirmar el tipo exacto ni si estaban operando.",
+        "en": "Several large red vehicles are grouped among trees, roads and extensive destruction. Their colour and scale are consistent with emergency or response vehicles, but the resolution does not confirm the exact type or whether they were operating."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00117_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00117_after_event_swin2sr_x2.webp",
+      "nativeSha256": "c1a66dddd15f444f3648c94aff997abd1ce7bb1f02daa4234a53fb002046d9f7",
+      "enhancedSha256": "9d6e0e5a4c4cee9b93e17c026ae26025bd9b7ff1292b3b391b814ac66a2b4f15",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.619438562435898,-66.84675992099068",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:32.624709Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-object-persistence",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00117_B140001100B5C710_compare.png",
+        "nativeSha256": "56bb06f84de6617cf52ae3a54eb50befedf8b4b408919a435a3c67ff0d4bbc30",
+        "enhancedSha256": "e013d4b42c29c187f4d988576b721f4206257f9ee675cc70c1992aa81e4d19de",
+        "compareSha256": "7a04e8c0663d5f6336f5ab8b6deade38525854cbb9c3abf760900a998291277b",
+        "finding": {
+          "es": "La escena del 29 de junio muestra objetos grandes verdes y rojos en la misma parcela arbolada. La persistencia respalda que había objetos de escala vehicular o de carga, pero también es compatible con equipo almacenado; la atribución a vehículos de emergencia sigue sin resolverse.",
+          "en": "The June 29 scene shows large green and red objects in the same tree-lined parcel. Persistence supports the presence of vehicle- or cargo-scale objects, but is also compatible with stored equipment; attribution to emergency vehicles remains unresolved."
+        },
+        "limitations": {
+          "es": "Cambios de color, ángulo y resolución impiden contar o tipificar los objetos de forma consistente.",
+          "en": "Changes in colour, angle and resolution prevent consistent object counting or typing."
+        }
+      }
+    },
+    {
+      "id": "aerial-ems-00108",
+      "chipId": "ems_00108",
+      "status": "unresolved",
+      "confidence": "inferred",
+      "category": "heavy-machinery",
+      "location": {
+        "label": "Caraballeda oriental",
+        "latitude": 10.6148392825,
+        "longitude": -66.837810166,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Objeto amarillo de escala vehicular: relación con la respuesta no resuelta",
+        "en": "Vehicle-scale yellow object: response relationship unresolved"
+      },
+      "finding": {
+        "es": "Un objeto amarillo de escala vehicular aparece cerca del borde norte de una estructura afectada. Puede ser maquinaria, pero la geometría distinta entre imágenes y la falta de detalle impiden afirmar que llegó después del sismo o que formaba parte de la respuesta.",
+        "en": "A vehicle-scale yellow object appears near the northern edge of a damaged structure. It may be machinery, but differing image geometry and limited detail prevent saying it arrived after the earthquake or was part of the response."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00108_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00108_after_event_swin2sr_x2.webp",
+      "nativeSha256": "325f2b049d97c3679fef9048824b8f51a81f214096171b5a30dd34d585971c75",
+      "enhancedSha256": "0f186994d31044c9fe2c6be4d131fa5ec1cc650e3d15920ee29bc5abc0d9132f",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.6148392825,-66.837810166",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:32.624709Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-object-persistence",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00108_B140001100B5C710_compare.png",
+        "nativeSha256": "d7eec4c42b28443201947c0c77e695916ec9d0851f4ef12501abbec62b373146",
+        "enhancedSha256": "9884ba749e80b69e10b6e9130cb8d6c8b90bbaed4e66497f579979a69ab4948c",
+        "compareSha256": "2ceb81fa8a8bc538d779e8ff5771858880c2c0f42f676a2a98363ffee8eb31f4",
+        "finding": {
+          "es": "La vista del 29 de junio todavía muestra un objeto amarillo de escala de maquinaria junto a un objeto rojo alargado en el mismo sitio de apariencia industrial. La persistencia respalda la presencia de equipo o maquinaria, pero no cuándo llegó ni si tenía una función de emergencia.",
+          "en": "The June 29 view still shows a yellow equipment-scale object beside a long red object at the same industrial-looking site. Persistence supports the presence of equipment or machinery, but not when it arrived or whether it served an emergency function."
+        },
+        "limitations": {
+          "es": "La resolución no establece operador, propiedad, actividad ni relación causal con el sismo.",
+          "en": "Resolution does not establish operator, ownership, activity or a causal relationship to the earthquake."
+        }
+      }
+    },
+    {
+      "id": "aerial-ems-00031",
+      "chipId": "ems_00031",
+      "status": "unresolved",
+      "confidence": "inferred",
+      "category": "large-vehicles",
+      "location": {
+        "label": "La Guaira occidental",
+        "latitude": 10.605771187419354,
+        "longitude": -67.02861496232258,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Vehículo o remolque rojo grande en un patio industrial",
+        "en": "Large red vehicle or trailer in an industrial yard"
+      },
+      "finding": {
+        "es": "El chip posterior muestra una forma roja alargada compatible con un camión, autobús o remolque. El entorno industrial y la falta de una comparación geométrica limpia impiden atribuirlo a la respuesta o incluso fijar su tipo.",
+        "en": "The post-event chip shows an elongated red form consistent with a truck, bus or trailer. The industrial setting and lack of a clean geometric comparison prevent attributing it to the response or fixing its type."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00031_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00031_after_event_swin2sr_x2.webp",
+      "nativeSha256": "d808b747df905ddb0ff3fdf5d69f713e4609aa4fdd41fa411195611b9c03da02",
+      "enhancedSha256": "1f581f64ce22d0c3c159e534731aac1384da466865b3983ce95d2f600ad56ab7",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.605771187419354,-67.02861496232258",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-27T13:48:10.374681Z",
+        "hoursAfterEvent": 64,
+        "sourceId": "vantor-aoi12-june-27",
+        "sensor": "LG05",
+        "sourceRole": "external-triage",
+        "reviewStatus": "weakens-response-attribution",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00031_B15000110186C610_compare.png",
+        "nativeSha256": "53cffb1771208d01663ee9696f55ac1628a9c5f443b925b9847e956de3908806",
+        "enhancedSha256": "6d2c7ca2de561b60a6c1d504023ddae3543a54d1307b229c4826712a61cbcc53",
+        "compareSha256": "10baa89146dfc1e8f7b96b20afc0f74638a4e89a8d28eb3c45f3cdac859f87df",
+        "finding": {
+          "es": "La imagen del 27 de junio muestra varios vehículos, remolques o contenedores largos y de colores vivos en el mismo patio industrial. La persistencia y el contexto debilitan la atribución de la forma roja del 26 de junio a la respuesta sísmica; el tipo exacto de objeto sigue sin resolverse.",
+          "en": "The June 27 image shows several long, brightly coloured vehicles, trailers or containers in the same industrial yard. Persistence and yard context weaken attribution of the June 26 red form to the earthquake response; exact object type remains unresolved."
+        },
+        "limitations": {
+          "es": "Sensores, geometría y sombras distintos. La persistencia no demuestra función, propiedad ni movimiento.",
+          "en": "Different sensors, geometry and shadows. Persistence does not establish function, ownership or movement."
+        }
+      }
+    },
+    {
+      "id": "aerial-ems-00056",
+      "chipId": "ems_00056",
+      "status": "unresolved",
+      "confidence": "inferred",
+      "category": "site-use",
+      "location": {
+        "label": "La Guaira",
+        "latitude": 10.610860842897884,
+        "longitude": -67.02103362942042,
+        "precision": "centro del chip EMS"
+      },
+      "title": {
+        "es": "Vehículos en un área despejada; no confirma refugio o acopio",
+        "en": "Vehicles in a cleared area; does not confirm shelter or collection"
+      },
+      "finding": {
+        "es": "Se ven varios vehículos pequeños en un área abierta junto a un edificio afectado. Las formas rojas cercanas no pueden distinguirse con confianza como estructuras temporales. Este chip no permite afirmar que el lugar fuera centro de acopio, refugio o alojamiento.",
+        "en": "Several small vehicles are visible in an open area beside a damaged building. Nearby red forms cannot be confidently distinguished as temporary structures. This chip does not support calling the place a collection centre, shelter or lodging site."
+      },
+      "nativeImage": "/data/chips/emsr884-aoi12-caraballeda/ems_00056_after_event.png",
+      "enhancedImage": "/data/reconstruction/evidence/la-guaira/ems_00056_after_event_swin2sr_x2.webp",
+      "nativeSha256": "c2f70810324c87b798fa5132f052a0d1c59e1a23278031f11df4aceeb6f07e1b",
+      "enhancedSha256": "518a5c06b0ba08a0ffb13b77a73dc98f514777dfef2c13182e8eec8294c5ecae",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.610860842897884,-67.02103362942042",
+      "sourceIds": [
+        "copernicus-aoi12-june-26"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-27T13:48:10.374681Z",
+        "hoursAfterEvent": 64,
+        "sourceId": "vantor-aoi12-june-27",
+        "sensor": "LG05",
+        "sourceRole": "external-triage",
+        "reviewStatus": "weakens-response-attribution",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_native.png",
+        "enhancedImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_swin2sr_x2.webp",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/temporal/ems_00056_B15000110186C610_compare.png",
+        "nativeSha256": "04686cc96f82116a0732fb0d7cfa48e3fc9065cfbb7621fc6c7df5d7096cf1d8",
+        "enhancedSha256": "f8f9ded04008e5012f731a12708b46151ad7aeac241785831fe1975a6077b6e4",
+        "compareSha256": "2295452d7f64786d60724ee612a56e7e62189abb9acee9a258191795bb9ced8a",
+        "finding": {
+          "es": "La vista más limpia del 27 de junio muestra un patio con vehículos u objetos pequeños alrededor de edificios preexistentes de techo rojo. No se identifica un centro de acopio organizado ni un área de pernocta. Esto debilita la interpretación de uso de respuesta, pero no demuestra que esos usos no existieran en otro lugar o momento.",
+          "en": "The cleaner June 27 view shows a yard with small vehicles or objects around pre-existing red-roofed buildings. No organised collection centre or sleeping area is identifiable. This weakens the response-site interpretation but does not show those uses were absent elsewhere or at another time."
+        },
+        "limitations": {
+          "es": "Una escena puntual no mide actividad, ocupación ni uso fuera de la hora de adquisición.",
+          "en": "A single scene does not measure activity, occupancy or use outside its acquisition time."
+        }
+      }
+    },
+    {
+      "id": "aerial-grid-caraballeda-golf",
+      "chipId": "aoi12_r018_c111",
+      "status": "likely-response-related",
+      "confidence": "corroborated",
+      "category": "site-use",
+      "location": {
+        "label": "Campo de golf de Caraballeda · Urbanización Caribe",
+        "latitude": 10.61411884,
+        "longitude": -66.8425174,
+        "precision": "centro de celda de 250 m"
+      },
+      "title": {
+        "es": "El campo de golf ya concentraba una operación de respuesta a +41 h",
+        "en": "The golf course already held a response operation by +41 h"
+      },
+      "finding": {
+        "es": "En la imagen oficial del 26 de junio aparecen vehículos y objetos rectangulares organizados sobre un terreno que estaba casi vacío antes del sismo. La imagen por sí sola no prueba que allí durmieran personas; reportes de terreno del 28 de junio identificaron el campo de golf como hospital, helipuerto y refugio.",
+        "en": "The official June 26 image shows vehicles and organized rectangular objects on ground that was largely empty before the earthquakes. Imagery alone does not prove that people slept there; June 28 ground reporting identified the golf course as a hospital, helipad and shelter."
+      },
+      "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/caraballeda-golf_20260626_native.png",
+      "nativeSha256": "225812f055c295dc5665670cf36cc64c4df4252d09ca9f7eb175b59c589b0887",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.61411884,-66.8425174",
+      "sourceIds": [
+        "copernicus-aoi12-june-26",
+        "vantor-aoi12-june-29",
+        "panorama-golf-june-28",
+        "vtv-golf-july-9"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:32Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-new-response-site",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/caraballeda-golf_20260629_native.png",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/grid/caraballeda-golf_20260626_20260629_compare.webp",
+        "nativeSha256": "58e0a254cbc13affa7e64403977ca6731fb0997871a1d4c1f464440c4503a4b9",
+        "compareSha256": "535d515a9502b3e6bab8f282bb2c75296f57a03e69abd128b59a918ed2d9c22c",
+        "finding": {
+          "es": "Dos escenas independientes del 29 de junio muestran una instalación mucho más definida: carpas o módulos temporales, vehículos y áreas ordenadas en arcos. Fuentes posteriores describen familias alojadas y un puesto de operaciones militares en el lugar.",
+          "en": "Two independent June 29 scenes show a much more developed installation: temporary tents or modules, vehicles and organized arc-shaped areas. Later sources describe sheltered families and a military operations post at the site."
+        },
+        "limitations": {
+          "es": "La imagen no permite contar personas, separar usos civiles y operativos ni medir la suficiencia de la atención.",
+          "en": "The image cannot count people, separate civilian and operational uses, or measure the adequacy of assistance."
+        }
+      }
+    },
+    {
+      "id": "aerial-grid-estadio-jorge-garcia",
+      "chipId": "aoi12_r013_c083",
+      "status": "likely-response-related",
+      "confidence": "corroborated",
+      "category": "site-use",
+      "location": {
+        "label": "Estadio Jorge Luis García Carneiro · Macuto",
+        "latitude": 10.60308183,
+        "longitude": -66.90539947,
+        "precision": "centro de celda de 250 m"
+      },
+      "title": {
+        "es": "Un equipo médico y campamento ocupan el estadio entre el 26 y el 29",
+        "en": "A medical team and camp occupy the stadium between June 26 and 29"
+      },
+      "finding": {
+        "es": "El terreno del estadio aparece casi libre de estructuras temporales el 26 de junio. El 29 contiene filas densas de carpas o módulos, áreas organizadas y numerosos vehículos; un estacionamiento contiguo también está ocupado. OPS/OMS situó allí un equipo médico fijo de Cruz Roja en su mapa de despliegue al 2 de julio.",
+        "en": "The stadium field is largely free of temporary structures on June 26. By June 29 it contains dense rows of tents or modules, organized areas and many vehicles; an adjacent parking lot is also occupied. PAHO/WHO placed a fixed Red Cross medical team there in its deployment map as of July 2."
+      },
+      "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/estadio-jorge-garcia_20260626_native.png",
+      "nativeSha256": "ce44d92ca25fc5315cf2db1672a83d14024110b5529e0190d520bd5477328591",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.60308183,-66.90539947",
+      "sourceIds": [
+        "copernicus-aoi12-june-26",
+        "vantor-aoi12-june-29",
+        "paho-emt-july-2"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:55Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-new-response-site",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/estadio-jorge-garcia_20260629_native.png",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/grid/estadio-jorge-garcia_20260626_20260629_compare.webp",
+        "nativeSha256": "9915b5ebc7a26d8c55917f135da02804916bf6f74249e745c1af80b56ad8c104",
+        "compareSha256": "61be5ab4fe67ad419e8d5365c13116f502756a9a7ab518889ec8f93a4c221627",
+        "finding": {
+          "es": "La transición ocurre dentro del intervalo de imágenes del 26 al 29 de junio. La adquisición del 29 confirma presencia y organización, no la hora exacta de apertura.",
+          "en": "The transition occurs within the June 26–29 image interval. The June 29 acquisition confirms presence and organization, not the exact opening time."
+        },
+        "limitations": {
+          "es": "Las cubiertas no permiten distinguir desde el aire áreas médicas, alojamiento, almacenamiento u otros usos internos.",
+          "en": "Roof coverings do not allow medical, sleeping, storage or other internal uses to be separated from the air."
+        }
+      }
+    },
+    {
+      "id": "aerial-grid-punta-mulatos-waterfront",
+      "chipId": "aoi12_r013_c073",
+      "status": "likely-response-related",
+      "confidence": "inferred",
+      "category": "site-use",
+      "location": {
+        "label": "Frente costero de Punta de Mulatos · La Guaira",
+        "latitude": 10.60308183,
+        "longitude": -66.92785735,
+        "precision": "centro de celda de 250 m"
+      },
+      "title": {
+        "es": "Módulos temporales ocupan un estacionamiento costero el 29 de junio",
+        "en": "Temporary modules occupy a waterfront parking lot on June 29"
+      },
+      "finding": {
+        "es": "El estacionamiento tenía pocos objetos en la imagen del 26. El 29 muestra filas de grandes módulos blancos, vehículos y una organización interna nueva, compatible con campamento médico, logístico o de alojamiento. La función exacta no se resuelve en la imagen.",
+        "en": "The parking lot held few objects in the June 26 image. On June 29 it shows rows of large white modules, vehicles and a new internal layout compatible with a medical, logistics or accommodation camp. The exact function is unresolved in the imagery."
+      },
+      "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/punta-mulatos-waterfront_20260626_native.png",
+      "nativeSha256": "ea20dcf2b76c3c8d05329863b01ca2f22ec33d2cd68785db571ec631a6eb2426",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.60308183,-66.92785735",
+      "sourceIds": [
+        "copernicus-aoi12-june-26",
+        "vantor-aoi12-june-29"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:55Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-new-response-site",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/punta-mulatos-waterfront_20260629_native.png",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/grid/punta-mulatos-waterfront_20260626_20260629_compare.webp",
+        "nativeSha256": "91dd3c80a0f39b533b6b7058bf2fa76a7f8dfc968c2817c508cd4df102076bbd",
+        "compareSha256": "59c796e534be1ad764e3194fe1c4437613eb27dd3d32ceb7838907aefff94cf7",
+        "finding": {
+          "es": "La aparición está acotada al intervalo del 26 al 29 de junio. El sitio es cercano al sector costero donde fuentes posteriores ubican despliegues de respuesta, pero no se atribuye aquí a una organización.",
+          "en": "The appearance is bounded to the June 26–29 interval. The site is near the waterfront sector where later sources place response deployments, but no organization is attributed here."
+        },
+        "limitations": {
+          "es": "No hay identificación visual legible, y la imagen no muestra el interior de los módulos.",
+          "en": "No readable identification is visible, and the image does not show inside the modules."
+        }
+      }
+    },
+    {
+      "id": "aerial-grid-el-palmar-track",
+      "chipId": "aoi12_r019_c103",
+      "status": "likely-response-related",
+      "confidence": "inferred",
+      "category": "site-use",
+      "location": {
+        "label": "Pista costera · El Palmar Oeste, Caraballeda",
+        "latitude": 10.61632619,
+        "longitude": -66.8604837,
+        "precision": "centro de celda de 250 m"
+      },
+      "title": {
+        "es": "Una pista deportiva se convierte en sitio temporal organizado",
+        "en": "A sports track becomes an organized temporary site"
+      },
+      "finding": {
+        "es": "La pista está esencialmente libre el 26 de junio. El 29 contiene una fila central de módulos blancos, carpas periféricas, vehículos y circulación organizada. El cambio y el contexto son compatibles con uso de respuesta, sin resolver operador ni función.",
+        "en": "The track is essentially clear on June 26. On June 29 it contains a central row of white modules, peripheral tents, vehicles and organized circulation. The change and context are consistent with response use, without resolving operator or function."
+      },
+      "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/el-palmar-track_20260626_native.png",
+      "nativeSha256": "5c98be28b4ed1cbcaba121ed27fb571d65d802e2b80f7438c1eb149329faf9dc",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.61632619,-66.8604837",
+      "sourceIds": [
+        "copernicus-aoi12-june-26",
+        "vantor-aoi12-june-29"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:55Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-new-response-site",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/el-palmar-track_20260629_native.png",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/grid/el-palmar-track_20260626_20260629_compare.webp",
+        "nativeSha256": "403f8a94f7e2aea45ba8cce2d3eb0115beb683e4f5cc11b648032261e0f5a7ea",
+        "compareSha256": "4146471385373e3a3f68bb1ee2c9999f63111b19796edcb5b95bf92c300bb75c",
+        "finding": {
+          "es": "La instalación aparece entre el 26 y el 29 y está activa en la única imagen posterior utilizable.",
+          "en": "The installation appears between June 26 and 29 and is active in the only usable later image."
+        },
+        "limitations": {
+          "es": "Una sola adquisición posterior no establece duración, capacidad ni uso nocturno.",
+          "en": "A single usable later acquisition does not establish duration, capacity or overnight use."
+        }
+      }
+    },
+    {
+      "id": "aerial-grid-los-corales-vehicle-lot",
+      "chipId": "aoi12_r019_c107",
+      "status": "unresolved",
+      "confidence": "inferred",
+      "category": "large-vehicles",
+      "location": {
+        "label": "Lote abierto · Los Corales, Caraballeda",
+        "latitude": 10.61632619,
+        "longitude": -66.85150055,
+        "precision": "centro de celda de 250 m"
+      },
+      "title": {
+        "es": "Vehículos grandes aparecen ordenados en un lote a +41 h",
+        "en": "Large vehicles appear in ordered rows on an open lot by +41 h"
+      },
+      "finding": {
+        "es": "Un lote vacío antes del sismo contiene aproximadamente una quincena de objetos de escala vehicular en filas en la imagen del 26 de junio. El patrón es compatible con estacionamiento o staging, pero no permite clasificar camiones, ambulancias, maquinaria ni propiedad.",
+        "en": "A lot that was empty before the earthquakes contains roughly fifteen vehicle-scale objects in rows in the June 26 image. The pattern is compatible with parking or staging, but does not support classifying trucks, ambulances, machinery or ownership."
+      },
+      "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/los-corales-vehicle-lot_20260626_native.png",
+      "nativeSha256": "9dfd1e8f5e6b1018d0686a7f8d13ca1d7a31da2143472a168a7b7d1599ba8f82",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.61632619,-66.85150055",
+      "sourceIds": [
+        "copernicus-aoi12-june-26",
+        "vantor-aoi12-june-29"
+      ],
+      "temporalFollowup": {
+        "acquisitionAt": "2026-06-29T14:09:55Z",
+        "hoursAfterEvent": 112,
+        "sourceId": "vantor-aoi12-june-29",
+        "sensor": "LG04",
+        "sourceRole": "external-triage",
+        "reviewStatus": "supports-object-persistence",
+        "nativeImage": "/data/reconstruction/evidence/la-guaira/grid/los-corales-vehicle-lot_20260629_native.png",
+        "compareImage": "/data/reconstruction/evidence/la-guaira/grid/los-corales-vehicle-lot_20260626_20260629_compare.webp",
+        "nativeSha256": "0aff56f75755c0e2516194fb9156c097303ae0c7ee8a7970d52f2e8d2597a30e",
+        "compareSha256": "ab82e0797c7c9c5a1b410e2c5aba5f5269e213e1f12ee54cd63739f0d50343ef",
+        "finding": {
+          "es": "El 29 de junio el grupo permanece, con una disposición parcialmente reorganizada. La persistencia confirma objetos móviles de gran escala, no su papel en la respuesta.",
+          "en": "On June 29 the group remains, in a partially reorganized layout. Persistence confirms large mobile objects, not their role in the response."
+        },
+        "limitations": {
+          "es": "La resolución y el ángulo no permiten tipificar cada vehículo ni saber si operó en otro sitio.",
+          "en": "Resolution and viewing angle do not support typing each vehicle or knowing whether it operated elsewhere."
+        }
+      }
+    }
+  ],
+  "inventory": {
+    "url": "/data/imagery/emsr884-acquisitions.json",
+    "checkedAt": "2026-07-21T12:03:41Z",
+    "officialAois": 13,
+    "localOpticalAois": 12,
+    "opticalProductRecords": 22,
+    "distinctOpticalAcquisitions": 21,
+    "publiclyReadableOpticalCogs": 22,
+    "readableOpticalBytes": 9606780336,
+    "countingNote": {
+      "es": "Los registros de producto y las adquisiciones físicas no son lo mismo: AOI12 repite la escena del 26 de junio en PRODUCT y MONIT01. El inventario conserva ambos registros y publica un identificador de adquisición deduplicado.",
+      "en": "Product records and physical acquisitions are not the same: AOI12 repeats the June 26 scene in PRODUCT and MONIT01. The inventory keeps both records and publishes a deduplicated acquisition identifier."
+    }
+  },
+  "temporalReview": {
+    "status": "human-reviewed",
+    "summary": {
+      "es": "El segundo producto oficial de AOI12, adquirido el 5 de julio, fue probado en las 26 ubicaciones candidatas. En los cinco sitios publicados no produjo una comparación de objetos utilizable: tres quedaron sin píxeles útiles y dos bajo nube o bruma. Escenas abiertas de Vantor del 27 y 29 de junio sí permitieron comparar los cinco sitios; son evidencia externa de triage, no conteos oficiales EMS.",
+      "en": "The second official AOI12 product, acquired July 5, was tested at all 26 candidate locations. It yielded no usable object comparison at the five published sites: three lacked useful pixels and two were cloud- or haze-obscured. Open Vantor scenes from June 27 and 29 did support comparisons at all five sites; they are external triage evidence, not official EMS counts."
+    },
+    "officialJuly5": {
+      "acquisitionAt": "2026-07-05T15:05:00Z",
+      "sensor": "GeoEye-1",
+      "sourceId": "copernicus-aoi12-july-5",
+      "candidateLocationsChecked": 26,
+      "publishedSitesChecked": 5,
+      "publishedSitesUsableForObjectComparison": 0,
+      "finding": {
+        "es": "La existencia de una adquisición posterior no equivale a cobertura útil. No se publican conclusiones temporales desde estos cinco recortes.",
+        "en": "A later acquisition does not automatically provide useful coverage. No temporal conclusions are published from these five chips."
+      }
+    },
+    "externalFollowup": {
+      "sourceIds": [
+        "vantor-aoi12-june-27",
+        "vantor-aoi12-june-29"
+      ],
+      "publishedSitesChecked": 5,
+      "usableComparisons": 5,
+      "acquisitionDates": [
+        "2026-06-27T13:48:10.374681Z",
+        "2026-06-29T14:09:32.624709Z"
+      ],
+      "finding": {
+        "es": "Dos sitios occidentales tienen seguimiento del 27 de junio y tres sitios orientales del 29. Las comparaciones aportan persistencia o no discernibilidad, no propiedad, función ni suficiencia de la respuesta.",
+        "en": "Two western sites have June 27 follow-up and three eastern sites have June 29 follow-up. The comparisons establish persistence or non-discernibility, not ownership, function or response adequacy."
+      }
+    }
+  },
+  "gridReview": {
+    "status": "human-reviewed",
+    "profile": "detail-250m",
+    "geography": {
+      "es": "Corredor La Guaira–Macuto–Caraballeda, con celdas alrededor del daño oficial EMS",
+      "en": "La Guaira–Macuto–Caraballeda corridor, using cells around official EMS damage"
+    },
+    "resolution": {
+      "cellSizeMeters": 250,
+      "chipPixels": 768,
+      "outputGroundSampleDistanceMeters": 0.3255,
+      "sourceGroundSampleDistanceMeters": "aprox. 0,35–0,50",
+      "superResolutionUsedForEvidence": false,
+      "policy": {
+        "es": "Cada chip conserva píxeles fuente a una escala cercana a la resolución nativa. No se usó superresolución para detectar ni validar objetos; las mejoras 2× antiguas siguen separadas y solo sirven para visualización.",
+        "en": "Each chip preserves source pixels at a scale close to native resolution. No super-resolution was used to detect or validate objects; earlier 2× derivatives remain separate and are display-only."
+      }
+    },
+    "coverage": {
+      "gridCellsConsidered": 1022,
+      "gridCellsAnalyzed": 734,
+      "gridCellsRejectedForCoverageOrQuality": 288,
+      "primaryModelLikely": 16,
+      "primaryModelPossible": 171,
+      "priorityCells": 226,
+      "secondaryModelReviewed": 226,
+      "crossModelPositiveAgreements": 46,
+      "priorityCellsHumanReviewed": 55,
+      "newPublishedSites": 5
+    },
+    "models": {
+      "primary": {
+        "provider": "Hugging Face Inference Router",
+        "modelId": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+        "records": 734
+      },
+      "secondary": [
+        {
+          "provider": "Hugging Face Inference Router",
+          "modelId": "Qwen/Qwen2.5-VL-72B-Instruct",
+          "records": 206
+        },
+        {
+          "provider": "Hugging Face Inference Router",
+          "modelId": "CohereLabs/command-a-vision-07-2025",
+          "records": 20
+        }
+      ],
+      "minimax": {
+        "status": "not-run-provider-credential-unavailable",
+        "role": "optional selective adjudicator, never the sole basis for publication"
+      }
+    },
+    "calibration": {
+      "es": "El pase inicial de 500 m a ~0,98 m/píxel produjo falsos positivos y se conservó solo como calibración. En el pase de detalle, 46 acuerdos positivos entre modelos fueron revisados a píxel nativo; varios acuerdos en patios industriales y zonas de destrucción seguían siendo falsos. El acuerdo de modelos no sustituye la revisión humana.",
+      "en": "The initial 500 m pass at about 0.98 m/pixel produced false positives and is retained only as calibration. In the detail pass, 46 positive model agreements were checked at native pixels; several agreements in industrial yards and destruction zones were still false. Model agreement does not replace human review."
+    }
+  }
+}

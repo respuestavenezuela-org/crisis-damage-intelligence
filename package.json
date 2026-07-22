@@ -10,6 +10,8 @@
     "typecheck": "tsc --noEmit",
     "audit:assets": "python3 scripts/audit_asset_budget.py",
     "validate:catalog": "python3 scripts/validate_catalog_schema.py",
+    "validate:reconstruction": "python3 scripts/validate_reconstruction.py",
+    "build:reconstruction-review": "python3 scripts/build_reconstruction_review_queue.py",
     "validate:mobile-budget": "python3 scripts/validate_mobile_performance_budget.py",
     "validate:remote-assets": "python3 scripts/validate_remote_asset_urls.py --allow-failures",
     "build:remote-assets": "python3 scripts/build_vercel_remote_asset_package.py --force",
