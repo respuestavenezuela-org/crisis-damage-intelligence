@@ -79,6 +79,28 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def scene_provenance(row: dict[str, Any]) -> tuple[str | None, str | None, str]:
+    if row.get("sourceFamily") and row.get("license"):
+        return row["sourceFamily"], row["license"], "recorded"
+    text = " ".join(
+        str(row.get(key) or "")
+        for key in ("sceneId", "sensor", "chipPath", "sourceFamily")
+    ).lower()
+    if (
+        "vantor" in text
+        or "detail-250m-missing-scenes" in text
+        or str(row.get("sceneId") or "").startswith("B")
+    ):
+        return "vantor_open_data", "CC-BY-NC-4.0", "derived_from_scene_identity"
+    if "copernicus" in text or row.get("sensor") in {"Legion", "GeoEye-1"}:
+        return (
+            "copernicus_ems",
+            "Copernicus EMS public product terms",
+            "derived_from_scene_identity",
+        )
+    return row.get("sourceFamily"), row.get("license"), "unresolved"
+
+
 def parse_time(value: Any) -> datetime | None:
     if not isinstance(value, str) or "/" in value:
         return None
@@ -285,6 +307,7 @@ def main() -> int:
         pair_id = f"pair_{pair_index:04d}_{target['cellId']}_{detection['class'].lower()}"
         for image_index, row in enumerate(image_rows, 1):
             role = "pre_comparator" if row.get("phase") == "pre" else "post_detection"
+            source_family, license_name, provenance_status = scene_provenance(row)
             path = ROOT / row["chipPath"]
             with Image.open(path) as source:
                 source = source.convert("RGB")
@@ -302,8 +325,9 @@ def main() -> int:
                 "sceneId": row.get("sceneId"),
                 "acquisitionUtc": row.get("acquisitionUtc"),
                 "sensor": row.get("sensor"),
-                "sourceFamily": row.get("sourceFamily"),
-                "license": row.get("license"),
+                "sourceFamily": source_family,
+                "license": license_name,
+                "provenanceStatus": provenance_status,
                 "sourceChipPath": row.get("chipPath"),
                 "sourceChipSha256": sha256(path),
                 "normalizedCropBox": normalized_crop,

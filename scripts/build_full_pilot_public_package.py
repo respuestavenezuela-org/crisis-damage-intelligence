@@ -69,6 +69,28 @@ def bounds_polygon(bounds: list[float]) -> list[list[list[float]]]:
     return [[southwest, southeast, northeast, northwest, southwest]]
 
 
+def image_provenance(image: dict[str, Any]) -> tuple[str | None, str | None, str]:
+    if image.get("sourceFamily") and image.get("license"):
+        return image["sourceFamily"], image["license"], "recorded"
+    text = " ".join(
+        str(image.get(key) or "")
+        for key in ("sceneId", "sensor", "sourceChipPath", "sourceFamily")
+    ).lower()
+    if (
+        "vantor" in text
+        or "detail-250m-missing-scenes" in text
+        or str(image.get("sceneId") or "").startswith("B")
+    ):
+        return "vantor_open_data", "CC-BY-NC-4.0", "derived_from_scene_identity"
+    if "copernicus" in text or image.get("sensor") in {"Legion", "GeoEye-1"}:
+        return (
+            "copernicus_ems",
+            "Copernicus EMS public product terms",
+            "derived_from_scene_identity",
+        )
+    return image.get("sourceFamily"), image.get("license"), "unresolved"
+
+
 def public_image_path(source: Path, role: str) -> tuple[str, str]:
     directory = PUBLIC_CHIPS / role
     directory.mkdir(parents=True, exist_ok=True)
@@ -99,6 +121,7 @@ def main() -> int:
     for pair in crop_pairs:
         images = []
         for image in pair.get("images") or []:
+            source_family, license_name, provenance_status = image_provenance(image)
             native_source = ROOT / image["nativeCropPath"]
             native_local, native_remote = public_image_path(native_source, "native")
             copied_native += 1
@@ -116,8 +139,9 @@ def main() -> int:
                     "sceneId": image.get("sceneId"),
                     "acquisitionUtc": image.get("acquisitionUtc"),
                     "sensor": image.get("sensor"),
-                    "sourceFamily": image.get("sourceFamily"),
-                    "license": image.get("license"),
+                    "sourceFamily": source_family,
+                    "license": license_name,
+                    "provenanceStatus": provenance_status,
                     "nativeImage": native_remote,
                     "nativeLocalFallback": native_local,
                     "nativeSha256": image.get("nativeCropSha256"),
