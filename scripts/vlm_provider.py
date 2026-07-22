@@ -9,6 +9,8 @@ import base64
 import json
 import os
 import re
+import socket
+import threading
 import time
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -51,6 +53,29 @@ REQUIRED_KEYS = {
         "uncertainty_reason",
     ),
 }
+
+_MINIMAX_CALL_LOCK = threading.Lock()
+_MINIMAX_CALL_COUNT = 0
+
+
+def _reserve_minimax_call() -> int:
+    """Atomically enforce a per-process request ceiling, including retries."""
+
+    global _MINIMAX_CALL_COUNT
+    maximum = max(0, int(os.environ.get("MINIMAX_MAX_CALLS", "0")))
+    with _MINIMAX_CALL_LOCK:
+        if maximum and _MINIMAX_CALL_COUNT >= maximum:
+            raise RuntimeError(f"MiniMax request ceiling reached ({maximum} calls)")
+        _MINIMAX_CALL_COUNT += 1
+        return _MINIMAX_CALL_COUNT
+
+
+def _release_minimax_call() -> None:
+    """Release a reservation when MiniMax explicitly reports a no-usage quota response."""
+
+    global _MINIMAX_CALL_COUNT
+    with _MINIMAX_CALL_LOCK:
+        _MINIMAX_CALL_COUNT = max(0, _MINIMAX_CALL_COUNT - 1)
 
 
 def encode_image(path: str | Path) -> str:
@@ -188,7 +213,7 @@ def call_hf_router(system: str, prompt: str, image_paths: list[str | Path], meta
             if exc.code not in (408, 429, 500, 502, 503, 504) or attempt == attempts:
                 raise RuntimeError(f"HF Router HTTP {exc.code}: {detail}") from exc
             time.sleep(retry_seconds * attempt)
-        except URLError as exc:
+        except (URLError, TimeoutError, ConnectionError) as exc:
             if attempt == attempts:
                 raise RuntimeError(f"HF Router request failed: {exc}") from exc
             time.sleep(retry_seconds * attempt)
@@ -207,6 +232,8 @@ def call_hf_router(system: str, prompt: str, image_paths: list[str | Path], meta
     result["vlm_provider"] = "hf_router"
     result["review_type"] = review_type
     result["source_metadata"] = metadata
+    if isinstance(data.get("usage"), dict):
+        result["provider_usage"] = data["usage"]
     return result
 
 
@@ -227,26 +254,79 @@ def call_minimax_legacy(system: str, prompt: str, image_paths: list[str | Path],
         ],
         "temperature": 0,
     }
-    req = Request(
-        "https://api.minimax.io/v1/text/chatcompletion_v2",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urlopen(req, timeout=90) as resp:
-            raw = resp.read().decode("utf-8")
-    except HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"MiniMax HTTP {exc.code}: {detail}") from exc
-    data = json.loads(raw)
-    text = data["choices"][0]["message"]["content"]
-    result = _extract_json_text(text)
-    validate_result(result, review_type)
-    result["vlm_model"] = model
-    result["vlm_provider"] = "minimax_legacy"
-    result["review_type"] = review_type
-    return result
+    raw = ""
+    attempts = max(1, int(os.environ.get("MINIMAX_RETRIES", "75")))
+    retry_seconds = max(1.0, float(os.environ.get("MINIMAX_RETRY_SECONDS", "8")))
+    quota_retry_seconds = max(1.0, float(os.environ.get("MINIMAX_QUOTA_RETRY_SECONDS", "300")))
+    timeout = int(os.environ.get("MINIMAX_TIMEOUT_SECONDS", "180"))
+    for attempt in range(1, attempts + 1):
+        _reserve_minimax_call()
+        req = Request(
+            "https://api.minimax.io/v1/text/chatcompletion_v2",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urlopen(req, timeout=timeout) as resp:
+                raw = resp.read().decode("utf-8")
+            data = json.loads(raw)
+            base_response = data.get("base_resp") or {}
+            status_code = int(base_response.get("status_code") or 0)
+            if status_code in (2056, 2062):
+                _release_minimax_call()
+                if attempt == attempts:
+                    raise RuntimeError(
+                        "MiniMax Token Plan rate limit remained active after "
+                        f"{attempts} attempts: {base_response.get('status_msg')}"
+                    )
+                print(
+                    f"MiniMax Token Plan quota reached; waiting {quota_retry_seconds:.0f}s "
+                    f"before retry {attempt + 1}/{attempts}",
+                    flush=True,
+                )
+                time.sleep(quota_retry_seconds)
+                continue
+            if status_code:
+                raise RuntimeError(
+                    f"MiniMax API status {status_code}: {base_response.get('status_msg')}"
+                )
+            choices = data.get("choices") or []
+            if not choices:
+                raise ValueError(f"MiniMax returned no completion choices: {base_response}")
+            text = choices[0]["message"]["content"]
+            result = _extract_json_text(text)
+            validate_result(result, review_type)
+            result["vlm_model"] = model
+            result["vlm_provider"] = "minimax_legacy"
+            result["review_type"] = review_type
+            if isinstance(data.get("usage"), dict):
+                result["provider_usage"] = data["usage"]
+            return result
+        except HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")
+            retryable = exc.code in (408, 429, 500, 502, 503, 504)
+            if not retryable or attempt == attempts:
+                raise RuntimeError(f"MiniMax HTTP {exc.code}: {detail}") from exc
+            if exc.code == 429:
+                retry_after = exc.headers.get("Retry-After")
+                try:
+                    wait_seconds = max(quota_retry_seconds, float(retry_after or 0))
+                except ValueError:
+                    wait_seconds = quota_retry_seconds
+            else:
+                wait_seconds = retry_seconds * min(attempt, 8)
+            print(
+                f"MiniMax HTTP {exc.code}; waiting {wait_seconds:.0f}s "
+                f"before retry {attempt + 1}/{attempts}",
+                flush=True,
+            )
+            time.sleep(wait_seconds)
+        except (URLError, TimeoutError, socket.timeout) as exc:
+            if attempt == attempts:
+                raise RuntimeError(f"MiniMax request failed: {exc}") from exc
+            time.sleep(retry_seconds * min(attempt, 8))
+    raise RuntimeError("MiniMax request attempts exhausted without a usable result")
 
 
 def call_vlm(system: str, prompt: str, image_paths: list[str | Path], metadata: dict, review_type: str) -> dict:

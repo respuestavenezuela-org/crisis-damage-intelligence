@@ -183,6 +183,14 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--adjudicate-hf-workers", type=int, default=6)
     parser.add_argument("--adjudicate-minimax", action="store_true")
+    parser.add_argument(
+        "--minimax-scope",
+        choices=("candidates", "all"),
+        default="candidates",
+        help="Send only HF candidates or every HF-reviewed ready cell to MiniMax.",
+    )
+    parser.add_argument("--minimax-workers", type=int, default=2)
+    parser.add_argument("--minimax-limit", type=int, default=0)
     return parser.parse_args()
 
 
@@ -199,6 +207,19 @@ def configure_profile(profile: str) -> None:
     MINIMAX_PATH = OPS_DIR / "minimax_adjudication.jsonl"
     HF_SECONDARY_PATH = OPS_DIR / "hf_secondary_adjudication.jsonl"
     SUMMARY_PATH = OPS_DIR / "summary.json"
+
+
+def load_env(path: Path) -> None:
+    """Load local credentials without replacing explicit process settings."""
+
+    if not path.is_file():
+        return
+    for raw in path.read_text().splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
 
 
 def scene_covers(scene: Scene, lon: float, lat: float, half_m: float) -> bool:
@@ -664,40 +685,86 @@ def run_minimax_adjudication(
         print("MINIMAX_API_KEY missing; selective adjudication was not run.", file=sys.stderr)
         return {}
     existing = {} if args.force_vlm else load_jsonl(MINIMAX_PATH)
-    candidates = [
-        record
-        for record in primary.values()
-        if record["cellId"] not in existing
-        and (
+    candidates = []
+    for record in primary.values():
+        if record["cellId"] in existing:
+            continue
+        is_candidate = (
             record["vlm"].get("response_class") in {"likely_response_signal", "possible_response_signal"}
             or record["vlm"].get("human_review_priority") == "high"
         )
-    ]
+        if args.minimax_scope == "all" or is_candidate:
+            candidates.append(record)
+    candidates.sort(key=lambda record: record["cellId"])
+    if args.minimax_limit:
+        candidates = candidates[: args.minimax_limit]
     os.environ["VLM_PROVIDER"] = "minimax"
-    for index, primary_record in enumerate(candidates, 1):
+
+    def adjudicate(primary_record: dict[str, Any]) -> dict[str, Any]:
         cell = {
             "cellId": primary_record["cellId"],
             "centerLon": primary_record["centerLon"],
             "centerLat": primary_record["centerLat"],
+            "bounds3857": primary_record["bounds3857"],
         }
         scenes = primary_record["scenes"]
         paths = [ROOT / scene["chipPath"] for scene in scenes]
-        result = call_vlm(
-            SYSTEM,
-            prompt_for(cell, scenes)
-            + " Independently adjudicate the imagery; do not defer to another model's result.",
-            paths,
-            metadata={"cellId": cell["cellId"], "adjudicationOf": "hf_primary"},
-            review_type="temporal_response_comparison",
-        )
-        existing[cell["cellId"]] = {
+        schema_attempts = max(1, int(os.environ.get("MINIMAX_SCHEMA_RETRIES", "3")))
+        raw = None
+        for schema_attempt in range(1, schema_attempts + 1):
+            try:
+                raw = call_vlm(
+                    SYSTEM,
+                    prompt_for(cell, scenes)
+                    + " Independently adjudicate the imagery; do not defer to another model's result. "
+                    "Return every required JSON key, using null, an empty array, or a short uncertainty "
+                    "explanation when evidence is unavailable.",
+                    paths,
+                    metadata={"cellId": cell["cellId"], "adjudicationOf": "hf_primary"},
+                    review_type="temporal_response_comparison",
+                )
+                break
+            except (KeyError, TypeError, ValueError) as exc:
+                if schema_attempt == schema_attempts:
+                    raise
+                print(
+                    f"minimax {cell['cellId']}: malformed structured response "
+                    f"({exc}); retrying {schema_attempt + 1}/{schema_attempts}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+        if raw is None:
+            raise RuntimeError(f"MiniMax returned no usable structured result for {cell['cellId']}")
+        normalized, notes = normalize_temporal_result(raw, scenes)
+        return {
             "cellId": cell["cellId"],
             "centerLon": cell["centerLon"],
             "centerLat": cell["centerLat"],
-            "vlm": result,
+            "bounds3857": cell["bounds3857"],
+            "scenes": scenes,
+            "vlm": normalized,
+            "vlmRaw": raw,
+            "guardrailNotes": notes,
         }
-        write_jsonl(MINIMAX_PATH, existing)
-        print(f"minimax {index}/{len(candidates)} {cell['cellId']} {result.get('response_class')}", flush=True)
+
+    lock = threading.Lock()
+    with ThreadPoolExecutor(max_workers=args.minimax_workers) as executor:
+        futures = {executor.submit(adjudicate, record): record["cellId"] for record in candidates}
+        for index, future in enumerate(as_completed(futures), 1):
+            cell_id = futures[future]
+            try:
+                record = future.result()
+            except Exception as exc:
+                print(f"minimax {cell_id}: ERROR {exc}", file=sys.stderr, flush=True)
+                continue
+            with lock:
+                existing[cell_id] = record
+                write_jsonl(MINIMAX_PATH, existing)
+            print(
+                f"minimax {index}/{len(candidates)} {cell_id} "
+                f"{record['vlm'].get('response_class')}",
+                flush=True,
+            )
     os.environ["VLM_PROVIDER"] = "hf_router"
     return existing
 
@@ -773,6 +840,8 @@ def run_hf_secondary_adjudication(
 
 
 def main() -> int:
+    load_env(ROOT / ".env")
+    load_env(ROOT.parents[1] / ".env")
     args = parse_args()
     configure_profile(args.profile)
     if args.generate_only and args.analyze_only:

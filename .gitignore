@@ -52,6 +52,10 @@ ops/external_source_review/analysis/**/*.sample.geojson
 # QA screenshots
 output/playwright/*.png
 output/aoi12_temporal_response_grid/
+output/full_pilot_temporal_grid/
+output/full-pilot-publication/
+ops/data_acquisition_plan/full_pilot_temporal_grid/detail-250m/
+public/data/chips/full-pilot-response-evidence/
 
 # local Codex/coworker artifacts
 .codex/coworkers/

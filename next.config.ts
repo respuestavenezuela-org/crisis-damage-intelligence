@@ -2,6 +2,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "crisis-damage.localhost", "*.localhost"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev",
+        port: "",
+        pathname: "/data/chips/full-pilot-response-evidence/**",
+        search: "",
+      },
+    ],
+  },
   turbopack: {
     root: __dirname,
   },

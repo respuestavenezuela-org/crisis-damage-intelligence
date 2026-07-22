@@ -15,6 +15,7 @@ import type {
   ReconstructionSource,
   ResponseStage,
 } from "./types";
+import FullPilotEvidencePanel from "./FullPilotEvidencePanel";
 import styles from "./timeline.module.css";
 
 const copy = {
@@ -782,6 +783,8 @@ export default function TimelineExplorer({
       {data.aerialEvidence && (
         <AerialEvidenceExplorer evidence={data.aerialEvidence} language={language} />
       )}
+
+      {activeSlug === "la-guaira" && <FullPilotEvidencePanel language={language} />}
 
       <section className={styles.timelineSection} id="timeline">
         <div className={styles.timelineHeader}>

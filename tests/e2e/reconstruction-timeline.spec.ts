@@ -87,6 +87,108 @@ test.describe("public aftermath reconstruction", () => {
     );
   });
 
+  test("renders the full-pilot AI triage package with documentary traceability", async ({ page }) => {
+    await page.route(
+      "**/data/reconstruction/full-pilot-response-evidence-summary.json",
+      async (route) => {
+        await route.fulfill({
+          contentType: "application/json",
+          body: JSON.stringify({
+            updatedAt: "2026-07-21T00:00:00Z",
+            status: "public-ai-triage",
+            coverage: {
+              gridCells: 2283,
+              eligibleImageryStacks: 2283,
+              pairedVlmCoverage: 2283,
+              postEventOnlyCells: 191,
+              candidateCells: 412,
+              withinFirst72Hours: 260,
+              waldo30Cells: 2283,
+              cropPairs: 500,
+              nativeCropImages: 1000,
+              enhancedDisplayImages: 200,
+            },
+            evidenceTierCounts: { cross_model_positive: 12 },
+            timelineEvents: [
+              {
+                acquisitionUtc: "2026-06-26T15:10:00Z",
+                hoursAfterEvent: 41.09,
+                candidateCells: 30,
+                bothModelsPositive: 12,
+                detectorSupported: 4,
+              },
+            ],
+            topObservations: [
+              {
+                cellId: "pilot_r010_c010",
+                longitude: -66.95,
+                latitude: 10.6,
+                firstVisibleAcquisitionUtc: "2026-06-26T15:10:00Z",
+                hoursAfterEvent: 41.09,
+                evidenceTier: "cross_model_positive",
+                consensus: "both_positive",
+                priorityScore: 145,
+                assetCategories: ["heavy_machinery"],
+                evidencePair: null,
+              },
+            ],
+            documentaryEvidence: {
+              conflictsAndBounds: [
+                {
+                  topic: "Aid arrival",
+                  topicEs: "Llegada de ayuda",
+                  finding: "Aid trucks were observed by June 26.",
+                  findingEs: "Se observaron camiones de ayuda para el 26 de junio.",
+                  interpretation: "This does not establish delivery to every neighborhood.",
+                  interpretationEs: "Esto no demuestra entrega en todos los sectores.",
+                },
+              ],
+              sources: [
+                {
+                  id: "source-1",
+                  publisher: "World Food Programme",
+                  sourceType: "primary humanitarian agency update",
+                  publishedAt: "2026-06-26",
+                  url: "https://example.org/source",
+                  places: ["La Guaira"],
+                  claims: ["Temporary distribution centers were reported."],
+                  claimsEs: ["Se reportaron centros temporales de distribución."],
+                  timePrecision: "published June 26",
+                  limitations: "No exact opening time",
+                },
+              ],
+            },
+            downloads: {
+              candidateGeoJson: "/data/reconstruction/full-pilot-response-evidence.geojson",
+              candidateJsonl: "/data/reconstruction/full-pilot-response-evidence.jsonl",
+              cropManifest:
+                "/data/reconstruction/full-pilot-response-evidence-crops.jsonl",
+            },
+            guardrails: ["AI triage only"],
+          }),
+        });
+      },
+    );
+
+    await page.goto("/timeline");
+
+    const section = page.locator("#full-pilot-evidence");
+    await expect(
+      section.getByRole("heading", {
+        name: "2.283 celdas entre Catia La Mar, La Guaira y Caraballeda",
+      }),
+    ).toBeVisible();
+    await expect(section.getByText("2.283", { exact: true }).first()).toBeVisible();
+    await expect(section.getByText("Llegada de ayuda")).toBeVisible();
+    await expect(section.getByText("Se reportaron centros temporales de distribución.")).toBeHidden();
+    await section.getByText("World Food Programme").click();
+    await expect(section.getByText("Se reportaron centros temporales de distribución.")).toBeVisible();
+    await expect(section.getByRole("link", { name: /GeoJSON de candidatas/ })).toHaveAttribute(
+      "href",
+      "/data/reconstruction/full-pilot-response-evidence.geojson",
+    );
+  });
+
   test("is discoverable from lite view", async ({ page }) => {
     await page.goto("/lite");
     await expect(page.getByRole("link", { name: "Cronología" })).toHaveAttribute("href", "/timeline");
