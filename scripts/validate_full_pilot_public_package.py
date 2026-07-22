@@ -24,6 +24,7 @@ OBSERVATIONS = PUBLIC / "full-pilot-response-evidence.jsonl"
 CROPS = PUBLIC / "full-pilot-response-evidence-crops.jsonl"
 EXPLORER_CELLS = PUBLIC / "full-pilot-evidence-cells"
 EXPLORER_SUMMARY = PUBLIC / "full-pilot-evidence-explorer-summary.json"
+MAPACTION_RESPONSE = PUBLIC / "mapaction-response-sites-la-guaira.json"
 REMOTE_PREFIX = (
     "https://pub-35cd6458677c4b4c844a23fb91b0370e.r2.dev/"
     "data/chips/full-pilot-response-evidence/"
@@ -40,7 +41,14 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 
 def main() -> int:
     errors: list[str] = []
-    for path in (SUMMARY, GEOJSON, OBSERVATIONS, CROPS, EXPLORER_SUMMARY):
+    for path in (
+        SUMMARY,
+        GEOJSON,
+        OBSERVATIONS,
+        CROPS,
+        EXPLORER_SUMMARY,
+        MAPACTION_RESPONSE,
+    ):
         if not path.is_file():
             errors.append(f"missing:{path.relative_to(ROOT)}")
     if errors:
@@ -48,6 +56,7 @@ def main() -> int:
 
     summary = json.loads(SUMMARY.read_text())
     explorer_summary = json.loads(EXPLORER_SUMMARY.read_text())
+    mapaction_response = json.loads(MAPACTION_RESPONSE.read_text())
     geojson = json.loads(GEOJSON.read_text())
     observations = read_jsonl(OBSERVATIONS)
     crops = read_jsonl(CROPS)
@@ -134,9 +143,63 @@ def main() -> int:
         if not source.get("claims") or not source.get("claimsEs"):
             errors.append(f"missing bilingual documentary claims:{source.get('id')}")
 
+    response_findings = mapaction_response.get("headlineFindings") or {}
+    response_sites = mapaction_response.get("responseSites") or []
+    if response_findings.get("mappedResponseSites") != 5 or len(response_sites) != 5:
+        errors.append("MapAction response-site count must equal 5")
+    if response_findings.get("annotatedSleepingAreas") != 13:
+        errors.append("MapAction annotated sleeping-area count must equal 13")
+    if response_findings.get("capacityLabeledShelters") != 9:
+        errors.append("MapAction capacity-labelled shelter count must equal 9")
+    if response_findings.get("printedCapacityPeopleTotal") != 3260:
+        errors.append("MapAction printed capacity total must equal 3260")
+    if response_findings.get("namedTemporaryWasteSites") != 14:
+        errors.append("MapAction waste-site count must equal 14")
+    if len({site.get("id") for site in response_sites}) != len(response_sites):
+        errors.append("MapAction response-site IDs must be unique")
+    for site in response_sites:
+        if not str(site.get("datasetUrl") or "").startswith("https://"):
+            errors.append(f"non-HTTPS MapAction source:{site.get('id')}")
+        if not site.get("documentedAsOf"):
+            errors.append(f"missing MapAction source date:{site.get('id')}")
+        longitude = site.get("longitude")
+        latitude = site.get("latitude")
+        if not isinstance(longitude, (int, float)) or not -180 <= longitude <= 180:
+            errors.append(f"invalid MapAction longitude:{site.get('id')}")
+        if not isinstance(latitude, (int, float)) or not -90 <= latitude <= 90:
+            errors.append(f"invalid MapAction latitude:{site.get('id')}")
+        crosscheck = site.get("aerialCrosscheck") or {}
+        if not crosscheck.get("nearestCandidate"):
+            errors.append(f"missing aerial cross-check:{site.get('id')}")
+    model_quality = mapaction_response.get("modelQuality") or {}
+    if any(
+        forbidden_key in json.dumps(model_quality)
+        for forbidden_key in ("hfQwenRange", "minimaxRange")
+    ):
+        errors.append("unstable VLM unit-count ranges leaked into public package")
+    if any(
+        comparison.get("publicationDecision") != "withhold-visual-unit-count"
+        for comparison in model_quality.get("campUnitCountComparisons") or []
+    ):
+        errors.append("MapAction visual unit-count publication guardrail missing")
+    debris = mapaction_response.get("debrisManagement") or {}
+    if len(debris.get("namedTemporaryDisposalAndSortingSites") or []) != 14:
+        errors.append("MapAction named waste-site list must contain 14 sites")
+    if len(debris.get("healthFacilityDistances") or []) != 5:
+        errors.append("MapAction health-facility distance list must contain 5 sites")
+    for source in mapaction_response.get("sources") or []:
+        if not str(source.get("url") or "").startswith("https://"):
+            errors.append(f"non-HTTPS MapAction evidence source:{source.get('id')}")
+
     serialized = "\n".join(
         path.read_text(errors="replace")
-        for path in (SUMMARY, GEOJSON, OBSERVATIONS, CROPS)
+        for path in (
+            SUMMARY,
+            GEOJSON,
+            OBSERVATIONS,
+            CROPS,
+            MAPACTION_RESPONSE,
+        )
     )
     for forbidden in ("/Users/", "HF_TOKEN", "MINIMAX_API_KEY"):
         if forbidden in serialized:
@@ -160,6 +223,8 @@ def main() -> int:
         "documentarySources": len(
             (summary.get("documentaryEvidence") or {}).get("sources") or []
         ),
+        "mappedResponseSites": len(response_sites),
+        "mapActionPublicBytes": MAPACTION_RESPONSE.stat().st_size,
     }
     PROFILE.mkdir(parents=True, exist_ok=True)
     (PROFILE / "public_package_validation.json").write_text(

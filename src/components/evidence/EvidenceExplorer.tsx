@@ -31,6 +31,58 @@ type ExplorerTab = "findings" | "highlights" | "explorer" | "sources";
 type SortMode = "strength" | "earliest" | "latest" | "cell";
 type ImageMode = "native" | "enhanced";
 
+interface MapActionResponseSite {
+  id: string;
+  name: string;
+  documentedAsOf: string;
+  datasetUrl: string;
+  directlyAnnotatedServices: string[];
+  sleepingEvidence: {
+    annotatedSleepingAreas: number;
+    description: string;
+  } | null;
+  aerialCrosscheck: {
+    nearestCandidate: {
+      cellId: string;
+      distanceMeters: number;
+      hoursAfterEvent: number | null;
+      assetCategories: string[];
+    } | null;
+    earliestCrossModelShelterSignalWithin300m: {
+      cellId: string;
+      distanceMeters: number;
+      hoursAfterEvent: number;
+    } | null;
+  };
+}
+
+interface MapActionResponseEvidence {
+  headlineFindings: {
+    mappedResponseSites: number;
+    sitesWithAnnotatedSleepingAreas: number;
+    annotatedSleepingAreas: number;
+    capacityLabeledShelters: number;
+    printedCapacityPeopleTotal: number;
+    namedTemporaryWasteSites: number;
+    healthFacilitiesWithPrintedWasteDistance: number;
+  };
+  responseSites: MapActionResponseSite[];
+  debrisManagement: {
+    documentedAsOf: string;
+    namedTemporaryDisposalAndSortingSites: string[];
+    healthFacilityDistances: Array<{
+      facilityName: string;
+      facilityType: string;
+      distanceMeters: number;
+    }>;
+  };
+  additionalImageryInventory: {
+    sourceUrl: string;
+    reportedImageCountApprox: number;
+    limitation: string;
+  };
+}
+
 const PAGE_SIZE = 24;
 const SUMMARY_URL =
   "/data/reconstruction/full-pilot-evidence-explorer-summary.json";
@@ -38,6 +90,8 @@ const OBSERVATIONS_URL =
   "/data/reconstruction/full-pilot-response-evidence.jsonl";
 const CURATED_URL =
   "/data/reconstruction/aerial-response-evidence-la-guaira.json";
+const MAPACTION_RESPONSE_URL =
+  "/data/reconstruction/mapaction-response-sites-la-guaira.json";
 const CELL_DETAIL_BASE =
   "/data/reconstruction/full-pilot-evidence-cells";
 
@@ -184,6 +238,37 @@ const copy = {
       "Las fechas son límites de primera visibilidad en las adquisiciones disponibles, no horas reales de llegada.",
     absencePolicy:
       "No observado no significa que no haya ocurrido.",
+    documentedSitesKicker: "MapAction · evidencia documental georreferenciada",
+    documentedSitesTitle: "Dónde funcionó la respuesta",
+    documentedSitesIntro:
+      "Cinco mapas operativos ubican campamentos y servicios. Los cruzamos con la primera señal aérea candidata a menos de 300 metros; la coincidencia apoya la localización, no fija la hora de apertura.",
+    mappedSites: "sitios de respuesta",
+    sleepingAreas: "áreas de pernocta anotadas",
+    printedCapacity: "capacidad impresa",
+    capacityShelters: "refugios con capacidad",
+    capacitySheltersShort: "refugios",
+    wasteSites: "sitios temporales de residuos",
+    documentedBy: "Documentado al",
+    annotatedServices: "Servicios anotados directamente",
+    sleepingLabel: "Pernocta",
+    noSleepingLabel: "Sin área de pernocta anotada",
+    aerialCrosscheck: "Cruce aéreo candidato",
+    firstCrossModelSignal: "primera señal de refugio con ambos VLM",
+    nearestCandidate: "candidata más cercana",
+    hoursAfter: "h después del evento",
+    mapActionSource: "Abrir mapa fuente",
+    moreServices: "servicios más",
+    debrisTitle: "Gestión de escombros y residuos",
+    debrisBody:
+      "Los productos cartográficos nombran 14 sitios temporales de disposición o clasificación al 16 de julio y publican distancias entre cinco centros de salud y sitios de residuos. Son registros de proximidad, no evidencia de impacto sanitario.",
+    nearestHealthDistance: "menor distancia impresa a un centro de salud",
+    imageryInventoryTitle: "El inventario conocido es mayor que la imagen pública descargable",
+    imageryInventoryBody:
+      "UN-SPIDER reportó aproximadamente 120 imágenes de varios proveedores. La mayoría circuló entre socios de respuesta y no tiene escena cruda pública; el atlas solo usa derivados públicos y metadatos.",
+    publicationCaution:
+      "No publicamos conteos visuales de carpas, módulos u ocupantes: MiniMax y Qwen produjeron rangos incompatibles en tres de cuatro campamentos. Conservamos únicamente etiquetas impresas, ubicaciones y servicios legibles en la fuente.",
+    sourceDateCaution:
+      "La leyenda de MA020 imprime 2027-07-03 en varias capas, una fecha incompatible con el evento. Usamos el 6 de julio de 2026 —fecha de publicación— como límite documental seguro y dejamos visible la anomalía.",
   },
   en: {
     title: "What the imagery shows",
@@ -327,6 +412,37 @@ const copy = {
       "Dates are earliest visible bounds in available acquisitions, not actual arrival times.",
     absencePolicy:
       "Not observed does not mean it did not occur.",
+    documentedSitesKicker: "MapAction · georeferenced documentary evidence",
+    documentedSitesTitle: "Where response operations functioned",
+    documentedSitesIntro:
+      "Five operational maps locate camps and services. We cross-checked them against the first aerial candidate signal within 300 metres; proximity supports the location, not an opening time.",
+    mappedSites: "response sites",
+    sleepingAreas: "annotated sleeping areas",
+    printedCapacity: "printed capacity",
+    capacityShelters: "capacity-labelled shelters",
+    capacitySheltersShort: "shelters",
+    wasteSites: "temporary waste sites",
+    documentedBy: "Documented by",
+    annotatedServices: "Directly annotated services",
+    sleepingLabel: "Sleeping areas",
+    noSleepingLabel: "No sleeping area annotated",
+    aerialCrosscheck: "Candidate aerial cross-check",
+    firstCrossModelSignal: "first shelter signal from both VLMs",
+    nearestCandidate: "nearest candidate",
+    hoursAfter: "h after the event",
+    mapActionSource: "Open source map",
+    moreServices: "more services",
+    debrisTitle: "Debris and waste management",
+    debrisBody:
+      "Map products name 14 temporary disposal or sorting sites by July 16 and print distances between five health facilities and waste sites. These are proximity records, not evidence of health impact.",
+    nearestHealthDistance: "shortest printed distance to a health facility",
+    imageryInventoryTitle: "The known acquisition pool exceeds publicly downloadable imagery",
+    imageryInventoryBody:
+      "UN-SPIDER reported approximately 120 images from several providers. Most circulated among response partners without public raw scenes; the atlas uses only public derivatives and metadata.",
+    publicationCaution:
+      "We do not publish visual counts of tents, modules or occupants: MiniMax and Qwen produced incompatible ranges for three of four camps. Only printed labels, locations and source-readable services are retained.",
+    sourceDateCaution:
+      "The MA020 legend prints 2027-07-03 on several layers, a date incompatible with the event. We use July 6, 2026 —the publication date— as the safe documentary bound and disclose the anomaly.",
   },
 } satisfies Record<EvidenceLanguage, Record<string, string>>;
 
@@ -720,6 +836,7 @@ function HighlightCard({
 function FindingsOverview({
   summary,
   curated,
+  responseEvidence,
   language,
   onReviewed,
   onExplore,
@@ -727,6 +844,7 @@ function FindingsOverview({
 }: {
   summary: EvidenceSummary;
   curated: CuratedEvidence | null;
+  responseEvidence: MapActionResponseEvidence | null;
   language: EvidenceLanguage;
   onReviewed: () => void;
   onExplore: () => void;
@@ -811,6 +929,123 @@ function FindingsOverview({
         </article>
       </div>
 
+      {responseEvidence && (
+        <section
+          className={styles.documentedResponse}
+          aria-labelledby="documented-response-title"
+        >
+          <header>
+            <div>
+              <span>{t.documentedSitesKicker}</span>
+              <h3 id="documented-response-title">{t.documentedSitesTitle}</h3>
+            </div>
+            <p>{t.documentedSitesIntro}</p>
+          </header>
+
+          <dl className={styles.responseStats}>
+            <div>
+              <dt>{formatNumber(responseEvidence.headlineFindings.mappedResponseSites, language)}</dt>
+              <dd>{t.mappedSites}</dd>
+            </div>
+            <div>
+              <dt>{formatNumber(responseEvidence.headlineFindings.annotatedSleepingAreas, language)}</dt>
+              <dd>{t.sleepingAreas}</dd>
+            </div>
+            <div>
+              <dt>{formatNumber(responseEvidence.headlineFindings.printedCapacityPeopleTotal, language)}</dt>
+              <dd>{t.printedCapacity} · {responseEvidence.headlineFindings.capacityLabeledShelters} {t.capacitySheltersShort}</dd>
+            </div>
+            <div>
+              <dt>{formatNumber(responseEvidence.headlineFindings.namedTemporaryWasteSites, language)}</dt>
+              <dd>{t.wasteSites}</dd>
+            </div>
+          </dl>
+
+          <div className={styles.responseSiteGrid}>
+            {responseEvidence.responseSites.map((site) => {
+              const crossModel =
+                site.aerialCrosscheck.earliestCrossModelShelterSignalWithin300m;
+              const nearest = site.aerialCrosscheck.nearestCandidate;
+              const services = site.directlyAnnotatedServices.slice(0, 4);
+              return (
+                <article key={site.id} className={styles.responseSiteCard}>
+                  <div className={styles.responseSiteMeta}>
+                    <span>MapAction · {site.documentedAsOf}</span>
+                    <strong>
+                      {site.sleepingEvidence?.annotatedSleepingAreas
+                        ? `${site.sleepingEvidence.annotatedSleepingAreas} ${t.sleepingAreas}`
+                        : t.noSleepingLabel}
+                    </strong>
+                  </div>
+                  <h4>{site.name}</h4>
+                  <div>
+                    <b>{t.annotatedServices}</b>
+                    {services.length ? (
+                      <ul>
+                        {services.map((service) => <li key={service}>{service}</li>)}
+                      </ul>
+                    ) : (
+                      <p>—</p>
+                    )}
+                    {site.directlyAnnotatedServices.length > services.length && (
+                      <small>
+                        +{site.directlyAnnotatedServices.length - services.length} {t.moreServices}
+                      </small>
+                    )}
+                  </div>
+                  <div className={styles.aerialMatch}>
+                    <b>VLM · {t.aerialCrosscheck}</b>
+                    <p>
+                      {crossModel
+                        ? `${t.firstCrossModelSignal}: +${crossModel.hoursAfterEvent.toFixed(1)} ${t.hoursAfter} · ${Math.round(crossModel.distanceMeters)} m`
+                        : nearest
+                          ? `${t.nearestCandidate}: ${Math.round(nearest.distanceMeters)} m`
+                          : "—"}
+                    </p>
+                  </div>
+                  <a href={site.datasetUrl} target="_blank" rel="noreferrer">
+                    {t.mapActionSource} ↗
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className={styles.responseExtensions}>
+            <article>
+              <span>{responseEvidence.debrisManagement.documentedAsOf}</span>
+              <h4>{t.debrisTitle}</h4>
+              <p>{t.debrisBody}</p>
+              <strong>
+                {Math.min(
+                  ...responseEvidence.debrisManagement.healthFacilityDistances.map(
+                    (facility) => facility.distanceMeters,
+                  ),
+                )} m
+              </strong>
+              <small>{t.nearestHealthDistance}</small>
+            </article>
+            <article>
+              <span>UN-SPIDER · ~{responseEvidence.additionalImageryInventory.reportedImageCountApprox}</span>
+              <h4>{t.imageryInventoryTitle}</h4>
+              <p>{t.imageryInventoryBody}</p>
+              <a
+                href={responseEvidence.additionalImageryInventory.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t.openSource} ↗
+              </a>
+            </article>
+          </div>
+
+          <aside className={styles.responseCautions}>
+            <p>{t.publicationCaution}</p>
+            <p>{t.sourceDateCaution}</p>
+          </aside>
+        </section>
+      )}
+
       <section className={styles.evidenceClock} aria-labelledby="evidence-clock-title">
         <header>
           <div>
@@ -883,6 +1118,8 @@ export default function EvidenceExplorer() {
   const [summary, setSummary] = useState<EvidenceSummary | null>(null);
   const [observations, setObservations] = useState<EvidenceObservation[]>([]);
   const [curated, setCurated] = useState<CuratedEvidence | null>(null);
+  const [responseEvidence, setResponseEvidence] =
+    useState<MapActionResponseEvidence | null>(null);
   const [loading, setLoading] = useState(true);
   const [observationsLoaded, setObservationsLoaded] = useState(false);
   const [loadError, setLoadError] = useState(false);
@@ -915,10 +1152,22 @@ export default function EvidenceExplorer() {
         if (!response.ok) throw new Error(`curated:${response.status}`);
         return response.json() as Promise<CuratedEvidence>;
       }),
+      fetch(MAPACTION_RESPONSE_URL, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error(`mapaction:${response.status}`);
+          return response.json() as Promise<MapActionResponseEvidence>;
+        })
+        .catch((error: unknown) => {
+          if (error instanceof DOMException && error.name === "AbortError") {
+            throw error;
+          }
+          return null;
+        }),
     ])
-      .then(([nextSummary, nextCurated]) => {
+      .then(([nextSummary, nextCurated, nextResponseEvidence]) => {
         setSummary(nextSummary);
         setCurated(nextCurated);
+        setResponseEvidence(nextResponseEvidence);
         if (initialCell) setTab("explorer");
       })
       .catch((error: unknown) => {
@@ -1164,6 +1413,7 @@ export default function EvidenceExplorer() {
             <FindingsOverview
               summary={summary}
               curated={curated}
+              responseEvidence={responseEvidence}
               language={language}
               onReviewed={() => openTab("highlights")}
               onExplore={() => openTab("explorer")}
