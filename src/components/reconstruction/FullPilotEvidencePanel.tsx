@@ -175,14 +175,34 @@ const content = {
 };
 
 function formatDate(value: string, language: Language) {
-  return new Intl.DateTimeFormat(language === "es" ? "es-VE" : "en-US", {
+  const locale = language === "es" ? "es-VE" : "en-US";
+  const instant = new Date(value);
+  if (Number.isNaN(instant.getTime())) {
+    const acquisitionDates = value.split("/");
+    if (
+      acquisitionDates.length > 1 &&
+      acquisitionDates.every((date) => /^\d{4}-\d{2}-\d{2}$/.test(date))
+    ) {
+      const dateFormatter = new Intl.DateTimeFormat(locale, {
+        timeZone: "UTC",
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+      return acquisitionDates
+        .map((date) => dateFormatter.format(new Date(`${date}T00:00:00Z`)))
+        .join(" / ");
+    }
+    return value;
+  }
+  return new Intl.DateTimeFormat(locale, {
     timeZone: "America/Caracas",
     day: "2-digit",
     month: "short",
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
-  }).format(new Date(value));
+  }).format(instant);
 }
 
 function formatNumber(value: number, language: Language) {
