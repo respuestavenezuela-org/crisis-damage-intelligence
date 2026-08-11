@@ -52,6 +52,7 @@ const copy = {
     subtitle: "Consulta rápida para voluntarios y coordinadores no técnicos.",
     ops: "Consola operativa",
     timeline: "Cronología",
+    colombia: "Colombia M7,4 · Activación",
     loading: "Cargando catálogo público...",
     error: "No se pudo cargar el catálogo. Intenta de nuevo con mejor señal.",
     language: "Idioma",
@@ -75,6 +76,7 @@ const copy = {
     subtitle: "Fast public view for volunteers and nontechnical coordinators.",
     ops: "Operations console",
     timeline: "Timeline",
+    colombia: "Colombia M7.4 · Activation",
     loading: "Loading public catalog...",
     error: "Catalog could not load. Try again with a better connection.",
     language: "Language",
@@ -207,6 +209,7 @@ export default function LiteConsole() {
             <button type="button" className={language === "es" ? "active" : ""} aria-pressed={language === "es"} onClick={() => changeLanguage("es")}>ES</button>
             <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => changeLanguage("en")}>EN</button>
           </div>
+          <Link className="lite-secondary-link" data-testid="lite-colombia-activation-link" href="/colombia">{t.colombia}</Link>
           <Link className="lite-secondary-link" href="/timeline">{t.timeline}</Link>
           <Link className="lite-primary-link" href="/">{t.ops}</Link>
         </nav>
