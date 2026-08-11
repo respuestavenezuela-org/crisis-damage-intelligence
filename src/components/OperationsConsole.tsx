@@ -77,6 +77,7 @@ const copy = {
     live: "Public read-only",
     liteView: "Lite view",
     timelineView: "Aftermath timeline",
+    colombiaActivation: "Colombia M7.4 · Activation bulletin",
     opsConsole: "Operations console",
     language: "Language",
     aoi: "Go to affected area",
@@ -252,6 +253,7 @@ const copy = {
     live: "Público solo lectura",
     liteView: "Vista ligera",
     timelineView: "Cronología del impacto",
+    colombiaActivation: "Colombia M7,4 · Boletín de activación",
     opsConsole: "Consola operativa",
     language: "Idioma",
     aoi: "Ir a zona afectada",
@@ -2028,6 +2030,16 @@ export default function OperationsConsole() {
           <h1>{t.title}</h1>
           <p>{t.subtitle}</p>
           <p className="quick-start">{t.quickStart}</p>
+          <Link
+            className="incident-activation-link"
+            data-testid="colombia-activation-link"
+            href="/colombia"
+            aria-label={t.colombiaActivation}
+          >
+            <span className="incident-activation-label">{t.colombiaActivation}</span>
+            <span className="incident-activation-short" aria-hidden="true">CO</span>
+            <span className="incident-activation-arrow" aria-hidden="true">→</span>
+          </Link>
           {isMobileLayout && (
             <Button
               type="button"
@@ -2287,6 +2299,7 @@ export default function OperationsConsole() {
                   <nav className="sidebar-view-links" aria-label={language === "es" ? "Vistas públicas" : "Public views"}>
                     <Link className="lite-inline-link" href="/lite">{t.liteView}</Link>
                     <Link className="timeline-inline-link" href="/timeline">{t.timelineView}</Link>
+                    <Link className="colombia-inline-link" href="/colombia">{t.colombiaActivation}</Link>
                   </nav>
                   <p className="quick-start">{t.quickStart}</p>
                   <section className="field-guide">

@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "1.0.0",
+  "incidentId": "colombia-2026-08-10-san-jose-del-palmar",
+  "slug": "colombia",
+  "country": {
+    "es": "Colombia",
+    "en": "Colombia"
+  },
+  "status": "activated-holding-bulletin",
+  "statusLabel": {
+    "es": "Activado · boletín de verificación",
+    "en": "Activated · verification bulletin"
+  },
+  "activatedAt": "2026-08-11T10:29:22Z",
+  "lastVerifiedAt": "2026-08-11T10:56:37Z",
+  "verificationScope": {
+    "es": "Parámetros del sismo, actualización técnica del SGC, estado de tsunami y comunicado inicial de respuesta de la UNGRD verificados. Aún no hay totales oficiales granulares incorporados.",
+    "en": "Earthquake parameters, SGC's technical update, tsunami status, and UNGRD's initial response statement verified. No granular official totals are incorporated yet."
+  },
+  "event": {
+    "title": {
+      "es": "Sismo de San José del Palmar, Chocó",
+      "en": "San José del Palmar, Chocó earthquake"
+    },
+    "originLocal": "2026-08-10T07:34:00-05:00",
+    "originUtc": "2026-08-10T12:34:00Z",
+    "magnitude": 7.4,
+    "latitude": 5.04,
+    "longitude": -76.34,
+    "depthKm": 96,
+    "depthContext": {
+      "primarySourceIds": [
+        "sgc-seismic-viewer",
+        "dimar-bulletin-01"
+      ],
+      "officialAlternativeKm": 103,
+      "officialAlternativeSourceId": "sgc-technical-update",
+      "note": {
+        "es": "El visor SGC y el boletín DIMAR muestran 96 km; el comunicado técnico posterior del SGC informa 103 km. Se conservan ambos valores con su fuente.",
+        "en": "The SGC viewer and DIMAR bulletin show 96 km; SGC's later technical statement reports 103 km. Both values are retained with their source."
+      }
+    },
+    "reference": {
+      "es": "20 km de San José del Palmar, Chocó",
+      "en": "20 km from San José del Palmar, Chocó"
+    },
+    "parameterSourceId": "dimar-bulletin-01",
+    "sourceEventId": "202608101234",
+    "usgsEventId": "us6000tjl2"
+  },
+  "tsunami": {
+    "status": "no-threat",
+    "actionsRequired": false,
+    "issuedAt": "2026-08-10T08:04:52-05:00",
+    "summary": {
+      "es": "DIMAR informó que el sismo no tiene las características necesarias para generar un tsunami en la costa Pacífica colombiana y que no se requieren más acciones, salvo que aparezca nueva información.",
+      "en": "DIMAR reported that the earthquake does not have the characteristics needed to generate a tsunami on Colombia's Pacific coast and that no further action is required unless new information appears."
+    },
+    "sourceId": "dimar-bulletin-01"
+  },
+  "publicDamageLayer": {
+    "status": "not-published",
+    "summary": {
+      "es": "No se publica aún una capa pública de daños para este incidente. La ausencia de una capa no significa ausencia de daños.",
+      "en": "No public damage layer is published for this incident yet. The absence of a layer does not mean an absence of damage."
+    }
+  },
+  "situation": {
+    "known": [
+      {
+        "es": "SGC reportó magnitud 7,4, profundidad de 96 km y referencia a 20 km de San José del Palmar mediante el boletín oficial de DIMAR.",
+        "en": "SGC reported magnitude 7.4, a depth of 96 km, and a reference 20 km from San José del Palmar through DIMAR's official bulletin.",
+        "sourceIds": [
+          "dimar-bulletin-01"
+        ]
+      },
+      {
+        "es": "DIMAR clasificó el boletín como informativo y comunicó que no existe amenaza de tsunami para la costa Pacífica colombiana.",
+        "en": "DIMAR classified the bulletin as informational and reported no tsunami threat to Colombia's Pacific coast.",
+        "sourceIds": [
+          "dimar-bulletin-01",
+          "dimar-tsunami-index"
+        ]
+      },
+      {
+        "es": "USGS mantiene el evento revisado con alerta PAGER naranja; se usa solo como contexto preliminar de exposición.",
+        "en": "USGS lists the reviewed event with an orange PAGER alert; it is used only as preliminary exposure context.",
+        "sourceIds": [
+          "usgs-event"
+        ]
+      },
+      {
+        "es": "El SGC informó 18 réplicas registradas hasta las 12:00 del 10 de agosto, localizadas en San José del Palmar y Sipí, con magnitudes entre 1,4 y 4,8.",
+        "en": "SGC reported 18 aftershocks recorded through 12:00 on August 10, located in San José del Palmar and Sipí, with magnitudes from 1.4 to 4.8.",
+        "sourceIds": [
+          "sgc-technical-update"
+        ]
+      },
+      {
+        "es": "El SGC recibió más de 12.000 reportes de percepción desde 900 centros poblados y una intensidad máxima reportada de 7. Estos son reportes macrosísmicos para investigación, no un balance oficial de daños de la UNGRD.",
+        "en": "SGC received more than 12,000 felt reports from 900 populated places and a maximum reported intensity of 7. These are macroseismic research reports, not an official UNGRD damage assessment.",
+        "sourceIds": [
+          "sgc-technical-update"
+        ]
+      },
+      {
+        "es": "La UNGRD informó posibles afectaciones en nueve municipios de Chocó, ocho de Caldas, dos del Valle del Cauca, dos de Risaralda y varios del Quindío; las autoridades territoriales seguían verificando comunidades, viviendas e infraestructura.",
+        "en": "UNGRD reported possible impacts in nine municipalities in Chocó, eight in Caldas, two in Valle del Cauca, two in Risaralda, and several in Quindío; territorial authorities were still verifying communities, homes, and infrastructure.",
+        "sourceIds": [
+          "ungrd-initial-response"
+        ]
+      },
+      {
+        "es": "La Sala de Crisis Nacional permanecía activa y se habían activado cuatro grupos USAR de Bogotá, Envigado, Yopal y Medellín para apoyar búsqueda y rescate.",
+        "en": "The National Crisis Room remained active, and four USAR groups from Bogotá, Envigado, Yopal, and Medellín had been activated to support search and rescue.",
+        "sourceIds": [
+          "ungrd-initial-response"
+        ]
+      }
+    ],
+    "unconfirmed": [
+      {
+        "es": "Reportes públicos sobre víctimas, daños, refugios, cierres viales y necesidades no se incorporan hasta verificarlos con una fuente oficial identificable.",
+        "en": "Public reports about casualties, damage, shelters, road closures, and needs are not incorporated until verified against an identifiable official source."
+      }
+    ],
+    "unknown": [
+      {
+        "es": "Este boletín aún no incorpora totales oficiales vigentes de personas afectadas, edificaciones, refugios o cierres viales.",
+        "en": "This bulletin does not yet incorporate current official totals for affected people, buildings, shelters, or road closures."
+      },
+      {
+        "es": "No se ha publicado en esta plataforma una delimitación oficial de daños ni una cobertura pre/post-evento apta para evaluación.",
+        "en": "This platform has not published an official damage boundary or pre/post-event imagery suitable for assessment."
+      }
+    ]
+  },
+  "safety": [
+    {
+      "es": "Durante una réplica: agáchese, cúbrase y agárrese. Después, aléjese de fachadas, vidrios, cables y objetos que puedan caer.",
+      "en": "During an aftershock: drop, cover, and hold on. Afterwards, move away from façades, glass, power lines, and falling objects."
+    },
+    {
+      "es": "No ingrese a estructuras visiblemente dañadas y no use ascensores. Siga las instrucciones de las autoridades locales.",
+      "en": "Do not enter visibly damaged structures and do not use elevators. Follow local authority instructions."
+    },
+    {
+      "es": "No conduzca hacia las zonas afectadas sin una asignación oficial; mantenga libres las vías para la respuesta.",
+      "en": "Do not drive into affected areas without an official assignment; keep roads clear for responders."
+    }
+  ],
+  "operationalPriorities": [
+    {
+      "id": "official-source-intake",
+      "title": {
+        "es": "Fuentes oficiales",
+        "en": "Official sources"
+      },
+      "detail": {
+        "es": "Incorporar boletines SGC, UNGRD y DIMAR con hora, URL y alcance de verificación.",
+        "en": "Ingest SGC, UNGRD, and DIMAR bulletins with timestamp, URL, and verification scope."
+      }
+    },
+    {
+      "id": "access-infrastructure",
+      "title": {
+        "es": "Acceso e infraestructura",
+        "en": "Access and infrastructure"
+      },
+      "detail": {
+        "es": "Confirmar vías, puentes, hospitales, energía y conectividad con autoridades; no inferir rutas despejadas.",
+        "en": "Confirm roads, bridges, hospitals, power, and connectivity with authorities; do not infer that routes are clear."
+      }
+    },
+    {
+      "id": "licensed-imagery",
+      "title": {
+        "es": "Imágenes con licencia",
+        "en": "Licensed imagery"
+      },
+      "detail": {
+        "es": "Solicitar cobertura pre y post-evento con fecha, sensor, licencia, huella y metadatos verificables.",
+        "en": "Request pre- and post-event coverage with dates, sensor, license, footprint, and verifiable metadata."
+      }
+    },
+    {
+      "id": "human-reviewed-triage",
+      "title": {
+        "es": "Triage revisado por personas",
+        "en": "Human-reviewed triage"
+      },
+      "detail": {
+        "es": "Mantener separados los datos oficiales, el contexto de imágenes y las señales de triage; no ejecutar VLM en el navegador público.",
+        "en": "Keep official data, imagery context, and triage signals separate; do not run VLM in the public browser."
+      }
+    }
+  ],
+  "sourcePolicy": {
+    "es": "SGC, UNGRD y DIMAR son las fuentes oficiales colombianas para parámetros, impactos, coordinación y tsunami. USGS aporta contexto sísmico y de exposición preliminar, sin sustituir la verificación colombiana.",
+    "en": "SGC, UNGRD, and DIMAR are the official Colombian sources for parameters, impacts, coordination, and tsunami status. USGS provides preliminary seismic and exposure context without replacing Colombian verification."
+  },
+  "sources": [
+    {
+      "id": "sgc-seismic-viewer",
+      "label": {
+        "es": "SGC · Visor de sismos",
+        "en": "SGC · Earthquake viewer"
+      },
+      "url": "https://www.sgc.gov.co/sismos",
+      "authority": "official-colombia",
+      "role": "earthquake-parameters",
+      "lastCheckedAt": "2026-08-11T10:29:22Z"
+    },
+    {
+      "id": "sgc-technical-update",
+      "label": {
+        "es": "SGC · Actualización técnica sobre el sismo",
+        "en": "SGC · Technical earthquake update"
+      },
+      "url": "https://www2.sgc.gov.co/Noticias/Paginas/SGC-actualiza-la-informacion-sobre-el-sismo-ocurrido-en-San-Jose-del-Palmar-Choco.aspx",
+      "authority": "official-colombia",
+      "role": "earthquake-parameters-aftershocks-and-felt-reports",
+      "publishedAt": "2026-08-10",
+      "lastCheckedAt": "2026-08-11T10:56:37Z"
+    },
+    {
+      "id": "dimar-tsunami-index",
+      "label": {
+        "es": "DIMAR · Boletines de tsunami",
+        "en": "DIMAR · Tsunami bulletins"
+      },
+      "url": "https://www.dimar.mil.co/tsunami",
+      "authority": "official-colombia",
+      "role": "tsunami-status",
+      "lastCheckedAt": "2026-08-11T10:52:04Z"
+    },
+    {
+      "id": "dimar-bulletin-01",
+      "label": {
+        "es": "DIMAR · Boletín informativo No. 01 (PDF)",
+        "en": "DIMAR · Informational Bulletin No. 01 (PDF)"
+      },
+      "url": "https://www.dimar.mil.co/sites/default/files/users/user202/BOLET%C3%8DN%20No.%2001%20INFORMATIVO%20DE%20TSUNAMI%20COLOMBIA%20%20CHOC%C3%93.pdf",
+      "authority": "official-colombia",
+      "role": "earthquake-parameters-and-tsunami-status",
+      "publishedAt": "2026-08-10T08:04:52-05:00",
+      "lastCheckedAt": "2026-08-11T10:52:04Z"
+    },
+    {
+      "id": "ungrd",
+      "label": {
+        "es": "UNGRD · Gestión del riesgo",
+        "en": "UNGRD · Disaster risk management"
+      },
+      "url": "https://www.gestiondelriesgo.gov.co/",
+      "authority": "official-colombia",
+      "role": "impact-and-response",
+      "lastCheckedAt": "2026-08-11T10:29:22Z"
+    },
+    {
+      "id": "ungrd-initial-response",
+      "label": {
+        "es": "UNGRD · Respuesta inicial ante el sismo en Chocó",
+        "en": "UNGRD · Initial response to the Chocó earthquake"
+      },
+      "url": "https://portal.gestiondelriesgo.gov.co/Paginas/Noticias/2026/Gobierno-nacional-despliega-respuesta-ante-sismo-en-Choc%C3%B3-bajo-liderazgo-del-presidente-Abelardo-de-la-Espriella.aspx",
+      "authority": "official-colombia",
+      "role": "initial-impact-and-response-status",
+      "publishedAt": "2026-08-10T11:13:00-05:00",
+      "lastCheckedAt": "2026-08-11T10:52:04Z"
+    },
+    {
+      "id": "usgs-event",
+      "label": {
+        "es": "USGS · Evento us6000tjl2",
+        "en": "USGS · Event us6000tjl2"
+      },
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjl2",
+      "authority": "external-context",
+      "role": "reviewed-seismic-and-exposure-context",
+      "lastCheckedAt": "2026-08-11T10:52:04Z"
+    },
+    {
+      "id": "usgs-shakemap",
+      "label": {
+        "es": "USGS · ShakeMap de intensidad",
+        "en": "USGS · Intensity ShakeMap"
+      },
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjl2/shakemap/intensity",
+      "authority": "external-context",
+      "role": "preliminary-intensity-context",
+      "lastCheckedAt": "2026-08-11T10:29:22Z"
+    }
+  ],
+  "privacy": {
+    "personalDataPublished": false,
+    "exactHouseholdLocationsPublished": false,
+    "policy": {
+      "es": "No publicar nombres, teléfonos, texto libre ni ubicaciones exactas de hogares o víctimas.",
+      "en": "Do not publish names, phone numbers, free text, or exact household or victim locations."
+    }
+  },
+  "updatePolicy": {
+    "es": "Cada actualización debe identificar la fuente, la hora de consulta, lo que cambió y si el dato es oficial o solo contexto.",
+    "en": "Every update must identify its source, retrieval time, what changed, and whether the data is official or context only."
+  }
+}
