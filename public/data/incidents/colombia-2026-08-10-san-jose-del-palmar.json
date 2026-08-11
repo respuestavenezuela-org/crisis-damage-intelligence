@@ -12,10 +12,10 @@
     "en": "Activated · verification bulletin"
   },
   "activatedAt": "2026-08-11T10:29:22Z",
-  "lastVerifiedAt": "2026-08-11T10:56:37Z",
+  "lastVerifiedAt": "2026-08-11T11:38:48Z",
   "verificationScope": {
-    "es": "Parámetros del sismo, actualización técnica del SGC, estado de tsunami y comunicado inicial de respuesta de la UNGRD verificados. Aún no hay totales oficiales granulares incorporados.",
-    "en": "Earthquake parameters, SGC's technical update, tsunami status, and UNGRD's initial response statement verified. No granular official totals are incorporated yet."
+    "es": "Parámetros del sismo, actualización técnica del SGC, estado de tsunami, respuesta inicial de la UNGRD y áreas oficiales de cartografía Copernicus EMSR916 verificados. Aún no hay imágenes pre/post-evento ni totales oficiales granulares incorporados.",
+    "en": "Earthquake parameters, SGC's technical update, tsunami status, UNGRD's initial response, and official Copernicus EMSR916 mapping areas verified. No pre/post-event imagery or granular official totals are incorporated yet."
   },
   "event": {
     "title": {
@@ -63,6 +63,15 @@
     "summary": {
       "es": "No se publica aún una capa pública de daños para este incidente. La ausencia de una capa no significa ausencia de daños.",
       "en": "No public damage layer is published for this incident yet. The absence of a layer does not mean an absence of damage."
+    }
+  },
+  "mapping": {
+    "activationCode": "EMSR916",
+    "status": "official-areas-published-imagery-waiting",
+    "mapSnapshot": "/data/incidents/colombia-2026-08-10-emsr916-map.json",
+    "summary": {
+      "es": "Se publican las cuatro áreas oficiales de cartografía Copernicus y su calendario de adquisición. Son huellas de producción, no límites de daños.",
+      "en": "The four official Copernicus mapping areas and their acquisition schedule are published. They are production footprints, not damage boundaries."
     }
   },
   "situation": {
@@ -245,6 +254,18 @@
       "role": "earthquake-parameters-and-tsunami-status",
       "publishedAt": "2026-08-10T08:04:52-05:00",
       "lastCheckedAt": "2026-08-11T10:52:04Z"
+    },
+    {
+      "id": "copernicus-emsr916",
+      "label": {
+        "es": "Copernicus EMS · Activación EMSR916",
+        "en": "Copernicus EMS · EMSR916 activation"
+      },
+      "url": "https://mapping.emergency.copernicus.eu/news/earthquake-in-colombia-emsr916/",
+      "authority": "official-international",
+      "role": "official-mapping-areas-and-acquisition-status",
+      "publishedAt": "2026-08-10",
+      "lastCheckedAt": "2026-08-11T11:38:48Z"
     },
     {
       "id": "ungrd",
